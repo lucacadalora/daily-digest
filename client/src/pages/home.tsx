@@ -78,7 +78,7 @@ export default function Home() {
               <Link href="/article" className="block hover:bg-gray-50">
                 <div className="border-b border-gray-100 pb-6">
                   <div className="aspect-w-16 aspect-h-9 mb-4">
-                    <img src="https://assets.bwbx.io/images/users/iqjWHBFdfxIU/iDt1y.K65vUg/v0/1200x800.jpg" alt="SoftBank OpenAI Investment" className="object-cover rounded-lg" />
+                    <img src="https://assets.bwbx.io/images/users/iqjWHBFdfxIU/iDt1y.K65vUg/v0/1200x800.jpg" alt="SoftBank Masayoshi Son" className="object-cover rounded-lg" />
                   </div>
                   <div className="flex items-center space-x-2 text-xs text-gray-500 mb-2">
                     <span className="font-medium">By Luca Cada Lora</span>
@@ -97,7 +97,7 @@ export default function Home() {
               <Link href="/article" className="block hover:bg-gray-50">
                 <div className="border-b border-gray-100 pb-6">
                   <div className="aspect-w-16 aspect-h-9 mb-4">
-                    <img src="https://assets.bwbx.io/images/users/iqjWHBFdfxIU/iPw5UuQJoVK4/v0/1200x800.jpg" alt="White House" className="object-cover rounded-lg" />
+                    <img src="https://assets.bwbx.io/images/users/iqjWHBFdfxIU/iI2J0GoD2HvU/v0/1200x800.jpg" alt="White House" className="object-cover rounded-lg" />
                   </div>
                   <div className="flex items-center space-x-2 text-xs text-gray-500 mb-2">
                     <span className="font-medium">By Luca Cada Lora</span>
@@ -116,7 +116,7 @@ export default function Home() {
               <Link href="/article" className="block hover:bg-gray-50">
                 <div className="border-b border-gray-100 pb-6">
                   <div className="aspect-w-16 aspect-h-9 mb-4">
-                    <img src="https://assets.bwbx.io/images/users/iqjWHBFdfxIU/iKZ7UONyM5rA/v0/1200x800.jpg" alt="India AI" className="object-cover rounded-lg" />
+                    <img src="https://assets.bwbx.io/images/users/iqjWHBFdfxIU/iMIF9KdsZf_A/v0/1200x800.jpg" alt="India AI Models" className="object-cover rounded-lg" />
                   </div>
                   <div className="flex items-center space-x-2 text-xs text-gray-500 mb-2">
                     <span className="font-medium">By Luca Cada Lora</span>
