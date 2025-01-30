@@ -1,14 +1,21 @@
 import { Link } from "wouter";
 import { Card, CardContent } from "@/components/ui/card";
 import { Newspaper } from "lucide-react";
+import { MarketTicker } from "@/components/MarketTicker";
 
 export default function Home() {
   return (
     <div className="min-h-screen bg-white">
       {/* Header */}
       <header className="border-b border-gray-200">
-        <div className="max-w-[1200px] mx-auto px-4 py-4">
-          <div className="flex justify-between items-center">
+        <div className="max-w-[1200px] mx-auto px-4">
+          {/* Market Ticker */}
+          <div className="py-2 border-b border-gray-100 overflow-hidden">
+            <MarketTicker />
+          </div>
+
+          {/* Navigation */}
+          <div className="flex justify-between items-center py-4">
             <h1 className="text-2xl font-bold">Lucaxyzz Sipaling Saham</h1>
             <nav className="space-x-6 text-sm font-medium text-gray-600">
               <Link href="/">Markets</Link>
