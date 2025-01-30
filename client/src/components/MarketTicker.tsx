@@ -9,81 +9,158 @@ type MarketPrice = {
 };
 
 type MarketData = {
+  us_markets: {
+    NVDA: MarketPrice;
+    TSLA: MarketPrice;
+    BABA: MarketPrice;
+    'S&P500': MarketPrice;
+  };
+  indonesia: {
+    IHSG: MarketPrice;
+    BBCA: MarketPrice;
+    BBRI: MarketPrice;
+    ASII: MarketPrice;
+    UNTR: MarketPrice;
+    ITMG: MarketPrice;
+  };
   crypto: {
     BTC: MarketPrice;
     ETH: MarketPrice;
-  };
-  stocks: {
-    BBRI: MarketPrice;
-    TLKM: MarketPrice;
-    ASII: MarketPrice;
-    BBCA: MarketPrice;
-    AAPL: MarketPrice;
-    MSFT: MarketPrice;
-    GOOGL: MarketPrice;
-    TSLA: MarketPrice;
-  };
-  indices: {
-    IHSG: MarketPrice;
-    'S&P500': MarketPrice;
-    NASDAQ: MarketPrice;
-    DJI: MarketPrice;
+    SOL: MarketPrice;
   };
   commodities: {
     GOLD: MarketPrice;
-    OIL: MarketPrice;
     SILVER: MarketPrice;
+    COAL: MarketPrice;
   };
 };
 
 const FALLBACK_DATA: MarketData = {
+  us_markets: {
+    NVDA: { price: 624.65, change24h: 3.45 },
+    TSLA: { price: 182.63, change24h: -1.45 },
+    BABA: { price: 73.42, change24h: 0.87 },
+    'S&P500': { price: 4890.45, change24h: 0.70 }
+  },
+  indonesia: {
+    IHSG: { price: 7258.15, change24h: 0.63 },
+    BBCA: { price: 9250, change24h: 0.82 },
+    BBRI: { price: 4190, change24h: 0.75 },
+    ASII: { price: 5675, change24h: 1.25 },
+    UNTR: { price: 21575, change24h: 2.15 },
+    ITMG: { price: 31450, change24h: 1.85 }
+  },
   crypto: {
     BTC: { price: 42156.78, change24h: 2.34 },
-    ETH: { price: 2298.45, change24h: 1.89 }
-  },
-  stocks: {
-    BBRI: { price: 4190, change24h: 0.75 },
-    TLKM: { price: 3850, change24h: -0.52 },
-    ASII: { price: 5675, change24h: 1.25 },
-    BBCA: { price: 9250, change24h: 0.82 },
-    AAPL: { price: 188.45, change24h: -0.34 },
-    MSFT: { price: 402.56, change24h: 1.23 },
-    GOOGL: { price: 142.89, change24h: 0.95 },
-    TSLA: { price: 182.63, change24h: -1.45 }
-  },
-  indices: {
-    IHSG: { price: 7258.15, change24h: 0.63 },
-    'S&P500': { price: 4890.45, change24h: 0.70 },
-    NASDAQ: { price: 15628.73, change24h: 0.89 },
-    DJI: { price: 38150.82, change24h: 0.52 }
+    ETH: { price: 2298.45, change24h: 1.89 },
+    SOL: { price: 98.45, change24h: 4.23 }
   },
   commodities: {
     GOLD: { price: 2021.50, change24h: 0.45 },
-    OIL: { price: 78.25, change24h: -0.82 },
-    SILVER: { price: 22.85, change24h: 0.33 }
+    SILVER: { price: 22.85, change24h: 0.33 },
+    COAL: { price: 165.75, change24h: -0.92 }
   }
 };
 
 async function fetchMarketData(): Promise<MarketData> {
   try {
-    // Primary data source for IHSG
-    const ihsgResponse = await axios.get('https://api.idx.co.id/api/v1/indices/IHSG');
-    const ihsgData = ihsgResponse.data;
+    // Using Yahoo Finance API for stock data
+    const symbols = {
+      us: ['NVDA', 'TSLA', 'BABA', '^GSPC'],  // ^GSPC is S&P 500
+      id: ['^JKSE', 'BBCA.JK', 'BBRI.JK', 'ASII.JK', 'UNTR.JK', 'ITMG.JK'], // Indonesian stocks
+      crypto: ['BTC-USD', 'ETH-USD', 'SOL-USD'],
+      commodities: ['GC=F', 'SI=F', 'MTF=F'] // Gold, Silver, Coal futures
+    };
 
-    // Secondary data source for other markets
-    const marketResponse = await axios.get('/api/market-data');
-    const marketData = marketResponse.data;
-
-    return {
-      ...marketData,
-      indices: {
-        ...marketData.indices,
-        IHSG: {
-          price: ihsgData.lastPrice,
-          change24h: ihsgData.percentageChange
-        }
+    const options = {
+      method: 'GET',
+      url: 'https://yahoo-finance15.p.rapidapi.com/api/yahoo/qu/quote',
+      params: {
+        symbols: [...symbols.us, ...symbols.id, ...symbols.crypto, ...symbols.commodities].join(',')
+      },
+      headers: {
+        'X-RapidAPI-Key': '7c0a529e20mshc8d6f5b5727a30cp1f5f85jsn5f04cf4edf69',
+        'X-RapidAPI-Host': 'yahoo-finance15.p.rapidapi.com'
       }
     };
+
+    const response = await axios.request(options);
+    const quotes = response.data;
+
+    if (!quotes || !Array.isArray(quotes)) {
+      console.warn('Invalid response from Yahoo Finance API');
+      return FALLBACK_DATA;
+    }
+
+    const marketData: MarketData = {
+      us_markets: {
+        NVDA: { price: 0, change24h: 0 },
+        TSLA: { price: 0, change24h: 0 },
+        BABA: { price: 0, change24h: 0 },
+        'S&P500': { price: 0, change24h: 0 }
+      },
+      indonesia: {
+        IHSG: { price: 0, change24h: 0 },
+        BBCA: { price: 0, change24h: 0 },
+        BBRI: { price: 0, change24h: 0 },
+        ASII: { price: 0, change24h: 0 },
+        UNTR: { price: 0, change24h: 0 },
+        ITMG: { price: 0, change24h: 0 }
+      },
+      crypto: {
+        BTC: { price: 0, change24h: 0 },
+        ETH: { price: 0, change24h: 0 },
+        SOL: { price: 0, change24h: 0 }
+      },
+      commodities: {
+        GOLD: { price: 0, change24h: 0 },
+        SILVER: { price: 0, change24h: 0 },
+        COAL: { price: 0, change24h: 0 }
+      }
+    };
+
+    quotes.forEach((quote: any) => {
+      const symbol = quote.symbol;
+      const price = parseFloat(quote.regularMarketPrice);
+      const change = parseFloat(quote.regularMarketChangePercent);
+
+      // Map to our market data structure
+      if (symbol === 'NVDA') marketData.us_markets.NVDA = { price, change24h: change };
+      if (symbol === 'TSLA') marketData.us_markets.TSLA = { price, change24h: change };
+      if (symbol === 'BABA') marketData.us_markets.BABA = { price, change24h: change };
+      if (symbol === '^GSPC') marketData.us_markets['S&P500'] = { price, change24h: change };
+
+      if (symbol === '^JKSE') marketData.indonesia.IHSG = { price, change24h: change };
+      if (symbol === 'BBCA.JK') marketData.indonesia.BBCA = { price, change24h: change };
+      if (symbol === 'BBRI.JK') marketData.indonesia.BBRI = { price, change24h: change };
+      if (symbol === 'ASII.JK') marketData.indonesia.ASII = { price, change24h: change };
+      if (symbol === 'UNTR.JK') marketData.indonesia.UNTR = { price, change24h: change };
+      if (symbol === 'ITMG.JK') marketData.indonesia.ITMG = { price, change24h: change };
+
+      if (symbol === 'BTC-USD') marketData.crypto.BTC = { price, change24h: change };
+      if (symbol === 'ETH-USD') marketData.crypto.ETH = { price, change24h: change };
+      if (symbol === 'SOL-USD') marketData.crypto.SOL = { price, change24h: change };
+
+      if (symbol === 'GC=F') marketData.commodities.GOLD = { price, change24h: change };
+      if (symbol === 'SI=F') marketData.commodities.SILVER = { price, change24h: change };
+      if (symbol === 'MTF=F') marketData.commodities.COAL = { price, change24h: change };
+    });
+
+    // If any section is empty (all prices 0), use fallback data for that section
+    if (Object.values(marketData.us_markets).every(item => item.price === 0)) {
+      marketData.us_markets = FALLBACK_DATA.us_markets;
+    }
+    if (Object.values(marketData.indonesia).every(item => item.price === 0)) {
+      marketData.indonesia = FALLBACK_DATA.indonesia;
+    }
+    if (Object.values(marketData.crypto).every(item => item.price === 0)) {
+      marketData.crypto = FALLBACK_DATA.crypto;
+    }
+    if (Object.values(marketData.commodities).every(item => item.price === 0)) {
+      marketData.commodities = FALLBACK_DATA.commodities;
+    }
+
+    return marketData;
   } catch (error) {
     console.warn('Error fetching market data, using fallback:', error);
     return FALLBACK_DATA;
@@ -96,7 +173,7 @@ export function MarketTicker() {
   const { data, isLoading } = useQuery<MarketData>({
     queryKey: ['/api/market-data'],
     queryFn: fetchMarketData,
-    refetchInterval: 60000, // Refresh every minute
+    refetchInterval: 30000, // Refresh every 30 seconds
     initialData: FALLBACK_DATA
   });
 
@@ -167,24 +244,19 @@ export function MarketTicker() {
       onMouseLeave={() => setIsPaused(false)}
     >
       <div className={`flex animate-marquee ${isPaused ? 'animate-pause' : ''}`}>
-        {/* Crypto Section */}
-        {Object.entries(data.crypto).map(([symbol, price]) => 
-          renderMarketItem(symbol, price, "Crypto")
+        {/* Indonesian Markets */}
+        {Object.entries(data.indonesia).map(([symbol, price]) => 
+          renderMarketItem(symbol, price, "ID")
         )}
 
-        {/* US Stocks */}
-        {Object.entries(data.stocks).slice(4).map(([symbol, price]) => 
+        {/* US Markets */}
+        {Object.entries(data.us_markets).map(([symbol, price]) => 
           renderMarketItem(symbol, price, "US")
         )}
 
-        {/* Indices */}
-        {Object.entries(data.indices).map(([symbol, price]) => 
-          renderMarketItem(symbol, price, "Index")
-        )}
-
-        {/* ID Stocks */}
-        {Object.entries(data.stocks).slice(0, 4).map(([symbol, price]) => 
-          renderMarketItem(symbol, price, "ID")
+        {/* Crypto */}
+        {Object.entries(data.crypto).map(([symbol, price]) => 
+          renderMarketItem(symbol, price, "Crypto")
         )}
 
         {/* Commodities */}
