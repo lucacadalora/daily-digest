@@ -73,41 +73,51 @@ export default function Home() {
 
           {/* Latest Stories Sidebar */}
           <div className="w-80 flex-shrink-0">
-            <h2 className="text-xl font-bold mb-6 text-gray-900">Latest Stories</h2>
-            <div className="space-y-6">
+            <h2 className="text-xl font-bold mb-6 text-gray-900">Berita Utama</h2>
+            <div className="space-y-4">
               <Card>
                 <CardContent className="p-4">
-                  <span className="text-xs text-gray-500 mb-2 block">News • JAN 29, 2025</span>
-                  <h3 className="text-sm font-medium mb-1 hover:text-orange-500 cursor-pointer">
-                    $1B Venice VVV Token Launch: Symbiotic's Restaking Protocol
+                  <img 
+                    src="https://picsum.photos/300/200" 
+                    alt="Capitol Building" 
+                    className="w-full h-40 object-cover rounded-md mb-3"
+                  />
+                  <h3 className="font-medium mb-2 hover:text-orange-500 cursor-pointer">
+                    Gedung Putih Izinkan Influencer Meliput, Tembus 7.400 Pendaftar
                   </h3>
-                  <p className="text-xs text-gray-600">
-                    Symbiotics Restaking Protocol | The Future of Healthcare Data & Hippocrat
-                  </p>
+                  <span className="text-xs text-blue-500">Global</span>
                 </CardContent>
               </Card>
 
               <Card>
-                <CardContent className="p-4">
-                  <span className="text-xs text-gray-500 mb-2 block">News • JAN 27, 2025</span>
-                  <h3 className="text-sm font-medium mb-1 hover:text-orange-500 cursor-pointer">
-                    Jupiter Crypto Conglomerate
-                  </h3>
-                  <p className="text-xs text-gray-600">
-                    Hayes: $70,000 BTC? | JUP Spikes 40%
-                  </p>
+                <CardContent className="p-4 flex gap-3">
+                  <img 
+                    src="https://picsum.photos/100/100" 
+                    alt="Bank Building" 
+                    className="w-24 h-20 object-cover rounded-md"
+                  />
+                  <div>
+                    <h3 className="text-sm font-medium mb-1 hover:text-orange-500 cursor-pointer">
+                      Neraca Keuangan Bengkak, BOJ Akan Pangkas Rp8.065 T
+                    </h3>
+                    <span className="text-xs text-blue-500">Global</span>
+                  </div>
                 </CardContent>
               </Card>
 
               <Card>
-                <CardContent className="p-4">
-                  <span className="text-xs text-gray-500 mb-2 block">News • JAN 26, 2025</span>
-                  <h3 className="text-sm font-medium mb-1 hover:text-orange-500 cursor-pointer">
-                    Larry Fink Predicts $700,000 BTC
-                  </h3>
-                  <p className="text-xs text-gray-600">
-                    RWA TVL Surges to $7.3B | WLFI Acquires $2.6M TRX
-                  </p>
+                <CardContent className="p-4 flex gap-3">
+                  <img 
+                    src="https://picsum.photos/100/100" 
+                    alt="People" 
+                    className="w-24 h-20 object-cover rounded-md"
+                  />
+                  <div>
+                    <h3 className="text-sm font-medium mb-1 hover:text-orange-500 cursor-pointer">
+                      Tuai Kritik, Puan Maharani Tetap Dukung Program MBG Prabowo
+                    </h3>
+                    <span className="text-xs text-blue-500">Nasional</span>
+                  </div>
                 </CardContent>
               </Card>
             </div>
