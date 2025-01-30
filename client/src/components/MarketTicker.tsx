@@ -92,11 +92,11 @@ export function MarketTicker() {
   };
 
   const renderMarketItem = (symbol: string, data: MarketPrice, category?: string) => (
-    <div key={symbol} className="flex items-center gap-1 px-4 border-r border-gray-200 last:border-r-0">
-      {category && <span className="text-gray-400 mr-1">{category}</span>}
-      <span className="font-medium">{symbol}</span>
-      <span>{formatPrice(data.price)}</span>
-      <span className={`flex items-center ${data.change24h >= 0 ? 'text-green-500' : 'text-red-500'}`}>
+    <div key={symbol} className="flex items-center gap-1 px-2 sm:px-4 border-r border-gray-200 last:border-r-0">
+      {category && <span className="hidden sm:inline text-gray-400 mr-1">{category}</span>}
+      <span className="font-medium text-xs sm:text-sm">{symbol}</span>
+      <span className="text-xs sm:text-sm">{formatPrice(data.price)}</span>
+      <span className={`flex items-center text-xs sm:text-sm ${data.change24h >= 0 ? 'text-green-500' : 'text-red-500'}`}>
         {data.change24h >= 0 ? <TrendingUp className="h-3 w-3" /> : <TrendingDown className="h-3 w-3" />}
         {formatChange(data.change24h)}%
       </span>
