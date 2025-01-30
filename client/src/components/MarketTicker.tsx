@@ -64,38 +64,27 @@ const FALLBACK_DATA: MarketData = {
 
 async function fetchMarketData(): Promise<MarketData> {
   try {
-    // Yahoo Finance API v8 endpoint
-    const baseUrl = 'https://query2.finance.yahoo.com/v8/finance/chart/';
-    const symbols = {
-      us: ['NVDA', 'TSLA', 'BABA', '^GSPC'],  // ^GSPC is S&P 500
-      id: ['^JKSE', 'BBCA.JK', 'BBRI.JK', 'ASII.JK', 'UNTR.JK', 'ITMG.JK'],
-      crypto: ['BTC-USD', 'ETH-USD', 'SOL-USD'],
-      commodities: ['GC=F', 'SI=F', 'MTF=F']  // Gold, Silver, Coal futures
-    };
+    const baseUrl = 'https://query1.finance.yahoo.com/v6/finance/quote';
+    const symbols = [
+      'NVDA', 'TSLA', 'BABA', '^GSPC',  // US Markets
+      '^JKSE', 'BBCA.JK', 'BBRI.JK', 'ASII.JK', 'UNTR.JK', 'ITMG.JK',  // ID Markets
+      'BTC-USD', 'ETH-USD', 'SOL-USD',  // Crypto
+      'GC=F', 'SI=F', 'MTF=F'  // Commodities
+    ];
 
-    const fetchSymbol = async (symbol: string) => {
-      try {
-        const response = await axios.get(`${baseUrl}${symbol}?interval=1d&range=1d`);
-        const data = response.data.chart.result[0];
-        const quote = data.meta;
-        const price = quote.regularMarketPrice;
-        const previousClose = quote.previousClose;
-        const change24h = ((price - previousClose) / previousClose) * 100;
-
-        return {
-          price,
-          change24h
-        };
-      } catch (error) {
-        console.warn(`Error fetching ${symbol}:`, error);
-        return null;
+    const response = await axios.get(baseUrl, {
+      params: {
+        symbols: symbols.join(','),
+        fields: 'regularMarketPrice,regularMarketChangePercent,shortName'
       }
-    };
+    });
 
-    // Fetch all symbols in parallel
-    const allSymbols = [...symbols.us, ...symbols.id, ...symbols.crypto, ...symbols.commodities];
-    const results = await Promise.all(allSymbols.map(fetchSymbol));
+    if (!response.data?.quoteResponse?.result) {
+      console.warn('Invalid response from Yahoo Finance API');
+      return FALLBACK_DATA;
+    }
 
+    const quotes = response.data.quoteResponse.result;
     const marketData: MarketData = {
       us_markets: {
         NVDA: { price: 0, change24h: 0 },
@@ -123,33 +112,40 @@ async function fetchMarketData(): Promise<MarketData> {
       }
     };
 
-    // Map results to market data structure
-    allSymbols.forEach((symbol, index) => {
-      const data = results[index];
-      if (!data) return;
+    quotes.forEach((quote: any) => {
+      const data = {
+        price: quote.regularMarketPrice,
+        change24h: quote.regularMarketChangePercent
+      };
 
-      if (symbol === 'NVDA') marketData.us_markets.NVDA = data;
-      if (symbol === 'TSLA') marketData.us_markets.TSLA = data;
-      if (symbol === 'BABA') marketData.us_markets.BABA = data;
-      if (symbol === '^GSPC') marketData.us_markets['S&P500'] = data;
+      switch (quote.symbol) {
+        // US Markets
+        case 'NVDA': marketData.us_markets.NVDA = data; break;
+        case 'TSLA': marketData.us_markets.TSLA = data; break;
+        case 'BABA': marketData.us_markets.BABA = data; break;
+        case '^GSPC': marketData.us_markets['S&P500'] = data; break;
 
-      if (symbol === '^JKSE') marketData.indonesia.IHSG = data;
-      if (symbol === 'BBCA.JK') marketData.indonesia.BBCA = data;
-      if (symbol === 'BBRI.JK') marketData.indonesia.BBRI = data;
-      if (symbol === 'ASII.JK') marketData.indonesia.ASII = data;
-      if (symbol === 'UNTR.JK') marketData.indonesia.UNTR = data;
-      if (symbol === 'ITMG.JK') marketData.indonesia.ITMG = data;
+        // Indonesian Markets
+        case '^JKSE': marketData.indonesia.IHSG = data; break;
+        case 'BBCA.JK': marketData.indonesia.BBCA = data; break;
+        case 'BBRI.JK': marketData.indonesia.BBRI = data; break;
+        case 'ASII.JK': marketData.indonesia.ASII = data; break;
+        case 'UNTR.JK': marketData.indonesia.UNTR = data; break;
+        case 'ITMG.JK': marketData.indonesia.ITMG = data; break;
 
-      if (symbol === 'BTC-USD') marketData.crypto.BTC = data;
-      if (symbol === 'ETH-USD') marketData.crypto.ETH = data;
-      if (symbol === 'SOL-USD') marketData.crypto.SOL = data;
+        // Crypto
+        case 'BTC-USD': marketData.crypto.BTC = data; break;
+        case 'ETH-USD': marketData.crypto.ETH = data; break;
+        case 'SOL-USD': marketData.crypto.SOL = data; break;
 
-      if (symbol === 'GC=F') marketData.commodities.GOLD = data;
-      if (symbol === 'SI=F') marketData.commodities.SILVER = data;
-      if (symbol === 'MTF=F') marketData.commodities.COAL = data;
+        // Commodities
+        case 'GC=F': marketData.commodities.GOLD = data; break;
+        case 'SI=F': marketData.commodities.SILVER = data; break;
+        case 'MTF=F': marketData.commodities.COAL = data; break;
+      }
     });
 
-    // If any section is completely empty, use fallback data
+    // Use fallback data for empty sections
     if (Object.values(marketData.us_markets).every(item => item.price === 0)) {
       marketData.us_markets = FALLBACK_DATA.us_markets;
     }
