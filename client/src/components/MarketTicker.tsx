@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { TrendingUp, TrendingDown } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
+import axios from "axios";
 
 type MarketPrice = {
   price: number;
@@ -35,12 +36,68 @@ type MarketData = {
   };
 };
 
+const FALLBACK_DATA: MarketData = {
+  crypto: {
+    BTC: { price: 42156.78, change24h: 2.34 },
+    ETH: { price: 2298.45, change24h: 1.89 }
+  },
+  stocks: {
+    BBRI: { price: 4190, change24h: 0.75 },
+    TLKM: { price: 3850, change24h: -0.52 },
+    ASII: { price: 5675, change24h: 1.25 },
+    BBCA: { price: 9250, change24h: 0.82 },
+    AAPL: { price: 188.45, change24h: -0.34 },
+    MSFT: { price: 402.56, change24h: 1.23 },
+    GOOGL: { price: 142.89, change24h: 0.95 },
+    TSLA: { price: 182.63, change24h: -1.45 }
+  },
+  indices: {
+    IHSG: { price: 7258.15, change24h: 0.63 },
+    'S&P500': { price: 4890.45, change24h: 0.70 },
+    NASDAQ: { price: 15628.73, change24h: 0.89 },
+    DJI: { price: 38150.82, change24h: 0.52 }
+  },
+  commodities: {
+    GOLD: { price: 2021.50, change24h: 0.45 },
+    OIL: { price: 78.25, change24h: -0.82 },
+    SILVER: { price: 22.85, change24h: 0.33 }
+  }
+};
+
+async function fetchMarketData(): Promise<MarketData> {
+  try {
+    // Primary data source for IHSG
+    const ihsgResponse = await axios.get('https://api.idx.co.id/api/v1/indices/IHSG');
+    const ihsgData = ihsgResponse.data;
+
+    // Secondary data source for other markets
+    const marketResponse = await axios.get('/api/market-data');
+    const marketData = marketResponse.data;
+
+    return {
+      ...marketData,
+      indices: {
+        ...marketData.indices,
+        IHSG: {
+          price: ihsgData.lastPrice,
+          change24h: ihsgData.percentageChange
+        }
+      }
+    };
+  } catch (error) {
+    console.warn('Error fetching market data, using fallback:', error);
+    return FALLBACK_DATA;
+  }
+}
+
 export function MarketTicker() {
   const containerRef = useRef<HTMLDivElement>(null);
   const [isPaused, setIsPaused] = useState(false);
   const { data, isLoading } = useQuery<MarketData>({
     queryKey: ['/api/market-data'],
-    refetchInterval: 60000 // Refresh every minute
+    queryFn: fetchMarketData,
+    refetchInterval: 60000, // Refresh every minute
+    initialData: FALLBACK_DATA
   });
 
   useEffect(() => {
@@ -49,14 +106,13 @@ export function MarketTicker() {
 
     let animationFrame: number;
     let startTime: number;
-    const duration = 60000; // 60 seconds for one complete scroll (slower)
+    const duration = 60000; // 60 seconds for one complete scroll
     const scrollWidth = container.scrollWidth;
     const viewportWidth = container.offsetWidth;
 
     const animate = (timestamp: number) => {
       if (!startTime) startTime = timestamp;
 
-      // Only update scroll position if not paused
       if (!isPaused) {
         const progress = ((timestamp - startTime) % duration) / duration;
         const scrollPos = (scrollWidth + viewportWidth) * progress;
