@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { TrendingUp, TrendingDown } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
-import axios from "axios";
+import yahooFinance from "yahoo-finance2";
 
 type MarketPrice = {
   price: number;
@@ -64,104 +64,67 @@ const FALLBACK_DATA: MarketData = {
 
 async function fetchMarketData(): Promise<MarketData> {
   try {
-    const baseUrl = 'https://query1.finance.yahoo.com/v6/finance/quote';
-    const symbols = [
-      'NVDA', 'TSLA', 'BABA', '^GSPC',  // US Markets
-      '^JKSE', 'BBCA.JK', 'BBRI.JK', 'ASII.JK', 'UNTR.JK', 'ITMG.JK',  // ID Markets
-      'BTC-USD', 'ETH-USD', 'SOL-USD',  // Crypto
-      'GC=F', 'SI=F', 'MTF=F'  // Commodities
-    ];
-
-    const response = await axios.get(baseUrl, {
-      params: {
-        symbols: symbols.join(','),
-        fields: 'regularMarketPrice,regularMarketChangePercent,shortName'
-      }
-    });
-
-    if (!response.data?.quoteResponse?.result) {
-      console.warn('Invalid response from Yahoo Finance API');
-      return FALLBACK_DATA;
-    }
-
-    const quotes = response.data.quoteResponse.result;
-    const marketData: MarketData = {
-      us_markets: {
-        NVDA: { price: 0, change24h: 0 },
-        TSLA: { price: 0, change24h: 0 },
-        BABA: { price: 0, change24h: 0 },
-        'S&P500': { price: 0, change24h: 0 }
-      },
-      indonesia: {
-        IHSG: { price: 0, change24h: 0 },
-        BBCA: { price: 0, change24h: 0 },
-        BBRI: { price: 0, change24h: 0 },
-        ASII: { price: 0, change24h: 0 },
-        UNTR: { price: 0, change24h: 0 },
-        ITMG: { price: 0, change24h: 0 }
-      },
-      crypto: {
-        BTC: { price: 0, change24h: 0 },
-        ETH: { price: 0, change24h: 0 },
-        SOL: { price: 0, change24h: 0 }
-      },
-      commodities: {
-        GOLD: { price: 0, change24h: 0 },
-        SILVER: { price: 0, change24h: 0 },
-        COAL: { price: 0, change24h: 0 }
-      }
+    const symbols = {
+      us: ['NVDA', 'TSLA', 'BABA', '^GSPC'],  // ^GSPC is S&P 500
+      id: ['^JKSE', 'BBCA.JK', 'BBRI.JK', 'ASII.JK', 'UNTR.JK', 'ITMG.JK'],
+      crypto: ['BTC-USD', 'ETH-USD', 'SOL-USD'],
+      commodities: ['GC=F', 'SI=F', 'MTF=F']  // Gold, Silver, Coal futures
     };
 
-    quotes.forEach((quote: any) => {
-      const data = {
-        price: quote.regularMarketPrice,
-        change24h: quote.regularMarketChangePercent
-      };
+    const allSymbols = [...symbols.us, ...symbols.id, ...symbols.crypto, ...symbols.commodities];
 
-      switch (quote.symbol) {
-        // US Markets
-        case 'NVDA': marketData.us_markets.NVDA = data; break;
-        case 'TSLA': marketData.us_markets.TSLA = data; break;
-        case 'BABA': marketData.us_markets.BABA = data; break;
-        case '^GSPC': marketData.us_markets['S&P500'] = data; break;
+    // Initialize market data with fallback values
+    const marketData = structuredClone(FALLBACK_DATA);
 
-        // Indonesian Markets
-        case '^JKSE': marketData.indonesia.IHSG = data; break;
-        case 'BBCA.JK': marketData.indonesia.BBCA = data; break;
-        case 'BBRI.JK': marketData.indonesia.BBRI = data; break;
-        case 'ASII.JK': marketData.indonesia.ASII = data; break;
-        case 'UNTR.JK': marketData.indonesia.UNTR = data; break;
-        case 'ITMG.JK': marketData.indonesia.ITMG = data; break;
+    try {
+      const quotes = await Promise.allSettled(
+        allSymbols.map(symbol => yahooFinance.quote(symbol))
+      );
 
-        // Crypto
-        case 'BTC-USD': marketData.crypto.BTC = data; break;
-        case 'ETH-USD': marketData.crypto.ETH = data; break;
-        case 'SOL-USD': marketData.crypto.SOL = data; break;
+      quotes.forEach((result, index) => {
+        if (result.status === 'fulfilled' && result.value) {
+          const quote = result.value;
+          const price = quote.regularMarketPrice || 0;
+          const change24h = quote.regularMarketChangePercent || 0;
+          const data = { price, change24h };
 
-        // Commodities
-        case 'GC=F': marketData.commodities.GOLD = data; break;
-        case 'SI=F': marketData.commodities.SILVER = data; break;
-        case 'MTF=F': marketData.commodities.COAL = data; break;
-      }
-    });
+          const symbol = allSymbols[index];
 
-    // Use fallback data for empty sections
-    if (Object.values(marketData.us_markets).every(item => item.price === 0)) {
-      marketData.us_markets = FALLBACK_DATA.us_markets;
+          // US Markets
+          if (symbol === 'NVDA') marketData.us_markets.NVDA = data;
+          if (symbol === 'TSLA') marketData.us_markets.TSLA = data;
+          if (symbol === 'BABA') marketData.us_markets.BABA = data;
+          if (symbol === '^GSPC') marketData.us_markets['S&P500'] = data;
+
+          // Indonesian Markets
+          if (symbol === '^JKSE') marketData.indonesia.IHSG = data;
+          if (symbol === 'BBCA.JK') marketData.indonesia.BBCA = data;
+          if (symbol === 'BBRI.JK') marketData.indonesia.BBRI = data;
+          if (symbol === 'ASII.JK') marketData.indonesia.ASII = data;
+          if (symbol === 'UNTR.JK') marketData.indonesia.UNTR = data;
+          if (symbol === 'ITMG.JK') marketData.indonesia.ITMG = data;
+
+          // Crypto
+          if (symbol === 'BTC-USD') marketData.crypto.BTC = data;
+          if (symbol === 'ETH-USD') marketData.crypto.ETH = data;
+          if (symbol === 'SOL-USD') marketData.crypto.SOL = data;
+
+          // Commodities
+          if (symbol === 'GC=F') marketData.commodities.GOLD = data;
+          if (symbol === 'SI=F') marketData.commodities.SILVER = data;
+          if (symbol === 'MTF=F') marketData.commodities.COAL = data;
+        } else {
+          console.warn(`Failed to fetch data for symbol ${allSymbols[index]}:`, result.reason);
+        }
+      });
+
+      return marketData;
+    } catch (error) {
+      console.warn('Error fetching market data:', error);
+      return marketData; // Return initialized data with fallback values
     }
-    if (Object.values(marketData.indonesia).every(item => item.price === 0)) {
-      marketData.indonesia = FALLBACK_DATA.indonesia;
-    }
-    if (Object.values(marketData.crypto).every(item => item.price === 0)) {
-      marketData.crypto = FALLBACK_DATA.crypto;
-    }
-    if (Object.values(marketData.commodities).every(item => item.price === 0)) {
-      marketData.commodities = FALLBACK_DATA.commodities;
-    }
-
-    return marketData;
   } catch (error) {
-    console.warn('Error fetching market data, using fallback:', error);
+    console.error('Critical error in fetchMarketData:', error);
     return FALLBACK_DATA;
   }
 }
