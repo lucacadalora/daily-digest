@@ -72,44 +72,41 @@ export default function Home() {
           </div>
 
           {/* Latest Stories Sidebar */}
-          <div className="w-80 flex-shrink-0">
+          <div className="w-96 flex-shrink-0">
             <h2 className="text-xl font-bold mb-6 text-gray-900">Latest Stories</h2>
-            <div className="space-y-6">
-              <Card>
-                <CardContent className="p-4">
-                  <span className="text-xs text-gray-500 mb-2 block">News • JAN 29, 2025</span>
-                  <h3 className="text-sm font-medium mb-1 hover:text-orange-500 cursor-pointer">
-                    $1B Venice VVV Token Launch: Symbiotic's Restaking Protocol
+            <div className="space-y-4">
+              <Link href="/article" className="block hover:bg-gray-50">
+                <div className="border-b border-gray-100 pb-4">
+                  <h3 className="text-lg font-bold mb-2 hover:text-blue-600">
+                    Powell Signals Fed on Hold as Trump's Economic Policies Take Shape
                   </h3>
-                  <p className="text-xs text-gray-600">
-                    Symbiotics Restaking Protocol | The Future of Healthcare Data & Hippocrat
+                  <p className="text-sm text-gray-600">
+                    Federal Reserve maintains cautious stance amid policy shifts
                   </p>
-                </CardContent>
-              </Card>
+                </div>
+              </Link>
 
-              <Card>
-                <CardContent className="p-4">
-                  <span className="text-xs text-gray-500 mb-2 block">News • JAN 27, 2025</span>
-                  <h3 className="text-sm font-medium mb-1 hover:text-orange-500 cursor-pointer">
-                    Jupiter Crypto Conglomerate
+              <Link href="/article" className="block hover:bg-gray-50">
+                <div className="border-b border-gray-100 pb-4">
+                  <h3 className="text-lg font-bold mb-2 hover:text-blue-600">
+                    ECB Cut All But Certain With Price Goal in View
                   </h3>
-                  <p className="text-xs text-gray-600">
-                    Hayes: $70,000 BTC? | JUP Spikes 40%
+                  <p className="text-sm text-gray-600">
+                    European Central Bank prepares for significant policy adjustment
                   </p>
-                </CardContent>
-              </Card>
+                </div>
+              </Link>
 
-              <Card>
-                <CardContent className="p-4">
-                  <span className="text-xs text-gray-500 mb-2 block">News • JAN 26, 2025</span>
-                  <h3 className="text-sm font-medium mb-1 hover:text-orange-500 cursor-pointer">
-                    Larry Fink Predicts $700,000 BTC
+              <Link href="/article" className="block hover:bg-gray-50">
+                <div className="border-b border-gray-100 pb-4">
+                  <h3 className="text-lg font-bold mb-2 hover:text-blue-600">
+                    Bond Traders Are Kept in Limbo After Powell Offers Few Clues
                   </h3>
-                  <p className="text-xs text-gray-600">
-                    RWA TVL Surges to $7.3B | WLFI Acquires $2.6M TRX
+                  <p className="text-sm text-gray-600">
+                    Market uncertainty persists following Federal Reserve commentary
                   </p>
-                </CardContent>
-              </Card>
+                </div>
+              </Link>
             </div>
           </div>
         </div>
