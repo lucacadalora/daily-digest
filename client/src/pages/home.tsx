@@ -15,9 +15,9 @@ export default function Home() {
           </div>
 
           {/* Navigation */}
-          <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center py-3 gap-4">
+          <div className="flex justify-between items-center py-3">
             <h1 className="text-xl font-semibold bg-gradient-to-r from-orange-500 to-red-500 bg-clip-text text-transparent">@lucaxyzz daily digest</h1>
-            <nav className="flex gap-6 sm:gap-8 text-sm font-medium text-gray-600">
+            <nav className="space-x-8 text-sm font-medium text-gray-600">
               <Link href="/" className="hover:text-orange-500 transition-colors">Markets</Link>
               <Link href="/" className="hover:text-orange-500 transition-colors">Analysis</Link>
               <Link href="/" className="hover:text-orange-500 transition-colors">Watchlist</Link>
@@ -31,7 +31,7 @@ export default function Home() {
 
       {/* Main Content */}
       <main className="max-w-[1200px] mx-auto px-4 py-8">
-        <div className="flex flex-col lg:flex-row gap-8">
+        <div className="flex gap-8">
           {/* Newsletter Section */}
           <div className="flex-1">
             <div className="flex justify-between items-center mb-6">
@@ -41,7 +41,7 @@ export default function Home() {
               </Link>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="grid grid-cols-2 gap-6">
               <Link href="/article">
                 <Card className="cursor-pointer hover:shadow-lg transition-all duration-300 group">
                   <CardContent className="p-4">
@@ -78,7 +78,7 @@ export default function Home() {
           </div>
 
           {/* Latest Stories Sidebar */}
-          <div className="w-full lg:w-96 flex-shrink-0">
+          <div className="w-96 flex-shrink-0">
             <h2 className="text-xl font-bold mb-6 text-gray-900">Latest Stories</h2>
             <div className="space-y-6">
               <Link href="/article" className="block hover:bg-gray-50">

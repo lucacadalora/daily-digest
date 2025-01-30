@@ -1,5 +1,6 @@
 import { Card, CardContent } from '@/components/ui/card';
 import { TrendingUp, BarChart3, AlertCircle, Clock, MapPin } from 'lucide-react';
+import BBRIChartDashboard from '@/components/BBRIChartDashboard';
 
 export default function WSJArticle() {
   return (
@@ -173,7 +174,11 @@ export default function WSJArticle() {
           </CardContent>
         </Card>
 
-        <footer className="text-sm text-gray-500 border-t border-gray-200 pt-4">
+        <div className="px-4 py-8">
+          <BBRIChartDashboard />
+        </div>
+
+        <footer className="text-sm text-gray-500 border-t border-gray-200 pt-4 px-4">
           <p className="mb-2">Disclosure: This analysis incorporates data from BBRI investor relations, Bloomberg, CNBC Indonesia, and RHB/Ciptadana research reports. The author holds no positions in BBRI at publication time.</p>
           <p>© 2025 The Wall Street Journal. All rights reserved.</p>
         </footer>
