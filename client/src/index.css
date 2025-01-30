@@ -29,6 +29,22 @@
   .animate-pause {
     animation-play-state: paused;
   }
+
+  .read-button-gradient {
+    background-size: 200% auto;
+    transition: all 0.3s ease;
+    background-image: linear-gradient(
+      to right,
+      transparent 0%,
+      transparent 50%,
+      hsl(25, 95%, 53%) 50%,
+      hsl(25, 95%, 53%) 100%
+    );
+  }
+
+  .group:hover .read-button-gradient {
+    background-position: -100% 0;
+  }
 }
 
 @keyframes marquee {
@@ -37,5 +53,27 @@
   }
   100% {
     transform: translateX(-50%);
+  }
+}
+
+@keyframes slide-arrow {
+  0% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  49% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  50% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  51% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
   }
 }

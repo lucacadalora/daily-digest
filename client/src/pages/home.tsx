@@ -60,9 +60,9 @@ export default function Home() {
                         <Clock className="h-3 w-3" />
                         <span>January 30, 2025</span>
                       </div>
-                      <div className="bg-white border border-orange-500 text-orange-500 px-4 py-1.5 rounded-full flex items-center gap-2 group-hover:bg-orange-500 group-hover:text-white transition-all duration-300">
-                        <span className="text-sm font-medium">Read</span>
-                        <ArrowRight className="h-4 w-4 transform group-hover:translate-x-1 transition-transform duration-300" />
+                      <div className="overflow-hidden border border-orange-500 text-orange-500 px-4 py-1.5 rounded-full flex items-center gap-2 read-button-gradient group-hover:text-white group-hover:border-transparent transition-all duration-500">
+                        <span className="text-sm font-medium relative z-10">Read</span>
+                        <ArrowRight className="h-4 w-4 group-hover:animate-[slide-arrow_1s_ease-in-out_infinite] relative z-10" />
                       </div>
                     </div>
                   </CardContent>
