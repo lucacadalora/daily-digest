@@ -13,8 +13,27 @@ interface MarketData {
     ETH: MarketPrice;
   };
   stocks: {
+    // Indonesian Stocks
     BBRI: MarketPrice;
     TLKM: MarketPrice;
+    ASII: MarketPrice;
+    BBCA: MarketPrice;
+    // US Stocks
+    AAPL: MarketPrice;
+    MSFT: MarketPrice;
+    GOOGL: MarketPrice;
+    TSLA: MarketPrice;
+  };
+  indices: {
+    IHSG: MarketPrice;
+    'S&P500': MarketPrice;
+    NASDAQ: MarketPrice;
+    DJI: MarketPrice;
+  };
+  commodities: {
+    GOLD: MarketPrice;
+    OIL: MarketPrice;
+    SILVER: MarketPrice;
   };
 }
 
@@ -36,8 +55,27 @@ class MarketDataCache {
         ETH: { price: 0, change24h: 0 }
       },
       stocks: {
+        // Indonesian Stocks
         BBRI: { price: 0, change24h: 0 },
-        TLKM: { price: 0, change24h: 0 }
+        TLKM: { price: 0, change24h: 0 },
+        ASII: { price: 0, change24h: 0 },
+        BBCA: { price: 0, change24h: 0 },
+        // US Stocks
+        AAPL: { price: 0, change24h: 0 },
+        MSFT: { price: 0, change24h: 0 },
+        GOOGL: { price: 0, change24h: 0 },
+        TSLA: { price: 0, change24h: 0 }
+      },
+      indices: {
+        IHSG: { price: 0, change24h: 0 },
+        'S&P500': { price: 0, change24h: 0 },
+        NASDAQ: { price: 0, change24h: 0 },
+        DJI: { price: 0, change24h: 0 }
+      },
+      commodities: {
+        GOLD: { price: 0, change24h: 0 },
+        OIL: { price: 0, change24h: 0 },
+        SILVER: { price: 0, change24h: 0 }
       }
     }
   };
@@ -48,13 +86,11 @@ class MarketDataCache {
     const now = Date.now();
     const isStale = now - this.cache.timestamp > CACHE_DURATION;
 
-    // Return cached data if it's fresh
     if (!isStale) {
       console.log('[Cache] Hit - Returning fresh cached data');
       return this.cache.data;
     }
 
-    // If data is stale but another request is already fetching, return stale data
     if (this.isFetching) {
       console.log('[Cache] Hit - Returning stale data while revalidating');
       return this.cache.data;
@@ -75,7 +111,6 @@ class MarketDataCache {
     } catch (error) {
       console.error('[Cache] Error fetching fresh data:', error);
 
-      // Return last successful fetch if available and not too stale
       if (this.cache.lastSuccessfulFetch && 
           now - this.cache.timestamp < STALE_WHILE_REVALIDATE) {
         console.log('[Cache] Returning stale data due to fetch error');
@@ -94,7 +129,8 @@ class MarketDataCache {
       'https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum&vs_currencies=usd&include_24hr_change=true'
     );
 
-    // Format the data
+    // Format the data with simulated values for stocks, indices and commodities
+    // In production, these would come from actual market data APIs
     return {
       crypto: {
         BTC: {
@@ -107,15 +143,27 @@ class MarketDataCache {
         }
       },
       stocks: {
-        // Placeholder for stock data - we'll implement actual API later
-        BBRI: {
-          price: 4190,
-          change24h: 2.5
-        },
-        TLKM: {
-          price: 3820,
-          change24h: -0.8
-        }
+        // Indonesian Stocks (simulated data)
+        BBRI: { price: 4190, change24h: 2.5 },
+        TLKM: { price: 3820, change24h: -0.8 },
+        ASII: { price: 5650, change24h: 1.2 },
+        BBCA: { price: 9100, change24h: 0.5 },
+        // US Stocks (simulated data)
+        AAPL: { price: 185.85, change24h: 1.2 },
+        MSFT: { price: 405.12, change24h: 0.8 },
+        GOOGL: { price: 142.65, change24h: -0.5 },
+        TSLA: { price: 191.25, change24h: -2.1 }
+      },
+      indices: {
+        IHSG: { price: 7250, change24h: 0.3 },
+        'S&P500': { price: 4890, change24h: 0.7 },
+        NASDAQ: { price: 15455, change24h: 0.9 },
+        DJI: { price: 38150, change24h: 0.4 }
+      },
+      commodities: {
+        GOLD: { price: 2020.50, change24h: 0.3 },
+        OIL: { price: 78.25, change24h: -1.2 },
+        SILVER: { price: 22.85, change24h: 0.1 }
       }
     };
   }
@@ -124,7 +172,6 @@ class MarketDataCache {
 const marketDataCache = new MarketDataCache();
 
 export function registerRoutes(app: Express): Server {
-  // Market data endpoint with improved error handling
   app.get('/api/market-data', async (req, res) => {
     try {
       const marketData = await marketDataCache.get();
