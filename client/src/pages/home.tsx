@@ -78,7 +78,7 @@ export default function Home() {
               <Link href="/article" className="block hover:bg-gray-50">
                 <div className="border-b border-gray-100 pb-6">
                   <div className="aspect-w-16 aspect-h-9 mb-4">
-                    <img src="https://assets.bwbx.io/images/users/iqjWHBFdfxIU/ic9ZfbMHWVLA/v1/1200x800.jpg" alt="SoftBank Masayoshi Son" className="object-cover rounded-lg" />
+                    <img src="https://image.cnbcfm.com/api/v1/image/107063343-1653438552378-gettyimages-1395062617-AFP_32AL7QP.jpeg" alt="SoftBank Masayoshi Son" className="object-cover rounded-lg" />
                   </div>
                   <div className="flex items-center space-x-2 text-xs text-gray-500 mb-2">
                     <span className="font-medium">By Luca Cada Lora</span>
@@ -97,7 +97,7 @@ export default function Home() {
               <Link href="/article" className="block hover:bg-gray-50">
                 <div className="border-b border-gray-100 pb-6">
                   <div className="aspect-w-16 aspect-h-9 mb-4">
-                    <img src="https://assets.bwbx.io/images/users/iqjWHBFdfxIU/iN9RG.ZsI3Ik/v1/1200x800.jpg" alt="White House" className="object-cover rounded-lg" />
+                    <img src="https://media.npr.org/assets/img/2024/01/19/gettyimages-1666739176_wide-9e9c4f8121fcb84fca5f164bd8dff6cc4c36ac98-s1400-c100.jpg" alt="White House" className="object-cover rounded-lg" />
                   </div>
                   <div className="flex items-center space-x-2 text-xs text-gray-500 mb-2">
                     <span className="font-medium">By Luca Cada Lora</span>
@@ -116,7 +116,7 @@ export default function Home() {
               <Link href="/article" className="block hover:bg-gray-50">
                 <div className="border-b border-gray-100 pb-6">
                   <div className="aspect-w-16 aspect-h-9 mb-4">
-                    <img src="https://assets.bwbx.io/images/users/iqjWHBFdfxIU/iKjl3p2UYQK0/v1/1200x800.jpg" alt="India AI Models" className="object-cover rounded-lg" />
+                    <img src="https://cdn.sanity.io/images/tlr8oxjg/production/1ee437cf428a5d003ce3c7457ea465f1114faa7a-1456x816.png" alt="India AI Models" className="object-cover rounded-lg" />
                   </div>
                   <div className="flex items-center space-x-2 text-xs text-gray-500 mb-2">
                     <span className="font-medium">By Luca Cada Lora</span>
