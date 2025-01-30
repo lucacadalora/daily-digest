@@ -74,31 +74,55 @@ export default function Home() {
           {/* Latest Stories Sidebar */}
           <div className="w-96 flex-shrink-0">
             <h2 className="text-xl font-bold mb-6 text-gray-900">Latest Stories</h2>
-            <div className="space-y-4">
+            <div className="space-y-6">
               <Link href="/article" className="block hover:bg-gray-50">
-                <div className="border-b border-gray-100 pb-4">
+                <div className="border-b border-gray-100 pb-6">
+                  <div className="aspect-w-16 aspect-h-9 mb-4">
+                    <img src="https://images.unsplash.com/photo-1526304640581-d334cdbbf45e" alt="Venice VVV Token" className="object-cover rounded-lg" />
+                  </div>
+                  <div className="flex items-center space-x-2 text-xs text-gray-500 mb-2">
+                    <span className="font-medium">By Luca Cada Lora</span>
+                    <span>•</span>
+                    <span>Jan 29, 2025</span>
+                  </div>
                   <h3 className="text-lg font-bold mb-2 hover:text-blue-600">
-                    Powell Signals Fed on Hold as Trump's Economic Policies Take Shape
+                    $1B Venice VVV Token Launch
                   </h3>
                   <p className="text-sm text-gray-600">
-                    Federal Reserve maintains cautious stance amid policy shifts
+                    Symbiotic's Restaking Protocol | The Future of Healthcare Data & Hippocrat
                   </p>
                 </div>
               </Link>
 
               <Link href="/article" className="block hover:bg-gray-50">
-                <div className="border-b border-gray-100 pb-4">
+                <div className="border-b border-gray-100 pb-6">
+                  <div className="aspect-w-16 aspect-h-9 mb-4">
+                    <img src="https://images.unsplash.com/photo-1518546305927-5a555bb7020d" alt="Jupiter Crypto" className="object-cover rounded-lg" />
+                  </div>
+                  <div className="flex items-center space-x-2 text-xs text-gray-500 mb-2">
+                    <span className="font-medium">By Luca Cada Lora</span>
+                    <span>•</span>
+                    <span>Jan 27, 2025</span>
+                  </div>
                   <h3 className="text-lg font-bold mb-2 hover:text-blue-600">
-                    ECB Cut All But Certain With Price Goal in View
+                    Jupiter Crypto Conglomerate
                   </h3>
                   <p className="text-sm text-gray-600">
-                    European Central Bank prepares for significant policy adjustment
+                    Hayes: $70,000 BTC? | JUP Spikes 40%
                   </p>
                 </div>
               </Link>
 
               <Link href="/article" className="block hover:bg-gray-50">
-                <div className="border-b border-gray-100 pb-4">
+                <div className="border-b border-gray-100 pb-6">
+                  <div className="aspect-w-16 aspect-h-9 mb-4">
+                    <img src="https://images.unsplash.com/photo-1634542984003-e0fb8e200e91" alt="Bond Trading" className="object-cover rounded-lg" />
+                  </div>
+                  <div className="flex items-center space-x-2 text-xs text-gray-500 mb-2">
+                    <span className="font-medium">By Luca Cada Lora</span>
+                    <span>•</span>
+                    <span>Jan 26, 2025</span>
+                  </div>
                   <h3 className="text-lg font-bold mb-2 hover:text-blue-600">
                     Bond Traders Are Kept in Limbo After Powell Offers Few Clues
                   </h3>
