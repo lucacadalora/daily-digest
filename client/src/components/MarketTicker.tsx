@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { TrendingUp, TrendingDown } from "lucide-react";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 type MarketPrice = {
   price: number;
@@ -37,6 +37,7 @@ type MarketData = {
 
 export function MarketTicker() {
   const containerRef = useRef<HTMLDivElement>(null);
+  const [isPaused, setIsPaused] = useState(false);
   const { data, isLoading } = useQuery<MarketData>({
     queryKey: ['/api/market-data'],
     refetchInterval: 60000 // Refresh every minute
@@ -48,16 +49,17 @@ export function MarketTicker() {
 
     let animationFrame: number;
     let startTime: number;
-    const duration = 30000; // 30 seconds for one complete scroll
+    const duration = 60000; // 60 seconds for one complete scroll (slower)
     const scrollWidth = container.scrollWidth;
     const viewportWidth = container.offsetWidth;
 
     const animate = (timestamp: number) => {
       if (!startTime) startTime = timestamp;
-      const progress = ((timestamp - startTime) % duration) / duration;
-      const scrollPos = (scrollWidth + viewportWidth) * progress;
 
-      if (container) {
+      // Only update scroll position if not paused
+      if (!isPaused) {
+        const progress = ((timestamp - startTime) % duration) / duration;
+        const scrollPos = (scrollWidth + viewportWidth) * progress;
         container.scrollLeft = scrollPos % scrollWidth;
       }
 
@@ -71,7 +73,7 @@ export function MarketTicker() {
         cancelAnimationFrame(animationFrame);
       }
     };
-  }, [data]);
+  }, [data, isPaused]);
 
   if (isLoading || !data) {
     return (
@@ -107,8 +109,10 @@ export function MarketTicker() {
     <div 
       ref={containerRef} 
       className="flex overflow-x-hidden whitespace-nowrap text-sm scrollbar-hide"
+      onMouseEnter={() => setIsPaused(true)}
+      onMouseLeave={() => setIsPaused(false)}
     >
-      <div className="flex animate-marquee">
+      <div className={`flex animate-marquee ${isPaused ? 'animate-pause' : ''}`}>
         {/* Crypto Section */}
         {Object.entries(data.crypto).map(([symbol, price]) => 
           renderMarketItem(symbol, price, "Crypto")
