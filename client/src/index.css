@@ -2,7 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap');
+
 @layer base {
+  h1 {
+    font-family: 'Playfair Display', serif;
+  }
   * {
     @apply border-border;
   }

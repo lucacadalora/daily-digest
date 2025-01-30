@@ -15,9 +15,9 @@ export default function Home() {
           </div>
 
           {/* Navigation */}
-          <div className="flex justify-between items-center py-3">
-            <h1 className="text-xl font-semibold bg-gradient-to-r from-orange-500 to-red-500 bg-clip-text text-transparent">@lucaxyzz daily digest</h1>
-            <nav className="space-x-4 sm:space-x-8 text-sm font-medium text-gray-600"> {/* Reduced spacing on smaller screens */}
+          <div className="flex justify-between items-center py-4">
+            <h1 className="text-2xl font-serif font-bold tracking-tight text-gray-900">LUCAXYZZ<span className="text-orange-500 font-normal">DIGEST</span></h1>
+            <nav className="space-x-6 sm:space-x-8 text-sm font-medium text-gray-700"> {/* Reduced spacing on smaller screens */}
               <Link href="/" className="hover:text-orange-500 transition-colors">Markets</Link>
               <Link href="/" className="hover:text-orange-500 transition-colors">Analysis</Link>
               <Link href="/" className="hover:text-orange-500 transition-colors">Watchlist</Link>
