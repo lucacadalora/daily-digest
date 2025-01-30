@@ -8,7 +8,7 @@ export default function Home() {
     <div className="min-h-screen bg-[#FBF7F4]">
       {/* Header */}
       <header className="fixed w-full bg-white/80 backdrop-blur-sm border-b border-gray-100 z-50">
-        <div className="max-w-[1200px] mx-auto px-4">
+        <div className="max-w-[1200px] mx-auto px-4 sm:px-6"> {/* Added sm:px-6 for slightly wider padding on larger screens */}
           {/* Market Ticker */}
           <div className="py-2 overflow-hidden">
             <MarketTicker />
@@ -17,7 +17,7 @@ export default function Home() {
           {/* Navigation */}
           <div className="flex justify-between items-center py-3">
             <h1 className="text-xl font-semibold bg-gradient-to-r from-orange-500 to-red-500 bg-clip-text text-transparent">@lucaxyzz daily digest</h1>
-            <nav className="space-x-8 text-sm font-medium text-gray-600">
+            <nav className="space-x-4 sm:space-x-8 text-sm font-medium text-gray-600"> {/* Reduced spacing on smaller screens */}
               <Link href="/" className="hover:text-orange-500 transition-colors">Markets</Link>
               <Link href="/" className="hover:text-orange-500 transition-colors">Analysis</Link>
               <Link href="/" className="hover:text-orange-500 transition-colors">Watchlist</Link>
@@ -30,8 +30,8 @@ export default function Home() {
       <div className="h-24"></div>
 
       {/* Main Content */}
-      <main className="max-w-[1200px] mx-auto px-4 py-8">
-        <div className="flex gap-8">
+      <main className="max-w-[1200px] mx-auto px-2 py-4 sm:px-4 sm:py-8"> {/* Adjusted padding for mobile and larger screens */}
+        <div className="flex flex-col gap-8 sm:flex-row"> {/* Changed to flex-col for mobile, flex-row for larger screens */}
           {/* Newsletter Section */}
           <div className="flex-1">
             <div className="flex justify-between items-center mb-6">
@@ -41,7 +41,7 @@ export default function Home() {
               </Link>
             </div>
 
-            <div className="grid grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 gap-6 md:grid-cols-2"> {/* Changed to single column on mobile, two columns on medium and larger */}
               <Link href="/article">
                 <Card className="cursor-pointer hover:shadow-lg transition-all duration-300 group">
                   <CardContent className="p-4">
@@ -78,7 +78,7 @@ export default function Home() {
           </div>
 
           {/* Latest Stories Sidebar */}
-          <div className="w-96 flex-shrink-0">
+          <div className="w-96 flex-shrink-0 sm:w-64"> {/* Reduced width on smaller screens */}
             <h2 className="text-xl font-bold mb-6 text-gray-900">Latest Stories</h2>
             <div className="space-y-6">
               <Link href="/article" className="block hover:bg-gray-50">

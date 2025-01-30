@@ -106,7 +106,7 @@ export function MarketTicker() {
   return (
     <div 
       ref={containerRef} 
-      className="flex overflow-x-hidden whitespace-nowrap text-sm scrollbar-hide"
+      className="flex overflow-x-auto whitespace-nowrap text-sm scrollbar-hide"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
     >
