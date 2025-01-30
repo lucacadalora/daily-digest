@@ -55,9 +55,15 @@ export default function Home() {
                     <p className="text-sm text-gray-600 line-clamp-3 mb-4">
                       Analysis of BBRI's potential 30-40% total return opportunity through dividends and valuation re-rating.
                     </p>
-                    <div className="text-xs text-gray-500 flex items-center gap-2">
-                      <Clock className="h-3 w-3" />
-                      <span>January 30, 2025</span>
+                    <div className="flex justify-between items-center">
+                      <div className="text-xs text-gray-500 flex items-center gap-2">
+                        <Clock className="h-3 w-3" />
+                        <span>January 30, 2025</span>
+                      </div>
+                      <div className="bg-white border border-orange-500 text-orange-500 px-4 py-1.5 rounded-full flex items-center gap-2 group-hover:bg-orange-500 group-hover:text-white transition-all duration-300">
+                        <span className="text-sm font-medium">Read</span>
+                        <ArrowRight className="h-4 w-4 transform group-hover:translate-x-1 transition-transform duration-300" />
+                      </div>
                     </div>
                   </CardContent>
                 </Card>
