@@ -77,9 +77,7 @@ export function MarketTicker() {
 
   if (isLoading || !data) {
     return (
-      <div className="flex gap-4 text-sm text-gray-500 animate-pulse">
-        <div>Loading market data...</div>
-      </div>
+      <div className="h-6 animate-pulse bg-gray-100 rounded"></div>
     );
   }
 
