@@ -78,7 +78,7 @@ export default function Home() {
               <Link href="/article" className="block hover:bg-gray-50">
                 <div className="border-b border-gray-100 pb-6">
                   <div className="aspect-w-16 aspect-h-9 mb-4">
-                    <img src="https://imageio.forbes.com/specials-images/imageserve/63d31868cae0e059bd299d8e/0x0.jpg" alt="SoftBank Masayoshi Son" className="object-cover rounded-lg" />
+                    <img src="https://picsum.photos/seed/finance1/800/400" alt="SoftBank Masayoshi Son" className="object-cover rounded-lg" />
                   </div>
                   <div className="flex items-center space-x-2 text-xs text-gray-500 mb-2">
                     <span className="font-medium">By Luca Cada Lora</span>
@@ -97,7 +97,7 @@ export default function Home() {
               <Link href="/article" className="block hover:bg-gray-50">
                 <div className="border-b border-gray-100 pb-6">
                   <div className="aspect-w-16 aspect-h-9 mb-4">
-                    <img src="https://www.whitehouse.gov/wp-content/uploads/2021/01/white_house_at_night.jpg" alt="White House" className="object-cover rounded-lg" />
+                    <img src="https://picsum.photos/seed/finance2/800/400" alt="White House" className="object-cover rounded-lg" />
                   </div>
                   <div className="flex items-center space-x-2 text-xs text-gray-500 mb-2">
                     <span className="font-medium">By Luca Cada Lora</span>
@@ -116,7 +116,7 @@ export default function Home() {
               <Link href="/article" className="block hover:bg-gray-50">
                 <div className="border-b border-gray-100 pb-6">
                   <div className="aspect-w-16 aspect-h-9 mb-4">
-                    <img src="https://images.hindustantimes.com/tech/img/2024/01/17/1600x900/AI_1705484057457_1705484057735.jpg" alt="India AI Models" className="object-cover rounded-lg" />
+                    <img src="https://picsum.photos/seed/finance3/800/400" alt="India AI Models" className="object-cover rounded-lg" />
                   </div>
                   <div className="flex items-center space-x-2 text-xs text-gray-500 mb-2">
                     <span className="font-medium">By Luca Cada Lora</span>
