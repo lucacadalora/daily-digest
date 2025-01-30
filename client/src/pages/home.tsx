@@ -78,7 +78,26 @@ export default function Home() {
               <Link href="/article" className="block hover:bg-gray-50">
                 <div className="border-b border-gray-100 pb-6">
                   <div className="aspect-w-16 aspect-h-9 mb-4">
-                    <img src="https://images.unsplash.com/photo-1526304640581-d334cdbbf45e" alt="Venice VVV Token" className="object-cover rounded-lg" />
+                    <img src="https://assets.bwbx.io/images/users/iqjWHBFdfxIU/iDt1y.K65vUg/v0/1200x800.jpg" alt="SoftBank OpenAI Investment" className="object-cover rounded-lg" />
+                  </div>
+                  <div className="flex items-center space-x-2 text-xs text-gray-500 mb-2">
+                    <span className="font-medium">By Luca Cada Lora</span>
+                    <span>•</span>
+                    <span>Jan 30, 2025</span>
+                  </div>
+                  <h3 className="text-lg font-bold mb-2 hover:text-blue-600">
+                    SoftBank in Talks to Invest Up to $25 Billion in OpenAI
+                  </h3>
+                  <p className="text-sm text-gray-600">
+                    Meta Gains After Zuckerberg Predicts 'Really Big Year' in AI
+                  </p>
+                </div>
+              </Link>
+
+              <Link href="/article" className="block hover:bg-gray-50">
+                <div className="border-b border-gray-100 pb-6">
+                  <div className="aspect-w-16 aspect-h-9 mb-4">
+                    <img src="https://assets.bwbx.io/images/users/iqjWHBFdfxIU/iPw5UuQJoVK4/v0/1200x800.jpg" alt="White House" className="object-cover rounded-lg" />
                   </div>
                   <div className="flex items-center space-x-2 text-xs text-gray-500 mb-2">
                     <span className="font-medium">By Luca Cada Lora</span>
@@ -86,10 +105,10 @@ export default function Home() {
                     <span>Jan 29, 2025</span>
                   </div>
                   <h3 className="text-lg font-bold mb-2 hover:text-blue-600">
-                    $1B Venice VVV Token Launch
+                    White House Considers Dozens of New Ways to Seize Spending Power
                   </h3>
                   <p className="text-sm text-gray-600">
-                    Symbiotic's Restaking Protocol | The Future of Healthcare Data & Hippocrat
+                    Trump's Transactional Foreign Policy Leads to Flurry of Pledges
                   </p>
                 </div>
               </Link>
@@ -97,37 +116,18 @@ export default function Home() {
               <Link href="/article" className="block hover:bg-gray-50">
                 <div className="border-b border-gray-100 pb-6">
                   <div className="aspect-w-16 aspect-h-9 mb-4">
-                    <img src="https://images.unsplash.com/photo-1518546305927-5a555bb7020d" alt="Jupiter Crypto" className="object-cover rounded-lg" />
+                    <img src="https://assets.bwbx.io/images/users/iqjWHBFdfxIU/iKZ7UONyM5rA/v0/1200x800.jpg" alt="India AI" className="object-cover rounded-lg" />
                   </div>
                   <div className="flex items-center space-x-2 text-xs text-gray-500 mb-2">
                     <span className="font-medium">By Luca Cada Lora</span>
                     <span>•</span>
-                    <span>Jan 27, 2025</span>
+                    <span>Jan 28, 2025</span>
                   </div>
                   <h3 className="text-lg font-bold mb-2 hover:text-blue-600">
-                    Jupiter Crypto Conglomerate
+                    India Races to Build Own AI Models as DeepSeek Leaps Ahead
                   </h3>
                   <p className="text-sm text-gray-600">
-                    Hayes: $70,000 BTC? | JUP Spikes 40%
-                  </p>
-                </div>
-              </Link>
-
-              <Link href="/article" className="block hover:bg-gray-50">
-                <div className="border-b border-gray-100 pb-6">
-                  <div className="aspect-w-16 aspect-h-9 mb-4">
-                    <img src="https://images.unsplash.com/photo-1634542984003-e0fb8e200e91" alt="Bond Trading" className="object-cover rounded-lg" />
-                  </div>
-                  <div className="flex items-center space-x-2 text-xs text-gray-500 mb-2">
-                    <span className="font-medium">By Luca Cada Lora</span>
-                    <span>•</span>
-                    <span>Jan 26, 2025</span>
-                  </div>
-                  <h3 className="text-lg font-bold mb-2 hover:text-blue-600">
-                    Bond Traders Are Kept in Limbo After Powell Offers Few Clues
-                  </h3>
-                  <p className="text-sm text-gray-600">
-                    Market uncertainty persists following Federal Reserve commentary
+                    Adani Flagship's Net Slumps 97% on Poor Coal Trading, Forex Loss
                   </p>
                 </div>
               </Link>
