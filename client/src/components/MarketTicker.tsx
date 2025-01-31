@@ -36,106 +36,15 @@ type MarketData = {
   };
 };
 
-// Yahoo Finance symbols mapping
-const SYMBOLS = {
-  crypto: {
-    BTC: 'BTC-USD',
-    ETH: 'ETH-USD'
-  },
-  stocks: {
-    BBRI: 'BBRI.JK',
-    TLKM: 'TLKM.JK',
-    ASII: 'ASII.JK',
-    BBCA: 'BBCA.JK',
-    AAPL: 'AAPL',
-    MSFT: 'MSFT',
-    GOOGL: 'GOOGL',
-    TSLA: 'TSLA'
-  },
-  indices: {
-    IHSG: '^JKSE',
-    'S&P500': '^GSPC',
-    NASDAQ: '^IXIC',
-    DJI: '^DJI',
-    NIKKEI: '^N225',
-    HSI: '^HSI'
-  },
-  forex: {
-    'USD/IDR': 'IDR=X'
-  }
-};
-
 async function fetchMarketData(): Promise<MarketData> {
-  try {
-    // Create a flat list of all symbols
-    const allSymbols = [
-      ...Object.values(SYMBOLS.crypto),
-      ...Object.values(SYMBOLS.stocks),
-      ...Object.values(SYMBOLS.indices),
-      ...Object.values(SYMBOLS.forex)
-    ].join(',');
-
-    // Yahoo Finance API endpoint
-    const response = await axios.get(`https://query1.finance.yahoo.com/v7/finance/quote`, {
-      params: {
-        symbols: allSymbols,
-        fields: 'regularMarketPrice,regularMarketChangePercent'
-      }
-    });
-
-    const quotes = response.data.quoteResponse.result;
-    const quoteMap = new Map(quotes.map((quote: any) => [quote.symbol, quote]));
-
-    // Transform the data into our format
-    const marketData: MarketData = {
-      crypto: {
-        BTC: mapYahooQuote(quoteMap.get(SYMBOLS.crypto.BTC)),
-        ETH: mapYahooQuote(quoteMap.get(SYMBOLS.crypto.ETH))
-      },
-      stocks: {
-        BBRI: mapYahooQuote(quoteMap.get(SYMBOLS.stocks.BBRI)),
-        TLKM: mapYahooQuote(quoteMap.get(SYMBOLS.stocks.TLKM)),
-        ASII: mapYahooQuote(quoteMap.get(SYMBOLS.stocks.ASII)),
-        BBCA: mapYahooQuote(quoteMap.get(SYMBOLS.stocks.BBCA)),
-        AAPL: mapYahooQuote(quoteMap.get(SYMBOLS.stocks.AAPL)),
-        MSFT: mapYahooQuote(quoteMap.get(SYMBOLS.stocks.MSFT)),
-        GOOGL: mapYahooQuote(quoteMap.get(SYMBOLS.stocks.GOOGL)),
-        TSLA: mapYahooQuote(quoteMap.get(SYMBOLS.stocks.TSLA))
-      },
-      indices: {
-        IHSG: mapYahooQuote(quoteMap.get(SYMBOLS.indices.IHSG)),
-        'S&P500': mapYahooQuote(quoteMap.get(SYMBOLS.indices['S&P500'])),
-        NASDAQ: mapYahooQuote(quoteMap.get(SYMBOLS.indices.NASDAQ)),
-        DJI: mapYahooQuote(quoteMap.get(SYMBOLS.indices.DJI)),
-        NIKKEI: mapYahooQuote(quoteMap.get(SYMBOLS.indices.NIKKEI)),
-        HSI: mapYahooQuote(quoteMap.get(SYMBOLS.indices.HSI))
-      },
-      forex: {
-        'USD/IDR': mapYahooQuote(quoteMap.get(SYMBOLS.forex['USD/IDR']))
-      }
-    };
-
-    return marketData;
-  } catch (error) {
-    console.error('Error fetching market data:', error);
-    throw error;
-  }
-}
-
-function mapYahooQuote(quote: any): MarketPrice {
-  if (!quote) {
-    return { price: 0, change24h: 0 };
-  }
-  return {
-    price: quote.regularMarketPrice || 0,
-    change24h: quote.regularMarketChangePercent || 0
-  };
+  const response = await axios.get('/api/market-data');
+  return response.data;
 }
 
 export function MarketTicker() {
   const containerRef = useRef<HTMLDivElement>(null);
   const [isPaused, setIsPaused] = useState(false);
-  const { data, isLoading } = useQuery<MarketData>({
+  const { data, isLoading, error } = useQuery<MarketData>({
     queryKey: ['market-data'],
     queryFn: fetchMarketData,
     refetchInterval: 30000, // Refresh every 30 seconds
@@ -176,6 +85,13 @@ export function MarketTicker() {
   if (isLoading || !data) {
     return (
       <div className="h-6 animate-pulse bg-gray-100 rounded"></div>
+    );
+  }
+
+  if (error) {
+    console.error('Error fetching market data:', error);
+    return (
+      <div className="text-sm text-red-500">Unable to load market data</div>
     );
   }
 
