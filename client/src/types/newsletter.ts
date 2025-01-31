@@ -28,7 +28,7 @@ export const sampleArticles: Article[] = [
     title: "Bank Rakyat Indonesia: The Undervalued Dividend Powerhouse",
     description: "Analysis of BBRI's potential 30-40% total return opportunity through dividends and valuation re-rating.",
     category: "Markets",
-    source: "Wall Street Journal",
+    source: "Daily Digest",
     author: "Luca Cada Lora",
     date: "January 30, 2025",
     content: "Full article content here..." 
@@ -38,7 +38,7 @@ export const sampleArticles: Article[] = [
     title: "SoftBank in Talks to Invest Up to $25 Billion in OpenAI",
     description: "Meta Gains After Zuckerberg Predicts 'Really Big Year' in AI",
     category: "Tech",
-    source: "Wall Street Journal",
+    source: "Daily Digest",
     author: "Luca Cada Lora",
     date: "January 29, 2025",
     content: "Full article content here..."
@@ -48,7 +48,7 @@ export const sampleArticles: Article[] = [
     title: "White House Considers Dozens of New Ways to Seize Spending Power",
     description: "Trump's Transactional Foreign Policy Leads to Flurry of Pledges",
     category: "Economics",
-    source: "Wall Street Journal",
+    source: "Daily Digest",
     author: "Luca Cada Lora",
     date: "January 28, 2025",
     content: "Full article content here..."

@@ -73,12 +73,14 @@ export default function Newsletters() {
               className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 relative
                 ${category === 'Featured' ? 'bg-blue-600 text-white shadow-lg shadow-blue-500/30' : 
                 'bg-blue-50 text-blue-600 hover:bg-blue-100 dark:bg-blue-900/20 dark:text-blue-400'}`}>
-              Featured
-              <span className="absolute -right-1 -top-1">
-                <span className="flex h-2 w-2">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
+              <span className="flex items-center">
+                <span className="relative mr-2">
+                  <span className="flex h-2 w-2">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
+                    <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
+                  </span>
                 </span>
+                Featured
               </span>
             </Link>
             {['Markets', 'Economics', 'Industries', 'Tech'].map((tag) => (
