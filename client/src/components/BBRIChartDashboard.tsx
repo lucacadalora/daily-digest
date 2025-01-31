@@ -2,7 +2,7 @@ import React from 'react';
 import { ComposedChart, BarChart, Bar, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, Cell, ReferenceLine } from 'recharts';
 
 const BBRIChartDashboard = () => {
-  // Main metrics data remains the same
+  // Main metrics data
   const combinedData = [
     {
       year: '2022',
@@ -76,11 +76,11 @@ const BBRIChartDashboard = () => {
   ];
 
   const PriceCard = ({ title, price, upside, color }: { title: string, price: number, upside: string, color: string }) => (
-    <div className="p-4 bg-gray-50 rounded-lg border-l-4" style={{ borderLeftColor: color }}>
-      <h3 className="font-semibold mb-2">{title}</h3>
-      <p className="text-xl font-bold">IDR {price.toLocaleString()}</p>
+    <div className="p-4 bg-gray-50 dark:bg-gray-800 rounded-lg border-l-4" style={{ borderLeftColor: color }}>
+      <h3 className="font-semibold mb-2 dark:text-white">{title}</h3>
+      <p className="text-xl font-bold dark:text-white">IDR {price.toLocaleString()}</p>
       {Number(upside) > 0 && (
-        <p className="text-green-600 font-medium">
+        <p className="text-green-600 dark:text-green-400 font-medium">
           +{upside}% upside potential
         </p>
       )}
@@ -91,11 +91,11 @@ const BBRIChartDashboard = () => {
     if (active && payload && payload.length) {
       const data = payload[0].payload;
       return (
-        <div className="bg-white p-3 shadow-lg rounded-lg border">
-          <p className="font-semibold">{data.name}</p>
-          <p>Price: IDR {data.price.toLocaleString()}</p>
+        <div className="bg-white dark:bg-gray-800 p-3 shadow-lg rounded-lg border dark:border-gray-700">
+          <p className="font-semibold dark:text-white">{data.name}</p>
+          <p className="dark:text-gray-300">Price: IDR {data.price.toLocaleString()}</p>
           {Number(data.upside) > 0 && (
-            <p className="text-green-600">Upside: +{data.upside}%</p>
+            <p className="text-green-600 dark:text-green-400">Upside: +{data.upside}%</p>
           )}
         </div>
       );
@@ -104,28 +104,30 @@ const BBRIChartDashboard = () => {
   };
 
   return (
-    <div className="p-6 bg-gray-50 rounded-lg">
-      <h2 className="text-2xl font-serif font-bold mb-6 text-gray-800">BBRI Comprehensive Analysis</h2>
-      
+    <div className="p-6 bg-gray-50 dark:bg-gray-900 rounded-lg">
+      <h2 className="text-2xl font-serif font-bold mb-6 text-gray-800 dark:text-white">BBRI Comprehensive Analysis</h2>
+
       <div className="space-y-6">
         {/* Main metrics chart */}
-        <div className="bg-white p-4 rounded-lg shadow">
-          <h3 className="text-xl font-semibold mb-4">Combined Performance Metrics</h3>
+        <div className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow">
+          <h3 className="text-xl font-semibold mb-4 dark:text-white">Combined Performance Metrics</h3>
           <div className="h-[500px] w-full">
             <ResponsiveContainer>
               <ComposedChart data={combinedData}>
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="year" />
+                <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.1)" />
+                <XAxis dataKey="year" stroke="currentColor" />
                 <YAxis 
                   yAxisId="left"
-                  label={{ value: 'Percentage (%)', angle: -90, position: 'insideLeft' }}
+                  label={{ value: 'Percentage (%)', angle: -90, position: 'insideLeft', style: { fill: 'currentColor' } }}
+                  stroke="currentColor"
                 />
                 <YAxis 
                   yAxisId="right"
                   orientation="right"
-                  label={{ value: 'Ratios', angle: 90, position: 'insideRight' }}
+                  label={{ value: 'Ratios', angle: 90, position: 'insideRight', style: { fill: 'currentColor' } }}
+                  stroke="currentColor"
                 />
-                <Tooltip />
+                <Tooltip content={<CustomTooltip />} />
                 <Legend />
                 <Bar yAxisId="left" dataKey="eps" fill="#3a7ca5" name="EPS Growth (%)" />
                 <Bar yAxisId="left" dataKey="capitalGain" fill="#f0ad4e" name="Capital Gain (%)" />
@@ -162,13 +164,13 @@ const BBRIChartDashboard = () => {
         </div>
 
         {/* Enhanced valuation estimates section */}
-        <div className="bg-white p-6 rounded-lg shadow">
-          <h3 className="text-xl font-bold mb-6">Fair Value Estimates</h3>
+        <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow">
+          <h3 className="text-xl font-bold mb-6 dark:text-white">Fair Value Estimates</h3>
           <div className="grid lg:grid-cols-2 gap-8">
             {/* Enhanced price visualization */}
             <div>
               <div className="mb-4">
-                <h4 className="text-lg font-semibold">Price Range Comparison</h4>
+                <h4 className="text-lg font-semibold dark:text-white">Price Range Comparison</h4>
               </div>
               <div className="h-[300px] w-full">
                 <ResponsiveContainer>
@@ -177,11 +179,11 @@ const BBRIChartDashboard = () => {
                     layout="vertical"
                     margin={{ top: 20, right: 30, left: 100, bottom: 5 }}
                   >
-                    <CartesianGrid strokeDasharray="3 3" />
-                    <XAxis type="number" domain={[0, 10000]} />
-                    <YAxis dataKey="name" type="category" />
+                    <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.1)" />
+                    <XAxis type="number" domain={[0, 10000]} stroke="currentColor" />
+                    <YAxis dataKey="name" type="category" stroke="currentColor" />
                     <Tooltip content={<CustomTooltip />} />
-                    <ReferenceLine x={currentPrice} stroke="#e74c3c" strokeDasharray="3 3" label="Current Price" />
+                    <ReferenceLine x={currentPrice} stroke="#e74c3c" strokeDasharray="3 3" label={{ value: "Current Price", fill: 'currentColor' }} />
                     <Bar dataKey="price" maxBarSize={40}>
                       {valuationData.map((entry, index) => (
                         <Cell key={`cell-${index}`} fill={entry.color} />
