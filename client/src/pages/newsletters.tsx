@@ -44,34 +44,62 @@ export default function Newsletters() {
         </div>
       </header>
 
-      {/* Header spacing for fixed navbar */}
+      {/* Header spacing */}
       <div className="h-24"></div>
 
       <main className="max-w-[1200px] mx-auto px-4 py-8">
-        {/* Breadcrumb */}
-        <div className="flex items-center space-x-2 text-sm text-gray-600 dark:text-gray-400 mb-6">
-          <Link href="/" className="hover:text-blue-600">Home</Link>
-          <ChevronRight className="h-4 w-4" />
-          <Link href="/newsletters" className="hover:text-blue-600">Newsletter</Link>
-          {category && (
-            <>
-              <ChevronRight className="h-4 w-4" />
-              <span>{category} Newsletter</span>
-            </>
-          )}
-        </div>
+        <h1 className="text-3xl font-bold mb-8 text-gray-900 dark:text-white">Newsletter</h1>
 
+        {/* Filter by tag */}
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
-            {category ? `${category} Newsletter` : 'All Newsletters'}
-          </h1>
+          <p className="text-sm text-gray-600 dark:text-gray-400 mb-3">FILTER BY TAG</p>
+          <div className="flex flex-wrap gap-2">
+            <Link href="/newsletters" 
+              className={`px-4 py-2 rounded-full text-sm font-medium transition-colors 
+                ${!category ? 'bg-red-600 text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-300'}`}>
+              View All
+            </Link>
+            {['Featured', 'News', 'Interview', "Marco's Musing", 'Research'].map((tag) => (
+              <Link key={tag} href={`/newsletter/category/${tag}`}
+                className={`px-4 py-2 rounded-full text-sm font-medium transition-colors 
+                  ${category === tag ? 'bg-red-600 text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-300'}`}>
+                {tag}
+              </Link>
+            ))}
+          </div>
         </div>
 
+        {/* Featured Article with Animation */}
+        {!category && (
+          <div className="mb-12 relative">
+            <div className="absolute -left-3 top-0">
+              <span className="flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-red-500"></span>
+              </span>
+            </div>
+            <p className="text-sm text-red-600 font-medium mb-4 pl-2">FEATURED</p>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {sampleArticles.slice(0, 1).map((article, index) => (
+                <ArticleCard key={index} article={article} />
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Regular Articles */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredArticles.map((article, index) => (
+          {filteredArticles.slice(category ? 0 : 1).map((article, index) => (
             <ArticleCard key={index} article={article} />
           ))}
         </div>
+
+        {/* Empty State */}
+        {filteredArticles.length === 0 && (
+          <div className="text-center py-12">
+            <p className="text-gray-600 dark:text-gray-400">No articles found in this category.</p>
+          </div>
+        )}
       </main>
     </div>
   );
