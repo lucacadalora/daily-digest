@@ -11,38 +11,50 @@ export default function Home() {
     <div className="min-h-screen bg-[#FBF7F4] dark:bg-gray-900 transition-colors">
       {/* Header */}
       <header className="fixed w-full bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm border-b border-gray-100 dark:border-gray-800 z-50">
-        <div className="max-w-[1200px] mx-auto px-4 sm:px-6">
+        <div className="max-w-[1200px] mx-auto px-4">
           {/* Market Ticker */}
           <div className="py-2 overflow-hidden">
             <MarketTicker />
           </div>
 
-          {/* Navigation */}
+          {/* Top Navigation Bar */}
           <div className="flex justify-between items-center py-3">
             <h1 className="text-xl font-['Georgia'] font-bold dark:text-white">
               <span className="bg-gradient-to-r from-blue-700 via-blue-600 to-blue-500 bg-clip-text text-transparent">Daily</span>
               <span className="font-light mx-1">|</span>
               <span className="bg-gradient-to-r from-gray-800 to-gray-600 dark:from-gray-200 dark:to-gray-400 bg-clip-text text-transparent">Digest</span>
             </h1>
-            <div className="flex items-center space-x-4">
-              <nav className="space-x-4 sm:space-x-8 text-sm font-medium text-gray-600 dark:text-gray-300">
+            <ThemeToggle />
+          </div>
+
+          {/* Category Navigation - Desktop */}
+          <nav className="hidden sm:flex items-center justify-center space-x-8 py-3 text-sm font-medium text-gray-600 dark:text-gray-300">
+            <Link href="/newsletter/category/Markets" className="hover:text-blue-600 transition-colors">Markets</Link>
+            <Link href="/newsletter/category/Economics" className="hover:text-blue-600 transition-colors">Economics</Link>
+            <Link href="/newsletter/category/Industries" className="hover:text-blue-600 transition-colors">Industries</Link>
+            <Link href="/newsletter/category/Tech" className="hover:text-blue-600 transition-colors">Tech</Link>
+          </nav>
+
+          {/* Category Navigation - Mobile */}
+          <div className="sm:hidden">
+            <div className="overflow-x-auto pb-3 -mx-4 px-4">
+              <nav className="flex space-x-6 text-sm font-medium text-gray-600 dark:text-gray-300 whitespace-nowrap">
                 <Link href="/newsletter/category/Markets" className="hover:text-blue-600 transition-colors">Markets</Link>
                 <Link href="/newsletter/category/Economics" className="hover:text-blue-600 transition-colors">Economics</Link>
                 <Link href="/newsletter/category/Industries" className="hover:text-blue-600 transition-colors">Industries</Link>
                 <Link href="/newsletter/category/Tech" className="hover:text-blue-600 transition-colors">Tech</Link>
               </nav>
-              <ThemeToggle />
             </div>
           </div>
         </div>
       </header>
 
       {/* Top Spacing for Fixed Header */}
-      <div className="h-24"></div>
+      <div className="h-36 sm:h-32"></div>
 
       {/* Main Content */}
-      <main className="max-w-[1200px] mx-auto px-2 py-4 sm:px-4 sm:py-8 dark:text-gray-200">
-        <div className="flex flex-col gap-8 sm:flex-row">
+      <main className="max-w-[1200px] mx-auto px-4 py-6 sm:py-8 dark:text-gray-200">
+        <div className="flex flex-col gap-8 lg:flex-row">
           {/* Newsletter Section */}
           <div className="flex-1">
             <div className="flex justify-between items-center mb-6">
@@ -66,7 +78,7 @@ export default function Home() {
           </div>
 
           {/* Latest Stories Sidebar */}
-          <div className="w-96 flex-shrink-0 sm:w-64 dark:border-gray-800">
+          <div className="w-full lg:w-96 flex-shrink-0 lg:w-64 dark:border-gray-800">
             <h2 className="text-xl font-bold mb-6 text-gray-900 dark:text-white">Latest Stories</h2>
             <div className="space-y-6">
               <Link href="/article" className="block hover:bg-gray-50 dark:hover:bg-gray-700">
