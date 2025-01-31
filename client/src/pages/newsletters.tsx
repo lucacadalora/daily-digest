@@ -24,8 +24,8 @@ export default function Newsletters() {
             <MarketTicker />
           </div>
 
-          {/* Navigation */}
-          <div className="flex flex-col sm:flex-row justify-between items-center py-3 space-y-3 sm:space-y-0">
+          {/* Top Navigation Bar */}
+          <div className="flex justify-between items-center py-3">
             <Link href="/">
               <h1 className="text-xl font-['Georgia'] font-bold dark:text-white cursor-pointer hover:opacity-80 transition-opacity">
                 <span className="bg-gradient-to-r from-blue-700 via-blue-600 to-blue-500 bg-clip-text text-transparent">Daily</span>
@@ -33,31 +33,33 @@ export default function Newsletters() {
                 <span className="bg-gradient-to-r from-gray-800 to-gray-600 dark:from-gray-200 dark:to-gray-400 bg-clip-text text-transparent">Digest</span>
               </h1>
             </Link>
-            <div className="flex items-center space-x-4">
-              <nav className="hidden sm:flex space-x-4 md:space-x-8 text-sm font-medium text-gray-600 dark:text-gray-300">
+            <ThemeToggle />
+          </div>
+
+          {/* Category Navigation - Desktop */}
+          <nav className="hidden sm:flex items-center justify-center space-x-8 py-3 text-sm font-medium text-gray-600 dark:text-gray-300">
+            <Link href="/newsletter/category/Markets" className="hover:text-blue-600 transition-colors">Markets</Link>
+            <Link href="/newsletter/category/Economics" className="hover:text-blue-600 transition-colors">Economics</Link>
+            <Link href="/newsletter/category/Industries" className="hover:text-blue-600 transition-colors">Industries</Link>
+            <Link href="/newsletter/category/Tech" className="hover:text-blue-600 transition-colors">Tech</Link>
+          </nav>
+
+          {/* Category Navigation - Mobile */}
+          <div className="sm:hidden">
+            <div className="overflow-x-auto pb-3 -mx-4 px-4">
+              <nav className="flex space-x-6 text-sm font-medium text-gray-600 dark:text-gray-300 whitespace-nowrap">
                 <Link href="/newsletter/category/Markets" className="hover:text-blue-600 transition-colors">Markets</Link>
                 <Link href="/newsletter/category/Economics" className="hover:text-blue-600 transition-colors">Economics</Link>
                 <Link href="/newsletter/category/Industries" className="hover:text-blue-600 transition-colors">Industries</Link>
                 <Link href="/newsletter/category/Tech" className="hover:text-blue-600 transition-colors">Tech</Link>
               </nav>
-              <ThemeToggle />
             </div>
-          </div>
-
-          {/* Mobile Navigation */}
-          <div className="sm:hidden overflow-x-auto pb-3 -mx-4 px-4">
-            <nav className="flex space-x-4 text-sm font-medium text-gray-600 dark:text-gray-300 whitespace-nowrap">
-              <Link href="/newsletter/category/Markets" className="hover:text-blue-600 transition-colors">Markets</Link>
-              <Link href="/newsletter/category/Economics" className="hover:text-blue-600 transition-colors">Economics</Link>
-              <Link href="/newsletter/category/Industries" className="hover:text-blue-600 transition-colors">Industries</Link>
-              <Link href="/newsletter/category/Tech" className="hover:text-blue-600 transition-colors">Tech</Link>
-            </nav>
           </div>
         </div>
       </header>
 
       {/* Header spacing */}
-      <div className="h-32 sm:h-24"></div>
+      <div className="h-36 sm:h-32"></div>
 
       <main className="max-w-[1200px] mx-auto px-4 py-6 sm:py-8">
         {/* Breadcrumb */}
