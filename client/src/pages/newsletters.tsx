@@ -67,7 +67,24 @@ export default function Newsletters() {
           </h1>
         </div>
 
+        <div className="space-y-8">
+  {/* Category sections */}
+  {(category ? [category] : ["Markets", "Economics", "Industries", "Tech"]).map((cat) => {
+    const categoryArticles = sampleArticles.filter(article => article.category === cat);
+    if (categoryArticles.length === 0) return null;
+    
+    return (
+      <section key={cat}>
+        <h2 className="text-2xl font-bold mb-4 text-gray-800 dark:text-gray-200">{cat}</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {categoryArticles.map((article, index) => (
+            <ArticleCard key={index} article={article} />
+          ))}
+        </div>
+      </section>
+    );
+  })}
+</div>
           {filteredArticles.map((article, index) => (
             <ArticleCard key={index} article={article} />
           ))}

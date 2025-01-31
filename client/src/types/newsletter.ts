@@ -31,6 +31,36 @@ export const sampleArticles: Article[] = [
     source: "Wall Street Journal",
     author: "Luca Cada Lora",
     date: "January 30, 2025",
-    content: "Full article content here..." // Add actual content when available
+    content: "Full article content here..."
+  },
+  {
+    slug: "indonesia-tech-sector-growth",
+    title: "Indonesia's Tech Sector: The Next Growth Engine",
+    description: "Exploring the rapid growth of Indonesia's tech ecosystem and investment opportunities.",
+    category: "Tech",
+    source: "TechCrunch",
+    author: "Sarah Chen",
+    date: "January 29, 2025",
+    content: "Full article content here..."
+  },
+  {
+    slug: "manufacturing-recovery-southeast-asia",
+    title: "Manufacturing Recovery in Southeast Asia",
+    description: "Analysis of the manufacturing sector's recovery and its impact on regional economies.",
+    category: "Industries",
+    source: "Bloomberg",
+    author: "Michael Roberts",
+    date: "January 28, 2025",
+    content: "Full article content here..."
+  },
+  {
+    slug: "economic-outlook-2025",
+    title: "Economic Outlook 2025: Southeast Asia's Momentum",
+    description: "Comprehensive analysis of economic trends and forecasts for Southeast Asian economies.",
+    category: "Economics",
+    source: "Financial Times",
+    author: "David Wong",
+    date: "January 27, 2025",
+    content: "Full article content here..."
   }
 ];
