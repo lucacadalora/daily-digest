@@ -4,7 +4,7 @@ import BBRIChartDashboard from '@/components/BBRIChartDashboard';
 
 export default function WSJArticle() {
   return (
-    <div className="min-h-screen bg-white dark:bg-gray-900">
+    <div className="min-h-screen bg-white dark:bg-gray-900 overflow-y-auto">
       <div className="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
         <header className="border-b border-gray-200 dark:border-gray-800 pb-4">
           <div className="pt-4">
