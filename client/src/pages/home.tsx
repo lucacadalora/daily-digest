@@ -3,6 +3,8 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Newspaper, Clock, ArrowRight } from "lucide-react";
 import { MarketTicker } from "@/components/MarketTicker";
 import { ThemeToggle } from "@/components/ThemeToggle";
+import { ArticleCard } from "@/components/ArticleCard";
+import { sampleArticles } from "@/types/newsletter";
 
 export default function Home() {
   return (
@@ -24,9 +26,10 @@ export default function Home() {
             </h1>
             <div className="flex items-center space-x-4">
               <nav className="space-x-4 sm:space-x-8 text-sm font-medium text-gray-600 dark:text-gray-300">
-                <Link href="/" className="hover:text-blue-600 transition-colors">Markets</Link>
-                <Link href="/" className="hover:text-blue-600 transition-colors">Analysis</Link>
-                <Link href="/" className="hover:text-blue-600 transition-colors">Watchlist</Link>
+                <Link href="/newsletter/category/Markets" className="hover:text-blue-600 transition-colors">Markets</Link>
+                <Link href="/newsletter/category/Economics" className="hover:text-blue-600 transition-colors">Economics</Link>
+                <Link href="/newsletter/category/Industries" className="hover:text-blue-600 transition-colors">Industries</Link>
+                <Link href="/newsletter/category/Tech" className="hover:text-blue-600 transition-colors">Tech</Link>
               </nav>
               <ThemeToggle />
             </div>
@@ -50,32 +53,9 @@ export default function Home() {
             </div>
 
             <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-              <Link href="/article">
-                <Card className="cursor-pointer hover:shadow-lg transition-all duration-300 group dark:border-gray-800 dark:bg-gray-800">
-                  <CardContent className="p-4">
-                    <div className="flex items-center space-x-2 mb-3 text-gray-600 dark:text-gray-400">
-                      <Newspaper className="h-4 w-4" />
-                      <span className="text-xs font-medium">Wall Street Journal</span>
-                    </div>
-                    <h3 className="font-serif text-lg font-bold mb-2 line-clamp-2 group-hover:text-blue-600 transition-colors dark:group-hover:text-blue-400">
-                      Bank Rakyat Indonesia: The Undervalued Dividend Powerhouse
-                    </h3>
-                    <p className="text-sm text-gray-600 dark:text-gray-400 line-clamp-3 mb-4">
-                      Analysis of BBRI's potential 30-40% total return opportunity through dividends and valuation re-rating.
-                    </p>
-                    <div className="flex justify-between items-center">
-                      <div className="text-xs text-gray-500 dark:text-gray-400 flex items-center gap-2">
-                        <Clock className="h-3 w-3" />
-                        <span>January 30, 2025</span>
-                      </div>
-                      <div className="overflow-hidden border border-blue-600 text-blue-600 px-4 py-1.5 rounded-full flex items-center gap-2 read-button-gradient group-hover:text-white group-hover:border-transparent transition-all duration-500 dark:border-blue-400 dark:text-blue-400 dark:group-hover:text-white dark:group-hover:border-transparent">
-                        <span className="text-sm font-medium relative z-10">Read</span>
-                        <ArrowRight className="h-4 w-4  relative z-10" />
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              </Link>
+              {sampleArticles.slice(0, 1).map((article, index) => (
+                <ArticleCard key={index} article={article} />
+              ))}
 
               <Card className="opacity-50 dark:opacity-75">
                 <CardContent className="p-4 h-[200px] flex items-center justify-center">
