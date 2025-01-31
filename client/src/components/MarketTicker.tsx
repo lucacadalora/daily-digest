@@ -28,76 +28,118 @@ type MarketData = {
     'S&P500': MarketPrice;
     NASDAQ: MarketPrice;
     DJI: MarketPrice;
+    NIKKEI: MarketPrice;
+    HSI: MarketPrice;
   };
-  commodities: {
-    GOLD: MarketPrice;
-    OIL: MarketPrice;
-    SILVER: MarketPrice;
+  forex: {
+    'USD/IDR': MarketPrice;
   };
 };
 
-const FALLBACK_DATA: MarketData = {
+// Yahoo Finance symbols mapping
+const SYMBOLS = {
   crypto: {
-    BTC: { price: 42156.78, change24h: 2.34 },
-    ETH: { price: 2298.45, change24h: 1.89 }
+    BTC: 'BTC-USD',
+    ETH: 'ETH-USD'
   },
   stocks: {
-    BBRI: { price: 4190, change24h: 0.75 },
-    TLKM: { price: 3850, change24h: -0.52 },
-    ASII: { price: 5675, change24h: 1.25 },
-    BBCA: { price: 9250, change24h: 0.82 },
-    AAPL: { price: 188.45, change24h: -0.34 },
-    MSFT: { price: 402.56, change24h: 1.23 },
-    GOOGL: { price: 142.89, change24h: 0.95 },
-    TSLA: { price: 182.63, change24h: -1.45 }
+    BBRI: 'BBRI.JK',
+    TLKM: 'TLKM.JK',
+    ASII: 'ASII.JK',
+    BBCA: 'BBCA.JK',
+    AAPL: 'AAPL',
+    MSFT: 'MSFT',
+    GOOGL: 'GOOGL',
+    TSLA: 'TSLA'
   },
   indices: {
-    IHSG: { price: 7258.15, change24h: 0.63 },
-    'S&P500': { price: 4890.45, change24h: 0.70 },
-    NASDAQ: { price: 15628.73, change24h: 0.89 },
-    DJI: { price: 38150.82, change24h: 0.52 }
+    IHSG: '^JKSE',
+    'S&P500': '^GSPC',
+    NASDAQ: '^IXIC',
+    DJI: '^DJI',
+    NIKKEI: '^N225',
+    HSI: '^HSI'
   },
-  commodities: {
-    GOLD: { price: 2021.50, change24h: 0.45 },
-    OIL: { price: 78.25, change24h: -0.82 },
-    SILVER: { price: 22.85, change24h: 0.33 }
+  forex: {
+    'USD/IDR': 'IDR=X'
   }
 };
 
 async function fetchMarketData(): Promise<MarketData> {
   try {
-    // Primary data source for IHSG
-    const ihsgResponse = await axios.get('https://api.idx.co.id/api/v1/indices/IHSG');
-    const ihsgData = ihsgResponse.data;
+    // Create a flat list of all symbols
+    const allSymbols = [
+      ...Object.values(SYMBOLS.crypto),
+      ...Object.values(SYMBOLS.stocks),
+      ...Object.values(SYMBOLS.indices),
+      ...Object.values(SYMBOLS.forex)
+    ].join(',');
 
-    // Secondary data source for other markets
-    const marketResponse = await axios.get('/api/market-data');
-    const marketData = marketResponse.data;
+    // Yahoo Finance API endpoint
+    const response = await axios.get(`https://query1.finance.yahoo.com/v7/finance/quote`, {
+      params: {
+        symbols: allSymbols,
+        fields: 'regularMarketPrice,regularMarketChangePercent'
+      }
+    });
 
-    return {
-      ...marketData,
+    const quotes = response.data.quoteResponse.result;
+    const quoteMap = new Map(quotes.map((quote: any) => [quote.symbol, quote]));
+
+    // Transform the data into our format
+    const marketData: MarketData = {
+      crypto: {
+        BTC: mapYahooQuote(quoteMap.get(SYMBOLS.crypto.BTC)),
+        ETH: mapYahooQuote(quoteMap.get(SYMBOLS.crypto.ETH))
+      },
+      stocks: {
+        BBRI: mapYahooQuote(quoteMap.get(SYMBOLS.stocks.BBRI)),
+        TLKM: mapYahooQuote(quoteMap.get(SYMBOLS.stocks.TLKM)),
+        ASII: mapYahooQuote(quoteMap.get(SYMBOLS.stocks.ASII)),
+        BBCA: mapYahooQuote(quoteMap.get(SYMBOLS.stocks.BBCA)),
+        AAPL: mapYahooQuote(quoteMap.get(SYMBOLS.stocks.AAPL)),
+        MSFT: mapYahooQuote(quoteMap.get(SYMBOLS.stocks.MSFT)),
+        GOOGL: mapYahooQuote(quoteMap.get(SYMBOLS.stocks.GOOGL)),
+        TSLA: mapYahooQuote(quoteMap.get(SYMBOLS.stocks.TSLA))
+      },
       indices: {
-        ...marketData.indices,
-        IHSG: {
-          price: ihsgData.lastPrice,
-          change24h: ihsgData.percentageChange
-        }
+        IHSG: mapYahooQuote(quoteMap.get(SYMBOLS.indices.IHSG)),
+        'S&P500': mapYahooQuote(quoteMap.get(SYMBOLS.indices['S&P500'])),
+        NASDAQ: mapYahooQuote(quoteMap.get(SYMBOLS.indices.NASDAQ)),
+        DJI: mapYahooQuote(quoteMap.get(SYMBOLS.indices.DJI)),
+        NIKKEI: mapYahooQuote(quoteMap.get(SYMBOLS.indices.NIKKEI)),
+        HSI: mapYahooQuote(quoteMap.get(SYMBOLS.indices.HSI))
+      },
+      forex: {
+        'USD/IDR': mapYahooQuote(quoteMap.get(SYMBOLS.forex['USD/IDR']))
       }
     };
+
+    return marketData;
   } catch (error) {
-    console.warn('Error fetching market data, using fallback:', error);
-    return FALLBACK_DATA;
+    console.error('Error fetching market data:', error);
+    throw error;
   }
+}
+
+function mapYahooQuote(quote: any): MarketPrice {
+  if (!quote) {
+    return { price: 0, change24h: 0 };
+  }
+  return {
+    price: quote.regularMarketPrice || 0,
+    change24h: quote.regularMarketChangePercent || 0
+  };
 }
 
 export function MarketTicker() {
   const containerRef = useRef<HTMLDivElement>(null);
   const [isPaused, setIsPaused] = useState(false);
   const { data, isLoading } = useQuery<MarketData>({
-    queryKey: ['/api/market-data'],
+    queryKey: ['market-data'],
     queryFn: fetchMarketData,
-    refetchInterval: 60000, // Refresh every minute
-    initialData: FALLBACK_DATA
+    refetchInterval: 30000, // Refresh every 30 seconds
+    retry: 3
   });
 
   useEffect(() => {
@@ -172,9 +214,9 @@ export function MarketTicker() {
           renderMarketItem(symbol, price, "Crypto")
         )}
 
-        {/* US Stocks */}
-        {Object.entries(data.stocks).slice(4).map(([symbol, price]) => 
-          renderMarketItem(symbol, price, "US")
+        {/* Forex */}
+        {Object.entries(data.forex).map(([symbol, price]) => 
+          renderMarketItem(symbol, price, "Forex")
         )}
 
         {/* Indices */}
@@ -182,14 +224,14 @@ export function MarketTicker() {
           renderMarketItem(symbol, price, "Index")
         )}
 
+        {/* US Stocks */}
+        {Object.entries(data.stocks).slice(4).map(([symbol, price]) => 
+          renderMarketItem(symbol, price, "US")
+        )}
+
         {/* ID Stocks */}
         {Object.entries(data.stocks).slice(0, 4).map(([symbol, price]) => 
           renderMarketItem(symbol, price, "ID")
-        )}
-
-        {/* Commodities */}
-        {Object.entries(data.commodities).map(([symbol, price]) => 
-          renderMarketItem(symbol, price, "Commodity")
         )}
       </div>
     </div>

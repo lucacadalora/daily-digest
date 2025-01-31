@@ -70,7 +70,7 @@ export default function Home() {
                       </div>
                       <div className="overflow-hidden border border-blue-600 text-blue-600 px-4 py-1.5 rounded-full flex items-center gap-2 read-button-gradient group-hover:text-white group-hover:border-transparent transition-all duration-500 dark:border-blue-400 dark:text-blue-400 dark:group-hover:text-white dark:group-hover:border-transparent">
                         <span className="text-sm font-medium relative z-10">Read</span>
-                        <ArrowRight className="h-4 w-4 group-hover:animate-[slide-arrow_1s_ease-in-out_infinite] relative z-10" />
+                        <ArrowRight className="h-4 w-4  relative z-10" />
                       </div>
                     </div>
                   </CardContent>

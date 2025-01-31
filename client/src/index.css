@@ -106,8 +106,8 @@
       to right,
       transparent 0%,
       transparent 50%,
-      hsl(25, 95%, 53%) 50%,
-      hsl(25, 95%, 53%) 100%
+      theme('colors.blue.600') 50%,
+      theme('colors.blue.500') 100%
     );
   }
 
