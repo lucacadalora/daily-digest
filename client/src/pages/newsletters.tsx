@@ -10,7 +10,11 @@ export default function Newsletters() {
   const [location] = useLocation();
   const category = location.split("/").pop() as Category | undefined;
 
-  const filteredArticles = category 
+  // If we're on /newsletters, we should show all articles
+  const isViewAll = location === "/newsletters";
+
+  // Filter articles based on category, show all if on /newsletters
+  const filteredArticles = category && !isViewAll
     ? sampleArticles.filter(article => article.category === category)
     : sampleArticles;
 
@@ -65,7 +69,7 @@ export default function Newsletters() {
           <div className="flex flex-wrap gap-2">
             <Link href="/newsletters" 
               className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 
-                ${!category ? 'bg-blue-600 text-white shadow-lg shadow-blue-500/30' : 
+                ${isViewAll ? 'bg-blue-600 text-white shadow-lg shadow-blue-500/30' : 
                 'bg-blue-50 text-blue-600 hover:bg-blue-100 dark:bg-blue-900/20 dark:text-blue-400'}`}>
               View All
             </Link>
@@ -94,35 +98,7 @@ export default function Newsletters() {
           </div>
         </div>
 
-        {/* Featured Article with Animation */}
-        {!category && (
-          <div className="mb-12 relative">
-            <div className="absolute -left-3 top-0">
-              <span className="flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
-              </span>
-            </div>
-            <p className="text-sm text-blue-600 font-medium mb-4 pl-2">
-              <span className="relative">
-                FEATURED
-                <span className="absolute -right-2 -top-2">
-                  <span className="flex h-2 w-2">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
-                    <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
-                  </span>
-                </span>
-              </span>
-            </p>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {sampleArticles.slice(0, 1).map((article, index) => (
-                <ArticleCard key={index} article={article} />
-              ))}
-            </div>
-          </div>
-        )}
-
-        {/* Regular Articles */}
+        {/* Articles Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredArticles.map((article, index) => (
             <ArticleCard key={index} article={article} />
