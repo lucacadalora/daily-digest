@@ -16,7 +16,9 @@ export default function Home() {
 
           {/* Navigation */}
           <div className="flex justify-between items-center py-3">
-            <h1 className="text-xl font-semibold bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent">LUCAXYZZ<span className="text-orange-500">DIGEST</span></h1>
+            <h1 className="text-xl font-serif font-bold bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent">
+              <span className="text-[#8B0000]">L</span>ucaxyzz<span className="text-orange-500">DIGEST</span>
+            </h1>
             <nav className="space-x-4 sm:space-x-8 text-sm font-medium text-gray-600"> {/* Reduced spacing on smaller screens */}
               <Link href="/" className="hover:text-orange-500 transition-colors">Markets</Link>
               <Link href="/" className="hover:text-orange-500 transition-colors">Analysis</Link>
