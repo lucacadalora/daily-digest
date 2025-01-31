@@ -50,16 +50,11 @@ export default function Newsletters() {
       <div className="h-24"></div>
 
       <main className="max-w-[1200px] mx-auto px-4 py-8">
+        {/* Breadcrumb */}
         <div className="flex items-center space-x-2 text-sm text-gray-600 dark:text-gray-400 mb-6">
           <Link href="/" className="hover:text-blue-600">Home</Link>
           <ChevronRight className="h-4 w-4" />
-          <span>Newsletter</span>
-          {category && (
-            <>
-              <ChevronRight className="h-4 w-4" />
-              <span>{category}</span>
-            </>
-          )}
+          <span>Newsletters</span>
         </div>
 
         <h1 className="text-3xl font-bold mb-8 text-gray-900 dark:text-white">Newsletter</h1>
@@ -73,6 +68,18 @@ export default function Newsletters() {
                 ${!category ? 'bg-blue-600 text-white shadow-lg shadow-blue-500/30' : 
                 'bg-blue-50 text-blue-600 hover:bg-blue-100 dark:bg-blue-900/20 dark:text-blue-400'}`}>
               View All
+            </Link>
+            <Link href="/newsletter/category/Featured"
+              className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 relative
+                ${category === 'Featured' ? 'bg-blue-600 text-white shadow-lg shadow-blue-500/30' : 
+                'bg-blue-50 text-blue-600 hover:bg-blue-100 dark:bg-blue-900/20 dark:text-blue-400'}`}>
+              Featured
+              <span className="absolute -right-1 -top-1">
+                <span className="flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
+                </span>
+              </span>
             </Link>
             {['Markets', 'Economics', 'Industries', 'Tech'].map((tag) => (
               <Link key={tag} href={`/newsletter/category/${tag}`}
@@ -115,7 +122,7 @@ export default function Newsletters() {
 
         {/* Regular Articles */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredArticles.slice(category ? 0 : 1).map((article, index) => (
+          {filteredArticles.map((article, index) => (
             <ArticleCard key={index} article={article} />
           ))}
         </div>
