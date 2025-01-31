@@ -88,13 +88,13 @@ const BBRIChartDashboard = () => {
   );
 
   const CustomTooltip = ({ active, payload }: any) => {
-    if (active && payload && payload.length) {
+    if (active && payload && payload.length && payload[0].payload) {
       const data = payload[0].payload;
       return (
         <div className="bg-white dark:bg-gray-800 p-3 shadow-lg rounded-lg border dark:border-gray-700">
           <p className="font-semibold dark:text-white">{data.name}</p>
-          <p className="dark:text-gray-300">Price: IDR {data.price.toLocaleString()}</p>
-          {Number(data.upside) > 0 && (
+          <p className="dark:text-gray-300">Price: IDR {data.price?.toLocaleString() || 'N/A'}</p>
+          {data.upside && Number(data.upside) > 0 && (
             <p className="text-green-600 dark:text-green-400">Upside: +{data.upside}%</p>
           )}
         </div>
