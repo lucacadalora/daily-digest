@@ -9,11 +9,7 @@ import { ThemeToggle } from "@/components/ThemeToggle";
 export default function Newsletters() {
   const [location] = useLocation();
   const category = location.split("/").pop() as Category | undefined;
-
-  // If we're on /newsletters, we should show all articles
   const isViewAll = location === "/newsletters";
-
-  // Filter articles based on category, show all if on /newsletters
   const filteredArticles = category && !isViewAll
     ? sampleArticles.filter(article => article.category === category)
     : sampleArticles;
@@ -22,14 +18,14 @@ export default function Newsletters() {
     <div className="min-h-screen bg-[#FBF7F4] dark:bg-gray-900 transition-colors">
       {/* Header */}
       <header className="fixed w-full bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm border-b border-gray-100 dark:border-gray-800 z-50">
-        <div className="max-w-[1200px] mx-auto px-4 sm:px-6">
+        <div className="max-w-[1200px] mx-auto px-4">
           {/* Market Ticker */}
           <div className="py-2 overflow-hidden">
             <MarketTicker />
           </div>
 
           {/* Navigation */}
-          <div className="flex justify-between items-center py-3">
+          <div className="flex flex-col sm:flex-row justify-between items-center py-3 space-y-3 sm:space-y-0">
             <Link href="/">
               <h1 className="text-xl font-['Georgia'] font-bold dark:text-white cursor-pointer hover:opacity-80 transition-opacity">
                 <span className="bg-gradient-to-r from-blue-700 via-blue-600 to-blue-500 bg-clip-text text-transparent">Daily</span>
@@ -38,7 +34,7 @@ export default function Newsletters() {
               </h1>
             </Link>
             <div className="flex items-center space-x-4">
-              <nav className="space-x-4 sm:space-x-8 text-sm font-medium text-gray-600 dark:text-gray-300">
+              <nav className="hidden sm:flex space-x-4 md:space-x-8 text-sm font-medium text-gray-600 dark:text-gray-300">
                 <Link href="/newsletter/category/Markets" className="hover:text-blue-600 transition-colors">Markets</Link>
                 <Link href="/newsletter/category/Economics" className="hover:text-blue-600 transition-colors">Economics</Link>
                 <Link href="/newsletter/category/Industries" className="hover:text-blue-600 transition-colors">Industries</Link>
@@ -47,13 +43,23 @@ export default function Newsletters() {
               <ThemeToggle />
             </div>
           </div>
+
+          {/* Mobile Navigation */}
+          <div className="sm:hidden overflow-x-auto pb-3 -mx-4 px-4">
+            <nav className="flex space-x-4 text-sm font-medium text-gray-600 dark:text-gray-300 whitespace-nowrap">
+              <Link href="/newsletter/category/Markets" className="hover:text-blue-600 transition-colors">Markets</Link>
+              <Link href="/newsletter/category/Economics" className="hover:text-blue-600 transition-colors">Economics</Link>
+              <Link href="/newsletter/category/Industries" className="hover:text-blue-600 transition-colors">Industries</Link>
+              <Link href="/newsletter/category/Tech" className="hover:text-blue-600 transition-colors">Tech</Link>
+            </nav>
+          </div>
         </div>
       </header>
 
       {/* Header spacing */}
-      <div className="h-24"></div>
+      <div className="h-32 sm:h-24"></div>
 
-      <main className="max-w-[1200px] mx-auto px-4 py-8">
+      <main className="max-w-[1200px] mx-auto px-4 py-6 sm:py-8">
         {/* Breadcrumb */}
         <div className="flex items-center space-x-2 text-sm text-gray-600 dark:text-gray-400 mb-6">
           <Link href="/" className="hover:text-blue-600">Home</Link>
@@ -61,10 +67,10 @@ export default function Newsletters() {
           <span>Newsletters</span>
         </div>
 
-        <h1 className="text-3xl font-bold mb-8 text-gray-900 dark:text-white">Newsletter</h1>
+        <h1 className="text-2xl sm:text-3xl font-bold mb-6 sm:mb-8 text-gray-900 dark:text-white">Newsletter</h1>
 
         {/* Filter by tag */}
-        <div className="mb-8">
+        <div className="mb-6 sm:mb-8">
           <p className="text-sm text-gray-600 dark:text-gray-400 mb-3">FILTER BY TAG</p>
           <div className="flex flex-wrap gap-2">
             <Link href="/newsletters" 
@@ -99,7 +105,7 @@ export default function Newsletters() {
         </div>
 
         {/* Articles Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
           {filteredArticles.map((article, index) => (
             <ArticleCard key={index} article={article} />
           ))}
