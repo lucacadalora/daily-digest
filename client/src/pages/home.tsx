@@ -17,14 +17,16 @@ export default function Home() {
 
           {/* Navigation */}
           <div className="flex justify-between items-center py-3">
-            <h1 className="text-xl font-serif font-bold dark:text-white">
-              <span className="text-[#8B0000] dark:text-red-500">L</span>ucaxyzz<span className="bg-gradient-to-r from-orange-500 to-red-500 bg-clip-text text-transparent">DIGEST</span>
+            <h1 className="text-xl font-['Georgia'] font-bold dark:text-white">
+              <span className="bg-gradient-to-r from-blue-700 via-blue-600 to-blue-500 bg-clip-text text-transparent">Daily</span>
+              <span className="font-light mx-1">|</span>
+              <span className="bg-gradient-to-r from-gray-800 to-gray-600 dark:from-gray-200 dark:to-gray-400 bg-clip-text text-transparent">Digest</span>
             </h1>
             <div className="flex items-center space-x-4">
               <nav className="space-x-4 sm:space-x-8 text-sm font-medium text-gray-600 dark:text-gray-300">
-                <Link href="/" className="hover:text-orange-500 transition-colors">Markets</Link>
-                <Link href="/" className="hover:text-orange-500 transition-colors">Analysis</Link>
-                <Link href="/" className="hover:text-orange-500 transition-colors">Watchlist</Link>
+                <Link href="/" className="hover:text-blue-600 transition-colors">Markets</Link>
+                <Link href="/" className="hover:text-blue-600 transition-colors">Analysis</Link>
+                <Link href="/" className="hover:text-blue-600 transition-colors">Watchlist</Link>
               </nav>
               <ThemeToggle />
             </div>
@@ -36,18 +38,18 @@ export default function Home() {
       <div className="h-24"></div>
 
       {/* Main Content */}
-      <main className="max-w-[1200px] mx-auto px-2 py-4 sm:px-4 sm:py-8 dark:text-gray-200"> {/* Adjusted padding for mobile and larger screens */}
-        <div className="flex flex-col gap-8 sm:flex-row"> {/* Changed to flex-col for mobile, flex-row for larger screens */}
+      <main className="max-w-[1200px] mx-auto px-2 py-4 sm:px-4 sm:py-8 dark:text-gray-200">
+        <div className="flex flex-col gap-8 sm:flex-row">
           {/* Newsletter Section */}
           <div className="flex-1">
             <div className="flex justify-between items-center mb-6">
               <h2 className="text-xl font-bold text-gray-900 dark:text-white">Newsletter</h2>
-              <Link href="/newsletters" className="text-sm text-orange-500 hover:text-orange-600 dark:text-orange-400 dark:hover:text-orange-300 flex items-center gap-1">
+              <Link href="/newsletters" className="text-sm text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 flex items-center gap-1">
                 View All <ArrowRight className="h-4 w-4" />
               </Link>
             </div>
 
-            <div className="grid grid-cols-1 gap-6 md:grid-cols-2"> {/* Changed to single column on mobile, two columns on medium and larger */}
+            <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
               <Link href="/article">
                 <Card className="cursor-pointer hover:shadow-lg transition-all duration-300 group dark:border-gray-800 dark:bg-gray-800">
                   <CardContent className="p-4">
@@ -55,7 +57,7 @@ export default function Home() {
                       <Newspaper className="h-4 w-4" />
                       <span className="text-xs font-medium">Wall Street Journal</span>
                     </div>
-                    <h3 className="font-serif text-lg font-bold mb-2 line-clamp-2 group-hover:text-orange-500 transition-colors dark:group-hover:text-orange-400">
+                    <h3 className="font-serif text-lg font-bold mb-2 line-clamp-2 group-hover:text-blue-600 transition-colors dark:group-hover:text-blue-400">
                       Bank Rakyat Indonesia: The Undervalued Dividend Powerhouse
                     </h3>
                     <p className="text-sm text-gray-600 dark:text-gray-400 line-clamp-3 mb-4">
@@ -66,7 +68,7 @@ export default function Home() {
                         <Clock className="h-3 w-3" />
                         <span>January 30, 2025</span>
                       </div>
-                      <div className="overflow-hidden border border-orange-500 text-orange-500 px-4 py-1.5 rounded-full flex items-center gap-2 read-button-gradient group-hover:text-white group-hover:border-transparent transition-all duration-500 dark:border-orange-400 dark:text-orange-400 dark:group-hover:text-white dark:group-hover:border-transparent">
+                      <div className="overflow-hidden border border-blue-600 text-blue-600 px-4 py-1.5 rounded-full flex items-center gap-2 read-button-gradient group-hover:text-white group-hover:border-transparent transition-all duration-500 dark:border-blue-400 dark:text-blue-400 dark:group-hover:text-white dark:group-hover:border-transparent">
                         <span className="text-sm font-medium relative z-10">Read</span>
                         <ArrowRight className="h-4 w-4 group-hover:animate-[slide-arrow_1s_ease-in-out_infinite] relative z-10" />
                       </div>
@@ -84,7 +86,7 @@ export default function Home() {
           </div>
 
           {/* Latest Stories Sidebar */}
-          <div className="w-96 flex-shrink-0 sm:w-64 dark:border-gray-800"> {/* Reduced width on smaller screens */}
+          <div className="w-96 flex-shrink-0 sm:w-64 dark:border-gray-800">
             <h2 className="text-xl font-bold mb-6 text-gray-900 dark:text-white">Latest Stories</h2>
             <div className="space-y-6">
               <Link href="/article" className="block hover:bg-gray-50 dark:hover:bg-gray-700">
@@ -151,7 +153,7 @@ export default function Home() {
       {/* Footer */}
       <footer className="border-t border-gray-200 dark:border-gray-700 mt-12 bg-white dark:bg-gray-900">
         <div className="max-w-[1200px] mx-auto px-4 py-6">
-          <p className="text-sm text-gray-500 dark:text-gray-400">© 2025 Lucaxyzz Sipaling Saham. All rights reserved.</p>
+          <p className="text-sm text-gray-500 dark:text-gray-400">© 2025 Daily Digest. All rights reserved.</p>
         </div>
       </footer>
     </div>
