@@ -26,11 +26,13 @@ export default function Newsletters() {
 
           {/* Navigation */}
           <div className="flex justify-between items-center py-3">
-            <h1 className="text-xl font-['Georgia'] font-bold dark:text-white">
-              <span className="bg-gradient-to-r from-blue-700 via-blue-600 to-blue-500 bg-clip-text text-transparent">Daily</span>
-              <span className="font-light mx-1">|</span>
-              <span className="bg-gradient-to-r from-gray-800 to-gray-600 dark:from-gray-200 dark:to-gray-400 bg-clip-text text-transparent">Digest</span>
-            </h1>
+            <Link href="/">
+              <h1 className="text-xl font-['Georgia'] font-bold dark:text-white cursor-pointer hover:opacity-80 transition-opacity">
+                <span className="bg-gradient-to-r from-blue-700 via-blue-600 to-blue-500 bg-clip-text text-transparent">Daily</span>
+                <span className="font-light mx-1">|</span>
+                <span className="bg-gradient-to-r from-gray-800 to-gray-600 dark:from-gray-200 dark:to-gray-400 bg-clip-text text-transparent">Digest</span>
+              </h1>
+            </Link>
             <div className="flex items-center space-x-4">
               <nav className="space-x-4 sm:space-x-8 text-sm font-medium text-gray-600 dark:text-gray-300">
                 <Link href="/newsletter/category/Markets" className="hover:text-blue-600 transition-colors">Markets</Link>
@@ -48,6 +50,18 @@ export default function Newsletters() {
       <div className="h-24"></div>
 
       <main className="max-w-[1200px] mx-auto px-4 py-8">
+        <div className="flex items-center space-x-2 text-sm text-gray-600 dark:text-gray-400 mb-6">
+          <Link href="/" className="hover:text-blue-600">Home</Link>
+          <ChevronRight className="h-4 w-4" />
+          <span>Newsletter</span>
+          {category && (
+            <>
+              <ChevronRight className="h-4 w-4" />
+              <span>{category}</span>
+            </>
+          )}
+        </div>
+
         <h1 className="text-3xl font-bold mb-8 text-gray-900 dark:text-white">Newsletter</h1>
 
         {/* Filter by tag */}
@@ -55,14 +69,16 @@ export default function Newsletters() {
           <p className="text-sm text-gray-600 dark:text-gray-400 mb-3">FILTER BY TAG</p>
           <div className="flex flex-wrap gap-2">
             <Link href="/newsletters" 
-              className={`px-4 py-2 rounded-full text-sm font-medium transition-colors 
-                ${!category ? 'bg-red-600 text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-300'}`}>
+              className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 
+                ${!category ? 'bg-blue-600 text-white shadow-lg shadow-blue-500/30' : 
+                'bg-blue-50 text-blue-600 hover:bg-blue-100 dark:bg-blue-900/20 dark:text-blue-400'}`}>
               View All
             </Link>
-            {['Featured', 'News', 'Interview', "Marco's Musing", 'Research'].map((tag) => (
+            {['Markets', 'Economics', 'Industries', 'Tech'].map((tag) => (
               <Link key={tag} href={`/newsletter/category/${tag}`}
-                className={`px-4 py-2 rounded-full text-sm font-medium transition-colors 
-                  ${category === tag ? 'bg-red-600 text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-300'}`}>
+                className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 
+                  ${category === tag ? 'bg-blue-600 text-white shadow-lg shadow-blue-500/30' : 
+                  'bg-blue-50 text-blue-600 hover:bg-blue-100 dark:bg-blue-900/20 dark:text-blue-400'}`}>
                 {tag}
               </Link>
             ))}
@@ -74,11 +90,21 @@ export default function Newsletters() {
           <div className="mb-12 relative">
             <div className="absolute -left-3 top-0">
               <span className="flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-red-500"></span>
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
               </span>
             </div>
-            <p className="text-sm text-red-600 font-medium mb-4 pl-2">FEATURED</p>
+            <p className="text-sm text-blue-600 font-medium mb-4 pl-2">
+              <span className="relative">
+                FEATURED
+                <span className="absolute -right-2 -top-2">
+                  <span className="flex h-2 w-2">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
+                    <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
+                  </span>
+                </span>
+              </span>
+            </p>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {sampleArticles.slice(0, 1).map((article, index) => (
                 <ArticleCard key={index} article={article} />

@@ -28,9 +28,11 @@ export default function WSJArticle() {
           {/* Navigation */}
           <div className="flex justify-between items-center py-3">
             <h1 className="text-xl font-['Georgia'] font-bold dark:text-white">
-              <span className="bg-gradient-to-r from-blue-700 via-blue-600 to-blue-500 bg-clip-text text-transparent">Daily</span>
-              <span className="font-light mx-1">|</span>
-              <span className="bg-gradient-to-r from-gray-800 to-gray-600 dark:from-gray-200 dark:to-gray-400 bg-clip-text text-transparent">Digest</span>
+              <Link href="/" className="cursor-pointer hover:opacity-80 transition-opacity">
+                <span className="bg-gradient-to-r from-blue-700 via-blue-600 to-blue-500 bg-clip-text text-transparent">Daily</span>
+                <span className="font-light mx-1">|</span>
+                <span className="bg-gradient-to-r from-gray-800 to-gray-600 dark:from-gray-200 dark:to-gray-400 bg-clip-text text-transparent">Digest</span>
+              </Link>
             </h1>
             <div className="flex items-center space-x-4">
               <nav className="space-x-4 sm:space-x-8 text-sm font-medium text-gray-600 dark:text-gray-300">
