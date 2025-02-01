@@ -89,26 +89,44 @@ export const Header = ({ onSubscribe, showCategories = true, simplified = false 
 
                   {/* Daily Digest AI */}
                   <div className="mb-8">
-                    <Link href="/chat" className="flex items-center justify-between text-lg font-medium hover:text-blue-600 transition-colors">
-                      Daily Digest AI
+                    <Link href="/chat" className="flex items-center justify-between group">
+                      <div className="flex items-center gap-2">
+                        <div className="relative flex items-center">
+                          <div className="w-2 h-2 rounded-full bg-green-500"></div>
+                          <div className="absolute w-2 h-2 rounded-full bg-green-500 animate-ping"></div>
+                        </div>
+                        <span className="text-lg font-medium group-hover:text-blue-600 transition-colors">Daily Digest AI</span>
+                      </div>
                       <ArrowRight className="h-4 w-4" />
                     </Link>
+                    <p className="text-sm text-gray-600 dark:text-gray-400 mt-2">
+                      Ask our AI about market trends, analysis, and predictions in real-time.
+                    </p>
                   </div>
 
                   {/* Subscribe Form - Always visible */}
-                  <div className="mt-8 pt-8 border-t border-gray-100 dark:border-gray-800">
-                    <h3 className="text-base font-medium mb-4">Subscribe to Daily Digest</h3>
-                    <form onSubmit={form.handleSubmit((data) => console.log(data))} className="space-y-4">
-                      <Input
-                        type="email"
-                        placeholder="Enter your email"
-                        {...form.register("email")}
-                        className="bg-white dark:bg-gray-800"
-                      />
-                      <Button type="submit" className="w-full bg-blue-600 hover:bg-blue-700 text-white">
-                        Subscribe
-                      </Button>
-                    </form>
+                  <div className="mt-8">
+                    <div className="bg-red-700 rounded-xl p-6">
+                      <h3 className="text-xl font-semibold text-white mb-2">Sign up for our newsletter!</h3>
+                      <p className="text-white/90 text-sm mb-4">
+                        Subscribe to stay up to date with the latest crypto products, strategies and trends.
+                      </p>
+                      <form onSubmit={form.handleSubmit((data) => console.log(data))} className="relative">
+                        <Input
+                          type="email"
+                          placeholder="Your Email"
+                          {...form.register("email")}
+                          className="w-full bg-white/90 dark:bg-white border-0 pr-12 placeholder:text-gray-500"
+                        />
+                        <Button 
+                          type="submit" 
+                          size="icon"
+                          className="absolute right-1 top-1 bottom-1 bg-red-600 hover:bg-red-700 rounded-full w-8 h-8 flex items-center justify-center p-0"
+                        >
+                          <ArrowRight className="h-4 w-4 text-white" />
+                        </Button>
+                      </form>
+                    </div>
                   </div>
                 </SheetContent>
               </Sheet>
