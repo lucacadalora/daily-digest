@@ -1,10 +1,9 @@
 import { Card, CardContent } from '@/components/ui/card';
 import { TrendingUp, BarChart3, AlertCircle, Clock, MapPin, ChevronRight } from 'lucide-react';
 import BBRIChartDashboard from '@/components/BBRIChartDashboard';
-import { MarketTicker } from "@/components/MarketTicker";
-import { ThemeToggle } from "@/components/ThemeToggle";
 import { Link, useLocation } from "wouter";
 import { sampleArticles } from "@/types/newsletter";
+import { Header } from "@/components/Header";
 
 export default function WSJArticle() {
   const [location] = useLocation();
@@ -18,34 +17,7 @@ export default function WSJArticle() {
   return (
     <div className="min-h-screen bg-white dark:bg-gray-900 overflow-y-auto">
       {/* Header */}
-      <header className="fixed w-full bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm border-b border-gray-100 dark:border-gray-800 z-50">
-        <div className="max-w-[1200px] mx-auto px-4 sm:px-6">
-          {/* Market Ticker */}
-          <div className="py-2 overflow-hidden">
-            <MarketTicker />
-          </div>
-
-          {/* Navigation */}
-          <div className="flex justify-between items-center py-3">
-            <h1 className="text-xl font-['Georgia'] font-bold dark:text-white">
-              <Link href="/" className="cursor-pointer hover:opacity-80 transition-opacity">
-                <span className="bg-gradient-to-r from-blue-700 via-blue-600 to-blue-500 bg-clip-text text-transparent">Daily</span>
-                <span className="font-light mx-1">|</span>
-                <span className="bg-gradient-to-r from-gray-800 to-gray-600 dark:from-gray-200 dark:to-gray-400 bg-clip-text text-transparent">Digest</span>
-              </Link>
-            </h1>
-            <div className="flex items-center space-x-4">
-              <nav className="space-x-4 sm:space-x-8 text-sm font-medium text-gray-600 dark:text-gray-300">
-                <Link href="/newsletter/category/Markets" className="hover:text-blue-600 transition-colors">Markets</Link>
-                <Link href="/newsletter/category/Economics" className="hover:text-blue-600 transition-colors">Economics</Link>
-                <Link href="/newsletter/category/Industries" className="hover:text-blue-600 transition-colors">Industries</Link>
-                <Link href="/newsletter/category/Tech" className="hover:text-blue-600 transition-colors">Tech</Link>
-              </nav>
-              <ThemeToggle />
-            </div>
-          </div>
-        </div>
-      </header>
+      <Header simplified showCategories={false} />
 
       {/* Header spacing */}
       <div className="h-24"></div>
