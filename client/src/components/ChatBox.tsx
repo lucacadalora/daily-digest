@@ -56,7 +56,6 @@ export const ChatBox = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
 
-
   const handleClear = () => {
     setMessages([]);
     setInput('');
@@ -220,20 +219,22 @@ export const ChatBox = () => {
         </h2>
       </div>
 
-      {/* Example Prompts */}
-      <div className="p-4 border-b border-gray-200 dark:border-gray-800">
-        <div className="flex flex-wrap gap-2">
-          {EXAMPLE_PROMPTS.map((prompt, index) => (
-            <button
-              key={index}
-              className="text-sm px-3 py-1.5 rounded-full bg-gray-100 text-gray-700 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700 transition-colors"
-              onClick={() => setInput(prompt)}
-            >
-              {prompt}
-            </button>
-          ))}
+      {/* Example Prompts - Only show when no messages */}
+      {messages.length === 0 && (
+        <div className="p-4 border-b border-gray-200 dark:border-gray-800">
+          <div className="flex flex-wrap gap-2">
+            {EXAMPLE_PROMPTS.map((prompt, index) => (
+              <button
+                key={index}
+                className="text-sm px-3 py-1.5 rounded-full bg-gray-100 text-gray-700 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700 transition-colors"
+                onClick={() => setInput(prompt)}
+              >
+                {prompt}
+              </button>
+            ))}
+          </div>
         </div>
-      </div>
+      )}
 
       {/* Chat Messages */}
       <ScrollArea className="flex-1 p-4">
@@ -295,7 +296,7 @@ export const ChatBox = () => {
           x: 0,
           y: 0,
           width: '100%',
-          height: 'calc(100vh - 9rem)',
+          height: messages.length > 0 ? 'calc(100vh - 9rem)' : 'auto',
           zIndex: 20,
         }}
         transition={{ 
