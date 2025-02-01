@@ -46,15 +46,33 @@ interface Message {
 }
 
 const formatMarketAnalysis = (content: string) => {
-  // Add emoji indicators for different sections
-  const withEmojis = content
-    .replace(/Fair Value Estimates:/g, '📊 Fair Value Estimates\n')
-    .replace(/Dividend Outlook:/g, '💰 Dividend Outlook\n')
-    .replace(/Market Context:/g, '📈 Market Context\n')
-    .replace(/(\d+(\.\d{1,2})?%)/g, '📝 $1') // Highlight percentages
-    .replace(/(IDR \d+([,\.]\d+)*)/g, '💵 $1'); // Highlight currency values
+  // First, check if content contains stock analysis markers
+  if (content.includes('MARKET_CONTEXT')) {
+    const parts = content.split('MARKET_CONTEXT');
+    const [beforeContext, afterContext] = parts;
 
-  return withEmojis;
+    // Format the market context section with real-time data and analysis
+    const formattedContext = afterContext
+      .replace(/📈 Latest Market Data:/g, '📈 Market Context\n')
+      .replace(/Current Price: (IDR \d+([,\.]\d+)*)/g, '💰 Current Price: 💵$1')
+      .replace(/Change: ([+-]\d+(\.\d{1,2})?%)/g, '📊 Change: $1')
+      .replace(/Fair Value Estimates:/g, '\n💡 Fair Value Estimates\n')
+      .replace(/Peter Lynch Fair Value:/g, '🎯 Peter Lynch Fair Value:')
+      .replace(/Analyst Consensus:/g, '👥 Analyst Consensus:')
+      .replace(/Dividend Outlook:/g, '\n💰 Dividend Outlook\n')
+      .replace(/(\d+(\.\d{1,2})?%)/g, '📝 $1')
+      .replace(/(IDR \d+([,\.]\d+)*)/g, '💵 $1')
+      .replace(/upside potential/g, '📈 upside potential')
+      .replace(/downside risk/g, '📉 downside risk');
+
+    return beforeContext + formattedContext;
+  }
+
+  // Default formatting for non-stock analysis content
+  return content
+    .replace(/Market Context:/g, '📈 Market Context\n')
+    .replace(/(\d+(\.\d{1,2})?%)/g, '📝 $1')
+    .replace(/(IDR \d+([,\.]\d+)*)/g, '💵 $1');
 };
 
 export function ChatBox() {
@@ -131,7 +149,7 @@ export function ChatBox() {
       );
     }
 
-    // Format the message content with market analysis styling
+    // Format the message content with enhanced market analysis styling
     const formattedContent = formatMarketAnalysis(message.content);
 
     return (
