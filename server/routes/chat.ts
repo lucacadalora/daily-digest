@@ -8,6 +8,7 @@ router.post("/api/chat", async (req, res) => {
     const { message } = req.body;
 
     if (!process.env.PERPLEXITY_API_KEY) {
+      console.error('API Key missing');
       throw new Error('Missing PERPLEXITY_API_KEY');
     }
 
@@ -60,10 +61,12 @@ Use markdown for formatting:
 - Links for citations [text](url)
 - Numbers should include proper units and contexts`;
 
+    console.log('Calling Perplexity API...');
+
     const response = await axios.post(
       'https://api.perplexity.ai/chat/completions',
       {
-        model: "llama-3.1-sonar-large-128k-online",
+        model: "sonar-small-chat",  // Using a more stable model
         messages: [
           {
             role: "system",
@@ -88,7 +91,10 @@ Use markdown for formatting:
       }
     );
 
+    console.log('API Response received:', response.status);
+
     if (!response.data?.choices?.[0]?.message?.content) {
+      console.error('Invalid API response format:', JSON.stringify(response.data));
       throw new Error('Invalid API response format');
     }
 
@@ -105,6 +111,11 @@ Use markdown for formatting:
     console.error('Chat API Error:', error);
     const errorMessage = error instanceof Error ? error.message : 'Unknown error';
     console.error('Error details:', errorMessage);
+
+    if (axios.isAxiosError(error)) {
+      console.error('API Response:', error.response?.data);
+      console.error('API Status:', error.response?.status);
+    }
 
     res.status(500).json({
       status: 'error',
