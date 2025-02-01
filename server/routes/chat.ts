@@ -11,27 +11,26 @@ router.post("/api/chat", async (req, res) => {
       throw new Error('Missing PERPLEXITY_API_KEY');
     }
 
-    // Enhanced financial terms regex
-    const financialTerms = /\b(market|stock|index|trade|invest|dividend|price|trend|economy|sector|analysis|forecast|growth|earning|revenue|profit|rate|bank|finance|currency|valuation|fundamental|technical|PE|EPS|ROE|asset|equity|bond|ETF|fund|mining|coal|commodity|volume)\b|\b[A-Z]{4}\.JK\b|\b[A-Z]{3,4}\b|\bIDX:\s*[A-Z]+\b/i;
-
-    if (!financialTerms.test(message)) {
+    // Only restrict highly technical programming queries
+    const restrictedTerms = /\b(sql injection|xss|database schema|api endpoint|code syntax|programming language|compiler|runtime|debugging)\b/i;
+    if (restrictedTerms.test(message)) {
       return res.json({
         status: 'success',
-        reply: "I apologize, but I can only assist with questions related to financial markets, economic analysis, and investment insights. Please ask questions within these domains."
+        reply: "I focus on business, market, and investment analysis. For coding-related questions, please consult programming-specific resources."
       });
     }
 
-    console.log('Processing financial query:', message);
+    console.log('Processing query:', message);
 
-    const systemPrompt = `You are an expert financial analyst specializing in Indonesian market analysis and investment research. Format your response using markdown syntax:
+    const systemPrompt = `You are an expert financial and business analyst specializing in market analysis and investment research. Format your response using markdown syntax:
 
-# 📊 Analysis Highlights:
-[Provide a concise market context about the stock/topic, focusing on recent significant developments and current market positioning]
+# 📊 Market Context
+[Provide a concise market context about the topic, focusing on recent significant developments and current positioning]
 
-## 💡 Key Metrics at a Glance:
-* **Valuation:** [P/E ratio and comparison to peers]
-* **Yield Projection:** [Current/projected dividend yield]
-* **Growth Highlight:** [Key growth metric or recent positive development]
+## 💡 Key Metrics
+* **[Key Metric 1]:** [Value with comparison to peers or historical data]
+* **[Key Metric 2]:** [Value with relevant context]
+* **[Key Metric 3]:** [Value with growth or trend information]
 
 ## 📈 Detailed Analysis
 [Comprehensive analysis of current situation, market position, and growth trajectory]
@@ -41,24 +40,25 @@ router.post("/api/chat", async (req, res) => {
 — [Expert Name], [Organization]
 
 ## 💫 Growth Opportunities
-* [Bullet points of key growth catalysts]
-* [Market expansion possibilities]
-* [Technological/operational advantages]
+* [Key growth catalyst]
+* [Market expansion possibility]
+* [Competitive advantage]
 
 ## ⚠️ Risk Factors
-* [Key risk factors]
-* [Market challenges]
-* [Operational concerns]
+* [Primary risk]
+* [Market challenge]
+* [Operational concern]
 
 ## 📝 Bottom Line
-[Concise conclusion summarizing investment thesis and key action points]
+[Concise conclusion summarizing key points and actionable insights]
 
 Use markdown for formatting:
 - **Bold** for key metrics and numbers
 - *Italic* for trends
 - \`code\` for exact values
 - > for expert quotes
-- --- for section breaks`;
+- Links for citations [text](url)
+- Numbers should include proper units and contexts`;
 
     const response = await axios.post(
       'https://api.perplexity.ai/chat/completions',
@@ -88,17 +88,17 @@ Use markdown for formatting:
       }
     );
 
-    console.log('Raw API Response:', JSON.stringify(response.data, null, 2));
-
     if (!response.data?.choices?.[0]?.message?.content) {
       throw new Error('Invalid API response format');
     }
 
     const content = response.data.choices[0].message.content;
+    const citations = response.data.citations || [];
 
     res.json({
       status: 'success',
-      reply: content.trim()
+      reply: content.trim(),
+      citations: citations
     });
 
   } catch (error) {

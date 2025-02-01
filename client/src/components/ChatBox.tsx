@@ -1,3 +1,9 @@
+const EXAMPLE_PROMPTS = [
+  "Analyze BBRI's current valuation and growth prospects",
+  "What's the latest market trend for Indonesian banking sector?",
+  "Compare dividend yields of top ASEAN banks",
+  "Analyze recent developments in digital banking adoption",
+];
 import { useState } from "react";
 import { Send, Search, Globe, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -12,14 +18,8 @@ interface Message {
   role: 'user' | 'assistant';
   content: string;
   isSearching?: boolean;
+  citations?: string[];
 }
-
-const EXAMPLE_PROMPTS = [
-  "Analyze BBRI's current valuation and dividend outlook",
-  "What's the investment thesis for ADRO in 2025?",
-  "Provide a technical analysis of TLKM stock",
-  "Assess ASII's growth prospects and market position",
-];
 
 export function ChatBox() {
   const [messages, setMessages] = useState<Message[]>([]);
@@ -35,12 +35,12 @@ export function ChatBox() {
     e.preventDefault();
     if (!input.trim() || isLoading) return;
 
-    // Check if the query is related to financial markets/analysis
-    const financialTerms = /\b(market|stock|index|trade|invest|dividend|price|trend|economy|sector|analysis|forecast|growth|earning|revenue|profit|rate|bank|finance|currency)\b/i;
-    if (!financialTerms.test(input)) {
+    // Updated filter to focus on business/market analysis while allowing broader topics
+    const restrictedTerms = /\b(sql|html|css|javascript|python|code|programming|script|database|api|endpoint)\b/i;
+    if (restrictedTerms.test(input)) {
       setMessages(prev => [...prev, 
         { role: 'user', content: input },
-        { role: 'assistant', content: "I apologize, but I can only assist with questions related to financial markets, economic analysis, and investment insights. Please ask questions within these domains." }
+        { role: 'assistant', content: "I focus on business, market, and investment analysis. For coding-related questions, please consult programming-specific resources." }
       ]);
       setInput('');
       return;
@@ -62,7 +62,11 @@ export function ChatBox() {
       if (response.data.status === 'success') {
         setMessages(prev => {
           const filtered = prev.filter(msg => !msg.isSearching);
-          return [...filtered, { role: 'assistant', content: response.data.reply }];
+          return [...filtered, { 
+            role: 'assistant', 
+            content: response.data.reply,
+            citations: response.data.citations 
+          }];
         });
       } else {
         throw new Error('Failed to get response');
@@ -81,12 +85,12 @@ export function ChatBox() {
     }
   };
 
-  const renderMessage = (content: string, isSearching?: boolean) => {
-    if (isSearching) {
+  const renderMessage = (message: Message) => {
+    if (message.isSearching) {
       return (
         <div className="flex items-center space-x-2">
           <Search className="h-4 w-4 animate-spin" />
-          <span>{content}</span>
+          <span>{message.content}</span>
         </div>
       );
     }
@@ -112,16 +116,40 @@ export function ChatBox() {
                 {children}
               </blockquote>
             ),
+            a: ({ href, children }) => (
+              <a href={href} target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300">
+                {children}
+              </a>
+            ),
           }}
         >
-          {content}
+          {message.content}
         </ReactMarkdown>
+        {message.citations && message.citations.length > 0 && (
+          <div className="mt-4 text-sm border-t border-gray-200 dark:border-gray-700 pt-2">
+            <p className="font-semibold mb-1">Sources:</p>
+            <ul className="list-none space-y-1">
+              {message.citations.map((citation, index) => (
+                <li key={index}>
+                  <a 
+                    href={citation}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300 text-sm"
+                  >
+                    [{index + 1}] {new URL(citation).hostname}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
       </div>
     );
   };
 
   return (
-    <Card className="w-full max-w-2xl mx-auto">
+    <Card className="w-full max-w-3xl mx-auto">
       <div className="p-4">
         <div className="mb-4">
           <div className="flex items-center justify-between">
@@ -171,7 +199,7 @@ export function ChatBox() {
           )}
         </div>
 
-        <ScrollArea className="h-[400px] pr-4 mb-4">
+        <ScrollArea className="h-[600px] pr-4 mb-4">
           <div className="space-y-4">
             {messages.map((message, index) => (
               <div
@@ -179,13 +207,13 @@ export function ChatBox() {
                 className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}
               >
                 <div
-                  className={`max-w-[85%] rounded-lg p-4 ${
+                  className={`max-w-[90%] rounded-lg p-4 ${
                     message.role === 'user'
                       ? 'bg-gray-100 text-gray-900 dark:bg-gray-800 dark:text-white ml-4'
                       : 'bg-gray-50 dark:bg-gray-800/50 text-gray-900 dark:text-gray-100 mr-4'
                   }`}
                 >
-                  {renderMessage(message.content, message.isSearching)}
+                  {renderMessage(message)}
                 </div>
               </div>
             ))}
