@@ -15,14 +15,14 @@ export default function WSJArticle() {
   }
 
   return (
-    <div className="min-h-screen bg-white dark:bg-gray-900 overflow-y-auto">
+    <div className="min-h-screen bg-[#FBF7F4] dark:bg-gray-900 transition-colors">
       {/* Header */}
       <Header simplified showCategories={false} />
 
       {/* Header spacing */}
-      <div className="h-24"></div>
+      <div className="h-36 sm:h-32"></div>
 
-      <div className="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
+      <div className="max-w-[1200px] mx-auto px-4">
         {/* Breadcrumb */}
         <div className="flex items-center space-x-2 text-sm text-gray-600 dark:text-gray-400 py-4 border-b border-gray-200 dark:border-gray-800">
           <Link href="/" className="hover:text-blue-600">Home</Link>
