@@ -29,7 +29,7 @@ export default function Home() {
       <main className="max-w-[1200px] mx-auto px-4 py-6 sm:py-8 dark:text-gray-200">
         <div className="flex flex-col md:flex-row gap-8">
           {/* Left Sidebar - ChatBox (Hidden on mobile) */}
-          <div className="hidden md:block md:w-80 flex-shrink-0">
+          <div id="chat" className="hidden md:block md:w-80 flex-shrink-0 scroll-mt-40">
             <ChatBox />
           </div>
 
@@ -83,7 +83,7 @@ export default function Home() {
         </div>
 
         {/* Mobile Chat Box Section */}
-        <div className="md:hidden mt-8">
+        <div id="mobile-chat" className="md:hidden mt-8 scroll-mt-40">
           <ChatBox />
         </div>
       </main>
