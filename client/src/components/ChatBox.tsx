@@ -1,10 +1,11 @@
-import { 
-  Panel as ResizablePanel,
-  PanelGroup as ResizablePanelGroup,
-  PanelResizeHandle as ResizableHandle
-} from "react-resizable-panels";
+const EXAMPLE_PROMPTS = [
+  "Analyze BBRI's current valuation and growth prospects",
+  "What's the latest market trend for Indonesian banking sector?",
+  "Compare dividend yields of top ASEAN banks",
+  "Analyze recent developments in digital banking adoption",
+];
 import { useState } from "react";
-import { Send, Search, Globe, Trash2, GripVertical } from "lucide-react";
+import { Send, Search, Globe, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card } from "@/components/ui/card";
@@ -12,13 +13,6 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import axios from "axios";
-
-const EXAMPLE_PROMPTS = [
-  "Analyze BBRI's current valuation and growth prospects",
-  "What's the latest market trend for Indonesian banking sector?",
-  "Compare dividend yields of top ASEAN banks",
-  "Analyze recent developments in digital banking adoption",
-];
 
 interface Message {
   role: 'user' | 'assistant';
@@ -31,7 +25,6 @@ export function ChatBox() {
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const [height, setHeight] = useState(600);
 
   const handleClear = () => {
     setMessages([]);
@@ -42,6 +35,7 @@ export function ChatBox() {
     e.preventDefault();
     if (!input.trim() || isLoading) return;
 
+    // Updated filter to focus on business/market analysis while allowing broader topics
     const restrictedTerms = /\b(sql|html|css|javascript|python|code|programming|script|database|api|endpoint)\b/i;
     if (restrictedTerms.test(input)) {
       setMessages(prev => [...prev, 
@@ -156,103 +150,89 @@ export function ChatBox() {
 
   return (
     <Card className="w-full max-w-3xl mx-auto">
-      <ResizablePanelGroup
-        direction="vertical"
-        onLayout={(sizes: number[]) => {
-          const newHeight = Math.max(400, Math.min(1000, window.innerHeight * sizes[0] / 100));
-          setHeight(newHeight);
-        }}
-      >
-        <ResizablePanel defaultSize={75} minSize={30}>
-          <div className="p-4">
-            <div className="mb-4">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <h2 className="text-lg font-semibold text-gray-900 dark:text-white">Market Insights Chat</h2>
-                  <div className="flex items-center">
-                    <div className="relative">
-                      <div className="absolute h-2 w-2 rounded-full bg-green-500 animate-ping opacity-75" />
-                      <div className="h-2 w-2 rounded-full bg-green-500" />
-                    </div>
-                    <span className="text-sm text-gray-500 dark:text-gray-400 ml-2">Online</span>
-                  </div>
+      <div className="p-4">
+        <div className="mb-4">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <h2 className="text-lg font-semibold text-gray-900 dark:text-white">Market Insights Chat</h2>
+              <div className="flex items-center">
+                <div className="relative">
+                  <div className="absolute h-2 w-2 rounded-full bg-green-500 animate-ping opacity-75" />
+                  <div className="h-2 w-2 rounded-full bg-green-500" />
                 </div>
-                {messages.length > 0 && (
-                  <Button 
-                    variant="ghost" 
-                    size="sm" 
-                    onClick={handleClear}
-                    className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
-                  >
-                    <Trash2 className="h-4 w-4" />
-                  </Button>
-                )}
+                <span className="text-sm text-gray-500 dark:text-gray-400 ml-2">Online</span>
               </div>
-              <div className="flex items-center text-sm text-gray-600 dark:text-gray-400 mt-2">
-                <Globe className="h-4 w-4 mr-2" />
-                <p>Ask questions about market trends and get AI-powered insights with real-time web search</p>
-              </div>
-
-              {messages.length === 0 && (
-                <div className="mt-4 space-y-2">
-                  <p className="text-sm font-medium text-gray-700 dark:text-gray-300">Try asking about:</p>
-                  <div className="flex flex-wrap gap-2">
-                    {EXAMPLE_PROMPTS.map((prompt, index) => (
-                      <button
-                        key={index}
-                        className="text-sm px-3 py-1.5 rounded-full bg-gray-100 text-gray-700 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700 transition-colors"
-                        onClick={() => {
-                          setInput(prompt);
-                        }}
-                      >
-                        {prompt}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-              )}
             </div>
+            {messages.length > 0 && (
+              <Button 
+                variant="ghost" 
+                size="sm" 
+                onClick={handleClear}
+                className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
+              >
+                <Trash2 className="h-4 w-4" />
+              </Button>
+            )}
+          </div>
+          <div className="flex items-center text-sm text-gray-600 dark:text-gray-400 mt-2">
+            <Globe className="h-4 w-4 mr-2" />
+            <p>Ask questions about market trends and get AI-powered insights with real-time web search</p>
+          </div>
 
-            <ScrollArea className={`h-[${height}px] pr-4 mb-4`}>
-              <div className="space-y-4">
-                {messages.map((message, index) => (
-                  <div
+          {messages.length === 0 && (
+            <div className="mt-4 space-y-2">
+              <p className="text-sm font-medium text-gray-700 dark:text-gray-300">Try asking about:</p>
+              <div className="flex flex-wrap gap-2">
+                {EXAMPLE_PROMPTS.map((prompt, index) => (
+                  <button
                     key={index}
-                    className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}
+                    className="text-sm px-3 py-1.5 rounded-full bg-gray-100 text-gray-700 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700 transition-colors"
+                    onClick={() => {
+                      setInput(prompt);
+                    }}
                   >
-                    <div
-                      className={`max-w-[90%] rounded-lg p-4 ${
-                        message.role === 'user'
-                          ? 'bg-gray-100 text-gray-900 dark:bg-gray-800 dark:text-white ml-4'
-                          : 'bg-gray-50 dark:bg-gray-800/50 text-gray-900 dark:text-gray-100 mr-4'
-                      }`}
-                    >
-                      {renderMessage(message)}
-                    </div>
-                  </div>
+                    {prompt}
+                  </button>
                 ))}
               </div>
-            </ScrollArea>
+            </div>
+          )}
+        </div>
 
-            <ResizableHandle className="h-2 w-full hover:bg-gray-200 dark:hover:bg-gray-700 rounded cursor-row-resize flex items-center justify-center">
-              <GripVertical className="h-4 w-4 text-gray-400" />
-            </ResizableHandle>
-
-            <form onSubmit={handleSubmit} className="flex gap-2">
-              <Input
-                value={input}
-                onChange={(e) => setInput(e.target.value)}
-                placeholder="Ask about market insights..."
-                disabled={isLoading}
-                className="flex-1"
-              />
-              <Button type="submit" disabled={isLoading}>
-                <Send className="h-4 w-4" />
-              </Button>
-            </form>
+        <ScrollArea className="h-[600px] pr-4 mb-4">
+          <div className="space-y-4">
+            {messages.map((message, index) => (
+              <div
+                key={index}
+                className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}
+              >
+                <div
+                  className={`max-w-[90%] rounded-lg p-4 ${
+                    message.role === 'user'
+                      ? 'bg-gray-100 text-gray-900 dark:bg-gray-800 dark:text-white ml-4'
+                      : 'bg-gray-50 dark:bg-gray-800/50 text-gray-900 dark:text-gray-100 mr-4'
+                  }`}
+                >
+                  {renderMessage(message)}
+                </div>
+              </div>
+            ))}
           </div>
-        </ResizablePanel>
-      </ResizablePanelGroup>
+        </ScrollArea>
+
+        <form onSubmit={handleSubmit} className="flex gap-2">
+          <Input
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            placeholder="Ask about market insights..."
+            disabled={isLoading}
+            className="flex-1"
+          />
+          <Button type="submit" disabled={isLoading}>
+            <Send className="h-4 w-4" />
+          </Button>
+        </form>
+      </div>
     </Card>
   );
 }
