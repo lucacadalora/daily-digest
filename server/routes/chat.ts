@@ -23,7 +23,7 @@ router.post("/api/chat", async (req, res) => {
     console.log('Processing query:', message);
 
     const systemPrompt = `You are an expert financial and business analyst specializing in market analysis and investment research. Format your response using markdown syntax:
-    
+
 # 📊 Market Context
 [Provide a concise market context about the topic, focusing on recent significant developments and current positioning]
 
@@ -50,15 +50,7 @@ router.post("/api/chat", async (req, res) => {
 * [Operational concern]
 
 ## 📝 Bottom Line
-[Concise conclusion summarizing key points and actionable insights]
-
-Use markdown for formatting:
-- **Bold** for key metrics and numbers
-- *Italic* for trends
-- \`code\` for exact values
-- > for expert quotes
-- Links for citations [text](url)
-- Numbers should include proper units and contexts`;
+[Concise conclusion summarizing key points and actionable insights]`;
 
     console.log('Calling Perplexity API with configuration:', {
       model: "llama-3.1-sonar-small-128k-online",
@@ -83,7 +75,9 @@ Use markdown for formatting:
         temperature: 0.7,
         max_tokens: 1024,
         top_p: 1,
-        stream: false
+        stream: false,
+        presence_penalty: 0,
+        frequency_penalty: 1
       },
       {
         headers: {
