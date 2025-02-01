@@ -12,13 +12,14 @@ router.post("/api/chat", async (req, res) => {
       throw new Error('Missing PERPLEXITY_API_KEY');
     }
 
-    const stockRelatedTerms = /\b(stock|market|trading|investor|dividend|price|valuation|company analysis|ticker|shares|earnings|P\/E|ROE|market cap)\b/i;
-    const isStockRelated = stockRelatedTerms.test(message);
+    // Match stock tickers: Traditional (AAPL), Indonesian (.JK), Indices (^GSPC)
+    const stockTickerPattern = /\b[A-Z]{1,5}(\.[A-Z]{2})?\b|\^[A-Z]+\b/g;
+    const hasStockTicker = stockTickerPattern.test(message);
 
     console.log('Processing query:', message);
-    console.log('Is stock related:', isStockRelated);
+    console.log('Has stock ticker:', hasStockTicker);
 
-    const basePrompt = `You are an expert financial and business analyst specializing in stock market analysis, investment research, and market insights. You have extensive knowledge of global financial markets, company valuations, and investment analysis.`;
+    const basePrompt = `You are an expert financial and business analyst specializing in stock market analysis, investment research, and market insights. Provide clear, concise, and accurate information based on your extensive knowledge of global financial markets, company valuations, and investment analysis.`;
 
     const detailedStockPrompt = `You are an expert financial and business analyst specializing in market analysis and investment research. Format your response using markdown syntax:
 
@@ -72,7 +73,7 @@ Summarize key takeaways with actionable insights, focusing on investment opportu
       model: "sonar",
       messageLength: message.length,
       hasSystemPrompt: true,
-      isStockRelated
+      hasStockTicker
     });
 
     const response = await client.chat.completions.create({
@@ -80,7 +81,7 @@ Summarize key takeaways with actionable insights, focusing on investment opportu
       messages: [
         {
           role: "system",
-          content: isStockRelated ? detailedStockPrompt : basePrompt
+          content: hasStockTicker ? detailedStockPrompt : basePrompt
         },
         {
           role: "user",
