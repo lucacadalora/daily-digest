@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Link } from "wouter";
 import { Card, CardContent } from "@/components/ui/card";
 import { Newspaper, Clock, ArrowRight } from "lucide-react";
@@ -5,9 +6,13 @@ import { MarketTicker } from "@/components/MarketTicker";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { ArticleCard } from "@/components/ArticleCard";
 import { ChatBox } from "@/components/ChatBox";
+import { Button } from "@/components/ui/button";
+import { SubscribeModal } from "@/components/SubscribeModal";
 import { sampleArticles } from "@/types/newsletter";
 
 export default function Home() {
+  const [isSubscribeOpen, setIsSubscribeOpen] = useState(false);
+
   return (
     <div className="min-h-screen bg-[#FBF7F4] dark:bg-gray-900 transition-colors">
       {/* Header */}
@@ -20,21 +25,42 @@ export default function Home() {
 
           {/* Top Navigation Bar */}
           <div className="flex items-center justify-between py-4">
-            <h1 className="text-xl font-['Georgia'] font-bold dark:text-white">
-              <span className="bg-gradient-to-r from-blue-700 via-blue-600 to-blue-500 bg-clip-text text-transparent">Daily</span>
-              <span className="font-light mx-1">|</span>
-              <span className="bg-gradient-to-r from-gray-800 to-gray-600 dark:from-gray-200 dark:to-gray-400 bg-clip-text text-transparent">Digest</span>
-            </h1>
+            {/* Left Categories */}
             <nav className="hidden sm:flex items-center space-x-8 text-sm font-medium text-gray-600 dark:text-gray-300">
               <Link href="/newsletter/category/Markets" className="hover:text-blue-600 transition-colors">Markets</Link>
               <Link href="/newsletter/category/Economics" className="hover:text-blue-600 transition-colors">Economics</Link>
               <Link href="/newsletter/category/Industries" className="hover:text-blue-600 transition-colors">Industries</Link>
               <Link href="/newsletter/category/Tech" className="hover:text-blue-600 transition-colors">Tech</Link>
             </nav>
-            <ThemeToggle />
+
+            {/* Center Logo */}
+            <Link href="/" className="absolute left-1/2 -translate-x-1/2">
+              <h1 className="text-xl font-['Georgia'] font-bold dark:text-white cursor-pointer hover:opacity-80 transition-opacity">
+                <span className="bg-gradient-to-r from-blue-700 via-blue-600 to-blue-500 bg-clip-text text-transparent">Daily</span>
+                <span className="font-light mx-1">|</span>
+                <span className="bg-gradient-to-r from-gray-800 to-gray-600 dark:from-gray-200 dark:to-gray-400 bg-clip-text text-transparent">Digest</span>
+              </h1>
+            </Link>
+
+            {/* Right Actions */}
+            <div className="flex items-center gap-4">
+              <Button
+                onClick={() => setIsSubscribeOpen(true)}
+                className="bg-blue-600 hover:bg-blue-700 text-white rounded-full px-6"
+              >
+                Subscribe
+              </Button>
+              <ThemeToggle />
+            </div>
           </div>
         </div>
       </header>
+
+      {/* Subscription Modal */}
+      <SubscribeModal 
+        isOpen={isSubscribeOpen}
+        onClose={() => setIsSubscribeOpen(false)}
+      />
 
       {/* Top Spacing for Fixed Header */}
       <div className="h-36 sm:h-32"></div>
