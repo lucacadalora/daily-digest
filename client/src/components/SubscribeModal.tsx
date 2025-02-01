@@ -36,7 +36,7 @@ export const SubscribeModal = ({ isOpen, onClose }: SubscribeModalProps) => {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 20 }}
             transition={{ type: "spring", damping: 25, stiffness: 200 }}
-            className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-lg bg-white dark:bg-gray-900 rounded-xl shadow-xl z-50 overflow-hidden"
+            className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90%] max-w-lg bg-white dark:bg-gray-900 rounded-xl shadow-xl z-50 overflow-hidden"
           >
             <div className="relative p-6 sm:p-8">
               <button
