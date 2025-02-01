@@ -69,7 +69,7 @@ export function ChatBox() {
 
   const renderFormattedMessage = (content: string) => {
     return content.split('\n').map((line, index) => {
-      if (line.startsWith('📊') || line.startsWith('📈') || line.startsWith('💡')) {
+      if (line.startsWith('📊') || line.startsWith('📈') || line.startsWith('💡') || line.startsWith('⚠️')) {
         return (
           <div key={index} className="font-serif text-lg font-bold mb-3 text-gray-900 dark:text-white">
             {line}
