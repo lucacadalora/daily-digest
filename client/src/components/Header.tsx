@@ -7,6 +7,7 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Form } from "@/components/ui/form";
 import { useForm } from "react-hook-form";
 import { Input } from "@/components/ui/input";
+import { useState } from "react";
 
 interface HeaderProps {
   onSubscribe?: () => void;
@@ -15,11 +16,26 @@ interface HeaderProps {
 }
 
 export const Header = ({ onSubscribe, showCategories = true, simplified = false }: HeaderProps) => {
+  const [isSheetOpen, setIsSheetOpen] = useState(false);
   const form = useForm({
     defaultValues: {
       email: "",
     },
   });
+
+  const handleChatClick = () => {
+    setIsSheetOpen(false);
+    // Add a small delay to ensure the sheet closes before scrolling
+    setTimeout(() => {
+      const chatElement = document.querySelector('#chat');
+      const mobileChatElement = document.querySelector('#mobile-chat');
+      const elementToScroll = window.innerWidth >= 768 ? chatElement : mobileChatElement;
+
+      if (elementToScroll) {
+        elementToScroll.scrollIntoView({ behavior: 'smooth' });
+      }
+    }, 100);
+  };
 
   return (
     <header className="fixed w-full bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm border-b border-gray-100 dark:border-gray-800 z-50">
@@ -62,7 +78,7 @@ export const Header = ({ onSubscribe, showCategories = true, simplified = false 
 
             {/* Mobile Menu Button */}
             <div className="md:hidden">
-              <Sheet>
+              <Sheet open={isSheetOpen} onOpenChange={setIsSheetOpen}>
                 <SheetTrigger asChild>
                   <Button variant="ghost" size="icon">
                     <Menu className="h-5 w-5" />
@@ -89,7 +105,10 @@ export const Header = ({ onSubscribe, showCategories = true, simplified = false 
 
                   {/* Daily Digest AI */}
                   <div className="mb-8">
-                    <Link href="/#chat" className="flex items-center justify-between group">
+                    <button 
+                      onClick={handleChatClick}
+                      className="w-full flex items-center justify-between group"
+                    >
                       <div className="flex items-center gap-2">
                         <div className="relative flex items-center">
                           <div className="w-2 h-2 rounded-full bg-green-500"></div>
@@ -98,7 +117,7 @@ export const Header = ({ onSubscribe, showCategories = true, simplified = false 
                         <span className="text-lg font-medium group-hover:text-blue-600 transition-colors">Daily Digest AI</span>
                       </div>
                       <ArrowRight className="h-4 w-4" />
-                    </Link>
+                    </button>
                     <p className="text-sm text-gray-600 dark:text-gray-400 mt-2">
                       Ask our AI about market trends, analysis, and predictions in real-time.
                     </p>
