@@ -7,7 +7,6 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import axios from "axios";
-import { StockPriceChart } from './StockPriceChart';
 
 const EXAMPLE_PROMPTS = [
   "Analyze BBRI's current valuation and growth prospects",
@@ -149,71 +148,54 @@ export function ChatBox() {
         </div>
       );
     }
-  
-    // Check if the message contains stock analysis
-    const hasStockAnalysis = message.content.includes('MARKET_CONTEXT');
-    const stockSymbol = hasStockAnalysis ? 
-      message.content.match(/\b[A-Z]{2,5}\b(?=.*MARKET_CONTEXT)/)?.[0] : null;
-  
-    // Sample data - In production, this would come from your API
-    const sampleChartData = [
-      { date: '2024-01-25', price: 4190, volume: 152000000, open: 4180, high: 4220, low: 4150, close: 4190 },
-      { date: '2024-01-26', price: 4210, volume: 145000000, open: 4190, high: 4240, low: 4180, close: 4210 },
-      { date: '2024-01-29', price: 4250, volume: 168000000, open: 4210, high: 4270, low: 4200, close: 4250 },
-      { date: '2024-01-30', price: 4280, volume: 175000000, open: 4250, high: 4300, low: 4240, close: 4280 },
-      { date: '2024-01-31', price: 4310, volume: 182000000, open: 4280, high: 4330, low: 4270, close: 4310 },
-      // Add more data points as needed
-    ];
-  
+
+    // Format the message content with enhanced market analysis styling
+    const formattedContent = formatMarketAnalysis(message.content);
+
     return (
-      <div className="space-y-4">
-        {stockSymbol && (
-          <StockPriceChart data={sampleChartData} symbol={stockSymbol} />
+      <div className="prose prose-sm dark:prose-invert max-w-none">
+        <ReactMarkdown 
+          remarkPlugins={[remarkGfm]}
+          components={{
+            h1: ({ children }) => <h1 className="text-xl font-bold mb-2">{children}</h1>,
+            h2: ({ children }) => <h2 className="text-lg font-semibold mb-2">{children}</h2>,
+            h3: ({ children }) => <h3 className="text-base font-semibold mb-2">{children}</h3>,
+            p: ({ children }) => <p className="mb-2 leading-relaxed">{children}</p>,
+            ul: ({ children }) => <ul className="list-disc pl-4 mb-2 space-y-1">{children}</ul>,
+            li: ({ children }) => <li className="mb-1">{children}</li>,
+            strong: ({ children }) => <strong className="font-semibold text-blue-600 dark:text-blue-400">{children}</strong>,
+            em: ({ children }) => <em className="italic text-gray-600 dark:text-gray-400">{children}</em>,
+            code: ({ children }) => (
+              <code className="bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded">{children}</code>
+            ),
+            blockquote: ({ children }) => (
+              <blockquote className="border-l-4 border-blue-500 pl-4 italic bg-blue-50 dark:bg-blue-900/20 py-2 rounded-r">
+                {children}
+              </blockquote>
+            ),
+          }}
+        >
+          {formattedContent}
+        </ReactMarkdown>
+        {message.citations && message.citations.length > 0 && (
+          <div className="mt-4 text-sm border-t border-gray-200 dark:border-gray-700 pt-2">
+            <p className="font-semibold mb-1">Sources:</p>
+            <ul className="list-none space-y-1">
+              {message.citations.map((citation, index) => (
+                <li key={index}>
+                  <a 
+                    href={citation}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300 text-sm"
+                  >
+                    [{index + 1}] {new URL(citation).hostname}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
         )}
-        <div className="prose prose-sm dark:prose-invert max-w-none">
-          <ReactMarkdown 
-            remarkPlugins={[remarkGfm]}
-            components={{
-              h1: ({ children }) => <h1 className="text-xl font-bold mb-2">{children}</h1>,
-              h2: ({ children }) => <h2 className="text-lg font-semibold mb-2">{children}</h2>,
-              h3: ({ children }) => <h3 className="text-base font-semibold mb-2">{children}</h3>,
-              p: ({ children }) => <p className="mb-2 leading-relaxed">{children}</p>,
-              ul: ({ children }) => <ul className="list-disc pl-4 mb-2 space-y-1">{children}</ul>,
-              li: ({ children }) => <li className="mb-1">{children}</li>,
-              strong: ({ children }) => <strong className="font-semibold text-blue-600 dark:text-blue-400">{children}</strong>,
-              em: ({ children }) => <em className="italic text-gray-600 dark:text-gray-400">{children}</em>,
-              code: ({ children }) => (
-                <code className="bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded">{children}</code>
-              ),
-              blockquote: ({ children }) => (
-                <blockquote className="border-l-4 border-blue-500 pl-4 italic bg-blue-50 dark:bg-blue-900/20 py-2 rounded-r">
-                  {children}
-                </blockquote>
-              ),
-            }}
-          >
-            {formatMarketAnalysis(message.content)}
-          </ReactMarkdown>
-          {message.citations && message.citations.length > 0 && (
-            <div className="mt-4 text-sm border-t border-gray-200 dark:border-gray-700 pt-2">
-              <p className="font-semibold mb-1">Sources:</p>
-              <ul className="list-none space-y-1">
-                {message.citations.map((citation, index) => (
-                  <li key={index}>
-                    <a 
-                      href={citation}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300 text-sm"
-                    >
-                      [{index + 1}] {new URL(citation).hostname}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
-        </div>
       </div>
     );
   };
