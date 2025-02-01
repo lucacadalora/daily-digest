@@ -3,50 +3,6 @@ import axios from "axios";
 
 const router = express.Router();
 
-function formatResponse(text: string): string {
-  // Pre-process to fix number formatting
-  text = text.replace(/\[\d+\]/g, ''); // Remove citations
-  text = text.replace(/(\d+)\s*[•.-]\s*(\d+)(x?)/g, '$1.$2$3'); // Fix split numbers
-  text = text.replace(/\s+/g, ' ').trim(); // Clean up spaces
-
-  // Split into paragraphs and filter empty lines
-  const paragraphs = text.split('\n').map(p => p.trim()).filter(p => p.length > 0);
-  let formattedResponse = "";
-
-  // Process content
-  paragraphs.forEach((paragraph, index) => {
-    // Handle Analysis Highlights header specially
-    if (/^Analysis Highlights/i.test(paragraph)) {
-      formattedResponse += "📊 Analysis Highlights:\n\n";
-      return;
-    }
-
-    // Format the paragraph based on content
-    let formattedParagraph = paragraph;
-
-    // Format bullet points
-    if (/^\s*[•-]/.test(paragraph)) {
-      formattedParagraph = formattedParagraph.replace(/^\s*[•-]\s*/, '• ');
-    }
-
-    // Add emojis based on content type
-    if (/price|market cap|ratio|dividend/i.test(formattedParagraph)) {
-      formattedParagraph = `📈 ${formattedParagraph}`;
-    } else if (/growth|increase|performance/i.test(formattedParagraph)) {
-      formattedParagraph = `📊 ${formattedParagraph}`;
-    } else if (/risk|warning|caution/i.test(formattedParagraph)) {
-      formattedParagraph = `⚠️ ${formattedParagraph}`;
-    } else if (/recommend|opportunity|strategy/i.test(formattedParagraph)) {
-      formattedParagraph = `💡 ${formattedParagraph}`;
-    }
-
-    // Add the formatted paragraph
-    formattedResponse += formattedParagraph + "\n\n";
-  });
-
-  return formattedResponse.trim();
-}
-
 router.post("/api/chat", async (req, res) => {
   try {
     const { message } = req.body;
@@ -67,38 +23,35 @@ router.post("/api/chat", async (req, res) => {
 
     console.log('Processing financial query:', message);
 
-    const systemPrompt = `You are an expert financial analyst specializing in Indonesian market analysis and investment research.
-Your response must start with "Analysis Highlights:" followed by a comprehensive analysis.
-
-Format your response exactly as follows (including all sections):
+    const systemPrompt = `You are an expert financial analyst specializing in Indonesian market analysis and investment research. Format your response exactly as follows:
 
 Analysis Highlights:
-[Brief overview of key points]
+[Brief overview of the key points]
 
-Price Action
+Price Action:
 • Current stock price: [exact value]
-• Recent trading range
-• Volume trends
+• Recent trading range: [range]
+• Volume trends: [description]
 
-Key Metrics
-• Market Cap: [value in IDR]
+Key Metrics:
+• Market Cap: [value]
 • P/E Ratio: [value]
-• Trading Volume: [average]
-• Revenue Growth: [YoY %]
+• Trading Volume: [value]
+• Growth Rate: [value]
 
-Growth & Performance
-• Historical performance
-• Market position
-• Competitive strengths
+Growth & Performance:
+• Historical performance metrics
+• Market position details
+• Competitive analysis
 • Recent developments
 
-Expert Analysis
-• Market sentiment
+Expert Analysis:
+• Market sentiment overview
 • Industry trends
 • Strategic outlook
 • Key challenges
 
-Investment Assessment
+Investment Assessment:
 • Growth catalysts
 • Risk factors
 • Technical levels
@@ -109,7 +62,7 @@ Use bullet points and exact numbers throughout your analysis.`;
     const response = await axios.post(
       'https://api.perplexity.ai/chat/completions',
       {
-        model: "sonar-small-chat",
+        model: "llama-2-70b-chat",
         messages: [
           {
             role: "system",
@@ -129,7 +82,8 @@ Use bullet points and exact numbers throughout your analysis.`;
         headers: {
           'Authorization': `Bearer ${process.env.PERPLEXITY_API_KEY}`,
           'Content-Type': 'application/json'
-        }
+        },
+        timeout: 30000
       }
     );
 
@@ -140,18 +94,40 @@ Use bullet points and exact numbers throughout your analysis.`;
     }
 
     const rawContent = response.data.choices[0].message.content;
-    console.log('Raw content before formatting:', rawContent);
+    console.log('Raw content:', rawContent);
 
-    const formattedReply = formatResponse(rawContent);
-    console.log('Formatted reply:', formattedReply);
-
-    if (!formattedReply || formattedReply.trim().length === 0) {
-      throw new Error('Empty formatted response');
-    }
+    // Simple formatting to preserve structure and add emojis
+    const formattedContent = rawContent
+      .split('\n')
+      .map(line => {
+        if (line.includes('Analysis Highlights:')) {
+          return '📊 Analysis Highlights:\n';
+        }
+        if (line.includes('Price Action:')) {
+          return '📈 Price Action:\n';
+        }
+        if (line.includes('Key Metrics:')) {
+          return '💡 Key Metrics:\n';
+        }
+        if (line.includes('Growth & Performance:')) {
+          return '📊 Growth & Performance:\n';
+        }
+        if (line.includes('Expert Analysis:')) {
+          return '🔍 Expert Analysis:\n';
+        }
+        if (line.includes('Investment Assessment:')) {
+          return '💰 Investment Assessment:\n';
+        }
+        if (line.trim().startsWith('•')) {
+          return line;
+        }
+        return line;
+      })
+      .join('\n');
 
     res.json({
       status: 'success',
-      reply: formattedReply
+      reply: formattedContent.trim()
     });
 
   } catch (error) {
