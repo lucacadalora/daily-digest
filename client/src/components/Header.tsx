@@ -87,7 +87,7 @@ export const Header = ({ onSubscribe, showCategories = true, simplified = false 
           {/* Center Logo */}
           <Link 
             href="/" 
-            className={`${showCategories ? 'hidden md:block md:absolute md:left-1/2 md:-translate-x-1/2' : ''} mx-auto`}
+            className={`${showCategories ? 'md:absolute md:left-1/2 md:-translate-x-1/2' : ''} mx-auto flex-1 md:flex-none text-center`}
           >
             <h1 className="text-xl font-['Georgia'] font-bold dark:text-white cursor-pointer hover:opacity-80 transition-opacity">
               <span className="bg-gradient-to-r from-blue-700 via-blue-600 to-blue-500 bg-clip-text text-transparent">Daily</span>
@@ -108,6 +108,9 @@ export const Header = ({ onSubscribe, showCategories = true, simplified = false 
             )}
             <ThemeToggle />
           </div>
+
+          {/* Empty div for mobile layout balance */}
+          <div className="md:hidden w-10"></div>
         </div>
       </div>
     </header>
