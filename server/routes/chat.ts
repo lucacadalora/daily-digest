@@ -62,7 +62,7 @@ Use bullet points and exact numbers throughout your analysis.`;
     const response = await axios.post(
       'https://api.perplexity.ai/chat/completions',
       {
-        model: "llama-2-70b-chat",
+        model: "llama-3.1-sonar-small-128k-online",
         messages: [
           {
             role: "system",
