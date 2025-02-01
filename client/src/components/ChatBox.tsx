@@ -4,8 +4,28 @@ const EXAMPLE_PROMPTS = [
   "Compare dividend yields of top ASEAN banks",
   "Analyze recent developments in digital banking adoption",
 ];
+
+const LATEST_STORIES = [
+  {
+    time: "14 HR AGO",
+    title: "Bank Indonesia maintains interest rates at 5.75%"
+  },
+  {
+    time: "16 HR AGO",
+    title: "IDX Composite hits new all-time high"
+  },
+  {
+    time: "17 HR AGO",
+    title: "BBRI reports strong Q4 digital banking growth"
+  },
+  {
+    time: "1 DAY AGO",
+    title: "Indonesian banking sector outlook 2025"
+  }
+];
+
 import { useState } from "react";
-import { Send, Search, Globe, Trash2 } from "lucide-react";
+import { Send, Search, Globe, Trash2, Clock } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card } from "@/components/ui/card";
@@ -174,29 +194,48 @@ export function ChatBox() {
               </Button>
             )}
           </div>
-          <div className="flex items-center text-sm text-gray-600 dark:text-gray-400 mt-2">
-            <Globe className="h-4 w-4 mr-2" />
-            <p>Ask questions about market trends and get AI-powered insights with real-time web search</p>
-          </div>
 
-          {messages.length === 0 && (
-            <div className="mt-4 space-y-2">
-              <p className="text-sm font-medium text-gray-700 dark:text-gray-300">Try asking about:</p>
-              <div className="flex flex-wrap gap-2">
-                {EXAMPLE_PROMPTS.map((prompt, index) => (
-                  <button
-                    key={index}
-                    className="text-sm px-3 py-1.5 rounded-full bg-gray-100 text-gray-700 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700 transition-colors"
-                    onClick={() => {
-                      setInput(prompt);
-                    }}
-                  >
-                    {prompt}
-                  </button>
+          <div className="flex gap-8 mt-4">
+            <div className="flex-1">
+              <div className="flex items-center text-sm text-gray-600 dark:text-gray-400">
+                <Globe className="h-4 w-4 mr-2" />
+                <p>Ask questions about market trends and get AI-powered insights</p>
+              </div>
+
+              <div className="mt-2 space-y-2">
+                <div className="flex flex-wrap gap-2">
+                  {EXAMPLE_PROMPTS.map((prompt, index) => (
+                    <button
+                      key={index}
+                      className="text-sm px-3 py-1.5 rounded-full bg-gray-100 text-gray-700 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700 transition-colors"
+                      onClick={() => {
+                        setInput(prompt);
+                      }}
+                    >
+                      {prompt}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            <div className="w-64 border-l pl-4">
+              <h3 className="text-sm font-medium text-gray-900 dark:text-white mb-2">Latest Updates</h3>
+              <div className="space-y-3">
+                {LATEST_STORIES.map((story, index) => (
+                  <div key={index} className="text-sm">
+                    <div className="text-xs text-gray-500 mb-0.5 flex items-center">
+                      <Clock className="h-3 w-3 mr-1" />
+                      {story.time}
+                    </div>
+                    <p className="text-gray-900 dark:text-gray-100 hover:text-blue-600 dark:hover:text-blue-400 cursor-pointer">
+                      {story.title}
+                    </p>
+                  </div>
                 ))}
               </div>
             </div>
-          )}
+          </div>
         </div>
 
         <ScrollArea className="h-[600px] pr-4 mb-4">
