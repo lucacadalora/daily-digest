@@ -15,55 +15,42 @@ function formatResponse(text: string): string {
   let formattedResponse = "";
   let currentSection = "";
 
-  // Process each paragraph
   paragraphs.forEach(paragraph => {
-    // Format key metrics with consistent emoji
-    if (/^(Current Price|P\/?E Ratio|Price[- ]to[- ]Book|Dividend Yield|Market Cap|EPS|ROE|Payout Ratio):/i.test(paragraph)) {
-      if (currentSection !== "metrics") {
-        formattedResponse += "⚡ Key Metrics:\n";
-        currentSection = "metrics";
-      }
-      formattedResponse += `📊 ${paragraph}\n`;
+    if (/^1\.\s*Key\s*Metrics/i.test(paragraph)) {
+      formattedResponse += "\n**1. Key Metrics** 📊\n";
+      currentSection = "metrics";
     }
-    // Format trading metrics
-    else if (/^(Trading Volume|Support Level|Resistance Level|52[- ]Week|Moving Average):/i.test(paragraph)) {
-      if (currentSection !== "trading") {
-        formattedResponse += "\n📈 Trading Information:\n";
-        currentSection = "trading";
-      }
-      formattedResponse += `💫 ${paragraph}\n`;
+    else if (/^2\.\s*Growth/i.test(paragraph)) {
+      formattedResponse += "\n**2. Growth & Performance** 📈\n";
+      currentSection = "growth";
     }
-    // Format growth metrics
-    else if (/^(Revenue Growth|Profit Growth|CAGR|Growth Rate):/i.test(paragraph)) {
-      if (currentSection !== "growth") {
-        formattedResponse += "\n🚀 Growth Metrics:\n";
-        currentSection = "growth";
-      }
-      formattedResponse += `📈 ${paragraph}\n`;
+    else if (/^3\.\s*Expert/i.test(paragraph)) {
+      formattedResponse += "\n**3. Expert Analysis** 💬\n";
+      currentSection = "expert";
+    }
+    else if (/^4\.\s*Investment/i.test(paragraph)) {
+      formattedResponse += "\n**4. Investment Assessment** 💡\n";
+      currentSection = "investment";
     }
     // Format analyst quotes
     else if (/^[""].*[""].*—.*$/i.test(paragraph)) {
-      formattedResponse += `\n💬 Expert Analysis:\n${paragraph}\n`;
-      currentSection = "quote";
+      formattedResponse += `${paragraph}\n`;
     }
-    // Format risk factors
-    else if (/^Risk|Warning|Caution/i.test(paragraph)) {
-      formattedResponse += `\n⚠️ ${paragraph}\n`;
-      currentSection = "risks";
+    // Format key points with appropriate emoji based on content
+    else if (currentSection === "metrics" && /^[-•]/.test(paragraph)) {
+      formattedResponse += `💎 ${paragraph.replace(/^[-•]\s*/, '')}\n`;
     }
-    // Format investment insights
-    else if (/^(Investment|Strategy|Recommendation|Outlook|Summary)/i.test(paragraph)) {
-      formattedResponse += `\n💡 ${paragraph}\n`;
-      currentSection = "insights";
+    else if (currentSection === "growth" && /^[-•]/.test(paragraph)) {
+      formattedResponse += `🚀 ${paragraph.replace(/^[-•]\s*/, '')}\n`;
     }
-    // Format regular paragraphs with bullet points for key insights
+    else if (currentSection === "investment" && /Risk|Warning|Caution/i.test(paragraph)) {
+      formattedResponse += `⚠️ ${paragraph}\n`;
+    }
+    else if (/^[-•]/.test(paragraph)) {
+      formattedResponse += `• ${paragraph.replace(/^[-•]\s*/, '')}\n`;
+    }
     else if (paragraph.length > 0) {
-      if (/\b(key|major|significant|critical|important)\b/i.test(paragraph) || 
-          /^(•|-)\s/.test(paragraph)) {
-        formattedResponse += `• ${paragraph.replace(/^(•|-)\s/, '')}\n`;
-      } else {
-        formattedResponse += `${paragraph}\n`;
-      }
+      formattedResponse += `${paragraph}\n`;
     }
   });
 
@@ -91,37 +78,39 @@ router.post("/api/chat", async (req, res) => {
         messages: [
           {
             role: "system",
-            content: `You are an expert financial analyst specializing in Indonesian market analysis and investment research. Structure your responses in this format:
+            content: `You are an expert financial analyst specializing in Indonesian market analysis and investment research. Structure your responses in exactly this format:
 
-1. Key Metrics (Always start with these):
-   - Current market price
-   - P/E ratio and valuation metrics
-   - Dividend yield and payout ratio
-   - Market capitalization
-   - Trading volume and momentum
+1. Key Metrics
+- Current Price: [value]
+- P/E Ratio: [value]
+- Dividend Yield: [value]
+- Market Cap: [value]
+- Trading Volume: [value]
+- Other key metrics as relevant
 
-2. Growth & Performance:
-   - YoY revenue/profit growth
-   - Key business metrics
-   - Market share data
+2. Growth & Performance
+- List key growth metrics and YoY comparisons
+- Market share and competitive position
+- Operating performance highlights
+- Digital transformation metrics
 
-3. Expert Analysis:
-   - Include relevant analyst quotes
-   - Format as "Quote" — Analyst Name, Firm
+3. Expert Analysis
+Include 1-2 relevant analyst quotes in this format:
+"[Quote text]" — [Analyst Name], [Firm]
 
-4. Investment Assessment:
-   - Growth catalysts
-   - Risk factors
-   - Technical levels
-   - Price targets
+4. Investment Assessment
+- Growth catalysts and opportunities
+- Risk factors and challenges
+- Technical support/resistance levels
+- Price targets and recommendations
 
 Guidelines:
-- Present metrics clearly (e.g., "P/E Ratio: 15.2x")
-- Use bullet points for key insights
-- Include specific numbers and growth rates
-- Focus on material information
-- Do not use citations
-- Keep sections concise and focused`
+- Start each section with the number and title
+- Use bullet points for all metrics and insights
+- Keep points concise and focused
+- Include specific numbers and percentages
+- Do not use citations or references
+- Format numbers consistently (e.g., "4.9x" not "4.9 x")`
           },
           {
             role: "user",
