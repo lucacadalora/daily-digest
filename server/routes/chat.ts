@@ -7,9 +7,16 @@ router.post("/api/chat", async (req, res) => {
   try {
     const { message } = req.body;
 
+    // Log environment check
+    console.log('Environment check:', {
+      hasApiKey: !!process.env.PERPLEXITY_API_KEY,
+      nodeEnv: process.env.NODE_ENV,
+      apiKeyLength: process.env.PERPLEXITY_API_KEY?.length
+    });
+
     if (!process.env.PERPLEXITY_API_KEY) {
-      console.error('API Key missing');
-      throw new Error('Missing PERPLEXITY_API_KEY');
+      console.error('API Key missing in deployment environment');
+      throw new Error('Missing PERPLEXITY_API_KEY in environment');
     }
 
     const restrictedTerms = /\b(sql injection|xss|database schema|api endpoint|code syntax|programming language|compiler|runtime|debugging)\b/i;
@@ -52,14 +59,17 @@ router.post("/api/chat", async (req, res) => {
 ## 📝 Bottom Line
 [Concise conclusion summarizing key points and actionable insights]`;
 
-    console.log('Calling Perplexity API with configuration:', {
+    // Log API request details
+    const requestConfig = {
+      url: 'https://api.perplexity.ai/chat/completions',
       model: "sonar",
       messageLength: message.length,
       hasSystemPrompt: true
-    });
+    };
+    console.log('Making API request with config:', requestConfig);
 
     const response = await axios.post(
-      'https://api.perplexity.ai/chat/completions',
+      requestConfig.url,
       {
         model: "sonar",
         messages: [
@@ -83,8 +93,13 @@ router.post("/api/chat", async (req, res) => {
       }
     );
 
-    console.log('API Response status:', response.status);
-    console.log('API Response headers:', response.headers);
+    // Log successful API response metadata
+    console.log('API Response metadata:', {
+      status: response.status,
+      hasData: !!response.data,
+      hasChoices: !!response.data?.choices,
+      contentLength: response.data?.choices?.[0]?.message?.content?.length
+    });
 
     if (!response.data?.choices?.[0]?.message?.content) {
       console.error('Invalid API response format:', JSON.stringify(response.data));
@@ -105,13 +120,30 @@ router.post("/api/chat", async (req, res) => {
     const errorMessage = error instanceof Error ? error.message : 'Unknown error';
     console.error('Error details:', errorMessage);
 
+    // Enhanced error logging
     if (axios.isAxiosError(error)) {
-      console.error('API Error Response:', {
+      console.error('API Error Details:', {
         status: error.response?.status,
         statusText: error.response?.statusText,
-        data: error.response?.data,
+        responseData: error.response?.data,
+        requestConfig: error.config,
         headers: error.response?.headers
       });
+
+      // Return more specific error messages based on status codes
+      if (error.response?.status === 401) {
+        return res.status(500).json({
+          status: 'error',
+          error: 'Authentication failed - API key may be invalid',
+          details: 'Please check if the API key is correctly set in the deployment environment'
+        });
+      } else if (error.response?.status === 429) {
+        return res.status(500).json({
+          status: 'error',
+          error: 'Rate limit exceeded',
+          details: 'Too many requests, please try again later'
+        });
+      }
     }
 
     res.status(500).json({
