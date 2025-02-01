@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Send, Search, Globe, Maximize2, Minimize2, X } from "lucide-react";
+import { Send, Search, Globe, Maximize2, Minimize2, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card } from "@/components/ui/card";
@@ -24,12 +24,10 @@ interface Message {
 }
 
 const formatMarketAnalysis = (content: string) => {
-  // First, check if content contains stock analysis markers
   if (content.includes('MARKET_CONTEXT')) {
     const parts = content.split('MARKET_CONTEXT');
     const [beforeContext, afterContext] = parts;
 
-    // Format the market context section with real-time data and analysis
     const formattedContext = afterContext
       .replace(/📈 Latest Market Data:/g, '📈 Market Context\n')
       .replace(/Current Price: (IDR \d+([,\.]\d+)*)/g, '💰 Current Price: 💵$1')
@@ -46,19 +44,18 @@ const formatMarketAnalysis = (content: string) => {
     return beforeContext + formattedContext;
   }
 
-  // Default formatting for non-stock analysis content
   return content
     .replace(/Market Context:/g, '📈 Market Context\n')
     .replace(/(\d+(\.\d{1,2})?%)/g, '📝 $1')
     .replace(/(IDR \d+([,\.]\d+)*)/g, '💵 $1');
 };
 
-export function ChatBox() {
+export const ChatBox = () => {
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
-  const [isVisible, setIsVisible] = useState(true);
+
 
   const handleClear = () => {
     setMessages([]);
@@ -69,7 +66,6 @@ export function ChatBox() {
     e.preventDefault();
     if (!input.trim() || isLoading) return;
 
-    // Only restrict highly technical programming queries
     const restrictedTerms = /\b(sql|html|css|javascript|python|code|programming|script|database|api|endpoint)\b/i;
     if (restrictedTerms.test(input)) {
       setMessages(prev => [...prev, 
@@ -129,7 +125,6 @@ export function ChatBox() {
       );
     }
 
-    // Format the message content with enhanced market analysis styling
     const formattedContent = formatMarketAnalysis(message.content);
 
     return (
@@ -184,13 +179,7 @@ export function ChatBox() {
     setIsExpanded(!isExpanded);
   };
 
-  const handleClose = () => {
-    setIsVisible(false);
-  };
-
-  if (!isVisible) return null;
-
-    const chatContent = (
+  const chatContent = (
     <div className="flex flex-col h-full">
       {/* Header */}
       <div className="p-4 border-b border-gray-200 dark:border-gray-800">
@@ -205,6 +194,16 @@ export function ChatBox() {
             <Globe className="h-4 w-4 text-gray-500" />
           </div>
           <div className="flex items-center gap-2">
+            {messages.length > 0 && (
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={handleClear}
+                className="text-gray-500 hover:text-gray-700 dark:hover:text-gray-300"
+              >
+                <Trash2 className="h-4 w-4" />
+              </Button>
+            )}
             <Button
               variant="ghost"
               size="icon"
@@ -212,14 +211,6 @@ export function ChatBox() {
               className="text-gray-500 hover:text-gray-700 dark:hover:text-gray-300"
             >
               {isExpanded ? <Minimize2 className="h-4 w-4" /> : <Maximize2 className="h-4 w-4" />}
-            </Button>
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={handleClose}
-              className="text-gray-500 hover:text-gray-700 dark:hover:text-gray-300"
-            >
-              <X className="h-4 w-4" />
             </Button>
           </div>
         </div>
@@ -307,9 +298,15 @@ export function ChatBox() {
           height: 'calc(100vh - 9rem)',
           zIndex: 20,
         }}
-        transition={{ type: "spring", stiffness: 300, damping: 30 }}
+        transition={{ 
+          type: "spring", 
+          stiffness: 200, 
+          damping: 25,
+          mass: 1
+        }}
+        layout
       >
-        <Card className={`h-full bg-white dark:bg-gray-900 shadow-md ${
+        <Card className={`h-full bg-white dark:bg-gray-900 shadow-md overflow-hidden ${
           isExpanded ? 'rounded-lg' : ''
         }`}>
           {chatContent}
@@ -320,12 +317,11 @@ export function ChatBox() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
+          transition={{ duration: 0.2 }}
           className="fixed inset-0 bg-black/50 z-40"
           onClick={toggleExpand}
         />
       )}
     </AnimatePresence>
   );
-}
-
-export default ChatBox;
+};
