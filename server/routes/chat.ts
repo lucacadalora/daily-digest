@@ -9,86 +9,40 @@ function formatResponse(text: string): string {
   text = text.replace(/(\d+)\s*[•.-]\s*(\d+)(x?)/g, '$1.$2$3'); // Fix split numbers
   text = text.replace(/\s+/g, ' ').trim(); // Clean up spaces
 
+  // Split into paragraphs and filter empty lines
   const paragraphs = text.split('\n').map(p => p.trim()).filter(p => p.length > 0);
   let formattedResponse = "";
-  let currentSection = "";
-  let sectionContent: string[] = [];
 
   // Process content
   paragraphs.forEach((paragraph, index) => {
-    // Handle Analysis Highlights header
-    if (index === 0 && /analysis|overview|summary/i.test(paragraph)) {
+    // Handle Analysis Highlights header specially
+    if (/^Analysis Highlights/i.test(paragraph)) {
       formattedResponse += "📊 Analysis Highlights:\n\n";
       return;
     }
 
-    // Detect section headers but preserve original formatting
-    if (/^[\d.]*\s*Price\s*Action/i.test(paragraph)) {
-      if (sectionContent.length) {
-        formattedResponse += sectionContent.join('\n') + '\n\n';
-        sectionContent = [];
-      }
-      formattedResponse += "## Price Action\n\n";
-      currentSection = "price";
-    }
-    else if (/^[\d.]*\s*Key\s*Metrics/i.test(paragraph)) {
-      if (sectionContent.length) {
-        formattedResponse += sectionContent.join('\n') + '\n\n';
-        sectionContent = [];
-      }
-      formattedResponse += "⚡ Key Metrics\n\n";
-      currentSection = "metrics";
-    }
-    else if (/^[\d.]*\s*Growth|Performance/i.test(paragraph)) {
-      if (sectionContent.length) {
-        formattedResponse += sectionContent.join('\n') + '\n\n';
-        sectionContent = [];
-      }
-      formattedResponse += "🚀 Growth & Performance\n\n";
-      currentSection = "growth";
-    }
-    else if (/^[\d.]*\s*Expert\s*Analysis/i.test(paragraph)) {
-      if (sectionContent.length) {
-        formattedResponse += sectionContent.join('\n') + '\n\n';
-        sectionContent = [];
-      }
-      formattedResponse += "💬 Expert Analysis\n\n";
-      currentSection = "expert";
-    }
-    else if (/^[\d.]*\s*Investment/i.test(paragraph)) {
-      if (sectionContent.length) {
-        formattedResponse += sectionContent.join('\n') + '\n\n';
-        sectionContent = [];
-      }
-      formattedResponse += "💡 Investment Assessment\n\n";
-      currentSection = "investment";
-    }
-    else {
-      // Format content based on type
-      let formattedParagraph = paragraph;
+    // Format the paragraph based on content
+    let formattedParagraph = paragraph;
 
-      // Format bullet points
-      if (/^\s*[•-]/.test(paragraph)) {
-        formattedParagraph = paragraph.replace(/^\s*[•-]\s*/, '• ');
-      }
-
-      // Add special formatting based on content
-      if (/price|value|ratio|yield|cap/i.test(formattedParagraph)) {
-        formattedParagraph = `📊 ${formattedParagraph}`;
-      } else if (/growth|increase|decrease/i.test(formattedParagraph)) {
-        formattedParagraph = `📈 ${formattedParagraph}`;
-      } else if (/risk|warning|caution/i.test(formattedParagraph)) {
-        formattedParagraph = `⚠️ ${formattedParagraph}`;
-      }
-
-      sectionContent.push(formattedParagraph);
+    // Format bullet points
+    if (/^\s*[•-]/.test(paragraph)) {
+      formattedParagraph = formattedParagraph.replace(/^\s*[•-]\s*/, '• ');
     }
+
+    // Add emojis based on content type
+    if (/price|market cap|ratio|dividend/i.test(formattedParagraph)) {
+      formattedParagraph = `📈 ${formattedParagraph}`;
+    } else if (/growth|increase|performance/i.test(formattedParagraph)) {
+      formattedParagraph = `📊 ${formattedParagraph}`;
+    } else if (/risk|warning|caution/i.test(formattedParagraph)) {
+      formattedParagraph = `⚠️ ${formattedParagraph}`;
+    } else if (/recommend|opportunity|strategy/i.test(formattedParagraph)) {
+      formattedParagraph = `💡 ${formattedParagraph}`;
+    }
+
+    // Add the formatted paragraph
+    formattedResponse += formattedParagraph + "\n\n";
   });
-
-  // Add any remaining content
-  if (sectionContent.length) {
-    formattedResponse += sectionContent.join('\n');
-  }
 
   return formattedResponse.trim();
 }
@@ -98,8 +52,7 @@ router.post("/api/chat", async (req, res) => {
     const { message } = req.body;
 
     if (!process.env.PERPLEXITY_API_KEY) {
-      console.error('Missing PERPLEXITY_API_KEY');
-      throw new Error('API key not configured');
+      throw new Error('Missing PERPLEXITY_API_KEY');
     }
 
     // Enhanced financial terms regex
@@ -114,49 +67,49 @@ router.post("/api/chat", async (req, res) => {
 
     console.log('Processing financial query:', message);
 
-    const systemPrompt = `You are an expert financial analyst specializing in Indonesian market analysis and investment research. 
-Start your response with 'Analysis Highlights:' followed by a concise summary. Then structure your detailed analysis as follows:
+    const systemPrompt = `You are an expert financial analyst specializing in Indonesian market analysis and investment research.
+Your response must start with "Analysis Highlights:" followed by a comprehensive analysis.
+
+Format your response exactly as follows (including all sections):
+
+Analysis Highlights:
+[Brief overview of key points]
 
 Price Action
-- Current stock price with exact value
-- Recent price movements and trends
-- Trading volume and momentum analysis
+• Current stock price: [exact value]
+• Recent trading range
+• Volume trends
 
 Key Metrics
-• Current Price: [exact value]
-• P/E Ratio: [value]
 • Market Cap: [value in IDR]
-• Trading Volume: [average daily]
+• P/E Ratio: [value]
+• Trading Volume: [average]
+• Revenue Growth: [YoY %]
 
 Growth & Performance
-• Recent performance metrics
-• Revenue growth and trends
-• Market position analysis
-• Key business developments
+• Historical performance
+• Market position
+• Competitive strengths
+• Recent developments
 
 Expert Analysis
-• Market sentiment and outlook
-• Competitive advantages/risks
-• Industry position
-• Strategic initiatives
+• Market sentiment
+• Industry trends
+• Strategic outlook
+• Key challenges
 
 Investment Assessment
-• Growth opportunities
-• Risk considerations
-• Technical support/resistance levels
-• Price targets and recommendations
+• Growth catalysts
+• Risk factors
+• Technical levels
+• Price targets
 
-Always:
-- Include exact numbers and metrics
-- Use bullet points for key data
-- Keep insights actionable and clear
-- Focus on recent market data`;
+Use bullet points and exact numbers throughout your analysis.`;
 
-    console.log('Sending request to Perplexity API...');
     const response = await axios.post(
       'https://api.perplexity.ai/chat/completions',
       {
-        model: "sonar-pro",
+        model: "sonar-small-chat",
         messages: [
           {
             role: "system",
@@ -168,13 +121,14 @@ Always:
           }
         ],
         temperature: 0.7,
-        max_tokens: 1000
+        max_tokens: 1024,
+        top_p: 1,
+        stream: false
       },
       {
         headers: {
           'Authorization': `Bearer ${process.env.PERPLEXITY_API_KEY}`,
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
+          'Content-Type': 'application/json'
         }
       }
     );
@@ -182,7 +136,6 @@ Always:
     console.log('Raw API Response:', JSON.stringify(response.data, null, 2));
 
     if (!response.data?.choices?.[0]?.message?.content) {
-      console.error('Invalid API response structure:', response.data);
       throw new Error('Invalid API response format');
     }
 
@@ -196,9 +149,9 @@ Always:
       throw new Error('Empty formatted response');
     }
 
-    res.json({ 
-      reply: formattedReply,
-      status: 'success' 
+    res.json({
+      status: 'success',
+      reply: formattedReply
     });
 
   } catch (error) {
@@ -206,10 +159,10 @@ Always:
     const errorMessage = error instanceof Error ? error.message : 'Unknown error';
     console.error('Error details:', errorMessage);
 
-    res.status(500).json({ 
+    res.status(500).json({
+      status: 'error',
       error: 'Failed to get response from AI',
-      details: errorMessage,
-      status: 'error'
+      details: errorMessage
     });
   }
 });
