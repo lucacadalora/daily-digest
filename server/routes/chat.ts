@@ -30,8 +30,11 @@ Provide a concise overview of the current market landscape, focusing on recent s
 ## 💡 Key Metrics
 * **Current Stock Price:** [Retrieve the latest stock price using a real-time financial data API]
 * **Price-to-Earnings (P/E):** [Value, with comparison to industry peers and historical trends]
-* **Loan Growth (Digital/Traditional):** [Year-over-year or quarterly growth rate]
-* **Discount to Peers:** [Value, comparison to regional peers]
+* **Discount to Peers:** [Value, comparison to regional peers or sector average]
+* **Market Capitalization:** [Total market cap, with comparison to industry average or historical trends]
+* **Earnings Growth (YoY/Quarterly):** [Latest earnings growth, with comparison to peers or historical growth]
+* **Price-to-Book (P/B):** [Current P/B ratio with relevant context]
+* **Debt-to-Equity Ratio:** [Ratio indicating leverage, with comparison to sector average]
 
 ## 💰 Dividend Outlook
 2025 Projections: Dividend Yield: [X%] (estimated final dividend of IDR [value] per share)
