@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Send } from "lucide-react";
+import { Send, Search, Globe } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card } from "@/components/ui/card";
@@ -9,6 +9,7 @@ import axios from "axios";
 interface Message {
   role: 'user' | 'assistant';
   content: string;
+  isSearching?: boolean;
 }
 
 export function ChatBox() {
@@ -25,19 +26,33 @@ export function ChatBox() {
     setMessages(prev => [...prev, { role: 'user', content: userMessage }]);
     setIsLoading(true);
 
+    // Add a temporary "searching" message
+    setMessages(prev => [...prev, { 
+      role: 'assistant', 
+      content: 'Searching for market data...', 
+      isSearching: true 
+    }]);
+
     try {
       const response = await axios.post('/api/chat', { message: userMessage });
       if (response.data.status === 'success') {
-        setMessages(prev => [...prev, { role: 'assistant', content: response.data.reply }]);
+        // Remove the temporary searching message and add the real response
+        setMessages(prev => {
+          const filtered = prev.filter(msg => !msg.isSearching);
+          return [...filtered, { role: 'assistant', content: response.data.reply }];
+        });
       } else {
         throw new Error('Failed to get response');
       }
     } catch (error) {
       console.error('Chat error:', error);
-      setMessages(prev => [...prev, { 
-        role: 'assistant', 
-        content: 'Sorry, I encountered an error. Please try again.'
-      }]);
+      setMessages(prev => {
+        const filtered = prev.filter(msg => !msg.isSearching);
+        return [...filtered, { 
+          role: 'assistant', 
+          content: 'Sorry, I encountered an error. Please try again.'
+        }];
+      });
     } finally {
       setIsLoading(false);
     }
@@ -48,9 +63,12 @@ export function ChatBox() {
       <div className="p-4">
         <div className="mb-4">
           <h2 className="text-lg font-semibold text-gray-900 dark:text-white">Market Insights Chat</h2>
-          <p className="text-sm text-gray-600 dark:text-gray-400">Ask questions about market trends and get AI-powered insights</p>
+          <div className="flex items-center text-sm text-gray-600 dark:text-gray-400">
+            <Globe className="h-4 w-4 mr-2" />
+            <p>Ask questions about market trends and get AI-powered insights with real-time web search</p>
+          </div>
         </div>
-        
+
         <ScrollArea className="h-[400px] pr-4 mb-4">
           <div className="space-y-4">
             {messages.map((message, index) => (
@@ -65,21 +83,17 @@ export function ChatBox() {
                       : 'bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white mr-4'
                   }`}
                 >
-                  {message.content}
+                  {message.isSearching ? (
+                    <div className="flex items-center space-x-2">
+                      <Search className="h-4 w-4 animate-spin" />
+                      <span>{message.content}</span>
+                    </div>
+                  ) : (
+                    message.content
+                  )}
                 </div>
               </div>
             ))}
-            {isLoading && (
-              <div className="flex justify-start">
-                <div className="bg-gray-100 dark:bg-gray-800 rounded-lg p-3 max-w-[80%] mr-4">
-                  <div className="flex space-x-2">
-                    <div className="w-2 h-2 bg-gray-500 rounded-full animate-bounce" />
-                    <div className="w-2 h-2 bg-gray-500 rounded-full animate-bounce delay-100" />
-                    <div className="w-2 h-2 bg-gray-500 rounded-full animate-bounce delay-200" />
-                  </div>
-                </div>
-              </div>
-            )}
           </div>
         </ScrollArea>
 

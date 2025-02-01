@@ -13,7 +13,7 @@ router.post("/api/chat", async (req, res) => {
       messages: [
         {
           role: "system",
-          content: "You are an expert financial and market analyst. Provide insights and analysis about market trends, stocks, and economic conditions. Be concise and data-driven in your responses."
+          content: "You are an expert financial and market analyst with real-time web browsing capabilities. Leverage current market data and news to provide insights about market trends, stocks, and economic conditions. When analyzing market information, always try to provide the most up-to-date data and cite your sources. Be concise and data-driven in your responses."
         },
         {
           role: "user",
@@ -21,7 +21,10 @@ router.post("/api/chat", async (req, res) => {
         }
       ],
       temperature: 0.7,
-      max_tokens: 1000
+      max_tokens: 1000,
+      search: true,
+      search_provider: "you",
+      include_search_info: true
     });
 
     res.json({ 
