@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Send, Search, Globe } from "lucide-react";
+import { Send, Search, Globe, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card } from "@/components/ui/card";
@@ -12,10 +12,22 @@ interface Message {
   isSearching?: boolean;
 }
 
+const EXAMPLE_PROMPTS = [
+  "Analyze BBRI's current valuation and dividend outlook",
+  "What's the investment thesis for ADRO in 2025?",
+  "Provide a technical analysis of TLKM stock",
+  "Assess ASII's growth prospects and market position",
+];
+
 export function ChatBox() {
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+
+  const handleClear = () => {
+    setMessages([]);
+    setInput('');
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -90,20 +102,52 @@ export function ChatBox() {
     <Card className="w-full max-w-2xl mx-auto">
       <div className="p-4">
         <div className="mb-4">
-          <div className="flex items-center gap-2">
-            <h2 className="text-lg font-semibold text-gray-900 dark:text-white">Market Insights Chat</h2>
-            <div className="flex items-center">
-              <div className="relative">
-                <div className="absolute h-2 w-2 rounded-full bg-green-500 animate-ping" />
-                <div className="h-2 w-2 rounded-full bg-green-500" />
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <h2 className="text-lg font-semibold text-gray-900 dark:text-white">Market Insights Chat</h2>
+              <div className="flex items-center">
+                <div className="relative">
+                  <div className="absolute h-2 w-2 rounded-full bg-green-500 animate-ping opacity-75" />
+                  <div className="h-2 w-2 rounded-full bg-green-500" />
+                </div>
+                <span className="text-sm text-gray-500 dark:text-gray-400 ml-2">Online</span>
               </div>
-              <span className="text-sm text-gray-500 dark:text-gray-400 ml-2">Online</span>
             </div>
+            {messages.length > 0 && (
+              <Button 
+                variant="ghost" 
+                size="sm" 
+                onClick={handleClear}
+                className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
+              >
+                <Trash2 className="h-4 w-4" />
+              </Button>
+            )}
           </div>
           <div className="flex items-center text-sm text-gray-600 dark:text-gray-400 mt-2">
             <Globe className="h-4 w-4 mr-2" />
             <p>Ask questions about market trends and get AI-powered insights with real-time web search</p>
           </div>
+
+          {/* Example prompts - only show when no messages */}
+          {messages.length === 0 && (
+            <div className="mt-4 space-y-2">
+              <p className="text-sm font-medium text-gray-700 dark:text-gray-300">Try asking about:</p>
+              <div className="flex flex-wrap gap-2">
+                {EXAMPLE_PROMPTS.map((prompt, index) => (
+                  <button
+                    key={index}
+                    className="text-sm px-3 py-1.5 rounded-full bg-gray-100 text-gray-700 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700 transition-colors"
+                    onClick={() => {
+                      setInput(prompt);
+                    }}
+                  >
+                    {prompt}
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
 
         <ScrollArea className="h-[400px] pr-4 mb-4">

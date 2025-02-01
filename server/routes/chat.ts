@@ -9,51 +9,42 @@ function formatResponse(text: string): string {
   text = text.replace(/(\d+)\s*[•.-]\s*(\d+)(x?)/g, '$1.$2$3'); // Fix split numbers
   text = text.replace(/\s+/g, ' ').trim(); // Clean up extra spaces
 
-  // Split into sentences and trim
-  const sentences = text.split(/[.!?]/).map(s => s.trim()).filter(s => s.length > 0);
+  // Split into paragraphs and sentences
+  const paragraphs = text.split('\n').map(p => p.trim()).filter(p => p.length > 0);
 
-  // Group sentences into categories
   let formattedResponse = "";
 
-  // Create "Analysis Highlights" section
-  const statsSection = sentences.filter(s => 
-    /\b(\d+(\.\d+)?%?)|(\$[0-9,.]+)|(USD|IDR|EUR|JPY|GBP|Rp)\b/i.test(s)
-  );
-  if (statsSection.length > 0) {
-    formattedResponse += "📊 Analysis Highlights:\n" + 
-      statsSection.map(s => `• ${s}`).join("\n") + "\n\n";
-  }
+  // Process each paragraph
+  paragraphs.forEach(paragraph => {
+    // Check if this is a key metric or highlight
+    const isKeyMetric = /^(P\/?E|P\/?B|ROE|EPS|Dividend Yield|Market Cap|Revenue|EBITDA|Net Profit|Price Target):/i.test(paragraph) ||
+                       /^(Current Price|Support Level|Resistance Level|Trading Volume):/i.test(paragraph);
 
-  // Create "Market Dynamics" section
-  const trendSection = sentences.filter(s => 
-    /\b(increase|decrease|grew|fell|rise|drop|trend|gain|loss|outperform|underperform|valuation|multiple|premium|discount)\b/i.test(s)
-  );
-  if (trendSection.length > 0) {
-    formattedResponse += "📈 Market Dynamics:\n" + 
-      trendSection.map(s => `• ${s}`).join("\n") + "\n\n";
-  }
+    // Check if this is a section header
+    const isSectionHeader = /^(Key|Analysis|Market|Risk|Investment|Technical|Fundamental|Valuation|Growth|Outlook)/i.test(paragraph);
 
-  // Create "Risk Assessment" section
-  const riskSection = sentences.filter(s => 
-    /\b(risk|threat|challenge|concern|volatility|uncertainty|exposure|downside|bearish)\b/i.test(s)
-  );
-  if (riskSection.length > 0) {
-    formattedResponse += "⚠️ Risk Assessment:\n" + 
-      riskSection.map(s => `• ${s}`).join("\n") + "\n\n";
-  }
+    if (isSectionHeader) {
+      // Format section headers with emoji based on content
+      if (/Analysis|Overview|Summary/i.test(paragraph)) {
+        formattedResponse += `\n📊 ${paragraph}\n`;
+      } else if (/Market|Trading|Price/i.test(paragraph)) {
+        formattedResponse += `\n📈 ${paragraph}\n`;
+      } else if (/Risk|Warning|Caution/i.test(paragraph)) {
+        formattedResponse += `\n⚠️ ${paragraph}\n`;
+      } else if (/Investment|Strategy|Recommendation/i.test(paragraph)) {
+        formattedResponse += `\n💡 ${paragraph}\n`;
+      }
+    } else if (isKeyMetric) {
+      // Format key metrics as bullets
+      formattedResponse += `• ${paragraph}\n`;
+    } else {
+      // Regular paragraph without bullets
+      formattedResponse += `${paragraph}\n`;
+    }
+  });
 
-  // Remaining points go into "Investment Implications"
-  const remainingPoints = sentences.filter(s => 
-    !statsSection.includes(s) && 
-    !trendSection.includes(s) && 
-    !riskSection.includes(s)
-  );
-  if (remainingPoints.length > 0) {
-    formattedResponse += "💡 Investment Implications:\n" + 
-      remainingPoints.map(s => `• ${s}`).join("\n") + "\n\n";
-  }
-
-  return formattedResponse.trim();
+  // Cleanup double spacing and trim
+  return formattedResponse.replace(/\n\s*\n/g, '\n\n').trim();
 }
 
 router.post("/api/chat", async (req, res) => {
@@ -67,7 +58,22 @@ router.post("/api/chat", async (req, res) => {
         messages: [
           {
             role: "system",
-            content: "You are an expert financial analyst specializing in market analysis and investment research. Structure your responses like a professional investment report with clear sections. Include these essential elements where relevant:\n\n1. Key valuation metrics (P/E, P/B, dividend yield)\n2. Growth drivers and market dynamics\n3. Risk factors and mitigation strategies\n4. Fundamental analysis with specific numbers\n5. Technical indicators and price trends\n6. Comparative analysis with peers\n7. Forward-looking projections\n\nProvide specific numbers and percentages. Keep the tone professional and analytical, similar to institutional research reports. Format numbers consistently - use decimal points instead of splitting numbers across lines (e.g., write '4.9x' not '4• 9x'). Do not include citations or reference numbers."
+            content: `You are an expert financial analyst specializing in market analysis and investment research. Structure your responses like a professional investment report with clear sections.
+
+Keep responses focused on these key elements:
+1. Current market price and key valuation metrics (P/E, P/B, dividend yield)
+2. Critical growth drivers and market dynamics
+3. Major risk factors and mitigation strategies
+4. Essential fundamental metrics
+5. Important technical levels
+6. Notable peer comparison highlights
+7. Key forward-looking projections
+
+Format important metrics as "Metric: Value" on their own line.
+Keep paragraphs concise and focused.
+Do not include citations or reference numbers.
+Use decimal points for numbers (write '4.9x' not '4.9 x' or '4• 9x').
+Focus on actionable insights and material information.`
           },
           {
             role: "user",
