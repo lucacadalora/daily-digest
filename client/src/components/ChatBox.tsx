@@ -1,29 +1,3 @@
-const EXAMPLE_PROMPTS = [
-  "Analyze BBRI's current valuation and growth prospects",
-  "What's the latest market trend for Indonesian banking sector?",
-  "Compare dividend yields of top ASEAN banks",
-  "Analyze recent developments in digital banking adoption",
-];
-
-const LATEST_STORIES = [
-  {
-    time: "14 HR AGO",
-    title: "Bank Indonesia maintains interest rates at 5.75%"
-  },
-  {
-    time: "16 HR AGO",
-    title: "IDX Composite hits new all-time high"
-  },
-  {
-    time: "17 HR AGO",
-    title: "BBRI reports strong Q4 digital banking growth"
-  },
-  {
-    time: "1 DAY AGO",
-    title: "Indonesian banking sector outlook 2025"
-  }
-];
-
 import { useState } from "react";
 import { Send, Search, Globe, Trash2, Clock } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -32,7 +6,15 @@ import { Card } from "@/components/ui/card";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
+import { useLatestNews } from "@/hooks/useLatestNews";
 import axios from "axios";
+
+const EXAMPLE_PROMPTS = [
+  "Analyze BBRI's current valuation and growth prospects",
+  "What's the latest market trend for Indonesian banking sector?",
+  "Compare dividend yields of top ASEAN banks",
+  "Analyze recent developments in digital banking adoption",
+];
 
 interface Message {
   role: 'user' | 'assistant';
@@ -45,6 +27,7 @@ export function ChatBox() {
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const { data: latestNews, isLoading: isNewsLoading } = useLatestNews();
 
   const handleClear = () => {
     setMessages([]);
@@ -222,17 +205,33 @@ export function ChatBox() {
             <div className="w-64 border-l pl-4">
               <h3 className="text-sm font-medium text-gray-900 dark:text-white mb-2">Latest Updates</h3>
               <div className="space-y-3">
-                {LATEST_STORIES.map((story, index) => (
-                  <div key={index} className="text-sm">
-                    <div className="text-xs text-gray-500 mb-0.5 flex items-center">
-                      <Clock className="h-3 w-3 mr-1" />
-                      {story.time}
-                    </div>
-                    <p className="text-gray-900 dark:text-gray-100 hover:text-blue-600 dark:hover:text-blue-400 cursor-pointer">
-                      {story.title}
-                    </p>
+                {isNewsLoading ? (
+                  <div className="animate-pulse space-y-3">
+                    {[1, 2, 3, 4].map((i) => (
+                      <div key={i} className="space-y-1">
+                        <div className="h-2 w-16 bg-gray-200 dark:bg-gray-700 rounded"></div>
+                        <div className="h-3 w-full bg-gray-200 dark:bg-gray-700 rounded"></div>
+                      </div>
+                    ))}
                   </div>
-                ))}
+                ) : (
+                  latestNews?.map((story, index) => (
+                    <div key={index} className="text-sm">
+                      <div className="text-xs text-gray-500 mb-0.5 flex items-center">
+                        <Clock className="h-3 w-3 mr-1" />
+                        {story.time}
+                      </div>
+                      <a 
+                        href={story.url} 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="text-gray-900 dark:text-gray-100 hover:text-blue-600 dark:hover:text-blue-400 cursor-pointer block"
+                      >
+                        {story.title}
+                      </a>
+                    </div>
+                  ))
+                )}
               </div>
             </div>
           </div>
