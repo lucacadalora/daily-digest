@@ -75,9 +75,9 @@ router.post("/api/chat", async (req, res) => {
       },
       {
         headers: {
-          'Authorization': `Bearer ${process.env.PERPLEXITY_API_KEY}`,
-          'Content-Type': 'application/json',
-          'accept': 'application/json'
+          'accept': 'application/json',
+          'content-type': 'application/json',
+          'Authorization': `Bearer ${process.env.PERPLEXITY_API_KEY}`
         },
         timeout: 30000
       }
