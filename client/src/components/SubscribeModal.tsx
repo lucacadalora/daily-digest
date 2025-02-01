@@ -29,7 +29,7 @@ export const SubscribeModal = ({ isOpen, onClose }: SubscribeModalProps) => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
-            className="fixed inset-0 bg-black/50 z-50"
+            className="fixed inset-0 bg-black bg-opacity-50 z-40"
             onClick={onClose}
           />
 
@@ -48,7 +48,7 @@ export const SubscribeModal = ({ isOpen, onClose }: SubscribeModalProps) => {
             {/* Close button */}
             <button
               onClick={onClose}
-              className="absolute right-3 top-3 p-1 text-gray-400 hover:text-gray-600"
+              className="absolute right-3 top-3 text-gray-400 hover:text-gray-600 dark:text-gray-500 dark:hover:text-gray-400"
             >
               <X className="h-4 w-4" />
             </button>
