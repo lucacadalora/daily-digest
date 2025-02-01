@@ -56,6 +56,13 @@ export default function Home() {
                 {sampleArticles.slice(1).map((article, index) => (
                   <Link key={index} href={`/newsletter/${article.slug}`} className="block group">
                     <div className="flex gap-4">
+                      <div className="w-24 h-16 flex-shrink-0">
+                        <img 
+                          src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=800&h=400" 
+                          alt={article.title} 
+                          className="w-full h-full object-cover rounded"
+                        />
+                      </div>
                       <div className="flex-1">
                         <h4 className="font-medium text-sm mb-1 group-hover:text-blue-600 dark:group-hover:text-blue-400">
                           {article.title}
