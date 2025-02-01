@@ -87,33 +87,42 @@ Summarize key takeaways with actionable insights, focusing on investment opportu
       hasStockTicker
     });
 
-    const response = await client.chat.completions.create({
-      model: "sonar",
-      messages: [
-        {
-          role: "system",
-          content: hasStockTicker ? detailedStockPrompt : basePrompt
-        },
-        {
-          role: "user",
-          content: message
-        }
-      ]
-    });
+    let response;
+    try {
+      response = await client.chat.completions.create({
+        model: "sonar",
+        messages: [
+          {
+            role: "system",
+            content: hasStockTicker ? detailedStockPrompt : basePrompt
+          },
+          {
+            role: "user",
+            content: message
+          }
+        ]
+      });
+    } catch (apiError) {
+      console.error('Perplexity API Error:', apiError);
+      throw new Error(`Failed to get response from Perplexity API: ${apiError.message}`);
+    }
 
     console.log('API Response received');
 
-    if (!response.choices?.[0]?.message?.content) {
+    if (!response?.choices?.[0]?.message?.content) {
       console.error('Invalid API response format:', JSON.stringify(response));
       throw new Error('Invalid API response format');
     }
 
     const content = response.choices[0].message.content;
 
+    // Since response.citations is not a standard OpenAI API response field, we'll handle it safely
+    const citations = Array.isArray(response['citations']) ? response['citations'] : [];
+
     res.json({
       status: 'success',
       reply: content.trim(),
-      citations: response.citations || []
+      citations: citations
     });
 
   } catch (error) {
@@ -123,8 +132,8 @@ Summarize key takeaways with actionable insights, focusing on investment opportu
 
     res.status(500).json({
       status: 'error',
-      error: 'Failed to get response from AI',
-      details: errorMessage
+      error: errorMessage,
+      details: 'An error occurred while processing your request. Please try again.'
     });
   }
 });
