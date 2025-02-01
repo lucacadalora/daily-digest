@@ -47,7 +47,7 @@ export function MarketTicker() {
   const { data, isLoading, error } = useQuery<MarketData>({
     queryKey: ['market-data'],
     queryFn: fetchMarketData,
-    refetchInterval: 30000,
+    refetchInterval: 30000, // Refresh every 30 seconds
     retry: 3
   });
 
@@ -57,7 +57,7 @@ export function MarketTicker() {
 
     let animationFrame: number;
     let startTime: number;
-    const duration = 60000;
+    const duration = 60000; // 60 seconds for one complete scroll
     const scrollWidth = container.scrollWidth;
     const viewportWidth = container.offsetWidth;
 
@@ -84,14 +84,14 @@ export function MarketTicker() {
 
   if (isLoading || !data) {
     return (
-      <div className="h-6 animate-pulse bg-gray-100 rounded dark:bg-gray-800"></div>
+      <div className="h-6 animate-pulse bg-gray-100 rounded"></div>
     );
   }
 
   if (error) {
     console.error('Error fetching market data:', error);
     return (
-      <div className="text-sm text-red-500 dark:text-red-400">Unable to load market data</div>
+      <div className="text-sm text-red-500">Unable to load market data</div>
     );
   }
 
@@ -105,21 +105,17 @@ export function MarketTicker() {
     return change.toFixed(2);
   };
 
-  const renderMarketItem = (symbol: string, data: MarketPrice | undefined, category?: string) => {
-    if (!data) return null;
-
-    return (
-      <div key={symbol} className="flex items-center gap-1 px-2 sm:px-4 border-r border-gray-200 dark:border-gray-700 last:border-r-0">
-        {category && <span className="hidden sm:inline text-gray-400 mr-1">{category}</span>}
-        <span className="font-medium text-xs sm:text-sm">{symbol}</span>
-        <span className="text-xs sm:text-sm">{formatPrice(data.price)}</span>
-        <span className={`flex items-center text-xs sm:text-sm ${data.change24h >= 0 ? 'text-green-500' : 'text-red-500'}`}>
-          {data.change24h >= 0 ? <TrendingUp className="h-3 w-3" /> : <TrendingDown className="h-3 w-3" />}
-          {formatChange(data.change24h)}%
-        </span>
-      </div>
-    );
-  };
+  const renderMarketItem = (symbol: string, data: MarketPrice, category?: string) => (
+    <div key={symbol} className="flex items-center gap-1 px-2 sm:px-4 border-r border-gray-200 last:border-r-0">
+      {category && <span className="hidden sm:inline text-gray-400 mr-1">{category}</span>}
+      <span className="font-medium text-xs sm:text-sm">{symbol}</span>
+      <span className="text-xs sm:text-sm">{formatPrice(data.price)}</span>
+      <span className={`flex items-center text-xs sm:text-sm ${data.change24h >= 0 ? 'text-green-500' : 'text-red-500'}`}>
+        {data.change24h >= 0 ? <TrendingUp className="h-3 w-3" /> : <TrendingDown className="h-3 w-3" />}
+        {formatChange(data.change24h)}%
+      </span>
+    </div>
+  );
 
   return (
     <div 
@@ -129,23 +125,28 @@ export function MarketTicker() {
       onMouseLeave={() => setIsPaused(false)}
     >
       <div className={`flex animate-marquee ${isPaused ? 'animate-pause' : ''}`}>
-        {data.crypto && Object.entries(data.crypto).map(([symbol, price]) => 
+        {/* Crypto Section */}
+        {Object.entries(data.crypto).map(([symbol, price]) => 
           renderMarketItem(symbol, price, "Crypto")
         )}
 
-        {data.forex && Object.entries(data.forex).map(([symbol, price]) => 
+        {/* Forex */}
+        {Object.entries(data.forex).map(([symbol, price]) => 
           renderMarketItem(symbol, price, "Forex")
         )}
 
-        {data.indices && Object.entries(data.indices).map(([symbol, price]) => 
+        {/* Indices */}
+        {Object.entries(data.indices).map(([symbol, price]) => 
           renderMarketItem(symbol, price, "Index")
         )}
 
-        {data.stocks && Object.entries(data.stocks).slice(4).map(([symbol, price]) => 
+        {/* US Stocks */}
+        {Object.entries(data.stocks).slice(4).map(([symbol, price]) => 
           renderMarketItem(symbol, price, "US")
         )}
 
-        {data.stocks && Object.entries(data.stocks).slice(0, 4).map(([symbol, price]) => 
+        {/* ID Stocks */}
+        {Object.entries(data.stocks).slice(0, 4).map(([symbol, price]) => 
           renderMarketItem(symbol, price, "ID")
         )}
       </div>
