@@ -89,7 +89,7 @@ export const Header = ({ onSubscribe, showCategories = true, simplified = false 
 
                   {/* Daily Digest AI */}
                   <div className="mb-8">
-                    <Link href="/chat" className="flex items-center justify-between group">
+                    <Link href="/#chat" className="flex items-center justify-between group">
                       <div className="flex items-center gap-2">
                         <div className="relative flex items-center">
                           <div className="w-2 h-2 rounded-full bg-green-500"></div>
@@ -106,7 +106,7 @@ export const Header = ({ onSubscribe, showCategories = true, simplified = false 
 
                   {/* Subscribe Form - Always visible */}
                   <div className="mt-8">
-                    <div className="bg-red-700 rounded-xl p-6">
+                    <div className="bg-blue-600 rounded-xl p-6">
                       <h3 className="text-xl font-semibold text-white mb-2">Sign up for our newsletter!</h3>
                       <p className="text-white/90 text-sm mb-4">
                         Subscribe to stay up to date with the latest crypto products, strategies and trends.
@@ -121,7 +121,7 @@ export const Header = ({ onSubscribe, showCategories = true, simplified = false 
                         <Button 
                           type="submit" 
                           size="icon"
-                          className="absolute right-1 top-1 bottom-1 bg-red-600 hover:bg-red-700 rounded-full w-8 h-8 flex items-center justify-center p-0"
+                          className="absolute right-1 top-1 bottom-1 bg-blue-500 hover:bg-blue-700 rounded-full w-8 h-8 flex items-center justify-center p-0"
                         >
                           <ArrowRight className="h-4 w-4 text-white" />
                         </Button>
