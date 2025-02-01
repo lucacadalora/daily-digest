@@ -13,25 +13,25 @@ function formatResponse(text: string): string {
   // If text contains numbers/statistics, create a "Key Figures" section
   const statsSection = sentences.filter(s => /\d/.test(s));
   if (statsSection.length > 0) {
-    formattedResponse += "📊 Key Figures:\n" + 
+    formattedResponse += "📊 Analysis Highlights:\n" + 
       statsSection.map(s => `• ${s}`).join("\n") + "\n\n";
   }
 
   // If text mentions trends/changes, create a "Market Trends" section
   const trendSection = sentences.filter(s => 
-    /\b(increase|decrease|grew|fell|rise|drop|trend)\b/i.test(s)
+    /\b(increase|decrease|grew|fell|rise|drop|trend|gain|loss|outperform|underperform)\b/i.test(s)
   );
   if (trendSection.length > 0) {
-    formattedResponse += "📈 Market Trends:\n" + 
+    formattedResponse += "📈 Market Dynamics:\n" + 
       trendSection.map(s => `• ${s}`).join("\n") + "\n\n";
   }
 
-  // Remaining points go into "Additional Insights"
+  // Remaining points go into "Investment Insights"
   const remainingPoints = sentences.filter(s => 
     !statsSection.includes(s) && !trendSection.includes(s)
   );
   if (remainingPoints.length > 0) {
-    formattedResponse += "💡 Additional Insights:\n" + 
+    formattedResponse += "💡 Investment Implications:\n" + 
       remainingPoints.map(s => `• ${s}`).join("\n") + "\n\n";
   }
 
@@ -49,7 +49,7 @@ router.post("/api/chat", async (req, res) => {
         messages: [
           {
             role: "system",
-            content: "You are an expert financial and market analyst. Provide insights in a clear, structured format. Focus on key statistics, trends, and actionable insights. Use precise numbers and percentages when available. Keep responses concise and data-driven."
+            content: "You are an expert financial analyst specializing in market analysis and investment research. Structure your responses like a professional investment report with clear sections. Focus on key metrics, market dynamics, and actionable insights. Provide specific numbers, growth rates, and comparisons. Keep the tone professional and analytical, similar to institutional research reports. Always consider both fundamental data and market sentiment in your analysis."
           },
           {
             role: "user",

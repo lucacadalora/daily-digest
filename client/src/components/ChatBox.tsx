@@ -21,22 +21,31 @@ export function ChatBox() {
     e.preventDefault();
     if (!input.trim() || isLoading) return;
 
+    // Check if the query is related to financial markets/analysis
+    const financialTerms = /\b(market|stock|index|trade|invest|dividend|price|trend|economy|sector|analysis|forecast|growth|earning|revenue|profit|rate|bank|finance|currency)\b/i;
+    if (!financialTerms.test(input)) {
+      setMessages(prev => [...prev, 
+        { role: 'user', content: input },
+        { role: 'assistant', content: "I apologize, but I can only assist with questions related to financial markets, economic analysis, and investment insights. Please ask questions within these domains." }
+      ]);
+      setInput('');
+      return;
+    }
+
     const userMessage = input.trim();
     setInput('');
     setMessages(prev => [...prev, { role: 'user', content: userMessage }]);
     setIsLoading(true);
 
-    // Add a temporary "searching" message
     setMessages(prev => [...prev, { 
       role: 'assistant', 
-      content: 'Searching for market data...', 
+      content: 'Analyzing market data...', 
       isSearching: true 
     }]);
 
     try {
       const response = await axios.post('/api/chat', { message: userMessage });
       if (response.data.status === 'success') {
-        // Remove the temporary searching message and add the real response
         setMessages(prev => {
           const filtered = prev.filter(msg => !msg.isSearching);
           return [...filtered, { role: 'assistant', content: response.data.reply }];
@@ -62,18 +71,18 @@ export function ChatBox() {
     return content.split('\n').map((line, index) => {
       if (line.startsWith('📊') || line.startsWith('📈') || line.startsWith('💡')) {
         return (
-          <div key={index} className="font-semibold text-primary mb-2">
+          <div key={index} className="font-serif text-lg font-bold mb-3 text-gray-900 dark:text-white">
             {line}
           </div>
         );
       } else if (line.startsWith('•')) {
         return (
-          <div key={index} className="ml-4 mb-1">
+          <div key={index} className="ml-4 mb-2 text-gray-700 dark:text-gray-300">
             {line}
           </div>
         );
       }
-      return <div key={index} className="mb-1">{line}</div>;
+      return <div key={index} className="mb-2 text-gray-700 dark:text-gray-300">{line}</div>;
     });
   };
 
@@ -98,8 +107,8 @@ export function ChatBox() {
                 <div
                   className={`max-w-[80%] rounded-lg p-3 ${
                     message.role === 'user'
-                      ? 'bg-blue-600 text-white ml-4'
-                      : 'bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white mr-4'
+                      ? 'bg-primary text-white dark:text-primary-foreground ml-4'
+                      : 'bg-secondary/50 dark:bg-secondary text-gray-900 dark:text-gray-100 mr-4'
                   }`}
                 >
                   {message.isSearching ? (
