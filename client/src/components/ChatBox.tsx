@@ -58,6 +58,25 @@ export function ChatBox() {
     }
   };
 
+  const renderFormattedMessage = (content: string) => {
+    return content.split('\n').map((line, index) => {
+      if (line.startsWith('📊') || line.startsWith('📈') || line.startsWith('💡')) {
+        return (
+          <div key={index} className="font-semibold text-primary mb-2">
+            {line}
+          </div>
+        );
+      } else if (line.startsWith('•')) {
+        return (
+          <div key={index} className="ml-4 mb-1">
+            {line}
+          </div>
+        );
+      }
+      return <div key={index} className="mb-1">{line}</div>;
+    });
+  };
+
   return (
     <Card className="w-full max-w-2xl mx-auto">
       <div className="p-4">
@@ -89,7 +108,9 @@ export function ChatBox() {
                       <span>{message.content}</span>
                     </div>
                   ) : (
-                    message.content
+                    <div className="prose prose-sm dark:prose-invert max-w-none">
+                      {renderFormattedMessage(message.content)}
+                    </div>
                   )}
                 </div>
               </div>

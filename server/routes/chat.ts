@@ -3,6 +3,41 @@ import axios from "axios";
 
 const router = express.Router();
 
+function formatResponse(text: string): string {
+  // Split into sentences and trim
+  const sentences = text.split(/[.!?]/).map(s => s.trim()).filter(s => s.length > 0);
+
+  // Group sentences into categories
+  let formattedResponse = "";
+
+  // If text contains numbers/statistics, create a "Key Figures" section
+  const statsSection = sentences.filter(s => /\d/.test(s));
+  if (statsSection.length > 0) {
+    formattedResponse += "📊 Key Figures:\n" + 
+      statsSection.map(s => `• ${s}`).join("\n") + "\n\n";
+  }
+
+  // If text mentions trends/changes, create a "Market Trends" section
+  const trendSection = sentences.filter(s => 
+    /\b(increase|decrease|grew|fell|rise|drop|trend)\b/i.test(s)
+  );
+  if (trendSection.length > 0) {
+    formattedResponse += "📈 Market Trends:\n" + 
+      trendSection.map(s => `• ${s}`).join("\n") + "\n\n";
+  }
+
+  // Remaining points go into "Additional Insights"
+  const remainingPoints = sentences.filter(s => 
+    !statsSection.includes(s) && !trendSection.includes(s)
+  );
+  if (remainingPoints.length > 0) {
+    formattedResponse += "💡 Additional Insights:\n" + 
+      remainingPoints.map(s => `• ${s}`).join("\n") + "\n\n";
+  }
+
+  return formattedResponse.trim();
+}
+
 router.post("/api/chat", async (req, res) => {
   try {
     const { message } = req.body;
@@ -14,7 +49,7 @@ router.post("/api/chat", async (req, res) => {
         messages: [
           {
             role: "system",
-            content: "You are an expert financial and market analyst with real-time web browsing capabilities. Leverage current market data and news to provide insights about market trends, stocks, and economic conditions. When analyzing market information, always try to provide the most up-to-date data and cite your sources. Be concise and data-driven in your responses."
+            content: "You are an expert financial and market analyst. Provide insights in a clear, structured format. Focus on key statistics, trends, and actionable insights. Use precise numbers and percentages when available. Keep responses concise and data-driven."
           },
           {
             role: "user",
@@ -33,8 +68,11 @@ router.post("/api/chat", async (req, res) => {
       }
     );
 
+    // Format the response before sending
+    const formattedReply = formatResponse(response.data.choices[0].message.content);
+
     res.json({ 
-      reply: response.data.choices[0].message.content,
+      reply: formattedReply,
       status: 'success' 
     });
   } catch (error) {
