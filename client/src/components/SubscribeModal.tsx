@@ -12,7 +12,7 @@ interface SubscribeModalProps {
 export const SubscribeModal = ({ isOpen, onClose }: SubscribeModalProps) => {
   const [email, setEmail] = useState("");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     // TODO: Handle newsletter subscription
     console.log("Subscribe:", email);
@@ -29,7 +29,7 @@ export const SubscribeModal = ({ isOpen, onClose }: SubscribeModalProps) => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
-            className="fixed inset-0 bg-black bg-opacity-50 z-40"
+            className="fixed inset-0 bg-black/50 z-40"
             onClick={onClose}
           />
 
@@ -43,12 +43,12 @@ export const SubscribeModal = ({ isOpen, onClose }: SubscribeModalProps) => {
               stiffness: 300,
               damping: 30
             }}
-            className="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[min(90vw,400px)] bg-white dark:bg-gray-900 rounded-2xl p-8 shadow-2xl z-50"
+            className="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[min(90vw,360px)] bg-white dark:bg-gray-900 rounded-xl p-6 shadow-2xl z-50"
           >
             {/* Close button */}
             <button
               onClick={onClose}
-              className="absolute right-3 top-3 text-gray-400 hover:text-gray-600 dark:text-gray-500 dark:hover:text-gray-400"
+              className="absolute right-4 top-4 text-gray-400 hover:text-gray-600 dark:text-gray-500 dark:hover:text-gray-400"
             >
               <X className="h-4 w-4" />
             </button>
@@ -62,23 +62,23 @@ export const SubscribeModal = ({ isOpen, onClose }: SubscribeModalProps) => {
                 </span>
               </h2>
 
-              <p className="text-sm text-center text-gray-600 dark:text-gray-400">
+              <p className="text-sm text-center text-gray-600 dark:text-gray-400 px-2">
                 Subscribe to stay up to date with the latest stocks, crypto, tech and future industries.
               </p>
 
-              <form onSubmit={handleSubmit}>
-                <div className="relative mt-2">
+              <form onSubmit={handleSubmit} className="mt-4">
+                <div className="flex items-center gap-2">
                   <Input
                     type="email"
                     placeholder="Your Email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="w-full pr-24 rounded-lg border-gray-200 dark:border-gray-700"
+                    className="flex-1 rounded-lg border-gray-200 dark:border-gray-700"
                     required
                   />
                   <Button
                     type="submit"
-                    className="absolute right-0 top-0 h-full bg-blue-600 hover:bg-blue-700 text-white rounded-r-lg px-4"
+                    className="shrink-0 bg-blue-600 hover:bg-blue-700 text-white rounded-lg px-6"
                   >
                     Subscribe
                   </Button>
