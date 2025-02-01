@@ -5,8 +5,9 @@ const router = express.Router();
 
 function formatResponse(text: string): string {
   // Pre-process to fix number formatting
-  text = text.replace(/(-?\d+(\.\d+)?)\s*\[\d+\]/g, '$1'); // Remove citation brackets from numbers
-  text = text.replace(/(\d+)\s*-\s*(\d+)/, '$1.$2'); // Fix split decimals
+  text = text.replace(/\[\d+\]/g, ''); // Remove all citations
+  text = text.replace(/(\d+)\s*[•.-]\s*(\d+)(x?)/g, '$1.$2$3'); // Fix split numbers
+  text = text.replace(/\s+/g, ' ').trim(); // Clean up extra spaces
 
   // Split into sentences and trim
   const sentences = text.split(/[.!?]/).map(s => s.trim()).filter(s => s.length > 0);
@@ -16,7 +17,7 @@ function formatResponse(text: string): string {
 
   // Create "Analysis Highlights" section
   const statsSection = sentences.filter(s => 
-    /\b(\d+(\.\d+)?%?)|(\$[0-9,.]+)|(USD|IDR|EUR|JPY|GBP)\b/i.test(s)
+    /\b(\d+(\.\d+)?%?)|(\$[0-9,.]+)|(USD|IDR|EUR|JPY|GBP|Rp)\b/i.test(s)
   );
   if (statsSection.length > 0) {
     formattedResponse += "📊 Analysis Highlights:\n" + 
@@ -52,11 +53,6 @@ function formatResponse(text: string): string {
       remainingPoints.map(s => `• ${s}`).join("\n") + "\n\n";
   }
 
-  // If the response is empty, return a default message
-  if (!formattedResponse.trim()) {
-    return "I apologize, but I couldn't extract meaningful financial insights from the response. Please try rephrasing your question focusing on specific market aspects, financial metrics, or investment considerations.";
-  }
-
   return formattedResponse.trim();
 }
 
@@ -71,7 +67,7 @@ router.post("/api/chat", async (req, res) => {
         messages: [
           {
             role: "system",
-            content: "You are an expert financial analyst specializing in market analysis and investment research. Structure your responses like a professional investment report with clear sections. Include these essential elements where relevant:\n\n1. Key valuation metrics (P/E, P/B, dividend yield)\n2. Growth drivers and market dynamics\n3. Risk factors and mitigation strategies\n4. Fundamental analysis with specific numbers\n5. Technical indicators and price trends\n6. Comparative analysis with peers\n7. Forward-looking projections\n\nProvide specific numbers and percentages. Keep the tone professional and analytical, similar to institutional research reports."
+            content: "You are an expert financial analyst specializing in market analysis and investment research. Structure your responses like a professional investment report with clear sections. Include these essential elements where relevant:\n\n1. Key valuation metrics (P/E, P/B, dividend yield)\n2. Growth drivers and market dynamics\n3. Risk factors and mitigation strategies\n4. Fundamental analysis with specific numbers\n5. Technical indicators and price trends\n6. Comparative analysis with peers\n7. Forward-looking projections\n\nProvide specific numbers and percentages. Keep the tone professional and analytical, similar to institutional research reports. Format numbers consistently - use decimal points instead of splitting numbers across lines (e.g., write '4.9x' not '4• 9x'). Do not include citations or reference numbers."
           },
           {
             role: "user",
