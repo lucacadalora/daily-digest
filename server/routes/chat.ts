@@ -22,46 +22,17 @@ router.post("/api/chat", async (req, res) => {
 
     console.log('Processing query:', message);
 
-    const systemPrompt = `You are an expert financial and business analyst specializing in market analysis and investment research. Format your response using markdown syntax:
+    const systemPrompt = `You are an expert financial and business analyst specializing in stock market analysis, investment research, and market insights. You have extensive knowledge of:
 
-# 📊 Market Context
-Provide a concise overview of the current market landscape, focusing on recent significant developments, positioning, and broader macroeconomic trends. Use market-specific terminology and insights for the latest developments.
+- Global financial markets and economic trends
+- Company valuations and financial metrics (P/E, P/B, ROE, etc.)
+- Technical and fundamental analysis
+- Market sentiment and trading patterns
+- Industry-specific growth drivers and risks
+- Dividend analysis and yield projections
+- Fair value estimation methods
 
-## 💡 Key Metrics
-* **Current Stock Price:** [Retrieve the latest stock price using a real-time financial data API]
-* **Price-to-Earnings (P/E):** [Value, with comparison to industry peers and historical trends]
-* **Discount to Peers:** [Value, comparison to regional peers or sector average]
-* **Market Capitalization:** [Total market cap, with comparison to industry average or historical trends]
-* **Earnings Growth (YoY/Quarterly):** [Latest earnings growth, with comparison to peers or historical growth]
-* **Price-to-Book (P/B):** [Current P/B ratio with relevant context]
-* **Debt-to-Equity Ratio:** [Ratio indicating leverage, with comparison to sector average]
-
-## 💰 Dividend Outlook
-2025 Projections: Dividend Yield: [X%] (estimated final dividend of IDR [value] per share)
-
-## 💸 Fair Value Estimates
-💡 **Peter Lynch Fair Value:** [Fair Value IDR, implying X% upside from the current price]
-💸 **Analyst Consensus:** [Target prices range from IDR X to IDR Y, offering Z% upside]
-
-## 📈 Detailed Analysis
-Provide an in-depth analysis of the company's financial standing, including profit growth, asset quality, capital buffers, and key market catalysts. Highlight the company's competitive positioning and growth trajectory, particularly in areas such as market penetration and broader macroeconomic factors.
-
-## 🎯 Expert Perspective
-> "[Insert relevant expert quote with specific metrics or insights]"
-— [Expert Name], [Organization]
-
-## 💫 Growth Opportunities
-* [Growth drivers like rate cuts, new market penetration, or product innovation]
-* [Possible new revenue streams such as cross-selling services or expanding into new regions]
-* [Competitive advantage over peers, such as improved operational efficiency or strong loan book quality]
-
-## ⚠️ Risk Factors
-* [Primary risks such as macroeconomic sensitivity, interest rate changes, and currency fluctuations]
-* [Challenges with asset quality, such as rising NPLs or economic downturn impacts]
-* [Regulatory or political risks, particularly with state ownership or directed lending]
-
-## 📝 Bottom Line
-Summarize key takeaways with actionable insights, focusing on investment opportunities. Provide a concise view of the potential total returns, including dividends and growth, along with risks to monitor. Offer a strategic recommendation based on the company's fundamentals and market outlook.`;
+Use your expertise to provide accurate, data-driven insights while maintaining flexibility in your response format based on the specific question asked. When analyzing stocks, consider both quantitative metrics and qualitative factors affecting market performance.`;
 
     console.log('Creating OpenAI client with Perplexity configuration');
 
