@@ -29,11 +29,11 @@ router.post("/api/chat", async (req, res) => {
     console.log('Has stock ticker:', hasStockTicker);
 
     const basePrompt = `You are an expert financial and business analyst specializing in market analysis and investment research. Provide clear, concise, and accurate information based on your extensive knowledge of global financial markets, company valuations, and investment analysis.
-
+    
 Important: Only answer questions related to financial markets, investments, economic trends, and business analysis. If the question is outside these domains, inform the user that you can only assist with market-related queries.`;
-
+    
     const detailedStockPrompt = `You are an expert financial and business analyst specializing in market analysis and investment research. Format your response using markdown syntax:
-
+    
 # 📊 Market Context
 Provide a concise overview of the current market landscape, focusing on recent significant developments, positioning, and broader macroeconomic trends. Use market-specific terminology and insights for the latest developments.
 
@@ -81,7 +81,7 @@ Summarize key takeaways with actionable insights, focusing on investment opportu
     });
 
     console.log('Calling Perplexity API with configuration:', {
-      model: "llama-3.1-sonar-small-128k-online",
+      model: "llama-3.1-sonar-huge-128k-online",
       messageLength: message.length,
       hasSystemPrompt: true,
       hasStockTicker
@@ -90,7 +90,7 @@ Summarize key takeaways with actionable insights, focusing on investment opportu
     let response;
     try {
       response = await client.chat.completions.create({
-        model: "llama-3.1-sonar-small-128k-online",
+        model: "llama-3.1-sonar-huge-128k-online",
         messages: [
           {
             role: "system",
