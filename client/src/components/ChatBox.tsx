@@ -174,26 +174,25 @@ export function ChatBox() {
   };
 
   return (
-    <Card className="w-full max-w-3xl mx-auto">
-      <div className="p-4">
-        <header className="flex items-center justify-between border-b border-gray-200 dark:border-gray-800 pb-4 mb-4">
-          <div className="flex items-center">
-            <a href="#" className="flex items-center space-x-2">
-              <span className="text-blue-600 font-semibold">Daily</span>
-              <span className="text-gray-500">|</span>
-              <span className="text-gray-900 dark:text-gray-100 font-semibold">Digest</span>
-            </a>
-            <div className="h-4 mx-8 w-px bg-gray-200 dark:bg-gray-800" />
-            <nav className="flex items-center space-x-8">
-              <a href="#" className="text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100 text-sm">Markets</a>
-              <a href="#" className="text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100 text-sm">Economics</a>
-              <a href="#" className="text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100 text-sm">Industries</a>
-              <a href="#" className="text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100 text-sm">Tech</a>
-            </nav>
+    <Card className="w-full max-w-3xl mx-auto shadow-none rounded-none">
+      <nav className="flex items-center justify-between h-14 px-4 border-b border-gray-100 dark:border-gray-800">
+        <div className="flex items-center gap-8">
+          <a href="#" className="flex items-center space-x-2">
+            <span className="text-blue-600 font-semibold">Daily</span>
+            <span className="text-gray-500">|</span>
+            <span className="text-gray-900 dark:text-gray-100 font-semibold">Digest</span>
+          </a>
+          <div className="flex items-center space-x-8">
+            <a href="#" className="text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100 text-sm">Markets</a>
+            <a href="#" className="text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100 text-sm">Economics</a>
+            <a href="#" className="text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100 text-sm">Industries</a>
+            <a href="#" className="text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100 text-sm">Tech</a>
           </div>
-          <ThemeToggle />
-        </header>
+        </div>
+        <ThemeToggle />
+      </nav>
 
+      <div className="p-4">
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center gap-2">
             <h2 className="text-lg font-semibold">Market Insights Chat</h2>
