@@ -62,7 +62,7 @@ Use markdown for formatting:
 - Numbers should include proper units and contexts`;
 
     console.log('Calling Perplexity API with configuration:', {
-      model: "sonar-pro-online",
+      model: "llama-3.1-sonar-large-128k-online",
       messageLength: message.length,
       hasSystemPrompt: true
     });
@@ -70,7 +70,7 @@ Use markdown for formatting:
     const response = await axios.post(
       'https://api.perplexity.ai/chat/completions',
       {
-        model: "sonar-pro-online",  // Updated to use pro model
+        model: "llama-3.1-sonar-large-128k-online",
         messages: [
           {
             role: "system",
