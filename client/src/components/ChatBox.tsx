@@ -178,9 +178,10 @@ export function ChatBox() {
   };
 
   return (
-    <Card className="w-full max-w-3xl mx-auto shadow-none rounded-none">
-      <div className="p-4">
-        <div className="flex items-center gap-2 mb-4">
+    <Card className="sticky top-32 bg-white dark:bg-gray-900 shadow-md">
+      <div className="flex flex-col h-[calc(100vh-9rem)]">
+        {/* Header */}
+        <div className="p-4 border-b border-gray-200 dark:border-gray-800">
           <div className="flex items-center gap-2">
             <div className="relative flex h-2 w-2">
               <div className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></div>
@@ -189,21 +190,15 @@ export function ChatBox() {
             <span className="text-sm text-gray-500">Online</span>
             <div className="h-4 w-px bg-gray-300 mx-2" />
             <Globe className="h-4 w-4 text-gray-500" />
-            <span className="text-sm text-gray-500">Ask questions about market trends</span>
           </div>
-          {messages.length > 0 && (
-            <Button 
-              variant="ghost" 
-              size="sm" 
-              onClick={handleClear}
-              className="text-gray-500 ml-auto"
-            >
-              Clear
-            </Button>
-          )}
+
+          <h2 className="text-sm font-medium mt-2 text-gray-700 dark:text-gray-300">
+            Ask questions about market trends
+          </h2>
         </div>
 
-        <div className="mt-2 mb-4">
+        {/* Example Prompts */}
+        <div className="p-4 border-b border-gray-200 dark:border-gray-800">
           <div className="flex flex-wrap gap-2">
             {EXAMPLE_PROMPTS.map((prompt, index) => (
               <button
@@ -217,7 +212,8 @@ export function ChatBox() {
           </div>
         </div>
 
-        <ScrollArea className="h-[600px] pr-4 mb-4">
+        {/* Chat Messages */}
+        <ScrollArea className="flex-1 p-4">
           <div className="space-y-4">
             {messages.map((message, index) => (
               <div
@@ -227,8 +223,8 @@ export function ChatBox() {
                 <div
                   className={`max-w-[90%] rounded-lg p-4 ${
                     message.role === 'user'
-                      ? 'bg-gray-100 text-gray-900 dark:bg-gray-800 dark:text-white ml-4'
-                      : 'bg-gray-50 dark:bg-gray-800/50 text-gray-900 dark:text-gray-100 mr-4'
+                      ? 'bg-blue-50 text-gray-900 dark:bg-blue-900/20 dark:text-white'
+                      : 'bg-gray-50 dark:bg-gray-800/50 text-gray-900 dark:text-gray-100'
                   }`}
                 >
                   {renderMessage(message)}
@@ -238,18 +234,21 @@ export function ChatBox() {
           </div>
         </ScrollArea>
 
-        <form onSubmit={handleSubmit} className="flex gap-2">
-          <Input
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            placeholder="Ask about market insights..."
-            disabled={isLoading}
-            className="flex-1"
-          />
-          <Button type="submit" disabled={isLoading}>
-            <Send className="h-4 w-4" />
-          </Button>
-        </form>
+        {/* Chat Input */}
+        <div className="p-4 border-t border-gray-200 dark:border-gray-800">
+          <form onSubmit={handleSubmit} className="flex gap-2">
+            <Input
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              placeholder="Ask about market insights..."
+              disabled={isLoading}
+              className="flex-1"
+            />
+            <Button type="submit" disabled={isLoading}>
+              <Send className="h-4 w-4" />
+            </Button>
+          </form>
+        </div>
       </div>
     </Card>
   );

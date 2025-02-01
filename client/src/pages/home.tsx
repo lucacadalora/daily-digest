@@ -41,8 +41,13 @@ export default function Home() {
 
       {/* Main Content */}
       <main className="max-w-[1200px] mx-auto px-4 py-6 sm:py-8 dark:text-gray-200">
-        <div className="flex flex-col gap-8 lg:flex-row">
-          {/* Newsletter Section */}
+        <div className="flex flex-col lg:flex-row gap-8">
+          {/* Left Sidebar - ChatBox */}
+          <div className="lg:w-80 flex-shrink-0">
+            <ChatBox />
+          </div>
+
+          {/* Main Content Area */}
           <div className="flex-1">
             <div className="flex justify-between items-center mb-6">
               <h2 className="text-xl font-bold text-gray-900 dark:text-white">Newsletter</h2>
@@ -51,84 +56,52 @@ export default function Home() {
               </Link>
             </div>
 
-            <div className="grid grid-cols-1 gap-6 md:grid-cols-2 mb-8">
+            {/* Featured Articles */}
+            <div className="grid grid-cols-1 gap-6 mb-8">
               {sampleArticles.slice(0, 1).map((article, index) => (
                 <ArticleCard key={index} article={article} />
               ))}
-
-              <Card className="opacity-50 dark:opacity-75">
-                <CardContent className="p-4 h-[200px] flex items-center justify-center">
-                  <p className="text-gray-500 dark:text-gray-400">More newsletters coming soon</p>
-                </CardContent>
-              </Card>
             </div>
 
-            {/* Add ChatBox component */}
-            <div className="mt-8">
-              <ChatBox />
-            </div>
-          </div>
-
-          {/* Latest Stories Sidebar */}
-          <div className="w-full lg:w-96 flex-shrink-0 lg:w-64 dark:border-gray-800">
-            <h2 className="text-xl font-bold mb-6 text-gray-900 dark:text-white">Latest Stories</h2>
-            <div className="space-y-6">
-              <Link href="/article" className="block hover:bg-gray-50 dark:hover:bg-gray-700">
-                <div className="border-b border-gray-100 dark:border-gray-700 pb-6">
-                  <div className="aspect-w-16 aspect-h-9 mb-4">
-                    <img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=800&h=400" alt="SoftBank Masayoshi Son" className="object-cover rounded-lg" />
-                  </div>
-                  <div className="flex items-center space-x-2 text-xs text-gray-500 dark:text-gray-400 mb-2">
-                    <span className="font-medium">By Luca Cada Lora</span>
-                    <span>•</span>
-                    <span>Jan 30, 2025</span>
-                  </div>
-                  <h3 className="text-lg font-bold mb-2 hover:text-blue-600 dark:hover:text-blue-500">
-                    SoftBank in Talks to Invest Up to $25 Billion in OpenAI
-                  </h3>
-                  <p className="text-sm text-gray-600 dark:text-gray-400">
-                    Meta Gains After Zuckerberg Predicts 'Really Big Year' in AI
-                  </p>
-                </div>
-              </Link>
-
-              <Link href="/article" className="block hover:bg-gray-50 dark:hover:bg-gray-700">
-                <div className="border-b border-gray-100 dark:border-gray-700 pb-6">
-                  <div className="aspect-w-16 aspect-h-9 mb-4">
-                    <img src="https://images.unsplash.com/photo-1605146768851-eda79da39897?w=800&h=400" alt="White House" className="object-cover rounded-lg" />
-                  </div>
-                  <div className="flex items-center space-x-2 text-xs text-gray-500 dark:text-gray-400 mb-2">
-                    <span className="font-medium">By Luca Cada Lora</span>
-                    <span>•</span>
-                    <span>Jan 29, 2025</span>
-                  </div>
-                  <h3 className="text-lg font-bold mb-2 hover:text-blue-600 dark:hover:text-blue-500">
-                    White House Considers Dozens of New Ways to Seize Spending Power
-                  </h3>
-                  <p className="text-sm text-gray-600 dark:text-gray-400">
-                    Trump's Transactional Foreign Policy Leads to Flurry of Pledges
-                  </p>
-                </div>
-              </Link>
-
-              <Link href="/article" className="block hover:bg-gray-50 dark:hover:bg-gray-700">
-                <div className="border-b border-gray-100 dark:border-gray-700 pb-6">
-                  <div className="aspect-w-16 aspect-h-9 mb-4">
-                    <img src="https://images.unsplash.com/photo-1526628953301-3e589a6a8b74?w=800&h=400" alt="India AI Models" className="object-cover rounded-lg" />
-                  </div>
-                  <div className="flex items-center space-x-2 text-xs text-gray-500 dark:text-gray-400 mb-2">
-                    <span className="font-medium">By Luca Cada Lora</span>
-                    <span>•</span>
-                    <span>Jan 28, 2025</span>
-                  </div>
-                  <h3 className="text-lg font-bold mb-2 hover:text-blue-600 dark:hover:text-blue-500">
-                    India Races to Build Own AI Models as DeepSeek Leaps Ahead
-                  </h3>
-                  <p className="text-sm text-gray-600 dark:text-gray-400">
-                    Adani Flagship's Net Slumps 97% on Poor Coal Trading, Forex Loss
-                  </p>
-                </div>
-              </Link>
+            {/* Latest Stories - Compact Version */}
+            <div className="border-t border-gray-200 dark:border-gray-700 pt-6">
+              <h3 className="text-lg font-bold mb-4 text-gray-900 dark:text-white">Latest Stories</h3>
+              <div className="space-y-4">
+                {[
+                  {
+                    img: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=800&h=400",
+                    title: "SoftBank in Talks to Invest Up to $25 Billion in OpenAI",
+                    subtitle: "Meta Gains After Zuckerberg Predicts 'Really Big Year' in AI",
+                    author: "Luca Cada Lora",
+                    date: "Jan 30, 2025"
+                  },
+                  {
+                    img: "https://images.unsplash.com/photo-1605146768851-eda79da39897?w=800&h=400",
+                    title: "White House Considers Dozens of New Ways to Seize Spending Power",
+                    subtitle: "Trump's Transactional Foreign Policy Leads to Flurry of Pledges",
+                    author: "Luca Cada Lora",
+                    date: "Jan 29, 2025"
+                  }
+                ].map((story, index) => (
+                  <Link key={index} href="/article" className="block group">
+                    <div className="flex gap-4">
+                      <div className="w-24 h-16 flex-shrink-0">
+                        <img src={story.img} alt={story.title} className="w-full h-full object-cover rounded" />
+                      </div>
+                      <div className="flex-1">
+                        <h4 className="font-medium text-sm mb-1 group-hover:text-blue-600 dark:group-hover:text-blue-400">
+                          {story.title}
+                        </h4>
+                        <div className="flex items-center gap-2 text-xs text-gray-500 dark:text-gray-400">
+                          <span>{story.author}</span>
+                          <span>•</span>
+                          <span>{story.date}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </Link>
+                ))}
+              </div>
             </div>
           </div>
         </div>
