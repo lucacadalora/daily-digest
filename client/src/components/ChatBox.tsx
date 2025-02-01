@@ -1,3 +1,13 @@
+import { useState } from "react";
+import { Send, Search, Globe, ArrowRight } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Card } from "@/components/ui/card";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
+import axios from "axios";
+
 const EXAMPLE_PROMPTS = [
   "Analyze BBRI's current valuation and growth prospects",
   "What's the latest market trend for Indonesian banking sector?",
@@ -27,16 +37,6 @@ const LATEST_STORIES = [
     title: "A long-awaited update on anxiety and antidepressants"
   }
 ];
-
-import { useState } from "react";
-import { Send, Search, Globe, ArrowRight } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Card } from "@/components/ui/card";
-import { ScrollArea } from "@/components/ui/scroll-area";
-import ReactMarkdown from "react-markdown";
-import remarkGfm from "remark-gfm";
-import axios from "axios";
 
 interface Message {
   role: 'user' | 'assistant';
@@ -175,20 +175,32 @@ export function ChatBox() {
   return (
     <Card className="w-full max-w-3xl mx-auto">
       <div className="p-4">
+        <div className="flex items-center justify-between mb-6">
+          <div className="flex items-center space-x-2 text-base">
+            <span className="font-semibold text-blue-600">Daily</span>
+            <span className="text-gray-500">|</span>
+            <span className="font-semibold">Digest</span>
+          </div>
+          <nav className="flex space-x-8 text-sm">
+            <a href="#" className="text-gray-600 hover:text-gray-900">Markets</a>
+            <a href="#" className="text-gray-600 hover:text-gray-900">Economics</a>
+            <a href="#" className="text-gray-600 hover:text-gray-900">Industries</a>
+            <a href="#" className="text-gray-600 hover:text-gray-900">Tech</a>
+          </nav>
+        </div>
+
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center gap-2">
             <h2 className="text-lg font-semibold">Market Insights Chat</h2>
-             <div className="flex items-center gap-2">
-              <div className="relative flex">
-                <div className="absolute h-2 w-2 bg-green-500 rounded-full animate-ping" />
-                <div className="relative h-2 w-2 bg-green-500 rounded-full" />
+            <div className="flex items-center gap-2">
+              <div className="relative flex h-2 w-2">
+                <div className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></div>
+                <div className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></div>
               </div>
               <span className="text-sm text-gray-500">Online</span>
-              <div className="h-4 w-px bg-gray-300 mx-2" />
-              <div className="flex items-center">
-                <Globe className="h-4 w-4 mr-1 text-gray-500" />
-                <span className="text-sm text-gray-500">Ask questions about market trends</span>
-              </div>
+               <div className="h-4 w-px bg-gray-300 mx-2" />
+              <Globe className="h-4 w-4 text-gray-500" />
+              <span className="text-sm text-gray-500">Ask questions about market trends</span>
             </div>
           </div>
           {messages.length > 0 && (
