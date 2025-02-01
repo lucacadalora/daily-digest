@@ -53,7 +53,7 @@ router.post("/api/chat", async (req, res) => {
 [Concise conclusion summarizing key points and actionable insights]`;
 
     console.log('Calling Perplexity API with configuration:', {
-      model: "sonar-small-chat",
+      model: "sonar",
       messageLength: message.length,
       hasSystemPrompt: true
     });
@@ -61,7 +61,7 @@ router.post("/api/chat", async (req, res) => {
     const response = await axios.post(
       'https://api.perplexity.ai/chat/completions',
       {
-        model: "sonar-small-chat",
+        model: "sonar",
         messages: [
           {
             role: "system",
