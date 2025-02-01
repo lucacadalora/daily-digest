@@ -4,6 +4,7 @@ import { Newspaper, Clock, ArrowRight } from "lucide-react";
 import { MarketTicker } from "@/components/MarketTicker";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { ArticleCard } from "@/components/ArticleCard";
+import { ChatBox } from "@/components/ChatBox";
 import { sampleArticles } from "@/types/newsletter";
 
 export default function Home() {
@@ -64,7 +65,7 @@ export default function Home() {
               </Link>
             </div>
 
-            <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+            <div className="grid grid-cols-1 gap-6 md:grid-cols-2 mb-8">
               {sampleArticles.slice(0, 1).map((article, index) => (
                 <ArticleCard key={index} article={article} />
               ))}
@@ -74,6 +75,11 @@ export default function Home() {
                   <p className="text-gray-500 dark:text-gray-400">More newsletters coming soon</p>
                 </CardContent>
               </Card>
+            </div>
+
+            {/* Add ChatBox component */}
+            <div className="mt-8">
+              <ChatBox />
             </div>
           </div>
 

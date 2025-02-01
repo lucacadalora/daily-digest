@@ -1,10 +1,14 @@
 import express, { type Request, Response, NextFunction } from "express";
 import { registerRoutes } from "./routes";
 import { setupVite, serveStatic, log } from "./vite";
+import chatRouter from "./routes/chat";
 
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+
+// Add chat routes
+app.use(chatRouter);
 
 app.use((req, res, next) => {
   const start = Date.now();
