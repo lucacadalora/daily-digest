@@ -12,84 +12,80 @@ function formatResponse(text: string): string {
   const paragraphs = text.split('\n').map(p => p.trim()).filter(p => p.length > 0);
   let formattedResponse = "";
   let currentSection = "";
-  let sectionContent: string[] = []; // Fix TypeScript error by explicitly typing
+  let sectionContent: string[] = [];
 
-  paragraphs.forEach(paragraph => {
-    // More flexible section header matching
-    if (/^\s*1\.?\s*Key\s*Metrics/i.test(paragraph)) {
+  // Process content
+  paragraphs.forEach((paragraph, index) => {
+    // Handle Analysis Highlights header
+    if (index === 0 && /analysis|overview|summary/i.test(paragraph)) {
+      formattedResponse += "📊 Analysis Highlights:\n\n";
+      return;
+    }
+
+    // Detect section headers but preserve original formatting
+    if (/^[\d.]*\s*Price\s*Action/i.test(paragraph)) {
       if (sectionContent.length) {
         formattedResponse += sectionContent.join('\n') + '\n\n';
         sectionContent = [];
       }
-      formattedResponse += "⚡ **Key Metrics**\n\n";
+      formattedResponse += "## Price Action\n\n";
+      currentSection = "price";
+    }
+    else if (/^[\d.]*\s*Key\s*Metrics/i.test(paragraph)) {
+      if (sectionContent.length) {
+        formattedResponse += sectionContent.join('\n') + '\n\n';
+        sectionContent = [];
+      }
+      formattedResponse += "⚡ Key Metrics\n\n";
       currentSection = "metrics";
     }
-    else if (/^\s*2\.?\s*Growth/i.test(paragraph)) {
+    else if (/^[\d.]*\s*Growth|Performance/i.test(paragraph)) {
       if (sectionContent.length) {
         formattedResponse += sectionContent.join('\n') + '\n\n';
         sectionContent = [];
       }
-      formattedResponse += "🚀 **Growth & Performance**\n\n";
+      formattedResponse += "🚀 Growth & Performance\n\n";
       currentSection = "growth";
     }
-    else if (/^\s*3\.?\s*Expert/i.test(paragraph)) {
+    else if (/^[\d.]*\s*Expert\s*Analysis/i.test(paragraph)) {
       if (sectionContent.length) {
         formattedResponse += sectionContent.join('\n') + '\n\n';
         sectionContent = [];
       }
-      formattedResponse += "💬 **Expert Analysis**\n\n";
+      formattedResponse += "💬 Expert Analysis\n\n";
       currentSection = "expert";
     }
-    else if (/^\s*4\.?\s*Investment/i.test(paragraph)) {
+    else if (/^[\d.]*\s*Investment/i.test(paragraph)) {
       if (sectionContent.length) {
         formattedResponse += sectionContent.join('\n') + '\n\n';
         sectionContent = [];
       }
-      formattedResponse += "💡 **Investment Assessment**\n\n";
+      formattedResponse += "💡 Investment Assessment\n\n";
       currentSection = "investment";
     }
-    // Enhanced content formatting based on section
-    else if (currentSection === "metrics") {
-      // Format metrics with bullet points and emojis
-      if (/^\s*[•-]\s*(.+):\s*(.+)$/i.test(paragraph)) {
-        const formatted = paragraph.replace(/^\s*[•-]\s*/, '');
-        sectionContent.push(`📊 ${formatted}`);
-      } else {
-        sectionContent.push(paragraph);
-      }
-    }
-    else if (currentSection === "growth") {
-      if (/^\s*[•-]/.test(paragraph)) {
-        sectionContent.push(`📈 ${paragraph.replace(/^\s*[•-]\s*/, '')}`);
-      } else {
-        sectionContent.push(paragraph);
-      }
-    }
-    else if (currentSection === "expert") {
-      if (/^[""].*[""].*—.*$/i.test(paragraph)) {
-        sectionContent.push(`💎 ${paragraph}`);
-      } else if (/^\s*[•-]/.test(paragraph)) {
-        sectionContent.push(`🔍 ${paragraph.replace(/^\s*[•-]\s*/, '')}`);
-      } else {
-        sectionContent.push(paragraph);
-      }
-    }
-    else if (currentSection === "investment") {
-      if (/Risk|Warning|Caution/i.test(paragraph)) {
-        sectionContent.push(`⚠️ ${paragraph}`);
-      } else if (/^\s*[•-]/.test(paragraph)) {
-        sectionContent.push(`💡 ${paragraph.replace(/^\s*[•-]\s*/, '')}`);
-      } else {
-        sectionContent.push(paragraph);
-      }
-    }
-    // If no section is matched yet, add to general content
     else {
-      sectionContent.push(paragraph);
+      // Format content based on type
+      let formattedParagraph = paragraph;
+
+      // Format bullet points
+      if (/^\s*[•-]/.test(paragraph)) {
+        formattedParagraph = paragraph.replace(/^\s*[•-]\s*/, '• ');
+      }
+
+      // Add special formatting based on content
+      if (/price|value|ratio|yield|cap/i.test(formattedParagraph)) {
+        formattedParagraph = `📊 ${formattedParagraph}`;
+      } else if (/growth|increase|decrease/i.test(formattedParagraph)) {
+        formattedParagraph = `📈 ${formattedParagraph}`;
+      } else if (/risk|warning|caution/i.test(formattedParagraph)) {
+        formattedParagraph = `⚠️ ${formattedParagraph}`;
+      }
+
+      sectionContent.push(formattedParagraph);
     }
   });
 
-  // Add any remaining section content
+  // Add any remaining content
   if (sectionContent.length) {
     formattedResponse += sectionContent.join('\n') + '\n';
   }
@@ -118,38 +114,43 @@ router.post("/api/chat", async (req, res) => {
         messages: [
           {
             role: "system",
-            content: `You are an expert financial analyst specializing in Indonesian market analysis and investment research. Follow this exact format for your response:
-1. Key Metrics
-• Current Price: [value]
+            content: `You are an expert financial analyst specializing in Indonesian market analysis and investment research. Start your response with 'Analysis Highlights:' and then provide detailed analysis following this structure:
+
+Price Action
+- Current stock price and recent movement
+- Trading volume and momentum indicators
+- Key support and resistance levels
+
+Key Metrics
+• Current Price: [exact value]
 • P/E Ratio: [value]
-• Dividend Yield: [value]
 • Market Cap: [value]
-• Trading Volume: [value]
+• Trading Volume: [recent average]
 [Add other relevant metrics with bullet points]
 
-2. Growth & Performance
-• YoY Revenue Growth: [value]
-• Market Share: [details]
-• Key Performance Highlights
-[List key operational metrics with bullet points]
+Growth & Performance
+• Year-to-date performance
+• Revenue growth trends
+• Market share analysis
+• Operational highlights
 
-3. Expert Analysis
-[Include 1-2 relevant analyst quotes exactly in this format:]
-"[Quote text]" — [Analyst Name], [Firm]
-[Add key analyst insights with bullet points]
+Expert Analysis
+• Include relevant analyst quotes
+• Key insights about company strategy
+• Competitive position
+• Market sentiment
 
-4. Investment Assessment
-• Growth Catalysts: [key points]
-• Risk Factors: [key points]
-• Technical Levels: [support/resistance]
-• Price Targets: [range and consensus]
+Investment Assessment
+• Growth catalysts
+• Risk factors
+• Technical outlook
+• Price targets
 
 Guidelines:
-- Use bullet points consistently
-- Present exact numbers and percentages
-- Keep insights concise and focused
-- Format numbers as "4.9x" not "4.9 x"
-- Don't use citations or references`
+- Use bullet points for key information
+- Include exact numbers where available
+- Keep insights concise and actionable
+- Focus on recent developments`
           },
           {
             role: "user",
