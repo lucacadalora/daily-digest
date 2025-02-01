@@ -16,7 +16,11 @@ const LATEST_STORIES = [
   },
   {
     time: "17 HR AGO",
-    title: "RFK Jr. is giving his son any fees he earns from litigation"
+    title: "RFK Jr. is giving his son any fees he earns from Gardasil vaccine litigation"
+  },
+  {
+    time: "18 HR AGO",
+    title: "RFK Jr. disavows fundraising email that praised HHS freeze"
   },
   {
     time: "21 HR AGO",
@@ -171,59 +175,57 @@ export function ChatBox() {
   return (
     <Card className="w-full max-w-3xl mx-auto">
       <div className="p-4">
-        <div className="mb-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-2">
-              <h2 className="text-lg font-semibold text-gray-900 dark:text-white">Market Insights Chat</h2>
-              <div className="flex items-center">
-                <Globe className="h-4 w-4 mr-1 text-gray-500" />
-                <span className="text-sm text-gray-500">Ask questions about market trends</span>
-              </div>
+        <div className="flex items-center justify-between mb-4">
+          <div className="flex items-center gap-2">
+            <h2 className="text-lg font-semibold">Market Insights Chat</h2>
+            <div className="flex items-center">
+              <Globe className="h-4 w-4 mr-1 text-gray-500" />
+              <span className="text-sm text-gray-500">Ask questions about market trends</span>
             </div>
-            {messages.length > 0 && (
-              <Button 
-                variant="ghost" 
-                size="sm" 
-                onClick={handleClear}
-                className="text-gray-500"
-              >
-                Clear
-              </Button>
-            )}
           </div>
+          {messages.length > 0 && (
+            <Button 
+              variant="ghost" 
+              size="sm" 
+              onClick={handleClear}
+              className="text-gray-500"
+            >
+              Clear
+            </Button>
+          )}
+        </div>
 
-          <div className="flex gap-4 mt-4">
-            <div className="flex-1">
-              <div className="mt-2">
-                <div className="flex flex-wrap gap-2">
-                  {EXAMPLE_PROMPTS.map((prompt, index) => (
-                    <button
-                      key={index}
-                      className="text-sm px-3 py-1.5 rounded-full bg-gray-100 text-gray-700 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700 transition-colors"
-                      onClick={() => setInput(prompt)}
-                    >
-                      {prompt}
-                    </button>
-                  ))}
-                </div>
-              </div>
-            </div>
-
-            <div className="w-48">
-              <div className="flex items-center gap-1 mb-2">
-                <h3 className="text-sm font-medium text-gray-900 dark:text-white">LATEST</h3>
-                <ArrowRight className="h-3 w-3" />
-              </div>
-              <div className="space-y-2">
-                {LATEST_STORIES.map((story, index) => (
-                  <div key={index}>
-                    <div className="text-xs text-gray-500">{story.time}</div>
-                    <p className="text-sm text-gray-900 dark:text-gray-100 hover:text-blue-600 dark:hover:text-blue-400 cursor-pointer line-clamp-2">
-                      {story.title}
-                    </p>
-                  </div>
+        <div className="flex gap-4">
+          <div className="flex-1">
+            <div className="mt-2">
+              <div className="flex flex-wrap gap-2">
+                {EXAMPLE_PROMPTS.map((prompt, index) => (
+                  <button
+                    key={index}
+                    className="text-sm px-3 py-1.5 rounded-full bg-gray-100 text-gray-700 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700 transition-colors"
+                    onClick={() => setInput(prompt)}
+                  >
+                    {prompt}
+                  </button>
                 ))}
               </div>
+            </div>
+          </div>
+
+          <div className="w-48">
+            <div className="flex items-center gap-1 mb-2">
+              <h3 className="text-sm font-medium">LATEST</h3>
+              <ArrowRight className="h-3 w-3" />
+            </div>
+            <div className="space-y-2">
+              {LATEST_STORIES.map((story, index) => (
+                <div key={index}>
+                  <div className="text-xs text-gray-500">{story.time}</div>
+                  <p className="text-sm text-gray-900 dark:text-gray-100 hover:text-blue-600 dark:hover:text-blue-400 cursor-pointer">
+                    {story.title}
+                  </p>
+                </div>
+              ))}
             </div>
           </div>
         </div>
