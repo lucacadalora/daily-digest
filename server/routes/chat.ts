@@ -66,7 +66,7 @@ Use markdown for formatting:
     const response = await axios.post(
       'https://api.perplexity.ai/chat/completions',
       {
-        model: "sonar-small-chat",  // Using a more stable model
+        model: "sonar-pro-online",  // Updated to use pro model
         messages: [
           {
             role: "system",
