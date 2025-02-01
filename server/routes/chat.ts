@@ -81,7 +81,7 @@ Summarize key takeaways with actionable insights, focusing on investment opportu
     });
 
     console.log('Calling Perplexity API with configuration:', {
-      model: "sonar",
+      model: "llama-3.1-sonar-small-128k-online",
       messageLength: message.length,
       hasSystemPrompt: true,
       hasStockTicker
@@ -90,7 +90,7 @@ Summarize key takeaways with actionable insights, focusing on investment opportu
     let response;
     try {
       response = await client.chat.completions.create({
-        model: "sonar",
+        model: "llama-3.1-sonar-small-128k-online",
         messages: [
           {
             role: "system",
@@ -100,14 +100,21 @@ Summarize key takeaways with actionable insights, focusing on investment opportu
             role: "user",
             content: message
           }
-        ]
+        ],
+        temperature: 0.2,
+        top_p: 0.9
       });
+
+      console.log('API Response succeeded:', {
+        status: 'success',
+        modelUsed: response.model,
+        tokensUsed: response.usage?.total_tokens
+      });
+
     } catch (apiError) {
       console.error('Perplexity API Error:', apiError);
       throw new Error(`Failed to get response from Perplexity API: ${apiError.message}`);
     }
-
-    console.log('API Response received');
 
     if (!response?.choices?.[0]?.message?.content) {
       console.error('Invalid API response format:', JSON.stringify(response));
@@ -115,8 +122,6 @@ Summarize key takeaways with actionable insights, focusing on investment opportu
     }
 
     const content = response.choices[0].message.content;
-
-    // Since response.citations is not a standard OpenAI API response field, we'll handle it safely
     const citations = Array.isArray(response['citations']) ? response['citations'] : [];
 
     res.json({
