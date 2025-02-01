@@ -23,58 +23,69 @@ export const SubscribeModal = ({ isOpen, onClose }: SubscribeModalProps) => {
     <AnimatePresence>
       {isOpen && (
         <>
+          {/* Overlay */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
-            className="fixed inset-0 bg-black/50 z-50"
+            className="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm z-50"
             onClick={onClose}
           />
+
+          {/* Modal */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 20 }}
-            transition={{ type: "spring", damping: 25, stiffness: 200 }}
-            className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90%] max-w-lg bg-white dark:bg-gray-900 rounded-xl shadow-xl z-50 overflow-hidden"
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.95 }}
+            transition={{ 
+              type: "spring",
+              stiffness: 300,
+              damping: 30
+            }}
+            className="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[min(90vw,480px)] bg-white dark:bg-gray-900 rounded-2xl shadow-2xl z-50"
           >
-            <div className="relative p-6 sm:p-8">
+            <div className="relative px-6 py-8 sm:px-8">
+              {/* Close button */}
               <button
                 onClick={onClose}
-                className="absolute top-4 right-4 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
+                className="absolute right-4 top-4 p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-full transition-colors"
               >
-                <X className="h-6 w-6" />
+                <X className="h-5 w-5 text-gray-500" />
               </button>
 
-              <h2 className="text-4xl font-bold text-center mb-4 leading-tight">
-                The best newsletter for{" "}
-                <span className="bg-gradient-to-r from-blue-600 to-blue-400 bg-clip-text text-transparent">
-                  stock investors
-                </span>
-              </h2>
+              {/* Content */}
+              <div className="text-center space-y-4">
+                <h2 className="text-3xl sm:text-4xl font-bold leading-tight">
+                  The best newsletter for{" "}
+                  <span className="bg-gradient-to-r from-blue-600 to-blue-400 bg-clip-text text-transparent">
+                    stock investors
+                  </span>
+                </h2>
 
-              <p className="text-center text-gray-600 dark:text-gray-400 mb-8">
-                Subscribe to stay up to date with the latest stocks, crypto, tech and future industries.
-              </p>
+                <p className="text-gray-600 dark:text-gray-400 max-w-md mx-auto">
+                  Subscribe to stay up to date with the latest stocks, crypto, tech and future industries.
+                </p>
 
-              <form onSubmit={handleSubmit} className="space-y-4">
-                <div className="relative">
-                  <Input
-                    type="email"
-                    placeholder="Your Email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    className="w-full py-3 px-4 rounded-full"
-                    required
-                  />
-                  <Button
-                    type="submit"
-                    className="absolute right-1.5 top-1.5 rounded-full px-6"
-                  >
-                    Subscribe
-                  </Button>
-                </div>
-              </form>
+                <form onSubmit={handleSubmit} className="max-w-md mx-auto pt-4">
+                  <div className="relative">
+                    <Input
+                      type="email"
+                      placeholder="Your Email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      className="w-full pl-4 pr-[120px] py-3 h-12 rounded-full text-base"
+                      required
+                    />
+                    <Button
+                      type="submit"
+                      className="absolute right-1 top-1 h-10 rounded-full bg-blue-600 hover:bg-blue-700 text-white px-6"
+                    >
+                      Subscribe
+                    </Button>
+                  </div>
+                </form>
+              </div>
             </div>
           </motion.div>
         </>
