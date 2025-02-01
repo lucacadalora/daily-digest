@@ -9,7 +9,7 @@ router.post("/api/chat", async (req, res) => {
     const { message } = req.body;
 
     const response = await together.chat.completions.create({
-      model: "deepseek-ai/deepseek-llm-67b-chat",
+      model: "deepseek-ai/DeepSeek-R1",
       messages: [
         {
           role: "system",
@@ -21,10 +21,7 @@ router.post("/api/chat", async (req, res) => {
         }
       ],
       temperature: 0.7,
-      max_tokens: 1000,
-      search: true,
-      search_provider: "you",
-      include_search_info: true
+      max_tokens: 1000
     });
 
     res.json({ 
