@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Send, Search, Globe, ArrowRight } from "lucide-react";
+import { Send, Search, Globe } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card } from "@/components/ui/card";
@@ -13,29 +13,6 @@ const EXAMPLE_PROMPTS = [
   "What's the latest market trend for Indonesian banking sector?",
   "Compare dividend yields of top ASEAN banks",
   "Analyze recent developments in digital banking adoption",
-];
-
-const LATEST_STORIES = [
-  {
-    time: "14 HR AGO",
-    title: "RFK Jr. says U.S. won't threaten pharmaceutical patents"
-  },
-  {
-    time: "16 HR AGO",
-    title: "CAR-T cells can arm other immune cells with engineered proteins"
-  },
-  {
-    time: "17 HR AGO",
-    title: "RFK Jr. is giving his son any fees he earns from Gardasil vaccine litigation"
-  },
-  {
-    time: "18 HR AGO",
-    title: "RFK Jr. disavows fundraising email that praised HHS freeze"
-  },
-  {
-    time: "21 HR AGO",
-    title: "A long-awaited update on anxiety and antidepressants"
-  }
 ];
 
 interface Message {
@@ -226,38 +203,17 @@ export function ChatBox() {
           )}
         </div>
 
-        <div className="flex gap-4">
-          <div className="flex-1">
-            <div className="mt-2">
-              <div className="flex flex-wrap gap-2">
-                {EXAMPLE_PROMPTS.map((prompt, index) => (
-                  <button
-                    key={index}
-                    className="text-sm px-3 py-1.5 rounded-full bg-gray-100 text-gray-700 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700 transition-colors"
-                    onClick={() => setInput(prompt)}
-                  >
-                    {prompt}
-                  </button>
-                ))}
-              </div>
-            </div>
-          </div>
-
-          <div className="w-48">
-            <div className="flex items-center gap-1 mb-2">
-              <h3 className="text-sm font-medium">LATEST</h3>
-              <ArrowRight className="h-3 w-3" />
-            </div>
-            <div className="space-y-2">
-              {LATEST_STORIES.map((story, index) => (
-                <div key={index}>
-                  <div className="text-xs text-gray-500">{story.time}</div>
-                  <p className="text-sm text-gray-900 dark:text-gray-100 hover:text-blue-600 dark:hover:text-blue-400 cursor-pointer">
-                    {story.title}
-                  </p>
-                </div>
-              ))}
-            </div>
+        <div className="mt-2 mb-4">
+          <div className="flex flex-wrap gap-2">
+            {EXAMPLE_PROMPTS.map((prompt, index) => (
+              <button
+                key={index}
+                className="text-sm px-3 py-1.5 rounded-full bg-gray-100 text-gray-700 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700 transition-colors"
+                onClick={() => setInput(prompt)}
+              >
+                {prompt}
+              </button>
+            ))}
           </div>
         </div>
 
