@@ -53,7 +53,7 @@ router.post("/api/chat", async (req, res) => {
 [Concise conclusion summarizing key points and actionable insights]`;
 
     console.log('Calling Perplexity API with configuration:', {
-      model: "llama-3.1-sonar-small-128k-online",
+      model: "sonar-small-chat",
       messageLength: message.length,
       hasSystemPrompt: true
     });
@@ -61,7 +61,7 @@ router.post("/api/chat", async (req, res) => {
     const response = await axios.post(
       'https://api.perplexity.ai/chat/completions',
       {
-        model: "llama-3.1-sonar-small-128k-online",
+        model: "sonar-small-chat",
         messages: [
           {
             role: "system",
@@ -71,18 +71,13 @@ router.post("/api/chat", async (req, res) => {
             role: "user",
             content: message
           }
-        ],
-        temperature: 0.7,
-        max_tokens: 1024,
-        top_p: 1,
-        stream: false,
-        presence_penalty: 0,
-        frequency_penalty: 1
+        ]
       },
       {
         headers: {
           'Authorization': `Bearer ${process.env.PERPLEXITY_API_KEY}`,
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'accept': 'application/json'
         },
         timeout: 30000
       }
