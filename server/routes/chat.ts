@@ -1,5 +1,5 @@
 import express from "express";
-import axios from "axios";
+import OpenAI from "openai";
 
 const router = express.Router();
 
@@ -63,67 +63,52 @@ Provide an in-depth analysis of the company's financial standing, including prof
 ## 📝 Bottom Line
 Summarize key takeaways with actionable insights, focusing on investment opportunities. Provide a concise view of the potential total returns, including dividends and growth, along with risks to monitor. Offer a strategic recommendation based on the company's fundamentals and market outlook.`;
 
+    console.log('Creating OpenAI client with Perplexity configuration');
+
+    const client = new OpenAI({
+      apiKey: process.env.PERPLEXITY_API_KEY,
+      baseURL: "https://api.perplexity.ai"
+    });
+
     console.log('Calling Perplexity API with configuration:', {
       model: "sonar",
       messageLength: message.length,
       hasSystemPrompt: true
     });
 
-    const response = await axios.post(
-      'https://api.perplexity.ai/chat/completions',
-      {
-        model: "sonar",
-        messages: [
-          {
-            role: "system",
-            content: systemPrompt
-          },
-          {
-            role: "user",
-            content: message
-          }
-        ]
-      },
-      {
-        headers: {
-          'Authorization': `Bearer ${process.env.PERPLEXITY_API_KEY}`,
-          'Content-Type': 'application/json',
-          'accept': 'application/json'
+    const response = await client.chat.completions.create({
+      model: "sonar",
+      messages: [
+        {
+          role: "system",
+          content: systemPrompt
         },
-        timeout: 30000
-      }
-    );
+        {
+          role: "user",
+          content: message
+        }
+      ]
+    });
 
-    console.log('API Response status:', response.status);
-    console.log('API Response headers:', response.headers);
+    console.log('API Response received');
 
-    if (!response.data?.choices?.[0]?.message?.content) {
-      console.error('Invalid API response format:', JSON.stringify(response.data));
+    if (!response.choices?.[0]?.message?.content) {
+      console.error('Invalid API response format:', JSON.stringify(response));
       throw new Error('Invalid API response format');
     }
 
-    const content = response.data.choices[0].message.content;
-    const citations = response.data.citations || [];
+    const content = response.choices[0].message.content;
 
     res.json({
       status: 'success',
       reply: content.trim(),
-      citations: citations
+      citations: response.citations || []
     });
 
   } catch (error) {
     console.error('Chat API Error:', error);
     const errorMessage = error instanceof Error ? error.message : 'Unknown error';
     console.error('Error details:', errorMessage);
-
-    if (axios.isAxiosError(error)) {
-      console.error('API Error Response:', {
-        status: error.response?.status,
-        statusText: error.response?.statusText,
-        data: error.response?.data,
-        headers: error.response?.headers
-      });
-    }
 
     res.status(500).json({
       status: 'error',
