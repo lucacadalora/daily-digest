@@ -61,7 +61,11 @@ Use markdown for formatting:
 - Links for citations [text](url)
 - Numbers should include proper units and contexts`;
 
-    console.log('Calling Perplexity API...');
+    console.log('Calling Perplexity API with configuration:', {
+      model: "sonar-pro-online",
+      messageLength: message.length,
+      hasSystemPrompt: true
+    });
 
     const response = await axios.post(
       'https://api.perplexity.ai/chat/completions',
@@ -91,7 +95,8 @@ Use markdown for formatting:
       }
     );
 
-    console.log('API Response received:', response.status);
+    console.log('API Response status:', response.status);
+    console.log('API Response headers:', response.headers);
 
     if (!response.data?.choices?.[0]?.message?.content) {
       console.error('Invalid API response format:', JSON.stringify(response.data));
@@ -113,8 +118,12 @@ Use markdown for formatting:
     console.error('Error details:', errorMessage);
 
     if (axios.isAxiosError(error)) {
-      console.error('API Response:', error.response?.data);
-      console.error('API Status:', error.response?.status);
+      console.error('API Error Response:', {
+        status: error.response?.status,
+        statusText: error.response?.statusText,
+        data: error.response?.data,
+        headers: error.response?.headers
+      });
     }
 
     res.status(500).json({
