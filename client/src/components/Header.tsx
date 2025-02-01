@@ -25,8 +25,7 @@ export const Header = ({ onSubscribe, showCategories = true, simplified = false 
     <header className="fixed w-full bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm border-b border-gray-100 dark:border-gray-800 z-50">
       <div className="max-w-[1200px] mx-auto px-4">
         {/* Market Ticker */}
-        <div className="py-2 overflow-hidden border-b border-gray-100 dark:border-gray-800 relative">
-          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent dark:via-gray-800/20 animate-pulse"></div>
+        <div className="py-2 overflow-hidden border-b border-gray-100 dark:border-gray-800">
           <MarketTicker />
         </div>
 
@@ -49,14 +48,11 @@ export const Header = ({ onSubscribe, showCategories = true, simplified = false 
             href="/" 
             className={`${showCategories ? 'md:absolute md:left-1/2 md:-translate-x-1/2' : ''} mx-auto flex-1 md:flex-none text-center`}
           >
-            <div className="relative inline-block">
-              <div className="absolute -inset-1 bg-gradient-to-r from-blue-600/20 to-gray-600/20 blur-sm rounded-lg"></div>
-              <h1 className="relative text-xl font-['Georgia'] font-bold dark:text-white cursor-pointer hover:opacity-80 transition-opacity">
-                <span className="bg-gradient-to-r from-blue-700 via-blue-600 to-blue-500 bg-clip-text text-transparent">Daily</span>
-                <span className="font-light mx-1">|</span>
-                <span className="bg-gradient-to-r from-gray-800 to-gray-600 dark:from-gray-200 dark:to-gray-400 bg-clip-text text-transparent">Digest</span>
-              </h1>
-            </div>
+            <h1 className="text-xl font-['Georgia'] font-bold dark:text-white cursor-pointer hover:opacity-80 transition-opacity">
+              <span className="bg-gradient-to-r from-blue-700 via-blue-600 to-blue-500 bg-clip-text text-transparent">Daily</span>
+              <span className="font-light mx-1">|</span>
+              <span className="bg-gradient-to-r from-gray-800 to-gray-600 dark:from-gray-200 dark:to-gray-400 bg-clip-text text-transparent">Digest</span>
+            </h1>
           </Link>
 
           {/* Right Actions */}
@@ -73,56 +69,31 @@ export const Header = ({ onSubscribe, showCategories = true, simplified = false 
                     <span className="sr-only">Toggle Menu</span>
                   </Button>
                 </SheetTrigger>
-                <SheetContent side="bottom" className="h-[80vh] px-6 py-8">
-                  {/* Categories with decorative elements */}
-                  <div className="relative">
-                    <div className="absolute -inset-4 bg-gradient-to-b from-blue-50/50 to-transparent dark:from-blue-950/30 rounded-xl"></div>
-                    <nav className="relative flex flex-col gap-6 text-base font-medium text-gray-600 dark:text-gray-300">
-                      <h3 className="text-sm uppercase tracking-wider text-gray-500 dark:text-gray-400">Categories</h3>
-                      <div className="grid grid-cols-2 gap-4">
-                        <Link href="/newsletter/category/Markets" className="flex items-center gap-2 hover:text-blue-600 transition-colors">
-                          <div className="w-1.5 h-1.5 rounded-full bg-blue-500"></div>
-                          Markets
-                        </Link>
-                        <Link href="/newsletter/category/Economics" className="flex items-center gap-2 hover:text-blue-600 transition-colors">
-                          <div className="w-1.5 h-1.5 rounded-full bg-green-500"></div>
-                          Economics
-                        </Link>
-                        <Link href="/newsletter/category/Industries" className="flex items-center gap-2 hover:text-blue-600 transition-colors">
-                          <div className="w-1.5 h-1.5 rounded-full bg-purple-500"></div>
-                          Industries
-                        </Link>
-                        <Link href="/newsletter/category/Tech" className="flex items-center gap-2 hover:text-blue-600 transition-colors">
-                          <div className="w-1.5 h-1.5 rounded-full bg-orange-500"></div>
-                          Tech
-                        </Link>
-                      </div>
-                    </nav>
-                  </div>
+                <SheetContent side="bottom" className="px-6 py-8">
+                  {/* Categories */}
+                  <nav className="space-y-4">
+                    <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400 mb-4">Categories</h3>
+                    <Link href="/newsletter/category/Markets" className="block text-base hover:text-blue-600 transition-colors">Markets</Link>
+                    <Link href="/newsletter/category/Economics" className="block text-base hover:text-blue-600 transition-colors">Economics</Link>
+                    <Link href="/newsletter/category/Industries" className="block text-base hover:text-blue-600 transition-colors">Industries</Link>
+                    <Link href="/newsletter/category/Tech" className="block text-base hover:text-blue-600 transition-colors">Tech</Link>
+                  </nav>
 
-                  {/* Subscribe Form with enhanced styling */}
+                  {/* Subscribe Form */}
                   {!simplified && (
-                    <div className="mt-12">
-                      <div className="relative">
-                        <div className="absolute -inset-4 bg-gradient-to-b from-gray-50/50 to-transparent dark:from-gray-800/30 rounded-xl"></div>
-                        <div className="relative">
-                          <h3 className="text-lg font-semibold mb-4">Get Daily Insights</h3>
-                          <p className="text-sm text-gray-600 dark:text-gray-400 mb-6">
-                            Subscribe to receive the latest market analysis and expert opinions.
-                          </p>
-                          <form onSubmit={form.handleSubmit((data) => console.log(data))} className="space-y-4">
-                            <Input
-                              type="email"
-                              placeholder="Enter your email"
-                              {...form.register("email")}
-                              className="bg-white/50 dark:bg-gray-800/50 border-gray-200 dark:border-gray-700"
-                            />
-                            <Button type="submit" className="w-full bg-blue-600 hover:bg-blue-700 text-white">
-                              Subscribe
-                            </Button>
-                          </form>
-                        </div>
-                      </div>
+                    <div className="mt-8 pt-8 border-t border-gray-100 dark:border-gray-800">
+                      <h3 className="text-base font-medium mb-4">Subscribe to Daily Digest</h3>
+                      <form onSubmit={form.handleSubmit((data) => console.log(data))} className="space-y-4">
+                        <Input
+                          type="email"
+                          placeholder="Enter your email"
+                          {...form.register("email")}
+                          className="bg-white dark:bg-gray-800"
+                        />
+                        <Button type="submit" className="w-full bg-blue-600 hover:bg-blue-700 text-white">
+                          Subscribe
+                        </Button>
+                      </form>
                     </div>
                   )}
                 </SheetContent>
