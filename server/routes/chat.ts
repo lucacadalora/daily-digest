@@ -7,47 +7,65 @@ router.post("/api/chat", async (req, res) => {
   try {
     const { message } = req.body;
 
-    if (!process.env.PERPLEXITY_API_KEY || !process.env.PERPLEXITY_API_KEY.startsWith('pplx-')) {
-      return res.status(500).json({
-        status: 'error',
-        error: 'Invalid or missing API key',
-        details: 'Please ensure PERPLEXITY_API_KEY is properly set and starts with "pplx-"'
+    if (!process.env.PERPLEXITY_API_KEY) {
+      console.error('API Key missing');
+      throw new Error('Missing PERPLEXITY_API_KEY');
+    }
+
+    const restrictedTerms = /\b(sql injection|xss|database schema|api endpoint|code syntax|programming language|compiler|runtime|debugging)\b/i;
+    if (restrictedTerms.test(message)) {
+      return res.json({
+        status: 'success',
+        reply: "I focus on business, market, and investment analysis. For coding-related questions, please consult programming-specific resources."
       });
     }
+
+    console.log('Processing query:', message);
+
+    const systemPrompt = `You are an expert financial and business analyst specializing in market analysis and investment research. Format your response using markdown syntax:
+
+# 📊 Market Context
+[Provide a concise market context about the topic, focusing on recent significant developments and current positioning]
+
+## 💡 Key Metrics
+* **[Key Metric 1]:** [Value with comparison to peers or historical data]
+* **[Key Metric 2]:** [Value with relevant context]
+* **[Key Metric 3]:** [Value with growth or trend information]
+
+## 📈 Detailed Analysis
+[Comprehensive analysis of current situation, market position, and growth trajectory]
+
+## 🎯 Expert Perspective
+> "[Insert relevant expert quote with specific metrics or insights]"
+— [Expert Name], [Organization]
+
+## 💫 Growth Opportunities
+* [Key growth catalyst]
+* [Market expansion possibility]
+* [Competitive advantage]
+
+## ⚠️ Risk Factors
+* [Primary risk]
+* [Market challenge]
+* [Operational concern]
+
+## 📝 Bottom Line
+[Concise conclusion summarizing key points and actionable insights]`;
+
+    console.log('Calling Perplexity API with configuration:', {
+      model: "sonar",
+      messageLength: message.length,
+      hasSystemPrompt: true
+    });
 
     const response = await axios.post(
       'https://api.perplexity.ai/chat/completions',
       {
-        model: "sonar-pro",
+        model: "sonar",
         messages: [
           {
             role: "system",
-            content: `You are an expert financial and business analyst specializing in market analysis and investment research. Format your responses as follows:
-
-1. 📊 Key Metrics:
-   - List 3-5 relevant metrics with emojis
-   - Include percentage changes where applicable
-   - Use numerical data when available
-
-2. 💡 Analysis:
-   - Provide a concise, data-driven analysis
-   - Use bullet points for clarity
-   - Include relevant market context
-
-3. 🎯 Credible Opinion:
-   - Start with "Based on [specific data/source]..."
-   - Include confidence level (High/Medium/Low)
-   - Support with recent market events or trends
-
-4. ⚠️ Risk Factors (if applicable):
-   - List key risks
-   - Quantify impact when possible
-
-5. 📈 Outlook:
-   - Short-term projection
-   - Long-term considerations
-
-Always be precise and back statements with data. Use emojis for section headers and key points.`
+            content: systemPrompt
           },
           {
             role: "user",
@@ -57,14 +75,19 @@ Always be precise and back statements with data. Use emojis for section headers 
       },
       {
         headers: {
-          'accept': 'application/json',
-          'content-type': 'application/json',
-          'Authorization': `Bearer ${process.env.PERPLEXITY_API_KEY}`
-        }
+          'Authorization': `Bearer ${process.env.PERPLEXITY_API_KEY}`,
+          'Content-Type': 'application/json',
+          'accept': 'application/json'
+        },
+        timeout: 30000
       }
     );
 
+    console.log('API Response status:', response.status);
+    console.log('API Response headers:', response.headers);
+
     if (!response.data?.choices?.[0]?.message?.content) {
+      console.error('Invalid API response format:', JSON.stringify(response.data));
       throw new Error('Invalid API response format');
     }
 
@@ -79,19 +102,22 @@ Always be precise and back statements with data. Use emojis for section headers 
 
   } catch (error) {
     console.error('Chat API Error:', error);
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+    console.error('Error details:', errorMessage);
 
     if (axios.isAxiosError(error)) {
-      console.error('API Error Details:', {
+      console.error('API Error Response:', {
         status: error.response?.status,
         statusText: error.response?.statusText,
-        data: error.response?.data
+        data: error.response?.data,
+        headers: error.response?.headers
       });
     }
 
     res.status(500).json({
       status: 'error',
       error: 'Failed to get response from AI',
-      details: error instanceof Error ? error.message : 'Unknown error'
+      details: errorMessage
     });
   }
 });
