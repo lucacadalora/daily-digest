@@ -178,9 +178,17 @@ export function ChatBox() {
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center gap-2">
             <h2 className="text-lg font-semibold">Market Insights Chat</h2>
-            <div className="flex items-center">
-              <Globe className="h-4 w-4 mr-1 text-gray-500" />
-              <span className="text-sm text-gray-500">Ask questions about market trends</span>
+             <div className="flex items-center gap-2">
+              <div className="relative flex">
+                <div className="absolute h-2 w-2 bg-green-500 rounded-full animate-ping" />
+                <div className="relative h-2 w-2 bg-green-500 rounded-full" />
+              </div>
+              <span className="text-sm text-gray-500">Online</span>
+              <div className="h-4 w-px bg-gray-300 mx-2" />
+              <div className="flex items-center">
+                <Globe className="h-4 w-4 mr-1 text-gray-500" />
+                <span className="text-sm text-gray-500">Ask questions about market trends</span>
+              </div>
             </div>
           </div>
           {messages.length > 0 && (
