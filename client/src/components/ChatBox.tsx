@@ -90,8 +90,14 @@ export function ChatBox() {
     <Card className="w-full max-w-2xl mx-auto">
       <div className="p-4">
         <div className="mb-4">
-          <h2 className="text-lg font-semibold text-gray-900 dark:text-white">Market Insights Chat</h2>
-          <div className="flex items-center text-sm text-gray-600 dark:text-gray-400">
+          <div className="flex items-center gap-2">
+            <h2 className="text-lg font-semibold text-gray-900 dark:text-white">Market Insights Chat</h2>
+            <div className="flex items-center">
+              <div className="h-2 w-2 rounded-full bg-green-500 mr-2 animate-pulse" />
+              <span className="text-sm text-gray-500 dark:text-gray-400">Online</span>
+            </div>
+          </div>
+          <div className="flex items-center text-sm text-gray-600 dark:text-gray-400 mt-2">
             <Globe className="h-4 w-4 mr-2" />
             <p>Ask questions about market trends and get AI-powered insights with real-time web search</p>
           </div>
@@ -105,9 +111,9 @@ export function ChatBox() {
                 className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}
               >
                 <div
-                  className={`max-w-[80%] rounded-lg p-3 ${
+                  className={`max-w-[85%] rounded-lg p-4 ${
                     message.role === 'user'
-                      ? 'bg-primary text-white dark:text-primary-foreground ml-4'
+                      ? 'bg-[#1e40af] text-white dark:text-primary-foreground ml-4'
                       : 'bg-secondary/50 dark:bg-secondary text-gray-900 dark:text-gray-100 mr-4'
                   }`}
                 >

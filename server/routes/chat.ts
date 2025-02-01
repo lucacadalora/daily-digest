@@ -4,13 +4,17 @@ import axios from "axios";
 const router = express.Router();
 
 function formatResponse(text: string): string {
+  // Pre-process to fix number formatting
+  text = text.replace(/(-?\d+(\.\d+)?)\s*\[\d+\]/g, '$1'); // Remove citation brackets from numbers
+  text = text.replace(/(\d+)\s*-\s*(\d+)/, '$1.$2'); // Fix split decimals
+
   // Split into sentences and trim
   const sentences = text.split(/[.!?]/).map(s => s.trim()).filter(s => s.length > 0);
 
   // Group sentences into categories
   let formattedResponse = "";
 
-  // If text contains numbers/statistics, create a "Analysis Highlights" section
+  // Create "Analysis Highlights" section
   const statsSection = sentences.filter(s => 
     /\b(\d+(\.\d+)?%?)|(\$[0-9,.]+)|(USD|IDR|EUR|JPY|GBP)\b/i.test(s)
   );
@@ -19,7 +23,7 @@ function formatResponse(text: string): string {
       statsSection.map(s => `• ${s}`).join("\n") + "\n\n";
   }
 
-  // Create "Market Dynamics" section for trends and changes
+  // Create "Market Dynamics" section
   const trendSection = sentences.filter(s => 
     /\b(increase|decrease|grew|fell|rise|drop|trend|gain|loss|outperform|underperform|valuation|multiple|premium|discount)\b/i.test(s)
   );
@@ -28,7 +32,7 @@ function formatResponse(text: string): string {
       trendSection.map(s => `• ${s}`).join("\n") + "\n\n";
   }
 
-  // Create "Risk Assessment" section for risk-related content
+  // Create "Risk Assessment" section
   const riskSection = sentences.filter(s => 
     /\b(risk|threat|challenge|concern|volatility|uncertainty|exposure|downside|bearish)\b/i.test(s)
   );
