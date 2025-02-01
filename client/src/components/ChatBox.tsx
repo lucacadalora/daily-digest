@@ -4,6 +4,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card } from "@/components/ui/card";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 import axios from "axios";
 
 interface Message {
@@ -79,23 +81,43 @@ export function ChatBox() {
     }
   };
 
-  const renderFormattedMessage = (content: string) => {
-    return content.split('\n').map((line, index) => {
-      if (line.startsWith('📊') || line.startsWith('📈') || line.startsWith('💡') || line.startsWith('⚠️')) {
-        return (
-          <div key={index} className="font-serif text-lg font-bold mb-3 text-gray-900 dark:text-white">
-            {line}
-          </div>
-        );
-      } else if (line.startsWith('•')) {
-        return (
-          <div key={index} className="ml-4 mb-2 text-gray-700 dark:text-gray-300">
-            {line}
-          </div>
-        );
-      }
-      return <div key={index} className="mb-2 text-gray-700 dark:text-gray-300">{line}</div>;
-    });
+  const renderMessage = (content: string, isSearching?: boolean) => {
+    if (isSearching) {
+      return (
+        <div className="flex items-center space-x-2">
+          <Search className="h-4 w-4 animate-spin" />
+          <span>{content}</span>
+        </div>
+      );
+    }
+
+    return (
+      <div className="prose prose-sm dark:prose-invert max-w-none">
+        <ReactMarkdown 
+          remarkPlugins={[remarkGfm]}
+          components={{
+            h1: ({ children }) => <h1 className="text-xl font-bold mb-2">{children}</h1>,
+            h2: ({ children }) => <h2 className="text-lg font-semibold mb-2">{children}</h2>,
+            h3: ({ children }) => <h3 className="text-base font-semibold mb-2">{children}</h3>,
+            p: ({ children }) => <p className="mb-2">{children}</p>,
+            ul: ({ children }) => <ul className="list-disc pl-4 mb-2">{children}</ul>,
+            li: ({ children }) => <li className="mb-1">{children}</li>,
+            strong: ({ children }) => <strong className="font-semibold">{children}</strong>,
+            em: ({ children }) => <em className="italic">{children}</em>,
+            code: ({ children }) => (
+              <code className="bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded">{children}</code>
+            ),
+            blockquote: ({ children }) => (
+              <blockquote className="border-l-4 border-gray-200 dark:border-gray-700 pl-4 italic">
+                {children}
+              </blockquote>
+            ),
+          }}
+        >
+          {content}
+        </ReactMarkdown>
+      </div>
+    );
   };
 
   return (
@@ -129,7 +151,6 @@ export function ChatBox() {
             <p>Ask questions about market trends and get AI-powered insights with real-time web search</p>
           </div>
 
-          {/* Example prompts - only show when no messages */}
           {messages.length === 0 && (
             <div className="mt-4 space-y-2">
               <p className="text-sm font-medium text-gray-700 dark:text-gray-300">Try asking about:</p>
@@ -164,16 +185,7 @@ export function ChatBox() {
                       : 'bg-gray-50 dark:bg-gray-800/50 text-gray-900 dark:text-gray-100 mr-4'
                   }`}
                 >
-                  {message.isSearching ? (
-                    <div className="flex items-center space-x-2">
-                      <Search className="h-4 w-4 animate-spin" />
-                      <span>{message.content}</span>
-                    </div>
-                  ) : (
-                    <div className="prose prose-sm dark:prose-invert max-w-none">
-                      {renderFormattedMessage(message.content)}
-                    </div>
-                  )}
+                  {renderMessage(message.content, message.isSearching)}
                 </div>
               </div>
             ))}

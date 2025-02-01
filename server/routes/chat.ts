@@ -23,41 +23,48 @@ router.post("/api/chat", async (req, res) => {
 
     console.log('Processing financial query:', message);
 
-    const systemPrompt = `You are an expert financial analyst specializing in Indonesian market analysis and investment research. Format your response exactly as follows:
+    const systemPrompt = `You are an expert financial analyst specializing in Indonesian market analysis and investment research. Format your response using markdown syntax:
 
-Analysis Highlights:
-[Brief overview of the key points]
+# Analysis Highlights
+Brief overview of the key points
 
-Price Action:
-• Current stock price: [exact value]
-• Recent trading range: [range]
-• Volume trends: [description]
+## Price Action
+* Current stock price: [exact value]
+* Recent trading range: [range]
+* Volume trends: [description]
 
-Key Metrics:
-• Market Cap: [value]
-• P/E Ratio: [value]
-• Trading Volume: [value]
-• Growth Rate: [value]
+## Key Metrics
+* Market Cap: [value]
+* P/E Ratio: [value]
+* Trading Volume: [value]
+* Growth Rate: [value]
 
-Growth & Performance:
-• Historical performance metrics
-• Market position details
-• Competitive analysis
-• Recent developments
+## Growth & Performance
+* Historical performance metrics
+* Market position details
+* Competitive analysis
+* Recent developments
 
-Expert Analysis:
-• Market sentiment overview
-• Industry trends
-• Strategic outlook
-• Key challenges
+## Expert Analysis
+* Market sentiment overview
+* Industry trends
+* Strategic outlook
+* Key challenges
 
-Investment Assessment:
-• Growth catalysts
-• Risk factors
-• Technical levels
-• Price targets
+## Investment Assessment
+* Growth catalysts
+* Risk factors
+* Technical levels
+* Price targets
 
-Use bullet points and exact numbers throughout your analysis.`;
+Use markdown syntax for formatting:
+- Use **bold** for important numbers and metrics
+- Use *italic* for trends and directional terms
+- Use \`code\` for exact values
+- Use > for important quotes or highlights
+- Use --- for section separators
+- Use bullet points (*)
+- Format numbers with appropriate units`;
 
     const response = await axios.post(
       'https://api.perplexity.ai/chat/completions',
@@ -93,37 +100,16 @@ Use bullet points and exact numbers throughout your analysis.`;
       throw new Error('Invalid API response format');
     }
 
-    const rawContent = response.data.choices[0].message.content;
-    console.log('Raw content:', rawContent);
+    const content = response.data.choices[0].message.content;
 
-    // Simple formatting to preserve structure and add emojis
-    const formattedContent = rawContent
-      .split('\n')
-      .map(line => {
-        if (line.includes('Analysis Highlights:')) {
-          return '📊 Analysis Highlights:\n';
-        }
-        if (line.includes('Price Action:')) {
-          return '📈 Price Action:\n';
-        }
-        if (line.includes('Key Metrics:')) {
-          return '💡 Key Metrics:\n';
-        }
-        if (line.includes('Growth & Performance:')) {
-          return '📊 Growth & Performance:\n';
-        }
-        if (line.includes('Expert Analysis:')) {
-          return '🔍 Expert Analysis:\n';
-        }
-        if (line.includes('Investment Assessment:')) {
-          return '💰 Investment Assessment:\n';
-        }
-        if (line.trim().startsWith('•')) {
-          return line;
-        }
-        return line;
-      })
-      .join('\n');
+    // Add emoji icons to headers while preserving markdown
+    const formattedContent = content
+      .replace(/# Analysis Highlights/g, '# 📊 Analysis Highlights')
+      .replace(/## Price Action/g, '## 📈 Price Action')
+      .replace(/## Key Metrics/g, '## 💡 Key Metrics')
+      .replace(/## Growth & Performance/g, '## 📊 Growth & Performance')
+      .replace(/## Expert Analysis/g, '## 🔍 Expert Analysis')
+      .replace(/## Investment Assessment/g, '## 💰 Investment Assessment');
 
     res.json({
       status: 'success',
