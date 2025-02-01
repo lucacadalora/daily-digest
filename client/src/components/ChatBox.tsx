@@ -8,24 +8,24 @@ const EXAMPLE_PROMPTS = [
 const LATEST_STORIES = [
   {
     time: "14 HR AGO",
-    title: "Bank Indonesia maintains interest rates at 5.75%"
+    title: "RFK Jr. says U.S. won't threaten pharmaceutical patents"
   },
   {
     time: "16 HR AGO",
-    title: "IDX Composite hits new all-time high"
+    title: "CAR-T cells can arm other immune cells with engineered proteins"
   },
   {
     time: "17 HR AGO",
-    title: "BBRI reports strong Q4 digital banking growth"
+    title: "RFK Jr. is giving his son any fees he earns from litigation"
   },
   {
-    time: "1 DAY AGO",
-    title: "Indonesian banking sector outlook 2025"
+    time: "21 HR AGO",
+    title: "A long-awaited update on anxiety and antidepressants"
   }
 ];
 
 import { useState } from "react";
-import { Send, Search, Globe, Trash2, Clock } from "lucide-react";
+import { Send, Search, Globe, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card } from "@/components/ui/card";
@@ -55,7 +55,7 @@ export function ChatBox() {
     e.preventDefault();
     if (!input.trim() || isLoading) return;
 
-    // Updated filter to focus on business/market analysis while allowing broader topics
+    // Only restrict highly technical programming queries
     const restrictedTerms = /\b(sql|html|css|javascript|python|code|programming|script|database|api|endpoint)\b/i;
     if (restrictedTerms.test(input)) {
       setMessages(prev => [...prev, 
@@ -176,11 +176,8 @@ export function ChatBox() {
             <div className="flex items-center gap-2">
               <h2 className="text-lg font-semibold text-gray-900 dark:text-white">Market Insights Chat</h2>
               <div className="flex items-center">
-                <div className="relative">
-                  <div className="absolute h-2 w-2 rounded-full bg-green-500 animate-ping opacity-75" />
-                  <div className="h-2 w-2 rounded-full bg-green-500" />
-                </div>
-                <span className="text-sm text-gray-500 dark:text-gray-400 ml-2">Online</span>
+                <Globe className="h-4 w-4 mr-1 text-gray-500" />
+                <span className="text-sm text-gray-500">Ask questions about market trends</span>
               </div>
             </div>
             {messages.length > 0 && (
@@ -188,29 +185,22 @@ export function ChatBox() {
                 variant="ghost" 
                 size="sm" 
                 onClick={handleClear}
-                className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
+                className="text-gray-500"
               >
-                <Trash2 className="h-4 w-4" />
+                Clear
               </Button>
             )}
           </div>
 
-          <div className="flex gap-8 mt-4">
+          <div className="flex gap-4 mt-4">
             <div className="flex-1">
-              <div className="flex items-center text-sm text-gray-600 dark:text-gray-400">
-                <Globe className="h-4 w-4 mr-2" />
-                <p>Ask questions about market trends and get AI-powered insights</p>
-              </div>
-
-              <div className="mt-2 space-y-2">
+              <div className="mt-2">
                 <div className="flex flex-wrap gap-2">
                   {EXAMPLE_PROMPTS.map((prompt, index) => (
                     <button
                       key={index}
                       className="text-sm px-3 py-1.5 rounded-full bg-gray-100 text-gray-700 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700 transition-colors"
-                      onClick={() => {
-                        setInput(prompt);
-                      }}
+                      onClick={() => setInput(prompt)}
                     >
                       {prompt}
                     </button>
@@ -219,16 +209,16 @@ export function ChatBox() {
               </div>
             </div>
 
-            <div className="w-64 border-l pl-4">
-              <h3 className="text-sm font-medium text-gray-900 dark:text-white mb-2">Latest Updates</h3>
-              <div className="space-y-3">
+            <div className="w-48">
+              <div className="flex items-center gap-1 mb-2">
+                <h3 className="text-sm font-medium text-gray-900 dark:text-white">LATEST</h3>
+                <ArrowRight className="h-3 w-3" />
+              </div>
+              <div className="space-y-2">
                 {LATEST_STORIES.map((story, index) => (
-                  <div key={index} className="text-sm">
-                    <div className="text-xs text-gray-500 mb-0.5 flex items-center">
-                      <Clock className="h-3 w-3 mr-1" />
-                      {story.time}
-                    </div>
-                    <p className="text-gray-900 dark:text-gray-100 hover:text-blue-600 dark:hover:text-blue-400 cursor-pointer">
+                  <div key={index}>
+                    <div className="text-xs text-gray-500">{story.time}</div>
+                    <p className="text-sm text-gray-900 dark:text-gray-100 hover:text-blue-600 dark:hover:text-blue-400 cursor-pointer line-clamp-2">
                       {story.title}
                     </p>
                   </div>
