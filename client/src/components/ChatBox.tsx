@@ -4,7 +4,6 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card } from "@/components/ui/card";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { ThemeToggle } from "@/components/ThemeToggle";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import axios from "axios";
@@ -175,118 +174,99 @@ export function ChatBox() {
 
   return (
     <Card className="w-full max-w-3xl mx-auto shadow-none rounded-none">
-        <nav className="flex items-center justify-between h-14 px-4 border-b border-gray-100 dark:border-gray-800">
-          <div className="flex items-center">
-            <a href="#" className="flex items-center space-x-2">
-              <span className="text-blue-600 font-semibold">Daily</span>
-              <span className="text-gray-500">|</span>
-              <span className="text-gray-900 dark:text-gray-100 font-semibold">Digest</span>
-            </a>
-          </div>
-          <div className="flex items-center space-x-6">
-            <nav className="flex items-center space-x-6">
-              <a href="#" className="text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100 text-sm">Markets</a>
-              <a href="#" className="text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100 text-sm">Economics</a>
-              <a href="#" className="text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100 text-sm">Industries</a>
-              <a href="#" className="text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100 text-sm">Tech</a>
-            </nav>
-            <ThemeToggle />
-          </div>
-        </nav>
-
-        <div className="p-4">
-          <div className="flex items-center gap-2 mb-4">
-            <div className="flex items-center gap-2">
-              <div className="relative flex h-2 w-2">
-                <div className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></div>
-                <div className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></div>
-              </div>
-              <span className="text-sm text-gray-500">Online</span>
-              <div className="h-4 w-px bg-gray-300 mx-2" />
-              <Globe className="h-4 w-4 text-gray-500" />
-              <span className="text-sm text-gray-500">Ask questions about market trends</span>
+      <div className="p-4">
+        <div className="flex items-center gap-2 mb-4">
+          <div className="flex items-center gap-2">
+            <div className="relative flex h-2 w-2">
+              <div className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></div>
+              <div className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></div>
             </div>
-            {messages.length > 0 && (
-              <Button 
-                variant="ghost" 
-                size="sm" 
-                onClick={handleClear}
-                className="text-gray-500 ml-auto"
-              >
-                Clear
-              </Button>
-            )}
+            <span className="text-sm text-gray-500">Online</span>
+            <div className="h-4 w-px bg-gray-300 mx-2" />
+            <Globe className="h-4 w-4 text-gray-500" />
+            <span className="text-sm text-gray-500">Ask questions about market trends</span>
           </div>
+          {messages.length > 0 && (
+            <Button 
+              variant="ghost" 
+              size="sm" 
+              onClick={handleClear}
+              className="text-gray-500 ml-auto"
+            >
+              Clear
+            </Button>
+          )}
+        </div>
 
-          <div className="flex gap-4">
-            <div className="flex-1">
-              <div className="mt-2">
-                <div className="flex flex-wrap gap-2">
-                  {EXAMPLE_PROMPTS.map((prompt, index) => (
-                    <button
-                      key={index}
-                      className="text-sm px-3 py-1.5 rounded-full bg-gray-100 text-gray-700 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700 transition-colors"
-                      onClick={() => setInput(prompt)}
-                    >
-                      {prompt}
-                    </button>
-                  ))}
-                </div>
-              </div>
-            </div>
-
-            <div className="w-48">
-              <div className="flex items-center gap-1 mb-2">
-                <h3 className="text-sm font-medium">LATEST</h3>
-                <ArrowRight className="h-3 w-3" />
-              </div>
-              <div className="space-y-2">
-                {LATEST_STORIES.map((story, index) => (
-                  <div key={index}>
-                    <div className="text-xs text-gray-500">{story.time}</div>
-                    <p className="text-sm text-gray-900 dark:text-gray-100 hover:text-blue-600 dark:hover:text-blue-400 cursor-pointer">
-                      {story.title}
-                    </p>
-                  </div>
+        <div className="flex gap-4">
+          <div className="flex-1">
+            <div className="mt-2">
+              <div className="flex flex-wrap gap-2">
+                {EXAMPLE_PROMPTS.map((prompt, index) => (
+                  <button
+                    key={index}
+                    className="text-sm px-3 py-1.5 rounded-full bg-gray-100 text-gray-700 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700 transition-colors"
+                    onClick={() => setInput(prompt)}
+                  >
+                    {prompt}
+                  </button>
                 ))}
               </div>
             </div>
           </div>
 
-          <ScrollArea className="h-[600px] pr-4 mb-4">
-            <div className="space-y-4">
-              {messages.map((message, index) => (
-                <div
-                  key={index}
-                  className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}
-                >
-                  <div
-                    className={`max-w-[90%] rounded-lg p-4 ${
-                      message.role === 'user'
-                        ? 'bg-gray-100 text-gray-900 dark:bg-gray-800 dark:text-white ml-4'
-                        : 'bg-gray-50 dark:bg-gray-800/50 text-gray-900 dark:text-gray-100 mr-4'
-                    }`}
-                  >
-                    {renderMessage(message)}
-                  </div>
+          <div className="w-48">
+            <div className="flex items-center gap-1 mb-2">
+              <h3 className="text-sm font-medium">LATEST</h3>
+              <ArrowRight className="h-3 w-3" />
+            </div>
+            <div className="space-y-2">
+              {LATEST_STORIES.map((story, index) => (
+                <div key={index}>
+                  <div className="text-xs text-gray-500">{story.time}</div>
+                  <p className="text-sm text-gray-900 dark:text-gray-100 hover:text-blue-600 dark:hover:text-blue-400 cursor-pointer">
+                    {story.title}
+                  </p>
                 </div>
               ))}
             </div>
-          </ScrollArea>
-
-          <form onSubmit={handleSubmit} className="flex gap-2">
-            <Input
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-              placeholder="Ask about market insights..."
-              disabled={isLoading}
-              className="flex-1"
-            />
-            <Button type="submit" disabled={isLoading}>
-              <Send className="h-4 w-4" />
-            </Button>
-          </form>
+          </div>
         </div>
+
+        <ScrollArea className="h-[600px] pr-4 mb-4">
+          <div className="space-y-4">
+            {messages.map((message, index) => (
+              <div
+                key={index}
+                className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}
+              >
+                <div
+                  className={`max-w-[90%] rounded-lg p-4 ${
+                    message.role === 'user'
+                      ? 'bg-gray-100 text-gray-900 dark:bg-gray-800 dark:text-white ml-4'
+                      : 'bg-gray-50 dark:bg-gray-800/50 text-gray-900 dark:text-gray-100 mr-4'
+                  }`}
+                >
+                  {renderMessage(message)}
+                </div>
+              </div>
+            ))}
+          </div>
+        </ScrollArea>
+
+        <form onSubmit={handleSubmit} className="flex gap-2">
+          <Input
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            placeholder="Ask about market insights..."
+            disabled={isLoading}
+            className="flex-1"
+          />
+          <Button type="submit" disabled={isLoading}>
+            <Send className="h-4 w-4" />
+          </Button>
+        </form>
+      </div>
     </Card>
   );
 }
