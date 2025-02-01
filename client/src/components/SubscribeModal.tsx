@@ -29,7 +29,7 @@ export const SubscribeModal = ({ isOpen, onClose }: SubscribeModalProps) => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
-            className="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm z-50"
+            className="fixed inset-0 bg-black/50 z-50"
             onClick={onClose}
           />
 
@@ -43,49 +43,47 @@ export const SubscribeModal = ({ isOpen, onClose }: SubscribeModalProps) => {
               stiffness: 300,
               damping: 30
             }}
-            className="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[min(90vw,480px)] bg-white dark:bg-gray-900 rounded-2xl shadow-2xl z-50"
+            className="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[min(90vw,400px)] bg-white dark:bg-gray-900 rounded-2xl p-8 shadow-2xl z-50"
           >
-            <div className="relative px-6 py-8 sm:px-8">
-              {/* Close button */}
-              <button
-                onClick={onClose}
-                className="absolute right-4 top-4 p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-full transition-colors"
-              >
-                <X className="h-5 w-5 text-gray-500" />
-              </button>
+            {/* Close button */}
+            <button
+              onClick={onClose}
+              className="absolute right-3 top-3 p-1 text-gray-400 hover:text-gray-600"
+            >
+              <X className="h-4 w-4" />
+            </button>
 
-              {/* Content */}
-              <div className="text-center space-y-4">
-                <h2 className="text-3xl sm:text-4xl font-bold leading-tight">
-                  The best newsletter for{" "}
-                  <span className="bg-gradient-to-r from-blue-600 to-blue-400 bg-clip-text text-transparent">
-                    stock investors
-                  </span>
-                </h2>
+            {/* Content */}
+            <div className="space-y-4">
+              <h2 className="text-2xl font-bold text-center">
+                The best newsletter for{" "}
+                <span className="text-blue-600 dark:text-blue-400">
+                  stock investors
+                </span>
+              </h2>
 
-                <p className="text-gray-600 dark:text-gray-400 max-w-md mx-auto">
-                  Subscribe to stay up to date with the latest stocks, crypto, tech and future industries.
-                </p>
+              <p className="text-sm text-center text-gray-600 dark:text-gray-400">
+                Subscribe to stay up to date with the latest stocks, crypto, tech and future industries.
+              </p>
 
-                <form onSubmit={handleSubmit} className="max-w-md mx-auto pt-4">
-                  <div className="relative">
-                    <Input
-                      type="email"
-                      placeholder="Your Email"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      className="w-full pl-4 pr-[120px] py-3 h-12 rounded-full text-base"
-                      required
-                    />
-                    <Button
-                      type="submit"
-                      className="absolute right-1 top-1 h-10 rounded-full bg-blue-600 hover:bg-blue-700 text-white px-6"
-                    >
-                      Subscribe
-                    </Button>
-                  </div>
-                </form>
-              </div>
+              <form onSubmit={handleSubmit}>
+                <div className="relative mt-2">
+                  <Input
+                    type="email"
+                    placeholder="Your Email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    className="w-full pr-24 rounded-lg border-gray-200 dark:border-gray-700"
+                    required
+                  />
+                  <Button
+                    type="submit"
+                    className="absolute right-0 top-0 h-full bg-blue-600 hover:bg-blue-700 text-white rounded-r-lg px-4"
+                  >
+                    Subscribe
+                  </Button>
+                </div>
+              </form>
             </div>
           </motion.div>
         </>
