@@ -5,54 +5,85 @@ const router = express.Router();
 
 function formatResponse(text: string): string {
   // Pre-process to fix number formatting
-  text = text.replace(/\[\d+\]/g, ''); // Remove all citations
+  text = text.replace(/\[\d+\]/g, ''); // Remove citations
   text = text.replace(/(\d+)\s*[•.-]\s*(\d+)(x?)/g, '$1.$2$3'); // Fix split numbers
-  text = text.replace(/\s+/g, ' ').trim(); // Clean up extra spaces
+  text = text.replace(/\s+/g, ' ').trim(); // Clean up spaces
 
-  // Split into paragraphs
   const paragraphs = text.split('\n').map(p => p.trim()).filter(p => p.length > 0);
-
   let formattedResponse = "";
   let currentSection = "";
+  let sectionContent = [];
 
   paragraphs.forEach(paragraph => {
+    // Handle section headers
     if (/^1\.\s*Key\s*Metrics/i.test(paragraph)) {
-      formattedResponse += "\n**1. Key Metrics** 📊\n";
+      formattedResponse += "\n⚡ **Key Metrics**\n\n";
       currentSection = "metrics";
     }
     else if (/^2\.\s*Growth/i.test(paragraph)) {
-      formattedResponse += "\n**2. Growth & Performance** 📈\n";
+      if (sectionContent.length) {
+        formattedResponse += sectionContent.join('\n') + '\n\n';
+        sectionContent = [];
+      }
+      formattedResponse += "🚀 **Growth & Performance**\n\n";
       currentSection = "growth";
     }
     else if (/^3\.\s*Expert/i.test(paragraph)) {
-      formattedResponse += "\n**3. Expert Analysis** 💬\n";
+      if (sectionContent.length) {
+        formattedResponse += sectionContent.join('\n') + '\n\n';
+        sectionContent = [];
+      }
+      formattedResponse += "💬 **Expert Analysis**\n\n";
       currentSection = "expert";
     }
     else if (/^4\.\s*Investment/i.test(paragraph)) {
-      formattedResponse += "\n**4. Investment Assessment** 💡\n";
+      if (sectionContent.length) {
+        formattedResponse += sectionContent.join('\n') + '\n\n';
+        sectionContent = [];
+      }
+      formattedResponse += "💡 **Investment Assessment**\n\n";
       currentSection = "investment";
     }
-    // Format analyst quotes
-    else if (/^[""].*[""].*—.*$/i.test(paragraph)) {
-      formattedResponse += `${paragraph}\n`;
+    // Handle content based on section type
+    else if (currentSection === "metrics") {
+      if (/^[-•]\s*(.+):\s*(.+)$/i.test(paragraph)) {
+        const formatted = paragraph.replace(/^[-•]\s*/, '');
+        sectionContent.push(`📊 ${formatted}`);
+      } else {
+        sectionContent.push(paragraph);
+      }
     }
-    // Format key points with appropriate emoji based on content
-    else if (currentSection === "metrics" && /^[-•]/.test(paragraph)) {
-      formattedResponse += `💎 ${paragraph.replace(/^[-•]\s*/, '')}\n`;
+    else if (currentSection === "growth") {
+      if (/^[-•]/.test(paragraph)) {
+        sectionContent.push(`📈 ${paragraph.replace(/^[-•]\s*/, '')}`);
+      } else {
+        sectionContent.push(paragraph);
+      }
     }
-    else if (currentSection === "growth" && /^[-•]/.test(paragraph)) {
-      formattedResponse += `🚀 ${paragraph.replace(/^[-•]\s*/, '')}\n`;
+    else if (currentSection === "expert") {
+      if (/^[""].*[""].*—.*$/i.test(paragraph)) {
+        sectionContent.push(`${paragraph}`);
+      } else if (/^[-•]/.test(paragraph)) {
+        sectionContent.push(`💎 ${paragraph.replace(/^[-•]\s*/, '')}`);
+      } else {
+        sectionContent.push(paragraph);
+      }
     }
-    else if (currentSection === "investment" && /Risk|Warning|Caution/i.test(paragraph)) {
-      formattedResponse += `⚠️ ${paragraph}\n`;
-    }
-    else if (/^[-•]/.test(paragraph)) {
-      formattedResponse += `• ${paragraph.replace(/^[-•]\s*/, '')}\n`;
-    }
-    else if (paragraph.length > 0) {
-      formattedResponse += `${paragraph}\n`;
+    else if (currentSection === "investment") {
+      if (/Risk|Warning|Caution/i.test(paragraph)) {
+        sectionContent.push(`⚠️ ${paragraph}`);
+      } else if (/^[-•]/.test(paragraph)) {
+        sectionContent.push(`💡 ${paragraph.replace(/^[-•]\s*/, '')}`);
+      } else {
+        sectionContent.push(paragraph);
+      }
     }
   });
+
+  // Add any remaining section content
+  if (sectionContent.length) {
+    formattedResponse += sectionContent.join('\n') + '\n';
+  }
 
   return formattedResponse.trim();
 }
@@ -78,39 +109,39 @@ router.post("/api/chat", async (req, res) => {
         messages: [
           {
             role: "system",
-            content: `You are an expert financial analyst specializing in Indonesian market analysis and investment research. Structure your responses in exactly this format:
+            content: `You are an expert financial analyst specializing in Indonesian market analysis and investment research. Follow this exact format for your response:
 
 1. Key Metrics
-- Current Price: [value]
-- P/E Ratio: [value]
-- Dividend Yield: [value]
-- Market Cap: [value]
-- Trading Volume: [value]
-- Other key metrics as relevant
+• Current Price: [value]
+• P/E Ratio: [value]
+• Dividend Yield: [value]
+• Market Cap: [value]
+• Trading Volume: [value]
+[Add other relevant metrics with bullet points]
 
 2. Growth & Performance
-- List key growth metrics and YoY comparisons
-- Market share and competitive position
-- Operating performance highlights
-- Digital transformation metrics
+• YoY Revenue Growth: [value]
+• Market Share: [details]
+• Key Performance Highlights
+[List key operational metrics with bullet points]
 
 3. Expert Analysis
-Include 1-2 relevant analyst quotes in this format:
+[Include 1-2 relevant analyst quotes exactly in this format:]
 "[Quote text]" — [Analyst Name], [Firm]
+[Add key analyst insights with bullet points]
 
 4. Investment Assessment
-- Growth catalysts and opportunities
-- Risk factors and challenges
-- Technical support/resistance levels
-- Price targets and recommendations
+• Growth Catalysts: [key points]
+• Risk Factors: [key points]
+• Technical Levels: [support/resistance]
+• Price Targets: [range and consensus]
 
 Guidelines:
-- Start each section with the number and title
-- Use bullet points for all metrics and insights
-- Keep points concise and focused
-- Include specific numbers and percentages
-- Do not use citations or references
-- Format numbers consistently (e.g., "4.9x" not "4.9 x")`
+- Use bullet points consistently
+- Present exact numbers and percentages
+- Keep insights concise and focused
+- Format numbers as "4.9x" not "4.9 x"
+- Don't use citations or references`
           },
           {
             role: "user",
