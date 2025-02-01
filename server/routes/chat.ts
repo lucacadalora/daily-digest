@@ -12,6 +12,15 @@ router.post("/api/chat", async (req, res) => {
       throw new Error('Missing PERPLEXITY_API_KEY');
     }
 
+    // Detect off-topic queries (programming, gaming, etc.)
+    const nonMarketTerms = /\b(code|programming|typescript|javascript|python|game|gaming|maze|algorithm|compiler|database|API|endpoint)\b/i;
+    if (nonMarketTerms.test(message)) {
+      return res.json({
+        status: 'error',
+        error: 'This AI assistant specializes in financial markets and investment analysis. For programming or other topics, please use appropriate specialized resources.',
+      });
+    }
+
     // Match stock tickers: Traditional (AAPL), Indonesian (.JK), Indices (^GSPC)
     const stockTickerPattern = /\b[A-Z]{1,5}(\.[A-Z]{2})?\b|\^[A-Z]+\b/g;
     const hasStockTicker = stockTickerPattern.test(message);
@@ -19,7 +28,9 @@ router.post("/api/chat", async (req, res) => {
     console.log('Processing query:', message);
     console.log('Has stock ticker:', hasStockTicker);
 
-    const basePrompt = `You are an expert financial and business analyst specializing in stock market analysis, investment research, and market insights. Provide clear, concise, and accurate information based on your extensive knowledge of global financial markets, company valuations, and investment analysis.`;
+    const basePrompt = `You are an expert financial and business analyst specializing in market analysis and investment research. Provide clear, concise, and accurate information based on your extensive knowledge of global financial markets, company valuations, and investment analysis.
+
+Important: Only answer questions related to financial markets, investments, economic trends, and business analysis. If the question is outside these domains, inform the user that you can only assist with market-related queries.`;
 
     const detailedStockPrompt = `You are an expert financial and business analyst specializing in market analysis and investment research. Format your response using markdown syntax:
 
