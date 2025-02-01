@@ -108,7 +108,7 @@ router.post("/api/chat", async (req, res) => {
     if (!financialTerms.test(message)) {
       return res.json({
         status: 'success',
-        reply: "I'm specialized in financial market analysis. Please ask questions about stocks, market trends, company valuations, or investment insights."
+        reply: "I apologize, but I can only assist with questions related to financial markets, economic analysis, and investment insights. Please ask questions within these domains."
       });
     }
 
