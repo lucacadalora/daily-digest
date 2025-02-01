@@ -12,15 +12,19 @@ function formatResponse(text: string): string {
   const paragraphs = text.split('\n').map(p => p.trim()).filter(p => p.length > 0);
   let formattedResponse = "";
   let currentSection = "";
-  let sectionContent = [];
+  let sectionContent: string[] = []; // Fix TypeScript error by explicitly typing
 
   paragraphs.forEach(paragraph => {
-    // Handle section headers
-    if (/^1\.\s*Key\s*Metrics/i.test(paragraph)) {
-      formattedResponse += "\n⚡ **Key Metrics**\n\n";
+    // More flexible section header matching
+    if (/^\s*1\.?\s*Key\s*Metrics/i.test(paragraph)) {
+      if (sectionContent.length) {
+        formattedResponse += sectionContent.join('\n') + '\n\n';
+        sectionContent = [];
+      }
+      formattedResponse += "⚡ **Key Metrics**\n\n";
       currentSection = "metrics";
     }
-    else if (/^2\.\s*Growth/i.test(paragraph)) {
+    else if (/^\s*2\.?\s*Growth/i.test(paragraph)) {
       if (sectionContent.length) {
         formattedResponse += sectionContent.join('\n') + '\n\n';
         sectionContent = [];
@@ -28,7 +32,7 @@ function formatResponse(text: string): string {
       formattedResponse += "🚀 **Growth & Performance**\n\n";
       currentSection = "growth";
     }
-    else if (/^3\.\s*Expert/i.test(paragraph)) {
+    else if (/^\s*3\.?\s*Expert/i.test(paragraph)) {
       if (sectionContent.length) {
         formattedResponse += sectionContent.join('\n') + '\n\n';
         sectionContent = [];
@@ -36,7 +40,7 @@ function formatResponse(text: string): string {
       formattedResponse += "💬 **Expert Analysis**\n\n";
       currentSection = "expert";
     }
-    else if (/^4\.\s*Investment/i.test(paragraph)) {
+    else if (/^\s*4\.?\s*Investment/i.test(paragraph)) {
       if (sectionContent.length) {
         formattedResponse += sectionContent.join('\n') + '\n\n';
         sectionContent = [];
@@ -44,27 +48,28 @@ function formatResponse(text: string): string {
       formattedResponse += "💡 **Investment Assessment**\n\n";
       currentSection = "investment";
     }
-    // Handle content based on section type
+    // Enhanced content formatting based on section
     else if (currentSection === "metrics") {
-      if (/^[-•]\s*(.+):\s*(.+)$/i.test(paragraph)) {
-        const formatted = paragraph.replace(/^[-•]\s*/, '');
+      // Format metrics with bullet points and emojis
+      if (/^\s*[•-]\s*(.+):\s*(.+)$/i.test(paragraph)) {
+        const formatted = paragraph.replace(/^\s*[•-]\s*/, '');
         sectionContent.push(`📊 ${formatted}`);
       } else {
         sectionContent.push(paragraph);
       }
     }
     else if (currentSection === "growth") {
-      if (/^[-•]/.test(paragraph)) {
-        sectionContent.push(`📈 ${paragraph.replace(/^[-•]\s*/, '')}`);
+      if (/^\s*[•-]/.test(paragraph)) {
+        sectionContent.push(`📈 ${paragraph.replace(/^\s*[•-]\s*/, '')}`);
       } else {
         sectionContent.push(paragraph);
       }
     }
     else if (currentSection === "expert") {
       if (/^[""].*[""].*—.*$/i.test(paragraph)) {
-        sectionContent.push(`${paragraph}`);
-      } else if (/^[-•]/.test(paragraph)) {
-        sectionContent.push(`💎 ${paragraph.replace(/^[-•]\s*/, '')}`);
+        sectionContent.push(`💎 ${paragraph}`);
+      } else if (/^\s*[•-]/.test(paragraph)) {
+        sectionContent.push(`🔍 ${paragraph.replace(/^\s*[•-]\s*/, '')}`);
       } else {
         sectionContent.push(paragraph);
       }
@@ -72,11 +77,15 @@ function formatResponse(text: string): string {
     else if (currentSection === "investment") {
       if (/Risk|Warning|Caution/i.test(paragraph)) {
         sectionContent.push(`⚠️ ${paragraph}`);
-      } else if (/^[-•]/.test(paragraph)) {
-        sectionContent.push(`💡 ${paragraph.replace(/^[-•]\s*/, '')}`);
+      } else if (/^\s*[•-]/.test(paragraph)) {
+        sectionContent.push(`💡 ${paragraph.replace(/^\s*[•-]\s*/, '')}`);
       } else {
         sectionContent.push(paragraph);
       }
+    }
+    // If no section is matched yet, add to general content
+    else {
+      sectionContent.push(paragraph);
     }
   });
 
@@ -110,7 +119,6 @@ router.post("/api/chat", async (req, res) => {
           {
             role: "system",
             content: `You are an expert financial analyst specializing in Indonesian market analysis and investment research. Follow this exact format for your response:
-
 1. Key Metrics
 • Current Price: [value]
 • P/E Ratio: [value]
