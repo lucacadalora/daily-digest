@@ -17,26 +17,33 @@ function formatResponse(text: string): string {
   // Process each paragraph
   paragraphs.forEach(paragraph => {
     // Check if this is a key metric or highlight
-    const isKeyMetric = /^(P\/?E|P\/?B|ROE|EPS|Dividend Yield|Market Cap|Revenue|EBITDA|Net Profit|Price Target):/i.test(paragraph) ||
-                       /^(Current Price|Support Level|Resistance Level|Trading Volume):/i.test(paragraph);
+    const isKeyMetric = 
+      /^(P\/?E|P\/?B|ROE|EPS|Dividend Yield|Market Cap|Revenue|EBITDA|Net Profit|Price Target|Current Price|Support Level|Resistance Level|Trading Volume|Payout Ratio|Net Interest Margin):/i.test(paragraph) ||
+      /^(Forward P\/?E|Book Value|Market Value|Free Cash Flow|Operating Margin):/i.test(paragraph);
+
+    // Check if this is an analyst quote
+    const isQuote = /^[""].*[""].*—.*$/i.test(paragraph);
 
     // Check if this is a section header
-    const isSectionHeader = /^(Key|Analysis|Market|Risk|Investment|Technical|Fundamental|Valuation|Growth|Outlook)/i.test(paragraph);
+    const isSectionHeader = /^(Key|Analysis|Market|Risk|Investment|Technical|Fundamental|Valuation|Growth|Outlook|Catalyst)/i.test(paragraph);
 
     if (isSectionHeader) {
       // Format section headers with emoji based on content
-      if (/Analysis|Overview|Summary/i.test(paragraph)) {
+      if (/Analysis|Overview|Summary|Valuation/i.test(paragraph)) {
         formattedResponse += `\n📊 ${paragraph}\n`;
-      } else if (/Market|Trading|Price/i.test(paragraph)) {
+      } else if (/Market|Trading|Price|Technical/i.test(paragraph)) {
         formattedResponse += `\n📈 ${paragraph}\n`;
       } else if (/Risk|Warning|Caution/i.test(paragraph)) {
         formattedResponse += `\n⚠️ ${paragraph}\n`;
-      } else if (/Investment|Strategy|Recommendation/i.test(paragraph)) {
+      } else if (/Investment|Strategy|Recommendation|Catalyst/i.test(paragraph)) {
         formattedResponse += `\n💡 ${paragraph}\n`;
       }
     } else if (isKeyMetric) {
-      // Format key metrics as bullets
-      formattedResponse += `• ${paragraph}\n`;
+      // Format key metrics as bullets with 💎
+      formattedResponse += `💎 ${paragraph}\n`;
+    } else if (isQuote) {
+      // Format analyst quotes in a blockquote style
+      formattedResponse += `\n${paragraph}\n`;
     } else {
       // Regular paragraph without bullets
       formattedResponse += `${paragraph}\n`;
@@ -51,6 +58,16 @@ router.post("/api/chat", async (req, res) => {
   try {
     const { message } = req.body;
 
+    // Expanded financial terms regex for better coverage
+    const financialTerms = /\b(market|stock|index|trade|invest|dividend|price|trend|economy|sector|analysis|forecast|growth|earning|revenue|profit|rate|bank|finance|currency|valuation|fundamental|technical|PE|EPS|ROE|asset|equity|bond|ETF|fund|IDX:|NYSE:|NASDAQ:)\b|\b[A-Z]{4}\.JK\b|\b[A-Z]{3,4}\b/i;
+
+    if (!financialTerms.test(message)) {
+      return res.json({
+        reply: "I'm specialized in financial market analysis. Please ask questions about stocks, market trends, company valuations, or investment insights. For example, try asking about specific stocks like 'BBRI valuation' or 'ADRO analysis'.",
+        status: 'success'
+      });
+    }
+
     const response = await axios.post(
       'https://api.perplexity.ai/chat/completions',
       {
@@ -61,19 +78,20 @@ router.post("/api/chat", async (req, res) => {
             content: `You are an expert financial analyst specializing in market analysis and investment research. Structure your responses like a professional investment report with clear sections.
 
 Keep responses focused on these key elements:
-1. Current market price and key valuation metrics (P/E, P/B, dividend yield)
-2. Critical growth drivers and market dynamics
-3. Major risk factors and mitigation strategies
-4. Essential fundamental metrics
-5. Important technical levels
-6. Notable peer comparison highlights
-7. Key forward-looking projections
+1. Company overview or asset introduction
+2. Current market price and key valuation metrics (P/E, P/B, dividend yield)
+3. Growth catalysts and market dynamics
+4. Risk factors and mitigation strategies
+5. Technical levels and price targets
+6. Analyst consensus and notable quotes
+7. Forward-looking projections
 
-Format important metrics as "Metric: Value" on their own line.
+Format valuation metrics with specific values (e.g., "P/E Ratio: 15.2x").
+Include relevant analyst quotes with attribution when available.
+Use clear section headers for different aspects of analysis.
 Keep paragraphs concise and focused.
-Do not include citations or reference numbers.
-Use decimal points for numbers (write '4.9x' not '4.9 x' or '4• 9x').
-Focus on actionable insights and material information.`
+Do not use citations or reference numbers.
+Format numbers consistently with decimal points.`
           },
           {
             role: "user",
