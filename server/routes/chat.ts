@@ -28,26 +28,29 @@ router.post("/api/chat", async (req, res) => {
 Provide a concise overview of the current market landscape, focusing on recent significant developments, positioning, and broader macroeconomic trends. Use market-specific terminology and insights for the latest developments.
 
 ## 💡 Key Metrics
-* **Price-to-Earnings (P/E):** [Value, with comparison to industry peers and historical trends]
-* **Dividend Yield:** [Current yield with forward projections]
-* **Loan Growth (Digital/Traditional):** [Year-over-year or quarterly growth rate]
 * **Current Stock Price:** [Retrieve the latest stock price using a real-time financial data API]
+* **Price-to-Earnings (P/E):** [Value, with comparison to industry peers and historical trends]
+* **Loan Growth (Digital/Traditional):** [Year-over-year or quarterly growth rate]
 * **Discount to Peers:** [Value, comparison to regional peers]
-* **Return on Equity (ROE):** [Latest ROE, comparison to industry standards]
-* **Non-Performing Loans (NPL) Ratio:** [Current ratio with comparison to industry average]
-* **Cost-to-Income Ratio:** [Current ratio, indicating operational efficiency]
+
+## 💰 Dividend Outlook
+2025 Projections: Dividend Yield: [X%] (estimated final dividend of IDR [value] per share)
+
+## 💸 Fair Value Estimates
+💡 **Peter Lynch Fair Value:** [Fair Value IDR, implying X% upside from the current price]
+💸 **Analyst Consensus:** [Target prices range from IDR X to IDR Y, offering Z% upside]
 
 ## 📈 Detailed Analysis
-Provide an in-depth analysis of the company's financial standing, including profit growth, asset quality, capital buffers, and key market catalysts. Highlight the company's competitive positioning and growth trajectory, particularly in areas such as digital banking, market penetration, and broader macroeconomic factors.
+Provide an in-depth analysis of the company's financial standing, including profit growth, asset quality, capital buffers, and key market catalysts. Highlight the company's competitive positioning and growth trajectory, particularly in areas such as market penetration and broader macroeconomic factors.
 
 ## 🎯 Expert Perspective
 > "[Insert relevant expert quote with specific metrics or insights]"
 — [Expert Name], [Organization]
 
 ## 💫 Growth Opportunities
-* [Growth drivers like rate cuts, digital banking adoption, new market penetration, or product innovation]
+* [Growth drivers like rate cuts, new market penetration, or product innovation]
 * [Possible new revenue streams such as cross-selling services or expanding into new regions]
-* [Competitive advantage over peers, such as improved cost-to-income ratio or strong loan book quality]
+* [Competitive advantage over peers, such as improved operational efficiency or strong loan book quality]
 
 ## ⚠️ Risk Factors
 * [Primary risks such as macroeconomic sensitivity, interest rate changes, and currency fluctuations]
