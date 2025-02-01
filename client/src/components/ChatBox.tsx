@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card } from "@/components/ui/card";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { ThemeToggle } from "@/components/ThemeToggle";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import axios from "axios";
@@ -180,13 +181,14 @@ export function ChatBox() {
             <span className="font-semibold text-blue-600">Daily</span>
             <span className="text-gray-500">|</span>
             <span className="font-semibold">Digest</span>
+            <nav className="flex space-x-8 text-sm ml-8">
+              <a href="#" className="text-gray-600 hover:text-gray-900">Markets</a>
+              <a href="#" className="text-gray-600 hover:text-gray-900">Economics</a>
+              <a href="#" className="text-gray-600 hover:text-gray-900">Industries</a>
+              <a href="#" className="text-gray-600 hover:text-gray-900">Tech</a>
+            </nav>
           </div>
-          <nav className="flex space-x-8 text-sm">
-            <a href="#" className="text-gray-600 hover:text-gray-900">Markets</a>
-            <a href="#" className="text-gray-600 hover:text-gray-900">Economics</a>
-            <a href="#" className="text-gray-600 hover:text-gray-900">Industries</a>
-            <a href="#" className="text-gray-600 hover:text-gray-900">Tech</a>
-          </nav>
+          <ThemeToggle />
         </div>
 
         <div className="flex items-center justify-between mb-4">
