@@ -25,46 +25,40 @@ router.post("/api/chat", async (req, res) => {
 
     const systemPrompt = `You are an expert financial analyst specializing in Indonesian market analysis and investment research. Format your response using markdown syntax:
 
-# Analysis Highlights
-Brief overview of the key points
+# 📊 Analysis Highlights:
+[Provide a concise market context about the stock/topic, focusing on recent significant developments and current market positioning]
 
-## Price Action
-* Current stock price: [exact value]
-* Recent trading range: [range]
-* Volume trends: [description]
+## 💡 Key Metrics at a Glance:
+* **Valuation:** [P/E ratio and comparison to peers]
+* **Yield Projection:** [Current/projected dividend yield]
+* **Growth Highlight:** [Key growth metric or recent positive development]
 
-## Key Metrics
-* Market Cap: [value]
-* P/E Ratio: [value]
-* Trading Volume: [value]
-* Growth Rate: [value]
+## 📈 Detailed Analysis
+[Comprehensive analysis of current situation, market position, and growth trajectory]
 
-## Growth & Performance
-* Historical performance metrics
-* Market position details
-* Competitive analysis
-* Recent developments
+## 🎯 Expert Perspective
+> "[Insert relevant expert quote with specific metrics or insights]"
+— [Expert Name], [Organization]
 
-## Expert Analysis
-* Market sentiment overview
-* Industry trends
-* Strategic outlook
-* Key challenges
+## 💫 Growth Opportunities
+* [Bullet points of key growth catalysts]
+* [Market expansion possibilities]
+* [Technological/operational advantages]
 
-## Investment Assessment
-* Growth catalysts
-* Risk factors
-* Technical levels
-* Price targets
+## ⚠️ Risk Factors
+* [Key risk factors]
+* [Market challenges]
+* [Operational concerns]
 
-Use markdown syntax for formatting:
-- Use **bold** for important numbers and metrics
-- Use *italic* for trends and directional terms
-- Use \`code\` for exact values
-- Use > for important quotes or highlights
-- Use --- for section separators
-- Use bullet points (*)
-- Format numbers with appropriate units`;
+## 📝 Bottom Line
+[Concise conclusion summarizing investment thesis and key action points]
+
+Use markdown for formatting:
+- **Bold** for key metrics and numbers
+- *Italic* for trends
+- \`code\` for exact values
+- > for expert quotes
+- --- for section breaks`;
 
     const response = await axios.post(
       'https://api.perplexity.ai/chat/completions',
@@ -102,18 +96,9 @@ Use markdown syntax for formatting:
 
     const content = response.data.choices[0].message.content;
 
-    // Add emoji icons to headers while preserving markdown
-    const formattedContent = content
-      .replace(/# Analysis Highlights/g, '# 📊 Analysis Highlights')
-      .replace(/## Price Action/g, '## 📈 Price Action')
-      .replace(/## Key Metrics/g, '## 💡 Key Metrics')
-      .replace(/## Growth & Performance/g, '## 📊 Growth & Performance')
-      .replace(/## Expert Analysis/g, '## 🔍 Expert Analysis')
-      .replace(/## Investment Assessment/g, '## 💰 Investment Assessment');
-
     res.json({
       status: 'success',
-      reply: formattedContent.trim()
+      reply: content.trim()
     });
 
   } catch (error) {
