@@ -12,7 +12,6 @@ router.post("/api/chat", async (req, res) => {
       throw new Error('Missing PERPLEXITY_API_KEY');
     }
 
-    // Only restrict highly technical programming queries
     const restrictedTerms = /\b(sql injection|xss|database schema|api endpoint|code syntax|programming language|compiler|runtime|debugging)\b/i;
     if (restrictedTerms.test(message)) {
       return res.json({
@@ -24,7 +23,7 @@ router.post("/api/chat", async (req, res) => {
     console.log('Processing query:', message);
 
     const systemPrompt = `You are an expert financial and business analyst specializing in market analysis and investment research. Format your response using markdown syntax:
-
+    
 # 📊 Market Context
 [Provide a concise market context about the topic, focusing on recent significant developments and current positioning]
 
@@ -62,7 +61,7 @@ Use markdown for formatting:
 - Numbers should include proper units and contexts`;
 
     console.log('Calling Perplexity API with configuration:', {
-      model: "llama-3.1-sonar-large-128k-online",
+      model: "llama-3.1-sonar-small-128k-online",
       messageLength: message.length,
       hasSystemPrompt: true
     });
@@ -70,7 +69,7 @@ Use markdown for formatting:
     const response = await axios.post(
       'https://api.perplexity.ai/chat/completions',
       {
-        model: "llama-3.1-sonar-large-128k-online",
+        model: "llama-3.1-sonar-small-128k-online",
         messages: [
           {
             role: "system",
