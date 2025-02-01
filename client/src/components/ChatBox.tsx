@@ -45,6 +45,18 @@ interface Message {
   citations?: string[];
 }
 
+const formatMarketAnalysis = (content: string) => {
+  // Add emoji indicators for different sections
+  const withEmojis = content
+    .replace(/Fair Value Estimates:/g, '📊 Fair Value Estimates\n')
+    .replace(/Dividend Outlook:/g, '💰 Dividend Outlook\n')
+    .replace(/Market Context:/g, '📈 Market Context\n')
+    .replace(/(\d+(\.\d{1,2})?%)/g, '📝 $1') // Highlight percentages
+    .replace(/(IDR \d+([,\.]\d+)*)/g, '💵 $1'); // Highlight currency values
+
+  return withEmojis;
+};
+
 export function ChatBox() {
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState('');
@@ -119,6 +131,9 @@ export function ChatBox() {
       );
     }
 
+    // Format the message content with market analysis styling
+    const formattedContent = formatMarketAnalysis(message.content);
+
     return (
       <div className="prose prose-sm dark:prose-invert max-w-none">
         <ReactMarkdown 
@@ -127,27 +142,22 @@ export function ChatBox() {
             h1: ({ children }) => <h1 className="text-xl font-bold mb-2">{children}</h1>,
             h2: ({ children }) => <h2 className="text-lg font-semibold mb-2">{children}</h2>,
             h3: ({ children }) => <h3 className="text-base font-semibold mb-2">{children}</h3>,
-            p: ({ children }) => <p className="mb-2">{children}</p>,
-            ul: ({ children }) => <ul className="list-disc pl-4 mb-2">{children}</ul>,
+            p: ({ children }) => <p className="mb-2 leading-relaxed">{children}</p>,
+            ul: ({ children }) => <ul className="list-disc pl-4 mb-2 space-y-1">{children}</ul>,
             li: ({ children }) => <li className="mb-1">{children}</li>,
-            strong: ({ children }) => <strong className="font-semibold">{children}</strong>,
-            em: ({ children }) => <em className="italic">{children}</em>,
+            strong: ({ children }) => <strong className="font-semibold text-blue-600 dark:text-blue-400">{children}</strong>,
+            em: ({ children }) => <em className="italic text-gray-600 dark:text-gray-400">{children}</em>,
             code: ({ children }) => (
               <code className="bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded">{children}</code>
             ),
             blockquote: ({ children }) => (
-              <blockquote className="border-l-4 border-gray-200 dark:border-gray-700 pl-4 italic">
+              <blockquote className="border-l-4 border-blue-500 pl-4 italic bg-blue-50 dark:bg-blue-900/20 py-2 rounded-r">
                 {children}
               </blockquote>
             ),
-            a: ({ href, children }) => (
-              <a href={href} target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300">
-                {children}
-              </a>
-            ),
           }}
         >
-          {message.content}
+          {formattedContent}
         </ReactMarkdown>
         {message.citations && message.citations.length > 0 && (
           <div className="mt-4 text-sm border-t border-gray-200 dark:border-gray-700 pt-2">
