@@ -27,53 +27,63 @@ export default function Home() {
 
       {/* Main Content */}
       <main className="max-w-[1200px] mx-auto px-4 py-6 sm:py-8 dark:text-gray-200">
-        {/* Newsletter Section */}
-        <div className="flex justify-between items-center mb-6">
-          <h2 className="text-xl font-bold text-gray-900 dark:text-white">Newsletter</h2>
-          <Link href="/newsletters" className="text-sm text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 flex items-center gap-1">
-            View All <ArrowRight className="h-4 w-4" />
-          </Link>
-        </div>
+        <div className="flex flex-col md:flex-row gap-8">
+          {/* Left Sidebar - ChatBox (Hidden on mobile) */}
+          <div className="hidden md:block md:w-80 flex-shrink-0">
+            <ChatBox />
+          </div>
 
-        {/* Featured Articles */}
-        <div className="grid grid-cols-1 gap-6 mb-8">
-          {sampleArticles.slice(0, 1).map((article, index) => (
-            <ArticleCard key={index} article={article} />
-          ))}
-        </div>
-
-        {/* Latest Stories */}
-        <div className="border-t border-gray-200 dark:border-gray-700 pt-6">
-          <h3 className="text-lg font-bold mb-4 text-gray-900 dark:text-white">Latest Stories</h3>
-          <div className="space-y-4">
-            {sampleArticles.slice(1).map((article, index) => (
-              <Link key={index} href={`/newsletter/${article.slug}`} className="block group">
-                <div className="flex gap-4">
-                  <div className="w-24 h-16 flex-shrink-0">
-                    <img 
-                      src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=800&h=400" 
-                      alt={article.title} 
-                      className="w-full h-full object-cover rounded"
-                    />
-                  </div>
-                  <div className="flex-1">
-                    <h4 className="font-medium text-sm mb-1 group-hover:text-blue-600 dark:group-hover:text-blue-400">
-                      {article.title}
-                    </h4>
-                    <div className="flex items-center gap-2 text-xs text-gray-500 dark:text-gray-400">
-                      <span>{article.author}</span>
-                      <span>•</span>
-                      <span>{article.date}</span>
-                    </div>
-                  </div>
-                </div>
+          {/* Main Content Area */}
+          <div className="flex-1">
+            {/* Newsletter Section */}
+            <div className="flex justify-between items-center mb-6">
+              <h2 className="text-xl font-bold text-gray-900 dark:text-white">Newsletter</h2>
+              <Link href="/newsletters" className="text-sm text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 flex items-center gap-1">
+                View All <ArrowRight className="h-4 w-4" />
               </Link>
-            ))}
+            </div>
+
+            {/* Featured Articles */}
+            <div className="grid grid-cols-1 gap-6 mb-8">
+              {sampleArticles.slice(0, 1).map((article, index) => (
+                <ArticleCard key={index} article={article} />
+              ))}
+            </div>
+
+            {/* Latest Stories */}
+            <div className="border-t border-gray-200 dark:border-gray-700 pt-6">
+              <h3 className="text-lg font-bold mb-4 text-gray-900 dark:text-white">Latest Stories</h3>
+              <div className="space-y-4">
+                {sampleArticles.slice(1).map((article, index) => (
+                  <Link key={index} href={`/newsletter/${article.slug}`} className="block group">
+                    <div className="flex gap-4">
+                      <div className="w-24 h-16 flex-shrink-0">
+                        <img 
+                          src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=800&h=400" 
+                          alt={article.title} 
+                          className="w-full h-full object-cover rounded"
+                        />
+                      </div>
+                      <div className="flex-1">
+                        <h4 className="font-medium text-sm mb-1 group-hover:text-blue-600 dark:group-hover:text-blue-400">
+                          {article.title}
+                        </h4>
+                        <div className="flex items-center gap-2 text-xs text-gray-500 dark:text-gray-400">
+                          <span>{article.author}</span>
+                          <span>•</span>
+                          <span>{article.date}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
 
-        {/* Chat Box Section */}
-        <div className="mt-8 lg:mt-12">
+        {/* Mobile Chat Box Section */}
+        <div className="md:hidden mt-8">
           <ChatBox />
         </div>
       </main>
