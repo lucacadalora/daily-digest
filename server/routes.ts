@@ -133,7 +133,6 @@ class MarketDataCache {
   }
 
   private async fetchFreshData(): Promise<MarketData> {
-    // Get all symbols
     const allSymbols = [
       ...Object.values(SYMBOLS.crypto),
       ...Object.values(SYMBOLS.stocks),
@@ -141,70 +140,68 @@ class MarketDataCache {
       ...Object.values(SYMBOLS.forex)
     ].join(',');
 
-    // Yahoo Finance API request with proper headers
-    const response = await axios.get('https://query2.finance.yahoo.com/v8/finance/quote', {
-      params: {
-        symbols: allSymbols,
-        fields: 'regularMarketPrice,regularMarketChangePercent'
-      },
-      headers: {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
-        'Accept': 'application/json',
-        'Accept-Language': 'en-US,en;q=0.9',
-        'Origin': 'https://finance.yahoo.com',
-        'Referer': 'https://finance.yahoo.com/'
-      }
-    });
+    try {
+      const response = await axios.get('https://query2.finance.yahoo.com/v8/finance/quote', {
+        params: {
+          symbols: allSymbols,
+          fields: 'regularMarketPrice,regularMarketChangePercent'
+        },
+        headers: {
+          'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
+        }
+      });
 
-    // Log response for debugging
-    console.log('Yahoo Finance API Response:', {
-      status: response.status,
-      dataLength: response.data?.quoteResponse?.result?.length || 0
-    });
+      console.log('Yahoo Finance API Response:', {
+        status: response.status,
+        dataLength: response.data?.quoteResponse?.result?.length || 0
+      });
 
-    const quotes = response.data?.quoteResponse?.result || [];
-    const quoteMap = new Map(quotes.map((quote: any) => [quote.symbol, quote]));
+      const quotes = response.data?.quoteResponse?.result || [];
+      const quoteMap = new Map(quotes.map((quote: any) => [quote.symbol, quote]));
 
-    function mapQuote(symbol: string): MarketPrice {
-      const quote = quoteMap.get(symbol);
-      if (!quote || !quote.regularMarketPrice) {
-        console.warn(`No data available for symbol: ${symbol}`);
-        return { price: 0, change24h: 0 };
-      }
-      return {
-        price: quote.regularMarketPrice,
-        change24h: quote.regularMarketChangePercent || 0
+      const mapQuote = (symbol: string): MarketPrice => {
+        const quote = quoteMap.get(symbol);
+        if (!quote) {
+          console.warn(`No data available for symbol: ${symbol}`);
+          return { price: 0, change24h: 0 };
+        }
+        return {
+          price: Number(quote.regularMarketPrice) || 0,
+          change24h: Number(quote.regularMarketChangePercent) || 0
+        };
       };
-    }
 
-    // Transform the data into our format
-    return {
-      crypto: {
-        BTC: mapQuote(SYMBOLS.crypto.BTC),
-        ETH: mapQuote(SYMBOLS.crypto.ETH)
-      },
-      stocks: {
-        BBRI: mapQuote(SYMBOLS.stocks.BBRI),
-        TLKM: mapQuote(SYMBOLS.stocks.TLKM),
-        ASII: mapQuote(SYMBOLS.stocks.ASII),
-        BBCA: mapQuote(SYMBOLS.stocks.BBCA),
-        AAPL: mapQuote(SYMBOLS.stocks.AAPL),
-        MSFT: mapQuote(SYMBOLS.stocks.MSFT),
-        GOOGL: mapQuote(SYMBOLS.stocks.GOOGL),
-        TSLA: mapQuote(SYMBOLS.stocks.TSLA)
-      },
-      indices: {
-        IHSG: mapQuote(SYMBOLS.indices.IHSG),
-        'S&P500': mapQuote(SYMBOLS.indices['S&P500']),
-        NASDAQ: mapQuote(SYMBOLS.indices.NASDAQ),
-        DJI: mapQuote(SYMBOLS.indices.DJI),
-        NIKKEI: mapQuote(SYMBOLS.indices.NIKKEI),
-        HSI: mapQuote(SYMBOLS.indices.HSI)
-      },
-      forex: {
-        'USD/IDR': mapQuote(SYMBOLS.forex['USD/IDR'])
-      }
-    };
+      return {
+        crypto: {
+          BTC: mapQuote(SYMBOLS.crypto.BTC),
+          ETH: mapQuote(SYMBOLS.crypto.ETH)
+        },
+        stocks: {
+          BBRI: mapQuote(SYMBOLS.stocks.BBRI),
+          TLKM: mapQuote(SYMBOLS.stocks.TLKM),
+          ASII: mapQuote(SYMBOLS.stocks.ASII),
+          BBCA: mapQuote(SYMBOLS.stocks.BBCA),
+          AAPL: mapQuote(SYMBOLS.stocks.AAPL),
+          MSFT: mapQuote(SYMBOLS.stocks.MSFT),
+          GOOGL: mapQuote(SYMBOLS.stocks.GOOGL),
+          TSLA: mapQuote(SYMBOLS.stocks.TSLA)
+        },
+        indices: {
+          IHSG: mapQuote(SYMBOLS.indices.IHSG),
+          'S&P500': mapQuote(SYMBOLS.indices['S&P500']),
+          NASDAQ: mapQuote(SYMBOLS.indices.NASDAQ),
+          DJI: mapQuote(SYMBOLS.indices.DJI),
+          NIKKEI: mapQuote(SYMBOLS.indices.NIKKEI),
+          HSI: mapQuote(SYMBOLS.indices.HSI)
+        },
+        forex: {
+          'USD/IDR': mapQuote(SYMBOLS.forex['USD/IDR'])
+        }
+      };
+    } catch (error) {
+      console.error('Error fetching market data:', error);
+      throw error;
+    }
   }
 }
 
@@ -225,14 +222,21 @@ export function registerRoutes(app: Express): Server {
   });
 
   app.post('/api/dev/refresh', async (req, res) => {
+    console.log('Starting environment refresh...');
+
     try {
       const refreshScriptPath = join(__dirname, '..', 'scripts', 'refresh.js');
+
       execFile('node', [refreshScriptPath], (error, stdout, stderr) => {
         if (error) {
           console.error('Error running refresh script:', error);
           return res.status(500).json({ 
             error: 'Failed to refresh environment',
-            message: error.message
+            message: error.message,
+            details: {
+              stdout,
+              stderr
+            }
           });
         }
 
@@ -241,7 +245,13 @@ export function registerRoutes(app: Express): Server {
         }
 
         console.log('Refresh script output:', stdout);
-        res.json({ message: 'Environment refresh completed successfully' });
+        res.json({ 
+          message: 'Environment refresh completed successfully',
+          details: {
+            stdout,
+            stderr: stderr || null
+          }
+        });
       });
     } catch (error) {
       console.error('Error in /api/dev/refresh:', error);
