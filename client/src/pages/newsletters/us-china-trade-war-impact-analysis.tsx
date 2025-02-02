@@ -3,7 +3,7 @@ import { TrendingUp, BarChart3, AlertCircle, Clock, MapPin, ChevronRight } from 
 import { Link } from "wouter";
 import { Header } from "@/components/Header";
 import { sampleArticles } from "@/types/newsletter";
-import { TradeWarContent } from "@/components/TradeWarContent";
+import { TradeWarContent } from "../../components/TradeWarContent";
 
 export default function TradeWarAnalysisArticle() {
   const article = sampleArticles.find(a => a.slug === 'us-china-trade-war-impact-analysis');
