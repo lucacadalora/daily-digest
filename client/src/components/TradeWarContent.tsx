@@ -64,21 +64,20 @@ export function TradeWarContent({ article }: TradeWarContentProps) {
             <span className="font-bold text-amber-800 dark:text-amber-200">Weekly Market Alert</span>
           </div>
           <p className="text-sm text-amber-800 dark:text-amber-200">
-            This special report outlines critical market scenarios and action plans for the week of February 3-7, 2025. 
+            This special report outlines critical market scenarios and action plans for the week of February 3-7, 2025.
             This special report outlines key market scenarios and potential impacts for the week ahead.
           </p>
         </div>
 
         <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
-          President Trump's 25% tariffs on Canada/Mexico and 10% on China risk triggering a retaliatory spiral, 
-          with Beijing likely to counter with targeted measures on US goods and allies. Indonesia's export-reliant 
-          industries and foreign-owned equities stand in the crossfire, threatening to push the IHSG below critical 
+          President Trump's 25% tariffs on Canada/Mexico and 10% on China risk triggering a retaliatory spiral,
+          with Beijing likely to counter with targeted measures on US goods and allies. Indonesia's export-reliant
+          industries and foreign-owned equities stand in the crossfire, threatening to push the IHSG below critical
           support levels.
         </p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 py-4">
-        {/* Strategic Takeaway Card */}
         <MetricCard
           icon={TrendingDown}
           title="IHSG Support Level"
@@ -87,7 +86,6 @@ export function TradeWarContent({ article }: TradeWarContentProps) {
           iconColor="text-blue-600"
         />
 
-        {/* Most Impacted Sectors Card */}
         <MetricCard
           icon={AlertCircle}
           title="Most Impacted Sectors"
@@ -96,7 +94,6 @@ export function TradeWarContent({ article }: TradeWarContentProps) {
           iconColor="text-orange-600"
         />
 
-        {/* Defensive Opportunities Card */}
         <MetricCard
           icon={Shield}
           title="Defensive Opportunities"
@@ -146,21 +143,21 @@ export function TradeWarContent({ article }: TradeWarContentProps) {
               <li className="flex space-x-2">
                 <div className="w-2 h-2 mt-2 rounded-full bg-blue-500 flex-shrink-0" />
                 <p className="mt-0">
-                  <strong>Tech Restrictions:</strong> Beijing may limit rare earth exports critical for US tech 
+                  <strong>Tech Restrictions:</strong> Beijing may limit rare earth exports critical for US tech
                   manufacturing, disrupting Indonesia's $2.11B nickel export pipeline to China.
                 </p>
               </li>
               <li className="flex space-x-2">
                 <div className="w-2 h-2 mt-2 rounded-full bg-blue-500 flex-shrink-0" />
                 <p className="mt-0">
-                  <strong>Agricultural Tariffs:</strong> Soybean or palm oil levies could pressure Indonesia's 
+                  <strong>Agricultural Tariffs:</strong> Soybean or palm oil levies could pressure Indonesia's
                   CPO exports (25% global market share), already weakened by EU deforestation rules.
                 </p>
               </li>
               <li className="flex space-x-2">
                 <div className="w-2 h-2 mt-2 rounded-full bg-blue-500 flex-shrink-0" />
                 <p className="mt-0">
-                  <strong>Currency Devaluation:</strong> A weaker yuan (CNY) risks competitive devaluations 
+                  <strong>Currency Devaluation:</strong> A weaker yuan (CNY) risks competitive devaluations
                   across ASEAN, pressuring USDIDR toward 16,300–16,500.
                 </p>
               </li>
@@ -194,9 +191,9 @@ export function TradeWarContent({ article }: TradeWarContentProps) {
         <CardContent className="p-4">
           <h2 className="text-lg font-bold text-gray-900 dark:text-white mb-2">The Bottom Line</h2>
           <p className="text-gray-700 dark:text-gray-300">
-            A US-China trade war remains the <strong>#1 systemic risk</strong> for the IHSG this week. 
-            Investors must brace for volatility, with 6,900 acting as a critical line in the sand. 
-            Regulatory agility (BI's $140B forex reserves) and domestic demand resilience could mitigate 
+            A US-China trade war remains the <strong>#1 systemic risk</strong> for the IHSG this week.
+            Investors must brace for volatility, with 6,900 acting as a critical line in the sand.
+            Regulatory agility (BI's $140B forex reserves) and domestic demand resilience could mitigate
             losses, but proactive risk management is non-negotiable.
           </p>
         </CardContent>
@@ -213,7 +210,7 @@ export function TradeWarContent({ article }: TradeWarContentProps) {
             </div>
           </div>
           <p className="text-xs mb-2">
-            Disclaimer: For general information only. Not financial advice. 
+            Disclaimer: For general information only. Not financial advice.
             Consult your financial advisor before making investment decisions.
           </p>
           <p>© 2025 Market Analysis Report</p>
