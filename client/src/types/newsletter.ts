@@ -24,6 +24,16 @@ export type Article = z.infer<typeof articleSchema>;
 
 export const sampleArticles: Article[] = [
   {
+    slug: "us-china-trade-war-impact-ihsg",
+    title: "US-China Retaliation: Escalation Could Trigger IHSG Sell-Offs Below 6,900",
+    description: "President Trump's 25% tariffs on Canada/Mexico and 10% on China risk triggering a retaliatory spiral, with Beijing likely to counter with targeted measures on US goods and allies.",
+    category: "Markets",
+    source: "Daily Digest",
+    author: "Luca Cada Lora",
+    date: "February 2, 2025",
+    content: "Full article content here..."
+  },
+  {
     slug: "bank-rakyat-indonesia-undervalued-dividend-powerhouse",
     title: "Bank Rakyat Indonesia: The Undervalued Dividend Powerhouse",
     description: "Analysis of BBRI's potential 30-40% total return opportunity through dividends and valuation re-rating.",
