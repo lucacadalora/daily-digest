@@ -12,7 +12,7 @@ interface RefreshStatus {
   server: 'idle' | 'loading' | 'success' | 'error';
 }
 
-export default function DevTools() {
+function DevTools() {
   const [isRefreshing, setIsRefreshing] = useState(false);
   const [status, setStatus] = useState<RefreshStatus>({
     cache: 'idle',
@@ -162,3 +162,5 @@ export default function DevTools() {
     </div>
   );
 }
+
+export default DevTools;

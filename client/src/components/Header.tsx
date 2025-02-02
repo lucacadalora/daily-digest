@@ -93,6 +93,14 @@ export const Header = ({ onSubscribe, showCategories = true, simplified = false 
                     </Link>
                   </div>
 
+                  {/* Add Dev Tools Link */}
+                  <div className="mb-8">
+                    <Link href="/dev-tools" className="flex items-center justify-between text-lg font-medium hover:text-blue-600 transition-colors">
+                      Dev Tools
+                      <ArrowRight className="h-4 w-4" />
+                    </Link>
+                  </div>
+
                   {/* Categories */}
                   <nav className="space-y-4 mb-8">
                     <h3 className="text-base font-medium text-gray-900 dark:text-white mb-4">Categories</h3>

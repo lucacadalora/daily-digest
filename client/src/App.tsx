@@ -1,4 +1,4 @@
-import { Switch, Route } from "wouter";
+import { Switch, Route, Redirect } from "wouter";
 import { queryClient } from "./lib/queryClient";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
@@ -18,6 +18,7 @@ function Router() {
       {/* Add redirect for /newsletters to /newsletter for backward compatibility */}
       <Route path="/newsletters" component={Newsletters} />
       <Route path="/dev-tools" component={DevTools} />
+      <Route path="/devtools" component={() => <Redirect to="/dev-tools" />} />
       <Route component={NotFound} />
     </Switch>
   );
