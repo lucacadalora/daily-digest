@@ -26,7 +26,7 @@ export const sampleArticles: Article[] = [
   {
     slug: "us-china-trade-war-impact-analysis",
     title: "US-China Retaliation: Escalation Could Trigger IHSG Sell-Offs Below 6,900",
-    description: "President Trump's 25% tariffs on Canada/Mexico and 10% on China risk triggering a retaliatory spiral, threatening Indonesia's export-reliant industries.",
+    description: "President Trump's 25% tariffs on Canada/Mexico and 10% on China risk triggering a retaliatory spiral, threatening Indonesia's export-reliant industries and foreign-owned equities.",
     category: "Markets",
     source: "Daily Digest",
     author: "Luca Cada Lora",
