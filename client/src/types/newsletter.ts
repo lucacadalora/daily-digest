@@ -31,7 +31,7 @@ export const sampleArticles: Article[] = [
     source: "Daily Digest",
     author: "Luca Cada Lora",
     date: "February 2, 2025",
-    content: "Full article content covering trade war analysis and market implications..."
+    content: "Full article content here..."
   },
   {
     slug: "bank-rakyat-indonesia-undervalued-dividend-powerhouse",
@@ -41,7 +41,17 @@ export const sampleArticles: Article[] = [
     source: "Daily Digest",
     author: "Luca Cada Lora",
     date: "January 30, 2025",
-    content: "In-depth analysis of BBRI's growth prospects and valuation metrics..."
+    content: "Full article content here..."
+  },
+  {
+    slug: "softbank-openai-investment",
+    title: "SoftBank in Talks to Invest Up to $25 Billion in OpenAI",
+    description: "Meta Gains After Zuckerberg Predicts 'Really Big Year' in AI",
+    category: "Tech",
+    source: "Daily Digest",
+    author: "Luca Cada Lora",
+    date: "January 29, 2025",
+    content: "Full article content here..."
   },
   {
     slug: "white-house-seize-spending-power",
@@ -51,6 +61,6 @@ export const sampleArticles: Article[] = [
     source: "Daily Digest",
     author: "Luca Cada Lora",
     date: "January 28, 2025",
-    content: "Analysis of White House economic policies and implications..."
+    content: "Full article content here..."
   }
 ];

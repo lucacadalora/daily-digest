@@ -11,6 +11,9 @@ import { Header } from "@/components/Header";
 export default function Home() {
   const [isSubscribeOpen, setIsSubscribeOpen] = useState(false);
 
+  // Log articles to verify they're being loaded correctly
+  console.log('Featured Articles:', sampleArticles.slice(0, 2));
+
   return (
     <div className="min-h-screen bg-[#FBF7F4] dark:bg-gray-900 transition-colors">
       {/* Header */}
@@ -45,12 +48,36 @@ export default function Home() {
 
             {/* Featured Articles */}
             <div className="grid grid-cols-1 gap-6 mb-8">
-              {sampleArticles.map((article) => (
+              {/* Display first two articles */}
+              {sampleArticles.slice(0, 2).map((article) => (
                 <ArticleCard 
                   key={article.slug} 
                   article={article} 
                 />
               ))}
+            </div>
+
+            {/* Latest Stories */}
+            <div className="border-t border-gray-200 dark:border-gray-700 pt-6">
+              <h3 className="text-lg font-bold mb-4 text-gray-900 dark:text-white">Latest Stories</h3>
+              <div className="space-y-4">
+                {sampleArticles.slice(2).map((article) => (
+                  <Link key={article.slug} href={`/newsletter/${article.slug}`} className="block group">
+                    <div className="flex gap-4">
+                      <div className="flex-1">
+                        <h4 className="font-medium text-sm mb-1 group-hover:text-blue-600 dark:group-hover:text-blue-400">
+                          {article.title}
+                        </h4>
+                        <div className="flex items-center gap-2 text-xs text-gray-500 dark:text-gray-400">
+                          <span>{article.source}</span>
+                          <span>•</span>
+                          <span>{article.date}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </Link>
+                ))}
+              </div>
             </div>
           </div>
         </div>
