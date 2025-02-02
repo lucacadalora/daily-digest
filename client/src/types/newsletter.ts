@@ -26,12 +26,33 @@ export const sampleArticles: Article[] = [
   {
     slug: "us-china-trade-war-impact-ihsg",
     title: "US-China Retaliation: Escalation Could Trigger IHSG Sell-Offs Below 6,900",
-    description: "President Trump's 25% tariffs on Canada/Mexico and 10% on China risk triggering a retaliatory spiral, with Beijing likely to counter with targeted measures on US goods and allies.",
+    description: "President Trump's 25% tariffs on Canada/Mexico and 10% on China risk triggering a retaliatory spiral, with Beijing likely to counter with targeted measures on US goods and allies. Indonesia's export-reliant industries and foreign-owned equities stand in the crossfire, threatening to push the IHSG below critical support levels.",
     category: "Markets",
     source: "Daily Digest",
     author: "Luca Cada Lora",
     date: "February 2, 2025",
-    content: "Full article content here..."
+    content: `[Trade War Analysis Content]
+      President Trump's 25% tariffs on Canada/Mexico and 10% on China risk triggering a retaliatory spiral, 
+      with Beijing likely to counter with targeted measures on US goods and allies. Indonesia's export-reliant 
+      industries and foreign-owned equities stand in the crossfire, threatening to push the IHSG below critical 
+      support levels.
+
+      Key metrics include:
+      - IHSG Support Level: 6,900-6,956 (Critical psychological support)
+      - Most Impacted Sectors: Cyclicals & Basic Industries (Direct trade war exposure)
+      - Defensive Opportunities: Non-Cyclicals & Finance (Domestic demand shield)
+
+      China's Retaliatory Playbook includes:
+      - Tech Restrictions: Beijing may limit rare earth exports critical for US tech manufacturing
+      - Agricultural Tariffs: Soybean or palm oil levies could pressure Indonesia's CPO exports
+      - Currency Devaluation: A weaker yuan risks competitive devaluations across ASEAN
+
+      Supply Chain Spillovers affect:
+      - Electronics & Auto: US-China factory relocations may sideline Indonesian suppliers
+      - Commodity Demand: China's slowdown could reduce coal imports
+
+      Bottom Line: A US-China trade war remains the #1 systemic risk for the IHSG this week.
+    `
   },
   {
     slug: "bank-rakyat-indonesia-undervalued-dividend-powerhouse",
