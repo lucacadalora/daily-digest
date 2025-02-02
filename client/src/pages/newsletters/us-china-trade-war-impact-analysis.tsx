@@ -4,9 +4,12 @@ import { Link } from "wouter";
 import { Header } from "@/components/Header";
 import { sampleArticles } from "@/types/newsletter";
 
-const TradeWarAnalysis = () => {
-  // Find the article data
-  const article = sampleArticles[0]; // It should be the first article now
+export default function TradeWarAnalysisArticle() {
+  const article = sampleArticles.find(a => a.slug === 'us-china-trade-war-impact-analysis');
+
+  if (!article) {
+    return <div>Article not found</div>;
+  }
 
   return (
     <div className="min-h-screen bg-[#FBF7F4] dark:bg-gray-900 transition-colors">
@@ -21,9 +24,9 @@ const TradeWarAnalysis = () => {
         <div className="flex items-center space-x-2 text-sm text-gray-600 dark:text-gray-400 py-4 border-b border-gray-200 dark:border-gray-800">
           <Link href="/" className="hover:text-blue-600">Home</Link>
           <ChevronRight className="h-4 w-4" />
-          <Link href="/newsletters" className="hover:text-blue-600">Newsletters</Link>
+          <Link href="/newsletters" className="hover:text-blue-600">Newsletter</Link>
           <ChevronRight className="h-4 w-4" />
-          <span>US-China Trade War Impact</span>
+          <span>{article.title}</span>
         </div>
 
         {/* Article content */}
@@ -59,12 +62,22 @@ const TradeWarAnalysis = () => {
           </p>
 
           <div className="prose dark:prose-invert max-w-none">
-            {/* ... rest of the article content ... */}
+            {/* Content from the attached file */}
+            <div className="bg-amber-50 dark:bg-amber-900/20 border-l-4 border-amber-500 p-4 mb-6">
+              <div className="flex items-center mb-2">
+                <Clock className="h-5 w-5 text-amber-600 mr-2" />
+                <span className="font-bold text-amber-800 dark:text-amber-200">Weekly Market Alert</span>
+              </div>
+              <p className="text-sm text-amber-800 dark:text-amber-200">
+                This special report outlines critical market scenarios and action plans for the week of February 3-7, 2025.
+                This special report outlines key market scenarios and potential impacts for the week ahead.
+              </p>
+            </div>
+
+            {/* Rest of article content... */}
           </div>
         </div>
       </div>
     </div>
   );
-};
-
-export default TradeWarAnalysis;
+}
