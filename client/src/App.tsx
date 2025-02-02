@@ -13,8 +13,8 @@ function Router() {
     <Switch>
       <Route path="/" component={Home} />
       <Route path="/newsletters" component={Newsletters} />
-      <Route path="/newsletter/bank-rakyat-indonesia-undervalued-dividend-powerhouse" component={BBRIAnalysisArticle} />
-      <Route path="/newsletter/us-china-trade-war-impact-analysis" component={TradeWarAnalysisArticle} />
+      <Route path="/newsletters/us-china-trade-war-impact-analysis" component={TradeWarAnalysisArticle} />
+      <Route path="/newsletters/bank-rakyat-indonesia-undervalued-dividend-powerhouse" component={BBRIAnalysisArticle} />
       <Route path="/newsletter/category/:category" component={Newsletters} />
       <Route component={NotFound} />
     </Switch>
