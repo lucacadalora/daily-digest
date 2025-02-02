@@ -13,12 +13,28 @@ router.post("/api/chat", async (req, res) => {
   try {
     const { message } = req.body;
 
-    if (!process.env.PERPLEXITY_API_KEY) {
-      console.error('API Key missing');
+    const apiKey = process.env.PERPLEXITY_API_KEY;
+    console.log('Environment check:', {
+      hasApiKey: !!apiKey,
+      nodeEnv: process.env.NODE_ENV
+    });
+
+    if (!apiKey) {
+      console.error('Perplexity API Key missing in environment:', process.env.NODE_ENV);
       return res.status(500).json({
         status: 'error',
-        error: 'Missing API key configuration. Please ensure the Perplexity API key is properly set up.',
-        details: 'The application requires a valid Perplexity API key to function. Please contact the administrator.'
+        error: 'API Configuration Error',
+        details: 'Missing Perplexity API key. Please check deployment settings.'
+      });
+    }
+
+    // Validate API key format
+    if (typeof apiKey !== 'string' || apiKey.length < 10) {
+      console.error('Invalid API key format');
+      return res.status(500).json({
+        status: 'error',
+        error: 'Invalid API key format',
+        details: 'The provided API key appears to be invalid. Please check the key format.'
       });
     }
 
@@ -80,9 +96,11 @@ Provide a concise overview of the current market landscape, focusing on recent s
     console.log('Creating OpenAI client with Perplexity configuration');
 
     const client = new OpenAI({
-      apiKey: process.env.PERPLEXITY_API_KEY,
+      apiKey,
       baseURL: "https://api.perplexity.ai"
     });
+
+    console.log('OpenAI client initialized with Perplexity configuration');
 
     if (req.headers.accept === 'text/event-stream') {
       try {
