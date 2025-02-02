@@ -1,7 +1,6 @@
-import { Card, CardContent } from '@/components/ui/card';
+import React from 'react';
 import { TrendingDown, AlertCircle, Shield, Clock, MapPin, ChevronRight } from 'lucide-react';
-import { Link, useLocation } from "wouter";
-import { Header } from "@/components/Header";
+import { Card, CardContent } from '@/components/ui/card';
 
 const MetricCard = ({ icon: Icon, title, mainValue, subtitle, iconColor }) => {
   return (
@@ -18,20 +17,15 @@ const MetricCard = ({ icon: Icon, title, mainValue, subtitle, iconColor }) => {
   );
 };
 
-export default function TradeWarAnalysis() {
+const TradeWarAnalysis = () => {
   return (
     <div className="min-h-screen bg-[#FBF7F4] dark:bg-gray-900 transition-colors">
-      <Header simplified showCategories={false} />
-
-      {/* Header spacing */}
-      <div className="h-36 sm:h-32"></div>
-
       <div className="max-w-[1200px] mx-auto px-4">
         {/* Breadcrumb */}
         <div className="flex items-center space-x-2 text-sm text-gray-600 dark:text-gray-400 py-4 border-b border-gray-200 dark:border-gray-800">
-          <Link href="/" className="hover:text-blue-600">Home</Link>
+          <span className="hover:text-blue-600">Home</span>
           <ChevronRight className="h-4 w-4" />
-          <Link href="/newsletters" className="hover:text-blue-600">Newsletter</Link>
+          <span className="hover:text-blue-600">Market Analysis</span>
           <ChevronRight className="h-4 w-4" />
           <span>US-China Trade War Impact</span>
         </div>
@@ -39,13 +33,13 @@ export default function TradeWarAnalysis() {
         <header className="border-b border-gray-200 dark:border-gray-800 pb-4">
           <div className="pt-4">
             <div className="flex items-center space-x-3 mb-4">
-              <div className="bg-blue-100 dark:bg-blue-900 px-3 py-1 rounded-full">
-                <span className="text-xs font-bold text-blue-700 dark:text-blue-300 uppercase">Weekly Special</span>
-              </div>
-              <div className="flex items-center space-x-2 text-xs text-gray-600 dark:text-gray-400">
-                <span className="font-bold uppercase">Market Strategy</span>
-              </div>
+            <div className="bg-blue-100 dark:bg-blue-900 px-3 py-1 rounded-full">
+              <span className="text-xs font-bold text-blue-700 dark:text-blue-300 uppercase">Weekly Special</span>
             </div>
+            <div className="flex items-center space-x-2 text-xs text-gray-600 dark:text-gray-400">
+              <span className="font-bold uppercase">Market Strategy</span>
+            </div>
+          </div>
 
             <h1 className="font-serif text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-3 leading-tight">
               US-China Retaliation: Escalation Could Trigger IHSG Sell-Offs Below 6,900
@@ -71,10 +65,11 @@ export default function TradeWarAnalysis() {
               <span className="font-bold text-amber-800 dark:text-amber-200">Weekly Market Alert</span>
             </div>
             <p className="text-sm text-amber-800 dark:text-amber-200">
-              This special report outlines critical market scenarios and action plans for the week of February 3-7, 2025.
+              This special report outlines critical market scenarios and action plans for the week of February 3-7, 2025. 
+              This special report outlines key market scenarios and potential impacts for the week ahead.
             </p>
           </div>
-
+          
           <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
             President Trump's 25% tariffs on Canada/Mexico and 10% on China risk triggering a retaliatory spiral, 
             with Beijing likely to counter with targeted measures on US goods and allies. Indonesia's export-reliant 
@@ -84,32 +79,75 @@ export default function TradeWarAnalysis() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 py-4">
-          <MetricCard
-            icon={TrendingDown}
-            title="IHSG Support Level"
-            mainValue="6,900-6,956"
-            subtitle="Critical psychological support zone"
-            iconColor="text-blue-600"
-          />
-          <MetricCard
-            icon={AlertCircle}
-            title="Most Impacted Sectors"
-            mainValue="Cyclicals & Basic Ind"
-            subtitle="Direct trade war exposure"
-            iconColor="text-orange-600"
-          />
-          <MetricCard
-            icon={Shield}
-            title="Defensive Opportunities"
-            mainValue="Non-Cyclicals & Finance"
-            subtitle="Domestic demand shield"
-            iconColor="text-green-600"
-          />
+          {/* Strategic Takeaway Card */}
+          <Card className="bg-gray-50 dark:bg-gray-800">
+            <CardContent className="p-4">
+              <div className="flex items-center space-x-2 mb-2">
+                <TrendingDown className="h-5 w-5 text-blue-600" />
+                <h3 className="font-bold text-gray-900 dark:text-white">IHSG Support Level</h3>
+              </div>
+              <p className="text-2xl font-bold text-gray-900 dark:text-white mb-2">6,900-6,956</p>
+              <div className="space-y-2">
+                <p className="text-sm text-gray-600 dark:text-gray-400">Critical psychological support zone</p>
+                <div className="pt-2 border-t border-gray-200 dark:border-gray-700">
+                  <p className="text-sm text-gray-700 dark:text-gray-300">
+                    <span className="font-semibold">Action Required:</span> Monitor support level closely. Consider reducing position sizes if breached.
+                  </p>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Most Impacted Sectors Card */}
+          <Card className="bg-gray-50 dark:bg-gray-800">
+            <CardContent className="p-4">
+              <div className="flex items-center space-x-2 mb-2">
+                <AlertCircle className="h-5 w-5 text-orange-600" />
+                <h3 className="font-bold text-gray-900 dark:text-white">Most Impacted Sectors</h3>
+              </div>
+              <p className="text-2xl font-bold text-gray-900 dark:text-white mb-2">Cyclicals & Basic Ind</p>
+              <div className="space-y-2">
+                <p className="text-sm text-gray-600 dark:text-gray-400">Direct trade war exposure</p>
+                <div className="pt-2 border-t border-gray-200 dark:border-gray-700">
+                  <p className="text-sm text-gray-700 dark:text-gray-300">
+                    <span className="font-semibold">Key Stocks:</span> ASII, UNTR, ADRO
+                  </p>
+                  <p className="text-sm text-gray-700 dark:text-gray-300 mt-1">
+                    <span className="font-semibold">Risk:</span> China supply chain dependence
+                  </p>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Defensive Opportunities Card */}
+          <Card className="bg-gray-50 dark:bg-gray-800">
+            <CardContent className="p-4">
+              <div className="flex items-center space-x-2 mb-2">
+                <Shield className="h-5 w-5 text-green-600" />
+                <h3 className="font-bold text-gray-900 dark:text-white">Defensive Opportunities</h3>
+              </div>
+              <p className="text-2xl font-bold text-gray-900 dark:text-white mb-2">Non-Cyclicals & Finance</p>
+              <div className="space-y-2">
+                <p className="text-sm text-gray-600 dark:text-gray-400">Domestic demand shield</p>
+                <div className="pt-2 border-t border-gray-200 dark:border-gray-700">
+                  <p className="text-sm text-gray-700 dark:text-gray-300">
+                    <span className="font-semibold">Key Stocks:</span> UNVR, KLBF, BBCA
+                  </p>
+                  <p className="text-sm text-gray-700 dark:text-gray-300 mt-1">
+                    <span className="font-semibold">Advantage:</span> Strong domestic focus
+                  </p>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
         </div>
 
         <div className="py-4 space-y-6">
           <section>
-            <h2 className="text-xl font-serif font-bold text-gray-900 dark:text-white mb-3">IHSG Implications</h2>
+            <h2 className="text-xl font-serif font-bold text-gray-900 dark:text-white mb-3">
+              IHSG Implications
+            </h2>
             <div className="overflow-x-auto mb-6">
               <table className="w-full border-collapse bg-white dark:bg-gray-800 rounded-lg shadow-sm">
                 <thead className="bg-gray-50 dark:bg-gray-700">
@@ -122,12 +160,12 @@ export default function TradeWarAnalysis() {
                 <tbody>
                   <tr className="border-t border-gray-200 dark:border-gray-600">
                     <td className="p-4 font-medium text-gray-900 dark:text-white">Limited Retaliation</td>
-                    <td className="p-4 text-gray-700 dark:text-gray-300">China imposes symbolic tariffs</td>
+                    <td className="p-4 text-gray-700 dark:text-gray-300">China imposes symbolic tariffs (e.g., luxury goods)</td>
                     <td className="p-4 text-gray-700 dark:text-gray-300">Range-bound (7,000–7,215)</td>
                   </tr>
                   <tr className="border-t border-gray-200 dark:border-gray-600">
                     <td className="p-4 font-medium text-gray-900 dark:text-white">Moderate Escalation</td>
-                    <td className="p-4 text-gray-700 dark:text-gray-300">Rare earth/tech restrictions</td>
+                    <td className="p-4 text-gray-700 dark:text-gray-300">Rare earth/tech restrictions + yuan devaluation</td>
                     <td className="p-4 text-gray-700 dark:text-gray-300">Test 6,956 support</td>
                   </tr>
                   <tr className="border-t border-gray-200 dark:border-gray-600">
@@ -138,10 +176,32 @@ export default function TradeWarAnalysis() {
                 </tbody>
               </table>
             </div>
+
+            <Card className="bg-orange-50 dark:bg-orange-900/20 mb-6">
+              <CardContent className="p-4">
+                <h3 className="font-bold text-gray-900 dark:text-white mb-3">Critical Thresholds</h3>
+                <ul className="list-none space-y-3 pl-0">
+                  <li className="flex space-x-2">
+                    <div className="w-2 h-2 mt-2 rounded-full bg-orange-500 flex-shrink-0" />
+                    <p className="text-gray-700 dark:text-gray-300 mt-0">
+                      <strong>6,900:</strong> Psychological support level; breached in August 2024 during initial Trump tariff threats.
+                    </p>
+                  </li>
+                  <li className="flex space-x-2">
+                    <div className="w-2 h-2 mt-2 rounded-full bg-orange-500 flex-shrink-0" />
+                    <p className="text-gray-700 dark:text-gray-300 mt-0">
+                      <strong>Foreign Sell-Off Catalyst:</strong> Net equity outflows (-Rp 397.7B in Jan 2025) could accelerate, mirroring 2024's $31B EM capital flight.
+                    </p>
+                  </li>
+                </ul>
+              </CardContent>
+            </Card>
           </section>
 
           <section>
-            <h2 className="text-xl font-serif font-bold text-gray-900 dark:text-white mb-3">China's Retaliatory Playbook</h2>
+            <h2 className="text-xl font-serif font-bold text-gray-900 dark:text-white mb-3">
+              China's Retaliatory Playbook
+            </h2>
             <div className="prose text-gray-700 dark:text-gray-300 max-w-none">
               <ul className="list-none space-y-3 pl-0">
                 <li className="flex space-x-2">
@@ -192,7 +252,32 @@ export default function TradeWarAnalysis() {
           </Card>
 
           <section>
-            <h2 className="text-xl font-serif font-bold text-gray-900 dark:text-white mb-3">Investor Action Plan</h2>
+            <h2 className="text-xl font-serif font-bold text-gray-900 dark:text-white mb-3">
+              Sectoral Vulnerabilities
+            </h2>
+            <div className="prose text-gray-700 dark:text-gray-300 max-w-none">
+              <div className="space-y-4">
+                <div>
+                  <h3 className="font-bold text-gray-900 dark:text-white mb-2">Commodity Exporters</h3>
+                  <ul className="list-none space-y-3 pl-0">
+                    <li className="flex space-x-2">
+                      <div className="w-2 h-2 mt-2 rounded-full bg-red-500 flex-shrink-0" />
+                      <p className="mt-0"><strong>ADRO, PTBA:</strong> Coal prices face dual pressure from China's demand slump and US tariffs.</p>
+                    </li>
+                    <li className="flex space-x-2">
+                      <div className="w-2 h-2 mt-2 rounded-full bg-red-500 flex-shrink-0" />
+                      <p className="mt-0"><strong>AALI, LSIP:</strong> Palm oil exporters risk margin compression if China imposes retaliatory levies.</p>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section>
+            <h2 className="text-xl font-serif font-bold text-gray-900 dark:text-white mb-3">
+              Investor Action Plan
+            </h2>
             <div className="prose text-gray-700 dark:text-gray-300 max-w-none">
               <div className="space-y-4">
                 <div>
@@ -235,6 +320,6 @@ export default function TradeWarAnalysis() {
       </div>
     </div>
   );
-}
+};
 
 export default TradeWarAnalysis;

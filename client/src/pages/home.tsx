@@ -18,6 +18,14 @@ const categoryThumbnails = {
 
 export default function Home() {
   const [isSubscribeOpen, setIsSubscribeOpen] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const articlesPerPage = 4;
+
+  // Calculate the articles for the current page
+  const indexOfLastArticle = currentPage * articlesPerPage;
+  const indexOfFirstArticle = indexOfLastArticle - articlesPerPage;
+  const currentArticles = sampleArticles.slice(indexOfFirstArticle, indexOfLastArticle);
+  const totalPages = Math.ceil(sampleArticles.length / articlesPerPage);
 
   return (
     <div className="min-h-screen bg-[#FBF7F4] dark:bg-gray-900 transition-colors">
@@ -53,40 +61,29 @@ export default function Home() {
 
             {/* Featured Articles */}
             <div className="grid grid-cols-1 gap-6 mb-8">
-              {sampleArticles.slice(0, 1).map((article, index) => (
+              {currentArticles.map((article, index) => (
                 <ArticleCard key={index} article={article} />
               ))}
             </div>
 
-            {/* Latest Stories */}
-            <div className="border-t border-gray-200 dark:border-gray-700 pt-6">
-              <h3 className="text-lg font-bold mb-4 text-gray-900 dark:text-white">Latest Stories</h3>
-              <div className="space-y-4">
-                {sampleArticles.slice(1).map((article, index) => (
-                  <Link key={index} href={`/newsletter/${article.slug}`} className="block group">
-                    <div className="flex gap-4">
-                      <div className="w-24 h-16 flex-shrink-0 overflow-hidden rounded">
-                        <img 
-                          src={categoryThumbnails[article.category]} 
-                          alt={`${article.category} - ${article.title}`}
-                          className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-300"
-                        />
-                      </div>
-                      <div className="flex-1">
-                        <h4 className="font-medium text-sm mb-1 group-hover:text-blue-600 dark:group-hover:text-blue-400">
-                          {article.title}
-                        </h4>
-                        <div className="flex items-center gap-2 text-xs text-gray-500 dark:text-gray-400">
-                          <span>{article.author}</span>
-                          <span>•</span>
-                          <span>{article.date}</span>
-                        </div>
-                      </div>
-                    </div>
-                  </Link>
+            {/* Pagination */}
+            {totalPages > 1 && (
+              <div className="flex justify-center gap-2 mt-6">
+                {Array.from({ length: totalPages }, (_, i) => (
+                  <button
+                    key={i}
+                    onClick={() => setCurrentPage(i + 1)}
+                    className={`px-3 py-1 rounded-full text-sm font-medium transition-all duration-300 
+                      ${currentPage === i + 1 
+                        ? 'bg-blue-600 text-white' 
+                        : 'bg-gray-100 text-gray-600 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-400'
+                      }`}
+                  >
+                    {i + 1}
+                  </button>
                 ))}
               </div>
-            </div>
+            )}
           </div>
         </div>
 
