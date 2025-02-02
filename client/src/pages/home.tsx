@@ -38,7 +38,7 @@ export default function Home() {
             {/* Newsletter Section */}
             <div className="flex justify-between items-center mb-6">
               <h2 className="text-xl font-bold text-gray-900 dark:text-white">Newsletter</h2>
-              <Link href="/newsletters" className="text-sm text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 flex items-center gap-1">
+              <Link href="/newsletter" className="text-sm text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 flex items-center gap-1">
                 View All <ArrowRight className="h-4 w-4" />
               </Link>
             </div>

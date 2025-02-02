@@ -8,7 +8,7 @@ import { Header } from "@/components/Header";
 export default function Newsletters() {
   const [location] = useLocation();
   const category = location.split("/").pop() as Category | undefined;
-  const isViewAll = location === "/newsletters";
+  const isViewAll = location === "/newsletter";
   const filteredArticles = category && !isViewAll
     ? sampleArticles.filter(article => article.category === category)
     : sampleArticles;
@@ -26,7 +26,7 @@ export default function Newsletters() {
         <div className="flex items-center space-x-2 text-sm text-gray-600 dark:text-gray-400 mb-6">
           <Link href="/" className="hover:text-blue-600">Home</Link>
           <ChevronRight className="h-4 w-4" />
-          <span>Newsletters</span>
+          <span>Newsletter</span>
         </div>
 
         <h1 className="text-2xl sm:text-3xl font-bold mb-6 sm:mb-8 text-gray-900 dark:text-white">Newsletter</h1>
@@ -35,7 +35,7 @@ export default function Newsletters() {
         <div className="mb-6 sm:mb-8">
           <p className="text-sm text-gray-600 dark:text-gray-400 mb-3">FILTER BY TAG</p>
           <div className="flex flex-wrap gap-2">
-            <Link href="/newsletters" 
+            <Link href="/newsletter" 
               className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 
                 ${isViewAll ? 'bg-blue-600 text-white shadow-lg shadow-blue-500/30' : 
                 'bg-blue-50 text-blue-600 hover:bg-blue-100 dark:bg-blue-900/20 dark:text-blue-400'}`}>

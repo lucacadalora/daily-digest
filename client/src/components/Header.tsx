@@ -25,7 +25,6 @@ export const Header = ({ onSubscribe, showCategories = true, simplified = false 
 
   const handleChatClick = () => {
     setIsSheetOpen(false);
-    // Add a small delay to ensure the sheet closes before scrolling
     setTimeout(() => {
       const chatElement = document.querySelector('#chat');
       const mobileChatElement = document.querySelector('#mobile-chat');
@@ -88,7 +87,7 @@ export const Header = ({ onSubscribe, showCategories = true, simplified = false 
                 <SheetContent side="bottom" className="px-6 py-8">
                   {/* Newsletter Link */}
                   <div className="mb-8">
-                    <Link href="/newsletters" className="flex items-center justify-between text-lg font-medium hover:text-blue-600 transition-colors">
+                    <Link href="/newsletter" className="flex items-center justify-between text-lg font-medium hover:text-blue-600 transition-colors">
                       Newsletter
                       <ArrowRight className="h-4 w-4" />
                     </Link>
