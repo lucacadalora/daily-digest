@@ -66,21 +66,12 @@ export const ChatBox = () => {
     e.preventDefault();
     if (!input.trim() || isLoading) return;
 
-    const restrictedTerms = /\b(sql|html|css|javascript|python|code|programming|script|database|api|endpoint)\b/i;
-    if (restrictedTerms.test(input)) {
-      setMessages(prev => [...prev, 
-        { role: 'user', content: input },
-        { role: 'assistant', content: "I focus on business, market, and investment analysis. For coding-related questions, please consult programming-specific resources." }
-      ]);
-      setInput('');
-      return;
-    }
-
     const userMessage = input.trim();
     setInput('');
     setMessages(prev => [...prev, { role: 'user', content: userMessage }]);
     setIsLoading(true);
 
+    // Add searching message with loading animation
     setMessages(prev => [...prev, { 
       role: 'assistant', 
       content: 'Analyzing market data...', 
@@ -88,7 +79,9 @@ export const ChatBox = () => {
     }]);
 
     try {
-      // Try streaming first
+      // Introduce a fixed delay to ensure loading animation is visible
+      await new Promise(resolve => setTimeout(resolve, 4000)); // 4 second delay
+
       const response = await fetch('/api/chat', {
         method: 'POST',
         headers: {
@@ -99,12 +92,12 @@ export const ChatBox = () => {
       });
 
       if (response.headers.get('Content-Type')?.includes('text/event-stream')) {
-        // Handle streaming response
         const reader = response.body?.getReader();
         const decoder = new TextDecoder();
         let streamedContent = '';
 
         if (reader) {
+          // Only update to streaming state after delay
           setMessages(prev => {
             const filtered = prev.filter(msg => !msg.isSearching);
             return [...filtered, { 
@@ -160,7 +153,7 @@ export const ChatBox = () => {
           }
         }
       } else {
-        // Fallback to regular JSON response
+        // Wait for the animation to complete before showing non-streaming response
         const data = await response.json();
         if (data.status === 'success') {
           setMessages(prev => {
@@ -177,6 +170,8 @@ export const ChatBox = () => {
       }
     } catch (error) {
       console.error('Chat error:', error);
+      // Ensure error message shows after animation completes
+      await new Promise(resolve => setTimeout(resolve, 1000));
       setMessages(prev => {
         const filtered = prev.filter(msg => !msg.isSearching);
         return [...filtered, { 
