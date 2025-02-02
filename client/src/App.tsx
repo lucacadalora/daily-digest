@@ -15,6 +15,8 @@ function Router() {
       <Route path="/newsletter" component={Newsletters} />
       <Route path="/newsletter/:slug" component={WSJArticle} />
       <Route path="/newsletter/category/:category" component={Newsletters} />
+      {/* Add redirect for /newsletters to /newsletter for backward compatibility */}
+      <Route path="/newsletters" component={Newsletters} />
       <Route path="/dev-tools" component={DevTools} />
       <Route component={NotFound} />
     </Switch>
