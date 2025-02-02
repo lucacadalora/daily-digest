@@ -18,7 +18,6 @@ export const articleSchema = z.object({
   author: z.string(),
   date: z.string(),
   content: z.string(),
-  isPremium: z.boolean().optional(),
 });
 
 export type Article = z.infer<typeof articleSchema>;
@@ -32,8 +31,7 @@ export const sampleArticles: Article[] = [
     source: "Daily Digest",
     author: "Luca Cada Lora",
     date: "January 30, 2025",
-    content: "Full article content here...",
-    isPremium: true
+    content: "Full article content here..." 
   },
   {
     slug: "softbank-openai-investment",
@@ -43,8 +41,7 @@ export const sampleArticles: Article[] = [
     source: "Daily Digest",
     author: "Luca Cada Lora",
     date: "January 29, 2025",
-    content: "Full article content here...",
-    isPremium: true
+    content: "Full article content here..."
   },
   {
     slug: "white-house-seize-spending-power",
