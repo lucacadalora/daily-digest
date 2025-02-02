@@ -208,6 +208,36 @@ class MarketDataCache {
 const marketDataCache = new MarketDataCache();
 
 export function registerRoutes(app: Express): Server {
+  app.use((req, res, next) => {
+    if (process.env.NODE_ENV === 'development') {
+      res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, private');
+      res.setHeader('Pragma', 'no-cache');
+      res.setHeader('Expires', '0');
+    }
+    next();
+  });
+
+  app.use((req, res, next) => {
+    const requestStart = Date.now();
+    const originalEnd = res.end;
+    const chunks: Buffer[] = [];
+
+    res.end = function (chunk: any) {
+      if (chunk) {
+        chunks.push(Buffer.from(chunk));
+      }
+      const responseTime = Date.now() - requestStart;
+      const contentLength = chunks.reduce((acc, chunk) => acc + chunk.length, 0);
+
+      console.log(`[${new Date().toISOString()}] ${req.method} ${req.url} - ${res.statusCode} (${responseTime}ms, ${contentLength} bytes)`);
+
+      // @ts-ignore
+      return originalEnd.apply(res, arguments);
+    };
+
+    next();
+  });
+
   app.get('/api/market-data', async (req, res) => {
     try {
       const marketData = await marketDataCache.get();
