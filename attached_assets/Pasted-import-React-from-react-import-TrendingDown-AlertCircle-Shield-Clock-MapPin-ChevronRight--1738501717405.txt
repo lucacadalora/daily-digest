@@ -1,17 +1,8 @@
-import { Card, CardContent } from '@/components/ui/card';
+import React from 'react';
 import { TrendingDown, AlertCircle, Shield, Clock, MapPin, ChevronRight } from 'lucide-react';
-import { Link } from "wouter";
-import { Header } from "@/components/Header";
+import { Card, CardContent } from '@/components/ui/card';
 
-interface MetricCardProps {
-  icon: React.ElementType;
-  title: string;
-  mainValue: string;
-  subtitle: string;
-  iconColor: string;
-}
-
-const MetricCard: React.FC<MetricCardProps> = ({ icon: Icon, title, mainValue, subtitle, iconColor }) => {
+const MetricCard = ({ icon: Icon, title, mainValue, subtitle, iconColor }) => {
   return (
     <Card className="bg-gray-50 dark:bg-gray-800">
       <CardContent className="p-4">
@@ -26,7 +17,7 @@ const MetricCard: React.FC<MetricCardProps> = ({ icon: Icon, title, mainValue, s
   );
 };
 
-export default function TradeWarAnalysis() {
+const TradeWarAnalysis = () => {
   return (
     <div className="min-h-screen bg-[#FBF7F4] dark:bg-gray-900 transition-colors">
       <div className="max-w-[1200px] mx-auto px-4">
@@ -217,4 +208,6 @@ export default function TradeWarAnalysis() {
       </div>
     </div>
   );
-}
+};
+
+export default TradeWarAnalysis;
