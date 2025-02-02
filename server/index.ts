@@ -16,6 +16,7 @@ app.use((req, res, next) => {
   next();
 });
 
+// Basic middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
@@ -62,6 +63,16 @@ app.use((req, res, next) => {
 (async () => {
   const server = registerRoutes(app);
 
+  // Log environment
+  log(`[ENV] Running in ${app.get("env")} mode`);
+
+  // Setup Vite in development mode first, before other routes
+  if (app.get("env") === "development") {
+    log("[SETUP] Setting up Vite middleware");
+    await setupVite(app, server);
+    log("[SETUP] Vite middleware setup complete");
+  }
+
   // Error handling middleware
   app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
     const status = err.status || err.statusCode || 500;
@@ -70,27 +81,14 @@ app.use((req, res, next) => {
     res.status(status).json({ message });
   });
 
-  // Log environment
-  log(`[ENV] Running in ${app.get("env")} mode`);
-
-  if (app.get("env") === "development") {
-    log("[SETUP] Setting up Vite middleware");
-    await setupVite(app, server);
-    log("[SETUP] Vite middleware setup complete");
-  } else {
-    app.get('*', (req, res) => {
-      res.sendFile(path.join(__dirname, '../dist/public/index.html'));
-    });
-  }
-
   const PORT = process.env.PORT || 5000;
 
-  server.listen(PORT, () => {
+  server.listen(PORT, "0.0.0.0", () => {
     log(`[SERVER] Serving on port ${PORT}`);
   }).on('error', (e: any) => {
     if (e.code === 'EADDRINUSE') {
       log('[ERROR] Port 5000 is in use, trying 5001...');
-      server.listen(5001);
+      server.listen(5001, "0.0.0.0");
     } else {
       console.error(e);
     }
