@@ -8,6 +8,14 @@ import { SubscribeModal } from "@/components/SubscribeModal";
 import { sampleArticles } from "@/types/newsletter";
 import { Header } from "@/components/Header";
 
+// Category-specific thumbnail images
+const categoryThumbnails = {
+  Markets: "https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?w=800&h=400",
+  Economics: "https://images.unsplash.com/photo-1543286386-2e659306cd6c?w=800&h=400",
+  Industries: "https://images.unsplash.com/photo-1563203369-26f2e4a5ccf7?w=800&h=400",
+  Tech: "https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&h=400"
+};
+
 export default function Home() {
   const [isSubscribeOpen, setIsSubscribeOpen] = useState(false);
 
@@ -57,11 +65,11 @@ export default function Home() {
                 {sampleArticles.slice(1).map((article, index) => (
                   <Link key={index} href={`/newsletter/${article.slug}`} className="block group">
                     <div className="flex gap-4">
-                      <div className="w-24 h-16 flex-shrink-0">
+                      <div className="w-24 h-16 flex-shrink-0 overflow-hidden rounded">
                         <img 
-                          src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=800&h=400" 
-                          alt={article.title} 
-                          className="w-full h-full object-cover rounded"
+                          src={categoryThumbnails[article.category]} 
+                          alt={`${article.category} - ${article.title}`}
+                          className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-300"
                         />
                       </div>
                       <div className="flex-1">
