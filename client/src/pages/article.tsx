@@ -4,6 +4,47 @@ import BBRIChartDashboard from '@/components/BBRIChartDashboard';
 import { Link, useLocation } from "wouter";
 import { sampleArticles } from "@/types/newsletter";
 import { Header } from "@/components/Header";
+import { useEffect } from "react";
+import { Article } from "@/types/newsletter";
+
+function updateMetaTags(article: Article) {
+  // Update title
+  document.title = `${article.title} | Daily Digest`;
+
+  // Update meta description
+  const descriptionTag = document.querySelector('meta[name="description"]');
+  if (descriptionTag) {
+    descriptionTag.setAttribute("content", article.description);
+  }
+
+  // Update OpenGraph tags
+  const metaTags = {
+    "og:title": `${article.previewEmoji || ""} ${article.title}`,
+    "og:description": article.previewMetrics
+      ? `${article.previewMetrics.map(m => `${m.label}: ${m.value}`).join(" | ")}. ${article.description}`
+      : article.description,
+    "og:type": "article",
+    "og:image": article.previewImage || "https://daily-digest.replit.app/assets/article-preview.png",
+    "og:url": `https://daily-digest.replit.app/newsletter/${article.slug}`,
+    "twitter:card": "summary_large_image",
+    "twitter:title": `${article.previewEmoji || ""} ${article.title}`,
+    "twitter:description": article.previewMetrics
+      ? `${article.previewMetrics.map(m => `${m.label}: ${m.value}`).join(" | ")}. ${article.description}`
+      : article.description,
+    "twitter:image": article.previewImage || "https://daily-digest.replit.app/assets/article-preview.png",
+    "article:published_time": article.date,
+    "article:author": article.author,
+    "article:section": article.category,
+    "article:tag": article.tags ? article.tags.join(",") : article.category
+  };
+
+  Object.entries(metaTags).forEach(([name, content]) => {
+    const tag = document.querySelector(`meta[property="${name}"]`);
+    if (tag) {
+      tag.setAttribute("content", content);
+    }
+  });
+}
 
 export default function WSJArticle() {
   const [location] = useLocation();
@@ -15,6 +56,12 @@ export default function WSJArticle() {
   }
 
   const article = sampleArticles.find(a => a.slug === slug);
+
+  useEffect(() => {
+    if (article) {
+      updateMetaTags(article);
+    }
+  }, [article]);
 
   if (!article) {
     return <div>Article not found</div>;

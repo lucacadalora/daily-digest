@@ -25,18 +25,46 @@ export const ArticleCard = ({ article }: ArticleCardProps) => {
     <Link href={`/newsletter/${article.slug}`}>
       <Card className="cursor-pointer hover:shadow-lg transition-all duration-300 group dark:border-gray-800 dark:bg-gray-800">
         <CardContent className="p-4">
-          <div className="flex items-center space-x-2 mb-3 text-gray-600 dark:text-gray-400">
-            <Icon className="h-4 w-4" />
-            <span className="text-xs font-medium">{article.source}</span>
-            <span>•</span>
-            <span className="text-xs font-medium">{article.category}</span>
+          {/* Header with emoji and category */}
+          <div className="flex items-center justify-between mb-3">
+            <div className="flex items-center space-x-2 text-gray-600 dark:text-gray-400">
+              <Icon className="h-4 w-4" />
+              <span className="text-xs font-medium">{article.source}</span>
+              <span>•</span>
+              <span className="text-xs font-medium">{article.category}</span>
+            </div>
+            {article.previewEmoji && (
+              <span className="text-xl">{article.previewEmoji}</span>
+            )}
           </div>
+
+          {/* Title */}
           <h3 className="font-serif text-lg font-bold mb-2 line-clamp-2 group-hover:text-blue-600 transition-colors dark:group-hover:text-blue-400">
             {article.title}
           </h3>
-          <p className="text-sm text-gray-600 dark:text-gray-400 line-clamp-3 mb-4">
+
+          {/* Preview Metrics */}
+          {article.previewMetrics && (
+            <div className="grid grid-cols-3 gap-2 mb-3 bg-gray-50 dark:bg-gray-700/50 p-2 rounded-lg">
+              {article.previewMetrics.map((metric, index) => (
+                <div key={index} className="text-center">
+                  <div className="font-bold text-blue-600 dark:text-blue-400">
+                    {metric.value}
+                  </div>
+                  <div className="text-xs text-gray-600 dark:text-gray-400">
+                    {metric.label}
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+
+          {/* Description */}
+          <p className="text-sm text-gray-600 dark:text-gray-400 line-clamp-2 mb-4">
             {article.description}
           </p>
+
+          {/* Footer */}
           <div className="flex justify-between items-center">
             <div className="text-xs text-gray-500 dark:text-gray-400 flex items-center gap-2">
               <Clock className="h-3 w-3" />
