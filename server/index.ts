@@ -9,6 +9,13 @@ import { fileURLToPath } from 'url';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const app = express();
+
+// Debug middleware to log all requests
+app.use((req, res, next) => {
+  log(`[DEBUG] ${req.method} ${req.path}`);
+  next();
+});
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
@@ -59,14 +66,18 @@ app.use((req, res, next) => {
   app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
     const status = err.status || err.statusCode || 500;
     const message = err.message || "Internal Server Error";
+    log(`[ERROR] ${message}`);
     res.status(status).json({ message });
-    throw err;
   });
 
+  // Log environment
+  log(`[ENV] Running in ${app.get("env")} mode`);
+
   if (app.get("env") === "development") {
+    log("[SETUP] Setting up Vite middleware");
     await setupVite(app, server);
+    log("[SETUP] Vite middleware setup complete");
   } else {
-    // In production, serve the index.html for client-side routing
     app.get('*', (req, res) => {
       res.sendFile(path.join(__dirname, '../dist/public/index.html'));
     });
@@ -74,12 +85,11 @@ app.use((req, res, next) => {
 
   const PORT = process.env.PORT || 5000;
 
-  // Fixed the TypeScript error by using a number for the port
   server.listen(PORT, () => {
-    log(`serving on port ${PORT}`);
+    log(`[SERVER] Serving on port ${PORT}`);
   }).on('error', (e: any) => {
     if (e.code === 'EADDRINUSE') {
-      console.error('Port 5000 is in use, trying 5001...');
+      log('[ERROR] Port 5000 is in use, trying 5001...');
       server.listen(5001);
     } else {
       console.error(e);
