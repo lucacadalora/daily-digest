@@ -4,6 +4,7 @@ import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import NotFound from "@/pages/not-found";
 import BBRIAnalysisArticle from "@/pages/newsletters/bank-rakyat-indonesia-undervalued-dividend-powerhouse";
+import TradeWarAnalysis from "@/pages/newsletters/us-china-trade-war-impact-analysis";
 import Home from "@/pages/home";
 import Newsletters from "@/pages/newsletters";
 
@@ -13,6 +14,7 @@ function Router() {
       <Route path="/" component={Home} />
       <Route path="/newsletters" component={Newsletters} />
       <Route path="/newsletter/bank-rakyat-indonesia-undervalued-dividend-powerhouse" component={BBRIAnalysisArticle} />
+      <Route path="/newsletter/us-china-trade-war-impact-analysis" component={TradeWarAnalysis} />
       <Route path="/newsletter/category/:category" component={Newsletters} />
       <Route component={NotFound} />
     </Switch>
