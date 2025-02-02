@@ -3,20 +3,10 @@ import express, { type Request, Response, NextFunction } from "express";
 import { registerRoutes } from "./routes";
 import { setupVite, serveStatic, log } from "./vite";
 import chatRouter from "./routes/chat";
-import path from "path";
-import { fileURLToPath } from 'url';
-
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-
-// In production, serve static files from the dist/public directory
-if (process.env.NODE_ENV === 'production') {
-  const clientDistPath = path.join(__dirname, '../dist/public');
-  app.use(express.static(clientDistPath));
-}
 
 // Add chat routes
 app.use(chatRouter);
@@ -68,23 +58,13 @@ app.use((req, res, next) => {
   if (app.get("env") === "development") {
     await setupVite(app, server);
   } else {
-    // In production, serve the index.html for client-side routing
-    app.get('*', (req, res) => {
-      res.sendFile(path.join(__dirname, '../dist/public/index.html'));
-    });
+    serveStatic(app);
   }
 
   // ALWAYS serve the app on port 5000
   // this serves both the API and the client
-  const PORT = process.env.PORT || 5000;
+  const PORT = 5000;
   server.listen(PORT, "0.0.0.0", () => {
     log(`serving on port ${PORT}`);
-  }).on('error', (e: any) => {
-    if (e.code === 'EADDRINUSE') {
-      console.error('Port 5000 is in use, trying 5001...');
-      server.listen(5001, "0.0.0.0");
-    } else {
-      console.error(e);
-    }
   });
 })();
