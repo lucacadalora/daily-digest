@@ -43,31 +43,24 @@ export default function Home() {
               </Link>
             </div>
 
-            {/* Featured Articles - Show first article */}
+            {/* Featured Article */}
             <div className="grid grid-cols-1 gap-6 mb-8">
               <ArticleCard article={sampleArticles[0]} />
             </div>
 
-            {/* Latest Stories - Show next 3 articles */}
+            {/* Latest Stories */}
             <div className="border-t border-gray-200 dark:border-gray-700 pt-6">
               <h3 className="text-lg font-bold mb-4 text-gray-900 dark:text-white">Latest Stories</h3>
               <div className="space-y-4">
                 {sampleArticles.slice(1, 4).map((article, index) => (
                   <Link key={index} href={`/newsletter/${article.slug}`} className="block group">
                     <div className="flex gap-4">
-                      <div className="w-24 h-16 flex-shrink-0">
-                        <img 
-                          src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=800&h=400" 
-                          alt={article.title} 
-                          className="w-full h-full object-cover rounded"
-                        />
-                      </div>
                       <div className="flex-1">
                         <h4 className="font-medium text-sm mb-1 group-hover:text-blue-600 dark:group-hover:text-blue-400">
                           {article.title}
                         </h4>
                         <div className="flex items-center gap-2 text-xs text-gray-500 dark:text-gray-400">
-                          <span>{article.author}</span>
+                          <span>{article.source}</span>
                           <span>•</span>
                           <span>{article.date}</span>
                         </div>
