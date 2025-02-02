@@ -45,7 +45,8 @@ export default function Home() {
 
             {/* Featured Articles */}
             <div className="grid grid-cols-1 gap-6 mb-8">
-              {sampleArticles.slice(0, 2).map((article, index) => (
+              {/* Display first two articles */}
+              {sampleArticles.slice(0, 2).map((article) => (
                 <ArticleCard key={article.slug} article={article} />
               ))}
             </div>
@@ -54,7 +55,7 @@ export default function Home() {
             <div className="border-t border-gray-200 dark:border-gray-700 pt-6">
               <h3 className="text-lg font-bold mb-4 text-gray-900 dark:text-white">Latest Stories</h3>
               <div className="space-y-4">
-                {sampleArticles.slice(2, 5).map((article, index) => (
+                {sampleArticles.slice(2, 5).map((article) => (
                   <Link key={article.slug} href={`/newsletter/${article.slug}`} className="block group">
                     <div className="flex gap-4">
                       <div className="flex-1">
