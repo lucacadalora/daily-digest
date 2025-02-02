@@ -1,5 +1,6 @@
 import express from "express";
 import OpenAI from "openai";
+import type { APIError } from "openai";
 
 const router = express.Router();
 
@@ -111,7 +112,8 @@ Summarize key takeaways with actionable insights, focusing on investment opportu
         tokensUsed: response.usage?.total_tokens
       });
 
-    } catch (apiError) {
+    } catch (error) {
+      const apiError = error as APIError;
       console.error('Perplexity API Error:', apiError);
       throw new Error(`Failed to get response from Perplexity API: ${apiError.message}`);
     }
@@ -122,7 +124,9 @@ Summarize key takeaways with actionable insights, focusing on investment opportu
     }
 
     const content = response.choices[0].message.content;
-    const citations = Array.isArray(response['citations']) ? response['citations'] : [];
+    // Since Perplexity API might include citations in a custom format, we handle it safely
+    const citations = response && typeof response === 'object' && 'citations' in response ? 
+      (response as any).citations || [] : [];
 
     res.json({
       status: 'success',
