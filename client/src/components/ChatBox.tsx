@@ -79,9 +79,6 @@ export const ChatBox = () => {
     }]);
 
     try {
-      // Introduce a fixed delay to ensure loading animation is visible
-      await new Promise(resolve => setTimeout(resolve, 4000)); // 4 second delay
-
       const response = await fetch('/api/chat', {
         method: 'POST',
         headers: {
@@ -95,18 +92,9 @@ export const ChatBox = () => {
         const reader = response.body?.getReader();
         const decoder = new TextDecoder();
         let streamedContent = '';
+        let hasReceivedFirstChunk = false;
 
         if (reader) {
-          // Only update to streaming state after delay
-          setMessages(prev => {
-            const filtered = prev.filter(msg => !msg.isSearching);
-            return [...filtered, { 
-              role: 'assistant', 
-              content: '', 
-              isStreaming: true 
-            }];
-          });
-
           while (true) {
             const { value, done } = await reader.read();
             if (done) break;
@@ -120,19 +108,33 @@ export const ChatBox = () => {
                   const data = JSON.parse(line.slice(6));
 
                   if (data.status === 'chunk') {
-                    streamedContent += data.content;
-                    setMessages(prev => {
-                      const filtered = prev.filter(msg => !msg.isSearching);
-                      const lastMessage = filtered[filtered.length - 1];
+                    if (!hasReceivedFirstChunk) {
+                      // Only remove loading state when we have content
+                      hasReceivedFirstChunk = true;
+                      streamedContent = data.content;
+                      setMessages(prev => {
+                        const filtered = prev.filter(msg => !msg.isSearching);
+                        return [...filtered, { 
+                          role: 'assistant', 
+                          content: streamedContent,
+                          isStreaming: true 
+                        }];
+                      });
+                    } else {
+                      streamedContent += data.content;
+                      setMessages(prev => {
+                        const filtered = prev.filter(msg => !msg.isSearching);
+                        const lastMessage = filtered[filtered.length - 1];
 
-                      if (lastMessage && lastMessage.isStreaming) {
-                        return [
-                          ...filtered.slice(0, -1),
-                          { ...lastMessage, content: streamedContent }
-                        ];
-                      }
-                      return filtered;
-                    });
+                        if (lastMessage && lastMessage.isStreaming) {
+                          return [
+                            ...filtered.slice(0, -1),
+                            { ...lastMessage, content: streamedContent }
+                          ];
+                        }
+                        return filtered;
+                      });
+                    }
                   } else if (data.status === 'complete') {
                     setMessages(prev => {
                       const filtered = prev.filter(msg => !msg.isSearching);
@@ -153,7 +155,8 @@ export const ChatBox = () => {
           }
         }
       } else {
-        // Wait for the animation to complete before showing non-streaming response
+        // For non-streaming response, keep loading animation for minimum time
+        await new Promise(resolve => setTimeout(resolve, 2000));
         const data = await response.json();
         if (data.status === 'success') {
           setMessages(prev => {
@@ -170,8 +173,8 @@ export const ChatBox = () => {
       }
     } catch (error) {
       console.error('Chat error:', error);
-      // Ensure error message shows after animation completes
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      // Keep minimum loading time for error messages too
+      await new Promise(resolve => setTimeout(resolve, 2000));
       setMessages(prev => {
         const filtered = prev.filter(msg => !msg.isSearching);
         return [...filtered, { 
