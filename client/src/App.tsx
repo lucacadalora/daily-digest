@@ -14,13 +14,11 @@ function Router() {
     <Switch>
       <Route path="/" component={Home} />
       <Route path="/newsletter" component={Newsletters} />
-      {/* Special route for Trade War Analysis */}
+      {/* Trade War Analysis route must come before generic article route */}
       <Route path="/newsletter/us-china-trade-war-impact-ihsg" component={TradeWarAnalysis} />
-      {/* Generic article route for other articles */}
       <Route path="/newsletter/:slug" component={WSJArticle} />
       <Route path="/newsletter/category/:category" component={Newsletters} />
-      {/* Add redirect for /newsletters to /newsletter for backward compatibility */}
-      <Route path="/newsletters" component={Newsletters} />
+      <Route path="/newsletters" component={() => <Redirect to="/newsletter" />} />
       <Route path="/dev-tools" component={DevTools} />
       <Route path="/devtools" component={() => <Redirect to="/dev-tools" />} />
       <Route component={NotFound} />

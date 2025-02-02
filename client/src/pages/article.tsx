@@ -8,6 +8,12 @@ import { Header } from "@/components/Header";
 export default function WSJArticle() {
   const [location] = useLocation();
   const slug = location.split("/").pop();
+
+  // Early return for Trade War Analysis to ensure it uses its dedicated page
+  if (slug === 'us-china-trade-war-impact-ihsg') {
+    return null;
+  }
+
   const article = sampleArticles.find(a => a.slug === slug);
 
   if (!article) {
