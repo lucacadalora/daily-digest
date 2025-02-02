@@ -10,7 +10,11 @@ router.post("/api/chat", async (req, res) => {
 
     if (!process.env.PERPLEXITY_API_KEY) {
       console.error('API Key missing');
-      throw new Error('Missing PERPLEXITY_API_KEY');
+      return res.status(500).json({
+        status: 'error',
+        error: 'Missing API key configuration. Please ensure the Perplexity API key is properly set up.',
+        details: 'The application requires a valid Perplexity API key to function. Please contact the administrator.'
+      });
     }
 
     // Detect off-topic queries (programming, gaming, etc.)
@@ -30,11 +34,11 @@ router.post("/api/chat", async (req, res) => {
     console.log('Has stock ticker:', hasStockTicker);
 
     const basePrompt = `You are an expert financial and business analyst specializing in market analysis and investment research. Provide clear, concise, and accurate information based on your extensive knowledge of global financial markets, company valuations, and investment analysis.
-
+    
 Important: Only answer questions related to financial markets, investments, economic trends, and business analysis. If the question is outside these domains, inform the user that you can only assist with market-related queries.`;
 
     const detailedStockPrompt = `You are an expert financial and business analyst specializing in market analysis and investment research. Format your response using markdown syntax:
-
+    
 # 📊 Market Context
 Provide a concise overview of the current market landscape, focusing on recent significant developments, positioning, and broader macroeconomic trends. Use market-specific terminology and insights for the latest developments.
 
