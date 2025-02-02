@@ -192,10 +192,60 @@ export const ChatBox = () => {
   const renderMessage = (message: Message) => {
     if (message.isSearching) {
       return (
-        <div className="flex items-center space-x-2">
-          <Search className="h-4 w-4 animate-spin" />
-          <span>{message.content}</span>
-        </div>
+        <motion.div
+          initial={{ opacity: 0, y: 5 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="flex flex-col space-y-2"
+        >
+          <div className="flex items-center space-x-2">
+            <Search className="h-4 w-4 animate-spin" />
+            <span className="text-sm text-gray-600 dark:text-gray-400">
+              Analyzing market data
+              <motion.span
+                animate={{
+                  opacity: [0, 1, 1, 1, 0],
+                }}
+                transition={{
+                  duration: 2,
+                  repeat: Infinity,
+                  times: [0, 0.25, 0.5, 0.75, 1]
+                }}
+              >
+                .
+              </motion.span>
+              <motion.span
+                animate={{
+                  opacity: [0, 0, 1, 1, 0],
+                }}
+                transition={{
+                  duration: 2,
+                  repeat: Infinity,
+                  times: [0, 0.25, 0.5, 0.75, 1]
+                }}
+              >
+                .
+              </motion.span>
+              <motion.span
+                animate={{
+                  opacity: [0, 0, 0, 1, 0],
+                }}
+                transition={{
+                  duration: 2,
+                  repeat: Infinity,
+                  times: [0, 0.25, 0.5, 0.75, 1]
+                }}
+              >
+                .
+              </motion.span>
+            </span>
+          </div>
+          <motion.div
+            initial={{ width: 0 }}
+            animate={{ width: "100%" }}
+            transition={{ duration: 2, repeat: Infinity }}
+            className="h-0.5 bg-gradient-to-r from-blue-500 to-transparent"
+          />
+        </motion.div>
       );
     }
 
