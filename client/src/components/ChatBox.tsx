@@ -109,7 +109,6 @@ export const ChatBox = () => {
 
                   if (data.status === 'chunk') {
                     if (!hasReceivedFirstChunk) {
-                      // Only remove loading state when we have content
                       hasReceivedFirstChunk = true;
                       streamedContent = data.content;
                       setMessages(prev => {
@@ -155,8 +154,8 @@ export const ChatBox = () => {
           }
         }
       } else {
-        // For non-streaming response, keep loading animation for minimum time
-        await new Promise(resolve => setTimeout(resolve, 2000));
+        // For non-streaming response, keep loading state for minimum 3 seconds
+        await new Promise(resolve => setTimeout(resolve, 3000));
         const data = await response.json();
         if (data.status === 'success') {
           setMessages(prev => {
@@ -174,7 +173,7 @@ export const ChatBox = () => {
     } catch (error) {
       console.error('Chat error:', error);
       // Keep minimum loading time for error messages too
-      await new Promise(resolve => setTimeout(resolve, 2000));
+      await new Promise(resolve => setTimeout(resolve, 3000));
       setMessages(prev => {
         const filtered = prev.filter(msg => !msg.isSearching);
         return [...filtered, { 
@@ -204,8 +203,8 @@ export const ChatBox = () => {
                   opacity: [0, 1, 1, 1, 0],
                 }}
                 transition={{
-                  duration: 2,
-                  repeat: Infinity,
+                  duration: 1.5,
+                  repeat: 2,
                   times: [0, 0.25, 0.5, 0.75, 1]
                 }}
               >
@@ -216,8 +215,8 @@ export const ChatBox = () => {
                   opacity: [0, 0, 1, 1, 0],
                 }}
                 transition={{
-                  duration: 2,
-                  repeat: Infinity,
+                  duration: 1.5,
+                  repeat: 2,
                   times: [0, 0.25, 0.5, 0.75, 1]
                 }}
               >
@@ -228,8 +227,8 @@ export const ChatBox = () => {
                   opacity: [0, 0, 0, 1, 0],
                 }}
                 transition={{
-                  duration: 2,
-                  repeat: Infinity,
+                  duration: 1.5,
+                  repeat: 2,
                   times: [0, 0.25, 0.5, 0.75, 1]
                 }}
               >
@@ -240,7 +239,7 @@ export const ChatBox = () => {
           <motion.div
             initial={{ width: 0 }}
             animate={{ width: "100%" }}
-            transition={{ duration: 2, repeat: Infinity }}
+            transition={{ duration: 3, repeat: 1 }}
             className="h-0.5 bg-gradient-to-r from-blue-500 to-transparent"
           />
         </motion.div>
