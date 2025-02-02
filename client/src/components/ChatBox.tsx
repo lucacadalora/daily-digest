@@ -203,7 +203,7 @@ export const ChatBox = () => {
 
     return (
       <motion.div
-        initial={{ opacity: 0, y: 20 }}
+        initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.3 }}
         className="prose prose-sm dark:prose-invert max-w-none"
@@ -217,44 +217,59 @@ export const ChatBox = () => {
                 h2: ({ children }) => <h2 className="text-lg font-semibold mb-2">{children}</h2>,
                 h3: ({ children }) => <h3 className="text-base font-semibold mb-2">{children}</h3>,
                 p: ({ children }) => (
-                  <motion.p 
-                    className="mb-2 leading-relaxed"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ duration: 0.2 }}
-                  >
+                  <div className="mb-2 leading-relaxed">
                     {children}
-                  </motion.p>
+                    {message.isStreaming && (
+                      <motion.span
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: [0.3, 1] }}
+                        transition={{
+                          duration: 0.8,
+                          repeat: Infinity,
+                          repeatType: "reverse",
+                          ease: "easeInOut"
+                        }}
+                        className="inline-block ml-0.5 w-0.5 h-4 bg-blue-500 translate-y-1"
+                      />
+                    )}
+                  </div>
                 ),
                 ul: ({ children }) => <ul className="list-disc pl-4 mb-2 space-y-1">{children}</ul>,
                 li: ({ children }) => <li className="mb-1">{children}</li>,
-                strong: ({ children }) => <strong className="font-semibold text-blue-600 dark:text-blue-400">{children}</strong>,
+                strong: ({ children }) => (
+                  <motion.strong 
+                    initial={{ backgroundColor: "rgba(59, 130, 246, 0.1)" }}
+                    animate={{ backgroundColor: "rgba(59, 130, 246, 0)" }}
+                    transition={{ duration: 1 }}
+                    className="font-semibold text-blue-600 dark:text-blue-400"
+                  >
+                    {children}
+                  </motion.strong>
+                ),
                 em: ({ children }) => <em className="italic text-gray-600 dark:text-gray-400">{children}</em>,
                 code: ({ children }) => (
                   <code className="bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded">{children}</code>
                 ),
                 blockquote: ({ children }) => (
-                  <blockquote className="border-l-4 border-blue-500 pl-4 italic bg-blue-50 dark:bg-blue-900/20 py-2 rounded-r">
+                  <motion.blockquote 
+                    initial={{ borderLeftColor: "rgba(59, 130, 246, 0.5)" }}
+                    animate={{ borderLeftColor: "rgba(59, 130, 246, 1)" }}
+                    transition={{ duration: 0.5 }}
+                    className="border-l-4 pl-4 italic bg-blue-50 dark:bg-blue-900/20 py-2 rounded-r"
+                  >
                     {children}
-                  </blockquote>
+                  </motion.blockquote>
                 ),
               }}
             >
               {formattedContent}
             </ReactMarkdown>
-            <motion.div
-              className="absolute -right-2 top-0"
-              animate={{ opacity: [0.4, 1, 0.4] }}
-              transition={{ duration: 1.5, repeat: Infinity }}
-            >
-              <div className="w-1.5 h-4 bg-blue-500 rounded-full" />
-            </motion.div>
           </div>
         ) : (
           <motion.div
-            initial={{ opacity: 0 }}
+            initial={{ opacity: 0.8 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 0.3 }}
+            transition={{ duration: 0.5 }}
           >
             <ReactMarkdown 
               remarkPlugins={[remarkGfm]}
@@ -283,15 +298,20 @@ export const ChatBox = () => {
         )}
         {message.citations && message.citations.length > 0 && (
           <motion.div 
-            initial={{ opacity: 0, y: 10 }}
+            initial={{ opacity: 0, y: 5 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.3, delay: 0.2 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
             className="mt-4 text-sm border-t border-gray-200 dark:border-gray-700 pt-2"
           >
             <p className="font-semibold mb-1">Sources:</p>
             <ul className="list-none space-y-1">
               {message.citations.map((citation, index) => (
-                <li key={index}>
+                <motion.li
+                  key={index}
+                  initial={{ opacity: 0, x: -5 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.3, delay: 0.3 + index * 0.1 }}
+                >
                   <a 
                     href={citation}
                     target="_blank"
@@ -300,7 +320,7 @@ export const ChatBox = () => {
                   >
                     [{index + 1}] {new URL(citation).hostname}
                   </a>
-                </li>
+                </motion.li>
               ))}
             </ul>
           </motion.div>
