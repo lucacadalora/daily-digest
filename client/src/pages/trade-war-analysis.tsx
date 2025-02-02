@@ -1,5 +1,6 @@
 import { Card, CardContent } from '@/components/ui/card';
 import { TrendingDown, AlertCircle, Shield, Clock, MapPin, ChevronRight } from 'lucide-react';
+import { Link } from "wouter";
 import { Header } from "@/components/Header";
 
 interface MetricCardProps {
@@ -28,12 +29,14 @@ const MetricCard: React.FC<MetricCardProps> = ({ icon: Icon, title, mainValue, s
 export default function TradeWarAnalysis() {
   return (
     <div className="min-h-screen bg-[#FBF7F4] dark:bg-gray-900 transition-colors">
+      <Header simplified showCategories={false} />
+      <div className="h-36 sm:h-32"></div>
+
       <div className="max-w-[1200px] mx-auto px-4">
-        {/* Breadcrumb */}
         <div className="flex items-center space-x-2 text-sm text-gray-600 dark:text-gray-400 py-4 border-b border-gray-200 dark:border-gray-800">
-          <span className="hover:text-blue-600">Home</span>
+          <Link href="/" className="hover:text-blue-600">Home</Link>
           <ChevronRight className="h-4 w-4" />
-          <span className="hover:text-blue-600">Market Analysis</span>
+          <Link href="/newsletter" className="hover:text-blue-600">Newsletter</Link>
           <ChevronRight className="h-4 w-4" />
           <span>US-China Trade War Impact</span>
         </div>
@@ -59,6 +62,10 @@ export default function TradeWarAnalysis() {
                 <MapPin className="h-4 w-4" />
                 <span>JAKARTA</span>
               </div>
+            </div>
+
+            <div className="text-sm">
+              <p className="font-semibold dark:text-gray-300">By Luca Cada Lora</p>
             </div>
           </div>
         </header>
