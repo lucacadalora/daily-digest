@@ -9,6 +9,8 @@ export default function Newsletters() {
   const [location] = useLocation();
   const category = location.split("/").pop() as Category | undefined;
   const isViewAll = location === "/newsletters";
+
+  // Ensure all articles are shown when viewing all
   const filteredArticles = category && !isViewAll
     ? sampleArticles.filter(article => article.category === category)
     : sampleArticles;
@@ -55,7 +57,7 @@ export default function Newsletters() {
         {/* Articles Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
           {filteredArticles.map((article, index) => (
-            <ArticleCard key={index} article={article} />
+            <ArticleCard key={article.slug} article={article} />
           ))}
         </div>
 
