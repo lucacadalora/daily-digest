@@ -12,8 +12,11 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-// Serve static files from the public directory
-app.use(express.static(path.join(__dirname, 'public')));
+// In production, serve static files from the dist/public directory
+if (process.env.NODE_ENV === 'production') {
+  const clientDistPath = path.join(__dirname, '../dist/public');
+  app.use(express.static(clientDistPath));
+}
 
 // Add chat routes
 app.use(chatRouter);
@@ -65,7 +68,10 @@ app.use((req, res, next) => {
   if (app.get("env") === "development") {
     await setupVite(app, server);
   } else {
-    serveStatic(app);
+    // In production, serve the index.html for client-side routing
+    app.get('*', (req, res) => {
+      res.sendFile(path.join(__dirname, '../dist/public/index.html'));
+    });
   }
 
   // ALWAYS serve the app on port 5000
