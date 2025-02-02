@@ -7,12 +7,16 @@ import WSJArticle from "@/pages/article";
 import Home from "@/pages/home";
 import Newsletters from "@/pages/newsletters";
 import DevTools from "@/pages/dev-tools";
+import TradeWarAnalysis from "@/pages/trade-war-analysis";
 
 function Router() {
   return (
     <Switch>
       <Route path="/" component={Home} />
       <Route path="/newsletter" component={Newsletters} />
+      {/* Special route for Trade War Analysis */}
+      <Route path="/newsletter/us-china-trade-war-impact-ihsg" component={TradeWarAnalysis} />
+      {/* Generic article route for other articles */}
       <Route path="/newsletter/:slug" component={WSJArticle} />
       <Route path="/newsletter/category/:category" component={Newsletters} />
       {/* Add redirect for /newsletters to /newsletter for backward compatibility */}
