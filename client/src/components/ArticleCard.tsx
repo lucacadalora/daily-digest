@@ -20,7 +20,9 @@ export interface ArticleCardProps {
 
 export const ArticleCard = ({ article }: ArticleCardProps) => {
   const Icon = CategoryIcons[article.category];
-  
+
+  console.log('Rendering article:', article.slug, article.title);
+
   return (
     <Link href={`/newsletter/${article.slug}`}>
       <Card className="cursor-pointer hover:shadow-lg transition-all duration-300 group dark:border-gray-800 dark:bg-gray-800">
