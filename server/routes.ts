@@ -1,6 +1,8 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
 import axios from "axios";
+import { execFile } from "child_process";
+import { join } from "path";
 
 interface MarketPrice {
   price: number;
@@ -217,6 +219,34 @@ export function registerRoutes(app: Express): Server {
       console.error('Error in /api/market-data:', error);
       res.status(500).json({ 
         error: 'Failed to fetch market data',
+        message: error instanceof Error ? error.message : 'Unknown error'
+      });
+    }
+  });
+
+  app.post('/api/dev/refresh', async (req, res) => {
+    try {
+      const refreshScriptPath = join(__dirname, '..', 'scripts', 'refresh.js');
+      execFile('node', [refreshScriptPath], (error, stdout, stderr) => {
+        if (error) {
+          console.error('Error running refresh script:', error);
+          return res.status(500).json({ 
+            error: 'Failed to refresh environment',
+            message: error.message
+          });
+        }
+
+        if (stderr) {
+          console.warn('Refresh script warnings:', stderr);
+        }
+
+        console.log('Refresh script output:', stdout);
+        res.json({ message: 'Environment refresh completed successfully' });
+      });
+    } catch (error) {
+      console.error('Error in /api/dev/refresh:', error);
+      res.status(500).json({ 
+        error: 'Failed to refresh environment',
         message: error instanceof Error ? error.message : 'Unknown error'
       });
     }

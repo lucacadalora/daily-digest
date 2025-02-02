@@ -6,6 +6,7 @@ import NotFound from "@/pages/not-found";
 import WSJArticle from "@/pages/article";
 import Home from "@/pages/home";
 import Newsletters from "@/pages/newsletters";
+import DevTools from "@/pages/dev-tools";
 
 function Router() {
   return (
@@ -14,6 +15,7 @@ function Router() {
       <Route path="/newsletter" component={Newsletters} />
       <Route path="/newsletter/:slug" component={WSJArticle} />
       <Route path="/newsletter/category/:category" component={Newsletters} />
+      <Route path="/dev-tools" component={DevTools} />
       <Route component={NotFound} />
     </Switch>
   );
