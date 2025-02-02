@@ -1,9 +1,9 @@
 import { Card, CardContent } from '@/components/ui/card';
+import { TrendingUp, BarChart3, AlertCircle, Clock, MapPin, ChevronRight } from 'lucide-react';
 import { Link } from "wouter";
 import { Header } from "@/components/Header";
 import { sampleArticles } from "@/types/newsletter";
 import { TradeWarContent } from "@/components/TradeWarContent";
-import { ChevronRight } from 'lucide-react';
 
 export default function TradeWarAnalysisArticle() {
   const article = sampleArticles.find(a => a.slug === 'us-china-trade-war-impact-analysis');
