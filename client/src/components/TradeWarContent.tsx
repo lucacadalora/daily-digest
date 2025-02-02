@@ -1,9 +1,32 @@
-import { Clock, MapPin } from 'lucide-react';
+import React from 'react';
+import { TrendingDown, AlertCircle, Shield, Clock, MapPin } from 'lucide-react';
+import { Card, CardContent } from '@/components/ui/card';
 import type { Article } from "@/types/newsletter";
 
 interface TradeWarContentProps {
   article: Article;
 }
+
+const MetricCard = ({ icon: Icon, title, mainValue, subtitle, iconColor }: {
+  icon: any;
+  title: string;
+  mainValue: string;
+  subtitle: string;
+  iconColor: string;
+}) => {
+  return (
+    <Card className="bg-gray-50 dark:bg-gray-800">
+      <CardContent className="p-4">
+        <div className="flex items-center space-x-2 mb-2">
+          <Icon className={`h-5 w-5 ${iconColor}`} />
+          <h3 className="font-bold text-gray-900 dark:text-white">{title}</h3>
+        </div>
+        <p className="text-2xl font-bold text-gray-900 dark:text-white mb-1">{mainValue}</p>
+        <p className="text-sm text-gray-600 dark:text-gray-400">{subtitle}</p>
+      </CardContent>
+    </Card>
+  );
+};
 
 export function TradeWarContent({ article }: TradeWarContentProps) {
   return (
@@ -34,32 +57,39 @@ export function TradeWarContent({ article }: TradeWarContentProps) {
         </div>
       </div>
 
-      <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed mb-8">
-        {article.description}
-      </p>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 py-4">
+        {/* Strategic Takeaway Card */}
+        <MetricCard
+          icon={TrendingDown}
+          title="IHSG Support Level"
+          mainValue="6,900-6,956"
+          subtitle="Critical psychological support zone"
+          iconColor="text-blue-600"
+        />
+
+        {/* Most Impacted Sectors Card */}
+        <MetricCard
+          icon={AlertCircle}
+          title="Most Impacted Sectors"
+          mainValue="Cyclicals & Basic Ind"
+          subtitle="Direct trade war exposure"
+          iconColor="text-orange-600"
+        />
+
+        {/* Defensive Opportunities Card */}
+        <MetricCard
+          icon={Shield}
+          title="Defensive Opportunities"
+          mainValue="Non-Cyclicals & Finance"
+          subtitle="Domestic demand shield"
+          iconColor="text-green-600"
+        />
+      </div>
 
       <div className="prose dark:prose-invert max-w-none">
-        {/* Alert box */}
-        <div className="bg-amber-50 dark:bg-amber-900/20 border-l-4 border-amber-500 p-4 mb-6">
-          <div className="flex items-center mb-2">
-            <Clock className="h-5 w-5 text-amber-600 mr-2" />
-            <span className="font-bold text-amber-800 dark:text-amber-200">Weekly Market Alert</span>
-          </div>
-          <p className="text-sm text-amber-800 dark:text-amber-200">
-            This special report outlines critical market scenarios and action plans for the week of February 3-7, 2025.
-            This special report outlines key market scenarios and potential impacts for the week ahead.
-          </p>
-        </div>
-
-        {/* Main content */}
-        <div className="text-gray-700 dark:text-gray-300">
-          <p>
-            President Trump's 25% tariffs on Canada/Mexico and 10% on China risk triggering a retaliatory spiral, 
-            with Beijing likely to counter with targeted measures on US goods and allies. Indonesia's export-reliant 
-            industries and foreign-owned equities stand in the crossfire, threatening to push the IHSG below critical 
-            support levels.
-          </p>
-        </div>
+        <p className="text-gray-700 dark:text-gray-300">
+          {article.description}
+        </p>
       </div>
     </div>
   );
