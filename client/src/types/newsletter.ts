@@ -26,12 +26,12 @@ export const sampleArticles: Article[] = [
   {
     slug: "us-china-trade-war-impact-analysis",
     title: "US-China Retaliation: Escalation Could Trigger IHSG Sell-Offs Below 6,900",
-    description: "President Trump's 25% tariffs on Canada/Mexico and 10% on China risk triggering a retaliatory spiral, threatening Indonesia's export-reliant industries and foreign-owned equities.",
+    description: "President Trump's 25% tariffs on Canada/Mexico and 10% on China risk triggering a retaliatory spiral, with Beijing likely to counter with targeted measures on US goods and allies. Indonesia's export-reliant industries and foreign-owned equities stand in the crossfire, threatening to push the IHSG below critical support levels.",
     category: "Markets",
     source: "Daily Digest",
     author: "Luca Cada Lora",
     date: "February 2, 2025",
-    content: "Full article content here..." 
+    content: "Full article content here..."
   },
   {
     slug: "bank-rakyat-indonesia-undervalued-dividend-powerhouse",
@@ -41,7 +41,7 @@ export const sampleArticles: Article[] = [
     source: "Daily Digest",
     author: "Luca Cada Lora",
     date: "January 30, 2025",
-    content: "Full article content here..." 
+    content: "Full article content here..."
   },
   {
     slug: "softbank-openai-investment",
