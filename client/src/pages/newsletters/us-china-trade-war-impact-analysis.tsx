@@ -1,3 +1,4 @@
+import { Card, CardContent } from '@/components/ui/card';
 import { Link } from "wouter";
 import { Header } from "@/components/Header";
 import { sampleArticles } from "@/types/newsletter";
