@@ -22,6 +22,7 @@ export const articleSchema = z.object({
 
 export type Article = z.infer<typeof articleSchema>;
 
+// Updated sample articles with the trade war analysis first (most recent)
 export const sampleArticles: Article[] = [
   {
     slug: "us-china-trade-war-impact-analysis",
