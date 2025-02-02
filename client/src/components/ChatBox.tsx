@@ -21,6 +21,7 @@ interface Message {
   content: string;
   isSearching?: boolean;
   citations?: string[];
+  isStreaming?: boolean;
 }
 
 const formatMarketAnalysis = (content: string) => {
@@ -87,18 +88,92 @@ export const ChatBox = () => {
     }]);
 
     try {
-      const response = await axios.post('/api/chat', { message: userMessage });
-      if (response.data.status === 'success') {
-        setMessages(prev => {
-          const filtered = prev.filter(msg => !msg.isSearching);
-          return [...filtered, { 
-            role: 'assistant', 
-            content: response.data.reply,
-            citations: response.data.citations 
-          }];
-        });
+      // Try streaming first
+      const response = await fetch('/api/chat', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'text/event-stream',
+        },
+        body: JSON.stringify({ message: userMessage })
+      });
+
+      if (response.headers.get('Content-Type')?.includes('text/event-stream')) {
+        // Handle streaming response
+        const reader = response.body?.getReader();
+        const decoder = new TextDecoder();
+        let streamedContent = '';
+
+        if (reader) {
+          setMessages(prev => {
+            const filtered = prev.filter(msg => !msg.isSearching);
+            return [...filtered, { 
+              role: 'assistant', 
+              content: '', 
+              isStreaming: true 
+            }];
+          });
+
+          while (true) {
+            const { value, done } = await reader.read();
+            if (done) break;
+
+            const chunk = decoder.decode(value);
+            const lines = chunk.split('\n');
+
+            for (const line of lines) {
+              if (line.startsWith('data: ')) {
+                try {
+                  const data = JSON.parse(line.slice(6));
+
+                  if (data.status === 'chunk') {
+                    streamedContent += data.content;
+                    setMessages(prev => {
+                      const filtered = prev.filter(msg => !msg.isSearching);
+                      const lastMessage = filtered[filtered.length - 1];
+
+                      if (lastMessage && lastMessage.isStreaming) {
+                        return [
+                          ...filtered.slice(0, -1),
+                          { ...lastMessage, content: streamedContent }
+                        ];
+                      }
+                      return filtered;
+                    });
+                  } else if (data.status === 'complete') {
+                    setMessages(prev => {
+                      const filtered = prev.filter(msg => !msg.isSearching);
+                      return [...filtered.slice(0, -1), { 
+                        role: 'assistant', 
+                        content: data.content,
+                        citations: data.citations 
+                      }];
+                    });
+                  } else if (data.status === 'error') {
+                    throw new Error(data.error);
+                  }
+                } catch (e) {
+                  console.error('Error parsing SSE data:', e);
+                }
+              }
+            }
+          }
+        }
       } else {
-        throw new Error('Failed to get response');
+        // Fallback to regular JSON response
+        const data = await response.json();
+        if (data.status === 'success') {
+          setMessages(prev => {
+            const filtered = prev.filter(msg => !msg.isSearching);
+            return [...filtered, { 
+              role: 'assistant', 
+              content: data.reply,
+              citations: data.citations 
+            }];
+          });
+        } else {
+          throw new Error(data.error);
+        }
       }
     } catch (error) {
       console.error('Chat error:', error);
@@ -115,7 +190,7 @@ export const ChatBox = () => {
   };
 
   const renderMessage = (message: Message) => {
-      if (message.isSearching) {
+    if (message.isSearching) {
       return (
         <div className="flex items-center space-x-2">
           <Search className="h-4 w-4 animate-spin" />
@@ -127,32 +202,92 @@ export const ChatBox = () => {
     const formattedContent = formatMarketAnalysis(message.content);
 
     return (
-      <div className="prose prose-sm dark:prose-invert max-w-none">
-        <ReactMarkdown 
-          remarkPlugins={[remarkGfm]}
-          components={{
-            h1: ({ children }) => <h1 className="text-xl font-bold mb-2">{children}</h1>,
-            h2: ({ children }) => <h2 className="text-lg font-semibold mb-2">{children}</h2>,
-            h3: ({ children }) => <h3 className="text-base font-semibold mb-2">{children}</h3>,
-            p: ({ children }) => <p className="mb-2 leading-relaxed">{children}</p>,
-            ul: ({ children }) => <ul className="list-disc pl-4 mb-2 space-y-1">{children}</ul>,
-            li: ({ children }) => <li className="mb-1">{children}</li>,
-            strong: ({ children }) => <strong className="font-semibold text-blue-600 dark:text-blue-400">{children}</strong>,
-            em: ({ children }) => <em className="italic text-gray-600 dark:text-gray-400">{children}</em>,
-             code: ({ children }) => (
-              <code className="bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded">{children}</code>
-            ),
-            blockquote: ({ children }) => (
-              <blockquote className="border-l-4 border-blue-500 pl-4 italic bg-blue-50 dark:bg-blue-900/20 py-2 rounded-r">
-                {children}
-              </blockquote>
-            ),
-          }}
-        >
-          {formattedContent}
-        </ReactMarkdown>
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.3 }}
+        className="prose prose-sm dark:prose-invert max-w-none"
+      >
+        {message.isStreaming ? (
+          <div className="relative">
+            <ReactMarkdown 
+              remarkPlugins={[remarkGfm]}
+              components={{
+                h1: ({ children }) => <h1 className="text-xl font-bold mb-2">{children}</h1>,
+                h2: ({ children }) => <h2 className="text-lg font-semibold mb-2">{children}</h2>,
+                h3: ({ children }) => <h3 className="text-base font-semibold mb-2">{children}</h3>,
+                p: ({ children }) => (
+                  <motion.p 
+                    className="mb-2 leading-relaxed"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    {children}
+                  </motion.p>
+                ),
+                ul: ({ children }) => <ul className="list-disc pl-4 mb-2 space-y-1">{children}</ul>,
+                li: ({ children }) => <li className="mb-1">{children}</li>,
+                strong: ({ children }) => <strong className="font-semibold text-blue-600 dark:text-blue-400">{children}</strong>,
+                em: ({ children }) => <em className="italic text-gray-600 dark:text-gray-400">{children}</em>,
+                code: ({ children }) => (
+                  <code className="bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded">{children}</code>
+                ),
+                blockquote: ({ children }) => (
+                  <blockquote className="border-l-4 border-blue-500 pl-4 italic bg-blue-50 dark:bg-blue-900/20 py-2 rounded-r">
+                    {children}
+                  </blockquote>
+                ),
+              }}
+            >
+              {formattedContent}
+            </ReactMarkdown>
+            <motion.div
+              className="absolute -right-2 top-0"
+              animate={{ opacity: [0.4, 1, 0.4] }}
+              transition={{ duration: 1.5, repeat: Infinity }}
+            >
+              <div className="w-1.5 h-4 bg-blue-500 rounded-full" />
+            </motion.div>
+          </div>
+        ) : (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.3 }}
+          >
+            <ReactMarkdown 
+              remarkPlugins={[remarkGfm]}
+              components={{
+                h1: ({ children }) => <h1 className="text-xl font-bold mb-2">{children}</h1>,
+                h2: ({ children }) => <h2 className="text-lg font-semibold mb-2">{children}</h2>,
+                h3: ({ children }) => <h3 className="text-base font-semibold mb-2">{children}</h3>,
+                p: ({ children }) => <p className="mb-2 leading-relaxed">{children}</p>,
+                ul: ({ children }) => <ul className="list-disc pl-4 mb-2 space-y-1">{children}</ul>,
+                li: ({ children }) => <li className="mb-1">{children}</li>,
+                strong: ({ children }) => <strong className="font-semibold text-blue-600 dark:text-blue-400">{children}</strong>,
+                em: ({ children }) => <em className="italic text-gray-600 dark:text-gray-400">{children}</em>,
+                code: ({ children }) => (
+                  <code className="bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded">{children}</code>
+                ),
+                blockquote: ({ children }) => (
+                  <blockquote className="border-l-4 border-blue-500 pl-4 italic bg-blue-50 dark:bg-blue-900/20 py-2 rounded-r">
+                    {children}
+                  </blockquote>
+                ),
+              }}
+            >
+              {formattedContent}
+            </ReactMarkdown>
+          </motion.div>
+        )}
         {message.citations && message.citations.length > 0 && (
-          <div className="mt-4 text-sm border-t border-gray-200 dark:border-gray-700 pt-2">
+          <motion.div 
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.3, delay: 0.2 }}
+            className="mt-4 text-sm border-t border-gray-200 dark:border-gray-700 pt-2"
+          >
             <p className="font-semibold mb-1">Sources:</p>
             <ul className="list-none space-y-1">
               {message.citations.map((citation, index) => (
@@ -168,9 +303,9 @@ export const ChatBox = () => {
                 </li>
               ))}
             </ul>
-          </div>
+          </motion.div>
         )}
-      </div>
+      </motion.div>
     );
   };
 

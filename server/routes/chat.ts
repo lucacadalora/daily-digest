@@ -4,6 +4,11 @@ import type { APIError } from "openai";
 
 const router = express.Router();
 
+// Helper function to send SSE messages
+function sendSSE(res: express.Response, data: any) {
+  res.write(`data: ${JSON.stringify(data)}\n\n`);
+}
+
 router.post("/api/chat", async (req, res) => {
   try {
     const { message } = req.body;
@@ -33,12 +38,26 @@ router.post("/api/chat", async (req, res) => {
     console.log('Processing query:', message);
     console.log('Has stock ticker:', hasStockTicker);
 
+    // Set up SSE headers
+    if (req.headers.accept === 'text/event-stream') {
+      res.setHeader('Content-Type', 'text/event-stream');
+      res.setHeader('Cache-Control', 'no-cache');
+      res.setHeader('Connection', 'keep-alive');
+      res.flushHeaders();
+
+      // Send initial status
+      sendSSE(res, { 
+        status: 'start',
+        message: 'Analyzing market data...'
+      });
+    }
+
     const basePrompt = `You are an expert financial and business analyst specializing in market analysis and investment research. Provide clear, concise, and accurate information based on your extensive knowledge of global financial markets, company valuations, and investment analysis.
-    
+
 Important: Only answer questions related to financial markets, investments, economic trends, and business analysis. If the question is outside these domains, inform the user that you can only assist with market-related queries.`;
 
     const detailedStockPrompt = `You are an expert financial and business analyst specializing in market analysis and investment research. Format your response using markdown syntax:
-    
+
 # 📊 Market Context
 Provide a concise overview of the current market landscape, focusing on recent significant developments, positioning, and broader macroeconomic trends. Use market-specific terminology and insights for the latest developments.
 
@@ -56,27 +75,7 @@ Provide a concise overview of the current market landscape, focusing on recent s
 
 ## 💸 Fair Value Estimates
 💡 **Peter Lynch Fair Value:** [Fair Value IDR, implying X% upside from the current price]
-💸 **Analyst Consensus:** [Target prices range from IDR X to IDR Y, offering Z% upside]
-
-## 📈 Detailed Analysis
-Provide an in-depth analysis of the company's financial standing, including profit growth, asset quality, capital buffers, and key market catalysts. Highlight the company's competitive positioning and growth trajectory, particularly in areas such as market penetration and broader macroeconomic factors.
-
-## 🎯 Expert Perspective
-> "[Insert relevant expert quote with specific metrics or insights]"
-— [Expert Name], [Organization]
-
-## 💫 Growth Opportunities
-* [Growth drivers like rate cuts, new market penetration, or product innovation]
-* [Possible new revenue streams such as cross-selling services or expanding into new regions]
-* [Competitive advantage over peers, such as improved operational efficiency or strong loan book quality]
-
-## ⚠️ Risk Factors
-* [Primary risks such as macroeconomic sensitivity, interest rate changes, and currency fluctuations]
-* [Challenges with asset quality, such as rising NPLs or economic downturn impacts]
-* [Regulatory or political risks, particularly with state ownership or directed lending]
-
-## 📝 Bottom Line
-Summarize key takeaways with actionable insights, focusing on investment opportunities. Provide a concise view of the potential total returns, including dividends and growth, along with risks to monitor. Offer a strategic recommendation based on the company's fundamentals and market outlook.`;
+💸 **Analyst Consensus:** [Target prices range from IDR X to IDR Y, offering Z% upside]`;
 
     console.log('Creating OpenAI client with Perplexity configuration');
 
@@ -85,42 +84,76 @@ Summarize key takeaways with actionable insights, focusing on investment opportu
       baseURL: "https://api.perplexity.ai"
     });
 
-    console.log('Calling Perplexity API with configuration:', {
-      model: "llama-3.1-sonar-small-128k-online",
-      messageLength: message.length,
-      hasSystemPrompt: true,
-      hasStockTicker
-    });
+    if (req.headers.accept === 'text/event-stream') {
+      try {
+        const stream = await client.chat.completions.create({
+          model: "llama-3.1-sonar-small-128k-online",
+          messages: [
+            {
+              role: "system",
+              content: hasStockTicker ? detailedStockPrompt : basePrompt
+            },
+            {
+              role: "user",
+              content: message
+            }
+          ],
+          temperature: 0.2,
+          top_p: 0.9,
+          stream: true
+        });
 
-    let response;
-    try {
-      response = await client.chat.completions.create({
-        model: "llama-3.1-sonar-small-128k-online",
-        messages: [
-          {
-            role: "system",
-            content: hasStockTicker ? detailedStockPrompt : basePrompt
-          },
-          {
-            role: "user",
-            content: message
+        let fullContent = '';
+
+        for await (const chunk of stream) {
+          if (chunk.choices[0]?.delta?.content) {
+            const content = chunk.choices[0].delta.content;
+            fullContent += content;
+
+            sendSSE(res, {
+              status: 'chunk',
+              content: content
+            });
           }
-        ],
-        temperature: 0.2,
-        top_p: 0.9
-      });
+        }
 
-      console.log('API Response succeeded:', {
-        status: 'success',
-        modelUsed: response.model,
-        tokensUsed: response.usage?.total_tokens
-      });
+        // Send completion message
+        sendSSE(res, {
+          status: 'complete',
+          content: fullContent
+        });
 
-    } catch (error) {
-      const apiError = error as APIError;
-      console.error('Perplexity API Error:', apiError);
-      throw new Error(`Failed to get response from Perplexity API: ${apiError.message}`);
+        res.end();
+        return;
+      } catch (error) {
+        const apiError = error as APIError;
+        console.error('Streaming Error:', apiError);
+        sendSSE(res, {
+          status: 'error',
+          error: apiError.message
+        });
+        res.end();
+        return;
+      }
     }
+
+    // Non-streaming fallback
+    console.log('Using non-streaming API call');
+    const response = await client.chat.completions.create({
+      model: "llama-3.1-sonar-small-128k-online",
+      messages: [
+        {
+          role: "system",
+          content: hasStockTicker ? detailedStockPrompt : basePrompt
+        },
+        {
+          role: "user",
+          content: message
+        }
+      ],
+      temperature: 0.2,
+      top_p: 0.9
+    });
 
     if (!response?.choices?.[0]?.message?.content) {
       console.error('Invalid API response format:', JSON.stringify(response));
@@ -128,7 +161,6 @@ Summarize key takeaways with actionable insights, focusing on investment opportu
     }
 
     const content = response.choices[0].message.content;
-    // Since Perplexity API might include citations in a custom format, we handle it safely
     const citations = response && typeof response === 'object' && 'citations' in response ? 
       (response as any).citations || [] : [];
 
@@ -143,11 +175,13 @@ Summarize key takeaways with actionable insights, focusing on investment opportu
     const errorMessage = error instanceof Error ? error.message : 'Unknown error';
     console.error('Error details:', errorMessage);
 
-    res.status(500).json({
-      status: 'error',
-      error: errorMessage,
-      details: 'An error occurred while processing your request. Please try again.'
-    });
+    if (!res.headersSent) {
+      res.status(500).json({
+        status: 'error',
+        error: errorMessage,
+        details: 'An error occurred while processing your request. Please try again.'
+      });
+    }
   }
 });
 
