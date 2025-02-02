@@ -55,6 +55,12 @@ export default function Newsletters() {
           <Link href="/" className="hover:text-blue-600">Home</Link>
           <ChevronRight className="h-4 w-4" />
           <span>Newsletters</span>
+          {category && (
+            <>
+              <ChevronRight className="h-4 w-4" />
+              <span>{category}</span>
+            </>
+          )}
         </div>
 
         <h1 className="text-2xl sm:text-3xl font-bold mb-6 sm:mb-8 text-gray-900 dark:text-white">Newsletter</h1>
@@ -81,14 +87,15 @@ export default function Newsletters() {
         </div>
 
         {/* Articles Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4 sm:gap-6 mb-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-8">
           {currentArticles.map((article) => (
             <ArticleCard key={article.slug} article={article} />
           ))}
           {emptyCards.map((emptyArticle) => (
-            <Card key={emptyArticle.slug} className="h-full opacity-50 dark:opacity-30 cursor-not-allowed">
-              <div className="p-4 h-full flex items-center justify-center text-gray-400 dark:text-gray-600">
-                Coming Soon
+            <Card key={emptyArticle.slug} className="h-full opacity-50 dark:opacity-30">
+              <div className="p-8 h-full flex flex-col items-center justify-center text-gray-400 dark:text-gray-600">
+                <p className="text-lg font-medium mb-2">Coming Soon</p>
+                <p className="text-sm text-center">More articles are on the way</p>
               </div>
             </Card>
           ))}
