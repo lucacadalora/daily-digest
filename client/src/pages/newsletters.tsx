@@ -2,18 +2,44 @@ import { ArticleCard } from "@/components/ArticleCard";
 import { sampleArticles } from "@/types/newsletter";
 import type { Category } from "@/types/newsletter";
 import { useLocation, Link } from "wouter";
-import { ChevronRight } from "lucide-react";
+import { ChevronRight, ChevronLeft } from "lucide-react";
 import { Header } from "@/components/Header";
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
+
+const ARTICLES_PER_PAGE = 4;
 
 export default function Newsletters() {
   const [location] = useLocation();
   const category = location.split("/").pop() as Category | undefined;
   const isViewAll = location === "/newsletters";
+  const [currentPage, setCurrentPage] = useState(1);
 
-  // Ensure all articles are shown when viewing all
+  // Filter articles based on category
   const filteredArticles = category && !isViewAll
     ? sampleArticles.filter(article => article.category === category)
     : sampleArticles;
+
+  // Calculate pagination
+  const totalPages = Math.ceil(filteredArticles.length / ARTICLES_PER_PAGE);
+  const startIndex = (currentPage - 1) * ARTICLES_PER_PAGE;
+  const endIndex = startIndex + ARTICLES_PER_PAGE;
+  const currentArticles = filteredArticles.slice(startIndex, endIndex);
+
+  // Generate empty cards to fill the grid
+  const emptyCards = Array(ARTICLES_PER_PAGE - currentArticles.length)
+    .fill(null)
+    .map((_, index) => ({
+      slug: `empty-${index}`,
+      title: "",
+      description: "",
+      category: "Markets" as Category,
+      source: "",
+      author: "",
+      date: "",
+      content: "",
+    }));
 
   return (
     <div className="min-h-screen bg-[#FBF7F4] dark:bg-gray-900 transition-colors">
@@ -55,11 +81,43 @@ export default function Newsletters() {
         </div>
 
         {/* Articles Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-          {filteredArticles.map((article, index) => (
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4 sm:gap-6 mb-8">
+          {currentArticles.map((article) => (
             <ArticleCard key={article.slug} article={article} />
           ))}
+          {emptyCards.map((emptyArticle) => (
+            <Card key={emptyArticle.slug} className="h-full opacity-50 dark:opacity-30 cursor-not-allowed">
+              <div className="p-4 h-full flex items-center justify-center text-gray-400 dark:text-gray-600">
+                Coming Soon
+              </div>
+            </Card>
+          ))}
         </div>
+
+        {/* Pagination */}
+        {totalPages > 1 && (
+          <div className="flex justify-center items-center gap-2">
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
+              disabled={currentPage === 1}
+            >
+              <ChevronLeft className="h-4 w-4" />
+            </Button>
+            <span className="text-sm text-gray-600 dark:text-gray-400">
+              Page {currentPage} of {totalPages}
+            </span>
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
+              disabled={currentPage === totalPages}
+            >
+              <ChevronRight className="h-4 w-4" />
+            </Button>
+          </div>
+        )}
 
         {/* Empty State */}
         {filteredArticles.length === 0 && (
