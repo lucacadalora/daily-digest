@@ -11,6 +11,16 @@ app.use(express.urlencoded({ extended: false }));
 // Add chat routes
 app.use(chatRouter);
 
+// Development middleware to disable caching
+if (process.env.NODE_ENV === 'development') {
+  app.use((req, res, next) => {
+    res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
+    res.setHeader('Pragma', 'no-cache');
+    res.setHeader('Expires', '0');
+    next();
+  });
+}
+
 app.use((req, res, next) => {
   const start = Date.now();
   const path = req.path;
@@ -53,7 +63,9 @@ app.use((req, res, next) => {
   });
 
   if (app.get("env") === "development") {
+    log("Setting up Vite development server...");
     await setupVite(app, server);
+    log("Vite development server setup complete");
   } else {
     serveStatic(app);
   }
