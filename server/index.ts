@@ -60,11 +60,9 @@ app.use((req, res, next) => {
     throw err;
   });
 
-  if (app.get("env") === "development") {
-    await setupVite(app, server);
-  } else {
-    serveStatic(app);
-  }
+  // Force development mode for HMR
+  app.set("env", "development");
+  await setupVite(app, server);
 
   // Server configuration
   const PORT = process.env.PORT || 4000;
