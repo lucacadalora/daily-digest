@@ -2,7 +2,7 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import App from './App';
 import "./index.css";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query"; // Assuming this import is correct
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 // Create a new QueryClient instance
 const queryClient = new QueryClient();
@@ -23,6 +23,20 @@ if (import.meta.env.DEV) {
   }
 }
 
+// Add timestamp to force refresh on development
+if (import.meta.env.DEV) {
+  const stamp = Date.now();
+  const linkEls = document.getElementsByTagName('link');
+  const scriptEls = document.getElementsByTagName('script');
+
+  for (const el of [...linkEls, ...scriptEls]) {
+    const url = el.getAttribute('href') || el.getAttribute('src');
+    if (url) {
+      el.setAttribute(url.includes('?') ? 'href' : 'src', `${url}?t=${stamp}`);
+    }
+  }
+}
+
 const root = createRoot(document.getElementById("root")!);
 
 const render = () => {
@@ -38,5 +52,5 @@ const render = () => {
 render();
 
 if (import.meta.hot) {
-  import.meta.hot.accept(render); //This line is crucial to fix the HMR
+  import.meta.hot.accept(render);
 }
