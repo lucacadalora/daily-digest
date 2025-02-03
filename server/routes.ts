@@ -209,10 +209,11 @@ const marketDataCache = new MarketDataCache();
 
 export function registerRoutes(app: Express): Server {
   app.use((req, res, next) => {
-    res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, private, max-age=0');
-    res.setHeader('Pragma', 'no-cache');
-    res.setHeader('Expires', '-1');
-    res.setHeader('Surrogate-Control', 'no-store');
+    if (process.env.NODE_ENV === 'development') {
+      res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, private');
+      res.setHeader('Pragma', 'no-cache');
+      res.setHeader('Expires', '0');
+    }
     next();
   });
 

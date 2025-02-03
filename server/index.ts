@@ -13,12 +13,8 @@ app.use(chatRouter);
 
 // Development middleware to disable caching and add debug logging
 app.use((req, res, next) => {
-  // Aggressive cache busting
-  res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, private');
-  res.setHeader('Clear-Site-Data', '"cache","cookies","storage"');
-  res.setHeader('Surrogate-Control', 'no-store');
-  res.setHeader('Pragma', 'no-cache');
-  res.setHeader('Expires', '0');
+  // Force no caching in all environments
+  res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0');
   res.setHeader('Pragma', 'no-cache');
   res.setHeader('Expires', '-1');
   res.setHeader('Surrogate-Control', 'no-store');
