@@ -53,7 +53,10 @@ export const SubscribeModal = ({ isOpen, onClose }: SubscribeModalProps) => {
             </button>
 
             {/* Content */}
-            <div className="space-y-4 pt-2">
+            <div className="space-y-4 pt-2" aria-describedby="subscribe-modal-description">
+              <h2 className="text-3xl font-medium text-center">
+                <span id="subscribe-modal-description">Subscribe to Newsletter</span>
+              </h2>
               <h2 className="text-3xl font-medium text-center">
                 The best newsletter for{" "}
                 <span className="text-blue-600 dark:text-blue-400">
