@@ -11,16 +11,25 @@ app.use(express.urlencoded({ extended: false }));
 // Add chat routes
 app.use(chatRouter);
 
-// Development middleware to disable caching
+// Development middleware to disable caching and add debug logging
 if (process.env.NODE_ENV === 'development') {
   app.use((req, res, next) => {
+    // Force no caching in development
     res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
     res.setHeader('Pragma', 'no-cache');
     res.setHeader('Expires', '0');
+    res.setHeader('Surrogate-Control', 'no-store');
+
+    // Debug logging for file requests
+    if (req.url.includes('.') || req.url.includes('assets')) {
+      log(`[Debug] File request: ${req.url}`, 'dev-server');
+    }
+
     next();
   });
 }
 
+// Request logging middleware
 app.use((req, res, next) => {
   const start = Date.now();
   const path = req.path;
@@ -57,9 +66,8 @@ app.use((req, res, next) => {
   app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
     const status = err.status || err.statusCode || 500;
     const message = err.message || "Internal Server Error";
-
+    log(`[Error] ${message}`, 'error');
     res.status(status).json({ message });
-    throw err;
   });
 
   if (app.get("env") === "development") {
@@ -70,13 +78,19 @@ app.use((req, res, next) => {
     serveStatic(app);
   }
 
-  // ALWAYS serve the app on port 5000
-  const PORT = 5000;
-  const HOST = '0.0.0.0';
+  const PORT = process.env.PORT || 5000;
+  const HOST = process.env.HOST || '0.0.0.0';
 
   server.listen(PORT, HOST, () => {
     log(`Server running in ${app.get('env')} mode`);
     log(`Frontend: http://${HOST}:${PORT}`);
     log(`API: http://${HOST}:${PORT}/api`);
+
+    // Log environment details in development
+    if (app.get("env") === "development") {
+      log(`Debug mode enabled - file changes will be logged`);
+      log(`Cache headers: disabled`);
+      log(`HMR: enabled`);
+    }
   });
 })();
