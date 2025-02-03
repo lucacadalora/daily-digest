@@ -27,7 +27,6 @@ app.use((req, res, next) => {
   next();
 });
 
-
 // Request logging middleware
 app.use((req, res, next) => {
   const start = Date.now();
@@ -77,13 +76,13 @@ app.use((req, res, next) => {
     serveStatic(app);
   }
 
-  const PORT = process.env.PORT || 5000;
-  const HOST = process.env.HOST || '0.0.0.0';
+  const port = process.env.PORT ? parseInt(process.env.PORT, 10) : 5000;
+  const host = process.env.HOST || '0.0.0.0';
 
-  server.listen(PORT, HOST, () => {
+  server.listen(port, host, () => {
     log(`Server running in ${app.get('env')} mode`);
-    log(`Frontend: http://${HOST}:${PORT}`);
-    log(`API: http://${HOST}:${PORT}/api`);
+    log(`Frontend: http://${host}:${port}`);
+    log(`API: http://${host}:${port}/api`);
 
     // Log environment details in development
     if (app.get("env") === "development") {
