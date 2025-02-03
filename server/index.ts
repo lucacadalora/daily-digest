@@ -5,8 +5,18 @@ import { setupVite, serveStatic, log } from "./vite";
 import chatRouter from "./routes/chat";
 
 const app = express();
+
+// Basic middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+
+// CORS configuration for development
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+  next();
+});
 
 // Add chat routes
 app.use(chatRouter);
@@ -26,7 +36,6 @@ app.use((req, res, next) => {
 
   next();
 });
-
 
 // Request logging middleware
 app.use((req, res, next) => {
@@ -77,7 +86,7 @@ app.use((req, res, next) => {
     serveStatic(app);
   }
 
-  const PORT = process.env.PORT || 5000;
+  const PORT = Number(process.env.PORT) || 5000;
   const HOST = process.env.HOST || '0.0.0.0';
 
   server.listen(PORT, HOST, () => {
