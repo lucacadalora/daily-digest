@@ -10,9 +10,16 @@ app.use(express.urlencoded({ extended: false }));
 
 // Add strict no-cache headers for development
 app.use((req, res, next) => {
-  res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, private');
-  res.setHeader('Pragma', 'no-cache');
-  res.setHeader('Expires', '0');
+  if (process.env.NODE_ENV === 'development') {
+    res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, private');
+    res.setHeader('Pragma', 'no-cache');
+    res.setHeader('Expires', '0');
+    res.setHeader('Surrogate-Control', 'no-store');
+    // Allow all CORS in development
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  }
   next();
 });
 
@@ -55,12 +62,15 @@ app.use((req, res, next) => {
   app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
     const status = err.status || err.statusCode || 500;
     const message = err.message || "Internal Server Error";
-
+    log(`Error: ${message}`);
     res.status(status).json({ message });
-    throw err;
+    if (status >= 500) {
+      throw err;
+    }
   });
 
-  // Force development mode for HMR
+  // Force development mode and set environment
+  process.env.NODE_ENV = 'development';
   app.set("env", "development");
   await setupVite(app, server);
 
