@@ -8,21 +8,6 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-// Add strict no-cache headers for development
-app.use((req, res, next) => {
-  if (process.env.NODE_ENV === 'development') {
-    res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, private');
-    res.setHeader('Pragma', 'no-cache');
-    res.setHeader('Expires', '0');
-    res.setHeader('Surrogate-Control', 'no-store');
-    // Allow all CORS in development
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-  }
-  next();
-});
-
 // Add chat routes
 app.use(chatRouter);
 
@@ -62,26 +47,24 @@ app.use((req, res, next) => {
   app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
     const status = err.status || err.statusCode || 500;
     const message = err.message || "Internal Server Error";
-    log(`Error: ${message}`);
+
     res.status(status).json({ message });
-    if (status >= 500) {
-      throw err;
-    }
+    throw err;
   });
 
-  // Force development mode and set environment
-  process.env.NODE_ENV = 'development';
-  app.set("env", "development");
-  await setupVite(app, server);
+  if (app.get("env") === "development") {
+    await setupVite(app, server);
+  } else {
+    serveStatic(app);
+  }
 
-  // Server configuration
-  const PORT = process.env.PORT || 4000;
+  // ALWAYS serve the app on port 5000
+  const PORT = 5000;
   const HOST = '0.0.0.0';
 
   server.listen(PORT, HOST, () => {
-    log(`Server running in ${app.get('env')} mode on port ${PORT}`);
+    log(`Server running in ${app.get('env')} mode`);
     log(`Frontend: http://${HOST}:${PORT}`);
     log(`API: http://${HOST}:${PORT}/api`);
-    log(`Market data endpoint: http://${HOST}:${PORT}/api/market-data`);
   });
 })();

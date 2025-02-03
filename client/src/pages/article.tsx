@@ -15,40 +15,34 @@ function updateMetaTags(article: Article) {
   const descriptionTag = document.querySelector('meta[name="description"]');
   if (descriptionTag) {
     descriptionTag.setAttribute("content", article.description);
-  } else {
-    const meta = document.createElement('meta');
-    meta.name = "description";
-    meta.content = article.description;
-    document.head.appendChild(meta);
   }
 
-  // Update OpenGraph and Twitter card tags
+  // Update OpenGraph tags
   const metaTags = {
-    "og:title": article.title,
-    "og:description": article.description,
+    "og:title": `${article.previewEmoji || ""} ${article.title}`,
+    "og:description": article.previewMetrics
+      ? `${article.previewMetrics.map(m => `${m.label}: ${m.value}`).join(" | ")}. ${article.description}`
+      : article.description,
     "og:type": "article",
-    "og:url": `https://lucaxyzz-digest.replit.app/newsletter/${article.slug}`,
-    "og:site_name": "Daily Digest",
-    "og:image": article.previewImage || "https://lucaxyzz-digest.replit.app/assets/default-preview.png",
+    "og:image": article.previewImage || "https://daily-digest.replit.app/assets/article-preview.png",
+    "og:url": `https://daily-digest.replit.app/newsletter/${article.slug}`,
     "twitter:card": "summary_large_image",
-    "twitter:title": article.title,
-    "twitter:description": article.description,
-    "twitter:image": article.previewImage || "https://lucaxyzz-digest.replit.app/assets/default-preview.png",
+    "twitter:title": `${article.previewEmoji || ""} ${article.title}`,
+    "twitter:description": article.previewMetrics
+      ? `${article.previewMetrics.map(m => `${m.label}: ${m.value}`).join(" | ")}. ${article.description}`
+      : article.description,
+    "twitter:image": article.previewImage || "https://daily-digest.replit.app/assets/article-preview.png",
     "article:published_time": article.date,
     "article:author": article.author,
     "article:section": article.category,
     "article:tag": article.tags ? article.tags.join(",") : article.category
   };
 
-  // Update existing meta tags or create new ones
   Object.entries(metaTags).forEach(([name, content]) => {
-    let tag = document.querySelector(`meta[property="${name}"]`);
-    if (!tag) {
-      tag = document.createElement('meta');
-      tag.setAttribute('property', name);
-      document.head.appendChild(tag);
+    const tag = document.querySelector(`meta[property="${name}"]`);
+    if (tag) {
+      tag.setAttribute("content", content);
     }
-    tag.setAttribute('content', content);
   });
 }
 

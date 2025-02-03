@@ -140,8 +140,6 @@ class MarketDataCache {
       ...Object.values(SYMBOLS.forex)
     ].join(',');
 
-    console.log('Fetching data for symbols:', allSymbols);
-
     try {
       const response = await axios.get('https://query2.finance.yahoo.com/v8/finance/quote', {
         params: {

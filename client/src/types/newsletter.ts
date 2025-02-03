@@ -18,6 +18,7 @@ export const articleSchema = z.object({
   author: z.string(),
   date: z.string(),
   content: z.string(),
+  // Added standardized preview metadata
   previewMetrics: z.array(z.object({
     label: z.string(),
     value: z.string(),
@@ -40,7 +41,6 @@ export const sampleArticles: Article[] = [
     author: "Luca Cada Lora",
     date: "February 2, 2025",
     previewEmoji: "🚨",
-    previewImage: "https://lucaxyzz-digest.replit.app/assets/trade-war-preview.jpg",
     previewMetrics: [
       {
         label: "IHSG Support",
@@ -64,13 +64,12 @@ export const sampleArticles: Article[] = [
   {
     slug: "bank-rakyat-indonesia-undervalued-dividend-powerhouse",
     title: "Bank Rakyat Indonesia: The Undervalued Dividend Powerhouse",
-    description: "Analysis reveals BBRI as a compelling anomaly: a blue-chip stock trading at a 46% discount while offering one of Asia's highest dividend yields. Our deep dive suggests 30-40% total return potential through dividends and valuation re-rating in 2025.",
+    description: "Analysis of BBRI's potential 30-40% total return opportunity through dividends and valuation re-rating.",
     category: "Markets",
     source: "Daily Digest",
     author: "Luca Cada Lora",
     date: "January 30, 2025",
     previewEmoji: "💰",
-    previewImage: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?q=80&w=1200&h=630&fit=crop&auto=format",
     previewMetrics: [
       {
         label: "Dividend Yield",
@@ -88,8 +87,8 @@ export const sampleArticles: Article[] = [
         subtitle: "Total return"
       }
     ],
-    tags: ["BBRI", "Banking", "Dividends", "Value Investing"],
-    content: "Full article content here..."
+    tags: ["BBRI", "Banking", "Dividends"],
+    content: "Full article content here..." 
   },
   {
     slug: "softbank-openai-investment",
@@ -100,7 +99,6 @@ export const sampleArticles: Article[] = [
     author: "Luca Cada Lora",
     date: "January 29, 2025",
     previewEmoji: "🤖",
-    previewImage: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=1200&h=630&fit=crop&auto=format",
     previewMetrics: [
       {
         label: "Deal Size",
