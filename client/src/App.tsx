@@ -7,7 +7,6 @@ import NotFound from "@/pages/not-found";
 import WSJArticle from "@/pages/article";
 import Home from "@/pages/home";
 import Newsletters from "@/pages/newsletters";
-import DevTools from "@/pages/dev-tools";
 import TradeWarAnalysis from "@/pages/trade-war-analysis";
 
 function Router() {
@@ -28,8 +27,6 @@ function Router() {
           <Route path="/newsletter/:slug" component={WSJArticle} />
           <Route path="/newsletter/category/:category" component={Newsletters} />
           <Route path="/newsletters" component={() => <Redirect to="/newsletter" />} />
-          <Route path="/dev-tools" component={DevTools} />
-          <Route path="/devtools" component={() => <Redirect to="/dev-tools" />} />
           <Route component={NotFound} />
         </Switch>
       </div>
@@ -45,8 +42,6 @@ function Router() {
       <Route path="/newsletter/:slug" component={WSJArticle} />
       <Route path="/newsletter/category/:category" component={Newsletters} />
       <Route path="/newsletters" component={() => <Redirect to="/newsletter" />} />
-      <Route path="/dev-tools" component={DevTools} />
-      <Route path="/devtools" component={() => <Redirect to="/dev-tools" />} />
       <Route component={NotFound} />
     </Switch>
   );
