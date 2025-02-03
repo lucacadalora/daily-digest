@@ -12,22 +12,21 @@ app.use(express.urlencoded({ extended: false }));
 app.use(chatRouter);
 
 // Development middleware to disable caching and add debug logging
-if (process.env.NODE_ENV === 'development') {
-  app.use((req, res, next) => {
-    // Force no caching in development
-    res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
-    res.setHeader('Pragma', 'no-cache');
-    res.setHeader('Expires', '0');
-    res.setHeader('Surrogate-Control', 'no-store');
+app.use((req, res, next) => {
+  // Force no caching in all environments
+  res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0');
+  res.setHeader('Pragma', 'no-cache');
+  res.setHeader('Expires', '-1');
+  res.setHeader('Surrogate-Control', 'no-store');
 
-    // Debug logging for file requests
-    if (req.url.includes('.') || req.url.includes('assets')) {
-      log(`[Debug] File request: ${req.url}`, 'dev-server');
-    }
+  // Debug logging for file requests
+  if (process.env.NODE_ENV === 'development' && (req.url.includes('.') || req.url.includes('assets'))) {
+    log(`[Debug] File request: ${req.url}`, 'dev-server');
+  }
 
-    next();
-  });
-}
+  next();
+});
+
 
 // Request logging middleware
 app.use((req, res, next) => {
