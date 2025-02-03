@@ -3,7 +3,7 @@ import { createServer, type Server } from "http";
 import axios from "axios";
 import { execFile } from "child_process";
 import { join } from "path";
-
+import { MarketDataCache } from './utils/marketData';
 interface MarketPrice {
   price: number;
   change24h: number;
@@ -66,144 +66,6 @@ const SYMBOLS = {
   }
 };
 
-class MarketDataCache {
-  private cache: {
-    timestamp: number;
-    data: MarketData;
-  };
-
-  constructor() {
-    this.cache = {
-      timestamp: 0,
-      data: this.getInitialData()
-    };
-  }
-
-  private getInitialData(): MarketData {
-    const defaultPrice = { price: 0, change24h: 0 };
-    return {
-      crypto: {
-        BTC: defaultPrice,
-        ETH: defaultPrice
-      },
-      stocks: {
-        BBRI: defaultPrice,
-        TLKM: defaultPrice,
-        ASII: defaultPrice,
-        BBCA: defaultPrice,
-        AAPL: defaultPrice,
-        MSFT: defaultPrice,
-        GOOGL: defaultPrice,
-        TSLA: defaultPrice
-      },
-      indices: {
-        IHSG: defaultPrice,
-        'S&P500': defaultPrice,
-        NASDAQ: defaultPrice,
-        DJI: defaultPrice,
-        NIKKEI: defaultPrice,
-        HSI: defaultPrice
-      },
-      forex: {
-        'USD/IDR': defaultPrice
-      }
-    };
-  }
-
-  async get(): Promise<MarketData> {
-    const now = Date.now();
-    if (now - this.cache.timestamp < 30000) { // 30 second cache
-      return this.cache.data;
-    }
-
-    try {
-      const data = await this.fetchFreshData();
-      this.cache = {
-        timestamp: now,
-        data
-      };
-      return data;
-    } catch (error) {
-      console.error('Error fetching market data:', error);
-      if (this.cache.data) {
-        return this.cache.data; // Return stale data if available
-      }
-      throw error;
-    }
-  }
-
-  private async fetchFreshData(): Promise<MarketData> {
-    const allSymbols = [
-      ...Object.values(SYMBOLS.crypto),
-      ...Object.values(SYMBOLS.stocks),
-      ...Object.values(SYMBOLS.indices),
-      ...Object.values(SYMBOLS.forex)
-    ].join(',');
-
-    try {
-      const response = await axios.get('https://query2.finance.yahoo.com/v8/finance/quote', {
-        params: {
-          symbols: allSymbols,
-          fields: 'regularMarketPrice,regularMarketChangePercent'
-        },
-        headers: {
-          'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
-        }
-      });
-
-      console.log('Yahoo Finance API Response:', {
-        status: response.status,
-        dataLength: response.data?.quoteResponse?.result?.length || 0
-      });
-
-      const quotes = response.data?.quoteResponse?.result || [];
-      const quoteMap = new Map(quotes.map((quote: any) => [quote.symbol, quote]));
-
-      const mapQuote = (symbol: string): MarketPrice => {
-        const quote = quoteMap.get(symbol);
-        if (!quote) {
-          console.warn(`No data available for symbol: ${symbol}`);
-          return { price: 0, change24h: 0 };
-        }
-        return {
-          price: Number(quote.regularMarketPrice) || 0,
-          change24h: Number(quote.regularMarketChangePercent) || 0
-        };
-      };
-
-      return {
-        crypto: {
-          BTC: mapQuote(SYMBOLS.crypto.BTC),
-          ETH: mapQuote(SYMBOLS.crypto.ETH)
-        },
-        stocks: {
-          BBRI: mapQuote(SYMBOLS.stocks.BBRI),
-          TLKM: mapQuote(SYMBOLS.stocks.TLKM),
-          ASII: mapQuote(SYMBOLS.stocks.ASII),
-          BBCA: mapQuote(SYMBOLS.stocks.BBCA),
-          AAPL: mapQuote(SYMBOLS.stocks.AAPL),
-          MSFT: mapQuote(SYMBOLS.stocks.MSFT),
-          GOOGL: mapQuote(SYMBOLS.stocks.GOOGL),
-          TSLA: mapQuote(SYMBOLS.stocks.TSLA)
-        },
-        indices: {
-          IHSG: mapQuote(SYMBOLS.indices.IHSG),
-          'S&P500': mapQuote(SYMBOLS.indices['S&P500']),
-          NASDAQ: mapQuote(SYMBOLS.indices.NASDAQ),
-          DJI: mapQuote(SYMBOLS.indices.DJI),
-          NIKKEI: mapQuote(SYMBOLS.indices.NIKKEI),
-          HSI: mapQuote(SYMBOLS.indices.HSI)
-        },
-        forex: {
-          'USD/IDR': mapQuote(SYMBOLS.forex['USD/IDR'])
-        }
-      };
-    } catch (error) {
-      console.error('Error fetching market data:', error);
-      throw error;
-    }
-  }
-}
 
 const marketDataCache = new MarketDataCache();
 
@@ -244,6 +106,38 @@ export function registerRoutes(app: Express): Server {
       res.json(marketData);
     } catch (error) {
       console.error('Error in /api/market-data:', error);
+
+      if (process.env.NODE_ENV === 'development') {
+        const mockData = {
+          crypto: {
+            BTC: { price: 43250.50, change24h: 2.5 },
+            ETH: { price: 2304.75, change24h: 1.8 }
+          },
+          stocks: {
+            BBRI: { price: 5525, change24h: 0.5 },
+            TLKM: { price: 3890, change24h: -0.3 },
+            ASII: { price: 5975, change24h: 1.2 },
+            BBCA: { price: 9250, change24h: 0.8 },
+            AAPL: { price: 185.85, change24h: 1.5 },
+            MSFT: { price: 405.75, change24h: 2.1 },
+            GOOGL: { price: 142.50, change24h: 0.9 },
+            TSLA: { price: 187.75, change24h: -1.2 }
+          },
+          indices: {
+            IHSG: { price: 7120.5, change24h: 0.7 },
+            'S&P500': { price: 4975.25, change24h: 1.1 },
+            NASDAQ: { price: 15680.75, change24h: 1.8 },
+            DJI: { price: 38450.50, change24h: 0.9 },
+            NIKKEI: { price: 36250.75, change24h: 1.2 },
+            HSI: { price: 15890.25, change24h: -0.8 }
+          },
+          forex: {
+            'USD/IDR': { price: 15750, change24h: -0.2 }
+          }
+        };
+        return res.json(mockData);
+      }
+
       res.status(500).json({ 
         error: 'Failed to fetch market data',
         message: error instanceof Error ? error.message : 'Unknown error'
