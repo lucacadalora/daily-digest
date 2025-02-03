@@ -15,6 +15,13 @@ export function useDevRefresh() {
           forceRefresh();
         });
       }
+
+      // Force refresh every 30 seconds in development
+      const interval = setInterval(() => {
+        forceRefresh();
+      }, 30000);
+
+      return () => clearInterval(interval);
     }
   }, []);
 }

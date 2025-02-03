@@ -14,6 +14,12 @@ function Router() {
   // Add development refresh hook
   useDevRefresh();
 
+  // Force re-render on development changes
+  if (import.meta.env.DEV) {
+    const forceUpdate = Date.now();
+    console.log('Development build refreshed:', forceUpdate);
+  }
+
   return (
     <Switch>
       <Route path="/" component={Home} />
