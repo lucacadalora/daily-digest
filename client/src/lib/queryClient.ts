@@ -4,7 +4,12 @@ export const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
       queryFn: async ({ queryKey }) => {
-        const res = await fetch(queryKey[0] as string, {
+        // Add cache busting parameter for development
+        const url = import.meta.env.DEV 
+          ? `${queryKey[0]}${queryKey[0].includes('?') ? '&' : '?'}_t=${Date.now()}`
+          : queryKey[0];
+
+        const res = await fetch(url as string, {
           credentials: "include",
         });
 
@@ -19,9 +24,10 @@ export const queryClient = new QueryClient({
         return res.json();
       },
       refetchInterval: false,
-      refetchOnWindowFocus: false,
-      staleTime: Infinity,
+      refetchOnWindowFocus: import.meta.env.DEV ? true : false,
+      staleTime: import.meta.env.DEV ? 0 : Infinity,
       retry: false,
+      cacheTime: import.meta.env.DEV ? 0 : 300000, // 5 minutes in production
     },
     mutations: {
       retry: false,

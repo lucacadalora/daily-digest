@@ -2,6 +2,7 @@ import { Switch, Route, Redirect } from "wouter";
 import { queryClient } from "./lib/queryClient";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
+import { useDevRefresh } from "@/hooks/use-dev-refresh";
 import NotFound from "@/pages/not-found";
 import WSJArticle from "@/pages/article";
 import Home from "@/pages/home";
@@ -10,6 +11,9 @@ import DevTools from "@/pages/dev-tools";
 import TradeWarAnalysis from "@/pages/trade-war-analysis";
 
 function Router() {
+  // Add development refresh hook
+  useDevRefresh();
+
   return (
     <Switch>
       <Route path="/" component={Home} />
