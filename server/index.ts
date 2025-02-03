@@ -4,6 +4,11 @@ import { registerRoutes } from "./routes";
 import { setupVite, serveStatic, log } from "./vite";
 import chatRouter from "./routes/chat";
 
+// Ensure environment variables are set
+const NODE_ENV = process.env.NODE_ENV || 'development';
+const PORT = parseInt(process.env.PORT || '5000', 10);
+const HOST = process.env.HOST || '0.0.0.0';
+
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -20,13 +25,12 @@ app.use((req, res, next) => {
   res.setHeader('Surrogate-Control', 'no-store');
 
   // Debug logging for file requests
-  if (process.env.NODE_ENV === 'development' && (req.url.includes('.') || req.url.includes('assets'))) {
+  if (NODE_ENV === 'development' && (req.url.includes('.') || req.url.includes('assets'))) {
     log(`[Debug] File request: ${req.url}`, 'dev-server');
   }
 
   next();
 });
-
 
 // Request logging middleware
 app.use((req, res, next) => {
@@ -69,7 +73,7 @@ app.use((req, res, next) => {
     res.status(status).json({ message });
   });
 
-  if (app.get("env") === "development") {
+  if (NODE_ENV === "development") {
     log("Setting up Vite development server...");
     await setupVite(app, server);
     log("Vite development server setup complete");
@@ -77,16 +81,13 @@ app.use((req, res, next) => {
     serveStatic(app);
   }
 
-  const PORT = process.env.PORT || 5000;
-  const HOST = process.env.HOST || '0.0.0.0';
-
-  server.listen(PORT, HOST, () => {
-    log(`Server running in ${app.get('env')} mode`);
+  server.listen(PORT, () => {
+    log(`Server running in ${NODE_ENV} mode`);
     log(`Frontend: http://${HOST}:${PORT}`);
     log(`API: http://${HOST}:${PORT}/api`);
 
     // Log environment details in development
-    if (app.get("env") === "development") {
+    if (NODE_ENV === "development") {
       log(`Debug mode enabled - file changes will be logged`);
       log(`Cache headers: disabled`);
       log(`HMR: enabled`);
