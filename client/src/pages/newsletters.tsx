@@ -29,7 +29,7 @@ export default function Newsletters() {
           <span>Newsletter</span>
         </div>
 
-        <h1 className="text-2xl sm:text-3xl font-bold mb-6 sm:mb-8 text-gray-900 dark:text-white">Daily Market Intelligence</h1>
+        <h1 className="text-2xl sm:text-3xl font-bold mb-6 sm:mb-8 text-gray-900 dark:text-white">Newsletter</h1>
 
         {/* Filter by tag */}
         <div className="mb-6 sm:mb-8">
