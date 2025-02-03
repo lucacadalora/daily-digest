@@ -3,20 +3,6 @@ import { createServer, type Server } from "http";
 import axios from "axios";
 import { execFile } from "child_process";
 import { join } from "path";
-import express from 'express';
-
-interface YahooFinanceQuote {
-  symbol: string;
-  regularMarketPrice: number;
-  regularMarketChangePercent: number;
-}
-
-interface YahooFinanceResponse {
-  quoteResponse?: {
-    result?: YahooFinanceQuote[];
-    error?: any;
-  };
-}
 
 interface MarketPrice {
   price: number;
@@ -155,30 +141,23 @@ class MarketDataCache {
     ].join(',');
 
     try {
-      const response = await axios.get<YahooFinanceResponse>('https://query2.finance.yahoo.com/v8/finance/quote', {
+      const response = await axios.get('https://query2.finance.yahoo.com/v8/finance/quote', {
         params: {
           symbols: allSymbols,
           fields: 'regularMarketPrice,regularMarketChangePercent'
         },
         headers: {
-          'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36',
-          'Accept': 'application/json',
-          'Accept-Language': 'en-US,en;q=0.9',
-          'Referer': 'https://finance.yahoo.com/',
-          'Origin': 'https://finance.yahoo.com',
-          'Cache-Control': 'no-cache'
-        },
-        timeout: 10000
+          'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
+        }
       });
 
       console.log('Yahoo Finance API Response:', {
         status: response.status,
-        dataLength: response.data?.quoteResponse?.result?.length || 0,
-        error: response.data?.quoteResponse?.error
+        dataLength: response.data?.quoteResponse?.result?.length || 0
       });
 
       const quotes = response.data?.quoteResponse?.result || [];
-      const quoteMap = new Map(quotes.map((quote: YahooFinanceQuote) => [quote.symbol, quote]));
+      const quoteMap = new Map(quotes.map((quote: any) => [quote.symbol, quote]));
 
       const mapQuote = (symbol: string): MarketPrice => {
         const quote = quoteMap.get(symbol);
@@ -192,7 +171,7 @@ class MarketDataCache {
         };
       };
 
-      const mappedData = {
+      return {
         crypto: {
           BTC: mapQuote(SYMBOLS.crypto.BTC),
           ETH: mapQuote(SYMBOLS.crypto.ETH)
@@ -219,33 +198,8 @@ class MarketDataCache {
           'USD/IDR': mapQuote(SYMBOLS.forex['USD/IDR'])
         }
       };
-
-      // Validate the mapped data
-      if (Object.values(mappedData.crypto).some(price => price.price === 0)) {
-        console.warn('Some crypto prices are missing');
-      }
-      if (Object.values(mappedData.stocks).some(price => price.price === 0)) {
-        console.warn('Some stock prices are missing');
-      }
-      if (Object.values(mappedData.indices).some(price => price.price === 0)) {
-        console.warn('Some index prices are missing');
-      }
-      if (Object.values(mappedData.forex).some(price => price.price === 0)) {
-        console.warn('Some forex prices are missing');
-      }
-
-      return mappedData;
     } catch (error) {
-      if (axios.isAxiosError(error)) {
-        console.error('Yahoo Finance API Error:', {
-          message: error.message,
-          status: error.response?.status,
-          data: error.response?.data,
-          headers: error.response?.headers
-        });
-      } else {
-        console.error('Unknown error fetching market data:', error);
-      }
+      console.error('Error fetching market data:', error);
       throw error;
     }
   }
@@ -253,61 +207,8 @@ class MarketDataCache {
 
 const marketDataCache = new MarketDataCache();
 
-// Improved logging middleware
-const requestLogger = (req: express.Request, res: express.Response, next: express.NextFunction) => {
-  const requestStart = Date.now();
-  let responseBody = '';
-
-  const originalWrite = res.write;
-  const originalEnd = res.end;
-
-  res.write = function (chunk: any, ...args: any[]): boolean {
-    if (chunk) {
-      responseBody += chunk.toString('utf8');
-    }
-    return originalWrite.apply(res, [chunk, ...args]);
-  };
-
-  res.end = function (chunk: any, ...args: any[]): any {
-    if (chunk) {
-      responseBody += chunk.toString('utf8');
-    }
-
-    const responseTime = Date.now() - requestStart;
-    const contentLength = responseBody.length;
-    const logData = {
-      timestamp: new Date().toISOString(),
-      method: req.method,
-      url: req.url,
-      status: res.statusCode,
-      responseTime: `${responseTime}ms`,
-      contentLength: `${contentLength} bytes`,
-      userAgent: req.headers['user-agent'],
-      referer: req.headers.referer || '-'
-    };
-
-    if (res.statusCode >= 400) {
-      console.error('Request Error:', logData);
-      if (contentLength < 1000) {
-        console.error('Error Response:', responseBody);
-      }
-    } else {
-      console.log('Request completed:', logData);
-    }
-
-    return originalEnd.apply(res, [chunk, ...args]);
-  };
-
-  next();
-};
-
 export function registerRoutes(app: Express): Server {
-  // Set security headers
   app.use((req, res, next) => {
-    res.setHeader('X-Content-Type-Options', 'nosniff');
-    res.setHeader('X-XSS-Protection', '1; mode=block');
-    res.setHeader('X-Frame-Options', 'SAMEORIGIN');
-
     if (process.env.NODE_ENV === 'development') {
       res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, private');
       res.setHeader('Pragma', 'no-cache');
@@ -316,8 +217,26 @@ export function registerRoutes(app: Express): Server {
     next();
   });
 
-  // Use the improved logging middleware
-  app.use(requestLogger);
+  app.use((req, res, next) => {
+    const requestStart = Date.now();
+    const originalEnd = res.end;
+    const chunks: Buffer[] = [];
+
+    res.end = function (chunk: any) {
+      if (chunk) {
+        chunks.push(Buffer.from(chunk));
+      }
+      const responseTime = Date.now() - requestStart;
+      const contentLength = chunks.reduce((acc, chunk) => acc + chunk.length, 0);
+
+      console.log(`[${new Date().toISOString()}] ${req.method} ${req.url} - ${res.statusCode} (${responseTime}ms, ${contentLength} bytes)`);
+
+      // @ts-ignore
+      return originalEnd.apply(res, arguments);
+    };
+
+    next();
+  });
 
   app.get('/api/market-data', async (req, res) => {
     try {
