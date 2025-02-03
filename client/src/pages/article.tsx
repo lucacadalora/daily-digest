@@ -8,30 +8,18 @@ import { useEffect } from "react";
 import { Article } from "@/types/newsletter";
 
 function updateMetaTags(article: Article) {
-  // Update title
-  document.title = `${article.title} | Daily Digest`;
-
-  // Update meta description
-  const descriptionTag = document.querySelector('meta[name="description"]');
-  if (descriptionTag) {
-    descriptionTag.setAttribute("content", article.description);
-  }
-
-  // Update OpenGraph tags
   const metaTags = {
-    "og:title": `${article.previewEmoji || ""} ${article.title}`,
+    "og:title": `${article.title} | Daily Digest`,
     "og:description": article.previewMetrics
       ? `${article.previewMetrics.map(m => `${m.label}: ${m.value}`).join(" | ")}. ${article.description}`
       : article.description,
     "og:type": "article",
-    "og:image": article.previewImage || "https://daily-digest.replit.app/assets/article-preview.png",
-    "og:url": `https://daily-digest.replit.app/newsletter/${article.slug}`,
-    "twitter:card": "summary_large_image",
-    "twitter:title": `${article.previewEmoji || ""} ${article.title}`,
+    "og:url": `https://lucaxyzz-digest.replit.app/newsletter/${article.slug}`,
+    "twitter:card": "summary",
+    "twitter:title": `${article.title} | Daily Digest`,
     "twitter:description": article.previewMetrics
       ? `${article.previewMetrics.map(m => `${m.label}: ${m.value}`).join(" | ")}. ${article.description}`
       : article.description,
-    "twitter:image": article.previewImage || "https://daily-digest.replit.app/assets/article-preview.png",
     "article:published_time": article.date,
     "article:author": article.author,
     "article:section": article.category,
@@ -39,11 +27,24 @@ function updateMetaTags(article: Article) {
   };
 
   Object.entries(metaTags).forEach(([name, content]) => {
-    const tag = document.querySelector(`meta[property="${name}"]`);
-    if (tag) {
-      tag.setAttribute("content", content);
+    let tag = document.querySelector(`meta[property="${name}"]`);
+    if (!tag) {
+      tag = document.createElement('meta');
+      tag.setAttribute('property', name);
+      document.head.appendChild(tag);
     }
+    tag.setAttribute('content', content);
   });
+
+  // Update title and description
+  document.title = `${article.title} | Daily Digest`;
+  let descTag = document.querySelector('meta[name="description"]');
+  if (!descTag) {
+    descTag = document.createElement('meta');
+    descTag.setAttribute('name', 'description');
+    document.head.appendChild(descTag);
+  }
+  descTag.setAttribute('content', article.description);
 }
 
 export default function WSJArticle() {
