@@ -59,13 +59,13 @@ app.use((req, res, next) => {
   }
 
   // ALWAYS serve the app on port 5000
-  const PORT = 5000;
+  const PORT = process.env.PORT || 5000;
   const HOST = '0.0.0.0';
 
   server.listen(PORT, HOST, () => {
     log(`Server running in ${app.get('env')} mode on port ${PORT}`);
     log(`Frontend: http://${HOST}:${PORT}`);
     log(`API: http://${HOST}:${PORT}/api`);
-    log('Market data endpoint: http://${HOST}:${PORT}/api/market-data');
+    log(`Market data endpoint: http://${HOST}:${PORT}/api/market-data`);
   });
 })();
