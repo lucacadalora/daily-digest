@@ -11,6 +11,11 @@ export const queryClient = new QueryClient({
 
         const res = await fetch(url as string, {
           credentials: "include",
+          headers: import.meta.env.DEV ? {
+            'Cache-Control': 'no-cache, no-store, must-revalidate',
+            'Pragma': 'no-cache',
+            'Expires': '0'
+          } : undefined
         });
 
         if (!res.ok) {
@@ -34,3 +39,13 @@ export const queryClient = new QueryClient({
     }
   },
 });
+
+// Reset cache on HMR updates
+if (import.meta.env.DEV) {
+  const hot = (import.meta as any).hot;
+  if (hot) {
+    hot.accept(() => {
+      queryClient.clear();
+    });
+  }
+}

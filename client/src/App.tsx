@@ -16,8 +16,24 @@ function Router() {
 
   // Force re-render on development changes
   if (import.meta.env.DEV) {
-    const forceUpdate = Date.now();
-    console.log('Development build refreshed:', forceUpdate);
+    const key = Date.now(); // Force re-render on each development change
+    console.log('Development build refreshed:', key);
+    return (
+      <div key={key}>
+        <Switch>
+          <Route path="/" component={Home} />
+          <Route path="/newsletter" component={Newsletters} />
+          {/* Trade War Analysis route must come before generic article route */}
+          <Route path="/newsletter/us-china-trade-war-impact-ihsg" component={TradeWarAnalysis} />
+          <Route path="/newsletter/:slug" component={WSJArticle} />
+          <Route path="/newsletter/category/:category" component={Newsletters} />
+          <Route path="/newsletters" component={() => <Redirect to="/newsletter" />} />
+          <Route path="/dev-tools" component={DevTools} />
+          <Route path="/devtools" component={() => <Redirect to="/dev-tools" />} />
+          <Route component={NotFound} />
+        </Switch>
+      </div>
+    );
   }
 
   return (
