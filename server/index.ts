@@ -63,8 +63,9 @@ app.use((req, res, next) => {
   const HOST = '0.0.0.0';
 
   server.listen(PORT, HOST, () => {
-    log(`Server running in ${app.get('env')} mode`);
+    log(`Server running in ${app.get('env')} mode on port ${PORT}`);
     log(`Frontend: http://${HOST}:${PORT}`);
     log(`API: http://${HOST}:${PORT}/api`);
+    log('Market data endpoint: http://${HOST}:${PORT}/api/market-data');
   });
 })();
