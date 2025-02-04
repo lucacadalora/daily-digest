@@ -33,6 +33,35 @@ export type Article = z.infer<typeof articleSchema>;
 
 export const sampleArticles: Article[] = [
   {
+    slug: "indonesia-mineral-criticality-matrix",
+    title: "Indonesia's Mineral Criticality Matrix: Strategic and Supply Chain Perspectives",
+    description: "A comprehensive analysis of Indonesia's critical mineral reserves and their strategic importance in global supply chains, with focus on nickel, copper, and rare earth elements.",
+    category: "Industries",
+    source: "Daily Digest",
+    author: "Luca Cada Lora",
+    date: "February 4, 2025",
+    previewEmoji: "⛏️",
+    previewMetrics: [
+      {
+        label: "Nickel Reserve",
+        value: "21M tons",
+        subtitle: "World's largest"
+      },
+      {
+        label: "Market Share",
+        value: "37%",
+        subtitle: "Global supply"
+      },
+      {
+        label: "Growth Rate",
+        value: "↑ 28%",
+        subtitle: "YoY Export"
+      }
+    ],
+    tags: ["Mining", "Supply Chain", "Commodities"],
+    content: "Full article content here..."
+  },
+  {
     slug: "us-china-trade-war-impact-ihsg",
     title: "US-China Retaliation: Escalation Could Trigger IHSG Sell-Offs Below 6,900",
     description: "President Trump's 25% tariffs on Canada/Mexico and 10% on China risk triggering a retaliatory spiral, with Beijing likely to counter with targeted measures on US goods and allies. Indonesia's export-reliant industries and foreign-owned equities stand in the crossfire, threatening to push the IHSG below critical support levels.",
