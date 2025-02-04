@@ -8,7 +8,7 @@ import WSJArticle from "@/pages/article";
 import Home from "@/pages/home";
 import Newsletters from "@/pages/newsletters";
 import TradeWarAnalysis from "@/pages/trade-war-analysis";
-import MineralCriticalityMatrix from "@/pages/mineral-criticality-matrix";
+import MineralCriticalityMatrix from "@/pages/mineral-critically-matix";
 
 function Router() {
   // Add development refresh hook
