@@ -46,7 +46,7 @@ export const Header = ({ onSubscribe, showCategories = true, simplified = false 
 
         {/* Top Navigation Bar */}
         <div className="flex items-center justify-between py-4">
-          {/* Left Categories - unchanged */}
+          {/* Left Categories */}
           {showCategories ? (
             <nav className="hidden md:flex items-center space-x-8 text-sm font-medium text-gray-600 dark:text-gray-300">
               <Link href="/newsletter/category/Markets" className="hover:text-blue-600 transition-colors">Markets</Link>
@@ -58,19 +58,19 @@ export const Header = ({ onSubscribe, showCategories = true, simplified = false 
             <div className="w-10 md:hidden"></div>
           )}
 
-          {/* Center Logo - Changed title from Daily Digest to REPLIT */}
+          {/* Center Logo - Changed to Daily | Digest */}
           <Link 
             href="/" 
             className={`${showCategories ? 'md:absolute md:left-1/2 md:-translate-x-1/2' : ''} mx-auto flex-1 md:flex-none text-center`}
           >
-            <h1 className="text-xl font-['Georgia'] font-bold dark:text-white cursor-pointer hover:opacity-80 transition-opacity">
-              <span className="bg-gradient-to-r from-blue-700 via-blue-600 to-blue-500 bg-clip-text text-transparent">REPLIT</span>
+            <h1 className="text-xl font-['Georgia'] font-bold cursor-pointer hover:opacity-80 transition-opacity">
+              <span className="text-blue-600">Daily</span>{" "}|{" "}
+              <span className="text-gray-900 dark:text-white">Digest</span>
             </h1>
           </Link>
 
           {/* Right Actions */}
           <div className="flex items-center gap-2">
-            {/* Theme Toggle - Always visible */}
             <ThemeToggle />
 
             {/* Mobile Menu Button */}
@@ -91,14 +91,6 @@ export const Header = ({ onSubscribe, showCategories = true, simplified = false 
                     </Link>
                   </div>
 
-                  {/* Add Dev Tools Link */}
-                  <div className="mb-8">
-                    <Link href="/dev-tools" className="flex items-center justify-between text-lg font-medium hover:text-blue-600 transition-colors">
-                      Dev Tools
-                      <ArrowRight className="h-4 w-4" />
-                    </Link>
-                  </div>
-
                   {/* Categories */}
                   <nav className="space-y-4 mb-8">
                     <h3 className="text-base font-medium text-gray-900 dark:text-white mb-4">Categories</h3>
@@ -108,32 +100,12 @@ export const Header = ({ onSubscribe, showCategories = true, simplified = false 
                     <Link href="/newsletter/category/Tech" className="block text-base hover:text-blue-600 transition-colors">Tech</Link>
                   </nav>
 
-                  {/* Daily Digest AI */}
-                  <div className="mb-8">
-                    <button 
-                      onClick={handleChatClick}
-                      className="w-full flex items-center justify-between group"
-                    >
-                      <div className="flex items-center gap-2">
-                        <div className="relative flex items-center">
-                          <div className="w-2 h-2 rounded-full bg-green-500"></div>
-                          <div className="absolute w-2 h-2 rounded-full bg-green-500 animate-ping"></div>
-                        </div>
-                        <span className="text-lg font-medium group-hover:text-blue-600 transition-colors">Daily Digest AI</span>
-                      </div>
-                      <ArrowRight className="h-4 w-4" />
-                    </button>
-                    <p className="text-sm text-gray-600 dark:text-gray-400 mt-2">
-                      Ask our AI about market trends, analysis, and predictions in real-time.
-                    </p>
-                  </div>
-
-                  {/* Subscribe Form - Always visible */}
+                  {/* Subscribe Form */}
                   <div className="mt-8">
                     <div className="bg-blue-600 rounded-xl p-6">
                       <h3 className="text-xl font-semibold text-white mb-2">Sign up for our newsletter!</h3>
                       <p className="text-white/90 text-sm mb-4">
-                        Subscribe to stay up to date with the latest crypto products, strategies and trends.
+                        Subscribe to stay up to date with the latest market insights and trends.
                       </p>
                       <form onSubmit={form.handleSubmit((data) => console.log(data))} className="relative">
                         <Input
