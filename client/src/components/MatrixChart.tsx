@@ -8,7 +8,7 @@ export default function MatrixChart() {
       </h3>
       <div className="w-full max-w-3xl mx-auto">
         <img 
-          src="/Figure_1.png" 
+          src="/attached_assets/Figure_1.png" 
           alt="Indonesia Mineral Criticality Matrix"
           className="w-full h-auto"
         />
