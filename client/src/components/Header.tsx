@@ -46,7 +46,7 @@ export const Header = ({ onSubscribe, showCategories = true, simplified = false 
 
         {/* Top Navigation Bar */}
         <div className="flex items-center justify-between py-4">
-          {/* Left Categories */}
+          {/* Left Categories - unchanged */}
           {showCategories ? (
             <nav className="hidden md:flex items-center space-x-8 text-sm font-medium text-gray-600 dark:text-gray-300">
               <Link href="/newsletter/category/Markets" className="hover:text-blue-600 transition-colors">Markets</Link>
@@ -58,15 +58,13 @@ export const Header = ({ onSubscribe, showCategories = true, simplified = false 
             <div className="w-10 md:hidden"></div>
           )}
 
-          {/* Center Logo */}
+          {/* Center Logo - Changed title from Daily Digest to REPLIT */}
           <Link 
             href="/" 
             className={`${showCategories ? 'md:absolute md:left-1/2 md:-translate-x-1/2' : ''} mx-auto flex-1 md:flex-none text-center`}
           >
             <h1 className="text-xl font-['Georgia'] font-bold dark:text-white cursor-pointer hover:opacity-80 transition-opacity">
-              <span className="bg-gradient-to-r from-blue-700 via-blue-600 to-blue-500 bg-clip-text text-transparent">Daily</span>
-              <span className="font-light mx-1">|</span>
-              <span className="bg-gradient-to-r from-gray-800 to-gray-600 dark:from-gray-200 dark:to-gray-400 bg-clip-text text-transparent">Digest</span>
+              <span className="bg-gradient-to-r from-blue-700 via-blue-600 to-blue-500 bg-clip-text text-transparent">REPLIT</span>
             </h1>
           </Link>
 
