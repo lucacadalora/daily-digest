@@ -1,4 +1,7 @@
 import 'dotenv/config';
+
+import path from "path";
+
 import express, { type Request, Response, NextFunction } from "express";
 import { registerRoutes } from "./routes";
 import { setupVite, serveStatic, log } from "./vite";
@@ -7,6 +10,11 @@ import chatRouter from "./routes/chat";
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+
+// Serve static files from the client directory in development
+if (process.env.NODE_ENV === 'development') {
+  app.use(express.static(path.join(__dirname, '../client')));
+}
 
 // Add chat routes
 app.use(chatRouter);
