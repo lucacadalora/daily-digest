@@ -43,23 +43,23 @@ export const sampleArticles: Article[] = [
     previewEmoji: "⛏️",
     previewMetrics: [
       {
-        label: "Nickel Reserve",
-        value: "21M tons",
-        subtitle: "World's largest"
+        label: "GDP Contribution",
+        value: "8.3%",
+        subtitle: "of National GDP"
       },
       {
-        label: "Market Share",
-        value: "37%",
-        subtitle: "Global supply"
+        label: "Export Share",
+        value: "15%",
+        subtitle: "of Total Exports"
       },
       {
-        label: "Growth Rate",
-        value: "↑ 28%",
-        subtitle: "YoY Export"
+        label: "Domestic Processing",
+        value: "60%",
+        subtitle: "Processed Locally"
       }
     ],
     tags: ["Mining", "Supply Chain", "Commodities"],
-    content: "Full article content here..."
+    content: `[Content from the mineral criticality matrix article]`
   },
   {
     slug: "us-china-trade-war-impact-ihsg",
@@ -117,7 +117,7 @@ export const sampleArticles: Article[] = [
       }
     ],
     tags: ["BBRI", "Banking", "Dividends"],
-    content: "Full article content here..." 
+    content: "Full article content here..."
   },
   {
     slug: "softbank-openai-investment",
