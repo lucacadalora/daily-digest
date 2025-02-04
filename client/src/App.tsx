@@ -8,6 +8,7 @@ import WSJArticle from "@/pages/article";
 import Home from "@/pages/home";
 import Newsletters from "@/pages/newsletters";
 import TradeWarAnalysis from "@/pages/trade-war-analysis";
+import MineralCriticalityMatrix from "@/pages/mineral-criticality-matrix";
 
 function Router() {
   // Add development refresh hook
@@ -22,8 +23,9 @@ function Router() {
         <Switch>
           <Route path="/" component={Home} />
           <Route path="/newsletter" component={Newsletters} />
-          {/* Trade War Analysis route must come before generic article route */}
+          {/* Trade War Analysis and Mineral Matrix routes must come before generic article route */}
           <Route path="/newsletter/us-china-trade-war-impact-ihsg" component={TradeWarAnalysis} />
+          <Route path="/newsletter/indonesia-mineral-criticality-matrix" component={MineralCriticalityMatrix} />
           <Route path="/newsletter/:slug" component={WSJArticle} />
           <Route path="/newsletter/category/:category" component={Newsletters} />
           <Route path="/newsletters" component={() => <Redirect to="/newsletter" />} />
@@ -37,8 +39,9 @@ function Router() {
     <Switch>
       <Route path="/" component={Home} />
       <Route path="/newsletter" component={Newsletters} />
-      {/* Trade War Analysis route must come before generic article route */}
+      {/* Trade War Analysis and Mineral Matrix routes must come before generic article route */}
       <Route path="/newsletter/us-china-trade-war-impact-ihsg" component={TradeWarAnalysis} />
+      <Route path="/newsletter/indonesia-mineral-criticality-matrix" component={MineralCriticalityMatrix} />
       <Route path="/newsletter/:slug" component={WSJArticle} />
       <Route path="/newsletter/category/:category" component={Newsletters} />
       <Route path="/newsletters" component={() => <Redirect to="/newsletter" />} />

@@ -1,5 +1,5 @@
 import { Card, CardContent } from '@/components/ui/card';
-import { TrendingUp, BarChart3, AlertCircle, Clock, MapPin, ChevronRight } from 'lucide-react';
+import { Clock, MapPin, ChevronRight, TrendingUp, AlertCircle } from 'lucide-react';
 import { Link, useLocation } from "wouter";
 import { sampleArticles } from "@/types/newsletter";
 import { Header } from "@/components/Header";
@@ -113,7 +113,7 @@ export default function MineralCriticalityMatrix() {
           <Card className="bg-gray-50 dark:bg-gray-800">
             <CardContent className="p-4">
               <div className="flex items-center space-x-2 mb-2">
-                <BarChart3 className="h-5 w-5 text-blue-600" />
+                <TrendingUp className="h-5 w-5 text-blue-600" />
                 <h3 className="font-bold text-gray-900 dark:text-white">Nickel Reserves</h3>
               </div>
               <p className="text-2xl font-bold text-gray-900 dark:text-white mb-1">21M tons</p>
