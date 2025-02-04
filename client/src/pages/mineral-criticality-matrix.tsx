@@ -14,38 +14,42 @@ const MineralCriticalityMatrix = () => {
   return (
     <div className="min-h-screen bg-[#FBF7F4] dark:bg-gray-900 transition-colors">
       <div className="max-w-[1200px] mx-auto px-4">
+        {/* Website Title */}
+        <div className="text-center py-4 border-b border-gray-200 dark:border-gray-800">
+          <h1 className="text-2xl font-serif font-bold text-gray-900 dark:text-white">
+            Daily | Digest
+          </h1>
+        </div>
+
         {/* Breadcrumb */}
         <div className="flex items-center space-x-2 text-sm text-gray-600 dark:text-gray-400 py-4 border-b border-gray-200 dark:border-gray-800">
-          <span className="hover:text-blue-600">Home</span>
+          <span className="hover:text-blue-600 cursor-pointer">Home</span>
           <ChevronRight className="h-4 w-4" />
-          <span className="hover:text-blue-600">Mineral Analysis</span>
+          <span className="hover:text-blue-600 cursor-pointer">Newsletter</span>
           <ChevronRight className="h-4 w-4" />
-          <span>Criticality Matrix</span>
+          <span className="hover:text-blue-600 cursor-pointer">Weekly Special</span>
+          <ChevronRight className="h-4 w-4" />
+          <span className="hover:text-blue-600 cursor-pointer">Market Strategy</span>
         </div>
 
         {/* Header */}
         <header className="border-b border-gray-200 dark:border-gray-800 pb-4">
           <div className="pt-4">
-            <div className="flex items-center space-x-3 mb-4">
-              <div className="bg-green-100 dark:bg-green-900 px-3 py-1 rounded-full">
-                <span className="text-xs font-bold text-green-700 dark:text-green-300 uppercase">Special Report</span>
-              </div>
-              <div className="flex items-center space-x-2 text-xs text-gray-600 dark:text-gray-400">
-                <span className="font-bold uppercase">Mineral Strategy</span>
-              </div>
-            </div>
             <h1 className="font-serif text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-3 leading-tight">
               Indonesia's Mineral Criticality Matrix: Strategic and Supply Chain Perspectives
             </h1>
             <div className="flex items-center space-x-4 text-sm text-gray-600 dark:text-gray-400 mb-3">
               <div className="flex items-center space-x-1">
                 <Clock className="h-4 w-4" />
-                <span>February 7, 2025</span>
+                <span>February 4, 2025</span>
               </div>
               <div className="flex items-center space-x-1">
                 <MapPin className="h-4 w-4" />
                 <span>JAKARTA</span>
               </div>
+            </div>
+            <div className="text-sm text-gray-600 dark:text-gray-400">
+              By Luca Cada Lora
             </div>
           </div>
         </header>
