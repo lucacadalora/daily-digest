@@ -11,6 +11,7 @@ import chatRouter from "./routes/chat";
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+app.use(express.static(path.join(__dirname, 'public')));
 
 // Serve static files from the client directory in development
 if (process.env.NODE_ENV === 'development') {
