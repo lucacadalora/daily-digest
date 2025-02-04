@@ -8,7 +8,7 @@ import {
   Shield
 } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
-import MatrixChart from '@/components/MatrixChart';
+import MatrixChart from '@/components/ui/MatrixChart';
 
 const MineralCriticalityMatrix = () => {
   return (
