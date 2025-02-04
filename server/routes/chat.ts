@@ -13,18 +13,19 @@ router.post("/api/chat", async (req, res) => {
   try {
     const { message } = req.body;
 
-    const apiKey = process.env.PERPLEXITY_API_KEY;
+    const apiKey = process.env.PERPLEXITY_API_KEY?.trim();
     console.log('Environment check:', {
       hasApiKey: !!apiKey,
+      keyLength: apiKey?.length,
       nodeEnv: process.env.NODE_ENV
     });
 
-    if (!apiKey) {
-      console.error('Perplexity API Key missing in environment:', process.env.NODE_ENV);
+    if (!apiKey || apiKey.length < 1) {
+      console.error('Perplexity API Key missing or invalid:', process.env.NODE_ENV);
       return res.status(500).json({
         status: 'error',
         error: 'API Configuration Error',
-        details: 'Missing Perplexity API key. Please check deployment settings.'
+        details: 'Invalid or missing Perplexity API key. Please check your secrets configuration.'
       });
     }
 
