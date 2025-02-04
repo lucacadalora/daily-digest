@@ -16,20 +16,18 @@ const MineralCriticalityMatrix = () => {
       <div className="max-w-[1200px] mx-auto px-4">
         {/* Website Title */}
         <div className="text-center py-4 border-b border-gray-200 dark:border-gray-800">
-          <h1 className="text-2xl font-serif font-bold text-gray-900 dark:text-white">
-            Daily | Digest
+          <h1 className="text-2xl font-serif font-bold">
+            <span className="text-blue-600">Daily</span> | <span className="text-gray-900 dark:text-white">Digest</span>
           </h1>
         </div>
 
         {/* Breadcrumb */}
         <div className="flex items-center space-x-2 text-sm text-gray-600 dark:text-gray-400 py-4 border-b border-gray-200 dark:border-gray-800">
-          <span className="hover:text-blue-600 cursor-pointer">Home</span>
+          <a href="/" className="hover:text-blue-600 cursor-pointer">Home</a>
           <ChevronRight className="h-4 w-4" />
-          <span className="hover:text-blue-600 cursor-pointer">Newsletter</span>
+          <a href="/newsletter" className="hover:text-blue-600 cursor-pointer">Newsletter</a>
           <ChevronRight className="h-4 w-4" />
-          <span className="hover:text-blue-600 cursor-pointer">Weekly Special</span>
-          <ChevronRight className="h-4 w-4" />
-          <span className="hover:text-blue-600 cursor-pointer">Market Strategy</span>
+          <span>Indonesia's Mineral Criticality Matrix</span>
         </div>
 
         {/* Header */}
