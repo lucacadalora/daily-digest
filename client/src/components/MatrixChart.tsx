@@ -9,9 +9,10 @@ export default function MatrixChart() {
       <Card className="bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm p-4">
         <div className="w-full max-w-4xl mx-auto">
           <img 
-            src="/assets/Figure_1.png"
+            src="Figure_1.png"
             alt="Indonesia Mineral Criticality Matrix"
             className="w-full h-auto object-contain rounded-lg"
+            style={{ maxHeight: '600px' }}
           />
         </div>
       </Card>
