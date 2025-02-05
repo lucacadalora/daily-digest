@@ -4,6 +4,27 @@ import type { APIError } from "openai";
 
 const router = express.Router();
 
+const basePrompt = `You are an expert financial and business analyst specializing in market analysis and investment research. Provide clear, concise, and accurate information based on your extensive knowledge of global financial markets, company valuations, and investment analysis.
+
+Important: Only answer questions related to financial markets, investments, economic trends, and business analysis. If the question is outside these domains, inform the user that you can only assist with market-related queries.`;
+
+const detailedStockPrompt = `You are an expert financial and business analyst specializing in market analysis and investment research. Format your response using markdown syntax:
+
+# 📊 Market Context
+Provide a concise overview of the current market landscape, focusing on recent significant developments, positioning, and broader macroeconomic trends. Use market-specific terminology and insights for the latest developments.
+
+## 💡 Key Metrics
+* **Current Stock Price:** [Latest market price]
+* **Price-to-Earnings (P/E):** [Value, with comparison to industry peers]
+* **Market Capitalization:** [Total market cap]
+* **Earnings Growth:** [Latest earnings growth]
+
+## 💰 Dividend Outlook
+Expected Dividend Yield and Projections
+
+## 💸 Fair Value Analysis
+Current valuation metrics and potential growth scenarios`;
+
 // Helper function to send SSE messages
 function sendSSE(res: express.Response, data: any) {
   res.write(`data: ${JSON.stringify(data)}\n\n`);
@@ -13,7 +34,14 @@ router.post("/api/chat", async (req, res) => {
   try {
     const { message } = req.body;
 
-    const apiKey = process.env.PERPLEXITY_API_KEY;
+    if (!message) {
+      return res.status(400).json({
+        status: 'error',
+        error: 'Message is required'
+      });
+    }
+
+    const apiKey = process.env.PERPLEXITY_API_KEY?.trim();
 
     if (!apiKey) {
       return res.status(500).json({
@@ -29,23 +57,20 @@ router.post("/api/chat", async (req, res) => {
       });
     }
 
-    // Detect off-topic queries (programming, gaming, etc.)
+    // Detect off-topic queries
     const nonMarketTerms = /\b(code|programming|typescript|javascript|python|game|gaming|maze|algorithm|compiler|database|API|endpoint)\b/i;
     if (nonMarketTerms.test(message)) {
-      return res.json({
+      return res.status(400).json({
         status: 'error',
         error: 'This AI assistant specializes in financial markets and investment analysis. For programming or other topics, please use appropriate specialized resources.'
       });
     }
 
-    // Match stock tickers: Traditional (AAPL), Indonesian (.JK), Indices (^GSPC)
+    // Match stock tickers
     const stockTickerPattern = /\b[A-Z]{1,5}(\.[A-Z]{2})?\b|\^[A-Z]+\b/g;
     const hasStockTicker = stockTickerPattern.test(message);
 
-    console.log('Processing query:', message);
-    console.log('Has stock ticker:', hasStockTicker);
-
-    // Set up SSE headers
+    // Set up SSE headers if streaming is requested
     if (req.headers.accept === 'text/event-stream') {
       res.setHeader('Content-Type', 'text/event-stream');
       res.setHeader('Cache-Control', 'no-cache');
@@ -65,10 +90,10 @@ router.post("/api/chat", async (req, res) => {
       defaultHeaders: {
         "Accept": "application/json",
         "Content-Type": "application/json"
-      },
-      dangerouslyAllowBrowser: true
+      }
     });
 
+    // Handle streaming response
     if (req.headers.accept === 'text/event-stream') {
       try {
         const stream = await client.chat.completions.create({
@@ -112,13 +137,11 @@ router.post("/api/chat", async (req, res) => {
         return;
       } catch (error) {
         console.error('Streaming Error:', error);
-        if (!res.headersSent) {
-          sendSSE(res, {
-            status: 'error',
-            error: 'An error occurred while processing your request. Please try again.'
-          });
-          res.end();
-        }
+        sendSSE(res, {
+          status: 'error',
+          error: 'An error occurred while processing your request. Please try again.'
+        });
+        res.end();
         return;
       }
     }
@@ -146,13 +169,9 @@ router.post("/api/chat", async (req, res) => {
       }
 
       const content = response.choices[0].message.content;
-      const citations = response && typeof response === 'object' && 'citations' in response ? 
-        (response as any).citations || [] : [];
-
       return res.json({
         status: 'success',
-        reply: content.trim(),
-        citations: citations
+        reply: content.trim()
       });
     } catch (error) {
       console.error('Non-streaming Error:', error);
@@ -163,13 +182,12 @@ router.post("/api/chat", async (req, res) => {
     }
   } catch (error) {
     console.error('Chat API Error:', error);
+    const errorResponse = {
+      status: 'error',
+      error: 'An error occurred while processing your request. Please try again.'
+    };
 
     if (!res.headersSent) {
-      const errorResponse = {
-        status: 'error',
-        error: 'An error occurred while processing your request. Please try again.'
-      };
-
       if (req.headers.accept === 'text/event-stream') {
         sendSSE(res, errorResponse);
         res.end();
