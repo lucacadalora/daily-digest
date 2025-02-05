@@ -90,7 +90,10 @@ Provide a concise overview of the current market landscape, focusing on recent s
 
     const client = new OpenAI({
       apiKey,
-      baseURL: "https://api.perplexity.ai"
+      baseURL: "https://api.perplexity.ai",
+      defaultHeaders: {
+        "Accept": "application/json"
+      }
     });
 
     console.log('OpenAI client initialized with Perplexity configuration');
@@ -183,7 +186,11 @@ Provide a concise overview of the current market landscape, focusing on recent s
     });
 
   } catch (error) {
-    console.error('Chat API Error:', error);
+    console.error('Chat API Error:', {
+      error,
+      apiKey: !!apiKey,
+      keyLength: apiKey?.length
+    });
     const errorMessage = error instanceof Error ? error.message : 'Unknown error';
 
     if (req.headers.accept === 'text/event-stream' && !res.headersSent) {
