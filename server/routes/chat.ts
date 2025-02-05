@@ -99,9 +99,11 @@ Provide a concise overview of the current market landscape, focusing on recent s
     const client = new OpenAI({
       apiKey,
       baseURL: "https://api.perplexity.ai",
+      defaultQuery: { mode: 'concise' },
       defaultHeaders: {
         'Accept': 'application/json',
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${apiKey}`
       },
       timeout: 30000
     });
@@ -200,11 +202,18 @@ Provide a concise overview of the current market landscape, focusing on recent s
     console.error('Error details:', errorMessage);
 
     if (!res.headersSent) {
-      res.status(500).json({
+      const errorResponse = {
         status: 'error',
-        error: errorMessage,
-        details: 'An error occurred while processing your request. Please try again.'
-      });
+        error: 'API Error',
+        details: 'Unable to process your request. Please try again.'
+      };
+      
+      if (req.headers.accept === 'text/event-stream') {
+        sendSSE(res, errorResponse);
+        res.end();
+      } else {
+        res.status(500).json(errorResponse);
+      }
     }
   }
 });
