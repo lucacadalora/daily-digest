@@ -98,7 +98,10 @@ Provide a concise overview of the current market landscape, focusing on recent s
 
     const client = new OpenAI({
       apiKey,
-      baseURL: "https://api.perplexity.ai"
+      baseURL: "https://api.perplexity.ai",
+      defaultHeaders: {
+        'Accept': 'application/json'
+      }
     });
 
     console.log('OpenAI client initialized with Perplexity configuration');
