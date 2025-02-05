@@ -100,7 +100,8 @@ Provide a concise overview of the current market landscape, focusing on recent s
       apiKey,
       baseURL: "https://api.perplexity.ai",
       defaultHeaders: {
-        'Accept': 'application/json'
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
       }
     });
 
