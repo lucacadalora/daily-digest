@@ -14,21 +14,21 @@ router.post("/api/chat", async (req, res) => {
     const { message } = req.body;
 
     const apiKey = process.env.PERPLEXITY_API_KEY?.trim();
-    console.log('Environment check:', {
-      hasApiKey: !!apiKey,
-      keyLength: apiKey?.length,
-      nodeEnv: process.env.NODE_ENV
-    });
+    
+    if (!apiKey) {
+      console.error('API Key missing');
+      return res.status(500).json({
+        status: 'error',
+        error: 'Missing API key. Please add PERPLEXITY_API_KEY to your Secrets.',
+      });
+    }
 
-    if (!apiKey || typeof apiKey !== 'string' || apiKey.length < 10) {
-      console.error('API Key validation failed:', { hasKey: !!apiKey, keyLength: apiKey?.length });
-
-      if (!res.headersSent) {
-        return res.status(500).json({
-          status: 'error',
-          error: 'Missing or invalid API key. Please check your environment configuration.',
-        });
-      }
+    if (apiKey.length < 10) {
+      console.error('API Key appears invalid:', { keyLength: apiKey.length });
+      return res.status(500).json({
+        status: 'error', 
+        error: 'Invalid API key format. Please check your PERPLEXITY_API_KEY in Secrets.',
+      });
     }
 
     // Detect off-topic queries (programming, gaming, etc.)
