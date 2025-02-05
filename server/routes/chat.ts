@@ -158,31 +158,26 @@ Provide a concise overview of the current market landscape, focusing on recent s
 
     // Non-streaming fallback
     console.log('Using non-streaming API call');
-    try {
-      const response = await client.chat.completions.create({
-        model: "llama-3.1-sonar-small-128k-online",
-        messages: [
-          {
-            role: "system",
-            content: hasStockTicker ? detailedStockPrompt : basePrompt
-          },
-          {
-            role: "user",
-            content: message
-          }
-        ],
-        temperature: 0.2,
-        top_p: 0.9
-      });
+    const response = await client.chat.completions.create({
+      model: "llama-3.1-sonar-small-128k-online",
+      messages: [
+        {
+          role: "system",
+          content: hasStockTicker ? detailedStockPrompt : basePrompt
+        },
+        {
+          role: "user",
+          content: message
+        }
+      ],
+      temperature: 0.2,
+      top_p: 0.9
+    });
 
-      if (!response?.choices?.[0]?.message?.content) {
-        console.error('Invalid API response format:', JSON.stringify(response));
-        return res.status(500).json({
-          status: 'error',
-          error: 'Invalid response from AI service',
-          details: 'The AI service returned an unexpected response format'
-        });
-      }
+    if (!response?.choices?.[0]?.message?.content) {
+      console.error('Invalid API response format:', JSON.stringify(response));
+      throw new Error('Invalid API response format');
+    }
 
     const content = response.choices[0].message.content;
     const citations = response && typeof response === 'object' && 'citations' in response ? 
@@ -195,20 +190,16 @@ Provide a concise overview of the current market landscape, focusing on recent s
     });
 
   } catch (error) {
-      console.error('Chat API Error:', error);
-      const errorMessage = error instanceof Error ? error.message : 'Unknown error';
-      console.error('Error details:', errorMessage);
+    console.error('Chat API Error:', error);
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+    console.error('Error details:', errorMessage);
 
-      // Check if headers have been sent and the response hasn't been ended
-      if (!res.headersSent) {
-        // Send a more specific error message
-        res.status(500).json({
-          status: 'error',
-          error: 'AI Service Error',
-          details: 'The AI service is temporarily unavailable. Please try again in a moment.',
-          technical_details: errorMessage
-        });
-      }
+    if (!res.headersSent) {
+      res.status(500).json({
+        status: 'error',
+        error: errorMessage,
+        details: 'An error occurred while processing your request. Please try again.'
+      });
     }
   }
 });
