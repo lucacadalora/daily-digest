@@ -92,8 +92,10 @@ Provide a concise overview of the current market landscape, focusing on recent s
       apiKey,
       baseURL: "https://api.perplexity.ai",
       defaultHeaders: {
-        "Accept": "application/json"
-      }
+        "Accept": "application/json",
+        "Content-Type": "application/json"
+      },
+      dangerouslyAllowBrowser: true
     });
 
     console.log('OpenAI client initialized with Perplexity configuration');
@@ -189,9 +191,12 @@ Provide a concise overview of the current market landscape, focusing on recent s
     console.error('Chat API Error:', {
       error,
       apiKey: !!apiKey,
-      keyLength: apiKey?.length
+      keyLength: apiKey?.length,
+      isAxiosError: error?.isAxiosError,
+      status: error?.response?.status,
+      data: error?.response?.data
     });
-    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+    const errorMessage = error?.response?.data?.error || (error instanceof Error ? error.message : 'Unknown error');
 
     if (req.headers.accept === 'text/event-stream' && !res.headersSent) {
       sendSSE(res, {
