@@ -102,7 +102,8 @@ Provide a concise overview of the current market landscape, focusing on recent s
       defaultHeaders: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
-      }
+      },
+      timeout: 30000
     });
 
     console.log('OpenAI client initialized with Perplexity configuration');
