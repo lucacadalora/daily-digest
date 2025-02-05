@@ -13,29 +13,22 @@ router.post("/api/chat", async (req, res) => {
   try {
     const { message } = req.body;
 
-    const apiKey = process.env.PERPLEXITY_API_KEY;
+    const apiKey = process.env.PERPLEXITY_API_KEY?.trim();
     console.log('Environment check:', {
       hasApiKey: !!apiKey,
+      keyLength: apiKey?.length,
       nodeEnv: process.env.NODE_ENV
     });
 
-    if (!apiKey) {
-      console.error('Perplexity API Key missing in environment:', process.env.NODE_ENV);
-      return res.status(500).json({
-        status: 'error',
-        error: 'API Configuration Error',
-        details: 'Missing Perplexity API key. Please check deployment settings.'
-      });
-    }
+    if (!apiKey || typeof apiKey !== 'string' || apiKey.length < 10) {
+      console.error('API Key validation failed:', { hasKey: !!apiKey, keyLength: apiKey?.length });
 
-    // Validate API key format
-    if (typeof apiKey !== 'string' || apiKey.length < 10) {
-      console.error('Invalid API key format');
-      return res.status(500).json({
-        status: 'error',
-        error: 'Invalid API key format',
-        details: 'The provided API key appears to be invalid. Please check the key format.'
-      });
+      if (!res.headersSent) {
+        return res.status(500).json({
+          status: 'error',
+          error: 'Missing or invalid API key. Please check your environment configuration.',
+        });
+      }
     }
 
     // Detect off-topic queries (programming, gaming, etc.)
@@ -144,13 +137,14 @@ Provide a concise overview of the current market landscape, focusing on recent s
         res.end();
         return;
       } catch (error) {
-        const apiError = error as APIError;
-        console.error('Streaming Error:', apiError);
-        sendSSE(res, {
-          status: 'error',
-          error: apiError.message
-        });
-        res.end();
+        console.error('Streaming Error:', error);
+        if (!res.headersSent) {
+          sendSSE(res, {
+            status: 'error',
+            error: 'An error occurred while processing your request. Please try again.'
+          });
+          res.end();
+        }
         return;
       }
     }
@@ -191,13 +185,17 @@ Provide a concise overview of the current market landscape, focusing on recent s
   } catch (error) {
     console.error('Chat API Error:', error);
     const errorMessage = error instanceof Error ? error.message : 'Unknown error';
-    console.error('Error details:', errorMessage);
 
-    if (!res.headersSent) {
+    if (req.headers.accept === 'text/event-stream' && !res.headersSent) {
+      sendSSE(res, {
+        status: 'error',
+        error: 'An error occurred while processing your request. Please try again.'
+      });
+      res.end();
+    } else if (!res.headersSent) {
       res.status(500).json({
         status: 'error',
-        error: errorMessage,
-        details: 'An error occurred while processing your request. Please try again.'
+        error: 'An error occurred while processing your request. Please try again.',
       });
     }
   }

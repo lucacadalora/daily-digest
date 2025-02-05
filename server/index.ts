@@ -1,9 +1,6 @@
 import 'dotenv/config';
-import path from "path";
-import { fileURLToPath } from 'url';
 import express, { type Request, Response, NextFunction } from "express";
 
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
 import { registerRoutes } from "./routes";
 import { setupVite, serveStatic, log } from "./vite";
 import chatRouter from "./routes/chat";
@@ -11,32 +8,6 @@ import chatRouter from "./routes/chat";
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(express.static(path.join(__dirname, 'public')));
-
-// Serve static files from the client directory in development
-if (process.env.NODE_ENV === 'development') {
-  app.use(express.static(path.join(__dirname, '../client')));
-}
-
-// Add chat routes
-app.use(chatRouter);
-
-// Development middleware to disable caching and add debug logging
-app.use((req, res, next) => {
-  // Force no caching in all environments
-  res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0');
-  res.setHeader('Pragma', 'no-cache');
-  res.setHeader('Expires', '-1');
-  res.setHeader('Surrogate-Control', 'no-store');
-
-  // Debug logging for file requests
-  if (process.env.NODE_ENV === 'development' && (req.url.includes('.') || req.url.includes('assets'))) {
-    log(`[Debug] File request: ${req.url}`, 'dev-server');
-  }
-
-  next();
-});
-
 
 // Request logging middleware
 app.use((req, res, next) => {
@@ -71,7 +42,6 @@ app.use((req, res, next) => {
 
 (async () => {
   const server = registerRoutes(app);
-
   app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
     const status = err.status || err.statusCode || 500;
     const message = err.message || "Internal Server Error";
@@ -87,13 +57,13 @@ app.use((req, res, next) => {
     serveStatic(app);
   }
 
-  const PORT = process.env.PORT || 5000;
-  const HOST = process.env.HOST || '0.0.0.0';
+  app.use(chatRouter);
 
-  server.listen(PORT, HOST, () => {
+  const PORT = 5000;
+  server.listen(PORT, "0.0.0.0", () => {
     log(`Server running in ${app.get('env')} mode`);
-    log(`Frontend: http://${HOST}:${PORT}`);
-    log(`API: http://${HOST}:${PORT}/api`);
+    log(`Frontend: http://0.0.0.0:${PORT}`);
+    log(`API: http://0.0.0.0:${PORT}/api`);
 
     // Log environment details in development
     if (app.get("env") === "development") {
