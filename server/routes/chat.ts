@@ -13,21 +13,19 @@ router.post("/api/chat", async (req, res) => {
   try {
     const { message } = req.body;
 
-    const apiKey = process.env.PERPLEXITY_API_KEY?.trim();
-    
+    const apiKey = process.env.PERPLEXITY_API_KEY;
+
     if (!apiKey) {
-      console.error('API Key missing');
       return res.status(500).json({
         status: 'error',
-        error: 'Missing API key. Please add PERPLEXITY_API_KEY to your Secrets.',
+        error: 'Missing API key. Please add PERPLEXITY_API_KEY to your Secrets.'
       });
     }
 
     if (apiKey.length < 10) {
-      console.error('API Key appears invalid:', { keyLength: apiKey.length });
       return res.status(500).json({
         status: 'error', 
-        error: 'Invalid API key format. Please check your PERPLEXITY_API_KEY in Secrets.',
+        error: 'Invalid API key format. Please check your PERPLEXITY_API_KEY in Secrets.'
       });
     }
 
@@ -36,7 +34,7 @@ router.post("/api/chat", async (req, res) => {
     if (nonMarketTerms.test(message)) {
       return res.json({
         status: 'error',
-        error: 'This AI assistant specializes in financial markets and investment analysis. For programming or other topics, please use appropriate specialized resources.',
+        error: 'This AI assistant specializes in financial markets and investment analysis. For programming or other topics, please use appropriate specialized resources.'
       });
     }
 
@@ -61,33 +59,6 @@ router.post("/api/chat", async (req, res) => {
       });
     }
 
-    const basePrompt = `You are an expert financial and business analyst specializing in market analysis and investment research. Provide clear, concise, and accurate information based on your extensive knowledge of global financial markets, company valuations, and investment analysis.
-
-Important: Only answer questions related to financial markets, investments, economic trends, and business analysis. If the question is outside these domains, inform the user that you can only assist with market-related queries.`;
-
-    const detailedStockPrompt = `You are an expert financial and business analyst specializing in market analysis and investment research. Format your response using markdown syntax:
-
-# 📊 Market Context
-Provide a concise overview of the current market landscape, focusing on recent significant developments, positioning, and broader macroeconomic trends. Use market-specific terminology and insights for the latest developments.
-
-## 💡 Key Metrics
-* **Current Stock Price:** [Retrieve the latest stock price using a real-time financial data API]
-* **Price-to-Earnings (P/E):** [Value, with comparison to industry peers and historical trends]
-* **Discount to Peers:** [Value, comparison to regional peers or sector average]
-* **Market Capitalization:** [Total market cap, with comparison to industry average or historical trends]
-* **Earnings Growth (YoY/Quarterly):** [Latest earnings growth, with comparison to peers or historical growth]
-* **Price-to-Book (P/B):** [Current P/B ratio with relevant context]
-* **Debt-to-Equity Ratio:** [Ratio indicating leverage, with comparison to sector average]
-
-## 💰 Dividend Outlook
-2025 Projections: Dividend Yield: [X%] (estimated final dividend of IDR [value] per share)
-
-## 💸 Fair Value Estimates
-💡 **Peter Lynch Fair Value:** [Fair Value IDR, implying X% upside from the current price]
-💸 **Analyst Consensus:** [Target prices range from IDR X to IDR Y, offering Z% upside]`;
-
-    console.log('Creating OpenAI client with Perplexity configuration');
-
     const client = new OpenAI({
       apiKey,
       baseURL: "https://api.perplexity.ai",
@@ -97,8 +68,6 @@ Provide a concise overview of the current market landscape, focusing on recent s
       },
       dangerouslyAllowBrowser: true
     });
-
-    console.log('OpenAI client initialized with Perplexity configuration');
 
     if (req.headers.accept === 'text/event-stream') {
       try {
@@ -155,60 +124,58 @@ Provide a concise overview of the current market landscape, focusing on recent s
     }
 
     // Non-streaming fallback
-    console.log('Using non-streaming API call');
-    const response = await client.chat.completions.create({
-      model: "llama-3.1-sonar-small-128k-online",
-      messages: [
-        {
-          role: "system",
-          content: hasStockTicker ? detailedStockPrompt : basePrompt
-        },
-        {
-          role: "user",
-          content: message
-        }
-      ],
-      temperature: 0.2,
-      top_p: 0.9
-    });
+    try {
+      const response = await client.chat.completions.create({
+        model: "llama-3.1-sonar-small-128k-online",
+        messages: [
+          {
+            role: "system",
+            content: hasStockTicker ? detailedStockPrompt : basePrompt
+          },
+          {
+            role: "user",
+            content: message
+          }
+        ],
+        temperature: 0.2,
+        top_p: 0.9
+      });
 
-    if (!response?.choices?.[0]?.message?.content) {
-      console.error('Invalid API response format:', JSON.stringify(response));
-      throw new Error('Invalid API response format');
-    }
+      if (!response?.choices?.[0]?.message?.content) {
+        throw new Error('Invalid API response format');
+      }
 
-    const content = response.choices[0].message.content;
-    const citations = response && typeof response === 'object' && 'citations' in response ? 
-      (response as any).citations || [] : [];
+      const content = response.choices[0].message.content;
+      const citations = response && typeof response === 'object' && 'citations' in response ? 
+        (response as any).citations || [] : [];
 
-    res.json({
-      status: 'success',
-      reply: content.trim(),
-      citations: citations
-    });
-
-  } catch (error) {
-    console.error('Chat API Error:', {
-      error,
-      apiKey: !!apiKey,
-      keyLength: apiKey?.length,
-      isAxiosError: error?.isAxiosError,
-      status: error?.response?.status,
-      data: error?.response?.data
-    });
-    const errorMessage = error?.response?.data?.error || (error instanceof Error ? error.message : 'Unknown error');
-
-    if (req.headers.accept === 'text/event-stream' && !res.headersSent) {
-      sendSSE(res, {
+      return res.json({
+        status: 'success',
+        reply: content.trim(),
+        citations: citations
+      });
+    } catch (error) {
+      console.error('Non-streaming Error:', error);
+      return res.status(500).json({
         status: 'error',
         error: 'An error occurred while processing your request. Please try again.'
       });
-      res.end();
-    } else if (!res.headersSent) {
-      res.status(500).json({
+    }
+  } catch (error) {
+    console.error('Chat API Error:', error);
+
+    if (!res.headersSent) {
+      const errorResponse = {
         status: 'error',
-        error: 'An error occurred while processing your request. Please try again.',
-      });
+        error: 'An error occurred while processing your request. Please try again.'
+      };
+
+      if (req.headers.accept === 'text/event-stream') {
+        sendSSE(res, errorResponse);
+        res.end();
+      } else {
+        res.status(500).json(errorResponse);
+      }
     }
   }
 });
