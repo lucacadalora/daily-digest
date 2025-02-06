@@ -11,27 +11,56 @@ export default function IndonesiaEconomicCrisis() {
 
   useEffect(() => {
     if (article) {
-      // Update meta tags for SEO
+      // Create a richer description by combining metrics and description
+      const enrichedDescription = article.previewMetrics 
+        ? `${article.previewMetrics.map(m => `${m.label}: ${m.value}`).join(" | ")}. ${article.description}`
+        : article.description;
+
       const metaTags = {
+        // Basic Meta Tags
+        "description": enrichedDescription,
+
+        // Open Graph Meta Tags
         "og:title": `${article.title} | Daily Digest`,
-        "og:description": article.description,
+        "og:description": enrichedDescription,
         "og:type": "article",
         "og:url": `https://lucaxyzz-digest.replit.app/newsletter/${article.slug}`,
-        "twitter:card": "summary",
+        "og:site_name": "Daily Digest - Market Intelligence",
+
+        // Twitter Card Meta Tags
+        "twitter:card": "summary_large_image",
         "twitter:title": `${article.title} | Daily Digest`,
-        "twitter:description": article.description,
+        "twitter:description": enrichedDescription,
+        "twitter:site": "@dailydigest",
+
+        // Article Specific Meta Tags
         "article:published_time": article.date,
         "article:author": article.author,
         "article:section": article.category,
-        "article:tag": article.tags ? article.tags.join(",") : article.category
+        "article:tag": article.tags ? article.tags.join(",") : article.category,
+
+        // Additional Meta Tags for SEO
+        "keywords": article.tags ? article.tags.join(",") : `${article.category},market analysis,financial news`,
+        "news_keywords": article.tags ? article.tags.join(",") : article.category
       };
 
+      // Update existing meta tags or create new ones
       Object.entries(metaTags).forEach(([name, content]) => {
-        let tag = document.querySelector(`meta[property="${name}"]`);
-        if (!tag) {
-          tag = document.createElement('meta');
-          tag.setAttribute('property', name);
-          document.head.appendChild(tag);
+        let tag;
+        if (name.startsWith('og:') || name.startsWith('article:')) {
+          tag = document.querySelector(`meta[property="${name}"]`);
+          if (!tag) {
+            tag = document.createElement('meta');
+            tag.setAttribute('property', name);
+            document.head.appendChild(tag);
+          }
+        } else {
+          tag = document.querySelector(`meta[name="${name}"]`);
+          if (!tag) {
+            tag = document.createElement('meta');
+            tag.setAttribute('name', name);
+            document.head.appendChild(tag);
+          }
         }
         tag.setAttribute('content', content);
       });
