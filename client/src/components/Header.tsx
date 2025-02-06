@@ -49,6 +49,7 @@ export const Header = ({ onSubscribe, showCategories = true, simplified = false 
           {/* Left Categories */}
           {showCategories ? (
             <nav className="hidden md:flex items-center space-x-8 text-sm font-medium text-gray-600 dark:text-gray-300">
+              <Link href="/about" className="hover:text-blue-600 transition-colors">About</Link>
               <Link href="/newsletter/category/Markets" className="hover:text-blue-600 transition-colors">Markets</Link>
               <Link href="/newsletter/category/Economics" className="hover:text-blue-600 transition-colors">Economics</Link>
               <Link href="/newsletter/category/Industries" className="hover:text-blue-600 transition-colors">Industries</Link>
@@ -83,6 +84,14 @@ export const Header = ({ onSubscribe, showCategories = true, simplified = false 
                   </Button>
                 </SheetTrigger>
                 <SheetContent side="bottom" className="px-6 py-8">
+                  {/* About Link */}
+                  <div className="mb-8">
+                    <Link href="/about" className="flex items-center justify-between text-lg font-medium hover:text-blue-600 transition-colors">
+                      About
+                      <ArrowRight className="h-4 w-4" />
+                    </Link>
+                  </div>
+
                   {/* Newsletter Link */}
                   <div className="mb-8">
                     <Link href="/newsletter" className="flex items-center justify-between text-lg font-medium hover:text-blue-600 transition-colors">

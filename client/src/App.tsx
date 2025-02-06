@@ -9,11 +9,13 @@ import Newsletters from "@/pages/newsletters";
 import TradeWarAnalysis from "@/pages/trade-war-analysis";
 import MineralCriticalityMatrix from "@/pages/mineral-criticality-matrix";
 import IndonesiaEconomicCrisis from "@/pages/indonesia-economic-crisis";
+import About from "@/pages/about";
 
 function Router() {
   return (
     <Switch>
       <Route path="/" component={Home} />
+      <Route path="/about" component={About} />
       <Route path="/newsletter" component={Newsletters} />
       {/* Special routes must come before generic article route */}
       <Route path="/newsletter/us-china-trade-war-impact-ihsg" component={TradeWarAnalysis} />
