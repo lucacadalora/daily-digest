@@ -18,7 +18,6 @@ export const articleSchema = z.object({
   author: z.string(),
   date: z.string(),
   content: z.string(),
-  // Added standardized preview metadata
   previewMetrics: z.array(z.object({
     label: z.string(),
     value: z.string(),
@@ -32,6 +31,35 @@ export const articleSchema = z.object({
 export type Article = z.infer<typeof articleSchema>;
 
 export const sampleArticles: Article[] = [
+  {
+    slug: "indonesia-economic-inventory-crisis",
+    title: "Indonesia's Growth Paradox: The Inventory-Led Crisis of 2025",
+    description: "Indonesia's economic narrative faces a dramatic shift as markets punish inventory-dependent growth, with the Jakarta Composite Index suffering its worst single-day performance in eight months amid revelations of unsustainable inventory accumulation.",
+    category: "Economics",
+    source: "Daily Digest",
+    author: "Luca Cada Lora",
+    date: "February 6, 2025",
+    previewEmoji: "📉",
+    previewMetrics: [
+      {
+        label: "IHSG Drop",
+        value: "-2.1%",
+        subtitle: "Single-day decline"
+      },
+      {
+        label: "GDP Impact",
+        value: "0.97pp",
+        subtitle: "From inventory"
+      },
+      {
+        label: "NPL Ratio",
+        value: "4.1%",
+        subtitle: "Manufacturing sector"
+      }
+    ],
+    tags: ["Economics", "Market Analysis", "Indonesia"],
+    content: "Full article content here..."
+  },
   {
     slug: "indonesia-mineral-criticality-matrix",
     title: "Indonesia's Mineral Criticality Matrix: Strategic and Supply Chain Perspectives",
