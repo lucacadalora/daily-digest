@@ -30,31 +30,25 @@ const formatMarketAnalysis = (content: string) => {
     const [beforeContext, afterContext] = parts;
 
     const formattedContext = afterContext
-      .replace(/📈 Latest Market Data:/g, '📊 Market Context\n')
+      .replace(/📈 Latest Market Data:/g, '📈 Market Context\n')
       .replace(/Current Price: (IDR \d+([,\.]\d+)*)/g, '💰 Current Price: 💵$1')
-      .replace(/Change: ([+](\d+(\.\d{1,2})?%)?)/g, '📈 Change: $1')  // Positive change
-      .replace(/Change: ([-](\d+(\.\d{1,2})?%)?)/g, '📉 Change: $1')  // Negative change
+      .replace(/Change: ([+-]\d+(\.\d{1,2})?%)/g, '📊 Change: $1')
       .replace(/Fair Value Estimates:/g, '\n💡 Fair Value Estimates\n')
       .replace(/Peter Lynch Fair Value:/g, '🎯 Peter Lynch Fair Value:')
       .replace(/Analyst Consensus:/g, '👥 Analyst Consensus:')
       .replace(/Dividend Outlook:/g, '\n💰 Dividend Outlook\n')
+      .replace(/(\d+(\.\d{1,2})?%)/g, '📝 $1')
       .replace(/(IDR \d+([,\.]\d+)*)/g, '💵 $1')
       .replace(/upside potential/g, '📈 upside potential')
-      .replace(/downside risk/g, '📉 downside risk')
-      .replace(/Volume: (\d+(\.\d{1,2})?[MBT])/g, '📊 Volume: $1')
-      .replace(/Market Cap: (IDR \d+([,\.]\d+)*[MBT])/g, '💹 Market Cap: $1')
-      .replace(/P\/E Ratio: (\d+(\.\d{1,2})?x)/g, '📊 P/E Ratio: $1')
-      .replace(/ROE: (\d+(\.\d{1,2})?%)/g, '📈 ROE: $1')
-      .replace(/NPL Ratio: (\d+(\.\d{1,2})?%)/g, '📊 NPL Ratio: $1');
+      .replace(/downside risk/g, '📉 downside risk');
 
     return beforeContext + formattedContext;
   }
 
   return content
-    .replace(/Market Context:/g, '📊 Market Context\n')
-    .replace(/(IDR \d+([,\.]\d+)*)/g, '💵 $1')
-    .replace(/([+](\d+(\.\d{1,2})?%)?)/g, '📈 $1')  // Positive percentage
-    .replace(/([-](\d+(\.\d{1,2})?%)?)/g, '📉 $1'); // Negative percentage
+    .replace(/Market Context:/g, '📈 Market Context\n')
+    .replace(/(\d+(\.\d{1,2})?%)/g, '📝 $1')
+    .replace(/(IDR \d+([,\.]\d+)*)/g, '💵 $1');
 };
 
 export const ChatBox = () => {
