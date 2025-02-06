@@ -131,7 +131,7 @@ export default function IndonesiaEconomicCrisis() {
               <p className="mb-3">2024's Growth Mirage revealed troubling patterns across key sectors:</p>
               <ul className="list-none space-y-3 pl-0">
                 {[
-                  { label: "Coal Stockpiling", text: "14.2% production surge vs 4.7% exports created a 28MT surplus (18 days' output)" },
+                  { label: "Coal Stockpiling", text: "14.2% production surge vs 4.7% exports - 28MT surplus (18 days' output)" },
                   { label: "Strategic Miscalculations", text: "166% QoQ rice imports created 2.3MT excess reserves" },
                   { label: "Manufacturing Glut", text: "Electronics/components inventory at 22% of sector GDP" }
                 ].map((item, index) => (
@@ -144,30 +144,32 @@ export default function IndonesiaEconomicCrisis() {
             </div>
           </section>
 
-          <Card className="bg-blue-50 dark:bg-blue-900/20">
-            <CardContent className="p-4">
-              <blockquote className="text-base italic text-gray-700 dark:text-gray-300 mb-2">
-                "This inventory overhang - contributing 0.97pp to GDP - masked fundamental weaknesses now exposed by three converging forces."
-              </blockquote>
-            </CardContent>
-          </Card>
-
           <section>
-            <h2 className="text-xl font-serif font-bold text-gray-900 dark:text-white mb-3">Crisis Catalysts: A Perfect Storm</h2>
+            <h2 className="text-xl font-serif font-bold text-gray-900 dark:text-white mb-3">Sectoral Reckoning: From Growth Driver to Liability</h2>
             <div className="prose text-gray-700 dark:text-gray-300 max-w-none">
-              <p className="mb-3">Three major factors contributed to the market's harsh verdict:</p>
-              <ul className="list-none space-y-3 pl-0">
-                {[
-                  { label: "Fed Hawkishness", text: "Rp14,900/USD triggered $317M foreign outflows, increasing dollarized inventory financing costs by 22%" },
-                  { label: "China Tariffs", text: "ADRO dropped 4.2% on 28MT coal exposure as export bottlenecks compound stockpiles" },
-                  { label: "Earnings Shock", text: "BMRI fell 3.5% on 14% profit drop as inventory impairments hit bank balance sheets" }
-                ].map((item, index) => (
-                  <li key={index} className="flex space-x-2">
-                    <div className="w-2 h-2 mt-2 rounded-full bg-red-500 flex-shrink-0" />
-                    <p className="mt-0"><strong>{item.label}:</strong> {item.text}</p>
-                  </li>
-                ))}
-              </ul>
+              <div className="space-y-4">
+                <div>
+                  <h3 className="font-bold text-gray-900 dark:text-white mb-2">Banking Sector (-1.75%)</h3>
+                  <ul className="list-none space-y-2">
+                    <li>• BMRI's manufacturing NPL ratio hit 4.1% (Q4-24) vs 2.8% YoY</li>
+                    <li>• Inventory-linked loans reached 18% of corporate credit portfolio</li>
+                  </ul>
+                </div>
+                <div>
+                  <h3 className="font-bold text-gray-900 dark:text-white mb-2">Basic Materials (-1.95%)</h3>
+                  <ul className="list-none space-y-2">
+                    <li>• KRAS steel inventories at 22% sales ratio - 5.2% share drop</li>
+                    <li>• TPIA petrochemical stockpiles at 45-day cover (-6.9% session loss)</li>
+                  </ul>
+                </div>
+                <div>
+                  <h3 className="font-bold text-gray-900 dark:text-white mb-2">Automotive Crisis</h3>
+                  <ul className="list-none space-y-2">
+                    <li>• ASII inventories hit 1.8M units (+37% YoY) - 4.3% plunge</li>
+                    <li>• 22% of dealer lots now holding &gt;90 days' supply</li>
+                  </ul>
+                </div>
+              </div>
             </div>
           </section>
 
@@ -190,6 +192,63 @@ export default function IndonesiaEconomicCrisis() {
                         </p>
                       </li>
                     ))}
+                  </ul>
+                </div>
+
+                <div>
+                  <h3 className="font-bold text-gray-900 dark:text-white mb-2">Critical Crossroads for Policymakers</h3>
+                  <ul className="list-none space-y-3 pl-0">
+                    {[
+                      { label: "Monetary Tightrope", text: "BI's 25bps cut risks stoking inventory inflation (current 2.1% carrying costs)" },
+                      { label: "Fiscal Reallocation", text: "Prabowo's welfare shift could divert Rp45T from inventory-heavy sectors" },
+                      { label: "SOE Rescue Plan", text: "Mandatory inventory purchases for infrastructure projects under consideration" }
+                    ].map((item, index) => (
+                      <li key={index} className="flex space-x-2">
+                        <div className="w-2 h-2 mt-2 rounded-full bg-blue-500 flex-shrink-0" />
+                        <p className="mt-0"><strong>{item.label}:</strong> {item.text}</p>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section>
+            <h2 className="text-xl font-serif font-bold text-gray-900 dark:text-white mb-3">Market Technicals: The Chart of Capitulation</h2>
+            <div className="prose text-gray-700 dark:text-gray-300 max-w-none">
+              <p className="mb-3">The IHSG's breakdown below 6,900 (critical Fibonacci support) suggests:</p>
+              <ul className="list-none space-y-2">
+                <li>• Immediate target 6,750 (-2.8% from current)</li>
+                <li>• Resistance now at 7,150 (200-day MA)</li>
+                <li>• Volume surge to Rp18.4T (145% of 30-day avg) confirms distribution</li>
+              </ul>
+              <p className="mt-3">
+                This technical damage mirrors fundamental realities - 14% of manufacturing loans turning substandard, while inventory carrying costs consume 7.2% of corporate cash flow (vs 4.1% 5-year avg).
+              </p>
+            </div>
+          </section>
+
+          <section>
+            <h2 className="text-xl font-serif font-bold text-gray-900 dark:text-white mb-3">The Path Forward: From Inventory Arithmetic to Demand Economics</h2>
+            <div className="prose text-gray-700 dark:text-gray-300 max-w-none">
+              <p className="mb-3">Strategic pivots must address both symptoms and causes:</p>
+
+              <div className="space-y-4">
+                <div>
+                  <h3 className="font-bold text-gray-900 dark:text-white mb-2">Immediate Term (Q1-25)</h3>
+                  <ul className="list-none space-y-2">
+                    <li>• Emergency export subsidies for coal/steel inventories (est. Rp7.2T cost)</li>
+                    <li>• Temporary tax holiday for inventory-to-investment conversion</li>
+                  </ul>
+                </div>
+
+                <div>
+                  <h3 className="font-bold text-gray-900 dark:text-white mb-2">Structural Reform</h3>
+                  <ul className="list-none space-y-2">
+                    <li>1. Demand-Side Stimulus: Shift from rice stockpiling to direct nutrition vouchers</li>
+                    <li>2. Manufacturing Upgrade: 30% tax credit for Industry 4.0 adoption in glut sectors</li>
+                    <li>3. Commodity Hedge Fund: SOE-led buffer stock mechanism with ASEAN partners</li>
                   </ul>
                 </div>
               </div>
