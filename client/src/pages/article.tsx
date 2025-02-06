@@ -13,35 +13,41 @@ function updateMetaTags(article: Article) {
     ? `${article.previewMetrics.map(m => `${m.label}: ${m.value}`).join(" | ")}. ${article.description}`
     : article.description;
 
-  const metaTags = {
-    // Basic Meta Tags
-    "description": enrichedDescription,
+  // Create a rich title that includes key metrics if available
+  const enrichedTitle = article.previewMetrics 
+    ? `${article.title} | ${article.previewMetrics[0].value} ${article.previewMetrics[0].label}`
+    : article.title;
 
-    // Open Graph Meta Tags
-    "og:title": `${article.title} | Daily Digest`,
+  const metaTags = {
+    // Open Graph
+    "og:title": enrichedTitle,
     "og:description": enrichedDescription,
     "og:type": "article",
     "og:url": `https://lucaxyzz-digest.replit.app/newsletter/${article.slug}`,
-    "og:site_name": "Daily Digest - Market Intelligence",
+    "og:site_name": "Daily Digest",
+    "og:locale": "en_US",
 
-    // Twitter Card Meta Tags
-    "twitter:card": "summary_large_image",
-    "twitter:title": `${article.title} | Daily Digest`,
-    "twitter:description": enrichedDescription,
+    // Twitter Card
+    "twitter:card": "summary",
     "twitter:site": "@dailydigest",
+    "twitter:creator": "@dailydigest",
+    "twitter:title": enrichedTitle,
+    "twitter:description": enrichedDescription,
+    "twitter:domain": "lucaxyzz-digest.replit.app",
 
-    // Article Specific Meta Tags
+    // Article Metadata
     "article:published_time": article.date,
     "article:author": article.author,
     "article:section": article.category,
     "article:tag": article.tags ? article.tags.join(",") : article.category,
 
-    // Additional Meta Tags for SEO
+    // Basic SEO
+    "description": enrichedDescription,
     "keywords": article.tags ? article.tags.join(",") : `${article.category},market analysis,financial news`,
     "news_keywords": article.tags ? article.tags.join(",") : article.category
   };
 
-  // Update existing meta tags or create new ones
+  // Update meta tags
   Object.entries(metaTags).forEach(([name, content]) => {
     let tag;
     if (name.startsWith('og:') || name.startsWith('article:')) {
@@ -62,8 +68,8 @@ function updateMetaTags(article: Article) {
     tag.setAttribute('content', content);
   });
 
-  // Update title
-  document.title = `${article.title} | Daily Digest`;
+  // Update document title with the enriched title
+  document.title = `${enrichedTitle} | Daily Digest`;
 }
 
 export default function WSJArticle() {
