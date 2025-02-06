@@ -89,6 +89,12 @@ export default function IndonesiaEconomicCrisis() {
           </div>
         </header>
 
+        <div className="py-4 border-b border-gray-200 dark:border-gray-800">
+          <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
+            Indonesia's economic narrative took a dramatic turn in early 2025, as financial markets delivered a brutal verdict on the nation's inventory-dependent growth model. The Jakarta Composite Index's 2.1% plunge on February 6 - its worst single-day performance in eight months - served as exclamation point to revelations that 19% of 2024's 5.03% GDP growth came from unsustainable inventory accumulation, creating a dangerous economic paradox now coming home to roost.
+          </p>
+        </div>
+
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 py-4">
           <Card className="bg-gray-50 dark:bg-gray-800">
             <CardContent className="p-4">
@@ -125,6 +131,50 @@ export default function IndonesiaEconomicCrisis() {
         </div>
 
         <div className="py-4 space-y-6">
+          <Card className="bg-blue-50 dark:bg-blue-900/20">
+            <CardContent className="p-4">
+              <blockquote className="text-base italic text-gray-700 dark:text-gray-300 mb-2">
+                "Indonesia's 5.03% growth in 2024 carries an artificial underbelly – when 0.97 percentage points (19% of total expansion) rely on inventory stockpiles rather than sustainable demand"
+              </blockquote>
+              <p className="text-sm text-gray-600 dark:text-gray-400">— Barra Kukuh Mamia, Head of Macroeconomic Research, BCA</p>
+            </CardContent>
+          </Card>
+
+          <section>
+            <h2 className="text-xl font-serif font-bold text-gray-900 dark:text-white mb-3">Crisis Catalysts: Market Forces Converge</h2>
+            <p className="text-gray-700 dark:text-gray-300 mb-4">
+              This inventory overhang - contributing 0.97pp to GDP - masked fundamental weaknesses now exposed by three converging forces:
+            </p>
+            <div className="overflow-x-auto">
+              <table className="w-full border-collapse">
+                <thead>
+                  <tr className="bg-gray-50 dark:bg-gray-800">
+                    <th className="p-3 text-left font-semibold text-gray-900 dark:text-white border border-gray-200 dark:border-gray-700">Crisis Catalyst</th>
+                    <th className="p-3 text-left font-semibold text-gray-900 dark:text-white border border-gray-200 dark:border-gray-700">Market Impact (Feb 6)</th>
+                    <th className="p-3 text-left font-semibold text-gray-900 dark:text-white border border-gray-200 dark:border-gray-700">Inventory Linkage</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td className="p-3 border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300">Fed Hawkishness</td>
+                    <td className="p-3 border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300">Rp14,900/USD - $317M foreign outflows</td>
+                    <td className="p-3 border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300">Dollarized inventory financing costs up 22%</td>
+                  </tr>
+                  <tr>
+                    <td className="p-3 border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300">China Tariffs</td>
+                    <td className="p-3 border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300">ADRO -4.2% (28MT coal exposure)</td>
+                    <td className="p-3 border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300">Export bottleneck compounds stockpiles</td>
+                  </tr>
+                  <tr>
+                    <td className="p-3 border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300">Earnings Shock</td>
+                    <td className="p-3 border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300">BMRI -3.5% (14% profit drop)</td>
+                    <td className="p-3 border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300">Inventory impairments hit bank balance sheets</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
           <section>
             <h2 className="text-xl font-serif font-bold text-gray-900 dark:text-white mb-3">The House of Cards: How Inventory Artifice Boosted Growth</h2>
             <div className="prose text-gray-700 dark:text-gray-300 max-w-none">
@@ -268,6 +318,9 @@ export default function IndonesiaEconomicCrisis() {
         <footer className="text-sm text-gray-500 dark:text-gray-400 border-t border-gray-200 dark:border-gray-700 pt-4 mt-8">
           <p className="mb-2">
             Disclosure: This analysis incorporates data from Bank Indonesia, BPS Statistics, and various market reports. The views expressed here are based on available public information and market data.
+          </p>
+          <p className="mb-2">
+            Sources: Mamia, Barra Kukuh. "GDP: What Can We Expect from This 'Baby Bump'?" PT Bank Central Asia Tbk, 6 Feb. 2025, https://www.bca.co.id/-/media/Feature/Report/File/S8/Laporan-Riset-Ekonomi/2025/02/20250206-gdp-what-can-we-expect-from-this-baby-bump.pdf.
           </p>
           <p>© 2025 Daily Digest. All rights reserved.</p>
         </footer>
