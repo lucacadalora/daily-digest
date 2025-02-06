@@ -95,7 +95,7 @@ Summarize key takeaways with actionable insights, focusing on investment opportu
 
     log('Sending request to Perplexity API with sonar model...');
     const response = await client.chat.completions.create({
-      model: "llama-3.1-sonar-huge-128k-online", // Using the largest model for better analysis
+      model: "sonar-reasoning-pro",  // Changed to sonar-reasoning-pro model
       messages: [
         { 
           role: "system", 
@@ -105,9 +105,9 @@ Summarize key takeaways with actionable insights, focusing on investment opportu
       ],
       temperature: 0.2,
       top_p: 0.9,
-      max_tokens: 4000,  // Increased for more comprehensive analysis
+      max_tokens: 4000,  // Keep the increased token limit for comprehensive analysis
       frequency_penalty: 1,
-      search_domain_filter: [ // Focus on financial and market data sources
+      search_domain_filter: [ // Keep both global and local financial sources
         // Global Financial Sources
         "bloomberg.com",
         "reuters.com",
