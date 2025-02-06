@@ -105,56 +105,22 @@ Summarize key takeaways with actionable insights, focusing on investment opportu
       ],
       temperature: 0.2,
       top_p: 0.9,
-      max_tokens: 1000,  
-      frequency_penalty: 1,
-      search_domain_filter: [ 
-        "bloomberg.com",
-        "reuters.com",
-        "ft.com",
-        "wsj.com",
-        "cnbc.com",
-        "marketwatch.com",
-        "finance.yahoo.com",
-        "investing.com",
-        "seekingalpha.com",
-        "fool.com",
-        "morningstar.com",
-        "zacks.com",
-        "tradingview.com",
-        "benzinga.com",
-        "barrons.com",
-        "gurufocus.com",
-        "markets.ft.com",
-
-        "investortrust.id",
-        "kontan.co.id",
-        "bisnis.com",
-        "stockbit.com",
-        "idx.co.id",
-        "finance.detik.com",
-        "money.kompas.com",
-        "investor.id",
-        "cnbcindonesia.com",
-        "market.bisnis.com",
-        "pasardana.id",
-        "indopremier.com",
-        "bareksa.com",
-        "mncsekuritas.id",
-        "idx.co.id"
-      ]
+      max_tokens: 1000,
+      frequency_penalty: 1
     });
 
     if (!response?.choices?.[0]?.message?.content) {
       throw new Error('Invalid API response format');
     }
 
+    log('API Response:', response);
+
     const result = {
       status: 'success',
-      reply: response.choices[0].message.content.trim(),
-      citations: response.citations || []
+      reply: response.choices[0].message.content.trim()
     };
 
-    log('Sending successful response:', result);
+    log('Sending successful response');
     res.json(result);
 
   } catch (error) {
