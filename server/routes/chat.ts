@@ -74,9 +74,9 @@ Provide a concise overview of the current market landscape, focusing on recent s
 
 Format your response in a structured way using markdown headings and bullet points. Include quantitative data where relevant, and always provide context for the numbers you present.`;
 
-    log('Sending request to Perplexity API with sonar-huge model...');
+    log('Sending request to Perplexity API with sonar-reasoning-pro model...');
     const response = await client.chat.completions.create({
-      model: "llama-3.1-sonar-huge-128k-online",
+      model: "sonar-reasoning-pro",
       messages: [
         { 
           role: "system", 
