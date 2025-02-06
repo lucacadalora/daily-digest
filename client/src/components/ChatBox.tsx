@@ -83,98 +83,30 @@ export const ChatBox = () => {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Accept': 'text/event-stream',
         },
         body: JSON.stringify({ message: userMessage })
       });
 
-      if (response.headers.get('Content-Type')?.includes('text/event-stream')) {
-        const reader = response.body?.getReader();
-        const decoder = new TextDecoder();
-        let streamedContent = '';
-        let hasReceivedFirstChunk = false;
-
-        if (reader) {
-          while (true) {
-            const { value, done } = await reader.read();
-            if (done) break;
-
-            const chunk = decoder.decode(value);
-            const lines = chunk.split('\n');
-
-            for (const line of lines) {
-              if (line.startsWith('data: ')) {
-                try {
-                  const data = JSON.parse(line.slice(6));
-
-                  if (data.status === 'chunk') {
-                    if (!hasReceivedFirstChunk) {
-                      // Only remove loading state when we have content
-                      hasReceivedFirstChunk = true;
-                      streamedContent = data.content;
-                      setMessages(prev => {
-                        const filtered = prev.filter(msg => !msg.isSearching);
-                        return [...filtered, { 
-                          role: 'assistant', 
-                          content: streamedContent,
-                          isStreaming: true 
-                        }];
-                      });
-                    } else {
-                      streamedContent += data.content;
-                      setMessages(prev => {
-                        const filtered = prev.filter(msg => !msg.isSearching);
-                        const lastMessage = filtered[filtered.length - 1];
-
-                        if (lastMessage && lastMessage.isStreaming) {
-                          return [
-                            ...filtered.slice(0, -1),
-                            { ...lastMessage, content: streamedContent }
-                          ];
-                        }
-                        return filtered;
-                      });
-                    }
-                  } else if (data.status === 'complete') {
-                    setMessages(prev => {
-                      const filtered = prev.filter(msg => !msg.isSearching);
-                      return [...filtered.slice(0, -1), { 
-                        role: 'assistant', 
-                        content: data.content,
-                        citations: data.citations 
-                      }];
-                    });
-                  } else if (data.status === 'error') {
-                    throw new Error(data.error);
-                  }
-                } catch (e) {
-                  console.error('Error parsing SSE data:', e);
-                }
-              }
-            }
-          }
-        }
-      } else {
-        // For non-streaming response, keep loading animation for minimum time
-        await new Promise(resolve => setTimeout(resolve, 2000));
-        const data = await response.json();
-        if (data.status === 'success') {
-          setMessages(prev => {
-            const filtered = prev.filter(msg => !msg.isSearching);
-            return [...filtered, { 
-              role: 'assistant', 
-              content: data.reply,
-              citations: data.citations 
-            }];
-          });
-        } else {
-          throw new Error(data.error);
-        }
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
       }
+
+      const data = await response.json();
+
+      if (data.status === 'error') {
+        throw new Error(data.error || 'Failed to get response');
+      }
+
+      setMessages(prev => {
+        const filtered = prev.filter(msg => !msg.isSearching);
+        return [...filtered, { 
+          role: 'assistant', 
+          content: data.reply,
+          citations: data.citations 
+        }];
+      });
     } catch (error) {
       console.error('Chat error:', error);
-      // Keep minimum loading time for error messages too
-      await new Promise(resolve => setTimeout(resolve, 2000));
       setMessages(prev => {
         const filtered = prev.filter(msg => !msg.isSearching);
         return [...filtered, { 
