@@ -95,7 +95,7 @@ Summarize key takeaways with actionable insights, focusing on investment opportu
 
     log('Sending request to Perplexity API with sonar model...');
     const response = await client.chat.completions.create({
-      model: "sonar-reasoning-pro",  // Changed to sonar-reasoning-pro model
+      model: "sonar",  
       messages: [
         { 
           role: "system", 
@@ -105,10 +105,9 @@ Summarize key takeaways with actionable insights, focusing on investment opportu
       ],
       temperature: 0.2,
       top_p: 0.9,
-      max_tokens: 4000,  // Keep the increased token limit for comprehensive analysis
+      max_tokens: 1000,  
       frequency_penalty: 1,
-      search_domain_filter: [ // Keep both global and local financial sources
-        // Global Financial Sources
+      search_domain_filter: [ 
         "bloomberg.com",
         "reuters.com",
         "ft.com",
@@ -127,7 +126,6 @@ Summarize key takeaways with actionable insights, focusing on investment opportu
         "gurufocus.com",
         "markets.ft.com",
 
-        // Indonesian Financial Sources
         "investortrust.id",
         "kontan.co.id",
         "bisnis.com",
