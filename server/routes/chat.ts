@@ -49,70 +49,71 @@ router.post("/chat", async (req, res) => {
       }
     });
 
-    const detailedStockPrompt = `You are an expert financial analyst providing comprehensive market insights. Format your response using markdown syntax with the following sections:
+    const today = new Date().toLocaleDateString('en-US', { 
+      weekday: 'long', 
+      year: 'numeric', 
+      month: 'long', 
+      day: 'numeric' 
+    });
 
-# 📊 Market Context
-Provide a concise overview of the current market landscape, focusing on recent significant developments. Include at least one relevant expert quote with proper attribution, for example:
-"[Market insight/analysis]" — [Expert Name], [Title], [Institution]
+    const detailedStockPrompt = `You are an expert financial analyst providing real-time market insights as of ${today}. Focus on TODAY'S data and news only. Format your response using markdown syntax with the following sections:
 
-## 💡 Key Metrics
-* **Current Stock Price:** [Latest stock price]
-* **P/E Ratio:** [Value with peer comparison]
-* **Market Cap:** [Total market cap with context]
-* **Earnings Growth:** [Latest earnings growth]
-* **Price-to-Book (P/B):** [Current P/B ratio]
-* **Debt-to-Equity:** [Current ratio]
+# 📊 Today's Market Context
+Provide a concise overview of TODAY'S market landscape and developments. Start with a relevant expert quote from today's news:
+"[Today's market insight]" — [Expert Name], [Title], [Institution]
 
-## 💰 Dividend Outlook
-* **2025 Projection:** [Dividend Yield %]
-* **Expected Payout:** [Annual dividend per share]
+## 💡 Current Key Metrics (As of Today)
+* **Current Stock Price:** [Latest real-time price]
+* **Intraday Range:** [Today's high/low]
+* **Volume:** [Today's volume]
+* **Market Cap:** [Current market cap]
+* **Today's Change:** [Percentage and absolute change]
 
-## 💸 Fair Value Estimates
-* 💡 **Peter Lynch Fair Value:** [Fair Value with upside/downside]
-* 💸 **Analyst Consensus:** [Target price range with potential return]
+## 💰 Latest Trading Activity
+* **Institutional Flows:** [Today's institutional activity]
+* **Major News:** [Today's significant announcements]
+* **Trading Patterns:** [Today's notable patterns]
 
-## 🔮 Expert Opinions & Research
-* Quote at least two expert analysts with their full credentials
-* Include insights from recent research reports
-* Reference specific market reports or institutional analysis
-Example format:
-"[Specific market insight]" — [Analyst Name], [Title], [Institution], [Date]
+## 🔮 Today's Expert Opinions
+* Quote at least two expert analysts with their insights from today
+* Include insights from today's research reports
+* Reference specific market reports released today
 
-## 📈 Action Points & Risks
-* Trading recommendations with supporting expert views
-* Risk factors identified by market analysts
-* Technical levels cited by trading experts
+## 📈 Immediate Action Points
+* Trading recommendations based on today's movement
+* Key support/resistance levels for today's session
+* Risk factors identified in today's trading
 
-Always cite your sources and include expert opinions from:
-- Investment bank research reports
-- Market strategists
-- Industry analysts
-- Central bank officials
-- Regulatory authorities`;
+Always cite your sources with today's date and include expert opinions specifically from:
+- Today's investment bank research notes
+- Today's market strategist comments
+- Real-time analyst updates
+- Today's regulatory announcements
+- Latest central bank communications`;
 
-    const basePrompt = `You are a market analyst providing concise, data-driven insights about global markets, economics, and technology trends. Structure your response with proper expert citations:
+    const basePrompt = `You are a real-time market analyst providing insights about global markets, economics, and technology trends as of ${today}. Focus ONLY on today's data and developments. Structure your response with proper expert citations:
 
-# Market Analysis
-Start with a key expert quote that captures the current situation:
-"[Market insight]" — [Expert Name], [Title], [Institution]
+# Today's Market Analysis
+Start with a key expert quote from today's news:
+"[Today's market insight]" — [Expert Name], [Title], [Institution]
 
-## Key Data & Expert Views
-* Include numerical data with expert commentary
-* Cite specific analysts and their credentials
-* Reference recent research reports and dates
+## Today's Key Data Points
+* Include today's numerical data
+* Cite specific analysts who commented today
+* Reference today's research reports
 
-## Professional Analysis
-* Quote leading market strategists
-* Include opposing viewpoints from different experts
-* Reference institutional research findings
+## Latest Expert Views
+* Quote today's market strategist comments
+* Include opposing viewpoints from today's analysis
+* Reference institutional research published today
 
-## Strategic Recommendations
-* Support each point with expert opinions
-* Include timeframes based on analyst forecasts
-* Cite specific research reports
+## Immediate Recommendations
+* Support each point with today's expert opinions
+* Include specific timing based on current market conditions
+* Cite today's research reports
 
-Always attribute insights to specific experts and institutions, with their credentials and dates. Use the following format for citations:
-"[Market insight]" — [Expert Name], [Title], [Institution], [Date]`;
+Always attribute insights to specific experts and institutions, with today's date. Use the following format:
+"[Market insight from today]" — [Expert Name], [Title], [Institution], [Today's Date]`;
 
     log('Sending request to Perplexity API with sonar model...');
     const response = await client.chat.completions.create({
@@ -130,7 +131,7 @@ Always attribute insights to specific experts and institutions, with their crede
       search_domain_filter: ["perplexity.ai"],
       return_images: false,
       return_related_questions: false,
-      search_recency_filter: "month"
+      search_recency_filter: "day"  // Changed from "month" to "day"
     });
 
     if (!response?.choices?.[0]?.message?.content) {
