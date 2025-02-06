@@ -93,6 +93,9 @@ export default function IndonesiaEconomicCrisis() {
           <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
             Indonesia's economic narrative took a dramatic turn in early 2025, as financial markets delivered a brutal verdict on the nation's inventory-dependent growth model. The Jakarta Composite Index's 2.1% plunge on February 6 - its worst single-day performance in eight months - served as exclamation point to revelations that 19% of 2024's 5.03% GDP growth came from unsustainable inventory accumulation, creating a dangerous economic paradox now coming home to roost.
           </p>
+          <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed mt-4">
+            Apart from coal, this inventory growth likely includes the aforementioned rice imports, as well as a general glut in manufactured products globally – which leads to unsold inventory by local manufacturers and rising imports particularly from China. Since inventories cannot keep growing forever – before 2024, the long-run average contribution from inventories to GDP growth was zero – this is probably the single best argument as to why GDP growth is bound to slow down in 2025.
+          </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 py-4">
