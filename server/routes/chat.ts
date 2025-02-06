@@ -59,61 +59,69 @@ router.post("/chat", async (req, res) => {
     const detailedStockPrompt = `You are an expert financial analyst providing real-time market insights as of ${today}. Focus on TODAY'S data and news only. Format your response using markdown syntax with the following sections:
 
 # 📊 Today's Market Context
-Provide a concise overview of TODAY'S market landscape and developments. Start with a relevant expert quote from today's news:
-"[Today's market insight]" — [Expert Name], [Title], [Institution]
+Start with a relevant expert quote from today's news, using numbered citation:
+"[Today's market insight]" — [Expert Name], [Title], [Institution] [1]
 
 ## 💡 Current Key Metrics (As of Today)
-* **Current Stock Price:** [Latest real-time price]
-* **Intraday Range:** [Today's high/low]
-* **Volume:** [Today's volume]
-* **Market Cap:** [Current market cap]
-* **Today's Change:** [Percentage and absolute change]
+* **Current Stock Price:** [Latest real-time price] [citation]
+* **Intraday Range:** [Today's high/low] [citation]
+* **Volume:** [Today's volume] [citation]
+* **Market Cap:** [Current market cap] [citation]
+* **Today's Change:** [Percentage and absolute change] [citation]
 
 ## 💰 Latest Trading Activity
-* **Institutional Flows:** [Today's institutional activity]
-* **Major News:** [Today's significant announcements]
-* **Trading Patterns:** [Today's notable patterns]
+* **Institutional Flows:** [Today's institutional activity] [citation]
+* **Major News:** [Today's significant announcements] [citation]
+* **Trading Patterns:** [Today's notable patterns] [citation]
 
 ## 🔮 Today's Expert Opinions
-* Quote at least two expert analysts with their insights from today
-* Include insights from today's research reports
-* Reference specific market reports released today
+Include expert quotes with citations:
+"[Expert insight]" — [Expert Name], [Title], [Institution] [citation]
 
 ## 📈 Immediate Action Points
-* Trading recommendations based on today's movement
-* Key support/resistance levels for today's session
-* Risk factors identified in today's trading
+* Trading recommendations based on today's movement [citation]
+* Key support/resistance levels for today's session [citation]
+* Risk factors identified in today's trading [citation]
 
-Always cite your sources with today's date and include expert opinions specifically from:
+## 🤔 Related Questions
+To learn more, you might want to ask:
+1. [Relevant follow-up question based on the analysis]
+2. [Question about a related market aspect]
+3. [Question about potential implications]
+
+Use numbered citations [1], [2], etc. inline with the text to reference sources. All data and quotes must be from today's sources:
 - Today's investment bank research notes
 - Today's market strategist comments
 - Real-time analyst updates
-- Today's regulatory announcements
-- Latest central bank communications`;
+- Today's regulatory announcements`;
 
     const basePrompt = `You are a real-time market analyst providing insights about global markets, economics, and technology trends as of ${today}. Focus ONLY on today's data and developments. Structure your response with proper expert citations:
 
 # Today's Market Analysis
 Start with a key expert quote from today's news:
-"[Today's market insight]" — [Expert Name], [Title], [Institution]
+"[Today's market insight]" — [Expert Name], [Title], [Institution] [1]
 
 ## Today's Key Data Points
-* Include today's numerical data
-* Cite specific analysts who commented today
-* Reference today's research reports
+* Include today's numerical data with inline citations [2]
+* Cite specific analysts who commented today [3]
+* Reference today's research reports [4]
 
 ## Latest Expert Views
-* Quote today's market strategist comments
-* Include opposing viewpoints from today's analysis
-* Reference institutional research published today
+Quote experts with inline citations:
+"[Expert insight]" — [Expert Name], [Title], [Institution] [5]
 
 ## Immediate Recommendations
-* Support each point with today's expert opinions
-* Include specific timing based on current market conditions
-* Cite today's research reports
+* Support each point with today's expert opinions [citation]
+* Include specific timing based on current conditions [citation]
+* Cite today's research reports [citation]
 
-Always attribute insights to specific experts and institutions, with today's date. Use the following format:
-"[Market insight from today]" — [Expert Name], [Title], [Institution], [Today's Date]`;
+## 🤔 Related Questions
+To learn more, you might want to ask:
+1. [Relevant follow-up question based on the analysis]
+2. [Question about a related market aspect]
+3. [Question about potential implications]
+
+Use numbered citations [1], [2], etc. inline with the text. All sources must be from today's date.`;
 
     log('Sending request to Perplexity API with sonar model...');
     const response = await client.chat.completions.create({
@@ -128,10 +136,9 @@ Always attribute insights to specific experts and institutions, with today's dat
       temperature: 0.2,
       top_p: 0.9,
       frequency_penalty: 1,
-      search_domain_filter: ["perplexity.ai"],
       return_images: false,
       return_related_questions: false,
-      search_recency_filter: "day"  // Changed from "month" to "day"
+      search_recency_filter: "day"  // Keep focus on today's data
     });
 
     if (!response?.choices?.[0]?.message?.content) {
