@@ -1,4 +1,5 @@
 import { z } from "zod";
+import axios from "axios";
 
 export const perplexityResponseSchema = z.object({
   id: z.string(),
@@ -32,6 +33,42 @@ export interface ChatMessage {
   content: string;
 }
 
+// Cache for stock prices
+const priceCache = new Map<string, { price: number; timestamp: number }>();
+const CACHE_DURATION = 60000; // 1 minute cache
+
+export async function getCurrentStockPrice(symbol: string): Promise<number | null> {
+  try {
+    // Check cache first
+    const cached = priceCache.get(symbol);
+    if (cached && Date.now() - cached.timestamp < CACHE_DURATION) {
+      return cached.price;
+    }
+
+    // Fetch from Yahoo Finance
+    const response = await axios.get(`https://query2.finance.yahoo.com/v8/finance/quote`, {
+      params: {
+        symbols: symbol,
+        fields: 'regularMarketPrice,regularMarketChangePercent'
+      },
+      headers: {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
+      }
+    });
+
+    if (response.data?.quoteResponse?.result?.[0]?.regularMarketPrice) {
+      const price = response.data.quoteResponse.result[0].regularMarketPrice;
+      priceCache.set(symbol, { price, timestamp: Date.now() });
+      return price;
+    }
+
+    return null;
+  } catch (error) {
+    console.error('Error fetching stock price:', error);
+    return null;
+  }
+}
+
 export async function getMarketAnalysis(query: string): Promise<string> {
   const messages: ChatMessage[] = [
     {
@@ -43,6 +80,29 @@ export async function getMarketAnalysis(query: string): Promise<string> {
       content: query
     }
   ];
+
+  // Extract stock symbols from query (e.g., BBRI.JK, TLKM.JK)
+  const stockSymbols = query.match(/[A-Z]{2,}\.?[A-Z]{0,2}/g) || [];
+
+  // Fetch current prices for mentioned stocks
+  const prices = await Promise.all(
+    stockSymbols.map(async symbol => {
+      const price = await getCurrentStockPrice(symbol);
+      return { symbol, price };
+    })
+  );
+
+  // Add price data to the message if available
+  if (prices.length > 0) {
+    const priceInfo = prices
+      .filter(p => p.price !== null)
+      .map(p => `${p.symbol}: ${p.price}`)
+      .join(', ');
+
+    if (priceInfo) {
+      messages[1].content += `\nCurrent prices: ${priceInfo}`;
+    }
+  }
 
   try {
     const response = await fetch("https://api.perplexity.ai/chat/completions", {
