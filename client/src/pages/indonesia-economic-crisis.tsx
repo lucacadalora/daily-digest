@@ -136,7 +136,17 @@ export default function IndonesiaEconomicCrisis() {
             <p className="text-gray-700 dark:text-gray-300 mb-4">
               This inventory overhang - contributing 0.97pp to GDP - masked fundamental weaknesses now exposed by three converging forces:
             </p>
-            <div className="overflow-x-auto">
+
+            <Card className="bg-blue-50 dark:bg-blue-900/20 mb-4">
+              <CardContent className="p-4">
+                <blockquote className="text-base italic text-gray-700 dark:text-gray-300 mb-2">
+                  "Indonesia's 5.03% growth in 2024 carries an artificial underbelly – when 0.97 percentage points (19% of total expansion) rely on inventory stockpiles rather than sustainable demand"
+                </blockquote>
+                <p className="text-sm text-gray-600 dark:text-gray-400">— Barra Kukuh Mamia, Head of Macroeconomic Research, BCA</p>
+              </CardContent>
+            </Card>
+
+            <div className="overflow-x-auto mb-4">
               <table className="w-full border-collapse">
                 <thead>
                   <tr className="bg-gray-50 dark:bg-gray-800">
@@ -167,16 +177,16 @@ export default function IndonesiaEconomicCrisis() {
           </section>
 
           <section>
-            <h2 className="text-xl font-serif font-bold text-gray-900 dark:text-white mb-3">The House of Cards: How Inventory Artifice Boosted Growth</h2>
+            <h2 className="text-xl font-serif font-bold text-gray-900 dark:text-white mb-2">The House of Cards: How Inventory Artifice Boosted Growth</h2>
             <div className="prose text-gray-700 dark:text-gray-300 max-w-none">
               <p className="mb-2">2024's Growth Mirage revealed troubling patterns across key sectors:</p>
-              <ul className="list-none space-y-2 pl-0">
+              <ul className="list-none pl-0 mb-4">
                 {[
                   { label: "Coal Stockpiling", text: "14.2% production surge vs 4.7% exports - 28MT surplus (18 days' output)" },
                   { label: "Strategic Miscalculations", text: "166% QoQ rice imports created 2.3MT excess reserves" },
                   { label: "Manufacturing Glut", text: "Electronics/components inventory at 22% of sector GDP" }
                 ].map((item, index) => (
-                  <li key={index} className="flex items-start space-x-2">
+                  <li key={index} className="flex items-start space-x-2 mb-2">
                     <div className="w-2 h-2 mt-2 rounded-full bg-blue-500 flex-shrink-0" />
                     <p className="mt-0"><strong>{item.label}:</strong> {item.text}</p>
                   </li>

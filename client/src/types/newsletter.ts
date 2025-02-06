@@ -47,14 +47,14 @@ export const sampleArticles: Article[] = [
         subtitle: "Single-day decline"
       },
       {
-        label: "GDP Impact",
-        value: "0.97pp",
-        subtitle: "From inventory"
+        label: "GDP Growth",
+        value: "5.03%",
+        subtitle: "19% from inventory"
       },
       {
-        label: "NPL Ratio",
-        value: "4.1%",
-        subtitle: "Manufacturing sector"
+        label: "Coal Stockpile",
+        value: "28MT",
+        subtitle: "18 days' output"
       }
     ],
     tags: ["Economics", "Market Analysis", "Indonesia"],
