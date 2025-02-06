@@ -5,7 +5,7 @@ export default function About() {
   return (
     <div className="min-h-screen bg-[#FBF7F4] dark:bg-gray-900 transition-colors">
       <Header simplified showCategories={false} />
-      
+
       {/* Header spacing */}
       <div className="h-36 sm:h-32"></div>
 
@@ -39,37 +39,20 @@ export default function About() {
               integrates global trends with local market dynamics.
             </p>
 
-            <h3 className="text-xl font-bold mt-8 mb-4">What Sets Us Apart</h3>
-            <ul className="list-none space-y-4">
-              <li className="flex items-start space-x-3">
-                <div className="w-2 h-2 mt-2.5 rounded-full bg-blue-500 flex-shrink-0" />
-                <p className="text-lg leading-relaxed">
-                  <strong>Advanced AI Integration:</strong> Utilizing state-of-the-art language models including 
-                  Llama-3.1-sonar-reasoning-pro for sophisticated market analysis and pattern recognition.
+            <h3 className="text-xl font-bold mt-8 mb-4">Contributors</h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
+                <h4 className="font-semibold text-lg mb-2">DeepSeek R1</h4>
+                <p className="text-gray-600 dark:text-gray-400">
+                  Advanced reasoning and pattern recognition for complex market analysis
                 </p>
-              </li>
-              <li className="flex items-start space-x-3">
-                <div className="w-2 h-2 mt-2.5 rounded-full bg-blue-500 flex-shrink-0" />
-                <p className="text-lg leading-relaxed">
-                  <strong>Local Market Focus:</strong> Deep integration with Indonesian financial data sources 
-                  including Investor Trust, Kompas, and Stockbit for comprehensive regional coverage.
+              </div>
+              <div className="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
+                <h4 className="font-semibold text-lg mb-2">gpt-o3-mini</h4>
+                <p className="text-gray-600 dark:text-gray-400">
+                  Real-time data processing and market trend identification
                 </p>
-              </li>
-              <li className="flex items-start space-x-3">
-                <div className="w-2 h-2 mt-2.5 rounded-full bg-blue-500 flex-shrink-0" />
-                <p className="text-lg leading-relaxed">
-                  <strong>Enhanced Citation System:</strong> Rigorous fact-checking and inline citations 
-                  ensure transparency and reliability in our analysis.
-                </p>
-              </li>
-            </ul>
-
-            <div className="mt-12 p-6 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
-              <p className="text-lg font-medium text-center italic">
-                "Our vision is to democratize access to institutional-grade market intelligence through 
-                the thoughtful application of artificial intelligence, making sophisticated financial 
-                analysis accessible to everyone."
-              </p>
+              </div>
             </div>
           </div>
         </div>

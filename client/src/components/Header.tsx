@@ -49,7 +49,6 @@ export const Header = ({ onSubscribe, showCategories = true, simplified = false 
           {/* Left Categories */}
           {showCategories ? (
             <nav className="hidden md:flex items-center space-x-8 text-sm font-medium text-gray-600 dark:text-gray-300">
-              <Link href="/about" className="hover:text-blue-600 transition-colors">About</Link>
               <Link href="/newsletter/category/Markets" className="hover:text-blue-600 transition-colors">Markets</Link>
               <Link href="/newsletter/category/Economics" className="hover:text-blue-600 transition-colors">Economics</Link>
               <Link href="/newsletter/category/Industries" className="hover:text-blue-600 transition-colors">Industries</Link>
@@ -59,7 +58,7 @@ export const Header = ({ onSubscribe, showCategories = true, simplified = false 
             <div className="w-10 md:hidden"></div>
           )}
 
-          {/* Center Logo - Changed to Daily | Digest */}
+          {/* Center Logo */}
           <Link 
             href="/" 
             className={`${showCategories ? 'md:absolute md:left-1/2 md:-translate-x-1/2' : ''} mx-auto flex-1 md:flex-none text-center`}
@@ -74,6 +73,23 @@ export const Header = ({ onSubscribe, showCategories = true, simplified = false 
           <div className="flex items-center gap-2">
             <ThemeToggle />
 
+            {/* Desktop About and Subscribe Buttons */}
+            <div className="hidden md:flex items-center gap-2">
+              <Link href="/about">
+                <Button variant="ghost" className="hover:text-blue-600">
+                  About
+                </Button>
+              </Link>
+              {!simplified && onSubscribe && (
+                <Button
+                  onClick={onSubscribe}
+                  className="bg-blue-600 hover:bg-blue-700 text-white rounded-full px-6"
+                >
+                  Subscribe
+                </Button>
+              )}
+            </div>
+
             {/* Mobile Menu Button */}
             <div className="md:hidden">
               <Sheet open={isSheetOpen} onOpenChange={setIsSheetOpen}>
@@ -84,22 +100,6 @@ export const Header = ({ onSubscribe, showCategories = true, simplified = false 
                   </Button>
                 </SheetTrigger>
                 <SheetContent side="bottom" className="px-6 py-8">
-                  {/* About Link */}
-                  <div className="mb-8">
-                    <Link href="/about" className="flex items-center justify-between text-lg font-medium hover:text-blue-600 transition-colors">
-                      About
-                      <ArrowRight className="h-4 w-4" />
-                    </Link>
-                  </div>
-
-                  {/* Newsletter Link */}
-                  <div className="mb-8">
-                    <Link href="/newsletter" className="flex items-center justify-between text-lg font-medium hover:text-blue-600 transition-colors">
-                      Newsletter
-                      <ArrowRight className="h-4 w-4" />
-                    </Link>
-                  </div>
-
                   {/* Categories */}
                   <nav className="space-y-4 mb-8">
                     <h3 className="text-base font-medium text-gray-900 dark:text-white mb-4">Categories</h3>
@@ -108,6 +108,14 @@ export const Header = ({ onSubscribe, showCategories = true, simplified = false 
                     <Link href="/newsletter/category/Industries" className="block text-base hover:text-blue-600 transition-colors">Industries</Link>
                     <Link href="/newsletter/category/Tech" className="block text-base hover:text-blue-600 transition-colors">Tech</Link>
                   </nav>
+
+                  {/* About Link */}
+                  <div className="mb-8">
+                    <Link href="/about" className="flex items-center justify-between text-lg font-medium hover:text-blue-600 transition-colors">
+                      About
+                      <ArrowRight className="h-4 w-4" />
+                    </Link>
+                  </div>
 
                   {/* Subscribe Form */}
                   <div className="mt-8">
@@ -135,18 +143,6 @@ export const Header = ({ onSubscribe, showCategories = true, simplified = false 
                   </div>
                 </SheetContent>
               </Sheet>
-            </div>
-
-            {/* Desktop Subscribe Button */}
-            <div className="hidden md:block">
-              {!simplified && onSubscribe && (
-                <Button
-                  onClick={onSubscribe}
-                  className="bg-blue-600 hover:bg-blue-700 text-white rounded-full px-6"
-                >
-                  Subscribe
-                </Button>
-              )}
             </div>
           </div>
         </div>
