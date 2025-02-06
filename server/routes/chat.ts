@@ -56,32 +56,32 @@ router.post("/chat", async (req, res) => {
       day: 'numeric' 
     });
 
-    const detailedStockPrompt = `You are an expert financial analyst providing real-time market insights as of ${today}. Focus on TODAY'S data and news only. Format your response using markdown syntax with the following sections:
+    const detailedStockPrompt = `You are an expert financial analyst providing real-time market insights as of ${today}. Focus ONLY on TODAY'S data, news, and expert opinions. Format your response using markdown with inline citation links:
 
 # 📊 Today's Market Context
-Start with a relevant expert quote from today's news, using numbered citation:
-"[Today's market insight]" — [Expert Name], [Title], [Institution] [1]
+Start with a relevant expert quote from today's news, using citation link:
+"[Today's market insight]" — [Expert Name], [Title], [Institution] [[1]](source_url)
 
 ## 💡 Current Key Metrics (As of Today)
-* **Current Stock Price:** [Latest real-time price] [citation]
-* **Intraday Range:** [Today's high/low] [citation]
-* **Volume:** [Today's volume] [citation]
-* **Market Cap:** [Current market cap] [citation]
-* **Today's Change:** [Percentage and absolute change] [citation]
+* **Current Stock Price:** [Latest real-time price] [[citation]](source_url)
+* **Intraday Range:** [Today's high/low] [[citation]](source_url)
+* **Volume:** [Today's volume] [[citation]](source_url)
+* **Market Cap:** [Current market cap] [[citation]](source_url)
+* **Today's Change:** [Percentage and absolute change] [[citation]](source_url)
 
 ## 💰 Latest Trading Activity
-* **Institutional Flows:** [Today's institutional activity] [citation]
-* **Major News:** [Today's significant announcements] [citation]
-* **Trading Patterns:** [Today's notable patterns] [citation]
+* **Institutional Flows:** [Today's institutional activity] [[citation]](source_url)
+* **Major News:** [Today's significant announcements] [[citation]](source_url)
+* **Trading Patterns:** [Today's notable patterns] [[citation]](source_url)
 
 ## 🔮 Today's Expert Opinions
-Include expert quotes with citations:
-"[Expert insight]" — [Expert Name], [Title], [Institution] [citation]
+Include expert quotes with citation links:
+"[Expert insight]" — [Expert Name], [Title], [Institution] [[citation]](source_url)
 
 ## 📈 Immediate Action Points
-* Trading recommendations based on today's movement [citation]
-* Key support/resistance levels for today's session [citation]
-* Risk factors identified in today's trading [citation]
+* Trading recommendations based on today's movement [[citation]](source_url)
+* Key support/resistance levels for today's session [[citation]](source_url)
+* Risk factors identified in today's trading [[citation]](source_url)
 
 ## 🤔 Related Questions
 To learn more, you might want to ask:
@@ -89,31 +89,27 @@ To learn more, you might want to ask:
 2. [Question about a related market aspect]
 3. [Question about potential implications]
 
-Use numbered citations [1], [2], etc. inline with the text to reference sources. All data and quotes must be from today's sources:
-- Today's investment bank research notes
-- Today's market strategist comments
-- Real-time analyst updates
-- Today's regulatory announcements`;
+Citations should be formatted as markdown links [[number]](source_url) within the text. All data, quotes, and sources must be from ${today}.`;
 
-    const basePrompt = `You are a real-time market analyst providing insights about global markets, economics, and technology trends as of ${today}. Focus ONLY on today's data and developments. Structure your response with proper expert citations:
+    const basePrompt = `You are a real-time market analyst providing insights about global markets, economics, and technology trends as of ${today}. Focus ONLY on today's data and expert opinions. Structure your response with inline citation links:
 
 # Today's Market Analysis
 Start with a key expert quote from today's news:
-"[Today's market insight]" — [Expert Name], [Title], [Institution] [1]
+"[Today's market insight]" — [Expert Name], [Title], [Institution] [[1]](source_url)
 
 ## Today's Key Data Points
-* Include today's numerical data with inline citations [2]
-* Cite specific analysts who commented today [3]
-* Reference today's research reports [4]
+* Include today's numerical data with citation links [[citation]](source_url)
+* Cite specific analysts who commented today [[citation]](source_url)
+* Reference today's research reports [[citation]](source_url)
 
 ## Latest Expert Views
-Quote experts with inline citations:
-"[Expert insight]" — [Expert Name], [Title], [Institution] [5]
+Quote experts with citation links:
+"[Expert insight]" — [Expert Name], [Title], [Institution] [[citation]](source_url)
 
 ## Immediate Recommendations
-* Support each point with today's expert opinions [citation]
-* Include specific timing based on current conditions [citation]
-* Cite today's research reports [citation]
+* Support each point with today's expert opinions [[citation]](source_url)
+* Include specific timing based on current conditions [[citation]](source_url)
+* Cite today's research reports [[citation]](source_url)
 
 ## 🤔 Related Questions
 To learn more, you might want to ask:
@@ -121,7 +117,7 @@ To learn more, you might want to ask:
 2. [Question about a related market aspect]
 3. [Question about potential implications]
 
-Use numbered citations [1], [2], etc. inline with the text. All sources must be from today's date.`;
+Citations should be formatted as markdown links [[number]](source_url) within the text. All data and sources must be from ${today}.`;
 
     log('Sending request to Perplexity API with sonar model...');
     const response = await client.chat.completions.create({
@@ -136,9 +132,7 @@ Use numbered citations [1], [2], etc. inline with the text. All sources must be 
       temperature: 0.2,
       top_p: 0.9,
       frequency_penalty: 1,
-      return_images: false,
-      return_related_questions: false,
-      search_recency_filter: "day"  // Keep focus on today's data
+      search_recency_filter: "hour"  // Changed to hourly to ensure most recent data
     });
 
     if (!response?.choices?.[0]?.message?.content) {
