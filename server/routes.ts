@@ -254,48 +254,62 @@ export function registerRoutes(app: Express): Server {
       // Read the index.html template
       let html = readFileSync(join(__dirname, '..', 'client', 'index.html'), 'utf-8');
 
+      // Helper function to escape HTML content
+      const escapeHtml = (unsafe: string) => {
+        return unsafe
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/"/g, "&quot;")
+          .replace(/'/g, "&#039;");
+      };
+
       // Create rich preview content
       const metrics = article.previewMetrics || [];
-      const metricsText = metrics.length > 0 
+      const metricsText = metrics.length > 0
         ? metrics.map(m => `${m.label}: ${m.value}`).join(" | ")
         : '';
 
-      const previewTitle = `${article.title} | Daily Digest`;
-      const previewDescription = metricsText 
+      const previewTitle = escapeHtml(`${article.title} | Daily Digest`);
+      const previewDescription = escapeHtml(metricsText
         ? `${metricsText}. ${article.description}`
-        : article.description;
+        : article.description);
 
       // Define meta tags for social media previews
-      const metaTags = `
-        <title>${previewTitle}</title>
-        <meta name="description" content="${previewDescription}">
+      const metaTags = [
+        `<title>${previewTitle}</title>`,
+        `<meta name="description" content="${previewDescription}">`,
 
-        <!-- Open Graph -->
-        <meta property="og:title" content="${previewTitle}">
-        <meta property="og:description" content="${previewDescription}">
-        <meta property="og:type" content="article">
-        <meta property="og:url" content="https://lucaxyzz-digest.replit.app/newsletter/${slug}">
-        <meta property="og:site_name" content="Daily Digest">
-        <meta property="og:locale" content="en_US">
+        // Open Graph
+        `<meta property="og:title" content="${previewTitle}">`,
+        `<meta property="og:description" content="${previewDescription}">`,
+        `<meta property="og:type" content="article">`,
+        `<meta property="og:url" content="https://lucaxyzz-digest.replit.app/newsletter/${escapeHtml(slug)}">`,
+        `<meta property="og:site_name" content="Daily Digest">`,
+        `<meta property="og:locale" content="en_US">`,
+        `<meta property="og:image" content="https://lucaxyzz-digest.replit.app/logo.png">`,
 
-        <!-- Twitter Card -->
-        <meta name="twitter:card" content="summary">
-        <meta name="twitter:site" content="@dailydigest">
-        <meta name="twitter:creator" content="@dailydigest">
-        <meta name="twitter:title" content="${previewTitle}">
-        <meta name="twitter:description" content="${previewDescription}">
-        <meta name="twitter:domain" content="lucaxyzz-digest.replit.app">
+        // Twitter Card
+        `<meta name="twitter:card" content="summary">`,
+        `<meta name="twitter:site" content="@dailydigest">`,
+        `<meta name="twitter:creator" content="@dailydigest">`,
+        `<meta name="twitter:title" content="${previewTitle}">`,
+        `<meta name="twitter:description" content="${previewDescription}">`,
+        `<meta name="twitter:domain" content="lucaxyzz-digest.replit.app">`,
+        `<meta name="twitter:image" content="https://lucaxyzz-digest.replit.app/logo.png">`,
 
-        <!-- Article Metadata -->
-        <meta property="article:published_time" content="${article.date}">
-        <meta property="article:author" content="${article.author}">
-        <meta property="article:section" content="${article.category}">
-        <meta property="article:tag" content="${article.tags?.join(',') || article.category}">
-      `;
+        // Article Metadata
+        `<meta property="article:published_time" content="${escapeHtml(article.date)}">`,
+        `<meta property="article:author" content="${escapeHtml(article.author)}">`,
+        `<meta property="article:section" content="${escapeHtml(article.category)}">`,
+        `<meta property="article:tag" content="${escapeHtml(article.tags?.join(',') || article.category)}">`
+      ].join('\n        ');
 
-      // Insert meta tags into HTML
-      html = html.replace('</head>', `${metaTags}\n</head>`);
+      // Find the head tag and insert meta tags right after it
+      html = html.replace('<head>', `<head>\n        ${metaTags}`);
 
+      // Set proper content type
+      res.setHeader('Content-Type', 'text/html');
       res.send(html);
     } catch (error) {
       console.error('Error rendering article meta tags:', error);
@@ -309,7 +323,7 @@ export function registerRoutes(app: Express): Server {
       res.json(marketData);
     } catch (error) {
       console.error('Error in /api/market-data:', error);
-      res.status(500).json({ 
+      res.status(500).json({
         error: 'Failed to fetch market data',
         message: error instanceof Error ? error.message : 'Unknown error'
       });
@@ -325,7 +339,7 @@ export function registerRoutes(app: Express): Server {
       execFile('node', [refreshScriptPath], (error, stdout, stderr) => {
         if (error) {
           console.error('Error running refresh script:', error);
-          return res.status(500).json({ 
+          return res.status(500).json({
             error: 'Failed to refresh environment',
             message: error.message,
             details: {
@@ -340,7 +354,7 @@ export function registerRoutes(app: Express): Server {
         }
 
         console.log('Refresh script output:', stdout);
-        res.json({ 
+        res.json({
           message: 'Environment refresh completed successfully',
           details: {
             stdout,
@@ -350,7 +364,7 @@ export function registerRoutes(app: Express): Server {
       });
     } catch (error) {
       console.error('Error in /api/dev/refresh:', error);
-      res.status(500).json({ 
+      res.status(500).json({
         error: 'Failed to refresh environment',
         message: error instanceof Error ? error.message : 'Unknown error'
       });
