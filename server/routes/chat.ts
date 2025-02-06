@@ -93,9 +93,9 @@ Provide an in-depth analysis of the company's financial standing, including prof
 ## 📝 Bottom Line
 Summarize key takeaways with actionable insights, focusing on investment opportunities. Provide a concise view of the potential total returns, including dividends and growth, along with risks to monitor. Offer a strategic recommendation based on the company's fundamentals and market outlook.`;
 
-    log('Sending request to Perplexity API with sonar-reasoning-pro model...');
+    log('Sending request to Perplexity API with sonar model...');
     const response = await client.chat.completions.create({
-      model: "sonar-reasoning-pro",
+      model: "llama-3.1-sonar-huge-128k-online", // Using the largest model for better analysis
       messages: [
         { 
           role: "system", 
@@ -105,9 +105,10 @@ Summarize key takeaways with actionable insights, focusing on investment opportu
       ],
       temperature: 0.2,
       top_p: 0.9,
-      max_tokens: 4000,  
+      max_tokens: 4000,  // Increased for more comprehensive analysis
       frequency_penalty: 1,
-      search_domain_filter: [ 
+      search_domain_filter: [ // Focus on financial and market data sources
+        // Global Financial Sources
         "bloomberg.com",
         "reuters.com",
         "ft.com",
@@ -126,6 +127,7 @@ Summarize key takeaways with actionable insights, focusing on investment opportu
         "gurufocus.com",
         "markets.ft.com",
 
+        // Indonesian Financial Sources
         "investortrust.id",
         "kontan.co.id",
         "bisnis.com",
@@ -141,8 +143,7 @@ Summarize key takeaways with actionable insights, focusing on investment opportu
         "bareksa.com",
         "mncsekuritas.id",
         "idx.co.id"
-      ],
-      search_recency_filter: "hour"  
+      ]
     });
 
     if (!response?.choices?.[0]?.message?.content) {
