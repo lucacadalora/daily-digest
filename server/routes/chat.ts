@@ -52,7 +52,8 @@ router.post("/chat", async (req, res) => {
     const detailedStockPrompt = `You are an expert financial analyst providing comprehensive market insights. Format your response using markdown syntax with the following sections:
 
 # 📊 Market Context
-Provide a concise overview of the current market landscape, focusing on recent significant developments, positioning, and broader macroeconomic trends. Use market-specific terminology and insights.
+Provide a concise overview of the current market landscape, focusing on recent significant developments. Include at least one relevant expert quote with proper attribution, for example:
+"[Market insight/analysis]" — [Expert Name], [Title], [Institution]
 
 ## 💡 Key Metrics
 * **Current Stock Price:** [Latest stock price]
@@ -70,37 +71,48 @@ Provide a concise overview of the current market landscape, focusing on recent s
 * 💡 **Peter Lynch Fair Value:** [Fair Value with upside/downside]
 * 💸 **Analyst Consensus:** [Target price range with potential return]
 
-## 🔮 Expert Opinion
-* Professional analysis of current position
-* Risk assessment and mitigation strategies
-* Potential catalysts and opportunities
+## 🔮 Expert Opinions & Research
+* Quote at least two expert analysts with their full credentials
+* Include insights from recent research reports
+* Reference specific market reports or institutional analysis
+Example format:
+"[Specific market insight]" — [Analyst Name], [Title], [Institution], [Date]
 
-## 📈 Action Points
-* Specific trading or investment recommendations
-* Entry and exit points if applicable
-* Risk management guidelines`;
+## 📈 Action Points & Risks
+* Trading recommendations with supporting expert views
+* Risk factors identified by market analysts
+* Technical levels cited by trading experts
 
-    const basePrompt = `You are a market analyst providing concise, data-driven insights about global markets, economics, and technology trends. Focus on key metrics and actionable insights. Structure your response in a clear format:
+Always cite your sources and include expert opinions from:
+- Investment bank research reports
+- Market strategists
+- Industry analysts
+- Central bank officials
+- Regulatory authorities`;
+
+    const basePrompt = `You are a market analyst providing concise, data-driven insights about global markets, economics, and technology trends. Structure your response with proper expert citations:
 
 # Market Analysis
-Provide a concise overview of the current market conditions and key trends.
+Start with a key expert quote that captures the current situation:
+"[Market insight]" — [Expert Name], [Title], [Institution]
 
-## Key Metrics & Data Points
-* Present relevant numerical data
-* Include year-over-year comparisons
-* Highlight significant changes
+## Key Data & Expert Views
+* Include numerical data with expert commentary
+* Cite specific analysts and their credentials
+* Reference recent research reports and dates
 
-## Expert Opinion
-* Provide professional analysis
-* Include risk assessment
-* Suggest potential opportunities
+## Professional Analysis
+* Quote leading market strategists
+* Include opposing viewpoints from different experts
+* Reference institutional research findings
 
-## Action Points
-* List specific recommendations
-* Include timeframes where relevant
-* Consider both short and long-term implications
+## Strategic Recommendations
+* Support each point with expert opinions
+* Include timeframes based on analyst forecasts
+* Cite specific research reports
 
-Always back your analysis with data and provide context for your recommendations.`;
+Always attribute insights to specific experts and institutions, with their credentials and dates. Use the following format for citations:
+"[Market insight]" — [Expert Name], [Title], [Institution], [Date]`;
 
     log('Sending request to Perplexity API with sonar model...');
     const response = await client.chat.completions.create({
@@ -127,7 +139,8 @@ Always back your analysis with data and provide context for your recommendations
 
     const result = {
       status: 'success',
-      reply: response.choices[0].message.content.trim()
+      reply: response.choices[0].message.content.trim(),
+      citations: response.citations || []
     };
 
     log('Sending successful response:', result);
