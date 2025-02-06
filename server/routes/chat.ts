@@ -108,6 +108,7 @@ Summarize key takeaways with actionable insights, focusing on investment opportu
       max_tokens: 4000,  // Increased for more comprehensive analysis
       frequency_penalty: 1,
       search_domain_filter: [ // Focus on financial and market data sources
+        // Global Financial Sources
         "bloomberg.com",
         "reuters.com",
         "ft.com",
@@ -124,7 +125,24 @@ Summarize key takeaways with actionable insights, focusing on investment opportu
         "benzinga.com",
         "barrons.com",
         "gurufocus.com",
-        "markets.ft.com"
+        "markets.ft.com",
+
+        // Indonesian Financial Sources
+        "investortrust.id",
+        "kontan.co.id",
+        "bisnis.com",
+        "stockbit.com",
+        "idx.co.id",
+        "finance.detik.com",
+        "money.kompas.com",
+        "investor.id",
+        "cnbcindonesia.com",
+        "market.bisnis.com",
+        "pasardana.id",
+        "indopremier.com",
+        "bareksa.com",
+        "mncsekuritas.id",
+        "idx.co.id"
       ]
     });
 
