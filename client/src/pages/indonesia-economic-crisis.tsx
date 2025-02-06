@@ -111,10 +111,10 @@ export default function IndonesiaEconomicCrisis() {
             <CardContent className="p-4">
               <div className="flex items-center space-x-2 mb-2">
                 <AlertCircle className="h-5 w-5 text-yellow-600" />
-                <h3 className="font-bold text-gray-900 dark:text-white">GDP Growth</h3>
+                <h3 className="font-bold text-gray-900 dark:text-white">2024 GDP Growth</h3>
               </div>
               <p className="text-2xl font-bold text-gray-900 dark:text-white mb-1">5.03%</p>
-              <p className="text-sm text-gray-600 dark:text-gray-400">19% from Inventory</p>
+              <p className="text-sm text-gray-600 dark:text-gray-400">0.97pp from Inventory</p>
             </CardContent>
           </Card>
 
@@ -122,24 +122,15 @@ export default function IndonesiaEconomicCrisis() {
             <CardContent className="p-4">
               <div className="flex items-center space-x-2 mb-2">
                 <AlertCircle className="h-5 w-5 text-red-600" />
-                <h3 className="font-bold text-gray-900 dark:text-white">Manufacturing NPL</h3>
+                <h3 className="font-bold text-gray-900 dark:text-white">Coal Stockpile</h3>
               </div>
-              <p className="text-2xl font-bold text-gray-900 dark:text-white mb-1">4.1%</p>
-              <p className="text-sm text-gray-600 dark:text-gray-400">Up from 2.8% YoY</p>
+              <p className="text-2xl font-bold text-gray-900 dark:text-white mb-1">28MT</p>
+              <p className="text-sm text-gray-600 dark:text-gray-400">18 days' surplus output</p>
             </CardContent>
           </Card>
         </div>
 
-        <div className="py-4 space-y-6">
-          <Card className="bg-blue-50 dark:bg-blue-900/20">
-            <CardContent className="p-4">
-              <blockquote className="text-base italic text-gray-700 dark:text-gray-300 mb-2">
-                "Indonesia's 5.03% growth in 2024 carries an artificial underbelly – when 0.97 percentage points (19% of total expansion) rely on inventory stockpiles rather than sustainable demand"
-              </blockquote>
-              <p className="text-sm text-gray-600 dark:text-gray-400">— Barra Kukuh Mamia, Head of Macroeconomic Research, BCA</p>
-            </CardContent>
-          </Card>
-
+        <div className="py-4 space-y-4">
           <section>
             <h2 className="text-xl font-serif font-bold text-gray-900 dark:text-white mb-3">Crisis Catalysts: Market Forces Converge</h2>
             <p className="text-gray-700 dark:text-gray-300 mb-4">
@@ -178,14 +169,14 @@ export default function IndonesiaEconomicCrisis() {
           <section>
             <h2 className="text-xl font-serif font-bold text-gray-900 dark:text-white mb-3">The House of Cards: How Inventory Artifice Boosted Growth</h2>
             <div className="prose text-gray-700 dark:text-gray-300 max-w-none">
-              <p className="mb-3">2024's Growth Mirage revealed troubling patterns across key sectors:</p>
-              <ul className="list-none space-y-3 pl-0">
+              <p className="mb-2">2024's Growth Mirage revealed troubling patterns across key sectors:</p>
+              <ul className="list-none space-y-2 pl-0">
                 {[
                   { label: "Coal Stockpiling", text: "14.2% production surge vs 4.7% exports - 28MT surplus (18 days' output)" },
                   { label: "Strategic Miscalculations", text: "166% QoQ rice imports created 2.3MT excess reserves" },
                   { label: "Manufacturing Glut", text: "Electronics/components inventory at 22% of sector GDP" }
                 ].map((item, index) => (
-                  <li key={index} className="flex space-x-2">
+                  <li key={index} className="flex items-start space-x-2">
                     <div className="w-2 h-2 mt-2 rounded-full bg-blue-500 flex-shrink-0" />
                     <p className="mt-0"><strong>{item.label}:</strong> {item.text}</p>
                   </li>
