@@ -36,6 +36,10 @@ router.post("/chat", async (req, res) => {
       });
     }
 
+    // Match stock tickers
+    const stockTickerPattern = /\b[A-Z]{1,5}(\.[A-Z]{2})?\b|\^[A-Z]+\b/g;
+    const hasStockTicker = stockTickerPattern.test(message);
+
     const client = new OpenAI({
       apiKey,
       baseURL: "https://api.perplexity.ai",
@@ -45,13 +49,39 @@ router.post("/chat", async (req, res) => {
       }
     });
 
-    const systemPrompt = `You are an expert financial and business analyst specializing in market analysis and investment research. Provide clear, concise, and accurate information based on your extensive knowledge of global financial markets, company valuations, and investment analysis.`;
+    const detailedStockPrompt = `You are an expert financial and business analyst specializing in market analysis and investment research. Format your response using markdown syntax with the following sections:
+
+# 📊 Market Context
+Provide a concise overview of the current market landscape, focusing on recent significant developments, positioning, and broader macroeconomic trends. Use market-specific terminology and insights.
+
+## 💡 Key Metrics
+* **Current Stock Price:** [Latest stock price]
+* **P/E Ratio:** [Value with peer comparison]
+* **Market Cap:** [Total market cap with context]
+* **Earnings Growth:** [Latest earnings growth]
+* **Price-to-Book (P/B):** [Current P/B ratio]
+* **Debt-to-Equity:** [Current ratio]
+
+## 💰 Dividend Outlook
+* **2025 Projection:** [Dividend Yield %]
+* **Expected Payout:** [Annual dividend per share]
+
+## 💸 Fair Value Estimates
+* 💡 **Peter Lynch Fair Value:** [Fair Value with upside/downside]
+* 💸 **Analyst Consensus:** [Target price range with potential return]`;
+
+    const basePrompt = `You are an expert financial and business analyst specializing in market analysis and investment research. Provide clear, concise, and accurate information based on your extensive knowledge of global financial markets, company valuations, and investment analysis.
+
+Format your response in a structured way using markdown headings and bullet points. Include quantitative data where relevant, and always provide context for the numbers you present.`;
 
     log('Sending request to Perplexity API...');
     const response = await client.chat.completions.create({
       model: "llama-3.1-sonar-small-128k-online",
       messages: [
-        { role: "system", content: systemPrompt },
+        { 
+          role: "system", 
+          content: hasStockTicker ? detailedStockPrompt : basePrompt 
+        },
         { role: "user", content: message }
       ],
       temperature: 0.2,
