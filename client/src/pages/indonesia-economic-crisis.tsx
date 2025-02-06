@@ -11,43 +11,50 @@ export default function IndonesiaEconomicCrisis() {
 
   useEffect(() => {
     if (article) {
-      // Create a richer description by combining metrics and description
-      const enrichedDescription = article.previewMetrics 
-        ? `${article.previewMetrics.map(m => `${m.label}: ${m.value}`).join(" | ")}. ${article.description}`
+      // Create rich preview metadata
+      const metrics = article.previewMetrics || [];
+      const metricsText = metrics.length > 0 
+        ? metrics.map(m => `${m.label}: ${m.value}`).join(" | ")
+        : '';
+
+      const previewTitle = `${article.title} | Daily Digest`;
+      const previewDescription = metricsText 
+        ? `${metricsText}. ${article.description}`
         : article.description;
 
       const metaTags = {
-        // Basic Meta Tags
-        "description": enrichedDescription,
+        // Open Graph tags for rich previews
+        'og:title': previewTitle,
+        'og:description': previewDescription,
+        'og:type': 'article',
+        'og:url': `https://lucaxyzz-digest.replit.app/newsletter/${article.slug}`,
+        'og:site_name': 'Daily Digest',
+        'og:locale': 'en_US',
 
-        // Open Graph Meta Tags
-        "og:title": `${article.title} | Daily Digest`,
-        "og:description": enrichedDescription,
-        "og:type": "article",
-        "og:url": `https://lucaxyzz-digest.replit.app/newsletter/${article.slug}`,
-        "og:site_name": "Daily Digest - Market Intelligence",
+        // Twitter Card tags
+        'twitter:card': 'summary',
+        'twitter:site': '@dailydigest',
+        'twitter:creator': '@dailydigest',
+        'twitter:title': previewTitle,
+        'twitter:description': previewDescription,
 
-        // Twitter Card Meta Tags
-        "twitter:card": "summary_large_image",
-        "twitter:title": `${article.title} | Daily Digest`,
-        "twitter:description": enrichedDescription,
-        "twitter:site": "@dailydigest",
+        // Article metadata
+        'article:published_time': article.date,
+        'article:author': article.author,
+        'article:section': article.category,
+        'article:tag': article.tags?.join(',') || article.category,
 
-        // Article Specific Meta Tags
-        "article:published_time": article.date,
-        "article:author": article.author,
-        "article:section": article.category,
-        "article:tag": article.tags ? article.tags.join(",") : article.category,
-
-        // Additional Meta Tags for SEO
-        "keywords": article.tags ? article.tags.join(",") : `${article.category},market analysis,financial news`,
-        "news_keywords": article.tags ? article.tags.join(",") : article.category
+        // Basic SEO tags
+        'description': previewDescription,
+        'keywords': article.tags?.join(',') || `${article.category},market analysis,financial news`,
+        'news_keywords': article.tags?.join(',') || article.category
       };
 
-      // Update existing meta tags or create new ones
+      // Update meta tags in the document head
       Object.entries(metaTags).forEach(([name, content]) => {
         let tag;
         if (name.startsWith('og:') || name.startsWith('article:')) {
+          // Handle Open Graph and article tags
           tag = document.querySelector(`meta[property="${name}"]`);
           if (!tag) {
             tag = document.createElement('meta');
@@ -55,6 +62,7 @@ export default function IndonesiaEconomicCrisis() {
             document.head.appendChild(tag);
           }
         } else {
+          // Handle other meta tags
           tag = document.querySelector(`meta[name="${name}"]`);
           if (!tag) {
             tag = document.createElement('meta');
@@ -65,7 +73,8 @@ export default function IndonesiaEconomicCrisis() {
         tag.setAttribute('content', content);
       });
 
-      document.title = `${article.title} | Daily Digest`;
+      // Update the document title
+      document.title = previewTitle;
     }
   }, [article]);
 
