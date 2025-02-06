@@ -95,7 +95,7 @@ Summarize key takeaways with actionable insights, focusing on investment opportu
 
     log('Sending request to Perplexity API with sonar model...');
     const response = await client.chat.completions.create({
-      model: "sonar",
+      model: "llama-3.1-sonar-huge-128k-online", // Using the largest model for better analysis
       messages: [
         { 
           role: "system", 
@@ -105,8 +105,27 @@ Summarize key takeaways with actionable insights, focusing on investment opportu
       ],
       temperature: 0.2,
       top_p: 0.9,
-      max_tokens: 2500,  // Increased for detailed analysis
-      frequency_penalty: 1
+      max_tokens: 4000,  // Increased for more comprehensive analysis
+      frequency_penalty: 1,
+      search_domain_filter: [ // Focus on financial and market data sources
+        "bloomberg.com",
+        "reuters.com",
+        "ft.com",
+        "wsj.com",
+        "cnbc.com",
+        "marketwatch.com",
+        "finance.yahoo.com",
+        "investing.com",
+        "seekingalpha.com",
+        "fool.com",
+        "morningstar.com",
+        "zacks.com",
+        "tradingview.com",
+        "benzinga.com",
+        "barrons.com",
+        "gurufocus.com",
+        "markets.ft.com"
+      ]
     });
 
     if (!response?.choices?.[0]?.message?.content) {
