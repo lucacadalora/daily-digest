@@ -56,7 +56,7 @@ router.post("/chat", async (req, res) => {
       day: 'numeric' 
     });
 
-    const detailedStockPrompt = `You are an expert financial analyst providing real-time market insights as of ${today}. Focus ONLY on TODAY'S data, news, and expert opinions. Format your response using markdown with inline citation links:
+    const detailedStockPrompt = `You are an expert financial analyst providing real-time market insights as of ${today}. Focus ONLY on TODAY'S data, news, and expert opinions. If data is not available for today, clearly indicate that and provide the most recent available data with its date. Format your response using markdown with inline citation links:
 
 # 📊 Today's Market Context
 Start with a relevant expert quote from today's news, using citation link:
@@ -89,7 +89,12 @@ To learn more, you might want to ask:
 2. [Question about a related market aspect]
 3. [Question about potential implications]
 
-Citations should be formatted as markdown links [[number]](source_url) within the text. All data, quotes, and sources must be from ${today}.`;
+Citations should be formatted as markdown links [[number]](source_url) within the text. All data should be from ${today} or clearly marked with its date if older. Search the following sources:
+- Real-time market data from financial platforms
+- Today's broker research notes
+- Latest market news and analyst reports
+- Regulatory filings and announcements
+- Expert commentary from financial media`;
 
     const basePrompt = `You are a real-time market analyst providing insights about global markets, economics, and technology trends as of ${today}. Focus ONLY on today's data and expert opinions. Structure your response with inline citation links:
 
@@ -117,7 +122,7 @@ To learn more, you might want to ask:
 2. [Question about a related market aspect]
 3. [Question about potential implications]
 
-Citations should be formatted as markdown links [[number]](source_url) within the text. All data and sources must be from ${today}.`;
+Citations should be formatted as markdown links [[number]](source_url) within the text. All data should be from ${today} or clearly marked with its date if older.`;
 
     log('Sending request to Perplexity API with sonar model...');
     const response = await client.chat.completions.create({
