@@ -165,12 +165,12 @@ export default function IndonesiaEconomicCrisis() {
                 </tr>
                 <tr>
                   <td className="p-3 border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300">China Tariffs</td>
-                  <td className="p-3 border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300">ADRO -4.2% (28MT coal exposure)</td>
+                  <td className="p-3 border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300">ADRO -2.29% (28MT coal exposure)</td>
                   <td className="p-3 border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300">Export bottleneck compounds stockpiles</td>
                 </tr>
                 <tr>
                   <td className="p-3 border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300">Earnings Shock</td>
-                  <td className="p-3 border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300">BMRI -3.5% (14% profit drop)</td>
+                  <td className="p-3 border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300">BMRI -7.69% (14% profit drop)</td>
                   <td className="p-3 border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300">Inventory impairments hit bank balance sheets</td>
                 </tr>
               </tbody>
