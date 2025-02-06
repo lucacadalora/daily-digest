@@ -9,39 +9,32 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-// Request logging middleware
+// Request logging middleware for debugging
 app.use((req, res, next) => {
   const start = Date.now();
-  const path = req.path;
-  let capturedJsonResponse: Record<string, any> | undefined = undefined;
+  log(`${req.method} ${req.path} - Started`);
 
-  const originalResJson = res.json;
-  res.json = function (bodyJson, ...args) {
-    capturedJsonResponse = bodyJson;
-    return originalResJson.apply(res, [bodyJson, ...args]);
+  const originalJson = res.json;
+  res.json = function(...args) {
+    log(`${req.method} ${req.path} - JSON Response:`, args[0]);
+    return originalJson.apply(res, args);
   };
 
-  res.on("finish", () => {
+  res.on('finish', () => {
     const duration = Date.now() - start;
-    if (path.startsWith("/api")) {
-      let logLine = `${req.method} ${path} ${res.statusCode} in ${duration}ms`;
-      if (capturedJsonResponse) {
-        logLine += ` :: ${JSON.stringify(capturedJsonResponse)}`;
-      }
-
-      if (logLine.length > 80) {
-        logLine = logLine.slice(0, 79) + "…";
-      }
-
-      log(logLine);
-    }
+    log(`${req.method} ${req.path} - Completed in ${duration}ms`);
   });
 
   next();
 });
 
+// API Routes - Mount before Vite middleware
+app.use('/api', chatRouter);
+
 (async () => {
   const server = registerRoutes(app);
+
+  // Error handling middleware
   app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
     const status = err.status || err.statusCode || 500;
     const message = err.message || "Internal Server Error";
@@ -57,19 +50,10 @@ app.use((req, res, next) => {
     serveStatic(app);
   }
 
-  app.use(chatRouter);
-
   const PORT = 5000;
   server.listen(PORT, "0.0.0.0", () => {
     log(`Server running in ${app.get('env')} mode`);
     log(`Frontend: http://0.0.0.0:${PORT}`);
     log(`API: http://0.0.0.0:${PORT}/api`);
-
-    // Log environment details in development
-    if (app.get("env") === "development") {
-      log(`Debug mode enabled - file changes will be logged`);
-      log(`Cache headers: disabled`);
-      log(`HMR: enabled`);
-    }
   });
 })();

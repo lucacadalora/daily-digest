@@ -1,13 +1,17 @@
 import express from "express";
 import OpenAI from "openai";
 import type { APIError } from "openai";
+import { log } from "../vite";
 
 const router = express.Router();
 
-router.post("/api/chat", async (req, res) => {
+router.post("/chat", async (req, res) => {
   try {
+    log('Received chat request:', req.body);
+
     const { message } = req.body;
     if (!message) {
+      log('Error: Message is required');
       return res.status(400).json({
         status: 'error',
         error: 'Message is required'
@@ -16,6 +20,7 @@ router.post("/api/chat", async (req, res) => {
 
     const apiKey = process.env.PERPLEXITY_API_KEY?.trim();
     if (!apiKey) {
+      log('Error: Missing API key');
       return res.status(500).json({
         status: 'error',
         error: 'API Configuration Error: Missing API key'
@@ -42,6 +47,7 @@ router.post("/api/chat", async (req, res) => {
 
     const systemPrompt = `You are an expert financial and business analyst specializing in market analysis and investment research. Provide clear, concise, and accurate information based on your extensive knowledge of global financial markets, company valuations, and investment analysis.`;
 
+    log('Sending request to Perplexity API...');
     const response = await client.chat.completions.create({
       model: "llama-3.1-sonar-small-128k-online",
       messages: [
@@ -56,14 +62,19 @@ router.post("/api/chat", async (req, res) => {
       throw new Error('Invalid API response format');
     }
 
-    res.json({
+    const result = {
       status: 'success',
       reply: response.choices[0].message.content.trim()
-    });
+    };
+
+    log('Sending successful response:', result);
+    res.json(result);
 
   } catch (error) {
     console.error('Chat API Error:', error);
     const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+
+    log('Error in chat endpoint:', errorMessage);
     res.status(500).json({
       status: 'error',
       error: errorMessage

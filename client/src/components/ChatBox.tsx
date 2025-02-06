@@ -79,6 +79,7 @@ export const ChatBox = () => {
     }]);
 
     try {
+      console.log('Sending chat request:', userMessage);
       const response = await fetch('/api/chat', {
         method: 'POST',
         headers: {
@@ -92,6 +93,7 @@ export const ChatBox = () => {
       }
 
       const data = await response.json();
+      console.log('Received chat response:', data);
 
       if (data.status === 'error') {
         throw new Error(data.error || 'Failed to get response');
@@ -111,7 +113,7 @@ export const ChatBox = () => {
         const filtered = prev.filter(msg => !msg.isSearching);
         return [...filtered, { 
           role: 'assistant', 
-          content: 'Sorry, I encountered an error. Please try again.'
+          content: error instanceof Error ? error.message : 'Sorry, I encountered an error. Please try again.'
         }];
       });
     } finally {
