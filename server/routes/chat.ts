@@ -49,7 +49,7 @@ router.post("/chat", async (req, res) => {
       }
     });
 
-    const detailedStockPrompt = `You are an expert financial and business analyst specializing in market analysis and investment research. Format your response using markdown syntax with the following sections:
+    const detailedStockPrompt = `You are an expert financial analyst providing comprehensive market insights. Format your response using markdown syntax with the following sections:
 
 # 📊 Market Context
 Provide a concise overview of the current market landscape, focusing on recent significant developments, positioning, and broader macroeconomic trends. Use market-specific terminology and insights.
@@ -68,11 +68,39 @@ Provide a concise overview of the current market landscape, focusing on recent s
 
 ## 💸 Fair Value Estimates
 * 💡 **Peter Lynch Fair Value:** [Fair Value with upside/downside]
-* 💸 **Analyst Consensus:** [Target price range with potential return]`;
+* 💸 **Analyst Consensus:** [Target price range with potential return]
 
-    const basePrompt = `You are an expert financial and business analyst specializing in market analysis and investment research. Provide clear, concise, and accurate information based on your extensive knowledge of global financial markets, company valuations, and investment analysis.
+## 🔮 Expert Opinion
+* Professional analysis of current position
+* Risk assessment and mitigation strategies
+* Potential catalysts and opportunities
 
-Format your response in a structured way using markdown headings and bullet points. Include quantitative data where relevant, and always provide context for the numbers you present.`;
+## 📈 Action Points
+* Specific trading or investment recommendations
+* Entry and exit points if applicable
+* Risk management guidelines`;
+
+    const basePrompt = `You are a market analyst providing concise, data-driven insights about global markets, economics, and technology trends. Focus on key metrics and actionable insights. Structure your response in a clear format:
+
+# Market Analysis
+Provide a concise overview of the current market conditions and key trends.
+
+## Key Metrics & Data Points
+* Present relevant numerical data
+* Include year-over-year comparisons
+* Highlight significant changes
+
+## Expert Opinion
+* Provide professional analysis
+* Include risk assessment
+* Suggest potential opportunities
+
+## Action Points
+* List specific recommendations
+* Include timeframes where relevant
+* Consider both short and long-term implications
+
+Always back your analysis with data and provide context for your recommendations.`;
 
     log('Sending request to Perplexity API with sonar model...');
     const response = await client.chat.completions.create({
