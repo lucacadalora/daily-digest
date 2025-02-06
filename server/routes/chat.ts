@@ -14,32 +14,16 @@ router.post("/api/chat", async (req, res) => {
     const { message } = req.body;
 
     const apiKey = process.env.PERPLEXITY_API_KEY?.trim();
-    console.log('Environment check:', {
-      hasApiKey: !!apiKey,
-      keyLength: apiKey?.length,
-      nodeEnv: process.env.NODE_ENV
-    });
-
-    if (!apiKey || apiKey.length < 1) {
-      console.error('Perplexity API Key missing or invalid:', process.env.NODE_ENV);
+    if (!apiKey) {
+      console.error('Missing Perplexity API key');
       return res.status(500).json({
         status: 'error',
         error: 'API Configuration Error',
-        details: 'Invalid or missing Perplexity API key. Please check your secrets configuration.'
+        details: 'Missing Perplexity API key'
       });
     }
 
-    // Validate API key format
-    if (typeof apiKey !== 'string' || apiKey.length < 10) {
-      console.error('Invalid API key format');
-      return res.status(500).json({
-        status: 'error',
-        error: 'Invalid API key format',
-        details: 'The provided API key appears to be invalid. Please check the key format.'
-      });
-    }
-
-    // Detect off-topic queries (programming, gaming, etc.)
+    // Detect off-topic queries
     const nonMarketTerms = /\b(code|programming|typescript|javascript|python|game|gaming|maze|algorithm|compiler|database|API|endpoint)\b/i;
     if (nonMarketTerms.test(message)) {
       return res.json({
@@ -48,77 +32,38 @@ router.post("/api/chat", async (req, res) => {
       });
     }
 
-    // Match stock tickers: Traditional (AAPL), Indonesian (.JK), Indices (^GSPC)
+    // Match stock tickers
     const stockTickerPattern = /\b[A-Z]{1,5}(\.[A-Z]{2})?\b|\^[A-Z]+\b/g;
     const hasStockTicker = stockTickerPattern.test(message);
 
-    console.log('Processing query:', message);
-    console.log('Has stock ticker:', hasStockTicker);
-
-    // Set up SSE headers
+    // Configure response headers for SSE if requested
     if (req.headers.accept === 'text/event-stream') {
       res.setHeader('Content-Type', 'text/event-stream');
       res.setHeader('Cache-Control', 'no-cache');
       res.setHeader('Connection', 'keep-alive');
       res.flushHeaders();
-
-      // Send initial status
-      sendSSE(res, { 
-        status: 'start',
-        message: 'Analyzing market data...'
-      });
     }
 
     const basePrompt = `You are an expert financial and business analyst specializing in market analysis and investment research. Provide clear, concise, and accurate information based on your extensive knowledge of global financial markets, company valuations, and investment analysis.
 
 Important: Only answer questions related to financial markets, investments, economic trends, and business analysis. If the question is outside these domains, inform the user that you can only assist with market-related queries.`;
 
-    const detailedStockPrompt = `You are an expert financial and business analyst specializing in market analysis and investment research. Format your response using markdown syntax:
-
-# 📊 Market Context
-Provide a concise overview of the current market landscape, focusing on recent significant developments, positioning, and broader macroeconomic trends. Use market-specific terminology and insights for the latest developments.
-
-## 💡 Key Metrics
-* **Current Stock Price:** [Retrieve the latest stock price using a real-time financial data API]
-* **Price-to-Earnings (P/E):** [Value, with comparison to industry peers and historical trends]
-* **Discount to Peers:** [Value, comparison to regional peers or sector average]
-* **Market Capitalization:** [Total market cap, with comparison to industry average or historical trends]
-* **Earnings Growth (YoY/Quarterly):** [Latest earnings growth, with comparison to peers or historical growth]
-* **Price-to-Book (P/B):** [Current P/B ratio with relevant context]
-* **Debt-to-Equity Ratio:** [Ratio indicating leverage, with comparison to sector average]
-
-## 💰 Dividend Outlook
-2025 Projections: Dividend Yield: [X%] (estimated final dividend of IDR [value] per share)
-
-## 💸 Fair Value Estimates
-💡 **Peter Lynch Fair Value:** [Fair Value IDR, implying X% upside from the current price]
-💸 **Analyst Consensus:** [Target prices range from IDR X to IDR Y, offering Z% upside]`;
-
-    console.log('Creating OpenAI client with Perplexity configuration');
-
     const client = new OpenAI({
       apiKey,
       baseURL: "https://api.perplexity.ai",
       defaultHeaders: {
-        'Accept': 'application/json'
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
       }
     });
-
-    console.log('OpenAI client initialized with Perplexity configuration');
 
     if (req.headers.accept === 'text/event-stream') {
       try {
         const stream = await client.chat.completions.create({
           model: "llama-3.1-sonar-small-128k-online",
           messages: [
-            {
-              role: "system",
-              content: hasStockTicker ? detailedStockPrompt : basePrompt
-            },
-            {
-              role: "user",
-              content: message
-            }
+            { role: "system", content: basePrompt },
+            { role: "user", content: message }
           ],
           temperature: 0.2,
           top_p: 0.9,
@@ -131,7 +76,6 @@ Provide a concise overview of the current market landscape, focusing on recent s
           if (chunk.choices[0]?.delta?.content) {
             const content = chunk.choices[0].delta.content;
             fullContent += content;
-
             sendSSE(res, {
               status: 'chunk',
               content: content
@@ -139,7 +83,6 @@ Provide a concise overview of the current market landscape, focusing on recent s
           }
         }
 
-        // Send completion message
         sendSSE(res, {
           status: 'complete',
           content: fullContent
@@ -148,8 +91,8 @@ Provide a concise overview of the current market landscape, focusing on recent s
         res.end();
         return;
       } catch (error) {
+        console.error('Streaming Error:', error);
         const apiError = error as APIError;
-        console.error('Streaming Error:', apiError);
         sendSSE(res, {
           status: 'error',
           error: apiError.message
@@ -159,37 +102,25 @@ Provide a concise overview of the current market landscape, focusing on recent s
       }
     }
 
-    // Non-streaming fallback
-    console.log('Using non-streaming API call');
+    // Non-streaming response
     const response = await client.chat.completions.create({
       model: "llama-3.1-sonar-small-128k-online",
       messages: [
-        {
-          role: "system",
-          content: hasStockTicker ? detailedStockPrompt : basePrompt
-        },
-        {
-          role: "user",
-          content: message
-        }
+        { role: "system", content: basePrompt },
+        { role: "user", content: message }
       ],
       temperature: 0.2,
       top_p: 0.9
     });
 
     if (!response?.choices?.[0]?.message?.content) {
-      console.error('Invalid API response format:', JSON.stringify(response));
       throw new Error('Invalid API response format');
     }
 
     const content = response.choices[0].message.content;
-    const citations = response && typeof response === 'object' && 'citations' in response ? 
-      (response as any).citations || [] : [];
-
     res.json({
       status: 'success',
-      reply: content.trim(),
-      citations: citations
+      reply: content.trim()
     });
 
   } catch (error) {
@@ -198,18 +129,11 @@ Provide a concise overview of the current market landscape, focusing on recent s
     console.error('Error details:', errorMessage);
 
     if (!res.headersSent) {
-      const errorResponse = {
+      res.status(500).json({
         status: 'error',
         error: 'API Error',
-        details: 'Unable to process your request. Please try again.'
-      };
-      
-      if (req.headers.accept === 'text/event-stream') {
-        sendSSE(res, errorResponse);
-        res.end();
-      } else {
-        res.status(500).json(errorResponse);
-      }
+        details: errorMessage
+      });
     }
   }
 });
