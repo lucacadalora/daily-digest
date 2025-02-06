@@ -3,6 +3,8 @@ import { createServer, type Server } from "http";
 import axios from "axios";
 import { execFile } from "child_process";
 import { join } from "path";
+import { readFileSync } from "fs";
+import { sampleArticles } from "../client/src/types/newsletter";
 
 interface MarketPrice {
   price: number;
@@ -236,6 +238,69 @@ export function registerRoutes(app: Express): Server {
     };
 
     next();
+  });
+
+  // Server-side rendering for article meta tags
+  app.get('/newsletter/:slug', (req, res, next) => {
+    const { slug } = req.params;
+    const article = sampleArticles.find(a => a.slug === slug);
+
+    if (!article) {
+      next(); // Let client-side handle 404
+      return;
+    }
+
+    try {
+      // Read the index.html template
+      let html = readFileSync(join(__dirname, '..', 'client', 'index.html'), 'utf-8');
+
+      // Create rich preview content
+      const metrics = article.previewMetrics || [];
+      const metricsText = metrics.length > 0 
+        ? metrics.map(m => `${m.label}: ${m.value}`).join(" | ")
+        : '';
+
+      const previewTitle = `${article.title} | Daily Digest`;
+      const previewDescription = metricsText 
+        ? `${metricsText}. ${article.description}`
+        : article.description;
+
+      // Define meta tags for social media previews
+      const metaTags = `
+        <title>${previewTitle}</title>
+        <meta name="description" content="${previewDescription}">
+
+        <!-- Open Graph -->
+        <meta property="og:title" content="${previewTitle}">
+        <meta property="og:description" content="${previewDescription}">
+        <meta property="og:type" content="article">
+        <meta property="og:url" content="https://lucaxyzz-digest.replit.app/newsletter/${slug}">
+        <meta property="og:site_name" content="Daily Digest">
+        <meta property="og:locale" content="en_US">
+
+        <!-- Twitter Card -->
+        <meta name="twitter:card" content="summary">
+        <meta name="twitter:site" content="@dailydigest">
+        <meta name="twitter:creator" content="@dailydigest">
+        <meta name="twitter:title" content="${previewTitle}">
+        <meta name="twitter:description" content="${previewDescription}">
+        <meta name="twitter:domain" content="lucaxyzz-digest.replit.app">
+
+        <!-- Article Metadata -->
+        <meta property="article:published_time" content="${article.date}">
+        <meta property="article:author" content="${article.author}">
+        <meta property="article:section" content="${article.category}">
+        <meta property="article:tag" content="${article.tags?.join(',') || article.category}">
+      `;
+
+      // Insert meta tags into HTML
+      html = html.replace('</head>', `${metaTags}\n</head>`);
+
+      res.send(html);
+    } catch (error) {
+      console.error('Error rendering article meta tags:', error);
+      next(); // Fall back to client-side rendering
+    }
   });
 
   app.get('/api/market-data', async (req, res) => {
