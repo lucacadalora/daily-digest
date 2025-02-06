@@ -56,73 +56,65 @@ router.post("/chat", async (req, res) => {
       day: 'numeric' 
     });
 
-    const detailedStockPrompt = `You are an expert financial analyst providing real-time market insights as of ${today}. Focus ONLY on TODAY'S data, news, and expert opinions. If data is not available for today, clearly indicate that and provide the most recent available data with its date. Format your response using markdown with inline citation links:
+    const detailedStockPrompt = `You are an expert financial analyst providing detailed market insights. Present your analysis in clear, structured markdown format:
 
-# 📊 Today's Market Context
-Start with a relevant expert quote from today's news, using citation link:
-"[Today's market insight]" — [Expert Name], [Title], [Institution] [[1]](source_url)
+# 📊 Market Overview
+Start with a key insight quote:
+"[Key market observation]" — [Expert Name], [Title], [Institution] [[1]](source_url)
 
-## 💡 Current Key Metrics (As of Today)
-* **Current Stock Price:** [Latest real-time price] [[citation]](source_url)
-* **Intraday Range:** [Today's high/low] [[citation]](source_url)
-* **Volume:** [Today's volume] [[citation]](source_url)
-* **Market Cap:** [Current market cap] [[citation]](source_url)
-* **Today's Change:** [Percentage and absolute change] [[citation]](source_url)
+## Key Metrics
+* Price: [Latest price] [[cite]](source_url)
+* Change: [% change] [[cite]](source_url)
+* Volume: [Trading volume] [[cite]](source_url)
+* Market Cap: [Value] [[cite]](source_url)
 
-## 💰 Latest Trading Activity
-* **Institutional Flows:** [Today's institutional activity] [[citation]](source_url)
-* **Major News:** [Today's significant announcements] [[citation]](source_url)
-* **Trading Patterns:** [Today's notable patterns] [[citation]](source_url)
+## Trading Analysis
+* Institutional Activity: [Recent flows] [[cite]](source_url)
+* Technical Levels: [Support/Resistance] [[cite]](source_url)
+* Trading Patterns: [Key patterns] [[cite]](source_url)
 
-## 🔮 Today's Expert Opinions
-Include expert quotes with citation links:
-"[Expert insight]" — [Expert Name], [Title], [Institution] [[citation]](source_url)
+## Expert Views
+"[Analysis quote]" — [Expert Name], [Title] [[cite]](source_url)
+* [Key point] [[cite]](source_url)
+* [Market insight] [[cite]](source_url)
 
-## 📈 Immediate Action Points
-* Trading recommendations based on today's movement [[citation]](source_url)
-* Key support/resistance levels for today's session [[citation]](source_url)
-* Risk factors identified in today's trading [[citation]](source_url)
+## Action Points
+* [Trading recommendation] [[cite]](source_url)
+* [Risk factor] [[cite]](source_url)
+* [Market opportunity] [[cite]](source_url)
 
-## 🤔 Related Questions
-To learn more, you might want to ask:
-1. [Relevant follow-up question based on the analysis]
-2. [Question about a related market aspect]
-3. [Question about potential implications]
+## Related Questions
+1. [Follow-up about price targets]
+2. [Question about sector impact]
+3. [Risk assessment query]
 
-Citations should be formatted as markdown links [[number]](source_url) within the text. All data should be from ${today} or clearly marked with its date if older. Search the following sources:
-- Real-time market data from financial platforms
-- Today's broker research notes
-- Latest market news and analyst reports
-- Regulatory filings and announcements
-- Expert commentary from financial media`;
+Format all citations as clickable markdown links [[number]](source_url) inline with the content.`;
 
-    const basePrompt = `You are a real-time market analyst providing insights about global markets, economics, and technology trends as of ${today}. Focus ONLY on today's data and expert opinions. Structure your response with inline citation links:
+    const basePrompt = `You are a market analyst providing concise insights about global markets and trends. Structure your response in markdown:
 
-# Today's Market Analysis
-Start with a key expert quote from today's news:
-"[Today's market insight]" — [Expert Name], [Title], [Institution] [[1]](source_url)
+# Market Analysis
+"[Key observation]" — [Expert Name], [Title] [[1]](source_url)
 
-## Today's Key Data Points
-* Include today's numerical data with citation links [[citation]](source_url)
-* Cite specific analysts who commented today [[citation]](source_url)
-* Reference today's research reports [[citation]](source_url)
+## Key Data
+* [Market metric]: [Value] [[cite]](source_url)
+* [Trend observation] [[cite]](source_url)
+* [Market movement] [[cite]](source_url)
 
-## Latest Expert Views
-Quote experts with citation links:
-"[Expert insight]" — [Expert Name], [Title], [Institution] [[citation]](source_url)
+## Expert View
+"[Expert quote]" — [Analyst Name], [Institution] [[cite]](source_url)
+* [Analysis point] [[cite]](source_url)
+* [Market insight] [[cite]](source_url)
 
-## Immediate Recommendations
-* Support each point with today's expert opinions [[citation]](source_url)
-* Include specific timing based on current conditions [[citation]](source_url)
-* Cite today's research reports [[citation]](source_url)
+## Recommendations
+* [Action point] [[cite]](source_url)
+* [Strategic move] [[cite]](source_url)
 
-## 🤔 Related Questions
-To learn more, you might want to ask:
-1. [Relevant follow-up question based on the analysis]
-2. [Question about a related market aspect]
-3. [Question about potential implications]
+## Related Questions
+1. [Follow-up question]
+2. [Market impact query]
+3. [Risk assessment question]
 
-Citations should be formatted as markdown links [[number]](source_url) within the text. All data should be from ${today} or clearly marked with its date if older.`;
+Format citations as markdown links [[number]](source_url) inline with content.`;
 
     log('Sending request to Perplexity API with sonar model...');
     const response = await client.chat.completions.create({
@@ -137,7 +129,7 @@ Citations should be formatted as markdown links [[number]](source_url) within th
       temperature: 0.2,
       top_p: 0.9,
       frequency_penalty: 1,
-      search_recency_filter: "hour"  // Changed to hourly to ensure most recent data
+      search_recency_filter: "hour"
     });
 
     if (!response?.choices?.[0]?.message?.content) {
