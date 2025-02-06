@@ -134,6 +134,51 @@ export default function IndonesiaEconomicCrisis() {
         </div>
 
         <section>
+          <h2 className="text-xl font-serif font-bold text-gray-900 dark:text-white mb-3">Crisis Catalysts: Market Forces Converge</h2>
+          <p className="text-gray-700 dark:text-gray-300 mb-4">
+            This inventory overhang - contributing 0.97pp to GDP - masked fundamental weaknesses now exposed by three converging forces:
+          </p>
+
+          <Card className="bg-blue-50 dark:bg-blue-900/20 mb-4">
+            <CardContent className="p-4">
+              <blockquote className="text-base italic text-gray-700 dark:text-gray-300 mb-2">
+                "Indonesia's 5.03% growth in 2024 carries an artificial underbelly – when 0.97 percentage points (19% of total expansion) rely on inventory stockpiles rather than sustainable demand"
+              </blockquote>
+              <p className="text-sm text-gray-600 dark:text-gray-400">— Barra Kukuh Mamia, Head of Macroeconomic Research, BCA</p>
+            </CardContent>
+          </Card>
+
+          <div className="overflow-x-auto mb-4">
+            <table className="w-full border-collapse">
+              <thead>
+                <tr className="bg-gray-50 dark:bg-gray-800">
+                  <th className="p-3 text-left font-semibold text-gray-900 dark:text-white border border-gray-200 dark:border-gray-700">Crisis Catalyst</th>
+                  <th className="p-3 text-left font-semibold text-gray-900 dark:text-white border border-gray-200 dark:border-gray-700">Market Impact (Feb 6)</th>
+                  <th className="p-3 text-left font-semibold text-gray-900 dark:text-white border border-gray-200 dark:border-gray-700">Inventory Linkage</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td className="p-3 border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300">Fed Hawkishness</td>
+                  <td className="p-3 border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300">$317M foreign outflows</td>
+                  <td className="p-3 border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300">Dollarized inventory financing costs up 22%</td>
+                </tr>
+                <tr>
+                  <td className="p-3 border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300">China Tariffs</td>
+                  <td className="p-3 border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300">ADRO -4.2% (28MT coal exposure)</td>
+                  <td className="p-3 border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300">Export bottleneck compounds stockpiles</td>
+                </tr>
+                <tr>
+                  <td className="p-3 border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300">Earnings Shock</td>
+                  <td className="p-3 border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300">BMRI -3.5% (14% profit drop)</td>
+                  <td className="p-3 border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300">Inventory impairments hit bank balance sheets</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section>
           <h2 className="text-xl font-serif font-bold text-gray-900 dark:text-white mb-3">Market Technicals: The Chart of Capitulation</h2>
           <div className="prose text-gray-700 dark:text-gray-300 max-w-none mb-4">
             <p className="mb-3">The IHSG's breakdown below 6,900 (critical Fibonacci support) suggests:</p>
@@ -253,51 +298,6 @@ export default function IndonesiaEconomicCrisis() {
                 </ul>
               </div>
             </div>
-          </div>
-        </section>
-
-        <section>
-          <h2 className="text-xl font-serif font-bold text-gray-900 dark:text-white mb-3">Crisis Catalysts: Market Forces Converge</h2>
-          <p className="text-gray-700 dark:text-gray-300 mb-4">
-            This inventory overhang - contributing 0.97pp to GDP - masked fundamental weaknesses now exposed by three converging forces:
-          </p>
-
-          <Card className="bg-blue-50 dark:bg-blue-900/20 mb-4">
-            <CardContent className="p-4">
-              <blockquote className="text-base italic text-gray-700 dark:text-gray-300 mb-2">
-                "Indonesia's 5.03% growth in 2024 carries an artificial underbelly – when 0.97 percentage points (19% of total expansion) rely on inventory stockpiles rather than sustainable demand"
-              </blockquote>
-              <p className="text-sm text-gray-600 dark:text-gray-400">— Barra Kukuh Mamia, Head of Macroeconomic Research, BCA</p>
-            </CardContent>
-          </Card>
-
-          <div className="overflow-x-auto mb-4">
-            <table className="w-full border-collapse">
-              <thead>
-                <tr className="bg-gray-50 dark:bg-gray-800">
-                  <th className="p-3 text-left font-semibold text-gray-900 dark:text-white border border-gray-200 dark:border-gray-700">Crisis Catalyst</th>
-                  <th className="p-3 text-left font-semibold text-gray-900 dark:text-white border border-gray-200 dark:border-gray-700">Market Impact (Feb 6)</th>
-                  <th className="p-3 text-left font-semibold text-gray-900 dark:text-white border border-gray-200 dark:border-gray-700">Inventory Linkage</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td className="p-3 border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300">Fed Hawkishness</td>
-                  <td className="p-3 border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300">$317M foreign outflows</td>
-                  <td className="p-3 border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300">Dollarized inventory financing costs up 22%</td>
-                </tr>
-                <tr>
-                  <td className="p-3 border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300">China Tariffs</td>
-                  <td className="p-3 border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300">ADRO -4.2% (28MT coal exposure)</td>
-                  <td className="p-3 border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300">Export bottleneck compounds stockpiles</td>
-                </tr>
-                <tr>
-                  <td className="p-3 border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300">Earnings Shock</td>
-                  <td className="p-3 border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300">BMRI -3.5% (14% profit drop)</td>
-                  <td className="p-3 border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300">Inventory impairments hit bank balance sheets</td>
-                </tr>
-              </tbody>
-            </table>
           </div>
         </section>
 
