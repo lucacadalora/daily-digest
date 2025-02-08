@@ -34,7 +34,7 @@ export const sampleArticles: Article[] = [
   {
     slug: "fed-balance-sheet-blueprint",
     title: "Fed's QT Exit: A Liquidity Lifeline for Risk Assets",
-    description: "The Federal Reserve has accelerated its quantitative tightening (QT) program, cutting its balance sheet by $2 trillion since 2022—including a rapid $297B reduction since June 2024. This pace exceeds earlier Wall Street estimates and signals aggressive liquidity withdrawal, with major implications for risk assets.",
+    description: "The Federal Reserve has accelerated its quantitative tightening (QT) program, cutting its balance sheet by $2 trillion since 2022—including a rapid $297B reduction since June 2024. This pace exceeds earlier Wall Street estimates (JPMorgan projected $1.7T total by 2024) and signals aggressive liquidity withdrawal.",
     category: "Economics",
     source: "Daily Digest",
     author: "Luca Cada Lora",
@@ -110,9 +110,9 @@ Risks to Monitor
 The Bottom Line
 
 The Fed's QT exit marks a structural shift from austerity to equilibrium—bullish for risk assets but requiring nimble positioning. Investors should:
-* Overweight: Tech (NVDA, META), Bitcoin miners (RIOT), AI infrastructure plays.
-* Avoid: Regional banks, commercial REITs facing refinancing walls.
-* Watch: March FOMC meeting for updated dot plots; CME FedWatch odds now price 40bps cuts by December.
+* Overweight: Tech (NVDA, META), Bitcoin miners (RIOT), AI infrastructure plays
+* Avoid: Regional banks, commercial REITs facing refinancing walls
+* Watch: March FOMC meeting for updated dot plots; CME FedWatch odds now price 40bps cuts by December
 
 Key Balance Sheet Metrics & Trajectory
 Current State (February 2025):
