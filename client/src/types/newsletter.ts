@@ -32,6 +32,146 @@ export type Article = z.infer<typeof articleSchema>;
 
 export const sampleArticles: Article[] = [
   {
+    slug: "fed-balance-sheet-blueprint",
+    title: "The Fed's Balance Sheet Blueprint: Faster QT, Strategic Pivot",
+    description: "The Federal Reserve has accelerated its quantitative tightening (QT) program, reducing its balance sheet by $1.3T in 2024, marking its most aggressive contractionary policy since 2018. This strategic pivot signals a renewed focus on financial stability amid persistent inflation concerns.",
+    category: "Economics",
+    source: "Daily Digest",
+    author: "Luca Cada Lora",
+    date: "February 8, 2025",
+    previewEmoji: "🏦",
+    previewMetrics: [
+      {
+        label: "QT Pace",
+        value: "$95B/month",
+        subtitle: "Current runoff"
+      },
+      {
+        label: "Balance Sheet",
+        value: "$7.2T",
+        subtitle: "Down 15% YoY"
+      },
+      {
+        label: "Duration Risk",
+        value: "6.2 years",
+        subtitle: "Avg maturity"
+      }
+    ],
+    tags: ["Federal Reserve", "Monetary Policy", "QT"],
+    content: `The Federal Reserve's balance sheet strategy has entered a critical new phase, with the pace of quantitative tightening (QT) accelerating to $95 billion per month – the fastest runoff rate in its history. This aggressive contraction has already reduced the balance sheet by $1.3 trillion in 2024, marking a decisive shift in the Fed's monetary policy stance.
+
+Key Balance Sheet Metrics & Trajectory
+Current State (February 2025):
+* Total Assets: $7.2 trillion (-15% YoY)
+* Securities Portfolio: $5.8T Treasuries, $1.2T MBS
+* Duration: 6.2 years weighted average maturity
+* Monthly Runoff: $95B/month ($60B UST + $35B MBS)
+
+2024 Balance Sheet Evolution:
+* Q1: -$392B (-5.2% QoQ)
+* Q2: -$315B (-4.4% QoQ)
+* Q3: -$298B (-4.3% QoQ)
+* Q4: -$295B (-4.5% QoQ)
+
+Strategic Pivot: Faster QT, Higher Terminal
+The Fed's accelerated QT reflects three strategic imperatives:
+
+1. Inflation Management
+* Core PCE steady at 2.9% despite rate restrictiveness
+* Wage growth remains elevated at 4.2% YoY
+* Housing services inflation sticky at 5.2%
+
+2. Financial Stability
+* Bank reserves at $3.2T (comfortable above $2.5T minimum)
+* Money market functioning intact despite faster runoff
+* No signs of Treasury market stress (bid-ask spreads normal)
+
+3. Policy Flexibility
+* Creates room for rate cuts if needed in H2-25
+* Reduces political pressure on monetary decisions
+* Better aligns with global central bank normalization
+
+Market Impact & Technical Dynamics
+Treasury Market Effects:
+* Long-end yields +15bps on faster QT announcement
+* 5s30s curve bear steepened to 65bps
+* Primary dealer positions down 22% YoY
+
+MBS Market Reaction:
+* Option-adjusted spreads widen 8bps
+* Convexity hedging adds to long-end pressure
+* Bank demand remains weak amid QT
+
+Transmission to Risk Assets:
+* SPX -0.8% on announcement day
+* HY spreads +25bps wider
+* EM sovereign spreads +15bps
+
+Policy Outlook & Scenario Analysis
+Base Case (65% probability):
+* Continue $95B/month pace through 2025
+* Terminal balance sheet ~$6.0T by end-2025
+* First rate cut in September 2025
+
+Hawkish Risk (25%):
+* Accelerate to $115B/month in H2
+* Faster MBS sales if housing stays hot
+* No rate cuts in 2025
+
+Dovish Risk (10%):
+* Slow to $65B/month if markets stress
+* Pause QT before rate cuts begin
+* Multiple rate cuts starting Q2
+
+Critical Variables to Monitor
+Inflation Dynamics:
+* Core services at 3.5% YoY; hot CPI print >3% would reset rate cut expectations
+* Wage growth moderation needed
+* Housing services disinflation pace
+
+Financial Conditions:
+* Bank reserves adequacy ($2.5T floor)
+* Treasury market depth metrics
+* Cross-currency basis swaps
+
+Economic Impact:
+* GDP growth sensitivity to QT
+* Credit availability/lending standards
+* Housing market reaction
+
+Implementation Challenges & Considerations
+Operational Complexities:
+1. MBS reinvestment caps require active management
+2. Treasury auction sizes may need adjustment
+3. Intraday liquidity demands increasing
+
+Market Communication:
+* Forward guidance on terminal size
+* Contingency plans for stress scenarios
+* Coordination with Treasury debt management
+
+Policy Coordination:
+* Fiscal deficit funding needs
+* International spillover effects
+* Emergency facility wind-down
+
+Strategic Recommendations
+For Investors:
+1. Duration: Maintain neutral stance, look to add at 4.5% 10y
+2. Curve: Steepener positions offer positive carry
+3. MBS: Prefer up-in-coupon given convexity risk
+
+For Policymakers:
+1. Enhance Treasury market monitoring
+2. Develop stress testing scenarios
+3. Update emergency facility frameworks
+
+The Bottom Line
+The Fed's accelerated balance sheet reduction represents a critical test of market resilience and policy transmission. While current conditions support the faster pace, flexibility remains key given the unprecedented nature of QT at this scale. Success will require careful monitoring of financial stability indicators and continued clear communication of policy intentions.
+
+This strategic pivot reinforces the Fed's commitment to sustainable inflation control while creating policy space for future cycles. However, the interaction between QT and eventual rate cuts will require deft management to avoid market disruption.`
+  },
+  {
     slug: "indonesia-economic-inventory-crisis",
     title: "Indonesia's Growth Paradox: The Inventory-Led Crisis of 2025",
     description: "Indonesia's economic narrative faces a dramatic shift as markets punish inventory-dependent growth, with the Jakarta Composite Index suffering its worst single-day performance in eight months amid revelations of unsustainable inventory accumulation.",
@@ -59,7 +199,6 @@ export const sampleArticles: Article[] = [
     ],
     tags: ["Economics", "Market Analysis", "Indonesia"],
     content: `Indonesia's economic narrative took a dramatic turn in early 2025, as financial markets delivered a brutal verdict on the nation's inventory-dependent growth model. The Jakarta Composite Index's 2.1% plunge on February 6 - its worst single-day performance in eight months - served as exclamation point to revelations that 19% of 2024's 5.03% GDP growth came from unsustainable inventory accumulation, creating a dangerous economic paradox now coming home to roost.
-
 The House of Cards: How Inventory Artifice Boosted Growth
 2024's Growth Mirage:
 * Coal stockpiling: 14.2% production surge vs 4.7% exports → 28MT surplus (18 days' output)
