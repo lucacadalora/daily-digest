@@ -182,55 +182,59 @@ const FedBalanceSheetPage: React.FC = () => {
           </Card>
 
           <div className="prose text-gray-700 dark:text-gray-300 max-w-none mb-4">
-            <h3 className="font-bold text-gray-900 dark:text-white mb-2">Equities: S&P 500 Poised for Breakout</h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-              <Card className="bg-white dark:bg-gray-800">
-                <CardContent className="p-4">
-                  <div className="flex items-start space-x-3">
-                    <TrendingUp className="w-5 h-5 text-blue-500 flex-shrink-0 mt-1" />
-                    <div>
-                      <h4 className="font-semibold mb-2">QT Exit Impact</h4>
-                      <p className="text-sm">The Fed's plan to halt QT by mid-2025 removes a major liquidity drag, favoring rate-sensitive sectors like tech and growth stocks.</p>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
+            <h3 className="font-bold text-gray-900 dark:text-white mb-4">Equities: S&P 500 Poised for Breakout</h3>
+            <div className="bg-gradient-to-br from-white to-blue-50 dark:from-gray-800 dark:to-blue-900/20 rounded-lg p-6 space-y-6">
+              {/* QT Exit Impact */}
+              <div className="flex items-start gap-6 border-b border-blue-100 dark:border-blue-800/50 pb-6">
+                <div className="w-12 h-12 rounded-full bg-blue-100 dark:bg-blue-900/50 flex items-center justify-center flex-shrink-0">
+                  <TrendingUp className="w-6 h-6 text-blue-600 dark:text-blue-400" />
+                </div>
+                <div>
+                  <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">QT Exit Impact</h4>
+                  <p className="text-gray-700 dark:text-gray-300">
+                    The Fed's plan to halt QT by mid-2025 removes a major liquidity drag, favoring rate-sensitive sectors like tech and growth stocks.
+                  </p>
+                </div>
+              </div>
 
-              <Card className="bg-white dark:bg-gray-800">
-                <CardContent className="p-4">
-                  <div className="flex items-start space-x-3">
-                    <Server className="w-5 h-5 text-blue-500 flex-shrink-0 mt-1" />
-                    <div>
-                      <h4 className="font-semibold mb-2">AI Infrastructure Surge</h4>
-                      <p className="text-sm">Surging demand for AI data centers (projected 500 TWh electricity consumption in 2025, up from 450 TWh) benefits semiconductor giants and cloud providers.</p>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
+              {/* AI Infrastructure */}
+              <div className="flex items-start gap-6 border-b border-blue-100 dark:border-blue-800/50 pb-6">
+                <div className="w-12 h-12 rounded-full bg-blue-100 dark:bg-blue-900/50 flex items-center justify-center flex-shrink-0">
+                  <Server className="w-6 h-6 text-blue-600 dark:text-blue-400" />
+                </div>
+                <div>
+                  <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">AI Infrastructure Surge</h4>
+                  <p className="text-gray-700 dark:text-gray-300">
+                    Surging demand for AI data centers <span className="font-semibold">(500 TWh in 2025 ↑ from 450 TWh)</span> benefits semiconductor giants (NVIDIA, AMD) and cloud providers (Microsoft Azure, AWS).
+                  </p>
+                </div>
+              </div>
 
-              <Card className="bg-white dark:bg-gray-800">
-                <CardContent className="p-4">
-                  <div className="flex items-start space-x-3">
-                    <LineChart className="w-5 h-5 text-blue-500 flex-shrink-0 mt-1" />
-                    <div>
-                      <h4 className="font-semibold mb-2">Valuation Support</h4>
-                      <p className="text-sm">AI-driven productivity gains justify premium multiples (S&P 500 P/E ~25x). Analysts forecast 12% EPS growth in 2025, tech contributing ~40% of earnings.</p>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
+              {/* Valuation Support */}
+              <div className="flex items-start gap-6 border-b border-blue-100 dark:border-blue-800/50 pb-6">
+                <div className="w-12 h-12 rounded-full bg-blue-100 dark:bg-blue-900/50 flex items-center justify-center flex-shrink-0">
+                  <LineChart className="w-6 h-6 text-blue-600 dark:text-blue-400" />
+                </div>
+                <div>
+                  <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">Valuation Support</h4>
+                  <p className="text-gray-700 dark:text-gray-300">
+                    AI-driven productivity gains justify premium multiples <span className="font-semibold">(S&P 500 P/E ~25x)</span>. Analysts forecast <span className="font-semibold">12% EPS growth in 2025</span>, with tech contributing ~40% of earnings.
+                  </p>
+                </div>
+              </div>
 
-              <Card className="bg-white dark:bg-gray-800">
-                <CardContent className="p-4">
-                  <div className="flex items-start space-x-3">
-                    <Shield className="w-5 h-5 text-blue-500 flex-shrink-0 mt-1" />
-                    <div>
-                      <h4 className="font-semibold mb-2">Fed Safeguards</h4>
-                      <p className="text-sm">Standing Repo Facility and slowed QT pace ($25B/month) mitigate systemic risk, allowing P/E expansion despite 10-year yields at 4.6%.</p>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
+              {/* Fed Safeguards */}
+              <div className="flex items-start gap-6">
+                <div className="w-12 h-12 rounded-full bg-blue-100 dark:bg-blue-900/50 flex items-center justify-center flex-shrink-0">
+                  <Shield className="w-6 h-6 text-blue-600 dark:text-blue-400" />
+                </div>
+                <div>
+                  <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">Fed Safeguards</h4>
+                  <p className="text-gray-700 dark:text-gray-300">
+                    Standing Repo Facility and slowed QT pace <span className="font-semibold">($25B/month)</span> mitigate systemic risk, allowing P/E expansion despite 10-year yields at <span className="font-semibold">4.6%</span>.
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
 
