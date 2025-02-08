@@ -4,7 +4,6 @@ import express, { type Request, Response, NextFunction } from "express";
 import { registerRoutes } from "./routes";
 import { setupVite, serveStatic, log } from "./vite";
 import chatRouter from "./routes/chat";
-import newsletterRouter from "./routes/newsletter";
 
 const app = express();
 app.use(express.json());
@@ -29,13 +28,8 @@ app.use((req, res, next) => {
   next();
 });
 
-// API Routes - Mount before any other middleware
-const apiRouter = express.Router();
-apiRouter.use('/chat', chatRouter);
-apiRouter.use('/newsletter', newsletterRouter);
-
-// Mount API routes first
-app.use('/api', apiRouter);
+// API Routes - Mount before Vite middleware
+app.use('/api', chatRouter);
 
 (async () => {
   const server = registerRoutes(app);
@@ -48,7 +42,6 @@ app.use('/api', apiRouter);
     res.status(status).json({ message });
   });
 
-  // Setup Vite or static serving after API routes
   if (app.get("env") === "development") {
     log("Setting up Vite development server...");
     await setupVite(app, server);
