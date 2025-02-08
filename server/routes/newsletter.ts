@@ -3,6 +3,7 @@ import { db } from "../../db";
 import { subscribers, insertSubscriberSchema } from "../../db/schema";
 import { eq } from "drizzle-orm";
 import sgMail from "@sendgrid/mail";
+import { log } from "../vite";
 
 const router = express.Router();
 
@@ -42,7 +43,7 @@ router.post("/subscribe", async (req, res) => {
         .update(subscribers)
         .set({ subscribed: true })
         .where(eq(subscribers.email, email));
-      
+
       return res.json({
         status: "success",
         message: "Your subscription has been reactivated",
@@ -52,21 +53,38 @@ router.post("/subscribe", async (req, res) => {
     // Add new subscriber
     await db.insert(subscribers).values(parsed);
 
-    // Send welcome email
-    await sgMail.send({
+    // Send welcome email with enhanced formatting
+    const welcomeEmail = {
       to: email,
-      from: "newsletter@dailydigest.com", // Update with your verified sender
-      subject: "Welcome to Daily Digest Newsletter",
+      from: {
+        email: 'newsletter@dailydigest.com',
+        name: 'Daily Digest Market Intelligence'
+      },
+      subject: 'Welcome to Daily Digest Newsletter',
       html: `
-        <h1>Welcome to Daily Digest!</h1>
-        <p>Hi ${name || "there"},</p>
-        <p>Thank you for subscribing to Daily Digest. You'll now receive updates about:</p>
-        <ul>
-          ${(categories || []).map(cat => `<li>${cat}</li>`).join("")}
-        </ul>
-        <p>Stay tuned for the latest market insights and analysis!</p>
-      `,
-    });
+        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+          <h1 style="color: #2563eb; margin-bottom: 20px;">Welcome to Daily Digest!</h1>
+          <p>Hi ${name || "there"},</p>
+          <p>Thank you for subscribing to Daily Digest. You'll now receive updates about:</p>
+          <ul style="list-style-type: none; padding: 0;">
+            ${(categories || []).map((cat: string) => 
+              `<li style="margin: 10px 0; padding: 10px; background: #f8fafc; border-left: 4px solid #2563eb; border-radius: 4px;">
+                ${cat.charAt(0).toUpperCase() + cat.slice(1).replace('-', ' ')}
+              </li>`
+            ).join("")}
+          </ul>
+          <p>Stay tuned for the latest market insights and analysis!</p>
+          <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #e2e8f0;">
+            <p style="color: #64748b; font-size: 0.875rem;">
+              Daily Digest - Your Source for Financial Intelligence
+            </p>
+          </div>
+        </div>
+      `
+    };
+
+    await sgMail.send(welcomeEmail);
+    log('Welcome email sent successfully');
 
     res.json({
       status: "success",
@@ -81,34 +99,70 @@ router.post("/subscribe", async (req, res) => {
   }
 });
 
-// Helper endpoint to send article notifications
+// Send article notifications to subscribers
 router.post("/notify", async (req, res) => {
   try {
-    const { articleTitle, articleUrl, articleDescription } = req.body;
+    const { articleTitle, articleUrl, articleDescription, category, previewMetrics } = req.body;
 
     // Get all active subscribers
     const activeSubscribers = await db.query.subscribers.findMany({
       where: eq(subscribers.subscribed, true),
     });
 
-    // Send email to each subscriber
-    const emailPromises = activeSubscribers.map(subscriber => 
-      sgMail.send({
-        to: subscriber.email,
-        from: "newsletter@dailydigest.com", // Update with your verified sender
-        subject: `New Article: ${articleTitle}`,
-        html: `
-          <h1>${articleTitle}</h1>
-          <p>${articleDescription}</p>
-          <p><a href="${articleUrl}">Read the full article</a></p>
-          <hr>
-          <p><small>You received this email because you're subscribed to Daily Digest. 
-          <a href="[Unsubscribe URL]">Unsubscribe</a></small></p>
-        `,
-      })
+    // Enhanced email template with metrics
+    const emailTemplate = (subscriber: typeof activeSubscribers[0]) => ({
+      to: subscriber.email,
+      from: {
+        email: 'newsletter@dailydigest.com',
+        name: 'Daily Digest Market Intelligence'
+      },
+      subject: `Market Alert: ${articleTitle}`,
+      html: `
+        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+          <h1 style="color: #2563eb; margin-bottom: 20px;">${articleTitle}</h1>
+
+          ${previewMetrics ? `
+            <div style="background: #f8fafc; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+              ${previewMetrics.map((metric: {label: string, value: string}) => `
+                <div style="display: inline-block; margin-right: 20px;">
+                  <strong style="color: #2563eb;">${metric.label}:</strong>
+                  <span>${metric.value}</span>
+                </div>
+              `).join('')}
+            </div>
+          ` : ''}
+
+          <p style="line-height: 1.6;">${articleDescription}</p>
+
+          <a href="${articleUrl}" 
+             style="display: inline-block; background: #2563eb; color: white; padding: 12px 24px; 
+                    text-decoration: none; border-radius: 6px; margin-top: 20px;">
+            Read Full Analysis
+          </a>
+
+          <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #e2e8f0;">
+            <p style="color: #64748b; font-size: 0.875rem;">
+              You received this email because you're subscribed to Daily Digest Market Intelligence.
+              <br>
+              <a href="[Unsubscribe URL]" style="color: #2563eb;">Unsubscribe</a>
+            </p>
+          </div>
+        </div>
+      `,
+      trackingSettings: {
+        clickTracking: { enable: true },
+        openTracking: { enable: true }
+      }
+    });
+
+    // Send emails to all subscribers
+    await Promise.all(
+      activeSubscribers.map(subscriber => 
+        sgMail.send(emailTemplate(subscriber))
+      )
     );
 
-    await Promise.all(emailPromises);
+    log(`Notification sent to ${activeSubscribers.length} subscribers`);
 
     res.json({
       status: "success",
