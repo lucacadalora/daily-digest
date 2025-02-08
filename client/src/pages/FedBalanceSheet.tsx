@@ -122,67 +122,20 @@ const FedBalanceSheetPage: React.FC = () => {
                   <BarChart className="w-5 h-5 text-blue-500" />
                   <div className="space-y-3 flex-1">
                     <h3 className="font-semibold text-gray-900 dark:text-white">Equities Outlook</h3>
-                    <div className="prose text-gray-700 dark:text-gray-300 max-w-none mb-4">
-                      <h3 className="font-bold text-gray-900 dark:text-white mb-4">Equities: S&P 500 Poised for Breakout</h3>
-
-                      <p className="text-lg mb-6 leading-relaxed">
-                        The S&P 500 is primed for a historic rally toward 6,000+ by late 2025, fueled by the Federal Reserve's liquidity stabilization and AI-driven productivity gains. With the Fed's accelerated quantitative tightening (QT) set to conclude mid-2025, reduced liquidity drag removes a critical headwind for equities—particularly tech giants like NVIDIA (AI chips) and Microsoft (cloud/data centers), which are central to the AI infrastructure boom.
-                      </p>
-
-                      <div className="bg-gradient-to-br from-white to-blue-50 dark:from-gray-800 dark:to-blue-900/20 rounded-lg p-8 space-y-8">
-                        {/* QT Exit Impact */}
-                        <div className="flex items-start gap-8">
-                          <div className="w-14 h-14 rounded-full bg-blue-100 dark:bg-blue-900/50 flex items-center justify-center flex-shrink-0">
-                            <TrendingUp className="w-7 h-7 text-blue-600 dark:text-blue-400" />
-                          </div>
-                          <div className="flex-1 border-b border-blue-100 dark:border-blue-800/50 pb-8">
-                            <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">QT Exit Impact</h4>
-                            <p className="text-gray-700 dark:text-gray-300">
-                              The Fed's plan to halt QT by mid-2025 removes a major liquidity drag, favoring rate-sensitive sectors like tech and growth stocks.
-                            </p>
-                          </div>
-                        </div>
-
-                        {/* AI Infrastructure */}
-                        <div className="flex items-start gap-8">
-                          <div className="w-14 h-14 rounded-full bg-blue-100 dark:bg-blue-900/50 flex items-center justify-center flex-shrink-0">
-                            <Server className="w-7 h-7 text-blue-600 dark:text-blue-400" />
-                          </div>
-                          <div className="flex-1 border-b border-blue-100 dark:border-blue-800/50 pb-8">
-                            <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">AI Infrastructure Surge</h4>
-                            <p className="text-gray-700 dark:text-gray-300">
-                              Surging demand for AI data centers <span className="font-semibold">(500 TWh in 2025 ↑ from 450 TWh)</span> benefits semiconductor giants (NVIDIA, AMD) and cloud providers (Microsoft Azure, AWS).
-                            </p>
-                          </div>
-                        </div>
-
-                        {/* Valuation Support */}
-                        <div className="flex items-start gap-8">
-                          <div className="w-14 h-14 rounded-full bg-blue-100 dark:bg-blue-900/50 flex items-center justify-center flex-shrink-0">
-                            <LineChart className="w-7 h-7 text-blue-600 dark:text-blue-400" />
-                          </div>
-                          <div className="flex-1 border-b border-blue-100 dark:border-blue-800/50 pb-8">
-                            <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">Valuation Support</h4>
-                            <p className="text-gray-700 dark:text-gray-300">
-                              AI-driven productivity gains justify premium multiples <span className="font-semibold">(S&P 500 P/E ~25x)</span>. Analysts forecast <span className="font-semibold">12% EPS growth in 2025</span>, with tech contributing ~40% of earnings.
-                            </p>
-                          </div>
-                        </div>
-
-                        {/* Fed Safeguards */}
-                        <div className="flex items-start gap-8">
-                          <div className="w-14 h-14 rounded-full bg-blue-100 dark:bg-blue-900/50 flex items-center justify-center flex-shrink-0">
-                            <Shield className="w-7 h-7 text-blue-600 dark:text-blue-400" />
-                          </div>
-                          <div className="flex-1">
-                            <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">Fed Safeguards</h4>
-                            <p className="text-gray-700 dark:text-gray-300">
-                              Standing Repo Facility and slowed QT pace <span className="font-semibold">($25B/month)</span> mitigate systemic risk, allowing P/E expansion despite 10-year yields at <span className="font-semibold">4.6%</span>.
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
+                    <ul className="space-y-2">
+                      <li className="flex items-center space-x-2">
+                        <ChevronRight className="w-4 h-4 text-blue-500" />
+                        <span>S&P 500 potential to reach 6,000+ by Q3 2025</span>
+                      </li>
+                      <li className="flex items-center space-x-2">
+                        <ChevronRight className="w-4 h-4 text-blue-500" />
+                        <span>Tech/Growth sectors favored by stable reserves</span>
+                      </li>
+                      <li className="flex items-center space-x-2">
+                        <ChevronRight className="w-4 h-4 text-blue-500" />
+                        <span>AI infrastructure and renewables outperformance expected</span>
+                      </li>
+                    </ul>
                   </div>
                 </div>
               </CardContent>
@@ -405,19 +358,16 @@ const FedBalanceSheetPage: React.FC = () => {
         </section>
 
         <Card className="bg-blue-50/50 dark:bg-blue-900/20 mt-8">
-          <CardContent className="p-8">
-            <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-4">The Bottom Line</h2>
-            <div className="space-y-4">
-              <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
-                The Federal Reserve's accelerated unwind of its $2 trillion quantitative tightening (QT) program—including a rapid $297 billion balance sheet reduction since June 2024—signals a pivotal shift toward stabilizing liquidity by mid-2025, when reserves hit "somewhat above ample" levels.
-              </p>
-              <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
-                This strategic pivot removes a critical headwind for risk assets, with equities poised to rally as tech giants (NVIDIA, Microsoft) and AI infrastructure plays capitalize on stabilized liquidity and productivity gains (1.97% YoY in 2024). Meanwhile, Bitcoin eyes $120K+ by late 2025, buoyed by ETF inflows and easing QT drag, while Ethereum rebounds on regulatory clarity under the SEC's new leadership.
-              </p>
-              <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
-                However, markets face lingering risks: oil shocks from Middle East tensions, sticky core inflation (3.5% YoY), and delayed crypto rulemaking threaten volatility. Investors must balance tech/crypto exposure with hedges (gold, Treasuries) as the Fed navigates its "soft landing" tightrope.
-              </p>
-            </div>
+          <CardContent className="p-6">
+            <h2 className="text-lg font-bold text-gray-900 dark:text-white mb-3">The Bottom Line</h2>
+            <p className="text-gray-700 dark:text-gray-300">
+              The Fed's QT exit marks a structural shift from austerity to equilibrium—bullish for risk assets but requiring nimble positioning. Investors should:
+            </p>
+            <ul className="list-disc list-inside pl-4 mt-2 space-y-2 text-gray-700 dark:text-gray-300">
+              <li>Overweight: Tech (NVDA, META), Bitcoin miners (RIOT), AI infrastructure plays</li>
+              <li>Avoid: Regional banks, commercial REITs facing refinancing walls</li>
+              <li>Watch: March FOMC meeting for updated dot plots; CME FedWatch odds now price 40bps cuts by December</li>
+            </ul>
           </CardContent>
         </Card>
 
