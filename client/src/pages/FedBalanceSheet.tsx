@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import { Card, CardContent } from '@/components/ui/card';
-import { TrendingDown, AlertCircle, Clock, MapPin, ChevronRight, TrendingUp, Shield } from 'lucide-react';
+import { TrendingDown, AlertCircle, Clock, MapPin, ChevronRight, TrendingUp, Shield, BarChart } from 'lucide-react';
 import { Link, useLocation } from "wouter";
 import { sampleArticles } from "@/types/newsletter";
 import { Header } from "@/components/Header";
@@ -86,49 +86,87 @@ const FedBalanceSheetPage: React.FC = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 py-6">
-          {/* Metric Cards */}
-          <Card className="bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm">
-            <CardContent className="pt-6">
-              <div className="flex flex-col items-center gap-1">
-                <TrendingDown className="h-6 w-6 text-blue-600" />
-                <p className="text-sm font-medium text-gray-500 dark:text-gray-400">Balance Sheet Cut</p>
-                <p className="text-2xl font-bold text-gray-900 dark:text-white">$2T</p>
-                <p className="text-sm text-gray-500 dark:text-gray-400">Since 2022</p>
-                <div className="mt-2 text-xs text-gray-600 dark:text-gray-400 text-center">
-                  Fastest pace of reduction in Fed history
+        <div className="py-4 space-y-6">
+          {/* Key QT Developments Card */}
+          <Card className="border-l-4 border-l-blue-500 bg-white dark:bg-gray-800">
+            <CardContent className="p-6">
+              <div className="flex items-start space-x-4">
+                <TrendingDown className="w-6 h-6 text-blue-500 flex-shrink-0" />
+                <div className="space-y-3">
+                  <h2 className="text-lg font-semibold text-gray-900 dark:text-white">Key QT Developments</h2>
+                  <ul className="space-y-2 text-gray-700 dark:text-gray-300">
+                    <li className="flex items-center space-x-2">
+                      <span className="w-1.5 h-1.5 rounded-full bg-blue-500"></span>
+                      <span>Balance sheet cut by $2T since 2022</span>
+                    </li>
+                    <li className="flex items-center space-x-2">
+                      <span className="w-1.5 h-1.5 rounded-full bg-blue-500"></span>
+                      <span>Rapid $297B reduction since June 2024</span>
+                    </li>
+                    <li className="flex items-center space-x-2">
+                      <span className="w-1.5 h-1.5 rounded-full bg-blue-500"></span>
+                      <span>Exceeds JPMorgan's $1.7T estimate</span>
+                    </li>
+                  </ul>
                 </div>
               </div>
             </CardContent>
           </Card>
 
-          <Card className="bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm">
-            <CardContent className="pt-6">
-              <div className="flex flex-col items-center gap-1">
-                <TrendingUp className="h-6 w-6 text-green-600" />
-                <p className="text-sm font-medium text-gray-500 dark:text-gray-400">S&P Target</p>
-                <p className="text-2xl font-bold text-gray-900 dark:text-white">6,000+</p>
-                <p className="text-sm text-gray-500 dark:text-gray-400">Q3 2025 Target</p>
-                <div className="mt-2 text-xs text-gray-600 dark:text-gray-400 text-center">
-                  Tech sector leadership expected
+          {/* Market Analysis Grid */}
+          <div className="grid md:grid-cols-2 gap-6">
+            {/* Equities Outlook */}
+            <Card className="bg-white dark:bg-gray-800">
+              <CardContent className="p-6">
+                <div className="flex items-start space-x-3">
+                  <BarChart className="w-5 h-5 text-blue-500" />
+                  <div className="space-y-3 flex-1">
+                    <h3 className="font-semibold text-gray-900 dark:text-white">Equities Outlook</h3>
+                    <ul className="space-y-2">
+                      <li className="flex items-center space-x-2">
+                        <ChevronRight className="w-4 h-4 text-blue-500" />
+                        <span>S&P 500 potential to reach 6,000+ by Q3 2025</span>
+                      </li>
+                      <li className="flex items-center space-x-2">
+                        <ChevronRight className="w-4 h-4 text-blue-500" />
+                        <span>Tech/Growth sectors favored by stable reserves</span>
+                      </li>
+                      <li className="flex items-center space-x-2">
+                        <ChevronRight className="w-4 h-4 text-blue-500" />
+                        <span>AI infrastructure and renewables outperformance expected</span>
+                      </li>
+                    </ul>
+                  </div>
                 </div>
-              </div>
-            </CardContent>
-          </Card>
+              </CardContent>
+            </Card>
 
-          <Card className="bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm">
-            <CardContent className="pt-6">
-              <div className="flex flex-col items-center gap-1">
-                <Shield className="h-6 w-6 text-yellow-600" />
-                <p className="text-sm font-medium text-gray-500 dark:text-gray-400">BTC Projection</p>
-                <p className="text-2xl font-bold text-gray-900 dark:text-white">$120K</p>
-                <p className="text-sm text-gray-500 dark:text-gray-400">Late 2025</p>
-                <div className="mt-2 text-xs text-gray-600 dark:text-gray-400 text-center">
-                  Post-ETF institutional adoption
+            {/* Crypto Projections */}
+            <Card className="bg-white dark:bg-gray-800">
+              <CardContent className="p-6">
+                <div className="flex items-start space-x-3">
+                  <Shield className="w-5 h-5 text-blue-500" />
+                  <div className="space-y-3 flex-1">
+                    <h3 className="font-semibold text-gray-900 dark:text-white">Crypto Projections</h3>
+                    <ul className="space-y-2">
+                      <li className="flex items-center space-x-2">
+                        <ChevronRight className="w-4 h-4 text-blue-500" />
+                        <span>Bitcoin targeting $120K by late 2025</span>
+                      </li>
+                      <li className="flex items-center space-x-2">
+                        <ChevronRight className="w-4 h-4 text-blue-500" />
+                        <span>ETH/BTC ratio rebound expected</span>
+                      </li>
+                      <li className="flex items-center space-x-2">
+                        <ChevronRight className="w-4 h-4 text-blue-500" />
+                        <span>High-beta tokens (SOL, DOGE) poised for surge</span>
+                      </li>
+                    </ul>
+                  </div>
                 </div>
-              </div>
-            </CardContent>
-          </Card>
+              </CardContent>
+            </Card>
+          </div>
         </div>
 
         <section>
