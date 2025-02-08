@@ -177,4 +177,44 @@ router.post("/notify", async (req, res) => {
   }
 });
 
+// Test endpoint for SendGrid integration
+router.post("/test-email", async (req, res) => {
+  try {
+    const testEmail = {
+      to: req.body.email || "test@example.com", // Allow test email to be specified
+      from: {
+        email: 'newsletter@dailydigest.com',
+        name: 'Daily Digest Market Intelligence'
+      },
+      subject: 'Test Email - Daily Digest Integration',
+      html: `
+        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+          <h1 style="color: #2563eb; margin-bottom: 20px;">SendGrid Integration Test</h1>
+          <p>This is a test email to verify the SendGrid integration with Daily Digest.</p>
+          <p>If you're receiving this, the integration is working correctly!</p>
+          <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #e2e8f0;">
+            <p style="color: #64748b; font-size: 0.875rem;">
+              Daily Digest - Your Source for Financial Intelligence
+            </p>
+          </div>
+        </div>
+      `
+    };
+
+    await sgMail.send(testEmail);
+    log('Test email sent successfully');
+
+    res.json({
+      status: "success",
+      message: "Test email sent successfully",
+    });
+  } catch (error) {
+    console.error("Test email error:", error);
+    res.status(500).json({
+      status: "error",
+      message: error instanceof Error ? error.message : "Failed to send test email",
+    });
+  }
+});
+
 export default router;

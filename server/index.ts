@@ -29,9 +29,13 @@ app.use((req, res, next) => {
   next();
 });
 
-// API Routes - Mount before Vite middleware
-app.use('/api', chatRouter);
-app.use('/api/newsletter', newsletterRouter);
+// API Routes - Mount before any other middleware
+const apiRouter = express.Router();
+apiRouter.use('/chat', chatRouter);
+apiRouter.use('/newsletter', newsletterRouter);
+
+// Mount API routes first
+app.use('/api', apiRouter);
 
 (async () => {
   const server = registerRoutes(app);
@@ -44,6 +48,7 @@ app.use('/api/newsletter', newsletterRouter);
     res.status(status).json({ message });
   });
 
+  // Setup Vite or static serving after API routes
   if (app.get("env") === "development") {
     log("Setting up Vite development server...");
     await setupVite(app, server);
