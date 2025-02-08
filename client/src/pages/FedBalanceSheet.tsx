@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import { Card, CardContent } from '@/components/ui/card';
-import { TrendingDown, AlertCircle, Clock, MapPin, ChevronRight, TrendingUp, Shield, BarChart } from 'lucide-react';
+import { TrendingDown, AlertCircle, Clock, MapPin, ChevronRight, TrendingUp, Shield, BarChart, Server, LineChart } from 'lucide-react';
 import { Link, useLocation } from "wouter";
 import { sampleArticles } from "@/types/newsletter";
 import { Header } from "@/components/Header";
@@ -177,17 +177,61 @@ const FedBalanceSheetPage: React.FC = () => {
               <blockquote className="text-base italic text-gray-700 dark:text-gray-300 mb-2">
                 "The Fed's QT exit marks a structural shift from austerity to equilibrium—bullish for risk assets but requiring nimble positioning."
               </blockquote>
-              <p className="text-sm text-gray-600 dark:text-gray-400">— Market Analysis Team</p>
+              <p className="text-sm text-gray-600 dark:text-gray-400">— Daily | Digest Market Analysis Team</p>
             </CardContent>
           </Card>
 
           <div className="prose text-gray-700 dark:text-gray-300 max-w-none mb-4">
             <h3 className="font-bold text-gray-900 dark:text-white mb-2">Equities: S&P 500 Poised for Breakout</h3>
-            <ul className="list-disc list-inside pl-4 space-y-2">
-              <li>Tech/Growth Leadership: Reduced liquidity drag and stable reserves favor rate-sensitive sectors</li>
-              <li>Sector Opportunities: AI infrastructure, renewables, and small-caps likely outperform</li>
-              <li>Valuation Support: Fed liquidity safeguards mitigate systemic risk</li>
-            </ul>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+              <Card className="bg-white dark:bg-gray-800">
+                <CardContent className="p-4">
+                  <div className="flex items-start space-x-3">
+                    <TrendingUp className="w-5 h-5 text-blue-500 flex-shrink-0 mt-1" />
+                    <div>
+                      <h4 className="font-semibold mb-2">QT Exit Impact</h4>
+                      <p className="text-sm">The Fed's plan to halt QT by mid-2025 removes a major liquidity drag, favoring rate-sensitive sectors like tech and growth stocks.</p>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+
+              <Card className="bg-white dark:bg-gray-800">
+                <CardContent className="p-4">
+                  <div className="flex items-start space-x-3">
+                    <Server className="w-5 h-5 text-blue-500 flex-shrink-0 mt-1" />
+                    <div>
+                      <h4 className="font-semibold mb-2">AI Infrastructure Surge</h4>
+                      <p className="text-sm">Surging demand for AI data centers (projected 500 TWh electricity consumption in 2025, up from 450 TWh) benefits semiconductor giants and cloud providers.</p>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+
+              <Card className="bg-white dark:bg-gray-800">
+                <CardContent className="p-4">
+                  <div className="flex items-start space-x-3">
+                    <LineChart className="w-5 h-5 text-blue-500 flex-shrink-0 mt-1" />
+                    <div>
+                      <h4 className="font-semibold mb-2">Valuation Support</h4>
+                      <p className="text-sm">AI-driven productivity gains justify premium multiples (S&P 500 P/E ~25x). Analysts forecast 12% EPS growth in 2025, tech contributing ~40% of earnings.</p>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+
+              <Card className="bg-white dark:bg-gray-800">
+                <CardContent className="p-4">
+                  <div className="flex items-start space-x-3">
+                    <Shield className="w-5 h-5 text-blue-500 flex-shrink-0 mt-1" />
+                    <div>
+                      <h4 className="font-semibold mb-2">Fed Safeguards</h4>
+                      <p className="text-sm">Standing Repo Facility and slowed QT pace ($25B/month) mitigate systemic risk, allowing P/E expansion despite 10-year yields at 4.6%.</p>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
           </div>
 
           <Card className="bg-orange-50/50 dark:bg-orange-900/20 mb-4">
@@ -195,7 +239,7 @@ const FedBalanceSheetPage: React.FC = () => {
               <blockquote className="text-base italic text-gray-700 dark:text-gray-300 mb-2">
                 "Bitcoin could target $120K by late 2025 as QT ends. Institutional inflows via ETFs may accelerate post-Fed pivot."
               </blockquote>
-              <p className="text-sm text-gray-600 dark:text-gray-400">— Crypto Strategy Team</p>
+              <p className="text-sm text-gray-600 dark:text-gray-400">— Daily | Digest Market Analysis Team</p>
             </CardContent>
           </Card>
 
@@ -217,7 +261,7 @@ const FedBalanceSheetPage: React.FC = () => {
               <blockquote className="text-base italic text-gray-700 dark:text-gray-300 mb-2">
                 "While the Fed's balance sheet shrinks faster than anticipated, strategic tools soften the blow, supporting a Goldilocks backdrop for corporates."
               </blockquote>
-              <p className="text-sm text-gray-600 dark:text-gray-400">— Policy Analysis Team</p>
+              <p className="text-sm text-gray-600 dark:text-gray-400">— Daily | Digest Policy Analysis Team</p>
             </CardContent>
           </Card>
 
