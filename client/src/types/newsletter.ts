@@ -33,32 +33,86 @@ export type Article = z.infer<typeof articleSchema>;
 export const sampleArticles: Article[] = [
   {
     slug: "fed-balance-sheet-blueprint",
-    title: "The Fed's Balance Sheet Blueprint: Faster QT, Strategic Pivot",
-    description: "The Federal Reserve has accelerated its quantitative tightening (QT) program, reducing its balance sheet by $1.3T in 2024, marking its most aggressive contractionary policy since 2018. This strategic pivot signals a renewed focus on financial stability amid persistent inflation concerns.",
+    title: "FED'S QT EXIT: A LIQUIDITY LIFELINE FOR RISK ASSETS",
+    description: "The Federal Reserve has accelerated its quantitative tightening (QT) program, cutting its balance sheet by $2 trillion since 2022—including a rapid $297B reduction since June 2024. This pace exceeds earlier Wall Street estimates and signals aggressive liquidity withdrawal, with major implications for risk assets.",
     category: "Economics",
     source: "Daily Digest",
     author: "Luca Cada Lora",
-    date: "February 8, 2025",
+    date: "February 9, 2025",
     previewEmoji: "🏦",
     previewMetrics: [
       {
-        label: "QT Pace",
-        value: "$95B/month",
-        subtitle: "Current runoff"
+        label: "Balance Sheet Cut",
+        value: "$2T",
+        subtitle: "Since 2022"
       },
       {
-        label: "Balance Sheet",
-        value: "$7.2T",
-        subtitle: "Down 15% YoY"
+        label: "S&P Target",
+        value: "6,000+",
+        subtitle: "Q3 2025"
       },
       {
-        label: "Duration Risk",
-        value: "6.2 years",
-        subtitle: "Avg maturity"
+        label: "BTC Projection",
+        value: "$120K",
+        subtitle: "Late 2025"
       }
     ],
-    tags: ["Federal Reserve", "Monetary Policy", "QT"],
-    content: `The Federal Reserve's balance sheet strategy has entered a critical new phase, with the pace of quantitative tightening (QT) accelerating to $95 billion per month – the fastest runoff rate in its history. This aggressive contraction has already reduced the balance sheet by $1.3 trillion in 2024, marking a decisive shift in the Fed's monetary policy stance.
+    tags: ["Federal Reserve", "Monetary Policy", "QT", "Risk Assets"],
+    content: `FED'S QT EXIT: A LIQUIDITY LIFELINE FOR RISK ASSETS
+February 9, 2025 | Markets Desk
+
+The Fed's Balance Sheet Blueprint: Faster QT, Strategic Pivot
+
+The Federal Reserve has accelerated its quantitative tightening (QT) program, cutting its balance sheet by $2 trillion since 2022—including a rapid $297B reduction since June 2024. This pace exceeds earlier Wall Street estimates (JPMorgan projected $1.7T total by 2024) and signals aggressive liquidity withdrawal.
+
+Critically, the Fed now explicitly plans to halt QT when reserves reach "somewhat above" ample levels—a nuanced shift from prior "just above" guidance. This buffer aims to prevent a replay of 2019's repo market stress while maintaining policy flexibility. Projections align with a mid-2025 endpoint, contingent on reserve balances (currently ~10-11% of GDP).
+
+Market Implications: The Liquidity Thaw
+
+Equities: S&P 500 Poised for Breakout
+* Tech/Growth Leadership: Reduced liquidity drag and stable reserves favor rate-sensitive sectors. The S&P 500 could retest 6,000+ by Q3 2025 if inflation cools as projected.
+* Sector Opportunities: AI infrastructure (semiconductors, data centers), renewables, and small-caps likely outperform as credit conditions ease.
+* Valuation Support: Fed liquidity safeguards (Standing Repo Facility) mitigate systemic risk, allowing P/E multiples to expand despite elevated rates.
+
+Crypto: Bitcoin's Macro Catalyst
+* Bitcoin: Historically inverse to real yields, BTC could target $120K by late 2025 as QT ends. Institutional inflows via ETFs may accelerate post-Fed pivot.
+* Ethereum: ETH/BTC ratio likely rebounds with risk appetite; regulatory clarity (SEC's SAB 122) reduces custody friction for banks.
+* High-Beta Plays: SOL, DOGE, and AI-linked tokens (FET, RNDR) may surge if retail FOMO returns.
+
+The Hidden Risk: Faster QT ≠ Tighter Policy
+
+While the Fed's balance sheet shrinks faster than anticipated, strategic tools soften the blow:
+* ON RRP Usage Collapse: Dropped from $2.55T (2023) to $78B, redirecting liquidity to private markets.
+* Productivity Buffer: Business-sector productivity grew 1.97% in 2024—above pre-pandemic trends—supporting non-inflationary growth.
+* Labor Market Stability: Unemployment flatlined at 4.1%, wage growth cooled to 3.6% YoY—a Goldilocks backdrop for corporates.
+
+Actionable Scenarios
+1. Soft Landing (60%)
+   * Inflation cools to 2.4%
+   * S&P +15%, Tech rallies
+   * BTC $100K, ETH $6K
+
+2. Early Pivot (25%)
+   * Unemployment >4.5% by Q1'25
+   * Small-caps surge 30%
+   * Altcoins (SOL +50%)
+
+3. Stagflation (15%)
+   * Oil spikes >$100/bbl
+   * Defensives outperform
+   * BTC tests $60K, stablecoins
+
+Risks to Monitor
+* Geopolitical Shock: Middle East conflict or Taiwan escalation could spike oil, delaying QT exit.
+* Inflation Stickiness: Core services (3.5% YoY) remain stubborn; hot CPI print >3% would reset rate cut bets.
+* Crypto Regulation: SEC Chair Gensler's lingering hostility to DeFi remains a sector headwind.
+
+The Bottom Line
+
+The Fed's QT exit marks a structural shift from austerity to equilibrium—bullish for risk assets but requiring nimble positioning. Investors should:
+* Overweight: Tech (NVDA, META), Bitcoin miners (RIOT), AI infrastructure plays
+* Avoid: Regional banks, commercial REITs facing refinancing walls
+* Watch: March FOMC meeting for updated dot plots; CME FedWatch odds now price 40bps cuts by December
 
 Key Balance Sheet Metrics & Trajectory
 Current State (February 2025):
@@ -73,103 +127,7 @@ Current State (February 2025):
 * Q3: -$298B (-4.3% QoQ)
 * Q4: -$295B (-4.5% QoQ)
 
-Strategic Pivot: Faster QT, Higher Terminal
-The Fed's accelerated QT reflects three strategic imperatives:
-
-1. Inflation Management
-* Core PCE steady at 2.9% despite rate restrictiveness
-* Wage growth remains elevated at 4.2% YoY
-* Housing services inflation sticky at 5.2%
-
-2. Financial Stability
-* Bank reserves at $3.2T (comfortable above $2.5T minimum)
-* Money market functioning intact despite faster runoff
-* No signs of Treasury market stress (bid-ask spreads normal)
-
-3. Policy Flexibility
-* Creates room for rate cuts if needed in H2-25
-* Reduces political pressure on monetary decisions
-* Better aligns with global central bank normalization
-
-Market Impact & Technical Dynamics
-Treasury Market Effects:
-* Long-end yields +15bps on faster QT announcement
-* 5s30s curve bear steepened to 65bps
-* Primary dealer positions down 22% YoY
-
-MBS Market Reaction:
-* Option-adjusted spreads widen 8bps
-* Convexity hedging adds to long-end pressure
-* Bank demand remains weak amid QT
-
-Transmission to Risk Assets:
-* SPX -0.8% on announcement day
-* HY spreads +25bps wider
-* EM sovereign spreads +15bps
-
-Policy Outlook & Scenario Analysis
-Base Case (65% probability):
-* Continue $95B/month pace through 2025
-* Terminal balance sheet ~$6.0T by end-2025
-* First rate cut in September 2025
-
-Hawkish Risk (25%):
-* Accelerate to $115B/month in H2
-* Faster MBS sales if housing stays hot
-* No rate cuts in 2025
-
-Dovish Risk (10%):
-* Slow to $65B/month if markets stress
-* Pause QT before rate cuts begin
-* Multiple rate cuts starting Q2
-
-Critical Variables to Monitor
-Inflation Dynamics:
-* Core services at 3.5% YoY; hot CPI print >3% would reset rate cut expectations
-* Wage growth moderation needed
-* Housing services disinflation pace
-
-Financial Conditions:
-* Bank reserves adequacy ($2.5T floor)
-* Treasury market depth metrics
-* Cross-currency basis swaps
-
-Economic Impact:
-* GDP growth sensitivity to QT
-* Credit availability/lending standards
-* Housing market reaction
-
-Implementation Challenges & Considerations
-Operational Complexities:
-1. MBS reinvestment caps require active management
-2. Treasury auction sizes may need adjustment
-3. Intraday liquidity demands increasing
-
-Market Communication:
-* Forward guidance on terminal size
-* Contingency plans for stress scenarios
-* Coordination with Treasury debt management
-
-Policy Coordination:
-* Fiscal deficit funding needs
-* International spillover effects
-* Emergency facility wind-down
-
-Strategic Recommendations
-For Investors:
-1. Duration: Maintain neutral stance, look to add at 4.5% 10y
-2. Curve: Steepener positions offer positive carry
-3. MBS: Prefer up-in-coupon given convexity risk
-
-For Policymakers:
-1. Enhance Treasury market monitoring
-2. Develop stress testing scenarios
-3. Update emergency facility frameworks
-
-The Bottom Line
-The Fed's accelerated balance sheet reduction represents a critical test of market resilience and policy transmission. While current conditions support the faster pace, flexibility remains key given the unprecedented nature of QT at this scale. Success will require careful monitoring of financial stability indicators and continued clear communication of policy intentions.
-
-This strategic pivot reinforces the Fed's commitment to sustainable inflation control while creating policy space for future cycles. However, the interaction between QT and eventual rate cuts will require deft management to avoid market disruption.`
+This newsletter synthesizes the Federal Reserve's February 2025 Monetary Policy Report, Bloomberg consensus forecasts, and proprietary analytics. Not investment advice.`
   },
   {
     slug: "indonesia-economic-inventory-crisis",
