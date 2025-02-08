@@ -76,10 +76,13 @@ const FedBalanceSheetPage: React.FC = () => {
 
         <div className="py-4 border-b border-gray-200 dark:border-gray-800">
           <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
-            The Federal Reserve has accelerated its quantitative tightening (QT) program, cutting its balance sheet by $2 trillion since 2022—including a rapid $297B reduction since June 2024. This pace exceeds earlier Wall Street estimates (JPMorgan projected $1.7T total by 2024) and signals aggressive liquidity withdrawal.
+            The Federal Reserve's newly released Monetary Policy Report (February 7, 2025) provides critical updates on its quantitative tightening (QT) strategy, revealing a faster-than-expected balance sheet reduction and a pivotal roadmap for liquidity normalization. Since QT began in June 2022, the Fed has slashed its securities holdings by $2 trillion, including a rapid $297 billion reduction since June 2024 alone—a pace that significantly exceeds earlier Wall Street projections (e.g., JPMorgan's 2024 estimate of $1.7T total).
           </p>
           <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed mt-4">
-            Critically, the Fed now explicitly plans to halt QT when reserves reach "somewhat above" ample levels—a nuanced shift from prior "just above" guidance. This buffer aims to prevent a replay of 2019's repo market stress while maintaining policy flexibility. Projections align with a mid-2025 endpoint, contingent on reserve balances (currently ~10-11% of GDP).
+            The Fed will halt balance sheet reductions when reserves are "somewhat above ample levels"—a nuanced shift from prior "just above" guidance. Mid-2025 remains the likely endpoint, contingent on reserve balances (~10-11% of GDP currently). Notably, the Fed's Standing Repo Facility (introduced post-2019) now ensures instant liquidity injections, reducing systemic risks from aggressive QT.
+          </p>
+          <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed mt-4">
+            For equities, this creates a significant liquidity tailwind, particularly benefiting tech and growth sectors. Despite a $78B collapse in the Fed's overnight reverse repo (ON RRP) usage (vs. $2.55T in 2023), bank reserves remain robust at $3.2T—deemed "abundant" but nearing pre-2019 stress thresholds. Supporting this transition, business-sector productivity grew 1.97% in 2024, driven by AI adoption and post-pandemic efficiency gains, providing a non-inflationary boost to corporate earnings.
           </p>
         </div>
 
