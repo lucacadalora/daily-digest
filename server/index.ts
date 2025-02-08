@@ -4,6 +4,7 @@ import express, { type Request, Response, NextFunction } from "express";
 import { registerRoutes } from "./routes";
 import { setupVite, serveStatic, log } from "./vite";
 import chatRouter from "./routes/chat";
+import newsletterRouter from "./routes/newsletter";
 
 const app = express();
 app.use(express.json());
@@ -30,6 +31,7 @@ app.use((req, res, next) => {
 
 // API Routes - Mount before Vite middleware
 app.use('/api', chatRouter);
+app.use('/api/newsletter', newsletterRouter);
 
 (async () => {
   const server = registerRoutes(app);
