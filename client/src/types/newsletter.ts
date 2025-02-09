@@ -58,7 +58,28 @@ export const sampleArticles: Article[] = [
       }
     ],
     tags: ["IHSG", "Trade War", "Market Analysis", "Weekly Special"],
-    content: `Weekly Market Alert February 10–14, 2025`
+    content: `Weekly Market Alert February 10–14, 2025
+
+The New Narrative: Indonesia as a Chinese Surplus Dumping Ground
+Bank Indonesia (BI) issued a stark warning this week: "Chinese goods barred from US markets are flooding Indonesia," threatening to overwhelm domestic industries. Key insights:
+
+Mechanism: Trump's 10% China tariffs have redirected $48B worth of Chinese exports (textiles, electronics, ceramics) to ASEAN markets. Indonesia, with its porous import controls, absorbed 32% of this diverted volume.
+
+Impact: Local MSMEs face existential risks. Textile producers like ERAT (-18% WoW) and ceramic firm ARTI (-23%) collapsed as Chinese imports undercut prices by 40–60%.
+
+Policy Paralysis: Indonesia's retaliatory 200% tariffs on Chinese goods (announced Jan 2025) remain unimplemented, exposing regulatory inertia.
+
+Defensive Pivot - Strategic Plan
+
+Dividend Shelter: Rotate into HMSP (8.2% yield) and SMGR (6.7%).
+
+HMSP:
+Short-Term Play: High yield attractive for income, but monitor payout sustainability.
+Action: Buy on dips near Rp580 (52-week low) with tight stop-loss at Rp550.
+
+SMGR:
+Long-Term Value: Undervalued at 0.5x P/S, but await infrastructure policy clarity.
+Action: Accumulate below Rp2,700 (near 2025 low) for dividend + potential rebound.`
   },
   {
     slug: "fed-balance-sheet-blueprint",
