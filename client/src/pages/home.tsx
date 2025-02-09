@@ -21,11 +21,16 @@ export default function Home() {
   const [currentPage, setCurrentPage] = useState(1);
   const articlesPerPage = 4;
 
+  // Sort articles by date (most recent first) and take the most recent ones
+  const sortedArticles = [...sampleArticles].sort((a, b) => 
+    new Date(b.date).getTime() - new Date(a.date).getTime()
+  );
+
   // Calculate the articles for the current page
   const indexOfLastArticle = currentPage * articlesPerPage;
   const indexOfFirstArticle = indexOfLastArticle - articlesPerPage;
-  const currentArticles = sampleArticles.slice(indexOfFirstArticle, indexOfLastArticle);
-  const totalPages = Math.ceil(sampleArticles.length / articlesPerPage);
+  const currentArticles = sortedArticles.slice(indexOfFirstArticle, indexOfLastArticle);
+  const totalPages = Math.ceil(sortedArticles.length / articlesPerPage);
 
   return (
     <div className="min-h-screen bg-[#FBF7F4] dark:bg-gray-900 transition-colors">
@@ -62,7 +67,7 @@ export default function Home() {
             {/* Featured Articles */}
             <div className="grid grid-cols-1 gap-6 mb-8">
               {currentArticles.map((article, index) => (
-                <ArticleCard key={index} article={article} />
+                <ArticleCard key={article.slug} article={article} />
               ))}
             </div>
 
