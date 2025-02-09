@@ -9,8 +9,13 @@ export default function Newsletters() {
   const [location] = useLocation();
   const category = location.split("/").pop() as Category | undefined;
   const isViewAll = location === "/newsletter";
+  const isFeatured = category === "Featured";
   const filteredArticles = category && !isViewAll
-    ? sampleArticles.filter(article => article.category === category)
+    ? sampleArticles.filter(article => 
+        category === "Featured" 
+          ? article.featured 
+          : article.category === category
+      )
     : sampleArticles;
 
   return (
@@ -40,6 +45,16 @@ export default function Newsletters() {
                 ${isViewAll ? 'bg-blue-600 text-white shadow-lg shadow-blue-500/30' : 
                 'bg-blue-50 text-blue-600 hover:bg-blue-100 dark:bg-blue-900/20 dark:text-blue-400'}`}>
               View All
+            </Link>
+            <Link href="/newsletter/category/Featured"
+              className={`group relative px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 flex items-center gap-2
+                ${isFeatured ? 'bg-blue-600 text-white shadow-lg shadow-blue-500/30' : 
+                'bg-blue-50 text-blue-600 hover:bg-blue-100 dark:bg-blue-900/20 dark:text-blue-400'}`}>
+              <span className="relative flex h-2 w-2">
+                <span className={`animate-ping absolute inline-flex h-full w-full rounded-full ${isFeatured ? 'bg-white/75' : 'bg-blue-400/75'} opacity-75`}></span>
+                <span className={`relative inline-flex rounded-full h-2 w-2 ${isFeatured ? 'bg-white' : 'bg-blue-500'}`}></span>
+              </span>
+              Featured
             </Link>
             {['Markets', 'Economics', 'Industries', 'Tech'].map((tag) => (
               <Link key={tag} href={`/newsletter/category/${tag}`}
