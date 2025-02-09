@@ -32,6 +32,67 @@ export type Article = z.infer<typeof articleSchema>;
 
 export const sampleArticles: Article[] = [
   {
+    slug: "trade-war-tsunami-feb-10-14",
+    title: "Floodgates Open as Trade War Tsunami Swamps IHSG",
+    description: "Bank Indonesia issues stark warning as Chinese goods flood Indonesian markets, threatening local industries and validating our previous week's bearish outlook. IHSG breaches critical 6,900 support exactly as predicted.",
+    category: "Markets",
+    source: "Daily Digest",
+    author: "Luca Cada Lora",
+    date: "February 10, 2025",
+    previewEmoji: "🌊",
+    previewMetrics: [
+      {
+        label: "IHSG Drop",
+        value: "-5.16%",
+        subtitle: "WoW Decline"
+      },
+      {
+        label: "Chinese Imports",
+        value: "↑ 32%",
+        subtitle: "ASEAN Share"
+      },
+      {
+        label: "Local Impact",
+        value: "-18-23%",
+        subtitle: "MSME Stocks"
+      }
+    ],
+    tags: ["IHSG", "Trade War", "Market Analysis", "Weekly Special"],
+    content: `Weekly Market Alert
+February 10–14, 2025: Floodgates Open as Trade War Tsunami Swamps IHSG
+
+Previously on Weekly Special February 3–7, 2025
+Our February 3–7 Market Alert proved prescient across three critical dimensions:
+
+1. IHSG Support Breach
+Predicted: 6,721–6,900 range under "Full Trade War" scenario
+Actual: Index collapsed to 6,752.57 (-5.16% WoW), breaching 6,900 in 3 sessions
+Key Drivers:
+- Trump's 25% tariffs on Canada/Mexico triggered risk-off sentiment
+- CNY devaluation pressured USDIDR to 16,450
+
+2. Sectoral Divergence
+Commodities: "Bloodbath" predicted, realized with Energy -7.6%, ADRO -12%
+Defensives (KLBF): Initially resilient (+7.44% intraweek) before succumbing to systemic pressure (-1.7%)
+
+3. Currency & Macro
+- USDIDR: Reached 16,450 (vs projected 16,300–16,500)
+- Reserves: Dropped $1.4B to $138.6B, limiting BI's response
+
+Intermezzo: Last Week's Market Reality Check
+
+What Our Analysis Nailed:
+✅ 6,900 Breach: Occurred exactly as modeled, with foreign outflows surging to Rp 3.8T
+✅ Commodity Collapse: Coal prices fell to $73/ton, crushing ADRO (-12%) and PTBA (-9%)
+✅ Defensive Flaw: KLBF's intraweek rally (+7.44%) validated its defensive role, but systemic panic later erased gains
+
+Where We Underestimated:
+⚠️ Speed of Collapse: 6,900 breached in 3 days vs projected 5-day timeline
+⚠️ KLBF's Limits: Sector-wide healthcare decline (-1.7% WoW) exposed defensive vulnerabilities
+
+[Rest of the content to be added later]`
+  },
+  {
     slug: "fed-balance-sheet-blueprint",
     title: "Fed's QT Exit: A Liquidity Lifeline for Risk Assets",
     description: "The Federal Reserve has accelerated its quantitative tightening (QT) program, cutting its balance sheet by $2 trillion since 2022—including a rapid $297B reduction since June 2024. This pace exceeds earlier Wall Street estimates (JPMorgan projected $1.7T total by 2024) and signals aggressive liquidity withdrawal.",
