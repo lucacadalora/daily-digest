@@ -61,6 +61,21 @@ export const sampleArticles: Article[] = [
     content: `Weekly Market Alert
 February 10–14, 2025: Floodgates Open as Trade War Tsunami Swamps IHSG
 
+The New Narrative: Indonesia as a Chinese Surplus Dumping Ground
+Bank Indonesia (BI) issued a stark warning this week: "Chinese goods barred from US markets are flooding Indonesia," threatening to overwhelm domestic industries112. Key insights:
+
+Mechanism: Trump's 10% China tariffs have redirected $48B worth of Chinese exports (textiles, electronics, ceramics) to ASEAN markets. Indonesia, with its porous import controls, absorbed 32% of this diverted volume112.
+
+Impact: Local MSMEs face existential risks. Textile producers like ERAT (-18% WoW) and ceramic firm ARTI (-23%) collapsed as Chinese imports undercut prices by 40–60%12.
+
+Policy Paralysis: Indonesia's retaliatory 200% tariffs on Chinese goods (announced Jan 2025) remain unimplemented, exposing regulatory inertia12.
+
+GDP Growth Mirage:
+The "5.03% growth" hailed for 2024 now reveals cracks:
+Inventory Illusion: 1.2 percentage points came from stockpiling, not demand. Auto inventories hit 112 days (vs 75-day healthy threshold)15.
+Consumption Crunch: Household spending growth slowed to 4.83% as real wages stagnate.
+Investor Takeaway: The IHSG's 6,752 close reflects not just trade war risks, but a domestic demand crisis masked by statistical artifice.
+
 Previously on Weekly Special February 3–7, 2025
 Our February 3–7 Market Alert proved prescient across three critical dimensions:
 
@@ -90,7 +105,25 @@ Where We Underestimated:
 ⚠️ Speed of Collapse: 6,900 breached in 3 days vs projected 5-day timeline
 ⚠️ KLBF's Limits: Sector-wide healthcare decline (-1.7% WoW) exposed defensive vulnerabilities
 
-[Rest of the content to be added later]`
+Forward Outlook: Flood Control Strategies
+Sectoral Triage
+Sector | Action | Rationale
+Textiles | Exit | Chinese imports now 58% of market share
+Ceramics | Short | ARTI faces 200% Chinese import surge
+Fintech | Accumulate | BUKA, BBCA benefit from BI's 7.1% SRBI bonds
+
+Critical Week Ahead
+Feb 11: BI emergency meeting – 25bps hike expected to defend USDIDR
+Feb 12: China's rare earth export curbs – ANTM, INCO face supply chain shocks
+Feb 14: US ASEAN auto tariff decision – ASII's 30% revenue at risk
+
+Technical Thresholds:
+IHSG: 6,600 (critical support) vs 6,900 (resistance)
+USDIDR: BI's 16,500 intervention line under siege
+
+Bottom Line: This isn't just a trade war – it's a battle for Indonesia's economic sovereignty. Investors must navigate Chinese dumping, phantom GDP growth, and BI's dwindling reserves ($138.6B). Rotate into tariff-immune sectors (healthcare, fintech) and brace for 6,500 tests.
+
+— Lucaxyz Digest Research | Data as of Feb 9, 2025`
   },
   {
     slug: "fed-balance-sheet-blueprint",
