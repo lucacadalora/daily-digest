@@ -33,8 +33,8 @@ export type Article = z.infer<typeof articleSchema>;
 export const sampleArticles: Article[] = [
   {
     slug: "trade-war-tsunami-feb-10-14",
-    title: "Floodgates Open as Trade War Tsunami Swamps IHSG",
-    description: "Bank Indonesia issues stark warning as Chinese goods flood Indonesian markets, threatening local industries. IHSG breaches critical 6,900 support amid growing concerns over trade imbalances and economic sustainability.",
+    title: "Trade War Tsunami: Indonesia Emerges as China's Surplus Dumping Ground",
+    description: "Bank Indonesia issues stark warning as Chinese goods flood Indonesian markets, threatening local industries. Analysis of critical support levels and monetary policy implications amid growing market volatility.",
     category: "Markets",
     source: "Daily Digest",
     author: "Luca Cada Lora",
@@ -42,19 +42,19 @@ export const sampleArticles: Article[] = [
     previewEmoji: "🌊",
     previewMetrics: [
       {
-        label: "Support Level",
-        value: "6,742",
-        subtitle: "Critical Support"
+        label: "IHSG Range",
+        value: "6,742–6,900",
+        subtitle: "Sideways with Bearish Bias"
       },
       {
-        label: "Chinese Imports",
-        value: "↑ 58%",
-        subtitle: "Market Share"
+        label: "USDIDR Crisis",
+        value: "+25 bps",
+        subtitle: "Near 16,500 Threshold"
       },
       {
-        label: "Foreign Flow",
-        value: "-$317M",
-        subtitle: "Weekly Outflow"
+        label: "Gold Proxy",
+        value: "Buy MDKA",
+        subtitle: "As Gold Nears $2,900"
       }
     ],
     tags: ["IHSG", "Trade War", "Market Analysis", "Weekly Special"],
