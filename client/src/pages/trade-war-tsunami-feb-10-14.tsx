@@ -69,7 +69,7 @@ const TradeWarTsunamiFeb1014 = () => {
             <p className="font-medium text-orange-800 mb-0">Weekly Market Alert</p>
           </div>
           <p className="text-gray-700 mt-2">
-            This special report outlines critical market scenarios and action plans for the week of February 10-14, 2025. 
+            This special report outlines critical market scenarios and action plans for the week of February 10-14, 2025.
             This special report outlines key market scenarios and potential impacts for the week ahead.
           </p>
         </div>
@@ -154,15 +154,15 @@ const TradeWarTsunamiFeb1014 = () => {
         {/* Previously in Weekly Special Section */}
         <div className="bg-gray-50 dark:bg-gray-800/50 rounded-lg p-6 mb-8 border border-gray-200 dark:border-gray-700">
           <h2 className="text-2xl font-serif font-bold text-gray-900 dark:text-white mb-4">
-            <a href="https://lucaxyzz-digest.replit.app/newsletter/us-china-trade-war-impact-ihsg" 
+            <a href="https://lucaxyzz-digest.replit.app/newsletter/us-china-trade-war-impact-ihsg"
                className="text-blue-600 hover:underline">
               Previously in Weekly Special 4-7 Feb 2025: US-China Retaliation: Escalation Could Trigger IHSG Sell-Offs Below 6,900
             </a>
           </h2>
 
           <p className="text-gray-700 dark:text-gray-300 mb-6 text-lg">
-            Last week's analysis proved prescient as we accurately predicted the IHSG's descent below 6,900. 
-            For new readers, our previous report detailed how escalating US-China tensions would impact Indonesian markets. 
+            Last week's analysis proved prescient as we accurately predicted the IHSG's descent below 6,900.
+            For new readers, our previous report detailed how escalating US-China tensions would impact Indonesian markets.
             Here's what we got right:
           </p>
 
@@ -366,6 +366,48 @@ const TradeWarTsunamiFeb1014 = () => {
                 </table>
               </div>
             </div>
+
+            {/* Strategic Plan Section */}
+            <section>
+              <h2 className="text-xl font-serif font-bold text-gray-900 dark:text-white mb-3">Strategic Plan</h2>
+              <div className="prose text-gray-700 dark:text-gray-300 max-w-none">
+                <div className="space-y-4">
+                  <div>
+                    <h3 className="font-bold text-gray-900 dark:text-white mb-2">Dividend Shelter: Rotate into HMSP (8.2% yield) and SMGR (6.7%)</h3>
+
+                    {/* HMSP Analysis */}
+                    <div className="bg-white dark:bg-gray-800 rounded-lg p-4 mb-4 border border-gray-200 dark:border-gray-700">
+                      <h4 className="font-bold text-gray-900 dark:text-white mb-2">HMSP</h4>
+                      <ul className="list-none space-y-2">
+                        <li className="flex space-x-2">
+                          <div className="w-2 h-2 mt-2 rounded-full bg-blue-500 flex-shrink-0" />
+                          <p className="mt-0"><strong>Short-Term Play:</strong> High yield attractive for income, but monitor payout sustainability.</p>
+                        </li>
+                        <li className="flex space-x-2">
+                          <div className="w-2 h-2 mt-2 rounded-full bg-blue-500 flex-shrink-0" />
+                          <p className="mt-0"><strong>Action:</strong> Buy on dips near Rp580 (52-week low) with tight stop-loss at Rp550.</p>
+                        </li>
+                      </ul>
+                    </div>
+
+                    {/* SMGR Analysis */}
+                    <div className="bg-white dark:bg-gray-800 rounded-lg p-4 mb-4 border border-gray-200 dark:border-gray-700">
+                      <h4 className="font-bold text-gray-900 dark:text-white mb-2">SMGR</h4>
+                      <ul className="list-none space-y-2">
+                        <li className="flex space-x-2">
+                          <div className="w-2 h-2 mt-2 rounded-full bg-green-500 flex-shrink-0" />
+                          <p className="mt-0"><strong>Long-Term Value:</strong> Undervalued at 0.5x P/S, but await infrastructure policy clarity.</p>
+                        </li>
+                        <li className="flex space-x-2">
+                          <div className="w-2 h-2 mt-2 rounded-full bg-green-500 flex-shrink-0" />
+                          <p className="mt-0"><strong>Action:</strong> Accumulate below Rp2,700 (near 2025 low) for dividend + potential rebound.</p>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
           </div>
         </section>
 
@@ -439,7 +481,7 @@ const TradeWarTsunamiFeb1014 = () => {
           </h2>
           <ul className="list-none space-y-3">
             <li>
-              <a href="https://lucaxyzz-digest.replit.app/newsletter/us-china-trade-war-impact-ihsg" 
+              <a href="https://lucaxyzz-digest.replit.app/newsletter/us-china-trade-war-impact-ihsg"
                  className="text-blue-600 hover:underline">
                 US-China Trade War Impact
               </a>
