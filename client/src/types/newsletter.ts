@@ -33,8 +33,8 @@ export type Article = z.infer<typeof articleSchema>;
 export const sampleArticles: Article[] = [
   {
     slug: "weekly-special-feb-10-14",
-    title: "Weekly Special: Market Reality Check (February 10-14, 2025)",
-    description: "Our February 3-7 Market Alert proved prescient as IHSG breached critical support levels, with commodity sectors experiencing significant pressure and defensive plays showing mixed resilience.",
+    title: "Weekly Market Alert: Trade War Tsunami Tests IHSG's 6,600 Lifeline",
+    description: "Our analysis validates previous warnings as trade tensions escalate, with IHSG facing critical support at 6,600 amid mounting foreign outflows and sectoral pressures.",
     category: "Markets",
     source: "Weekly Special",
     author: "Luca Cada Lora",
@@ -42,60 +42,84 @@ export const sampleArticles: Article[] = [
     previewEmoji: "📊",
     previewMetrics: [
       {
-        label: "IHSG Drop",
+        label: "IHSG Decline",
         value: "-5.16%",
-        subtitle: "WoW decline"
+        subtitle: "WoW drop"
       },
       {
         label: "Support Level",
-        value: "6,752",
-        subtitle: "As predicted"
+        value: "6,600",
+        subtitle: "Critical threshold"
       },
       {
         label: "Foreign Outflow",
         value: "Rp3.8T",
-        subtitle: "Weekly total"
+        subtitle: "Weekly volume"
       }
     ],
-    tags: ["IHSG", "Market Analysis", "Weekly Special", "Technical Analysis"],
-    content: `Previously on Weekly Special February 3–7, 2025
+    tags: ["IHSG", "Market Analysis", "Weekly Special", "Trade War"],
+    content: `Weekly Market Alert
+February 10–14, 2025: Trade War Tsunami Tests IHSG's 6,600 Lifeline
 
-Our February 3–7 Market Alert proved prescient across three critical dimensions:
+Backward Analysis: Validated Risks
+Previous Report
+Our February 3–7 analysis accurately flagged:
+IHSG Collapse: Index plunged to 6,752.57 (-5.16% WoW), breaching 6,900 as projected.
+Commodity Carnage: ADRO (-12%), PTBA (-9%), and AALI (-8%) collapsed amid China's coal/LNG tariffs and CPO risks.
+Currency Pressures: USDIDR hit 16,450, nearing BI's intervention threshold.
 
-IHSG Support Breach
-Predicted: 6,721–6,900 range under "Full Trade War" scenario.
-Actual: Index collapsed to 6,752.57 (-5.16% WoW), breaching 6,900 in 3 sessions.
-Key Drivers:
-Trump's 25% tariffs on Canada/Mexico triggered risk-off sentiment.
-CNY devaluation pressured USDIDR to 16,450.
+Key Triggers:
+China's 15% tariff on US coal/LNG (effective Feb 10) disrupted Indonesia's $2.1B nickel supply chain15.
+Trump's 10% China tariffs triggered Rp 3.8T foreign equity outflows611.
+MSCI exclusion of BREN/CUAN/PTRO erased $10.5B market cap, amplifying IHSG volatility625.
 
-Sectoral Divergence
-Sector Prediction Outcome Source
-Commodities "Bloodbath" expected Energy -7.6%, ADRO -12%
-Defensives (KLBF) Resilient initially +7.44% intraweek, then -1.7%
+Key Narratives for February 10–14
+1. GDP Growth Reality Check
+Indonesia's 2024 GDP growth of 5.03% YoY masked structural risks:
+Inventory-Driven: 1.2pp growth came from stockpiling, not organic demand25.
+Consumption Slump: Private consumption grew 4.83% (vs 5.1% in 2023), signaling weakening purchasing power25.
+Outlook: 2025 growth may stall at 5.0–5.1% unless exports rebound25.
 
-Currency & Macro
-USDIDR: Reached 16,450 (vs projected 16,300–16,500).
-Reserves: Dropped $1.4B to $138.6B, limiting BI's response.
+2. Trade War Escalation
+New Fronts Opening:
+Risk	Impact on Indonesia	Source
+China's rare earth export curbs (effective Feb 12)	Disrupts $2.1B nickel exports to China, hitting smelters like ANTM, INCO	527
+US 15% ASEAN auto tariffs (proposed)	ASII (-14% WoW) faces margin compression; 30% of revenue at risk	314
+Flooded Markets: BI warns Chinese goods diverted from US could "swamp" Indonesia, pressuring UNVR, ICBP	34	
 
-Intermezzo: Last Week's Market Reality Check
+Macro Impact:
+USDIDR could test 16,800 if Trump expands tariffs to ASEAN410.
+BI's reserves ($138.6B) may dip below 6 months' import cover610.
 
-What Our Analysis Nailed
-6,900 Breach: Occurred exactly as modeled, with foreign outflows surging to Rp 3.8T.
-Commodity Collapse: Coal prices fell to $73/ton, crushing ADRO (-12%) and PTBA (-9%).
-Defensive Flaw: KLBF's intraweek rally (+7.44%) validated its defensive role, but systemic panic later erased gains.
+Sectoral Outlook
+High-Risk Zones
+Sector	Vulnerability	Key Stocks
+Energy	China's coal import quotas (-40% MoM)	ADRO, PTBA
+Automotive	US tariff retaliation risk	ASII, AIMS
+Tech	Rare earth supply chain disruption	INCO, ANTM
 
-Where We Underestimated
-Speed of Collapse: 6,900 breached in 3 days vs projected 5-day timeline.
-KLBF's Limits: Sector-wide healthcare decline (-1.7% WoW) exposed defensive vulnerabilities.
+Defensive Pivot
+Sector	Catalyst	Key Stocks
+Healthcare	Pandemic restocking demand	KLBF, SIDO
+Gold	Safe-haven demand at $2,885/oz	MDKA, ANTM
+Telcos	5G rollout shields earnings	TLKM, EXCL
 
-Conclusion: Precision Amid Chaos
-Our original analysis:
-✅ Correctly flagged 6,900 as the critical threshold.
-✅ Accurately predicted commodity sector vulnerabilities (ADRO, AALI).
-⚠️ Underestimated KLBF's sensitivity to systemic panic despite strong fundamentals.
+Critical Thresholds
+IHSG Support: 6,600–6,700 (Fibonacci 78.6% retracement).
+Resistance: 6,900–7,000 (previous support now ceiling).
+Black Swan: Breach below 6,600 triggers algo sell programs targeting 6,4003135.
 
-Lesson: While macro forecasts proved reliable, liquidity crunches amplified sell-offs beyond technical projections.`
+Investor Action Plan
+Rotate to Domestic Demand: Increase exposure to BBCA (loan growth +24% YoY) and HMSP (8.2% yield).
+Hedge USDIDR: Use BI's FX Swap Facility (7.1% yield) or gold proxies.
+Avoid Value Traps: Exit BREN/CUAN/PTRO until MSCI liquidity stabilizes.
+
+Bottom Line
+The IHSG's 6,600 level is this week's litmus test. While systemic risks dominate, three factors could spark rebounds:
+BI Rate Hike (Feb 11): 25bps increase to stabilize USDIDR.
+China's Policy Easing: Potential RRR cuts to offset trade war impacts.
+Ramadan Prep: Consumer stocks (ICBP, UNVR) may rally on pre-holiday demand.
+Trade War Playbook: Short ASII/Long TLKM (1:2 beta) for sectoral hedge.`
   },
   {
     slug: "fed-balance-sheet-blueprint",
