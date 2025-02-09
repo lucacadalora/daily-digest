@@ -32,6 +32,35 @@ export type Article = z.infer<typeof articleSchema>;
 
 export const sampleArticles: Article[] = [
   {
+    slug: "bbri-financial-analysis",
+    title: "BBRI Q4 2024: Digital Banking Surge Masks Credit Quality Concerns",
+    description: "Bank Rakyat Indonesia (BBRI) faces credit quality pressures despite digital transformation success, as micro-lending segment shows stress signals amid rising rates.",
+    category: "Markets",
+    source: "Daily Digest",
+    author: "Luca Cada Lora",
+    date: "February 8, 2025",
+    previewEmoji: "🏦",
+    previewMetrics: [
+      {
+        label: "NPL Ratio",
+        value: "3.2%",
+        subtitle: "Up from 2.8% Q3"
+      },
+      {
+        label: "Digital Users",
+        value: "32.5M",
+        subtitle: "+45% YoY Growth"
+      },
+      {
+        label: "NIM",
+        value: "6.8%",
+        subtitle: "-20bps QoQ"
+      }
+    ],
+    tags: ["Banking", "Financial Analysis", "BBRI", "Featured"],
+    content: `BBRI's Q4 results reveal a complex narrative...`
+  },
+  {
     slug: "trade-war-tsunami-feb-10-14",
     title: "Trade War Tsunami: Indonesia Emerges as China's Surplus Dumping Ground",
     description: "Bank Indonesia issues stark warning as Chinese goods flood Indonesian markets, threatening local industries. Analysis of critical support levels and monetary policy implications amid growing market volatility.",
@@ -59,7 +88,6 @@ export const sampleArticles: Article[] = [
     ],
     tags: ["IHSG", "Trade War", "Market Analysis", "Weekly Special"],
     content: `Weekly Market Alert February 10–14, 2025
-
 The New Narrative: Indonesia as a Chinese Surplus Dumping Ground
 Bank Indonesia (BI) issued a stark warning this week: "Chinese goods barred from US markets are flooding Indonesia," threatening to overwhelm domestic industries. Key insights:
 
