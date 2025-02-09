@@ -3,9 +3,9 @@ import {
   Clock,
   MapPin,
   ChevronRight,
-  TrendingUp,
-  AlertCircle,
-  Shield
+  TrendingDown,
+  AlertTriangle,
+  ArrowUpCircle,
 } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Link } from 'wouter';
@@ -74,15 +74,15 @@ const TradeWarTsunamiFeb1014 = () => {
           </p>
         </div>
 
-        {/* Metric Cards - Updated to reflect current situation */}
+        {/* Metric Cards - Updated with detailed information */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 py-6 border-b border-gray-200 dark:border-gray-800">
           <Card className="bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm">
             <CardContent className="pt-6">
               <div className="flex flex-col items-center gap-1">
-                <TrendingUp className="h-6 w-6 text-red-600" />
-                <p className="text-sm font-medium text-gray-500 dark:text-gray-400">Market Direction</p>
-                <p className="text-2xl font-bold text-gray-900 dark:text-white">Bearish</p>
-                <p className="text-sm text-gray-500 dark:text-gray-400">IHSG Below 6,900</p>
+                <TrendingDown className="h-6 w-6 text-red-600" />
+                <p className="text-sm font-medium text-gray-500 dark:text-gray-400">IHSG Range</p>
+                <p className="text-2xl font-bold text-gray-900 dark:text-white">6,742–6,900</p>
+                <p className="text-sm text-gray-500 dark:text-gray-400">Sideways with Bearish Bias</p>
               </div>
             </CardContent>
           </Card>
@@ -90,10 +90,10 @@ const TradeWarTsunamiFeb1014 = () => {
           <Card className="bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm">
             <CardContent className="pt-6">
               <div className="flex flex-col items-center gap-1">
-                <AlertCircle className="h-6 w-6 text-orange-600" />
-                <p className="text-sm font-medium text-gray-500 dark:text-gray-400">BI Response</p>
+                <AlertTriangle className="h-6 w-6 text-orange-600" />
+                <p className="text-sm font-medium text-gray-500 dark:text-gray-400">USDIDR Crisis</p>
                 <p className="text-2xl font-bold text-gray-900 dark:text-white">+25 bps</p>
-                <p className="text-sm text-gray-500 dark:text-gray-400">Rate Hike to 6.00%</p>
+                <p className="text-sm text-gray-500 dark:text-gray-400">Near 16,500 Threshold</p>
               </div>
             </CardContent>
           </Card>
@@ -101,9 +101,9 @@ const TradeWarTsunamiFeb1014 = () => {
           <Card className="bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm">
             <CardContent className="pt-6">
               <div className="flex flex-col items-center gap-1">
-                <Shield className="h-6 w-6 text-blue-600" />
-                <p className="text-sm font-medium text-gray-500 dark:text-gray-400">Gold Proxies</p>
-                <p className="text-2xl font-bold text-gray-900 dark:text-white">MDKA</p>
+                <ArrowUpCircle className="h-6 w-6 text-green-600" />
+                <p className="text-sm font-medium text-gray-500 dark:text-gray-400">Buy MDKA</p>
+                <p className="text-2xl font-bold text-gray-900 dark:text-white">Gold Proxy</p>
                 <p className="text-sm text-gray-500 dark:text-gray-400">As Gold Nears $2,900</p>
               </div>
             </CardContent>
@@ -144,16 +144,6 @@ const TradeWarTsunamiFeb1014 = () => {
                   </h3>
                   <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
                     Chinese products are sold 40–60% cheaper than Indonesian equivalents, exploiting weak anti-dumping laws. Textile MSMEs lost 58% market share to Chinese apparel, forcing 20–30 factories to close. E-commerce platforms like Shopee and TikTok Shop prioritized Chinese sellers, drowning out local businesses. Despite a 200% retaliatory tariff announced in 2025, enforcement delays leave industries defenseless.
-                  </p>
-                </div>
-
-                {/* Point 3: Policy Paralysis */}
-                <div className="border-l-4 border-yellow-500 pl-4">
-                  <h3 className="font-bold text-gray-900 dark:text-white mb-2">
-                    Policy Paralysis Deepens Crisis
-                  </h3>
-                  <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
-                    Indonesia's proposed tariffs and bans (e.g., blocking TikTok Shop in 2023) have stalled due to bureaucracy and fears of Chinese retaliation. Meanwhile, USDIDR nears 16,500, draining BI's $138.6B reserves. Without swift action, the IHSG risks collapsing below 6,600, threatening economic stability.
                   </p>
                 </div>
               </div>
