@@ -21,18 +21,28 @@ const TradeWarTsunamiFeb1014 = () => {
         </div>
 
         {/* Breadcrumb */}
-        <div className="flex items-center space-x-2 text-sm text-gray-600 dark:text-gray-400 py-4 border-b border-gray-200 dark:border-gray-800">
-          <a href="/" className="hover:text-blue-600 cursor-pointer">Home</a>
+        <div className="flex items-center space-x-2 text-sm text-gray-600 dark:text-gray-400 py-4">
+          <a href="/" className="hover:text-blue-600">Home</a>
           <ChevronRight className="h-4 w-4" />
-          <a href="/newsletter" className="hover:text-blue-600 cursor-pointer">Newsletter</a>
+          <a href="/newsletter" className="hover:text-blue-600">Newsletter</a>
           <ChevronRight className="h-4 w-4" />
-          <span>Trade War Tsunami Swamps IHSG</span>
+          <span>Trade War Tsunami</span>
+        </div>
+
+        {/* Category Tags */}
+        <div className="flex flex-wrap gap-2 py-4">
+          <span className="text-sm font-medium px-3 py-1 bg-blue-100 text-blue-800 rounded-full dark:bg-blue-900 dark:text-blue-100">
+            Weekly Special
+          </span>
+          <span className="text-sm font-medium px-3 py-1 bg-green-100 text-green-800 rounded-full dark:bg-green-900 dark:text-green-100">
+            Market Strategy
+          </span>
         </div>
 
         {/* Header */}
-        <header className="border-b border-gray-200 dark:border-gray-800 pb-4">
+        <header className="border-b border-gray-200 dark:border-gray-800 pb-6">
           <div className="pt-4">
-            <h1 className="font-serif text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-3 leading-tight">
+            <h1 className="font-serif text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4 leading-tight">
               Floodgates Open as Trade War Tsunami Swamps IHSG
             </h1>
             <div className="flex items-center space-x-4 text-sm text-gray-600 dark:text-gray-400 mb-3">
@@ -50,6 +60,20 @@ const TradeWarTsunamiFeb1014 = () => {
             </div>
           </div>
         </header>
+
+        {/* Introduction */}
+        <section className="py-6 border-b border-gray-200 dark:border-gray-800">
+          <div className="prose dark:prose-invert max-w-none">
+            <div className="text-lg text-gray-700 dark:text-gray-300 space-y-4">
+              <p className="font-medium">Weekly Market Alert</p>
+              <p>
+                This special report outlines critical market scenarios and action plans for the week of February 10-14, 2025. 
+                Our analysis covers the escalating trade tensions and their immediate impact on Indonesian markets, providing 
+                strategic insights for navigating the current market turbulence.
+              </p>
+            </div>
+          </div>
+        </section>
 
         {/* Metric Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 py-6 border-b border-gray-200 dark:border-gray-800">
