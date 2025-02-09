@@ -140,7 +140,7 @@ const TradeWarTsunamiFeb1014 = () => {
           </div>
         </div>
 
-        {/* Metric Cards - Replaced with edited version */}
+        {/* Metric Cards - Updated with new data */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 py-6 border-b border-gray-200 dark:border-gray-800">
           <Card className="bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm">
             <CardContent className="pt-6">
@@ -176,7 +176,7 @@ const TradeWarTsunamiFeb1014 = () => {
           </Card>
         </div>
 
-        {/* IHSG Technical Outlook Section - New Section */}
+        {/* IHSG Technical Outlook Section */}
         <section className="prose dark:prose-invert max-w-none mb-8">
           <h2 className="text-xl font-serif font-bold text-gray-900 dark:text-white mb-4">
             IHSG Technical Outlook
@@ -243,135 +243,68 @@ const TradeWarTsunamiFeb1014 = () => {
           </div>
         </section>
 
-        {/* Article Content */}
-        <div className="py-4 space-y-6">
-          {/* New Narrative Section */}
-          <section className="prose dark:prose-invert max-w-none">
-            <h2 className="text-xl font-serif font-bold text-gray-900 dark:text-white mb-3">
-              The New Narrative: The Inventory Overhang
-            </h2>
-            <p className="text-gray-700 dark:text-gray-300">
-              Indonesia's 2024 GDP growth, while seemingly robust, hides structural vulnerabilities:
-            </p>
-            <ul className="list-disc list-inside text-gray-700 dark:text-gray-300">
-              <li>Auto Sector Glut: Inventory days surged to 112 (vs. healthy 75), pressuring ASII and AALI3.</li>
-              <li>Palm Oil Stockpiles: CPO inventories hit 4.2M tons (+18% MoM), risking margin compression for AALI and LSIP25.</li>
-            </ul>
-            <p className="text-gray-700 dark:text-gray-300 mt-4">
-              <strong>Investor Takeaway:</strong> The "growth" narrative is faltering. Markets now price in a domestic demand crisis, with retail sales growth slowing to 0.9% YoY3.
-            </p>
-          </section>
-
-          {/* New Narrative: Indonesia as a Chinese Surplus Dumping Ground */}
-          <section className="prose dark:prose-invert max-w-none">
-            <h2 className="text-xl font-serif font-bold text-gray-900 dark:text-white mb-3">
-              The New Narrative: Indonesia as a Chinese Surplus Dumping Ground
-            </h2>
-            <p className="text-gray-700 dark:text-gray-300">
-              Bank Indonesia (BI) issued a stark warning this week: "Chinese goods barred from US markets are flooding Indonesia," threatening to overwhelm domestic industries. Key insights:
-            </p>
-            <div className="space-y-4">
-              <div>
-                <h3 className="font-bold text-gray-900 dark:text-white">Mechanism</h3>
-                <p className="text-gray-700 dark:text-gray-300">
-                  Trump's 10% China tariffs have redirected $48B worth of Chinese exports (textiles, electronics, ceramics) to ASEAN markets. Indonesia, with its porous import controls, absorbed 32% of this diverted volume.
+        {/* Critical Week Ahead Section */}
+        <section className="prose dark:prose-invert max-w-none mb-8">
+          <h2 className="text-xl font-serif font-bold text-gray-900 dark:text-white mb-4">
+            Critical Week Ahead
+          </h2>
+          <div className="space-y-6">
+            <div className="space-y-2">
+              <h3 className="font-bold text-gray-900 dark:text-white flex items-center gap-2">
+                <Clock className="h-4 w-4 text-blue-600" />
+                Feb 11: BI Emergency Meeting
+              </h3>
+              <div className="ml-6">
+                <p className="text-gray-700 dark:text-gray-300 mb-2">
+                  <strong>Action:</strong> Likely 25bps rate hike (to 6.00%) to stabilize USDIDR, which neared 16,500.
                 </p>
-              </div>
-              <div>
-                <h3 className="font-bold text-gray-900 dark:text-white">Impact</h3>
                 <p className="text-gray-700 dark:text-gray-300">
-                  Local MSMEs face existential risks. Textile producers like ERAT (-18% WoW) and ceramic firm ARTI (-23%) collapsed as Chinese imports undercut prices by 40–60%.
-                </p>
-              </div>
-              <div>
-                <h3 className="font-bold text-gray-900 dark:text-white">Policy Paralysis</h3>
-                <p className="text-gray-700 dark:text-gray-300">
-                  Indonesia's retaliatory 200% tariffs on Chinese goods (announced Jan 2025) remain unimplemented, exposing regulatory inertia.
+                  <strong>Impact:</strong> Short-term relief for rupiah (16,200–16,300 range). Banks (BBCA, BBNI) face margin pressure but benefit from higher bond yields.
                 </p>
               </div>
             </div>
-          </section>
 
-          {/* GDP Growth Mirage Section */}
-          <section className="prose dark:prose-invert max-w-none">
-            <h2 className="text-xl font-serif font-bold text-gray-900 dark:text-white mb-3">
-              GDP Growth Mirage
-            </h2>
-            <p className="text-gray-700 dark:text-gray-300">
-              The "5.03% growth" hailed for 2024 now reveals cracks:
-            </p>
-            <ul className="list-disc list-inside text-gray-700 dark:text-gray-300">
-              <li>Inventory Illusion: 1.2 percentage points came from stockpiling, not demand. Auto inventories hit 112 days (vs 75-day healthy threshold).</li>
-              <li>Consumption Crunch: Household spending growth slowed to 4.83% as real wages stagnate.</li>
-            </ul>
-            <p className="text-gray-700 dark:text-gray-300 mt-4">
-              <strong>Investor Takeaway:</strong> The IHSG's 6,752 close reflects not just trade war risks, but a domestic demand crisis masked by statistical artifice.
-            </p>
-          </section>
-
-          {/* Critical Week Ahead Section */}
-          <section className="prose dark:prose-invert max-w-none mb-8">
-            <h2 className="text-xl font-serif font-bold text-gray-900 dark:text-white mb-4">
-              Critical Week Ahead
-            </h2>
-            <div className="space-y-6">
-              <div className="space-y-2">
-                <h3 className="font-bold text-gray-900 dark:text-white flex items-center gap-2">
-                  <Clock className="h-4 w-4 text-blue-600" />
-                  Feb 11: BI Emergency Meeting
-                </h3>
-                <div className="ml-6">
-                  <p className="text-gray-700 dark:text-gray-300 mb-2">
-                    <strong>Action:</strong> Likely 25bps rate hike (to 6.00%) to stabilize USDIDR, which neared 16,500.
-                  </p>
-                  <p className="text-gray-700 dark:text-gray-300">
-                    <strong>Impact:</strong> Short-term relief for rupiah (16,200–16,300 range). Banks (BBCA, BBNI) face margin pressure but benefit from higher bond yields.
-                  </p>
-                </div>
-              </div>
-
-              <div className="space-y-2">
-                <h3 className="font-bold text-gray-900 dark:text-white flex items-center gap-2">
-                  <AlertCircle className="h-4 w-4 text-red-600" />
-                  Feb 12: China's Rare Earth Curbs
-                </h3>
-                <div className="ml-6">
-                  <p className="text-gray-700 dark:text-gray-300 mb-2">
-                    <strong>Action:</strong> Restrictions on nickel exports to retaliate against US tariffs.
-                  </p>
-                  <p className="text-gray-700 dark:text-gray-300">
-                    <strong>Impact:</strong> ANTM/INCO hit hard – Indonesia's $2.1B nickel exports at risk. Global EV battery supply chains disrupted.
-                  </p>
-                </div>
-              </div>
-
-              <div className="space-y-2">
-                <h3 className="font-bold text-gray-900 dark:text-white flex items-center gap-2">
-                  <TrendingUp className="h-4 w-4 text-orange-600" />
-                  Feb 14: US ASEAN Auto Tariffs
-                </h3>
-                <div className="ml-6">
-                  <p className="text-gray-700 dark:text-gray-300 mb-2">
-                    <strong>Risk:</strong> 25% tariffs threaten ASII's exports (30% revenue).
-                  </p>
-                  <p className="text-gray-700 dark:text-gray-300">
-                    <strong>Fallout:</strong> Auto sector growth stalls; components from China face scrutiny. Investors pivot to defensive stocks (TLKM, BBCA).
-                  </p>
-                </div>
+            <div className="space-y-2">
+              <h3 className="font-bold text-gray-900 dark:text-white flex items-center gap-2">
+                <AlertCircle className="h-4 w-4 text-red-600" />
+                Feb 12: China's Rare Earth Curbs
+              </h3>
+              <div className="ml-6">
+                <p className="text-gray-700 dark:text-gray-300 mb-2">
+                  <strong>Action:</strong> Restrictions on nickel exports to retaliate against US tariffs.
+                </p>
+                <p className="text-gray-700 dark:text-gray-300">
+                  <strong>Impact:</strong> ANTM/INCO hit hard – Indonesia's $2.1B nickel exports at risk. Global EV battery supply chains disrupted.
+                </p>
               </div>
             </div>
-          </section>
 
-          {/* Bottom Line */}
-          <section className="prose dark:prose-invert max-w-none">
-            <h2 className="text-xl font-serif font-bold text-gray-900 dark:text-white mb-3">
-              Bottom Line
-            </h2>
-            <p className="text-gray-700 dark:text-gray-300">
-              This isn't just a trade war – it's a battle for Indonesia's economic sovereignty. Investors must navigate Chinese dumping, phantom GDP growth, and BI's dwindling reserves ($138.6B). Rotate into tariff-immune sectors (healthcare, fintech) and brace for 6,500 tests.
-            </p>
-          </section>
-        </div>
+            <div className="space-y-2">
+              <h3 className="font-bold text-gray-900 dark:text-white flex items-center gap-2">
+                <TrendingUp className="h-4 w-4 text-orange-600" />
+                Feb 14: US ASEAN Auto Tariffs
+              </h3>
+              <div className="ml-6">
+                <p className="text-gray-700 dark:text-gray-300 mb-2">
+                  <strong>Risk:</strong> 25% tariffs threaten ASII's exports (30% revenue).
+                </p>
+                <p className="text-gray-700 dark:text-gray-300">
+                  <strong>Fallout:</strong> Auto sector growth stalls; components from China face scrutiny. Investors pivot to defensive stocks (TLKM, BBCA).
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Bottom Line */}
+        <section className="prose dark:prose-invert max-w-none">
+          <h2 className="text-xl font-serif font-bold text-gray-900 dark:text-white mb-3">
+            Bottom Line
+          </h2>
+          <p className="text-gray-700 dark:text-gray-300">
+            This isn't just a trade war – it's a battle for Indonesia's economic sovereignty. Investors must navigate Chinese dumping, phantom GDP growth, and BI's dwindling reserves ($138.6B). Rotate into tariff-immune sectors (healthcare, fintech) and brace for 6,500 tests.
+          </p>
+        </section>
 
         {/* Footer */}
         <footer className="text-sm text-gray-500 dark:text-gray-400 border-t border-gray-200 dark:border-gray-700 pt-4 pb-6">
