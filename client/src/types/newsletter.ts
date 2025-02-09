@@ -59,6 +59,7 @@ export const sampleArticles: Article[] = [
     ],
     tags: ["IHSG", "Trade War", "Market Analysis", "Weekly Special"],
     content: `Weekly Market Alert February 10–14, 2025
+
 The New Narrative: Indonesia as a Chinese Surplus Dumping Ground
 Bank Indonesia (BI) issued a stark warning this week: "Chinese goods barred from US markets are flooding Indonesia," threatening to overwhelm domestic industries. Key insights:
 
@@ -108,35 +109,6 @@ Action: Accumulate below Rp2,700 (near 2025 low) for dividend + potential reboun
     ],
     tags: ["Federal Reserve", "Monetary Policy", "QT", "Risk Assets"],
     content: `Fed's QT Exit: A Liquidity Lifeline for Risk Assets`
-  },
-  {
-    slug: "bbri-financial-analysis",
-    title: "BBRI Q4 2024: Digital Banking Surge Masks Credit Quality Concerns",
-    description: "Bank Rakyat Indonesia (BBRI) faces credit quality pressures despite digital transformation success, as micro-lending segment shows stress signals amid rising rates.",
-    category: "Markets",
-    source: "Daily Digest",
-    author: "Luca Cada Lora",
-    date: "February 8, 2025",
-    previewEmoji: "🏦",
-    previewMetrics: [
-      {
-        label: "NPL Ratio",
-        value: "3.2%",
-        subtitle: "Up from 2.8% Q3"
-      },
-      {
-        label: "Digital Users",
-        value: "32.5M",
-        subtitle: "+45% YoY Growth"
-      },
-      {
-        label: "NIM",
-        value: "6.8%",
-        subtitle: "-20bps QoQ"
-      }
-    ],
-    tags: ["Banking", "Financial Analysis", "BBRI", "Featured"],
-    content: `BBRI's Q4 results reveal a complex narrative...`
   },
   {
     slug: "indonesia-economic-inventory-crisis",
