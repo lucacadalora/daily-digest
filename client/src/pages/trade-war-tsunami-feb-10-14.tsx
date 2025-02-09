@@ -42,6 +42,18 @@ const TradeWarTsunamiFeb1014 = () => {
           </span>
         </div>
 
+        {/* Weekly Market Alert Section - Moved to very top */}
+        <div className="bg-[#FFF7ED] border-l-4 border-orange-500 p-4 rounded-r mb-8">
+          <div className="flex items-center gap-2">
+            <Clock className="h-5 w-5 text-orange-800" />
+            <p className="font-medium text-orange-800 mb-0">Weekly Market Alert</p>
+          </div>
+          <p className="text-gray-700 mt-2">
+            This special report outlines critical market scenarios and action plans for the week of February 10-14, 2025. 
+            This special report outlines key market scenarios and potential impacts for the week ahead.
+          </p>
+        </div>
+
         {/* Header */}
         <header className="py-4">
           <h1 className="text-4xl font-serif font-bold text-gray-900 dark:text-white mb-4">
@@ -98,19 +110,44 @@ const TradeWarTsunamiFeb1014 = () => {
           </div>
         </section>
 
-        {/* Weekly Market Alert Section - Moved to top */}
-        <div className="bg-[#FFF7ED] border-l-4 border-orange-500 p-4 rounded-r mb-8">
-          <div className="flex items-center gap-2">
-            <Clock className="h-5 w-5 text-orange-800" />
-            <p className="font-medium text-orange-800 mb-0">Weekly Market Alert</p>
-          </div>
-          <p className="text-gray-700 mt-2">
-            This special report outlines critical market scenarios and action plans for the week of February 10-14, 2025. 
-            This special report outlines key market scenarios and potential impacts for the week ahead.
-          </p>
+
+        {/* Metric Cards - Enhanced with more details */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 py-6 border-b border-gray-200 dark:border-gray-800">
+          <Card className="bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm">
+            <CardContent className="pt-6">
+              <div className="flex flex-col items-center gap-1">
+                <TrendingUp className="h-6 w-6 text-red-600" />
+                <p className="text-sm font-medium text-gray-500 dark:text-gray-400">IHSG Drop</p>
+                <p className="text-2xl font-bold text-gray-900 dark:text-white">-5.16%</p>
+                <p className="text-sm text-gray-500 dark:text-gray-400">Bearish Trend (Below 6,900)</p>
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card className="bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm">
+            <CardContent className="pt-6">
+              <div className="flex flex-col items-center gap-1">
+                <AlertCircle className="h-6 w-6 text-orange-600" />
+                <p className="text-sm font-medium text-gray-500 dark:text-gray-400">USDIDR Band</p>
+                <p className="text-2xl font-bold text-gray-900 dark:text-white">16.3-16.6K</p>
+                <p className="text-sm text-gray-500 dark:text-gray-400">BI +25bps Rate Hike</p>
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card className="bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm">
+            <CardContent className="pt-6">
+              <div className="flex flex-col items-center gap-1">
+                <Shield className="h-6 w-6 text-blue-600" />
+                <p className="text-sm font-medium text-gray-500 dark:text-gray-400">Gold: $2,900/oz</p>
+                <p className="text-2xl font-bold text-gray-900 dark:text-white">MDKA</p>
+                <p className="text-sm text-gray-500 dark:text-gray-400">Rotate 20% Portfolio</p>
+              </div>
+            </CardContent>
+          </Card>
         </div>
 
-        {/* Previously in Weekly Special Section - Featured */}
+        {/* Previously in Weekly Special Section */}
         <div className="bg-gray-50 dark:bg-gray-800/50 rounded-lg p-6 mb-8 border border-gray-200 dark:border-gray-700">
           <h2 className="text-2xl font-serif font-bold text-gray-900 dark:text-white mb-4">
             <a href="https://lucaxyzz-digest.replit.app/newsletter/us-china-trade-war-impact-ihsg" 
@@ -174,42 +211,6 @@ const TradeWarTsunamiFeb1014 = () => {
               </ul>
             </div>
           </div>
-        </div>
-
-        {/* Metric Cards - Updated with new data */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 py-6 border-b border-gray-200 dark:border-gray-800">
-          <Card className="bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm">
-            <CardContent className="pt-6">
-              <div className="flex flex-col items-center gap-1">
-                <TrendingUp className="h-6 w-6 text-red-600" />
-                <p className="text-sm font-medium text-gray-500 dark:text-gray-400">IHSG Drop</p>
-                <p className="text-2xl font-bold text-gray-900 dark:text-white">-5.16%</p>
-                <p className="text-sm text-gray-500 dark:text-gray-400">WoW Decline</p>
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card className="bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm">
-            <CardContent className="pt-6">
-              <div className="flex flex-col items-center gap-1">
-                <AlertCircle className="h-6 w-6 text-orange-600" />
-                <p className="text-sm font-medium text-gray-500 dark:text-gray-400">USDIDR Band</p>
-                <p className="text-2xl font-bold text-gray-900 dark:text-white">16.3-16.6K</p>
-                <p className="text-sm text-gray-500 dark:text-gray-400">BI Intervention</p>
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card className="bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm">
-            <CardContent className="pt-6">
-              <div className="flex flex-col items-center gap-1">
-                <Shield className="h-6 w-6 text-blue-600" />
-                <p className="text-sm font-medium text-gray-500 dark:text-gray-400">Defensive Pivot</p>
-                <p className="text-2xl font-bold text-gray-900 dark:text-white">+20%</p>
-                <p className="text-sm text-gray-500 dark:text-gray-400">Gold Proxies</p>
-              </div>
-            </CardContent>
-          </Card>
         </div>
 
         {/* IHSG Technical Outlook Section */}
