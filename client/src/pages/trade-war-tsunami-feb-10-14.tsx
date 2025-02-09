@@ -29,7 +29,7 @@ const TradeWarTsunamiFeb1014 = () => {
           <ChevronRight className="h-4 w-4" />
           <Link href="/newsletter" className="hover:text-blue-600">Newsletter</Link>
           <ChevronRight className="h-4 w-4" />
-          <span>US-China Trade War Impact</span>
+          <span>Trade War Impact</span>
         </nav>
 
         {/* Category Tags */}
@@ -45,7 +45,7 @@ const TradeWarTsunamiFeb1014 = () => {
         {/* Header */}
         <header className="py-4">
           <h1 className="text-4xl font-serif font-bold text-gray-900 dark:text-white mb-4">
-            Floodgates Open as Trade War Tsunami Swamps IHSG
+            Trade War Tsunami: Indonesia Emerges as China's Surplus Dumping Ground
           </h1>
           <div className="flex items-center space-x-4 text-sm text-gray-600 dark:text-gray-400 mb-2">
             <div className="flex items-center space-x-1">
@@ -61,6 +61,42 @@ const TradeWarTsunamiFeb1014 = () => {
             By Luca Cada Lora
           </div>
         </header>
+
+        {/* Opening Narrative Section */}
+        <section className="prose dark:prose-invert max-w-none mb-8">
+          <div className="space-y-6">
+            <div>
+              <h2 className="text-xl font-serif font-bold text-gray-900 dark:text-white mb-4">
+                The Floodgates Open
+              </h2>
+              <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
+                Bank Indonesia (BI) issued a critical warning this week: "Chinese goods barred from US markets are flooding Indonesia", threatening to overwhelm domestic industries. This follows President Trump's 10% tariffs on $48B of Chinese exports, redirecting surplus goods to ASEAN markets. Indonesia, with its porous import controls, absorbed 32% of this diverted volume, turning the archipelago into a primary dumping ground for Chinese textiles, electronics, and ceramics.
+              </p>
+            </div>
+
+            <div>
+              <h2 className="text-xl font-serif font-bold text-gray-900 dark:text-white mb-4">
+                Mechanism: How Indonesia Became Ground Zero
+              </h2>
+              <div className="space-y-4">
+                <ul className="list-disc list-inside space-y-3 text-gray-700 dark:text-gray-300">
+                  <li className="flex items-start">
+                    <span className="text-red-600 mr-2">•</span>
+                    <span><strong>US-China Trade War Fallout:</strong> Trump's tariffs blocked Chinese exports to Western markets, forcing Beijing to redirect goods to ASEAN. Indonesia's lax border controls and 1,000+ illegal seaports (particularly in eastern Sumatra) enabled unchecked inflows.</span>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-red-600 mr-2">•</span>
+                    <span><strong>Price Undercutting:</strong> Chinese products are sold 40–60% cheaper than local equivalents, exploiting Indonesia's weak anti-dumping enforcement. For example, ceramic tiles from China caused PT Kusumahadi Santosa to lay off 3,000 workers.</span>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-red-600 mr-2">•</span>
+                    <span><strong>E-Commerce Channels:</strong> Platforms like Shopee and TikTok Shop dominate distribution, prioritizing Chinese goods and sidelining local MSMEs.</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
 
         {/* Weekly Market Alert Section - Moved to top */}
         <div className="bg-[#FFF7ED] border-l-4 border-orange-500 p-4 rounded-r mb-8">
