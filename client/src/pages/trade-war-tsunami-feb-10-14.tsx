@@ -403,7 +403,7 @@ const TradeWarTsunamiFeb1014 = () => {
 
             <div className="space-y-2">
               <h3 className="font-bold text-gray-900 dark:text-white flex items-center gap-2">
-                <TrendingUp className="h-4 w-4 text-orange-600" />
+                <TrendingDown className="h-4 w-4 text-orange-600" />
                 Feb 14: US ASEAN Auto Tariffs
               </h3>
               <div className="ml-6">
