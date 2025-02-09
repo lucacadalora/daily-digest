@@ -34,7 +34,7 @@ export const sampleArticles: Article[] = [
   {
     slug: "weekly-special-feb-10-14",
     title: "Weekly Market Alert: Trade War Tsunami Tests IHSG's 6,600 Lifeline",
-    description: "Our analysis validates previous warnings as trade tensions escalate, with IHSG facing critical support at 6,600 amid mounting foreign outflows and sectoral pressures.",
+    description: "In a market where yield-hungry investors are scrambling for stable returns, Bank Rakyat Indonesia (IDX: BBRI) has emerged as a compelling anomaly: a blue-chip stock trading at a steep discount to intrinsic value while offering one of Asia's highest dividend yields.",
     category: "Markets",
     source: "Weekly Special",
     author: "Luca Cada Lora",
@@ -42,84 +42,48 @@ export const sampleArticles: Article[] = [
     previewEmoji: "📊",
     previewMetrics: [
       {
-        label: "IHSG Decline",
-        value: "-5.16%",
-        subtitle: "WoW drop"
+        label: "Current Valuation",
+        value: "10.3x P/E",
+        subtitle: "46% discount to peers"
       },
       {
-        label: "Support Level",
-        value: "6,600",
-        subtitle: "Critical threshold"
+        label: "2025 Dividend Yield",
+        value: "8.4%",
+        subtitle: "IDR 350/share forecast"
       },
       {
-        label: "Foreign Outflow",
-        value: "Rp3.8T",
-        subtitle: "Weekly volume"
+        label: "Digital Growth",
+        value: "+62% YoY",
+        subtitle: "Mobile loan disbursements"
       }
     ],
     tags: ["IHSG", "Market Analysis", "Weekly Special", "Trade War"],
-    content: `Weekly Market Alert
-February 10–14, 2025: Trade War Tsunami Tests IHSG's 6,600 Lifeline
+    content: `In a market where yield-hungry investors are scrambling for stable returns, Bank Rakyat Indonesia (IDX: BBRI) has emerged as a compelling anomaly: a blue-chip stock trading at a steep discount to intrinsic value while offering one of Asia's highest dividend yields. Our analysis of financial disclosures, analyst models, and macroeconomic trends reveals why this state-backed lender could deliver 30-40% total returns in 2025 through a rare combination of income and growth.
 
-Backward Analysis: Validated Risks
-Previous Report
-Our February 3–7 analysis accurately flagged:
-IHSG Collapse: Index plunged to 6,752.57 (-5.16% WoW), breaching 6,900 as projected.
-Commodity Carnage: ADRO (-12%), PTBA (-9%), and AALI (-8%) collapsed amid China's coal/LNG tariffs and CPO risks.
-Currency Pressures: USDIDR hit 16,450, nearing BI's intervention threshold.
+The Valuation Gap: A Mispriced National Champion
 
-Key Triggers:
-China's 15% tariff on US coal/LNG (effective Feb 10) disrupted Indonesia's $2.1B nickel supply chain15.
-Trump's 10% China tariffs triggered Rp 3.8T foreign equity outflows611.
-MSCI exclusion of BREN/CUAN/PTRO erased $10.5B market cap, amplifying IHSG volatility625.
+At IDR 4,190 per share, BBRI trades at a trailing P/E of 10.3x — a 46% discount to its Indonesian banking peers (14.7x) and nearly half the valuation of regional counterparts like Malaysia's CIMB (19.1x). This disparity becomes starker when contextualized against fundamentals:
 
-Key Narratives for February 10–14
-1. GDP Growth Reality Check
-Indonesia's 2024 GDP growth of 5.03% YoY masked structural risks:
-Inventory-Driven: 1.2pp growth came from stockpiling, not organic demand25.
-Consumption Slump: Private consumption grew 4.83% (vs 5.1% in 2023), signaling weakening purchasing power25.
-Outlook: 2025 growth may stall at 5.0–5.1% unless exports rebound25.
+• Profit Growth: Net profit rose 12% YoY in Q3 2024 to IDR 16.2T, driven by a 34% surge in fee-based income from digital transactions and microloans.
 
-2. Trade War Escalation
-New Fronts Opening:
-Risk	Impact on Indonesia	Source
-China's rare earth export curbs (effective Feb 12)	Disrupts $2.1B nickel exports to China, hitting smelters like ANTM, INCO	527
-US 15% ASEAN auto tariffs (proposed)	ASII (-14% WoW) faces margin compression; 30% of revenue at risk	314
-Flooded Markets: BI warns Chinese goods diverted from US could "swamp" Indonesia, pressuring UNVR, ICBP	34	
+• Asset Quality: Gross NPL ratio held steady at 2.8% (vs. industry average 3.1%), with 89% of its IDR 1,895T loan book concentrated in resilient UMKM (micro-SME) segments.
 
-Macro Impact:
-USDIDR could test 16,800 if Trump expands tariffs to ASEAN410.
-BI's reserves ($138.6B) may dip below 6 months' import cover610.
+• Capital Buffers: CET1 ratio of 19.4% (Dec 2024) provides ample room for dividend hikes and share buybacks.
 
-Sectoral Outlook
-High-Risk Zones
-Sector	Vulnerability	Key Stocks
-Energy	China's coal import quotas (-40% MoM)	ADRO, PTBA
-Automotive	US tariff retaliation risk	ASII, AIMS
-Tech	Rare earth supply chain disruption	INCO, ANTM
+"BBRI is arguably the most undervalued large-cap bank in ASEAN. Its P/BV of 1.9x ignores the structural shift toward high-margin digital lending."
+— Arief Budiman, RHB Sekuritas Banking Analyst
 
-Defensive Pivot
-Sector	Catalyst	Key Stocks
-Healthcare	Pandemic restocking demand	KLBF, SIDO
-Gold	Safe-haven demand at $2,885/oz	MDKA, ANTM
-Telcos	5G rollout shields earnings	TLKM, EXCL
+Dividend Dynasty: A 7.1% Yield Backed by State Policy
 
-Critical Thresholds
-IHSG Support: 6,600–6,700 (Fibonacci 78.6% retracement).
-Resistance: 6,900–7,000 (previous support now ceiling).
-Black Swan: Breach below 6,600 triggers algo sell programs targeting 6,4003135.
+The stock's appeal as a passive income vehicle is quantifiable:
 
-Investor Action Plan
-Rotate to Domestic Demand: Increase exposure to BBCA (loan growth +24% YoY) and HMSP (8.2% yield).
-Hedge USDIDR: Use BI's FX Swap Facility (7.1% yield) or gold proxies.
-Avoid Value Traps: Exit BREN/CUAN/PTRO until MSCI liquidity stabilizes.
+• 2024 Payout: IDR 135/share interim dividend (paid Jan 15, 2025), with a final dividend expected to bring the total to IDR 300-316/share (7.1-7.5% yield).
 
-Bottom Line
-The IHSG's 6,600 level is this week's litmus test. While systemic risks dominate, three factors could spark rebounds:
-BI Rate Hike (Feb 11): 25bps increase to stabilize USDIDR.
-China's Policy Easing: Potential RRR cuts to offset trade war impacts.
-Ramadan Prep: Consumer stocks (ICBP, UNVR) may rally on pre-holiday demand.
-Trade War Playbook: Short ASII/Long TLKM (1:2 beta) for sectoral hedge.`
+• 2025 Forecast: Consensus estimates project IDR 350/share dividends (8.4% yield), supported by a government-mandated 35% payout ratio and IDR 220T in retained earnings.
+
+Notably, BBRI has increased dividends for 8 consecutive years — a track record unmatched by Indonesian peers.
+
+Catalysts: Rate Cuts, Digital Adoption, and Foreign Flows`
   },
   {
     slug: "fed-balance-sheet-blueprint",
