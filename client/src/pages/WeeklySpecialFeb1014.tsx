@@ -97,21 +97,21 @@ const WeeklySpecialFeb1014: React.FC = () => {
                   <table className="min-w-full border-collapse">
                     <thead>
                       <tr className="bg-gray-50 dark:bg-gray-800">
-                        <th className="p-3 text-left font-semibold">Sector</th>
-                        <th className="p-3 text-left font-semibold">Prediction</th>
-                        <th className="p-3 text-left font-semibold">Outcome</th>
+                        <th className="p-3 text-left font-semibold text-gray-900 dark:text-white border border-gray-200 dark:border-gray-700">Sector</th>
+                        <th className="p-3 text-left font-semibold text-gray-900 dark:text-white border border-gray-200 dark:border-gray-700">Prediction</th>
+                        <th className="p-3 text-left font-semibold text-gray-900 dark:text-white border border-gray-200 dark:border-gray-700">Outcome</th>
                       </tr>
                     </thead>
                     <tbody>
                       <tr>
-                        <td className="p-3 border">Commodities</td>
-                        <td className="p-3 border">"Bloodbath" expected</td>
-                        <td className="p-3 border">Energy -7.6%, ADRO -12%</td>
+                        <td className="p-3 border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300">Commodities</td>
+                        <td className="p-3 border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300">"Bloodbath" expected</td>
+                        <td className="p-3 border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300">Energy -7.6%, ADRO -12%</td>
                       </tr>
                       <tr>
-                        <td className="p-3 border">Defensives (KLBF)</td>
-                        <td className="p-3 border">Resilient initially</td>
-                        <td className="p-3 border">+7.44% intraweek, then -1.7%</td>
+                        <td className="p-3 border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300">Defensives (KLBF)</td>
+                        <td className="p-3 border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300">Resilient initially</td>
+                        <td className="p-3 border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300">+7.44% intraweek, then -1.7%</td>
                       </tr>
                     </tbody>
                   </table>
