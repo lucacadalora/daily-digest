@@ -32,60 +32,6 @@ export type Article = z.infer<typeof articleSchema>;
 
 export const sampleArticles: Article[] = [
   {
-    slug: "weekly-special-feb-10-14",
-    title: "Weekly Market Alert: Trade War Tsunami Tests IHSG's 6,600 Lifeline",
-    description: "In a market where yield-hungry investors are scrambling for stable returns, Bank Rakyat Indonesia (IDX: BBRI) has emerged as a compelling anomaly: a blue-chip stock trading at a steep discount to intrinsic value while offering one of Asia's highest dividend yields.",
-    category: "Markets",
-    source: "Weekly Special",
-    author: "Luca Cada Lora",
-    date: "February 10, 2025",
-    previewEmoji: "📊",
-    previewMetrics: [
-      {
-        label: "Current Valuation",
-        value: "10.3x P/E",
-        subtitle: "46% discount to peers"
-      },
-      {
-        label: "2025 Dividend Yield",
-        value: "8.4%",
-        subtitle: "IDR 350/share forecast"
-      },
-      {
-        label: "Digital Growth",
-        value: "+62% YoY",
-        subtitle: "Mobile loan disbursements"
-      }
-    ],
-    tags: ["IHSG", "Market Analysis", "Weekly Special", "Trade War"],
-    content: `In a market where yield-hungry investors are scrambling for stable returns, Bank Rakyat Indonesia (IDX: BBRI) has emerged as a compelling anomaly: a blue-chip stock trading at a steep discount to intrinsic value while offering one of Asia's highest dividend yields. Our analysis of financial disclosures, analyst models, and macroeconomic trends reveals why this state-backed lender could deliver 30-40% total returns in 2025 through a rare combination of income and growth.
-
-The Valuation Gap: A Mispriced National Champion
-
-At IDR 4,190 per share, BBRI trades at a trailing P/E of 10.3x — a 46% discount to its Indonesian banking peers (14.7x) and nearly half the valuation of regional counterparts like Malaysia's CIMB (19.1x). This disparity becomes starker when contextualized against fundamentals:
-
-• Profit Growth: Net profit rose 12% YoY in Q3 2024 to IDR 16.2T, driven by a 34% surge in fee-based income from digital transactions and microloans.
-
-• Asset Quality: Gross NPL ratio held steady at 2.8% (vs. industry average 3.1%), with 89% of its IDR 1,895T loan book concentrated in resilient UMKM (micro-SME) segments.
-
-• Capital Buffers: CET1 ratio of 19.4% (Dec 2024) provides ample room for dividend hikes and share buybacks.
-
-"BBRI is arguably the most undervalued large-cap bank in ASEAN. Its P/BV of 1.9x ignores the structural shift toward high-margin digital lending."
-— Arief Budiman, RHB Sekuritas Banking Analyst
-
-Dividend Dynasty: A 7.1% Yield Backed by State Policy
-
-The stock's appeal as a passive income vehicle is quantifiable:
-
-• 2024 Payout: IDR 135/share interim dividend (paid Jan 15, 2025), with a final dividend expected to bring the total to IDR 300-316/share (7.1-7.5% yield).
-
-• 2025 Forecast: Consensus estimates project IDR 350/share dividends (8.4% yield), supported by a government-mandated 35% payout ratio and IDR 220T in retained earnings.
-
-Notably, BBRI has increased dividends for 8 consecutive years — a track record unmatched by Indonesian peers.
-
-Catalysts: Rate Cuts, Digital Adoption, and Foreign Flows`
-  },
-  {
     slug: "fed-balance-sheet-blueprint",
     title: "Fed's QT Exit: A Liquidity Lifeline for Risk Assets",
     description: "The Federal Reserve has accelerated its quantitative tightening (QT) program, cutting its balance sheet by $2 trillion since 2022—including a rapid $297B reduction since June 2024. This pace exceeds earlier Wall Street estimates (JPMorgan projected $1.7T total by 2024) and signals aggressive liquidity withdrawal.",
