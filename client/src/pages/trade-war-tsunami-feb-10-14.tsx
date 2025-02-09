@@ -183,16 +183,96 @@ const TradeWarTsunamiFeb1014 = () => {
           </h2>
 
           <div className="space-y-6">
-            {/* Support & Resistance */}
+            {/* Current Position */}
             <div className="space-y-2">
-              <div>
+              <h3 className="font-bold text-gray-900 dark:text-white">Current Position</h3>
+              <p className="text-gray-700 dark:text-gray-300">
+                Last Close: 6,752.57 (-5.16% weekly), lowest since June 2024.
+              </p>
+              <div className="ml-4">
                 <p className="text-gray-700 dark:text-gray-300">
-                  <strong>New Support Zone:</strong> 6,600–6,750 (Fibonacci 78.6% retracement)
+                  <strong>Key Levels:</strong>
                 </p>
+                <ul className="list-disc list-inside">
+                  <li>Support: 6,742–6,830 (critical zone; breach risks 6,600–6,700)</li>
+                  <li>Resistance: 6,900–7,029 (previous support now resistance)</li>
+                </ul>
+              </div>
+            </div>
+
+            {/* Key Indicators */}
+            <div className="space-y-2">
+              <h3 className="font-bold text-gray-900 dark:text-white">Key Indicators</h3>
+              <div className="ml-4 space-y-2">
                 <p className="text-gray-700 dark:text-gray-300">
-                  <strong>Resistance:</strong> 6,900–7,000 (Previous support now resistance)
+                  <strong>Trend:</strong> Bearish (confirmed breakdown below 6,900)
+                </p>
+                <div>
+                  <p className="text-gray-700 dark:text-gray-300">
+                    <strong>Momentum:</strong>
+                  </p>
+                  <ul className="list-disc list-inside">
+                    <li>Stochastic RSI: Oversold (hinting at short-term rebound)</li>
+                    <li>Fibonacci: Next major support at 6,600–6,700 (78.6% retracement)</li>
+                  </ul>
+                </div>
+                <p className="text-gray-700 dark:text-gray-300">
+                  <strong>Volume:</strong> High sell-off volumes (Rp 11.6T/day) confirm bearishness
                 </p>
               </div>
+            </div>
+
+            {/* Critical Scenarios Table */}
+            <div>
+              <h3 className="font-bold text-gray-900 dark:text-white mb-3">Critical Scenarios</h3>
+              <div className="overflow-x-auto">
+                <table className="min-w-full border-collapse">
+                  <thead>
+                    <tr className="bg-gray-50 dark:bg-gray-800">
+                      <th className="px-4 py-2 text-left text-sm font-semibold text-gray-900 dark:text-white">Case</th>
+                      <th className="px-4 py-2 text-left text-sm font-semibold text-gray-900 dark:text-white">Probability</th>
+                      <th className="px-4 py-2 text-left text-sm font-semibold text-gray-900 dark:text-white">Target</th>
+                      <th className="px-4 py-2 text-left text-sm font-semibold text-gray-900 dark:text-white">Triggers</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr className="border-t border-gray-200 dark:border-gray-700">
+                      <td className="px-4 py-2 text-gray-700 dark:text-gray-300">Bull</td>
+                      <td className="px-4 py-2 text-gray-700 dark:text-gray-300">20%</td>
+                      <td className="px-4 py-2 text-gray-700 dark:text-gray-300">6,900–7,029</td>
+                      <td className="px-4 py-2 text-gray-700 dark:text-gray-300">Oversold rebound + BI rate hike.</td>
+                    </tr>
+                    <tr className="border-t border-gray-200 dark:border-gray-700">
+                      <td className="px-4 py-2 text-gray-700 dark:text-gray-300">Base</td>
+                      <td className="px-4 py-2 text-gray-700 dark:text-gray-300">50%</td>
+                      <td className="px-4 py-2 text-gray-700 dark:text-gray-300">6,742–6,900</td>
+                      <td className="px-4 py-2 text-gray-700 dark:text-gray-300">MSCI fallout + tariff uncertainty.</td>
+                    </tr>
+                    <tr className="border-t border-gray-200 dark:border-gray-700">
+                      <td className="px-4 py-2 text-gray-700 dark:text-gray-300">Bear</td>
+                      <td className="px-4 py-2 text-gray-700 dark:text-gray-300">30%</td>
+                      <td className="px-4 py-2 text-gray-700 dark:text-gray-300">6,500–6,700</td>
+                      <td className="px-4 py-2 text-gray-700 dark:text-gray-300">USDIDR surge + China rare earth curbs.</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            {/* What to Watch */}
+            <div>
+              <h3 className="font-bold text-gray-900 dark:text-white mb-3">What to Watch</h3>
+              <ul className="list-disc list-inside space-y-1 text-gray-700 dark:text-gray-300">
+                <li>6,742 Support: Breach risks algorithmic selling toward 6,600</li>
+                <li>6,900 Resistance: Recovery above this signals temporary relief</li>
+                <li>BI Meeting (Feb 11): Rate hike could stabilize USDIDR</li>
+              </ul>
+              <p className="text-gray-700 dark:text-gray-300 mt-2">
+                <strong>Action:</strong> Hedge with gold/defensive stocks (KLBF, TLKM); avoid commodities (ADRO, AALI)
+              </p>
+              <p className="text-gray-700 dark:text-gray-300 mt-2">
+                <strong>Bottom Line:</strong> The 6,742–6,830 zone is critical. Prioritize risk management amid high volatility.
+              </p>
             </div>
 
             {/* High-Risk Zones Table */}
