@@ -242,6 +242,101 @@ const TradeWarTsunamiFeb1014 = () => {
             </p>
           </section>
 
+          {/* Critical Week Ahead Section */}
+          <section className="prose dark:prose-invert max-w-none">
+            <h2 className="text-xl font-serif font-bold text-gray-900 dark:text-white mb-6">
+              Critical Week Ahead
+            </h2>
+            <div className="grid gap-6">
+              {/* BI Emergency Meeting */}
+              <div className="bg-white dark:bg-gray-800 rounded-lg p-6 border border-gray-200 dark:border-gray-700 shadow-sm">
+                <div className="flex items-center gap-2 mb-4">
+                  <Clock className="h-5 w-5 text-blue-600" />
+                  <h3 className="font-bold text-gray-900 dark:text-white text-lg m-0">Feb 11: BI Emergency Meeting</h3>
+                </div>
+                <div className="space-y-4">
+                  <div>
+                    <p className="font-semibold text-gray-900 dark:text-white mb-2">Action:</p>
+                    <p className="text-gray-700 dark:text-gray-300">
+                      Likely 25bps rate hike (to 6.00%) to stabilize USDIDR, which neared 16,500.
+                    </p>
+                  </div>
+                  <div>
+                    <p className="font-semibold text-gray-900 dark:text-white mb-2">Impact:</p>
+                    <ul className="list-none space-y-2 pl-0">
+                      <li className="flex items-start">
+                        <span className="text-blue-600 mr-2">•</span>
+                        <span>Short-term relief for rupiah (16,200–16,300 range)</span>
+                      </li>
+                      <li className="flex items-start">
+                        <span className="text-blue-600 mr-2">•</span>
+                        <span>Banks (BBCA, BBNI) face margin pressure but benefit from higher bond yields</span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              {/* China's Rare Earth Curbs */}
+              <div className="bg-white dark:bg-gray-800 rounded-lg p-6 border border-gray-200 dark:border-gray-700 shadow-sm">
+                <div className="flex items-center gap-2 mb-4">
+                  <AlertCircle className="h-5 w-5 text-red-600" />
+                  <h3 className="font-bold text-gray-900 dark:text-white text-lg m-0">Feb 12: China's Rare Earth Curbs</h3>
+                </div>
+                <div className="space-y-4">
+                  <div>
+                    <p className="font-semibold text-gray-900 dark:text-white mb-2">Action:</p>
+                    <p className="text-gray-700 dark:text-gray-300">
+                      Restrictions on nickel exports to retaliate against US tariffs.
+                    </p>
+                  </div>
+                  <div>
+                    <p className="font-semibold text-gray-900 dark:text-white mb-2">Impact:</p>
+                    <ul className="list-none space-y-2 pl-0">
+                      <li className="flex items-start">
+                        <span className="text-red-500 mr-2">•</span>
+                        <span>ANTM/INCO hit hard – Indonesia's $2.1B nickel exports at risk</span>
+                      </li>
+                      <li className="flex items-start">
+                        <span className="text-red-500 mr-2">•</span>
+                        <span>Global EV battery supply chains disrupted</span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              {/* US ASEAN Auto Tariffs */}
+              <div className="bg-white dark:bg-gray-800 rounded-lg p-6 border border-gray-200 dark:border-gray-700 shadow-sm">
+                <div className="flex items-center gap-2 mb-4">
+                  <TrendingUp className="h-5 w-5 text-orange-600" />
+                  <h3 className="font-bold text-gray-900 dark:text-white text-lg m-0">Feb 14: US ASEAN Auto Tariffs</h3>
+                </div>
+                <div className="space-y-4">
+                  <div>
+                    <p className="font-semibold text-gray-900 dark:text-white mb-2">Risk:</p>
+                    <p className="text-gray-700 dark:text-gray-300">
+                      25% tariffs threaten ASII's exports (30% revenue).
+                    </p>
+                  </div>
+                  <div>
+                    <p className="font-semibold text-gray-900 dark:text-white mb-2">Fallout:</p>
+                    <ul className="list-none space-y-2 pl-0">
+                      <li className="flex items-start">
+                        <span className="text-orange-500 mr-2">•</span>
+                        <span>Auto sector growth stalls; components from China face scrutiny</span>
+                      </li>
+                      <li className="flex items-start">
+                        <span className="text-orange-500 mr-2">•</span>
+                        <span>Investors pivot to defensive stocks (TLKM, BBCA)</span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
           {/* Forward Outlook Section */}
           <section className="prose dark:prose-invert max-w-none">
             <h2 className="text-xl font-serif font-bold text-gray-900 dark:text-white mb-3">
@@ -280,14 +375,7 @@ const TradeWarTsunamiFeb1014 = () => {
                 </div>
               </div>
 
-              <div>
-                <h3 className="font-bold text-gray-900 dark:text-white">Critical Week Ahead</h3>
-                <ul className="list-disc list-inside text-gray-700 dark:text-gray-300">
-                  <li><strong>Feb 11:</strong> BI emergency meeting – 25bps hike expected to defend USDIDR</li>
-                  <li><strong>Feb 12:</strong> China's rare earth export curbs – ANTM, INCO face supply chain shocks</li>
-                  <li><strong>Feb 14:</strong> US ASEAN auto tariff decision – ASII's 30% revenue at risk</li>
-                </ul>
-              </div>
+              {/*The original Critical Week Ahead section is removed here. */}
 
               <div>
                 <h3 className="font-bold text-gray-900 dark:text-white">Technical Thresholds</h3>
