@@ -62,6 +62,18 @@ const TradeWarTsunamiFeb1014 = () => {
           </div>
         </header>
 
+        {/* Weekly Market Alert Section - Moved to top */}
+        <div className="bg-[#FFF7ED] border-l-4 border-orange-500 p-4 rounded-r mb-8">
+          <div className="flex items-center gap-2">
+            <Clock className="h-5 w-5 text-orange-800" />
+            <p className="font-medium text-orange-800 mb-0">Weekly Market Alert</p>
+          </div>
+          <p className="text-gray-700 mt-2">
+            This special report outlines critical market scenarios and action plans for the week of February 10-14, 2025. 
+            This special report outlines key market scenarios and potential impacts for the week ahead.
+          </p>
+        </div>
+
         {/* Previously in Weekly Special Section - Featured */}
         <div className="bg-gray-50 dark:bg-gray-800/50 rounded-lg p-6 mb-8 border border-gray-200 dark:border-gray-700">
           <h2 className="text-2xl font-serif font-bold text-gray-900 dark:text-white mb-4">
@@ -120,15 +132,6 @@ const TradeWarTsunamiFeb1014 = () => {
               </ul>
             </div>
           </div>
-        </div>
-
-        {/* Weekly Market Alert Section */}
-        <div className="bg-[#FFF7ED] border-l-4 border-orange-500 p-4 rounded-r mb-8">
-          <p className="font-medium text-orange-800 mb-2">Weekly Market Alert</p>
-          <p className="text-gray-700">
-            This special report outlines critical market scenarios and action plans for the week of February 10-14, 2025. 
-            This special report outlines key market scenarios and potential impacts for the week ahead.
-          </p>
         </div>
 
         {/* Metric Cards */}
