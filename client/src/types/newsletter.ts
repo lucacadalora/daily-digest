@@ -33,8 +33,8 @@ export type Article = z.infer<typeof articleSchema>;
 export const sampleArticles: Article[] = [
   {
     slug: "trade-war-tsunami-feb-10-14",
-    title: "Trade War Tsunami: China's Mineral Export Curbs Ignite IHSG Crisis",
-    description: "Bank Indonesia issues stark warning as Chinese mineral export curbs destabilize Indonesia's industrial backbone, threatening nickel ambitions and IHSG stability amid escalating trade war retaliation.",
+    title: "Floodgates Open as Trade War Tsunami Swamps IHSG",
+    description: "Bank Indonesia issues stark warning as Chinese goods flood Indonesian markets, threatening local industries and validating our previous week's bearish outlook. IHSG breaches critical 6,900 support exactly as predicted.",
     category: "Markets",
     source: "Daily Digest",
     author: "Luca Cada Lora",
@@ -42,43 +42,23 @@ export const sampleArticles: Article[] = [
     previewEmoji: "🌊",
     previewMetrics: [
       {
-        label: "Nickel Price",
-        value: "$15.4K",
-        subtitle: "4-year low"
+        label: "IHSG Drop",
+        value: "-5.16%",
+        subtitle: "WoW Decline"
       },
       {
-        label: "Job Losses",
-        value: "2,100+",
-        subtitle: "Nickel sector"
+        label: "Chinese Imports",
+        value: "↑ 32%",
+        subtitle: "ASEAN Share"
       },
       {
-        label: "Price Gap",
-        value: "-33%",
-        subtitle: "vs global rate"
+        label: "Local Impact",
+        value: "-18-23%",
+        subtitle: "MSME Stocks"
       }
     ],
     tags: ["IHSG", "Trade War", "Market Analysis", "Weekly Special"],
-    content: `The Floodgates Open
-Bank Indonesia (BI) issued a dire warning this week: "China's strategic mineral export curbs are destabilizing Indonesia's industrial backbone", as Beijing escalates its trade war retaliation against the West. Following President Trump's 25% tariffs on Chinese EVs and renewables, China has weaponized its dominance in critical minerals, restricting exports of tungsten, molybdenum, indium, and graphite — key inputs for defense tech, batteries, and electronics. Indonesia, reliant on Chinese refining expertise and mineral imports, now faces a supply chain crisis threatening its nickel ambitions and IHSG stability.
-
-Mechanism: How China's Mineral War Targets Indonesia
-1. China's Export Controls Redirect Supply Chain Chaos
-The Trump administration's 25% tariffs on Chinese clean tech forced Beijing to retaliate with strategic mineral export curbs, disrupting global supply chains. Indonesia, home to 23% of global nickel reserves, relies on Chinese firms (e.g., Tsingshan, GEM Co.) to process 92% of its nickel into battery-grade materials. With China halting exports of tungsten (critical for alloy production) and molybdenum (used in steel), Indonesian smelters like ANTM and INCO face production paralysis.
-
-Impact:
-Nickel Price Crash: Global nickel prices slumped to $15,400/ton (near 4-year lows) as Chinese buyers withhold orders.
-Smelter Shutdowns: PT Virtue Dragon's $1.2B nickel plant halted operations, laying off 2,100 workers.
-
-2. Price Manipulation and Market Capture
-Chinese firms exploit Indonesia's reliance on their refining technology to suppress prices and dominate supply chains:
-Oligopsony Tactics: Chinese buyers collude to purchase nickel ore at $28/ton (vs. global $42/ton), squeezing margins for ADRO and PTBA.
-Tech Dependence: China controls 85% of Indonesia's high-pressure acid leaching (HPAL) technology, critical for EV battery production.
-Example: PT Trimegah Bangun Persada (ANTM) reported Q4 2024 losses of $120M after China slashed nickel orders by 40%.
-
-3. Policy Paralysis Amid Crisis
-Jakarta's countermeasures remain fragmented:
-Export Ban Delays: A proposed 2025 ban on raw nickel exports (to boost domestic refining) stalled due to lobbying by Chinese-backed firms.
-BI's Dilemma: With USDIDR at 16,450, BI's Feb 11 emergency meeting may hike rates 25bps to 6.00%, but this risks stifling growth.`
+    content: `Weekly Market Alert February 10–14, 2025`
   },
   {
     slug: "fed-balance-sheet-blueprint",

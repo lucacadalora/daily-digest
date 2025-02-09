@@ -45,7 +45,7 @@ const TradeWarTsunamiFeb1014 = () => {
         {/* Header */}
         <header className="py-4">
           <h1 className="text-4xl font-serif font-bold text-gray-900 dark:text-white mb-4">
-            Trade War Tsunami: China's Mineral Export Curbs Ignite IHSG Crisis
+            Trade War Tsunami: Indonesia Emerges as China's Surplus Dumping Ground
           </h1>
           <div className="flex items-center space-x-4 text-sm text-gray-600 dark:text-gray-400 mb-2">
             <div className="flex items-center space-x-1">
@@ -69,19 +69,20 @@ const TradeWarTsunamiFeb1014 = () => {
             <p className="font-medium text-orange-800 mb-0">Weekly Market Alert</p>
           </div>
           <p className="text-gray-700 mt-2">
-            This special report outlines critical market scenarios and action plans for the week of February 10-14, 2025, focusing on China's strategic mineral export curbs and their impact on Indonesia's industrial backbone.
+            This special report outlines critical market scenarios and action plans for the week of February 10-14, 2025. 
+            This special report outlines key market scenarios and potential impacts for the week ahead.
           </p>
         </div>
 
-        {/* Metric Cards - Updated with new metrics */}
+        {/* Metric Cards - Updated with detailed information */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 py-6 border-b border-gray-200 dark:border-gray-800">
           <Card className="bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm">
             <CardContent className="pt-6">
               <div className="flex flex-col items-center gap-1">
                 <TrendingDown className="h-6 w-6 text-red-600" />
-                <p className="text-sm font-medium text-gray-500 dark:text-gray-400">Nickel Price</p>
-                <p className="text-2xl font-bold text-gray-900 dark:text-white">$15.4K</p>
-                <p className="text-sm text-gray-500 dark:text-gray-400">4-year low</p>
+                <p className="text-sm font-medium text-gray-500 dark:text-gray-400">IHSG Range</p>
+                <p className="text-2xl font-bold text-gray-900 dark:text-white">6,742–6,900</p>
+                <p className="text-sm text-gray-500 dark:text-gray-400">Sideways with Bearish Bias</p>
               </div>
             </CardContent>
           </Card>
@@ -90,9 +91,9 @@ const TradeWarTsunamiFeb1014 = () => {
             <CardContent className="pt-6">
               <div className="flex flex-col items-center gap-1">
                 <AlertTriangle className="h-6 w-6 text-orange-600" />
-                <p className="text-sm font-medium text-gray-500 dark:text-gray-400">Job Losses</p>
-                <p className="text-2xl font-bold text-gray-900 dark:text-white">2,100+</p>
-                <p className="text-sm text-gray-500 dark:text-gray-400">Nickel sector</p>
+                <p className="text-sm font-medium text-gray-500 dark:text-gray-400">USDIDR Crisis</p>
+                <p className="text-2xl font-bold text-gray-900 dark:text-white">+25 bps</p>
+                <p className="text-sm text-gray-500 dark:text-gray-400">Near 16,500 Threshold</p>
               </div>
             </CardContent>
           </Card>
@@ -100,9 +101,9 @@ const TradeWarTsunamiFeb1014 = () => {
             <CardContent className="pt-6">
               <div className="flex flex-col items-center gap-1">
                 <ArrowUpCircle className="h-6 w-6 text-green-600" />
-                <p className="text-sm font-medium text-gray-500 dark:text-gray-400">Price Gap</p>
-                <p className="text-2xl font-bold text-gray-900 dark:text-white">-33%</p>
-                <p className="text-sm text-gray-500 dark:text-gray-400">vs global rate</p>
+                <p className="text-sm font-medium text-gray-500 dark:text-gray-400">Gold Proxy</p>
+                <p className="text-2xl font-bold text-gray-900 dark:text-white">Buy MDKA</p>
+                <p className="text-sm text-gray-500 dark:text-gray-400">As Gold Nears $2,900</p>
               </div>
             </CardContent>
           </Card>
@@ -116,64 +117,39 @@ const TradeWarTsunamiFeb1014 = () => {
                 The Floodgates Open
               </h2>
               <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
-                Bank Indonesia (BI) issued a dire warning this week: "China's strategic mineral export curbs are destabilizing Indonesia's industrial backbone", as Beijing escalates its trade war retaliation against the West. Following President Trump's 25% tariffs on Chinese EVs and renewables, China has weaponized its dominance in critical minerals, restricting exports of tungsten, molybdenum, indium, and graphite — key inputs for defense tech, batteries, and electronics. Indonesia, reliant on Chinese refining expertise and mineral imports, now faces a supply chain crisis threatening its nickel ambitions and IHSG stability.
+                Bank Indonesia (BI) issued a critical warning this week: "Chinese goods barred from US markets are flooding Indonesia", threatening to overwhelm domestic industries. This follows President Trump's 10% tariffs on $48B of Chinese exports, redirecting surplus goods to ASEAN markets. Indonesia, with its porous import controls, absorbed 32% of this diverted volume, turning the archipelago into a primary dumping ground for Chinese textiles, electronics, and ceramics.
               </p>
             </div>
 
             <div>
               <h2 className="text-xl font-serif font-bold text-gray-900 dark:text-white mb-4">
-                Mechanism: How China's Mineral War Targets Indonesia
+                Mechanism: How Indonesia Became Ground Zero
               </h2>
               <div className="space-y-6">
-                {/* Point 1: China's Export Controls */}
+                {/* Point 1: US-China Tariffs */}
                 <div className="border-l-4 border-red-500 pl-4">
                   <h3 className="font-bold text-gray-900 dark:text-white mb-2">
-                    1. China's Export Controls Redirect Supply Chain Chaos
+                    US-China Tariffs Redirect Flood of Cheap Goods
                   </h3>
                   <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
-                    The Trump administration's 25% tariffs on Chinese clean tech forced Beijing to retaliate with strategic mineral export curbs, disrupting global supply chains. Indonesia, home to 23% of global nickel reserves, relies on Chinese firms (e.g., Tsingshan, GEM Co.) to process 92% of its nickel into battery-grade materials. With China halting exports of tungsten (critical for alloy production) and molybdenum (used in steel), Indonesian smelters like ANTM and INCO face production paralysis.
+                    The Trump administration's 10–25% tariffs on Chinese exports forced Beijing to reroute $48B of surplus goods to ASEAN markets. Indonesia's 1,000+ illegal seaports and lax border controls made it a prime target, absorbing 32% of China's diverted goods — from textiles to electronics. Example: $360M of smuggled Chinese ceramics crushed local producers like PT Kusumahadi Santosa, which laid off 3,000 workers.
                   </p>
-                  <div className="mt-4">
-                    <p className="font-semibold mb-2">Impact:</p>
-                    <ul className="list-disc list-inside space-y-2">
-                      <li>Nickel Price Crash: Global nickel prices slumped to $15,400/ton (near 4-year lows) as Chinese buyers withhold orders.</li>
-                      <li>Smelter Shutdowns: PT Virtue Dragon's $1.2B nickel plant halted operations, laying off 2,100 workers.</li>
-                    </ul>
-                  </div>
                 </div>
 
                 {/* Point 2: Price Wars */}
                 <div className="border-l-4 border-orange-500 pl-4">
                   <h3 className="font-bold text-gray-900 dark:text-white mb-2">
-                    2. Price Manipulation and Market Capture
+                    Price Wars Crush Local Industries
                   </h3>
                   <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
-                    Chinese firms exploit Indonesia's reliance on their refining technology to suppress prices and dominate supply chains:
+                    Chinese products are sold 40–60% cheaper than Indonesian equivalents, exploiting weak anti-dumping laws. Textile MSMEs lost 58% market share to Chinese apparel, forcing 20–30 factories to close. E-commerce platforms like Shopee and TikTok Shop prioritized Chinese sellers, drowning out local businesses. Despite a 200% retaliatory tariff announced in 2025, enforcement delays leave industries defenseless.
                   </p>
-                  <ul className="list-disc list-inside space-y-2 mt-2">
-                    <li>Oligopsony Tactics: Chinese buyers collude to purchase nickel ore at $28/ton (vs. global $42/ton), squeezing margins for ADRO and PTBA.</li>
-                    <li>Tech Dependence: China controls 85% of Indonesia's high-pressure acid leaching (HPAL) technology, critical for EV battery production.</li>
-                    <li>Example: PT Trimegah Bangun Persada (ANTM) reported Q4 2024 losses of $120M after China slashed nickel orders by 40%.</li>
-                  </ul>
-                </div>
-
-                {/* Point 3: Policy Paralysis */}
-                <div className="border-l-4 border-yellow-500 pl-4">
-                  <h3 className="font-bold text-gray-900 dark:text-white mb-2">
-                    3. Policy Paralysis Amid Crisis
-                  </h3>
-                  <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
-                    Jakarta's countermeasures remain fragmented:
-                  </p>
-                  <ul className="list-disc list-inside space-y-2 mt-2">
-                    <li>Export Ban Delays: A proposed 2025 ban on raw nickel exports (to boost domestic refining) stalled due to lobbying by Chinese-backed firms.</li>
-                    <li>BI's Dilemma: With USDIDR at 16,450, BI's Feb 11 emergency meeting may hike rates 25bps to 6.00%, but this risks stifling growth.</li>
-                  </ul>
                 </div>
               </div>
             </div>
           </div>
         </section>
+
 
         {/* Previously in Weekly Special Section */}
         <div className="bg-gray-50 dark:bg-gray-800/50 rounded-lg p-6 mb-8 border border-gray-200 dark:border-gray-700">
