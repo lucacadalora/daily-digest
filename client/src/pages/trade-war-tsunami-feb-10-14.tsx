@@ -126,21 +126,36 @@ const TradeWarTsunamiFeb1014 = () => {
               <h2 className="text-xl font-serif font-bold text-gray-900 dark:text-white mb-4">
                 Mechanism: How Indonesia Became Ground Zero
               </h2>
-              <div className="space-y-4">
-                <ul className="list-disc list-inside space-y-3 text-gray-700 dark:text-gray-300">
-                  <li className="flex items-start">
-                    <span className="text-red-600 mr-2">•</span>
-                    <span><strong>US-China Trade War Fallout:</strong> Trump's tariffs blocked Chinese exports to Western markets, forcing Beijing to redirect goods to ASEAN. Indonesia's lax border controls and 1,000+ illegal seaports (particularly in eastern Sumatra) enabled unchecked inflows.</span>
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-red-600 mr-2">•</span>
-                    <span><strong>Price Undercutting:</strong> Chinese products are sold 40–60% cheaper than local equivalents, exploiting Indonesia's weak anti-dumping enforcement. For example, ceramic tiles from China caused PT Kusumahadi Santosa to lay off 3,000 workers.</span>
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-red-600 mr-2">•</span>
-                    <span><strong>E-Commerce Channels:</strong> Platforms like Shopee and TikTok Shop dominate distribution, prioritizing Chinese goods and sidelining local MSMEs.</span>
-                  </li>
-                </ul>
+              <div className="space-y-6">
+                {/* Point 1: US-China Tariffs */}
+                <div className="border-l-4 border-red-500 pl-4">
+                  <h3 className="font-bold text-gray-900 dark:text-white mb-2">
+                    US-China Tariffs Redirect Flood of Cheap Goods
+                  </h3>
+                  <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
+                    The Trump administration's 10–25% tariffs on Chinese exports forced Beijing to reroute $48B of surplus goods to ASEAN markets. Indonesia's 1,000+ illegal seaports and lax border controls made it a prime target, absorbing 32% of China's diverted goods — from textiles to electronics. Example: $360M of smuggled Chinese ceramics crushed local producers like PT Kusumahadi Santosa, which laid off 3,000 workers.
+                  </p>
+                </div>
+
+                {/* Point 2: Price Wars */}
+                <div className="border-l-4 border-orange-500 pl-4">
+                  <h3 className="font-bold text-gray-900 dark:text-white mb-2">
+                    Price Wars Crush Local Industries
+                  </h3>
+                  <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
+                    Chinese products are sold 40–60% cheaper than Indonesian equivalents, exploiting weak anti-dumping laws. Textile MSMEs lost 58% market share to Chinese apparel, forcing 20–30 factories to close. E-commerce platforms like Shopee and TikTok Shop prioritized Chinese sellers, drowning out local businesses. Despite a 200% retaliatory tariff announced in 2025, enforcement delays leave industries defenseless.
+                  </p>
+                </div>
+
+                {/* Point 3: Policy Paralysis */}
+                <div className="border-l-4 border-yellow-500 pl-4">
+                  <h3 className="font-bold text-gray-900 dark:text-white mb-2">
+                    Policy Paralysis Deepens Crisis
+                  </h3>
+                  <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
+                    Indonesia's proposed tariffs and bans (e.g., blocking TikTok Shop in 2023) have stalled due to bureaucracy and fears of Chinese retaliation. Meanwhile, USDIDR nears 16,500, draining BI's $138.6B reserves. Without swift action, the IHSG risks collapsing below 6,600, threatening economic stability.
+                  </p>
+                </div>
               </div>
             </div>
           </div>
