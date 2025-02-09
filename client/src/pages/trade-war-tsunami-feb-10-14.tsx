@@ -97,13 +97,12 @@ const TradeWarTsunamiFeb1014 = () => {
               </div>
             </CardContent>
           </Card>
-
           <Card className="bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm">
             <CardContent className="pt-6">
               <div className="flex flex-col items-center gap-1">
                 <ArrowUpCircle className="h-6 w-6 text-green-600" />
-                <p className="text-sm font-medium text-gray-500 dark:text-gray-400">Buy MDKA</p>
-                <p className="text-2xl font-bold text-gray-900 dark:text-white">Gold Proxy</p>
+                <p className="text-sm font-medium text-gray-500 dark:text-gray-400">Gold Proxy</p>
+                <p className="text-2xl font-bold text-gray-900 dark:text-white">Buy MDKA</p>
                 <p className="text-sm text-gray-500 dark:text-gray-400">As Gold Nears $2,900</p>
               </div>
             </CardContent>
@@ -352,14 +351,34 @@ const TradeWarTsunamiFeb1014 = () => {
 
             {/* Defensive Recalibration */}
             <div>
-              <h3 className="font-bold text-gray-900 dark:text-white mb-3">Defensive Recalibration</h3>
-              <div className="space-y-2">
-                <p className="text-gray-700 dark:text-gray-300 font-medium">Upgraded Resilience:</p>
-                <ul className="list-disc list-inside space-y-1 text-gray-700 dark:text-gray-300">
-                  <li>TLKM (+1.2% WoW): 5G rollout shields earnings</li>
-                  <li>KLBF (+2.3% WoW post-drop): Pandemic prep stocks boost demand</li>
-                  <li>BBCA: Liquidity coverage ratio at 158% buffers rate hikes</li>
-                </ul>
+              <h3 className="text-xl font-serif font-bold text-gray-900 dark:text-white mb-4">Defensive Pivot</h3>
+              <div className="overflow-x-auto">
+                <table className="min-w-full border-collapse">
+                  <thead>
+                    <tr className="bg-gray-50 dark:bg-gray-800">
+                      <th className="px-4 py-2 text-left text-sm font-semibold text-gray-900 dark:text-white">Sector</th>
+                      <th className="px-4 py-2 text-left text-sm font-semibold text-gray-900 dark:text-white">Catalyst</th>
+                      <th className="px-4 py-2 text-left text-sm font-semibold text-gray-900 dark:text-white">Key Stocks</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr className="border-t border-gray-200 dark:border-gray-700">
+                      <td className="px-4 py-2 text-gray-700 dark:text-gray-300">Healthcare</td>
+                      <td className="px-4 py-2 text-gray-700 dark:text-gray-300">Pandemic restocking demand</td>
+                      <td className="px-4 py-2 text-gray-700 dark:text-gray-300">KLBF, SIDO</td>
+                    </tr>
+                    <tr className="border-t border-gray-200 dark:border-gray-700">
+                      <td className="px-4 py-2 text-gray-700 dark:text-gray-300">Gold</td>
+                      <td className="px-4 py-2 text-gray-700 dark:text-gray-300">Safe-haven demand at $2,885/oz</td>
+                      <td className="px-4 py-2 text-gray-700 dark:text-gray-300">MDKA, ANTM</td>
+                    </tr>
+                    <tr className="border-t border-gray-200 dark:border-gray-700">
+                      <td className="px-4 py-2 text-gray-700 dark:text-gray-300">Telcos</td>
+                      <td className="px-4 py-2 text-gray-700 dark:text-gray-300">5G rollout shields earnings</td>
+                      <td className="px-4 py-2 text-gray-700 dark:text-gray-300">TLKM, EXCL</td>
+                    </tr>
+                  </tbody>
+                </table>
               </div>
             </div>
           </div>
