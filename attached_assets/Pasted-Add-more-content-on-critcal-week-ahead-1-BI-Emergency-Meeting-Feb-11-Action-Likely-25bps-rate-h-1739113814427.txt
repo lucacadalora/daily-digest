@@ -1,0 +1,50 @@
+Add more content on critcal week ahead
+
+1. BI Emergency Meeting (Feb 11)
+Action: Likely 25bps rate hike (to 6.00%) to stabilize USDIDR, which neared 16,500.
+Impact:
+Short-term relief for rupiah (16,200–16,300 range).
+Banks (BBCA, BBNI) face margin pressure but benefit from higher bond yields.
+2. China’s Rare Earth Curbs (Feb 12)
+Action: Restrictions on nickel exports to retaliate against US tariffs.
+Impact:
+ANTM/INCO hit hard – Indonesia’s $2.1B nickel exports at risk.
+Global EV battery supply chains disrupted.
+3. US ASEAN Auto Tariffs (Feb 14)
+Risk: 25% tariffs threaten ASII’s exports (30% revenue).
+Fallout:
+Auto sector growth stalls; components from China face scrutiny.
+Investors pivot to defensive stocks (TLKM, BBCA).
+
+
+Add a section IHSG Technical Outlook below the card
+
+New Support Zone: 6,600–6,750 (Fibonacci 78.6% retracement)
+Resistance: 6,900–7,000 (Previous support now resistance)
+Catalysts to Monitor:
+US Tariff Escalation: Trump’s proposed 15% ASEAN-wide auto tariffs (ASII at risk).
+China’s Rare Earth Export Curbs: Effective Feb 12 – threatens Indonesia’s nickel supply chain.
+BI Emergency Meeting (Feb 11): Potential rate hike (+25bps) to defend USDIDR.
+Sectoral Outlook: Post-Breach Realities
+High-Risk Zones
+Sector	Vulnerability	Key Stocks
+Automotive	US tariff retaliation risk	ASII (-14% WoW), AIMS (-9%)
+Coal	China’s import quotas cut 40%	ADRO, PTBA
+Palm Oil	EU deforestation rules + China tariffs	LSIP, AALI
+Defensive Recalibration
+Upgraded Resilience:
+TLKM (+1.2% WoW): 5G rollout shields earnings.
+KLBF (+2.3% WoW post-drop): Pandemic prep stocks boost demand.
+BBCA: Liquidity coverage ratio at 158% buffers rate hikes.
+Currency Warfare Frontline
+USDIDR Trajectory:
+Baseline: 16,300–16,600 (BI intervention band)
+Risk Case: 16,800+ if China devalues CNY beyond 7.3
+Hedging Strategy Update:
+Shift from SRBI bonds to BI’s new FX Swap Facility (7.1% yield).
+Accumulate gold miners (MDKA, ANTM) as bullion hits $2,900/oz.
+Investor Action Plan
+Stop-Loss Reset: Tighten to 5% below entry (vs 7% previously).
+Dynamic Hedging: Pair short ASII with long KLBF (1:2 beta ratio).
+Dividend Shelter: Rotate into HMSP (8.2% yield) and SMGR (6.7%).
+

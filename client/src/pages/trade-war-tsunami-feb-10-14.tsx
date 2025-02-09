@@ -137,185 +137,217 @@ const TradeWarTsunamiFeb1014 = () => {
                 </li>
               </ul>
             </div>
-          </div>
-        </div>
 
-        {/* Metric Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 py-6 border-b border-gray-200 dark:border-gray-800">
-          <Card className="bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm">
-            <CardContent className="pt-6">
-              <div className="flex flex-col items-center gap-1">
-                <TrendingUp className="h-6 w-6 text-red-600" />
-                <p className="text-sm font-medium text-gray-500 dark:text-gray-400">IHSG Drop</p>
-                <p className="text-2xl font-bold text-gray-900 dark:text-white">-5.16%</p>
-                <p className="text-sm text-gray-500 dark:text-gray-400">WoW Decline</p>
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card className="bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm">
-            <CardContent className="pt-6">
-              <div className="flex flex-col items-center gap-1">
-                <AlertCircle className="h-6 w-6 text-orange-600" />
-                <p className="text-sm font-medium text-gray-500 dark:text-gray-400">Chinese Imports</p>
-                <p className="text-2xl font-bold text-gray-900 dark:text-white">↑ 32%</p>
-                <p className="text-sm text-gray-500 dark:text-gray-400">ASEAN Share</p>
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card className="bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm">
-            <CardContent className="pt-6">
-              <div className="flex flex-col items-center gap-1">
-                <Shield className="h-6 w-6 text-blue-600" />
-                <p className="text-sm font-medium text-gray-500 dark:text-gray-400">Local Impact</p>
-                <p className="text-2xl font-bold text-gray-900 dark:text-white">-18-23%</p>
-                <p className="text-sm text-gray-500 dark:text-gray-400">MSME Stocks</p>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
-
-        {/* Article Content */}
-        <div className="py-4 space-y-6">
-          {/* New Narrative Section */}
-          <section className="prose dark:prose-invert max-w-none">
-            <h2 className="text-xl font-serif font-bold text-gray-900 dark:text-white mb-3">
-              The New Narrative: The Inventory Overhang
-            </h2>
-            <p className="text-gray-700 dark:text-gray-300">
-              Indonesia's 2024 GDP growth, while seemingly robust, hides structural vulnerabilities:
-            </p>
-            <ul className="list-disc list-inside text-gray-700 dark:text-gray-300">
-              <li>Auto Sector Glut: Inventory days surged to 112 (vs. healthy 75), pressuring ASII and AALI3.</li>
-              <li>Palm Oil Stockpiles: CPO inventories hit 4.2M tons (+18% MoM), risking margin compression for AALI and LSIP25.</li>
-            </ul>
-            <p className="text-gray-700 dark:text-gray-300 mt-4">
-              <strong>Investor Takeaway:</strong> The "growth" narrative is faltering. Markets now price in a domestic demand crisis, with retail sales growth slowing to 0.9% YoY3.
-            </p>
-          </section>
-
-          {/* New Narrative: Indonesia as a Chinese Surplus Dumping Ground */}
-          <section className="prose dark:prose-invert max-w-none">
-            <h2 className="text-xl font-serif font-bold text-gray-900 dark:text-white mb-3">
-              The New Narrative: Indonesia as a Chinese Surplus Dumping Ground
-            </h2>
-            <p className="text-gray-700 dark:text-gray-300">
-              Bank Indonesia (BI) issued a stark warning this week: "Chinese goods barred from US markets are flooding Indonesia," threatening to overwhelm domestic industries. Key insights:
-            </p>
-            <div className="space-y-4">
-              <div>
-                <h3 className="font-bold text-gray-900 dark:text-white">Mechanism</h3>
-                <p className="text-gray-700 dark:text-gray-300">
-                  Trump's 10% China tariffs have redirected $48B worth of Chinese exports (textiles, electronics, ceramics) to ASEAN markets. Indonesia, with its porous import controls, absorbed 32% of this diverted volume.
-                </p>
-              </div>
-              <div>
-                <h3 className="font-bold text-gray-900 dark:text-white">Impact</h3>
-                <p className="text-gray-700 dark:text-gray-300">
-                  Local MSMEs face existential risks. Textile producers like ERAT (-18% WoW) and ceramic firm ARTI (-23%) collapsed as Chinese imports undercut prices by 40–60%.
-                </p>
-              </div>
-              <div>
-                <h3 className="font-bold text-gray-900 dark:text-white">Policy Paralysis</h3>
-                <p className="text-gray-700 dark:text-gray-300">
-                  Indonesia's retaliatory 200% tariffs on Chinese goods (announced Jan 2025) remain unimplemented, exposing regulatory inertia.
-                </p>
+            <div>
+              <h3 className="font-bold text-gray-900 dark:text-white mb-3 text-lg">Sectoral Risks & Opportunities</h3>
+              <div className="overflow-x-auto">
+                <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+                  <thead>
+                    <tr>
+                      <th className="px-4 py-2 text-left text-gray-900 dark:text-white font-bold">Sector</th>
+                      <th className="px-4 py-2 text-left text-gray-900 dark:text-white font-bold">Outlook</th>
+                      <th className="px-4 py-2 text-left text-gray-900 dark:text-white font-bold">Key Stocks</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
+                    <tr>
+                      <td className="px-4 py-2 text-gray-700 dark:text-gray-300">Coal/Energy</td>
+                      <td className="px-4 py-2 text-red-600">China's import quotas cut 40%</td>
+                      <td className="px-4 py-2 text-gray-700 dark:text-gray-300">ADRO, PTBA</td>
+                    </tr>
+                    <tr>
+                      <td className="px-4 py-2 text-gray-700 dark:text-gray-300">Healthcare</td>
+                      <td className="px-4 py-2 text-green-600">Pandemic restocking demand</td>
+                      <td className="px-4 py-2 text-gray-700 dark:text-gray-300">KLBF, SIDO</td>
+                    </tr>
+                    <tr>
+                      <td className="px-4 py-2 text-gray-700 dark:text-gray-300">Financials</td>
+                      <td className="px-4 py-2 text-blue-600">Rate hike hedge</td>
+                      <td className="px-4 py-2 text-gray-700 dark:text-gray-300">BBCA, BBNI</td>
+                    </tr>
+                  </tbody>
+                </table>
               </div>
             </div>
-          </section>
+          </div>
 
-          {/* GDP Growth Mirage Section */}
-          <section className="prose dark:prose-invert max-w-none">
-            <h2 className="text-xl font-serif font-bold text-gray-900 dark:text-white mb-3">
-              GDP Growth Mirage
-            </h2>
-            <p className="text-gray-700 dark:text-gray-300">
-              The "5.03% growth" hailed for 2024 now reveals cracks:
-            </p>
-            <ul className="list-disc list-inside text-gray-700 dark:text-gray-300">
-              <li>Inventory Illusion: 1.2 percentage points came from stockpiling, not demand. Auto inventories hit 112 days (vs 75-day healthy threshold).</li>
-              <li>Consumption Crunch: Household spending growth slowed to 4.83% as real wages stagnate.</li>
-            </ul>
-            <p className="text-gray-700 dark:text-gray-300 mt-4">
-              <strong>Investor Takeaway:</strong> The IHSG's 6,752 close reflects not just trade war risks, but a domestic demand crisis masked by statistical artifice.
-            </p>
-          </section>
+          {/* Metric Cards */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 py-6 border-b border-gray-200 dark:border-gray-800">
+            <Card className="bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm">
+              <CardContent className="pt-6">
+                <div className="flex flex-col items-center gap-1">
+                  <TrendingUp className="h-6 w-6 text-red-600" />
+                  <p className="text-sm font-medium text-gray-500 dark:text-gray-400">IHSG Drop</p>
+                  <p className="text-2xl font-bold text-gray-900 dark:text-white">-5.16%</p>
+                  <p className="text-sm text-gray-500 dark:text-gray-400">WoW Decline</p>
+                </div>
+              </CardContent>
+            </Card>
 
-          {/* Forward Outlook Section */}
-          <section className="prose dark:prose-invert max-w-none">
-            <h2 className="text-xl font-serif font-bold text-gray-900 dark:text-white mb-3">
-              Forward Outlook: Flood Control Strategies
-            </h2>
-            <div className="space-y-6">
-              <div>
-                <h3 className="font-bold text-gray-900 dark:text-white">Sectoral Triage</h3>
-                <div className="overflow-x-auto">
-                  <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
-                    <thead>
-                      <tr>
-                        <th className="px-4 py-2 text-left text-gray-900 dark:text-white">Sector</th>
-                        <th className="px-4 py-2 text-left text-gray-900 dark:text-white">Action</th>
-                        <th className="px-4 py-2 text-left text-gray-900 dark:text-white">Rationale</th>
-                      </tr>
-                    </thead>
-                    <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
-                      <tr>
-                        <td className="px-4 py-2 text-gray-700 dark:text-gray-300">Textiles</td>
-                        <td className="px-4 py-2 text-red-600 font-semibold">Exit</td>
-                        <td className="px-4 py-2 text-gray-700 dark:text-gray-300">Chinese imports now 58% of market share</td>
-                      </tr>
-                      <tr>
-                        <td className="px-4 py-2 text-gray-700 dark:text-gray-300">Ceramics</td>
-                        <td className="px-4 py-2 text-orange-600 font-semibold">Short</td>
-                        <td className="px-4 py-2 text-gray-700 dark:text-gray-300">ARTI faces 200% Chinese import surge</td>
-                      </tr>
-                      <tr>
-                        <td className="px-4 py-2 text-gray-700 dark:text-gray-300">Fintech</td>
-                        <td className="px-4 py-2 text-green-600 font-semibold">Accumulate</td>
-                        <td className="px-4 py-2 text-gray-700 dark:text-gray-300">BUKA, BBCA benefit from BI's 7.1% SRBI bonds</td>
-                      </tr>
-                    </tbody>
-                  </table>
+            <Card className="bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm">
+              <CardContent className="pt-6">
+                <div className="flex flex-col items-center gap-1">
+                  <AlertCircle className="h-6 w-6 text-orange-600" />
+                  <p className="text-sm font-medium text-gray-500 dark:text-gray-400">Chinese Imports</p>
+                  <p className="text-2xl font-bold text-gray-900 dark:text-white">↑ 32%</p>
+                  <p className="text-sm text-gray-500 dark:text-gray-400">ASEAN Share</p>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className="bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm">
+              <CardContent className="pt-6">
+                <div className="flex flex-col items-center gap-1">
+                  <Shield className="h-6 w-6 text-blue-600" />
+                  <p className="text-sm font-medium text-gray-500 dark:text-gray-400">Local Impact</p>
+                  <p className="text-2xl font-bold text-gray-900 dark:text-white">-18-23%</p>
+                  <p className="text-sm text-gray-500 dark:text-gray-400">MSME Stocks</p>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+
+          {/* Article Content */}
+          <div className="py-4 space-y-6">
+            {/* New Narrative Section */}
+            <section className="prose dark:prose-invert max-w-none">
+              <h2 className="text-xl font-serif font-bold text-gray-900 dark:text-white mb-3">
+                The New Narrative: The Inventory Overhang
+              </h2>
+              <p className="text-gray-700 dark:text-gray-300">
+                Indonesia's 2024 GDP growth, while seemingly robust, hides structural vulnerabilities:
+              </p>
+              <ul className="list-disc list-inside text-gray-700 dark:text-gray-300">
+                <li>Auto Sector Glut: Inventory days surged to 112 (vs. healthy 75), pressuring ASII and AALI3.</li>
+                <li>Palm Oil Stockpiles: CPO inventories hit 4.2M tons (+18% MoM), risking margin compression for AALI and LSIP25.</li>
+              </ul>
+              <p className="text-gray-700 dark:text-gray-300 mt-4">
+                <strong>Investor Takeaway:</strong> The "growth" narrative is faltering. Markets now price in a domestic demand crisis, with retail sales growth slowing to 0.9% YoY3.
+              </p>
+            </section>
+
+            {/* New Narrative: Indonesia as a Chinese Surplus Dumping Ground */}
+            <section className="prose dark:prose-invert max-w-none">
+              <h2 className="text-xl font-serif font-bold text-gray-900 dark:text-white mb-3">
+                The New Narrative: Indonesia as a Chinese Surplus Dumping Ground
+              </h2>
+              <p className="text-gray-700 dark:text-gray-300">
+                Bank Indonesia (BI) issued a stark warning this week: "Chinese goods barred from US markets are flooding Indonesia," threatening to overwhelm domestic industries. Key insights:
+              </p>
+              <div className="space-y-4">
+                <div>
+                  <h3 className="font-bold text-gray-900 dark:text-white">Mechanism</h3>
+                  <p className="text-gray-700 dark:text-gray-300">
+                    Trump's 10% China tariffs have redirected $48B worth of Chinese exports (textiles, electronics, ceramics) to ASEAN markets. Indonesia, with its porous import controls, absorbed 32% of this diverted volume.
+                  </p>
+                </div>
+                <div>
+                  <h3 className="font-bold text-gray-900 dark:text-white">Impact</h3>
+                  <p className="text-gray-700 dark:text-gray-300">
+                    Local MSMEs face existential risks. Textile producers like ERAT (-18% WoW) and ceramic firm ARTI (-23%) collapsed as Chinese imports undercut prices by 40–60%.
+                  </p>
+                </div>
+                <div>
+                  <h3 className="font-bold text-gray-900 dark:text-white">Policy Paralysis</h3>
+                  <p className="text-gray-700 dark:text-gray-300">
+                    Indonesia's retaliatory 200% tariffs on Chinese goods (announced Jan 2025) remain unimplemented, exposing regulatory inertia.
+                  </p>
                 </div>
               </div>
+            </section>
 
-              <div>
-                <h3 className="font-bold text-gray-900 dark:text-white">Critical Week Ahead</h3>
-                <ul className="list-disc list-inside text-gray-700 dark:text-gray-300">
-                  <li><strong>Feb 11:</strong> BI emergency meeting – 25bps hike expected to defend USDIDR</li>
-                  <li><strong>Feb 12:</strong> China's rare earth export curbs – ANTM, INCO face supply chain shocks</li>
-                  <li><strong>Feb 14:</strong> US ASEAN auto tariff decision – ASII's 30% revenue at risk</li>
-                </ul>
+            {/* GDP Growth Mirage Section */}
+            <section className="prose dark:prose-invert max-w-none">
+              <h2 className="text-xl font-serif font-bold text-gray-900 dark:text-white mb-3">
+                GDP Growth Mirage
+              </h2>
+              <p className="text-gray-700 dark:text-gray-300">
+                The "5.03% growth" hailed for 2024 now reveals cracks:
+              </p>
+              <ul className="list-disc list-inside text-gray-700 dark:text-gray-300">
+                <li>Inventory Illusion: 1.2 percentage points came from stockpiling, not demand. Auto inventories hit 112 days (vs 75-day healthy threshold).</li>
+                <li>Consumption Crunch: Household spending growth slowed to 4.83% as real wages stagnate.</li>
+              </ul>
+              <p className="text-gray-700 dark:text-gray-300 mt-4">
+                <strong>Investor Takeaway:</strong> The IHSG's 6,752 close reflects not just trade war risks, but a domestic demand crisis masked by statistical artifice.
+              </p>
+            </section>
+
+            {/* Forward Outlook Section */}
+            <section className="prose dark:prose-invert max-w-none">
+              <h2 className="text-xl font-serif font-bold text-gray-900 dark:text-white mb-3">
+                Forward Outlook: Flood Control Strategies
+              </h2>
+              <div className="space-y-6">
+                <div>
+                  <h3 className="font-bold text-gray-900 dark:text-white">Sectoral Triage</h3>
+                  <div className="overflow-x-auto">
+                    <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+                      <thead>
+                        <tr>
+                          <th className="px-4 py-2 text-left text-gray-900 dark:text-white">Sector</th>
+                          <th className="px-4 py-2 text-left text-gray-900 dark:text-white">Action</th>
+                          <th className="px-4 py-2 text-left text-gray-900 dark:text-white">Rationale</th>
+                        </tr>
+                      </thead>
+                      <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
+                        <tr>
+                          <td className="px-4 py-2 text-gray-700 dark:text-gray-300">Textiles</td>
+                          <td className="px-4 py-2 text-red-600 font-semibold">Exit</td>
+                          <td className="px-4 py-2 text-gray-700 dark:text-gray-300">Chinese imports now 58% of market share</td>
+                        </tr>
+                        <tr>
+                          <td className="px-4 py-2 text-gray-700 dark:text-gray-300">Ceramics</td>
+                          <td className="px-4 py-2 text-orange-600 font-semibold">Short</td>
+                          <td className="px-4 py-2 text-gray-700 dark:text-gray-300">ARTI faces 200% Chinese import surge</td>
+                        </tr>
+                        <tr>
+                          <td className="px-4 py-2 text-gray-700 dark:text-gray-300">Fintech</td>
+                          <td className="px-4 py-2 text-green-600 font-semibold">Accumulate</td>
+                          <td className="px-4 py-2 text-gray-700 dark:text-gray-300">BUKA, BBCA benefit from BI's 7.1% SRBI bonds</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+
+                <div>
+                  <h3 className="font-bold text-gray-900 dark:text-white">Critical Week Ahead</h3>
+                  <ul className="list-disc list-inside text-gray-700 dark:text-gray-300">
+                    <li><strong>Feb 11:</strong> BI emergency meeting – 25bps hike expected to defend USDIDR</li>
+                    <li><strong>Feb 12:</strong> China's rare earth export curbs – ANTM, INCO face supply chain shocks</li>
+                    <li><strong>Feb 14:</strong> US ASEAN auto tariff decision – ASII's 30% revenue at risk</li>
+                  </ul>
+                </div>
+
+                <div>
+                  <h3 className="font-bold text-gray-900 dark:text-white">Technical Thresholds</h3>
+                  <ul className="list-disc list-inside text-gray-700 dark:text-gray-300">
+                    <li><strong>IHSG:</strong> 6,600 (critical support) vs 6,900 (resistance)</li>
+                    <li><strong>USDIDR:</strong> BI's 16,500 intervention line under siege</li>
+                  </ul>
+                </div>
               </div>
+            </section>
 
-              <div>
-                <h3 className="font-bold text-gray-900 dark:text-white">Technical Thresholds</h3>
-                <ul className="list-disc list-inside text-gray-700 dark:text-gray-300">
-                  <li><strong>IHSG:</strong> 6,600 (critical support) vs 6,900 (resistance)</li>
-                  <li><strong>USDIDR:</strong> BI's 16,500 intervention line under siege</li>
-                </ul>
-              </div>
-            </div>
-          </section>
-
-          {/* Bottom Line */}
-          <section className="prose dark:prose-invert max-w-none">
-            <h2 className="text-xl font-serif font-bold text-gray-900 dark:text-white mb-3">
-              Bottom Line
-            </h2>
-            <p className="text-gray-700 dark:text-gray-300">
-              This isn't just a trade war – it's a battle for Indonesia's economic sovereignty. Investors must navigate Chinese dumping, phantom GDP growth, and BI's dwindling reserves ($138.6B). Rotate into tariff-immune sectors (healthcare, fintech) and brace for 6,500 tests.
-            </p>
-          </section>
-        </div>
-
-        {/* Footer */}
-        <footer className="text-sm text-gray-500 dark:text-gray-400 border-t border-gray-200 dark:border-gray-700 pt-4 pb-6">
-          <div className="flex items-center justify-between mb-2">
-            <p>— Lucaxyz Digest Research | Data as of Feb 9, 2025</p>
+            {/* Bottom Line */}
+            <section className="prose dark:prose-invert max-w-none">
+              <h2 className="text-xl font-serif font-bold text-gray-900 dark:text-white mb-3">
+                Bottom Line
+              </h2>
+              <p className="text-gray-700 dark:text-gray-300">
+                This isn't just a trade war – it's a battle for Indonesia's economic sovereignty. Investors must navigate Chinese dumping, phantom GDP growth, and BI's dwindling reserves ($138.6B). Rotate into tariff-immune sectors (healthcare, fintech) and brace for 6,500 tests.
+              </p>
+            </section>
           </div>
-        </footer>
+
+          {/* Footer */}
+          <footer className="text-sm text-gray-500 dark:text-gray-400 border-t border-gray-200 dark:border-gray-700 pt-4 pb-6">
+            <div className="flex items-center justify-between mb-2">
+              <p>— Lucaxyz Digest Research | Data as of Feb 9, 2025</p>
+            </div>
+          </footer>
+        </div>
       </div>
     </div>
   );
