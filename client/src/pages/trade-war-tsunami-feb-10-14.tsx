@@ -21,59 +21,52 @@ const TradeWarTsunamiFeb1014 = () => {
         </div>
 
         {/* Breadcrumb */}
-        <div className="flex items-center space-x-2 text-sm text-gray-600 dark:text-gray-400 py-4">
+        <nav className="flex items-center space-x-2 text-sm text-gray-600 dark:text-gray-400 py-4">
           <a href="/" className="hover:text-blue-600">Home</a>
           <ChevronRight className="h-4 w-4" />
           <a href="/newsletter" className="hover:text-blue-600">Newsletter</a>
           <ChevronRight className="h-4 w-4" />
-          <span>Trade War Tsunami</span>
-        </div>
+          <span>US-China Trade War Impact</span>
+        </nav>
 
         {/* Category Tags */}
-        <div className="flex flex-wrap gap-2 py-4">
-          <span className="text-sm font-medium px-3 py-1 bg-blue-100 text-blue-800 rounded-full dark:bg-blue-900 dark:text-blue-100">
+        <div className="flex gap-2 py-2">
+          <span className="px-3 py-1 text-sm font-medium bg-blue-100 text-blue-800 rounded-full dark:bg-blue-900 dark:text-blue-100">
             Weekly Special
           </span>
-          <span className="text-sm font-medium px-3 py-1 bg-green-100 text-green-800 rounded-full dark:bg-green-900 dark:text-green-100">
+          <span className="px-3 py-1 text-sm font-medium bg-green-100 text-green-800 rounded-full dark:bg-green-900 dark:text-green-100">
             Market Strategy
           </span>
         </div>
 
         {/* Header */}
-        <header className="border-b border-gray-200 dark:border-gray-800 pb-6">
-          <div className="pt-4">
-            <h1 className="font-serif text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4 leading-tight">
-              Floodgates Open as Trade War Tsunami Swamps IHSG
-            </h1>
-            <div className="flex items-center space-x-4 text-sm text-gray-600 dark:text-gray-400 mb-3">
-              <div className="flex items-center space-x-1">
-                <Clock className="h-4 w-4" />
-                <span>February 10, 2025</span>
-              </div>
-              <div className="flex items-center space-x-1">
-                <MapPin className="h-4 w-4" />
-                <span>JAKARTA</span>
-              </div>
+        <header className="py-4">
+          <h1 className="text-4xl font-serif font-bold text-gray-900 dark:text-white mb-4">
+            Floodgates Open as Trade War Tsunami Swamps IHSG
+          </h1>
+          <div className="flex items-center space-x-4 text-sm text-gray-600 dark:text-gray-400 mb-2">
+            <div className="flex items-center space-x-1">
+              <Clock className="h-4 w-4" />
+              <span>February 10, 2025</span>
             </div>
-            <div className="text-sm text-gray-600 dark:text-gray-400">
-              By Luca Cada Lora
+            <div className="flex items-center space-x-1">
+              <MapPin className="h-4 w-4" />
+              <span>JAKARTA</span>
             </div>
+          </div>
+          <div className="text-sm text-gray-600 dark:text-gray-400 mb-6">
+            By Luca Cada Lora
           </div>
         </header>
 
         {/* Introduction */}
-        <section className="py-6 border-b border-gray-200 dark:border-gray-800">
-          <div className="prose dark:prose-invert max-w-none">
-            <div className="text-lg text-gray-700 dark:text-gray-300 space-y-4">
-              <p className="font-medium">Weekly Market Alert</p>
-              <p>
-                This special report outlines critical market scenarios and action plans for the week of February 10-14, 2025. 
-                Our analysis covers the escalating trade tensions and their immediate impact on Indonesian markets, providing 
-                strategic insights for navigating the current market turbulence.
-              </p>
-            </div>
-          </div>
-        </section>
+        <div className="prose dark:prose-invert max-w-none mb-8">
+          <p className="font-medium mb-2">Weekly Market Alert</p>
+          <p className="text-gray-700 dark:text-gray-300">
+            This special report outlines critical market scenarios and action plans for the week of February 10-14, 2025. 
+            This special report outlines key market scenarios and potential impacts for the week ahead.
+          </p>
+        </div>
 
         {/* Metric Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 py-6 border-b border-gray-200 dark:border-gray-800">
