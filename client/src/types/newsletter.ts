@@ -34,7 +34,7 @@ export const sampleArticles: Article[] = [
   {
     slug: "trade-war-tsunami-feb-10-14",
     title: "Floodgates Open as Trade War Tsunami Swamps IHSG",
-    description: "Bank Indonesia issues stark warning as Chinese goods flood Indonesian markets, threatening local industries and validating our previous week's bearish outlook. IHSG breaches critical 6,900 support exactly as predicted.",
+    description: "Bank Indonesia issues stark warning as Chinese goods flood Indonesian markets, threatening local industries. IHSG breaches critical 6,900 support amid growing concerns over trade imbalances and economic sustainability.",
     category: "Markets",
     source: "Daily Digest",
     author: "Luca Cada Lora",
@@ -42,19 +42,19 @@ export const sampleArticles: Article[] = [
     previewEmoji: "🌊",
     previewMetrics: [
       {
-        label: "IHSG Drop",
-        value: "-5.16%",
-        subtitle: "WoW Decline"
+        label: "Support Level",
+        value: "6,742",
+        subtitle: "Critical Support"
       },
       {
         label: "Chinese Imports",
-        value: "↑ 32%",
-        subtitle: "ASEAN Share"
+        value: "↑ 58%",
+        subtitle: "Market Share"
       },
       {
-        label: "Local Impact",
-        value: "-18-23%",
-        subtitle: "MSME Stocks"
+        label: "Foreign Flow",
+        value: "-$317M",
+        subtitle: "Weekly Outflow"
       }
     ],
     tags: ["IHSG", "Trade War", "Market Analysis", "Weekly Special"],
@@ -63,7 +63,7 @@ export const sampleArticles: Article[] = [
   {
     slug: "fed-balance-sheet-blueprint",
     title: "Fed's QT Exit: A Liquidity Lifeline for Risk Assets",
-    description: "The Federal Reserve's accelerated QT and strategic pivot signal a shift from austerity to equilibrium, with implications for equities and crypto markets through 2025.",
+    description: "Federal Reserve accelerates balance sheet reduction while planning strategic pivot, with implications for equities and crypto through 2025. Analysis of $2T cut since 2022 and projected market impact.",
     category: "Economics",
     source: "Daily Digest",
     author: "Luca Cada Lora",
@@ -71,19 +71,19 @@ export const sampleArticles: Article[] = [
     previewEmoji: "🏦",
     previewMetrics: [
       {
-        label: "Balance Sheet Cut",
+        label: "QT Total",
         value: "$2T",
         subtitle: "Since 2022"
       },
       {
-        label: "S&P Target",
-        value: "6,000+",
-        subtitle: "Q3 2025"
+        label: "Monthly Pace",
+        value: "$95B",
+        subtitle: "Current Run-rate"
       },
       {
-        label: "BTC Projection",
-        value: "$120K",
-        subtitle: "Late 2025"
+        label: "Target Level",
+        value: "$6.0T",
+        subtitle: "End-2025 Goal"
       }
     ],
     tags: ["Federal Reserve", "Monetary Policy", "QT", "Risk Assets"],
@@ -121,7 +121,7 @@ export const sampleArticles: Article[] = [
   {
     slug: "indonesia-mineral-criticality-matrix",
     title: "Indonesia's Mineral Matrix: Strategic Supply Chain Analysis",
-    description: "A comprehensive analysis of Indonesia's critical mineral reserves and their strategic importance in global supply chains, focusing on nickel, copper, and rare earth elements.",
+    description: "Deep dive into Indonesia's critical mineral reserves and supply chain implications, analyzing nickel, copper, and rare earth elements. Focus on economic impact and strategic positioning in global markets.",
     category: "Industries",
     source: "Daily Digest",
     author: "Luca Cada Lora",
