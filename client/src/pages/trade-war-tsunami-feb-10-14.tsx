@@ -367,44 +367,36 @@ const TradeWarTsunamiFeb1014 = () => {
               </div>
             </div>
 
-            {/* Strategic Plan Section */}
+            {/* Dividend Shelter Section */}
             <section>
-              <h2 className="text-xl font-serif font-bold text-gray-900 dark:text-white mb-3">Strategic Plan</h2>
+              <h2 className="text-xl font-serif font-bold text-gray-900 dark:text-white mb-3">
+                Dividend Shelter: Rotate into HMSP (8.2% yield) and SMGR (6.7%)
+              </h2>
               <div className="prose text-gray-700 dark:text-gray-300 max-w-none">
                 <div className="space-y-4">
-                  <div>
-                    <h3 className="font-bold text-gray-900 dark:text-white mb-2">Dividend Shelter: Rotate into HMSP (8.2% yield) and SMGR (6.7%)</h3>
+                  <h3 className="font-bold text-gray-900 dark:text-white mb-2">HMSP</h3>
+                  <ul className="list-none space-y-2">
+                    <li className="flex space-x-2">
+                      <div className="w-2 h-2 mt-2 rounded-full bg-blue-500 flex-shrink-0" />
+                      <p className="mt-0"><strong>Short-Term Play:</strong> High yield attractive for income, but monitor payout sustainability.</p>
+                    </li>
+                    <li className="flex space-x-2">
+                      <div className="w-2 h-2 mt-2 rounded-full bg-blue-500 flex-shrink-0" />
+                      <p className="mt-0"><strong>Action:</strong> Buy on dips near Rp580 (52-week low) with tight stop-loss at Rp550.</p>
+                    </li>
+                  </ul>
 
-                    {/* HMSP Analysis */}
-                    <div className="bg-white dark:bg-gray-800 rounded-lg p-4 mb-4 border border-gray-200 dark:border-gray-700">
-                      <h4 className="font-bold text-gray-900 dark:text-white mb-2">HMSP</h4>
-                      <ul className="list-none space-y-2">
-                        <li className="flex space-x-2">
-                          <div className="w-2 h-2 mt-2 rounded-full bg-blue-500 flex-shrink-0" />
-                          <p className="mt-0"><strong>Short-Term Play:</strong> High yield attractive for income, but monitor payout sustainability.</p>
-                        </li>
-                        <li className="flex space-x-2">
-                          <div className="w-2 h-2 mt-2 rounded-full bg-blue-500 flex-shrink-0" />
-                          <p className="mt-0"><strong>Action:</strong> Buy on dips near Rp580 (52-week low) with tight stop-loss at Rp550.</p>
-                        </li>
-                      </ul>
-                    </div>
-
-                    {/* SMGR Analysis */}
-                    <div className="bg-white dark:bg-gray-800 rounded-lg p-4 mb-4 border border-gray-200 dark:border-gray-700">
-                      <h4 className="font-bold text-gray-900 dark:text-white mb-2">SMGR</h4>
-                      <ul className="list-none space-y-2">
-                        <li className="flex space-x-2">
-                          <div className="w-2 h-2 mt-2 rounded-full bg-green-500 flex-shrink-0" />
-                          <p className="mt-0"><strong>Long-Term Value:</strong> Undervalued at 0.5x P/S, but await infrastructure policy clarity.</p>
-                        </li>
-                        <li className="flex space-x-2">
-                          <div className="w-2 h-2 mt-2 rounded-full bg-green-500 flex-shrink-0" />
-                          <p className="mt-0"><strong>Action:</strong> Accumulate below Rp2,700 (near 2025 low) for dividend + potential rebound.</p>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
+                  <h3 className="font-bold text-gray-900 dark:text-white mb-2">SMGR</h3>
+                  <ul className="list-none space-y-2">
+                    <li className="flex space-x-2">
+                      <div className="w-2 h-2 mt-2 rounded-full bg-green-500 flex-shrink-0" />
+                      <p className="mt-0"><strong>Long-Term Value:</strong> Undervalued at 0.5x P/S, but await infrastructure policy clarity.</p>
+                    </li>
+                    <li className="flex space-x-2">
+                      <div className="w-2 h-2 mt-2 rounded-full bg-green-500 flex-shrink-0" />
+                      <p className="mt-0"><strong>Action:</strong> Accumulate below Rp2,700 (near 2025 low) for dividend + potential rebound.</p>
+                    </li>
+                  </ul>
                 </div>
               </div>
             </section>
