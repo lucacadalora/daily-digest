@@ -7,6 +7,7 @@ import WSJArticle from "@/pages/article";
 import Home from "@/pages/home";
 import Newsletters from "@/pages/newsletters";
 import TradeWarAnalysis from "@/pages/trade-war-analysis";
+import TradeWarTsunamiFeb1014 from "@/pages/trade-war-tsunami-feb-10-14";
 import MineralCriticalityMatrix from "@/pages/mineral-criticality-matrix";
 import IndonesiaEconomicCrisis from "@/pages/indonesia-economic-crisis";
 import About from "@/pages/about";
@@ -20,6 +21,7 @@ function Router() {
       <Route path="/newsletter" component={Newsletters} />
       {/* Special routes must come before generic article route */}
       <Route path="/newsletter/us-china-trade-war-impact-ihsg" component={TradeWarAnalysis} />
+      <Route path="/newsletter/trade-war-tsunami-feb-10-14" component={TradeWarTsunamiFeb1014} />
       <Route path="/newsletter/indonesia-mineral-criticality-matrix" component={MineralCriticalityMatrix} />
       <Route path="/newsletter/indonesia-economic-inventory-crisis" component={IndonesiaEconomicCrisis} />
       <Route path="/newsletter/fed-balance-sheet-blueprint" component={FedBalanceSheet} />
