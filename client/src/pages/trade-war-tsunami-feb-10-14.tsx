@@ -53,7 +53,6 @@ const TradeWarTsunamiFeb1014 = () => {
 
         {/* Metric Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 py-6 border-b border-gray-200 dark:border-gray-800">
-          {/* Card 1: IHSG Drop */}
           <Card className="bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm">
             <CardContent className="pt-6">
               <div className="flex flex-col items-center gap-1">
@@ -65,7 +64,6 @@ const TradeWarTsunamiFeb1014 = () => {
             </CardContent>
           </Card>
 
-          {/* Card 2: Chinese Imports */}
           <Card className="bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm">
             <CardContent className="pt-6">
               <div className="flex flex-col items-center gap-1">
@@ -77,7 +75,6 @@ const TradeWarTsunamiFeb1014 = () => {
             </CardContent>
           </Card>
 
-          {/* Card 3: Local Impact */}
           <Card className="bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm">
             <CardContent className="pt-6">
               <div className="flex flex-col items-center gap-1">
@@ -144,10 +141,6 @@ const TradeWarTsunamiFeb1014 = () => {
             <h2 className="text-xl font-serif font-bold text-gray-900 dark:text-white mb-3">
               Previously on Weekly Special February 3–7, 2025
             </h2>
-            <p className="text-gray-700 dark:text-gray-300">
-              Our February 3–7 Market Alert proved prescient across three critical dimensions:
-            </p>
-            
             <div className="space-y-6">
               <div>
                 <h3 className="font-bold text-gray-900 dark:text-white">1. IHSG Support Breach</h3>
@@ -187,7 +180,6 @@ const TradeWarTsunamiFeb1014 = () => {
             <h2 className="text-xl font-serif font-bold text-gray-900 dark:text-white mb-3">
               Last Week's Market Reality Check
             </h2>
-            
             <div className="space-y-6">
               <div>
                 <h3 className="font-bold text-gray-900 dark:text-white">What Our Analysis Nailed</h3>
@@ -213,7 +205,6 @@ const TradeWarTsunamiFeb1014 = () => {
             <h2 className="text-xl font-serif font-bold text-gray-900 dark:text-white mb-3">
               Forward Outlook: Flood Control Strategies
             </h2>
-            
             <div className="space-y-6">
               <div>
                 <h3 className="font-bold text-gray-900 dark:text-white">Sectoral Triage</h3>
