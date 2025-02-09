@@ -8,6 +8,7 @@ import {
   Shield
 } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
+import { Link } from 'wouter';
 
 const TradeWarTsunamiFeb1014 = () => {
   return (
@@ -15,9 +16,11 @@ const TradeWarTsunamiFeb1014 = () => {
       <div className="max-w-[1200px] mx-auto px-4">
         {/* Website Title */}
         <div className="text-center py-4 border-b border-gray-200 dark:border-gray-800">
-          <h1 className="text-2xl font-serif font-bold">
-            <span className="text-blue-600">Daily</span> | <span className="text-gray-900 dark:text-white">Digest</span>
-          </h1>
+          <Link href="/" className="inline-block">
+            <h1 className="text-2xl font-serif font-bold">
+              <span className="text-blue-600">Daily</span> | <span className="text-gray-900 dark:text-white">Digest</span>
+            </h1>
+          </Link>
         </div>
 
         {/* Breadcrumb */}
@@ -34,7 +37,7 @@ const TradeWarTsunamiFeb1014 = () => {
           <span className="px-3 py-1 text-sm font-medium bg-blue-100 text-blue-800 rounded-full dark:bg-blue-900 dark:text-blue-100">
             Weekly Special
           </span>
-          <span className="px-3 py-1 text-sm font-medium bg-green-100 text-green-800 rounded-full dark:bg-green-900 dark:text-green-100">
+          <span className="px-3 py-1 text-sm font-medium bg-gray-100 text-gray-800 rounded-full dark:bg-gray-800 dark:text-gray-200">
             Market Strategy
           </span>
         </div>
@@ -59,10 +62,10 @@ const TradeWarTsunamiFeb1014 = () => {
           </div>
         </header>
 
-        {/* Introduction */}
-        <div className="prose dark:prose-invert max-w-none mb-8">
-          <p className="font-medium mb-2">Weekly Market Alert</p>
-          <p className="text-gray-700 dark:text-gray-300">
+        {/* Weekly Market Alert Section */}
+        <div className="bg-[#FFF7ED] border-l-4 border-orange-500 p-4 rounded-r mb-8">
+          <p className="font-medium text-orange-800 mb-2">Weekly Market Alert</p>
+          <p className="text-gray-700">
             This special report outlines critical market scenarios and action plans for the week of February 10-14, 2025. 
             This special report outlines key market scenarios and potential impacts for the week ahead.
           </p>
@@ -106,7 +109,47 @@ const TradeWarTsunamiFeb1014 = () => {
 
         {/* Article Content */}
         <div className="py-4 space-y-6">
+          {/* Previously in Weekly Special Section */}
+          <section className="prose dark:prose-invert max-w-none">
+            <h2 className="text-xl font-serif font-bold text-gray-900 dark:text-white mb-3">
+              Previously in Weekly Special 4-7 Feb 2025: Validated Risks
+            </h2>
+            <p className="text-gray-700 dark:text-gray-300">
+              <a href="https://lucaxyzz-digest.replit.app/newsletter/us-china-trade-war-impact-ihsg" className="text-blue-600 hover:underline">
+                Accurately flagged:
+              </a>
+            </p>
+            <ul className="list-disc list-inside text-gray-700 dark:text-gray-300">
+              <li>IHSG Collapse: Index plunged to 6,752.57 (-5.16% WoW), breaching 6,900 as projected6.</li>
+              <li>Commodity Carnage: ADRO (-12%), PTBA (-9%), and AALI (-8%) collapsed amid China's coal/LNG tariffs and CPO risks426.</li>
+              <li>Currency Pressures: USDIDR hit 16,450, nearing BI's intervention threshold632.</li>
+            </ul>
+
+            <h3 className="font-bold text-gray-900 dark:text-white mt-4">Key Triggers:</h3>
+            <ul className="list-disc list-inside text-gray-700 dark:text-gray-300">
+              <li>MSCI Exclusion Fallout: BREN (-22.16%), CUAN (-21.49%), PTRO (-27.27%) erased $10.5B market cap, contributing to 1.4pp of IHSG's decline1123.</li>
+              <li>GDP Mirage: Indonesia's 2024 GDP growth of 5.03% YoY relied on inventory stockpiling (1.2pp), masking weak consumption growth (4.83% YoY)322.</li>
+            </ul>
+          </section>
+
           {/* New Narrative Section */}
+          <section className="prose dark:prose-invert max-w-none">
+            <h2 className="text-xl font-serif font-bold text-gray-900 dark:text-white mb-3">
+              The New Narrative: The Inventory Overhang
+            </h2>
+            <p className="text-gray-700 dark:text-gray-300">
+              Indonesia's 2024 GDP growth, while seemingly robust, hides structural vulnerabilities:
+            </p>
+            <ul className="list-disc list-inside text-gray-700 dark:text-gray-300">
+              <li>Auto Sector Glut: Inventory days surged to 112 (vs. healthy 75), pressuring ASII and AALI3.</li>
+              <li>Palm Oil Stockpiles: CPO inventories hit 4.2M tons (+18% MoM), risking margin compression for AALI and LSIP25.</li>
+            </ul>
+            <p className="text-gray-700 dark:text-gray-300 mt-4">
+              <strong>Investor Takeaway:</strong> The "growth" narrative is faltering. Markets now price in a domestic demand crisis, with retail sales growth slowing to 0.9% YoY3.
+            </p>
+          </section>
+
+          {/* New Narrative: Indonesia as a Chinese Surplus Dumping Ground */}
           <section className="prose dark:prose-invert max-w-none">
             <h2 className="text-xl font-serif font-bold text-gray-900 dark:text-white mb-3">
               The New Narrative: Indonesia as a Chinese Surplus Dumping Ground
@@ -151,70 +194,6 @@ const TradeWarTsunamiFeb1014 = () => {
             <p className="text-gray-700 dark:text-gray-300 mt-4">
               <strong>Investor Takeaway:</strong> The IHSG's 6,752 close reflects not just trade war risks, but a domestic demand crisis masked by statistical artifice.
             </p>
-          </section>
-
-          {/* Previous Week Analysis Section */}
-          <section className="prose dark:prose-invert max-w-none">
-            <h2 className="text-xl font-serif font-bold text-gray-900 dark:text-white mb-3">
-              Previously on Weekly Special February 3–7, 2025
-            </h2>
-            <div className="space-y-6">
-              <div>
-                <h3 className="font-bold text-gray-900 dark:text-white">1. IHSG Support Breach</h3>
-                <p className="text-gray-700 dark:text-gray-300">
-                  <strong>Predicted:</strong> 6,721–6,900 range under "Full Trade War" scenario<br />
-                  <strong>Actual:</strong> Index collapsed to 6,752.57 (-5.16% WoW), breaching 6,900 in 3 sessions
-                </p>
-                <p className="text-gray-700 dark:text-gray-300 mt-2">
-                  <strong>Key Drivers:</strong>
-                </p>
-                <ul className="list-disc list-inside text-gray-700 dark:text-gray-300">
-                  <li>Trump's 25% tariffs on Canada/Mexico triggered risk-off sentiment</li>
-                  <li>CNY devaluation pressured USDIDR to 16,450</li>
-                </ul>
-              </div>
-
-              <div>
-                <h3 className="font-bold text-gray-900 dark:text-white">2. Sectoral Divergence</h3>
-                <ul className="list-disc list-inside text-gray-700 dark:text-gray-300">
-                  <li><strong>Commodities:</strong> "Bloodbath" predicted, realized with Energy -7.6%, ADRO -12%</li>
-                  <li><strong>Defensives (KLBF):</strong> Initially resilient (+7.44% intraweek) before succumbing to systemic pressure (-1.7%)</li>
-                </ul>
-              </div>
-
-              <div>
-                <h3 className="font-bold text-gray-900 dark:text-white">3. Currency & Macro</h3>
-                <ul className="list-disc list-inside text-gray-700 dark:text-gray-300">
-                  <li><strong>USDIDR:</strong> Reached 16,450 (vs projected 16,300–16,500)</li>
-                  <li><strong>Reserves:</strong> Dropped $1.4B to $138.6B, limiting BI's response</li>
-                </ul>
-              </div>
-            </div>
-          </section>
-
-          {/* Market Reality Check Section */}
-          <section className="prose dark:prose-invert max-w-none">
-            <h2 className="text-xl font-serif font-bold text-gray-900 dark:text-white mb-3">
-              Last Week's Market Reality Check
-            </h2>
-            <div className="space-y-6">
-              <div>
-                <h3 className="font-bold text-gray-900 dark:text-white">What Our Analysis Nailed</h3>
-                <ul className="list-disc list-inside text-gray-700 dark:text-gray-300">
-                  <li>✅ <strong>6,900 Breach:</strong> Occurred exactly as modeled, with foreign outflows surging to Rp 3.8T</li>
-                  <li>✅ <strong>Commodity Collapse:</strong> Coal prices fell to $73/ton, crushing ADRO (-12%) and PTBA (-9%)</li>
-                  <li>✅ <strong>Defensive Flaw:</strong> KLBF's intraweek rally (+7.44%) validated its defensive role, but systemic panic later erased gains</li>
-                </ul>
-              </div>
-
-              <div>
-                <h3 className="font-bold text-gray-900 dark:text-white">Where We Underestimated</h3>
-                <ul className="list-disc list-inside text-gray-700 dark:text-gray-300">
-                  <li>⚠️ <strong>Speed of Collapse:</strong> 6,900 breached in 3 days vs projected 5-day timeline</li>
-                  <li>⚠️ <strong>KLBF's Limits:</strong> Sector-wide healthcare decline (-1.7% WoW) exposed defensive vulnerabilities</li>
-                </ul>
-              </div>
-            </div>
           </section>
 
           {/* Forward Outlook Section */}
