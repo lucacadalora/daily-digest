@@ -32,35 +32,6 @@ export type Article = z.infer<typeof articleSchema>;
 
 export const sampleArticles: Article[] = [
   {
-    slug: "bbri-financial-analysis",
-    title: "BBRI Q4 2024: Digital Banking Surge Masks Credit Quality Concerns",
-    description: "Bank Rakyat Indonesia (BBRI) faces credit quality pressures despite digital transformation success, as micro-lending segment shows stress signals amid rising rates.",
-    category: "Markets",
-    source: "Daily Digest",
-    author: "Luca Cada Lora",
-    date: "February 8, 2025",
-    previewEmoji: "🏦",
-    previewMetrics: [
-      {
-        label: "NPL Ratio",
-        value: "3.2%",
-        subtitle: "Up from 2.8% Q3"
-      },
-      {
-        label: "Digital Users",
-        value: "32.5M",
-        subtitle: "+45% YoY Growth"
-      },
-      {
-        label: "NIM",
-        value: "6.8%",
-        subtitle: "-20bps QoQ"
-      }
-    ],
-    tags: ["Banking", "Financial Analysis", "BBRI", "Featured"],
-    content: `BBRI's Q4 results reveal a complex narrative...`
-  },
-  {
     slug: "trade-war-tsunami-feb-10-14",
     title: "Trade War Tsunami: Indonesia Emerges as China's Surplus Dumping Ground",
     description: "Bank Indonesia issues stark warning as Chinese goods flood Indonesian markets, threatening local industries. Analysis of critical support levels and monetary policy implications amid growing market volatility.",
@@ -137,6 +108,35 @@ Action: Accumulate below Rp2,700 (near 2025 low) for dividend + potential reboun
     ],
     tags: ["Federal Reserve", "Monetary Policy", "QT", "Risk Assets"],
     content: `Fed's QT Exit: A Liquidity Lifeline for Risk Assets`
+  },
+  {
+    slug: "bbri-financial-analysis",
+    title: "BBRI Q4 2024: Digital Banking Surge Masks Credit Quality Concerns",
+    description: "Bank Rakyat Indonesia (BBRI) faces credit quality pressures despite digital transformation success, as micro-lending segment shows stress signals amid rising rates.",
+    category: "Markets",
+    source: "Daily Digest",
+    author: "Luca Cada Lora",
+    date: "February 8, 2025",
+    previewEmoji: "🏦",
+    previewMetrics: [
+      {
+        label: "NPL Ratio",
+        value: "3.2%",
+        subtitle: "Up from 2.8% Q3"
+      },
+      {
+        label: "Digital Users",
+        value: "32.5M",
+        subtitle: "+45% YoY Growth"
+      },
+      {
+        label: "NIM",
+        value: "6.8%",
+        subtitle: "-20bps QoQ"
+      }
+    ],
+    tags: ["Banking", "Financial Analysis", "BBRI", "Featured"],
+    content: `BBRI's Q4 results reveal a complex narrative...`
   },
   {
     slug: "indonesia-economic-inventory-crisis",
