@@ -96,19 +96,25 @@ const TradeWarTsunamiFeb1014 = () => {
                 <li className="flex items-start">
                   <span className="text-blue-600 mr-2">•</span>
                   <span className="text-gray-700 dark:text-gray-300">
-                    <strong>IHSG Collapse:</strong> Index plunged to 6,752.57 (-5.16% WoW), breaching 6,900 as projected⁶
+                    <strong>IHSG Collapse:</strong> Index plunged to 6,752.57 (-5.16% WoW), breaching 6,900 as projected
                   </span>
                 </li>
                 <li className="flex items-start">
                   <span className="text-blue-600 mr-2">•</span>
                   <span className="text-gray-700 dark:text-gray-300">
-                    <strong>Commodity Carnage:</strong> ADRO (-12%), PTBA (-9%), and AALI (-8%) collapsed amid China's coal/LNG tariffs and CPO risks⁴²⁶
+                    <strong>Commodity Carnage:</strong> ADRO (-12%), PTBA (-9%), and AALI (-8%) collapsed amid China's coal/LNG tariffs and CPO risks
                   </span>
                 </li>
                 <li className="flex items-start">
                   <span className="text-blue-600 mr-2">•</span>
                   <span className="text-gray-700 dark:text-gray-300">
-                    <strong>Currency Pressures:</strong> USDIDR hit 16,450, nearing BI's intervention threshold⁶³²
+                    <strong>Currency Pressures:</strong> USDIDR hit 16,450, nearing BI's intervention threshold
+                  </span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-blue-600 mr-2">•</span>
+                  <span className="text-gray-700 dark:text-gray-300">
+                    <strong>Defensive Resilience:</strong> KLBF surged 7.4% intraweek before profit-taking, validating its defensive status despite systemic pressures
                   </span>
                 </li>
               </ul>
@@ -120,13 +126,13 @@ const TradeWarTsunamiFeb1014 = () => {
                 <li className="flex items-start">
                   <span className="text-red-500 mr-2">•</span>
                   <span className="text-gray-700 dark:text-gray-300">
-                    <strong>MSCI Exclusion Fallout:</strong> BREN (-22.16%), CUAN (-21.49%), PTRO (-27.27%) erased $10.5B market cap, contributing to 1.4pp of IHSG's decline¹¹²³
+                    <strong>MSCI Exclusion Fallout:</strong> BREN (-22.16%), CUAN (-21.49%), PTRO (-27.27%) erased $10.5B market cap, contributing to 1.4pp of IHSG's decline
                   </span>
                 </li>
                 <li className="flex items-start">
                   <span className="text-red-500 mr-2">•</span>
                   <span className="text-gray-700 dark:text-gray-300">
-                    <strong>GDP Mirage:</strong> Indonesia's 2024 GDP growth of 5.03% YoY relied on inventory stockpiling (1.2pp), masking weak consumption growth (4.83% YoY)³²²
+                    <strong>GDP Mirage:</strong> Indonesia's 2024 GDP growth of 5.03% YoY relied on inventory stockpiling (1.2pp), masking weak consumption growth (4.83% YoY)
                   </span>
                 </li>
               </ul>
