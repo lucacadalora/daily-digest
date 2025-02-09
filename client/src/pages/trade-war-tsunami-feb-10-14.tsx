@@ -300,21 +300,6 @@ const TradeWarTsunamiFeb1014 = () => {
               </div>
             </div>
 
-            {/* What to Watch */}
-            <div>
-              <h3 className="font-bold text-gray-900 dark:text-white mb-3">What to Watch</h3>
-              <ul className="list-disc list-inside space-y-1 text-gray-700 dark:text-gray-300">
-                <li>6,742 Support: Breach risks algorithmic selling toward 6,600</li>
-                <li>6,900 Resistance: Recovery above this signals temporary relief</li>
-                <li>BI Meeting (Feb 11): Rate hike could stabilize USDIDR</li>
-              </ul>
-              <p className="text-gray-700 dark:text-gray-300 mt-2">
-                <strong>Action:</strong> Hedge with gold/defensive stocks (KLBF, TLKM); avoid commodities (ADRO, AALI)
-              </p>
-              <p className="text-gray-700 dark:text-gray-300 mt-2">
-                <strong>Bottom Line:</strong> The 6,742–6,830 zone is critical. Prioritize risk management amid high volatility.
-              </p>
-            </div>
 
             {/* High-Risk Zones Table */}
             <div>
@@ -438,19 +423,42 @@ const TradeWarTsunamiFeb1014 = () => {
         </section>
 
         {/* Bottom Line */}
-        <section className="prose dark:prose-invert max-w-none">
-          <h2 className="text-xl font-serif font-bold text-gray-900 dark:text-white mb-3">
+        <section className="prose dark:prose-invert max-w-none mb-8">
+          <h2 className="text-xl font-serif font-bold text-gray-900 dark:text-white mb-4">
             Bottom Line
           </h2>
-          <p className="text-gray-700 dark:text-gray-300">
-            This isn't just a trade war – it's a battle for Indonesia's economic sovereignty. Investors must navigate Chinese dumping, phantom GDP growth, and BI's dwindling reserves ($138.6B). Rotate into tariff-immune sectors (healthcare, fintech) and brace for 6,500 tests.
+          <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
+            The IHSG's 6,600–6,700 zone is this week's litmus test. While BI's rate hike and Ramadan-driven consumption (UNVR, ICBP) may offer brief respite, systemic risks from trade wars and foreign outflows demand tactical caution. A breach below 6,742 opens a path to 6,400, but oversold conditions hint at dead-cat bounces to 6,900.
           </p>
         </section>
 
+        {/* Related Analyses */}
+        <section className="prose dark:prose-invert max-w-none mb-8">
+          <h2 className="text-xl font-serif font-bold text-gray-900 dark:text-white mb-4">
+            Related Analyses
+          </h2>
+          <ul className="list-none space-y-3">
+            <li>
+              <a href="https://lucaxyzz-digest.replit.app/newsletter/us-china-trade-war-impact-ihsg" 
+                 className="text-blue-600 hover:underline">
+                US-China Trade War Impact
+              </a>
+            </li>
+            <li>
+              <a href="https://lucaxyzz-digest.replit.app/newsletter/indonesia-economic-inventory-crisis"
+                 className="text-blue-600 hover:underline">
+                Indonesia's Inventory-Driven GDP Crisis
+              </a>
+            </li>
+          </ul>
+        </section>
+
         {/* Footer */}
-        <footer className="text-sm text-gray-500 dark:text-gray-400 border-t border-gray-200 dark:border-gray-700 pt-4 pb-6">
-          <div className="flex items-center justify-between mb-2">
-            <p>— Lucaxyz Digest Research | Data as of Feb 9, 2025</p>
+        <footer className="text-sm text-gray-500 dark:text-gray-400 border-t border-gray-200 dark:border-gray-700 pt-4 mt-8">
+          <div className="space-y-2">
+            <p className="font-medium">Sources: IDX, Kontan, CNBC Indonesia, Previous Analysis</p>
+            <p className="italic">Disclaimer: For general information only. Not financial advice. Consult your financial advisor before making investment decisions.</p>
+            <p>© 2025 Market Analysis Report</p>
           </div>
         </footer>
       </div>
