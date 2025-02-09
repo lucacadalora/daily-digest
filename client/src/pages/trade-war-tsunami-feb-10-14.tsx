@@ -140,7 +140,7 @@ const TradeWarTsunamiFeb1014 = () => {
           </div>
         </div>
 
-        {/* Metric Cards */}
+        {/* Metric Cards - Replaced with edited version */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 py-6 border-b border-gray-200 dark:border-gray-800">
           <Card className="bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm">
             <CardContent className="pt-6">
@@ -157,9 +157,9 @@ const TradeWarTsunamiFeb1014 = () => {
             <CardContent className="pt-6">
               <div className="flex flex-col items-center gap-1">
                 <AlertCircle className="h-6 w-6 text-orange-600" />
-                <p className="text-sm font-medium text-gray-500 dark:text-gray-400">Chinese Imports</p>
-                <p className="text-2xl font-bold text-gray-900 dark:text-white">↑ 32%</p>
-                <p className="text-sm text-gray-500 dark:text-gray-400">ASEAN Share</p>
+                <p className="text-sm font-medium text-gray-500 dark:text-gray-400">USDIDR Band</p>
+                <p className="text-2xl font-bold text-gray-900 dark:text-white">16.3-16.6K</p>
+                <p className="text-sm text-gray-500 dark:text-gray-400">BI Intervention</p>
               </div>
             </CardContent>
           </Card>
@@ -168,13 +168,80 @@ const TradeWarTsunamiFeb1014 = () => {
             <CardContent className="pt-6">
               <div className="flex flex-col items-center gap-1">
                 <Shield className="h-6 w-6 text-blue-600" />
-                <p className="text-sm font-medium text-gray-500 dark:text-gray-400">Local Impact</p>
-                <p className="text-2xl font-bold text-gray-900 dark:text-white">-18-23%</p>
-                <p className="text-sm text-gray-500 dark:text-gray-400">MSME Stocks</p>
+                <p className="text-sm font-medium text-gray-500 dark:text-gray-400">Defensive Pivot</p>
+                <p className="text-2xl font-bold text-gray-900 dark:text-white">+20%</p>
+                <p className="text-sm text-gray-500 dark:text-gray-400">Gold Proxies</p>
               </div>
             </CardContent>
           </Card>
         </div>
+
+        {/* IHSG Technical Outlook Section - New Section */}
+        <section className="prose dark:prose-invert max-w-none mb-8">
+          <h2 className="text-xl font-serif font-bold text-gray-900 dark:text-white mb-4">
+            IHSG Technical Outlook
+          </h2>
+
+          <div className="space-y-6">
+            {/* Support & Resistance */}
+            <div className="space-y-2">
+              <div>
+                <p className="text-gray-700 dark:text-gray-300">
+                  <strong>New Support Zone:</strong> 6,600–6,750 (Fibonacci 78.6% retracement)
+                </p>
+                <p className="text-gray-700 dark:text-gray-300">
+                  <strong>Resistance:</strong> 6,900–7,000 (Previous support now resistance)
+                </p>
+              </div>
+            </div>
+
+            {/* High-Risk Zones Table */}
+            <div>
+              <h3 className="font-bold text-gray-900 dark:text-white mb-3">High-Risk Zones</h3>
+              <div className="overflow-x-auto">
+                <table className="min-w-full border-collapse">
+                  <thead>
+                    <tr className="bg-gray-50 dark:bg-gray-800">
+                      <th className="px-4 py-2 text-left text-sm font-semibold text-gray-900 dark:text-white">Sector</th>
+                      <th className="px-4 py-2 text-left text-sm font-semibold text-gray-900 dark:text-white">Vulnerability</th>
+                      <th className="px-4 py-2 text-left text-sm font-semibold text-gray-900 dark:text-white">Key Stocks</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr className="border-t border-gray-200 dark:border-gray-700">
+                      <td className="px-4 py-2 text-gray-700 dark:text-gray-300">Automotive</td>
+                      <td className="px-4 py-2 text-gray-700 dark:text-gray-300">US tariff retaliation risk</td>
+                      <td className="px-4 py-2 text-gray-700 dark:text-gray-300">ASII (-14% WoW), AIMS (-9%)</td>
+                    </tr>
+                    <tr className="border-t border-gray-200 dark:border-gray-700">
+                      <td className="px-4 py-2 text-gray-700 dark:text-gray-300">Coal</td>
+                      <td className="px-4 py-2 text-gray-700 dark:text-gray-300">China's import quotas cut 40%</td>
+                      <td className="px-4 py-2 text-gray-700 dark:text-gray-300">ADRO, PTBA</td>
+                    </tr>
+                    <tr className="border-t border-gray-200 dark:border-gray-700">
+                      <td className="px-4 py-2 text-gray-700 dark:text-gray-300">Palm Oil</td>
+                      <td className="px-4 py-2 text-gray-700 dark:text-gray-300">EU deforestation rules + China tariffs</td>
+                      <td className="px-4 py-2 text-gray-700 dark:text-gray-300">LSIP, AALI</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            {/* Defensive Recalibration */}
+            <div>
+              <h3 className="font-bold text-gray-900 dark:text-white mb-3">Defensive Recalibration</h3>
+              <div className="space-y-2">
+                <p className="text-gray-700 dark:text-gray-300 font-medium">Upgraded Resilience:</p>
+                <ul className="list-disc list-inside space-y-1 text-gray-700 dark:text-gray-300">
+                  <li>TLKM (+1.2% WoW): 5G rollout shields earnings</li>
+                  <li>KLBF (+2.3% WoW post-drop): Pandemic prep stocks boost demand</li>
+                  <li>BBCA: Liquidity coverage ratio at 158% buffers rate hikes</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
 
         {/* Article Content */}
         <div className="py-4 space-y-6">
