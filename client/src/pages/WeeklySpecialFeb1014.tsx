@@ -7,7 +7,7 @@ import { Header } from "@/components/Header";
 
 const WeeklySpecialFeb1014: React.FC = () => {
   const [location] = useLocation();
-  const article = sampleArticles.find(a => a.slug === 'weekly-special-feb-10-14-2025');
+  const article = sampleArticles.find(a => a.slug === 'weekly-special-feb-10-14');
 
   useEffect(() => {
     if (article) {
@@ -129,7 +129,7 @@ const WeeklySpecialFeb1014: React.FC = () => {
 
             <div className="mt-8">
               <h2 className="text-xl font-serif font-bold text-gray-900 dark:text-white mb-4">Intermezzo: Last Week's Market Reality Check</h2>
-              
+
               <div className="space-y-6">
                 <div>
                   <h3 className="font-bold text-gray-900 dark:text-white mb-2">What Our Analysis Nailed</h3>
