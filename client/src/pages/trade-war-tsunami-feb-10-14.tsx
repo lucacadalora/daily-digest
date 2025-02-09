@@ -25,9 +25,9 @@ const TradeWarTsunamiFeb1014 = () => {
 
         {/* Breadcrumb */}
         <nav className="flex items-center space-x-2 text-sm text-gray-600 dark:text-gray-400 py-4">
-          <a href="/" className="hover:text-blue-600">Home</a>
+          <Link href="/" className="hover:text-blue-600">Home</Link>
           <ChevronRight className="h-4 w-4" />
-          <a href="/newsletter" className="hover:text-blue-600">Newsletter</a>
+          <Link href="/newsletter" className="hover:text-blue-600">Newsletter</Link>
           <ChevronRight className="h-4 w-4" />
           <span>US-China Trade War Impact</span>
         </nav>
@@ -61,6 +61,66 @@ const TradeWarTsunamiFeb1014 = () => {
             By Luca Cada Lora
           </div>
         </header>
+
+        {/* Previously in Weekly Special Section - Featured */}
+        <div className="bg-gray-50 dark:bg-gray-800/50 rounded-lg p-6 mb-8 border border-gray-200 dark:border-gray-700">
+          <h2 className="text-2xl font-serif font-bold text-gray-900 dark:text-white mb-4">
+            <a href="https://lucaxyzz-digest.replit.app/newsletter/us-china-trade-war-impact-ihsg" 
+               className="text-blue-600 hover:underline">
+              Previously in Weekly Special 4-7 Feb 2025: US-China Retaliation: Escalation Could Trigger IHSG Sell-Offs Below 6,900
+            </a>
+          </h2>
+
+          <p className="text-gray-700 dark:text-gray-300 mb-6 text-lg">
+            Last week's analysis proved prescient as we accurately predicted the IHSG's descent below 6,900. 
+            For new readers, our previous report detailed how escalating US-China tensions would impact Indonesian markets. 
+            Here's what we got right:
+          </p>
+
+          <div className="space-y-6">
+            <div>
+              <h3 className="font-bold text-gray-900 dark:text-white mb-3 text-lg">Accurately Flagged:</h3>
+              <ul className="space-y-3">
+                <li className="flex items-start">
+                  <span className="text-blue-600 mr-2">•</span>
+                  <span className="text-gray-700 dark:text-gray-300">
+                    <strong>IHSG Collapse:</strong> Index plunged to 6,752.57 (-5.16% WoW), breaching 6,900 as projected⁶
+                  </span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-blue-600 mr-2">•</span>
+                  <span className="text-gray-700 dark:text-gray-300">
+                    <strong>Commodity Carnage:</strong> ADRO (-12%), PTBA (-9%), and AALI (-8%) collapsed amid China's coal/LNG tariffs and CPO risks⁴²⁶
+                  </span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-blue-600 mr-2">•</span>
+                  <span className="text-gray-700 dark:text-gray-300">
+                    <strong>Currency Pressures:</strong> USDIDR hit 16,450, nearing BI's intervention threshold⁶³²
+                  </span>
+                </li>
+              </ul>
+            </div>
+
+            <div>
+              <h3 className="font-bold text-gray-900 dark:text-white mb-3 text-lg">Key Triggers:</h3>
+              <ul className="space-y-3">
+                <li className="flex items-start">
+                  <span className="text-red-500 mr-2">•</span>
+                  <span className="text-gray-700 dark:text-gray-300">
+                    <strong>MSCI Exclusion Fallout:</strong> BREN (-22.16%), CUAN (-21.49%), PTRO (-27.27%) erased $10.5B market cap, contributing to 1.4pp of IHSG's decline¹¹²³
+                  </span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-red-500 mr-2">•</span>
+                  <span className="text-gray-700 dark:text-gray-300">
+                    <strong>GDP Mirage:</strong> Indonesia's 2024 GDP growth of 5.03% YoY relied on inventory stockpiling (1.2pp), masking weak consumption growth (4.83% YoY)³²²
+                  </span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
 
         {/* Weekly Market Alert Section */}
         <div className="bg-[#FFF7ED] border-l-4 border-orange-500 p-4 rounded-r mb-8">
@@ -109,29 +169,6 @@ const TradeWarTsunamiFeb1014 = () => {
 
         {/* Article Content */}
         <div className="py-4 space-y-6">
-          {/* Previously in Weekly Special Section */}
-          <section className="prose dark:prose-invert max-w-none">
-            <h2 className="text-xl font-serif font-bold text-gray-900 dark:text-white mb-3">
-              Previously in Weekly Special 4-7 Feb 2025: Validated Risks
-            </h2>
-            <p className="text-gray-700 dark:text-gray-300">
-              <a href="https://lucaxyzz-digest.replit.app/newsletter/us-china-trade-war-impact-ihsg" className="text-blue-600 hover:underline">
-                Accurately flagged:
-              </a>
-            </p>
-            <ul className="list-disc list-inside text-gray-700 dark:text-gray-300">
-              <li>IHSG Collapse: Index plunged to 6,752.57 (-5.16% WoW), breaching 6,900 as projected6.</li>
-              <li>Commodity Carnage: ADRO (-12%), PTBA (-9%), and AALI (-8%) collapsed amid China's coal/LNG tariffs and CPO risks426.</li>
-              <li>Currency Pressures: USDIDR hit 16,450, nearing BI's intervention threshold632.</li>
-            </ul>
-
-            <h3 className="font-bold text-gray-900 dark:text-white mt-4">Key Triggers:</h3>
-            <ul className="list-disc list-inside text-gray-700 dark:text-gray-300">
-              <li>MSCI Exclusion Fallout: BREN (-22.16%), CUAN (-21.49%), PTRO (-27.27%) erased $10.5B market cap, contributing to 1.4pp of IHSG's decline1123.</li>
-              <li>GDP Mirage: Indonesia's 2024 GDP growth of 5.03% YoY relied on inventory stockpiling (1.2pp), masking weak consumption growth (4.83% YoY)322.</li>
-            </ul>
-          </section>
-
           {/* New Narrative Section */}
           <section className="prose dark:prose-invert max-w-none">
             <h2 className="text-xl font-serif font-bold text-gray-900 dark:text-white mb-3">
