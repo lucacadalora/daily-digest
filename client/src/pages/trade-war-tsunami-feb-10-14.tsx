@@ -388,7 +388,7 @@ const TradeWarTsunamiFeb1014 = () => {
 
             <div className="space-y-2">
               <h3 className="font-bold text-gray-900 dark:text-white flex items-center gap-2">
-                <AlertCircle className="h-4 w-4 text-red-600" />
+                <AlertTriangle className="h-4 w-4 text-red-600" />
                 Feb 12: China's Rare Earth Curbs
               </h3>
               <div className="ml-6">
