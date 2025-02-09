@@ -62,39 +62,38 @@ export const sampleArticles: Article[] = [
 
 Our February 3–7 Market Alert proved prescient across three critical dimensions:
 
-1. IHSG Support Breach
-Predicted: 6,721–6,900 range under "Full Trade War" scenario
-Actual: Index collapsed to 6,752.57 (-5.16% WoW), breaching 6,900 in 3 sessions
+IHSG Support Breach
+Predicted: 6,721–6,900 range under "Full Trade War" scenario.
+Actual: Index collapsed to 6,752.57 (-5.16% WoW), breaching 6,900 in 3 sessions.
 Key Drivers:
-* Trump's 25% tariffs on Canada/Mexico triggered risk-off sentiment
-* CNY devaluation pressured USDIDR to 16,450
+Trump's 25% tariffs on Canada/Mexico triggered risk-off sentiment.
+CNY devaluation pressured USDIDR to 16,450.
 
-2. Sectoral Divergence
-Sector          | Prediction           | Outcome
-----------------|---------------------|------------------------
-Commodities     | "Bloodbath" expected | Energy -7.6%, ADRO -12%
-Defensives (KLBF)| Resilient initially | +7.44% intraweek, then -1.7%
+Sectoral Divergence
+Sector Prediction Outcome Source
+Commodities "Bloodbath" expected Energy -7.6%, ADRO -12%
+Defensives (KLBF) Resilient initially +7.44% intraweek, then -1.7%
 
-3. Currency & Macro
-* USDIDR: Reached 16,450 (vs projected 16,300–16,500)
-* Reserves: Dropped $1.4B to $138.6B, limiting BI's response
+Currency & Macro
+USDIDR: Reached 16,450 (vs projected 16,300–16,500).
+Reserves: Dropped $1.4B to $138.6B, limiting BI's response.
 
 Intermezzo: Last Week's Market Reality Check
 
-What Our Analysis Nailed:
-* 6,900 Breach: Occurred exactly as modeled, with foreign outflows surging to Rp 3.8T
-* Commodity Collapse: Coal prices fell to $73/ton, crushing ADRO (-12%) and PTBA (-9%)
-* Defensive Flaw: KLBF's intraweek rally (+7.44%) validated its defensive role, but systemic panic later erased gains
+What Our Analysis Nailed
+6,900 Breach: Occurred exactly as modeled, with foreign outflows surging to Rp 3.8T.
+Commodity Collapse: Coal prices fell to $73/ton, crushing ADRO (-12%) and PTBA (-9%).
+Defensive Flaw: KLBF's intraweek rally (+7.44%) validated its defensive role, but systemic panic later erased gains.
 
-Where We Underestimated:
-* Speed of Collapse: 6,900 breached in 3 days vs projected 5-day timeline
-* KLBF's Limits: Sector-wide healthcare decline (-1.7% WoW) exposed defensive vulnerabilities
+Where We Underestimated
+Speed of Collapse: 6,900 breached in 3 days vs projected 5-day timeline.
+KLBF's Limits: Sector-wide healthcare decline (-1.7% WoW) exposed defensive vulnerabilities.
 
 Conclusion: Precision Amid Chaos
 Our original analysis:
-✅ Correctly flagged 6,900 as the critical threshold
-✅ Accurately predicted commodity sector vulnerabilities (ADRO, AALI)
-⚠️ Underestimated KLBF's sensitivity to systemic panic despite strong fundamentals
+✅ Correctly flagged 6,900 as the critical threshold.
+✅ Accurately predicted commodity sector vulnerabilities (ADRO, AALI).
+⚠️ Underestimated KLBF's sensitivity to systemic panic despite strong fundamentals.
 
 Lesson: While macro forecasts proved reliable, liquidity crunches amplified sell-offs beyond technical projections.`
   },

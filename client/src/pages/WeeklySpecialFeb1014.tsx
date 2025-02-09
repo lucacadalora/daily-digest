@@ -74,6 +74,21 @@ const WeeklySpecialFeb1014: React.FC = () => {
           </div>
         </header>
 
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 py-4">
+          {article.previewMetrics?.map((metric, index) => (
+            <Card key={index} className="bg-gray-50 dark:bg-gray-800">
+              <CardContent className="p-4">
+                <div className="flex items-center space-x-2 mb-2">
+                  <TrendingDown className="h-5 w-5 text-red-600" />
+                  <h3 className="font-bold text-gray-900 dark:text-white">{metric.label}</h3>
+                </div>
+                <p className="text-2xl font-bold text-gray-900 dark:text-white mb-1">{metric.value}</p>
+                <p className="text-sm text-gray-600 dark:text-gray-400">{metric.subtitle}</p>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+
         <div className="py-4 border-b border-gray-200 dark:border-gray-800">
           <div className="prose text-gray-700 dark:text-gray-300 max-w-none">
             <h2 className="text-xl font-serif font-bold text-gray-900 dark:text-white mb-4">Previously on Weekly Special February 3–7, 2025</h2>
@@ -81,7 +96,7 @@ const WeeklySpecialFeb1014: React.FC = () => {
 
             <div className="space-y-6">
               <div>
-                <h3 className="font-bold text-gray-900 dark:text-white mb-2">1. IHSG Support Breach</h3>
+                <h3 className="font-bold text-gray-900 dark:text-white mb-2">IHSG Support Breach</h3>
                 <ul className="list-none space-y-2">
                   <li><strong>Predicted:</strong> 6,721–6,900 range under "Full Trade War" scenario.</li>
                   <li><strong>Actual:</strong> Index collapsed to 6,752.57 (-5.16% WoW), breaching 6,900 in 3 sessions.</li>
@@ -92,7 +107,7 @@ const WeeklySpecialFeb1014: React.FC = () => {
               </div>
 
               <div>
-                <h3 className="font-bold text-gray-900 dark:text-white mb-2">2. Sectoral Divergence</h3>
+                <h3 className="font-bold text-gray-900 dark:text-white mb-2">Sectoral Divergence</h3>
                 <div className="overflow-x-auto">
                   <table className="min-w-full border-collapse">
                     <thead>
@@ -119,7 +134,7 @@ const WeeklySpecialFeb1014: React.FC = () => {
               </div>
 
               <div>
-                <h3 className="font-bold text-gray-900 dark:text-white mb-2">3. Currency & Macro</h3>
+                <h3 className="font-bold text-gray-900 dark:text-white mb-2">Currency & Macro</h3>
                 <ul className="list-none space-y-2">
                   <li>• USDIDR: Reached 16,450 (vs projected 16,300–16,500).</li>
                   <li>• Reserves: Dropped $1.4B to $138.6B, limiting BI's response.</li>
