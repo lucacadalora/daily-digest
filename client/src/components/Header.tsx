@@ -23,6 +23,10 @@ export const Header = ({ onSubscribe, showCategories = true, simplified = false 
     },
   });
 
+  const handleHomeClick = () => {
+    window.scrollTo(0, 0);
+  };
+
   const handleChatClick = () => {
     setIsSheetOpen(false);
     setTimeout(() => {
@@ -61,6 +65,7 @@ export const Header = ({ onSubscribe, showCategories = true, simplified = false 
           {/* Center Logo */}
           <Link 
             href="/" 
+            onClick={handleHomeClick}
             className={`${showCategories ? 'md:absolute md:left-1/2 md:-translate-x-1/2' : ''} mx-auto flex-1 md:flex-none text-center`}
           >
             <h1 className="text-xl font-['Georgia'] font-bold cursor-pointer hover:opacity-80 transition-opacity">
