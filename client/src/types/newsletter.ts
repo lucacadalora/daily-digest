@@ -53,9 +53,9 @@ export const sampleArticles: Article[] = [
         subtitle: "2025 Forecast"
       },
       {
-        label: "Digital Growth",
-        value: "+62% YoY",
-        subtitle: "Mobile Loans"
+        label: "Net Profit",
+        value: "+12% YoY",
+        subtitle: "Q3 2024"
       }
     ],
     tags: ["Banking", "Dividends", "BBRI", "Stock Analysis"],
@@ -97,8 +97,8 @@ At 10.3x earnings and 1.9x book value, BBRI prices in excessive pessimism about 
       },
       {
         label: "Defense Pick",
-        value: "UNVR",
-        subtitle: "Low China Risk"
+        value: "KLBF",
+        subtitle: "Healthcare Shield"
       }
     ],
     tags: ["IHSG", "Trade War", "Market Strategy"],
