@@ -24,9 +24,7 @@ export default function Home() {
   // Calculate the articles for the current page
   const indexOfLastArticle = currentPage * articlesPerPage;
   const indexOfFirstArticle = indexOfLastArticle - articlesPerPage;
-  const currentArticles = sortedArticles
-    .filter(article => article.slug !== 'indonesia-mineral-criticality-matrix') // Exclude featured from main list
-    .slice(indexOfFirstArticle, indexOfLastArticle);
+  const currentArticles = sortedArticles.slice(indexOfFirstArticle, indexOfLastArticle);
   const totalPages = Math.ceil(sortedArticles.length / articlesPerPage);
 
   return (
@@ -90,20 +88,23 @@ export default function Home() {
               <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-4">Featured</h2>
               {featuredArticle && (
                 <Link href={`/newsletter/${featuredArticle.slug}`}>
-                  <Card className="hover:shadow-lg transition-shadow duration-200 group">
+                  <Card className="group relative hover:shadow-lg transition-shadow duration-200">
                     <CardContent className="p-0">
                       <div className="relative">
                         <img 
                           src="/Figure_1.png" 
                           alt="Mineral Criticality Matrix"
-                          className="w-full h-40 object-cover rounded-t-lg"
+                          className="w-full object-cover rounded-t-lg"
                         />
-                        <div className="absolute top-2 right-2 bg-white dark:bg-gray-800 rounded-full p-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                          <ArrowRight className="h-4 w-4 text-blue-600" />
+                        <div className="absolute right-0 top-1/2 -translate-y-1/2 bg-white dark:bg-gray-800 rounded-l-full p-2 shadow-md group-hover:bg-blue-50 dark:group-hover:bg-gray-700 transition-colors">
+                          <ArrowRight className="h-5 w-5 text-blue-600" />
                         </div>
                       </div>
                       <div className="p-4">
-                        <h3 className="font-medium text-gray-900 dark:text-white text-sm line-clamp-2">
+                        <div className="text-xs font-semibold text-blue-600 dark:text-blue-400 uppercase tracking-wider mb-2">
+                          Industries
+                        </div>
+                        <h3 className="font-medium text-gray-900 dark:text-white">
                           {featuredArticle.title}
                         </h3>
                       </div>
