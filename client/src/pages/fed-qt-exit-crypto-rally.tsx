@@ -1,7 +1,6 @@
 import { Card, CardContent } from '@/components/ui/card';
 import { TrendingUp, AlertCircle, Clock, MapPin, ChevronRight, Shield, BarChart3, LineChart, Info } from 'lucide-react';
 import { Link } from "wouter";
-import { Header } from "@/components/Header";
 import { useEffect } from "react";
 
 export default function FedQTExitCryptoRally() {
@@ -186,21 +185,23 @@ export default function FedQTExitCryptoRally() {
                 <p className="mb-2"><strong>Catalyst:</strong> Retail FOMO + whale accumulation ($7.17M Binance buy). Oversold RSI (22.28) and expanding triangle pattern hint at volatility squeeze.</p>
                 <p><strong>Strategic Takeaway:</strong> Hold $0.60 for $0.75 target; breakdown below $0.53 invalidates setup.</p>
                 <div className="mt-4">
-                  <img 
-                    src="/wif-chart.png"
-                    alt="WIF Chart: TD Sequential buy signal" 
-                    className="w-full rounded-lg shadow-lg max-w-3xl mx-auto"
-                    onError={(e) => {
-                      console.error('Image failed to load:', e);
-                      if (e.currentTarget instanceof HTMLImageElement) {
-                        console.log('Attempted image path:', e.currentTarget.src);
-                        e.currentTarget.style.display = 'none';
-                      }
-                    }}
-                    onLoad={() => {
-                      console.log('WIF chart image loaded successfully');
-                    }}
-                  />
+                  <div className="w-full max-w-3xl mx-auto bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden">
+                    <img 
+                      src="/attached_assets/image_1739193795741.png"
+                      alt="WIF Chart: TD Sequential buy signal" 
+                      className="w-full h-auto"
+                      onError={(e) => {
+                        console.error('Image failed to load:', e);
+                        if (e.currentTarget instanceof HTMLImageElement) {
+                          console.log('Attempted image path:', e.currentTarget.src);
+                          e.currentTarget.style.display = 'none';
+                        }
+                      }}
+                      onLoad={() => {
+                        console.log('WIF chart image loaded successfully');
+                      }}
+                    />
+                  </div>
                 </div>
               </div>
             </div>
