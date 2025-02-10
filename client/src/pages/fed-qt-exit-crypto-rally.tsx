@@ -187,9 +187,19 @@ export default function FedQTExitCryptoRally() {
                 <p><strong>Strategic Takeaway:</strong> Hold $0.60 for $0.75 target; breakdown below $0.53 invalidates setup.</p>
                 <div className="mt-4">
                   <img 
-                    src="/wif-chart.png" 
+                    src="/wif-strategic-targets.png"
                     alt="WIF Chart: TD Sequential buy signal" 
                     className="w-full rounded-lg shadow-lg max-w-3xl mx-auto"
+                    onError={(e) => {
+                      console.error('Image failed to load:', e);
+                      if (e.currentTarget instanceof HTMLImageElement) {
+                        console.log('Attempted image path:', e.currentTarget.src);
+                        e.currentTarget.style.display = 'none';
+                      }
+                    }}
+                    onLoad={() => {
+                      console.log('WIF chart image loaded successfully');
+                    }}
                   />
                 </div>
               </div>
