@@ -149,8 +149,8 @@ export default function FedQTExitCryptoRally() {
                 <p><strong>Strategic Takeaway:</strong> Daily close above $100K confirms path to $105K; hold $94.7K as invalidation.</p>
                 <div className="mt-4">
                   <CryptoChart 
-                    imagePath="/btc-strategic-targets.png"
-                    altText="BTC Chart: Symmetrical triangle breakout"
+                    src="/btc-chart.png"
+                    alt="BTC Chart: Symmetrical triangle breakout"
                   />
                 </div>
               </div>
@@ -161,8 +161,8 @@ export default function FedQTExitCryptoRally() {
                 <p><strong>Strategic Takeaway:</strong> Break above $2.75K targets $3K; ETH/BTC ratio recovery critical for altseason.</p>
                 <div className="mt-4">
                   <CryptoChart 
-                    imagePath="/eth-strategic-targets.png"
-                    altText="ETH Chart: RSI divergence and whale accumulation"
+                    src="/eth-chart.png"
+                    alt="ETH Chart: RSI divergence and whale accumulation"
                   />
                 </div>
               </div>
@@ -173,8 +173,8 @@ export default function FedQTExitCryptoRally() {
                 <p><strong>Strategic Takeaway:</strong> Close above $210 opens path to $220; defend $200 support.</p>
                 <div className="mt-4">
                   <CryptoChart 
-                    imagePath="/sol-strategic-targets.png"
-                    altText="SOL Chart: Golden cross and volume spike"
+                    src="/sol-chart.png"
+                    alt="SOL Chart: Golden cross and volume spike"
                   />
                 </div>
               </div>
@@ -185,8 +185,8 @@ export default function FedQTExitCryptoRally() {
                 <p><strong>Strategic Takeaway:</strong> Hold $0.60 for $0.75 target; breakdown below $0.53 invalidates setup.</p>
                 <div className="mt-4">
                   <CryptoChart 
-                    imagePath="/wif-strategic-targets.png"
-                    altText="WIF Chart: TD Sequential buy signal"
+                    src="/wif-chart.png"
+                    alt="WIF Chart: TD Sequential buy signal"
                   />
                 </div>
               </div>
