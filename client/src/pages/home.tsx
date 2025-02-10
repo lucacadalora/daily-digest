@@ -102,16 +102,14 @@ export default function Home() {
                 <Link href={`/newsletter/${featuredArticle.slug}`}>
                   <Card className="group relative hover:shadow-lg transition-shadow duration-200">
                     <CardContent className="p-0">
-                      <div className="relative flex">
-                        <div className="flex-grow">
-                          <img
-                            src="/Figure_1.png"
-                            alt="Mineral Criticality Matrix"
-                            className="w-full aspect-video object-cover rounded-l-lg"
-                          />
-                        </div>
-                        <div className="w-12 bg-white dark:bg-gray-800 flex items-center justify-center group-hover:bg-blue-50 dark:group-hover:bg-gray-700 transition-colors rounded-r-lg">
-                          <ArrowRight className="h-6 w-6 text-blue-600" />
+                      <div className="relative">
+                        <img
+                          src="/Figure_1.png"
+                          alt="Mineral Criticality Matrix"
+                          className="w-full aspect-video object-cover rounded-lg"
+                        />
+                        <div className="absolute right-2 top-1/2 -translate-y-1/2 bg-white/90 dark:bg-gray-800/90 rounded-full p-2 shadow-sm group-hover:scale-110 transition-transform">
+                          <ArrowRight className="h-5 w-5 text-blue-600" />
                         </div>
                       </div>
                       <div className="p-4">
