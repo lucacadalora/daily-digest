@@ -2,6 +2,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { TrendingUp, AlertCircle, Clock, MapPin, ChevronRight, Shield, BarChart3, LineChart, Info } from 'lucide-react';
 import { Link } from "wouter";
 import { Header } from "@/components/Header";
+import { WIFChart } from "@/components/ui/WIFChart";
 import { CryptoChart } from "@/components/ui/CryptoChart";
 import { useEffect } from "react";
 
@@ -179,17 +180,12 @@ export default function FedQTExitCryptoRally() {
                 </div>
               </div>
 
-              <div>
+              <section className="py-4 border-b border-gray-200 dark:border-gray-800">
                 <h3 className="font-bold text-lg mb-2">Dogwifhat (WIF): $0.66</h3>
                 <p className="mb-2"><strong>Catalyst:</strong> Retail FOMO + whale accumulation ($7.17M Binance buy). Oversold RSI (22.28) and expanding triangle pattern hint at volatility squeeze.</p>
-                <p><strong>Strategic Takeaway:</strong> Hold $0.60 for $0.75 target; breakdown below $0.53 invalidates setup.</p>
-                <div className="mt-4">
-                  <CryptoChart 
-                    src="/wif-chart.png"
-                    alt="WIF Chart: TD Sequential buy signal"
-                  />
-                </div>
-              </div>
+                <p className="mb-4"><strong>Strategic Takeaway:</strong> Hold $0.60 for $0.75 target; breakdown below $0.53 invalidates setup.</p>
+                <WIFChart />
+              </section>
             </div>
           </section>
 
