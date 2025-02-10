@@ -16,7 +16,7 @@ const TradeWarTsunamiFeb1014 = () => {
       <div className="max-w-[1200px] mx-auto px-4">
         {/* Website Title */}
         <div className="text-center py-4 border-b border-gray-200 dark:border-gray-800">
-          <Link href="/" className="inline-block" onClick={() => window.scrollTo(0, 0)}>
+          <Link href="/" className="inline-block">
             <h1 className="text-2xl font-serif font-bold">
               <span className="text-blue-600">Daily</span> | <span className="text-gray-900 dark:text-white">Digest</span>
             </h1>
@@ -25,7 +25,7 @@ const TradeWarTsunamiFeb1014 = () => {
 
         {/* Breadcrumb */}
         <nav className="flex items-center space-x-2 text-sm text-gray-600 dark:text-gray-400 py-4">
-          <Link href="/" onClick={() => window.scrollTo(0, 0)} className="hover:text-blue-600">Home</Link>
+          <Link href="/" className="hover:text-blue-600">Home</Link>
           <ChevronRight className="h-4 w-4" />
           <Link href="/newsletter" className="hover:text-blue-600">Newsletter</Link>
           <ChevronRight className="h-4 w-4" />
@@ -43,24 +43,22 @@ const TradeWarTsunamiFeb1014 = () => {
         </div>
 
         {/* Header */}
-        <header className="sticky top-0 z-20 bg-[#FBF7F4] dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800 pb-4">
-          <div className="pt-4">
-            <h1 className="text-4xl font-serif font-bold text-gray-900 dark:text-white mb-4">
-              Trade War Tsunami: Indonesia Emerges as China's Surplus Dumping Ground
-            </h1>
-            <div className="flex items-center space-x-4 text-sm text-gray-600 dark:text-gray-400 mb-2">
-              <div className="flex items-center space-x-1">
-                <Clock className="h-4 w-4" />
-                <span>February 10, 2025</span>
-              </div>
-              <div className="flex items-center space-x-1">
-                <MapPin className="h-4 w-4" />
-                <span>JAKARTA</span>
-              </div>
+        <header className="py-4">
+          <h1 className="text-4xl font-serif font-bold text-gray-900 dark:text-white mb-4">
+            Trade War Tsunami: Indonesia Emerges as China's Surplus Dumping Ground
+          </h1>
+          <div className="flex items-center space-x-4 text-sm text-gray-600 dark:text-gray-400 mb-2">
+            <div className="flex items-center space-x-1">
+              <Clock className="h-4 w-4" />
+              <span>February 10, 2025</span>
             </div>
-            <div className="text-sm text-gray-600 dark:text-gray-400 mb-6">
-              By Luca Cada Lora
+            <div className="flex items-center space-x-1">
+              <MapPin className="h-4 w-4" />
+              <span>JAKARTA</span>
             </div>
+          </div>
+          <div className="text-sm text-gray-600 dark:text-gray-400 mb-6">
+            By Luca Cada Lora
           </div>
         </header>
 
@@ -495,7 +493,8 @@ const TradeWarTsunamiFeb1014 = () => {
             <p className="font-medium">Sources: IDX, Kontan, CNBC Indonesia, Previous Analysis</p>
             <p className="italic">Disclaimer: For general information only. Not financial advice. Consult your financial advisor before making investment decisions.</p>
             <p>© 2025 Market Analysis Report</p>
-          </div></footer>
+          </div>
+        </footer>
       </div>
     </div>
   );

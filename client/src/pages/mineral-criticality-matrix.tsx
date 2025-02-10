@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from "wouter";
 import {
   Clock,
   MapPin,
@@ -17,24 +16,22 @@ const MineralCriticalityMatrix = () => {
       <div className="max-w-[1200px] mx-auto px-4">
         {/* Website Title */}
         <div className="text-center py-4 border-b border-gray-200 dark:border-gray-800">
-          <Link href="/" onClick={() => window.scrollTo(0, 0)} className="inline-block">
-            <h1 className="text-2xl font-serif font-bold">
-              <span className="text-blue-600">Daily</span> | <span className="text-gray-900 dark:text-white">Digest</span>
-            </h1>
-          </Link>
+          <h1 className="text-2xl font-serif font-bold">
+            <span className="text-blue-600">Daily</span> | <span className="text-gray-900 dark:text-white">Digest</span>
+          </h1>
         </div>
 
         {/* Breadcrumb */}
         <div className="flex items-center space-x-2 text-sm text-gray-600 dark:text-gray-400 py-4 border-b border-gray-200 dark:border-gray-800">
-          <Link href="/" onClick={() => window.scrollTo(0, 0)} className="hover:text-blue-600">Home</Link>
+          <a href="/" className="hover:text-blue-600 cursor-pointer">Home</a>
           <ChevronRight className="h-4 w-4" />
-          <Link href="/newsletter" className="hover:text-blue-600">Newsletter</Link>
+          <a href="/newsletter" className="hover:text-blue-600 cursor-pointer">Newsletter</a>
           <ChevronRight className="h-4 w-4" />
           <span>Indonesia's Mineral Criticality Matrix</span>
         </div>
 
         {/* Header */}
-        <header className="sticky top-0 z-20 bg-[#FBF7F4] dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800 pb-4">
+        <header className="border-b border-gray-200 dark:border-gray-800 pb-4">
           <div className="pt-4">
             <h1 className="font-serif text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-3 leading-tight">
               Indonesia's Mineral Criticality Matrix: Strategic and Supply Chain Perspectives
@@ -49,8 +46,8 @@ const MineralCriticalityMatrix = () => {
                 <span>JAKARTA</span>
               </div>
             </div>
-            <div className="text-sm">
-              <p className="font-semibold dark:text-gray-300">By Luca Cada Lora</p>
+            <div className="text-sm text-gray-600 dark:text-gray-400">
+              By Luca Cada Lora
             </div>
           </div>
         </header>
@@ -64,6 +61,7 @@ const MineralCriticalityMatrix = () => {
             This special report introduces Indonesia's Mineral Criticality Matrix—a comprehensive framework designed to assess and balance the economic and strategic importance of minerals against their supply chain risks. By examining factors such as production capacity, domestic processing, and global market dynamics, this analysis aims to provide policymakers, industry leaders, and stakeholders with actionable insights to drive sustainable growth and secure national interests.
           </p>
         </section>
+
         {/* Metric Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 py-6 border-b border-gray-200 dark:border-gray-800">
           {/* Card 1: GDP Contribution */}
