@@ -36,16 +36,12 @@ router.post("/chat", async (req, res) => {
       });
     }
 
-    // Match stock tickers
-    const stockTickerPattern = /\b[A-Z]{1,5}(\.[A-Z]{2})?\b|\^[A-Z]+\b/g;
-    const hasStockTicker = stockTickerPattern.test(message);
-
+    log('Initializing Perplexity client...');
     const client = new OpenAI({
       apiKey,
       baseURL: "https://api.perplexity.ai",
       defaultHeaders: {
         'Accept': 'application/json',
-        'Content-Type': 'application/json'
       }
     });
 
@@ -56,49 +52,18 @@ router.post("/chat", async (req, res) => {
       day: 'numeric' 
     });
 
-    const basePrompt = `You are an expert financial and business analyst specializing in market analysis and investment research. Provide clear, concise, and accurate information based on your extensive knowledge of global financial markets, company valuations, and investment analysis.
+    log('Preparing system prompt...');
+    const basePrompt = `You are an expert financial and business analyst specializing in market analysis and investment research. Today is ${today}. Provide clear, concise, and accurate information based on your extensive knowledge of global financial markets, company valuations, and investment analysis.
 
-Important: Only answer questions related to financial markets, investments, economic trends, and business analysis. If the question is outside these domains, inform the user that you can only assist with market-related queries.`;
+Only answer questions related to financial markets, investments, economic trends, and business analysis. If the question is outside these domains, inform the user that you can only assist with market-related queries.`;
 
-    const detailedStockPrompt = `You are an expert financial and business analyst specializing in market analysis and investment research. Format your response using markdown syntax:
-
-# 📊 Market Context
-Provide a concise overview of the current market landscape, focusing on recent significant developments, positioning, and broader macroeconomic trends. Use market-specific terminology and insights for the latest developments.
-## 💡 Key Metrics
-* **Current Stock Price:** [Latest stock price] 
-* **Price-to-Earnings (P/E):** [Value, with comparison to industry peers and historical trends]
-* **Discount to Peers:** [Value, comparison to regional peers or sector average]
-* **Market Capitalization:** [Total market cap, with comparison to industry average or historical trends]
-* **Earnings Growth (YoY/Quarterly):** [Latest earnings growth, with comparison to peers or historical growth]
-* **Price-to-Book (P/B):** [Current P/B ratio with relevant context]
-* **Debt-to-Equity Ratio:** [Ratio indicating leverage, with comparison to sector average]
-## 💰 Dividend Outlook
-2025 Projections: Dividend Yield: [X%] (estimated final dividend of IDR [value] per share)
-## 💸 Fair Value Estimates
-💡 **Peter Lynch Fair Value:** [Fair Value IDR, implying X% upside from the current price]
-💸 **Analyst Consensus:** [Target prices range from IDR X to IDR Y, offering Z% upside]
-## 📈 Detailed Analysis
-Provide an in-depth analysis of the company's financial standing, including profit growth, asset quality, capital buffers, and key market catalysts. Highlight the company's competitive positioning and growth trajectory, particularly in areas such as market penetration and broader macroeconomic factors.
-## 🎯 Expert Perspective
-> "[Insert relevant expert quote with specific metrics or insights]"
-## 💫 Growth Opportunities
-* [Growth drivers like rate cuts, new market penetration, or product innovation]
-* [Possible new revenue streams such as cross-selling services or expanding into new regions]
-* [Competitive advantage over peers, such as improved operational efficiency or strong loan book quality]
-## ⚠️ Risk Factors
-* [Primary risks such as macroeconomic sensitivity, interest rate changes, and currency fluctuations]
-* [Challenges with asset quality, such as rising NPLs or economic downturn impacts]
-* [Regulatory or political risks, particularly with state ownership or directed lending]
-## 📝 Bottom Line
-Summarize key takeaways with actionable insights, focusing on investment opportunities. Provide a concise view of the potential total returns, including dividends and growth, along with risks to monitor. Offer a strategic recommendation based on the company's fundamentals and market outlook.`;
-
-    log('Sending request to Perplexity API with sonar model...');
+    log('Sending request to Perplexity API...');
     const response = await client.chat.completions.create({
-      model: "sonar",  
+      model: "llama-3.1-sonar-small-128k-online",
       messages: [
         { 
           role: "system", 
-          content: hasStockTicker ? detailedStockPrompt : basePrompt 
+          content: basePrompt
         },
         { role: "user", content: message }
       ],
@@ -122,10 +87,25 @@ Summarize key takeaways with actionable insights, focusing on investment opportu
 
   } catch (error) {
     console.error('Chat API Error:', error);
-    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+    const apiError = error as APIError;
+
+    // Handle specific API errors
+    let errorMessage = 'An unexpected error occurred';
+    let statusCode = 500;
+
+    if (apiError.status === 401) {
+      errorMessage = 'Invalid API key. Please check your configuration.';
+      statusCode = 401;
+    } else if (apiError.status === 429) {
+      errorMessage = 'Rate limit exceeded. Please try again later.';
+      statusCode = 429;
+    } else {
+      errorMessage = apiError.message || 'Unknown error occurred';
+      statusCode = apiError.status || 500;
+    }
 
     log('Error in chat endpoint:', errorMessage);
-    res.status(500).json({
+    res.status(statusCode).json({
       status: 'error',
       error: errorMessage
     });
