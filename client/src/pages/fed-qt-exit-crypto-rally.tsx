@@ -188,19 +188,9 @@ export default function FedQTExitCryptoRally() {
                 <div className="mt-4">
                   <div className="w-full max-w-3xl mx-auto bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden">
                     <img 
-                      src="/attached_assets/image_1739193795741.png"
+                      src="/wif-strategic-targets.png"
                       alt="WIF Chart: TD Sequential buy signal" 
                       className="w-full h-auto"
-                      onError={(e) => {
-                        console.error('Image failed to load:', e);
-                        if (e.currentTarget instanceof HTMLImageElement) {
-                          console.log('Attempted image path:', e.currentTarget.src);
-                          e.currentTarget.style.display = 'none';
-                        }
-                      }}
-                      onLoad={() => {
-                        console.log('WIF chart image loaded successfully');
-                      }}
                     />
                   </div>
                 </div>
