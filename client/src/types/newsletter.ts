@@ -52,9 +52,9 @@ export const sampleArticles: Article[] = [
         subtitle: "Below 5Y Avg"
       },
       {
-        label: "Digital Users",
-        value: "23.5M",
-        subtitle: "+45% YoY"
+        label: "Upside Range",
+        value: "48%",
+        subtitle: "Analyst Target"
       }
     ],
     tags: ["Banking", "Dividends", "Value Investing"],
@@ -81,9 +81,9 @@ export const sampleArticles: Article[] = [
         subtitle: "Weekly Outflow"
       },
       {
-        label: "Sector Risk",
-        value: "Tech -3.2%",
-        subtitle: "Most Vulnerable"
+        label: "Strategy",
+        value: "Defensive",
+        subtitle: "High Opportunity"
       }
     ],
     tags: ["Trade War", "Technical Analysis", "Market Risk"],
