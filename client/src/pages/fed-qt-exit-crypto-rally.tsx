@@ -146,26 +146,52 @@ export default function FedQTExitCryptoRally() {
                 <h3 className="font-bold text-lg mb-2">Bitcoin (BTC): $97,600</h3>
                 <p className="mb-2"><strong>Catalyst:</strong> Fed liquidity tailwind + ETF inflows ($48B daily volume). Institutional accumulation via BlackRock's ETF (150K+ BTC holdings) aligns with technical breakout above $105K.</p>
                 <p><strong>Strategic Takeaway:</strong> Daily close above $100K confirms path to $105K; hold $94.7K as invalidation.</p>
-                <p className="text-gray-600 dark:text-gray-400 mt-2">[Insert BTC chart: Symmetrical triangle breakout]</p>
+                <div className="mt-4">
+                  <img 
+                    src="/charts/btc-chart.png" 
+                    alt="BTC Chart: Symmetrical triangle breakout" 
+                    className="w-full rounded-lg shadow-lg"
+                  />
+                </div>
               </div>
 
               <div>
                 <h3 className="font-bold text-lg mb-2">Ethereum (ETH): $2,646</h3>
                 <p className="mb-2"><strong>Catalyst:</strong> Pectra upgrade (March 2025) + spot ETF dominance ($505M inflows). Whale accumulation ($883M inflows) and oversold RSI (29) signal rebound potential.</p>
                 <p><strong>Strategic Takeaway:</strong> Break above $2.75K targets $3K; ETH/BTC ratio recovery critical for altseason.</p>
-                <p className="text-gray-600 dark:text-gray-400 mt-2">[Insert ETH chart: RSI divergence + whale accumulation]</p>
+                <div className="mt-4">
+                  <img 
+                    src="/charts/eth-chart.png" 
+                    alt="ETH Chart: RSI divergence and whale accumulation" 
+                    className="w-full rounded-lg shadow-lg"
+                  />
+                </div>
               </div>
+
               <div>
                 <h3 className="font-bold text-lg mb-2">Solana (SOL): $204</h3>
                 <p className="mb-2"><strong>Catalyst:</strong> Golden cross (50D {'>'} 200D MA) + spot inflows ($16M). Fed-driven liquidity rotation favors high-beta SOL; exchange outflows ($100M) signal accumulation.</p>
                 <p><strong>Strategic Takeaway:</strong> Close above $210 opens path to $220; defend $200 support.</p>
-                <p className="text-gray-600 dark:text-gray-400 mt-2">[Insert SOL chart: Golden cross + volume spike]</p>
+                <div className="mt-4">
+                  <img 
+                    src="/charts/sol-chart.png" 
+                    alt="SOL Chart: Golden cross and volume spike" 
+                    className="w-full rounded-lg shadow-lg"
+                  />
+                </div>
               </div>
+
               <div>
                 <h3 className="font-bold text-lg mb-2">Dogwifhat (WIF): $0.66</h3>
                 <p className="mb-2"><strong>Catalyst:</strong> Retail FOMO + whale accumulation ($7.17M Binance buy). Oversold RSI (22.28) and expanding triangle pattern hint at volatility squeeze.</p>
                 <p><strong>Strategic Takeaway:</strong> Hold $0.60 for $0.75 target; breakdown below $0.53 invalidates setup.</p>
-                <p className="text-gray-600 dark:text-gray-400 mt-2">[Insert WIF chart: TD Sequential buy signal]</p>
+                <div className="mt-4">
+                  <img 
+                    src="/charts/wif-chart.png" 
+                    alt="WIF Chart: TD Sequential buy signal" 
+                    className="w-full rounded-lg shadow-lg"
+                  />
+                </div>
               </div>
             </div>
           </section>
