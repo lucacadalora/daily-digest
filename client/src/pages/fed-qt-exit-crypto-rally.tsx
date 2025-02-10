@@ -146,12 +146,12 @@ export default function FedQTExitCryptoRally() {
             <div className="space-y-6">
               <div>
                 <h3 className="font-bold text-lg mb-2">Bitcoin (BTC): $97,600</h3>
-                <p className="mb-2"><strong>Catalyst:</strong> Fed liquidity tailwind + ETF inflows ($48B daily volume). Institutional accumulation via BlackRock's ETF (150K+ BTC holdings) aligns with technical breakout above $105K.</p>
+                <p className="mb-2"><strong>Catalyst:</strong> Fed liquidity tailwind + ETF inflows ($48B daily volume).</p>
                 <p><strong>Strategic Takeaway:</strong> Daily close above $100K confirms path to $105K; hold $94.7K as invalidation.</p>
                 <div className="mt-4">
                   <CryptoChart 
                     src="/btc-chart.png"
-                    alt="BTC Chart: Symmetrical triangle breakout"
+                    alt="BTC Chart: Technical Analysis"
                   />
                 </div>
               </div>
@@ -163,7 +163,7 @@ export default function FedQTExitCryptoRally() {
                 <div className="mt-4">
                   <CryptoChart 
                     src="/eth-chart.png"
-                    alt="ETH Chart: RSI divergence and whale accumulation"
+                    alt="ETH Chart: Technical Analysis"
                   />
                 </div>
               </div>
@@ -175,7 +175,7 @@ export default function FedQTExitCryptoRally() {
                 <div className="mt-4">
                   <CryptoChart 
                     src="/sol-chart.png"
-                    alt="SOL Chart: Golden cross and volume spike"
+                    alt="SOL Chart: Technical Analysis"
                   />
                 </div>
               </div>
