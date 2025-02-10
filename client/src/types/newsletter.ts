@@ -32,6 +32,64 @@ export type Article = z.infer<typeof articleSchema>;
 
 export const sampleArticles: Article[] = [
   {
+    slug: "us-china-trade-war-impact-ihsg",
+    title: "US-China Retaliation: Escalation Could Trigger IHSG Sell-Offs Below 6,900",
+    description: "Analysis of potential market impacts as US-China trade tensions escalate, with focus on IHSG technical levels and sector-specific vulnerabilities.",
+    category: "Markets",
+    source: "Daily Digest",
+    author: "Luca Cada Lora",
+    date: "February 8, 2025",
+    previewEmoji: "🔄",
+    previewMetrics: [
+      {
+        label: "IHSG Support",
+        value: "6,900",
+        subtitle: "Critical Level"
+      },
+      {
+        label: "Foreign Flow",
+        value: "-$218M",
+        subtitle: "Weekly Outflow"
+      },
+      {
+        label: "Sector Risk",
+        value: "Tech -3.2%",
+        subtitle: "Most Vulnerable"
+      }
+    ],
+    tags: ["Trade War", "Technical Analysis", "Market Risk"],
+    content: "Analysis of US-China trade war impacts..."
+  },
+  {
+    slug: "bank-rakyat-indonesia-undervalued-dividend-powerhouse",
+    title: "Bank Rakyat Indonesia: Undervalued Dividend Powerhouse",
+    description: "Deep dive into BBRI's fundamental strengths, dividend sustainability, and valuation metrics against regional peers. Focus on micro-lending moat and digital transformation.",
+    category: "Markets",
+    source: "Daily Digest",
+    author: "Luca Cada Lora",
+    date: "February 7, 2025",
+    previewEmoji: "🏦",
+    previewMetrics: [
+      {
+        label: "Dividend Yield",
+        value: "4.8%",
+        subtitle: "Sustainable Payout"
+      },
+      {
+        label: "P/B Ratio",
+        value: "1.8x",
+        subtitle: "Below 5Y Avg"
+      },
+      {
+        label: "Digital Users",
+        value: "23.5M",
+        subtitle: "+45% YoY"
+      }
+    ],
+    tags: ["Banking", "Dividends", "Value Investing"],
+    content: "Analysis of BRI's dividend potential..."
+  },
+  {
     slug: "trade-war-tsunami-feb-10-14",
     title: "Trade War Tsunami: Indonesia Emerges as China's Surplus Dumping Ground",
     description: "Bank Indonesia issues stark warning as Chinese goods flood Indonesian markets, threatening local industries. Analysis of critical support levels and monetary policy implications amid growing market volatility.",
@@ -59,7 +117,6 @@ export const sampleArticles: Article[] = [
     ],
     tags: ["IHSG", "Trade War", "Market Analysis", "Weekly Special"],
     content: `Weekly Market Alert February 10–14, 2025
-
 The New Narrative: Indonesia as a Chinese Surplus Dumping Ground
 Bank Indonesia (BI) issued a stark warning this week: "Chinese goods barred from US markets are flooding Indonesia," threatening to overwhelm domestic industries. Key insights:
 
