@@ -1,9 +1,8 @@
 import { Card, CardContent } from '@/components/ui/card';
-import { TrendingUp, AlertCircle, Clock, MapPin, ChevronRight, Shield, BarChart3, LineChart } from 'lucide-react';
+import { TrendingUp, AlertCircle, Clock, MapPin, ChevronRight, Shield, BarChart3, LineChart, Info } from 'lucide-react';
 import { Link } from "wouter";
 import { Header } from "@/components/Header";
 import { useEffect } from "react";
-import { Article } from "@/types/newsletter";
 
 export default function FedQTExitCryptoRally() {
   useEffect(() => {
@@ -23,6 +22,27 @@ export default function FedQTExitCryptoRally() {
           <Link href="/newsletter" className="hover:text-blue-600">Newsletter</Link>
           <ChevronRight className="h-4 w-4" />
           <span>Fed's QT Exit Impact</span>
+        </div>
+
+        {/* Weekly Market Alert Warning */}
+        <div className="my-6">
+          <Card className="bg-orange-50 dark:bg-orange-900/20 border-orange-200 dark:border-orange-800">
+            <CardContent className="p-6">
+              <div className="flex items-start space-x-4">
+                <Info className="h-6 w-6 text-orange-600 dark:text-orange-400 flex-shrink-0 mt-1" />
+                <div className="space-y-3">
+                  <h2 className="font-bold text-lg text-gray-900 dark:text-white">Weekly Market Alert</h2>
+                  <p className="text-gray-700 dark:text-gray-300">
+                    This special report outlines key market scenarios and potential impacts for the week of February 10-14, 2025.
+                  </p>
+                  <div className="text-sm text-gray-600 dark:text-gray-400 italic">
+                    Any views expressed here are the personal views of the author and should not form the basis for making investment decisions, 
+                    nor be construed as a recommendation or advice to engage in investment transactions.
+                  </div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
         </div>
 
         <header className="border-b border-gray-200 dark:border-gray-800 pb-4">
