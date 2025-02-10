@@ -13,7 +13,7 @@ export default function Home() {
   const [currentPage, setCurrentPage] = useState(1);
   const articlesPerPage = 4;
 
-  // Sort articles by date (most recent first) and take the most recent ones
+  // Sort articles by date (most recent first)
   const sortedArticles = [...sampleArticles].sort((a, b) => 
     new Date(b.date).getTime() - new Date(a.date).getTime()
   );
@@ -31,16 +31,13 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-[#FBF7F4] dark:bg-gray-900 transition-colors">
-      {/* Header */}
       <Header onSubscribe={() => setIsSubscribeOpen(true)} />
 
-      {/* Subscription Modal */}
       <SubscribeModal 
         isOpen={isSubscribeOpen}
         onClose={() => setIsSubscribeOpen(false)}
       />
 
-      {/* Header spacing */}
       <div className="h-36 sm:h-32"></div>
 
       <main className="max-w-[1200px] mx-auto px-4 py-6 sm:py-8 dark:text-gray-200">
@@ -90,21 +87,25 @@ export default function Home() {
           {/* Featured Section - 1/6 width */}
           <div className="hidden lg:block lg:w-[16.67%] flex-shrink-0">
             <div className="sticky top-40">
-              <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-4">MOST READ</h2>
+              <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-4">Featured</h2>
               {featuredArticle && (
                 <Link href={`/newsletter/${featuredArticle.slug}`}>
-                  <Card className="hover:shadow-lg transition-shadow duration-200">
-                    <CardContent className="p-4">
-                      <div className="space-y-3">
-                        <div className="text-xs font-semibold text-blue-600 dark:text-blue-400 uppercase tracking-wider">
-                          FIRST OPINION
+                  <Card className="hover:shadow-lg transition-shadow duration-200 group">
+                    <CardContent className="p-0">
+                      <div className="relative">
+                        <img 
+                          src="/Figure_1.png" 
+                          alt="Mineral Criticality Matrix"
+                          className="w-full h-40 object-cover rounded-t-lg"
+                        />
+                        <div className="absolute top-2 right-2 bg-white dark:bg-gray-800 rounded-full p-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                          <ArrowRight className="h-4 w-4 text-blue-600" />
                         </div>
-                        <h3 className="font-medium text-gray-900 dark:text-white text-base">
+                      </div>
+                      <div className="p-4">
+                        <h3 className="font-medium text-gray-900 dark:text-white text-sm line-clamp-2">
                           {featuredArticle.title}
                         </h3>
-                        <div className="text-xs text-gray-500 dark:text-gray-400">
-                          1 of 5 most read today
-                        </div>
                       </div>
                     </CardContent>
                   </Card>
@@ -120,7 +121,6 @@ export default function Home() {
         </div>
       </main>
 
-      {/* Footer */}
       <footer className="border-t border-gray-200 dark:border-gray-700 mt-12 bg-white dark:bg-gray-900">
         <div className="max-w-[1200px] mx-auto px-4 py-6">
           <p className="text-sm text-gray-500 dark:text-gray-400">© 2025 Daily Digest. All rights reserved.</p>
