@@ -227,11 +227,11 @@ Action: Accumulate below Rp2,700 (near 2025 low) for dividend + potential reboun
   },
   {
     slug: "fed-qt-exit-crypto-rally",
-    title: "Fed's QT Exit Ignites Crypto-Equity Rally: Strategic Plays for BTC, ETH, SOL",
+    title: "Fed's QT Exit: Liquidity Lifeline Ignites Crypto & Equity Rally - Strategic Plays for BTC, ETH & SOL",
     description: "Comprehensive analysis of the Federal Reserve's quantitative tightening exit strategy and its implications for crypto markets, with focus on key resistance levels and institutional flows.",
     category: "Markets",
     source: "Daily Digest",
-    author: "Luca Cada Lora",
+    author: "Daily | Digest Market Analysis Team",
     date: "February 10, 2025",
     previewEmoji: "📈",
     previewMetrics: [
@@ -252,6 +252,6 @@ Action: Accumulate below Rp2,700 (near 2025 low) for dividend + potential reboun
       }
     ],
     tags: ["Crypto", "Federal Reserve", "Technical Analysis"],
-    content: "[Insert BTC chart: Symmetrical triangle breakout]"
+    content: "fed-qt-exit-crypto-rally"
   }
 ];

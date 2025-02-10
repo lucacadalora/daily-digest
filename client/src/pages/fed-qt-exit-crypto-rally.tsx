@@ -74,16 +74,16 @@ export default function FedQTExitCryptoRally() {
           </div>
         </header>
 
-        <div className="py-4 border-b border-gray-200 dark:border-gray-800">
-          <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
-            The Federal Reserve's accelerated balance sheet reduction and imminent QT exit strategy has created a 
-            compelling setup for risk assets, particularly in the crypto sector where Bitcoin's technical structure 
-            suggests an imminent breakout. This report analyzes the liquidity dynamics, charts key support/resistance 
-            levels, and outlines strategic positioning across major crypto assets as monetary conditions normalize.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 py-4">
+        <div className="py-4 space-y-6">
+          <section>
+            <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
+              The Federal Reserve's accelerated balance sheet reduction and imminent QT exit strategy has created a 
+              compelling setup for risk assets, particularly in the crypto sector where Bitcoin's technical structure 
+              suggests an imminent breakout. This report analyzes the liquidity dynamics, charts key support/resistance 
+              levels, and outlines strategic positioning across major crypto assets as monetary conditions normalize.
+            </p>
+          </section>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 py-4">
           <Card className="bg-gray-50 dark:bg-gray-800">
             <CardContent className="p-4">
               <div className="flex items-center space-x-2 mb-2">
@@ -117,8 +117,6 @@ export default function FedQTExitCryptoRally() {
             </CardContent>
           </Card>
         </div>
-
-        <div className="py-4 space-y-6">
           <section>
             <h2 className="text-xl font-serif font-bold text-gray-900 dark:text-white mb-3">
               Technical Setup: Bitcoin's Symmetrical Triangle
