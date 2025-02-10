@@ -23,7 +23,7 @@ router.post("/chat", async (req, res) => {
       });
     }
 
-    const apiKey = process.env.PERPLEXITY_API_KEY?.trim();
+    const apiKey = process.env.PERPLEXITY_API_KEY;
     if (!apiKey) {
       log('Error: Missing API key');
       return res.status(500).json({
