@@ -1,0 +1,30 @@
+Early Narratives: The Macro Catalyst
+Fed’s Accelerated QT Exit Fuels Risk-On Surge
+The Federal Reserve’s $2 trillion balance sheet reduction since June 2022—$297B pared since June 2024 alone—has outpaced Wall Street projections (vs. JPMorgan’s $1.7T estimate), signaling a faster-than-expected pivot toward liquidity normalization. This strategic unwind removes a critical drag on risk assets, with the Fed’s new guidance to halt QT when reserves are “somewhat above ample levels” (vs. prior “just above”) cementing mid-2025 as the likely endpoint.
+Token Analysis
+Bitcoin (BTC): $97,600
+Catalyst: Fed liquidity tailwind + ETF inflows ($48B daily volume). Institutional accumulation via BlackRock’s ETF (150K+ BTC holdings) aligns with technical breakout above $105K.
+Strategic Takeaway: Daily close above $100K confirms path to $105K; hold $94.7K as invalidation.
+[Insert BTC chart: Symmetrical triangle breakout]
+Ethereum (ETH): $2,646
+Catalyst: Pectra upgrade (March 2025) + spot ETF dominance ($505M inflows). Whale accumulation ($883M inflows) and oversold RSI (29) signal rebound potential.
+Strategic Takeaway: Break above $2.75K targets $3K; ETH/BTC ratio recovery critical for altseason.
+[Insert ETH chart: RSI divergence + whale accumulation]
+Solana (SOL): $204
+Catalyst: Golden cross (50D > 200D MA) + spot inflows ($16M). Fed-driven liquidity rotation favors high-beta SOL; exchange outflows ($100M) signal accumulation.
+Strategic Takeaway: Close above $210 opens path to $220; defend $200 support.
+[Insert SOL chart: Golden cross + volume spike]
+Dogwifhat (WIF): $0.66
+Catalyst: Retail FOMO + whale accumulation ($7.17M Binance buy). Oversold RSI (22.28) and expanding triangle pattern hint at volatility squeeze.
+Strategic Takeaway: Hold $0.60 for $0.75 target; breakdown below $0.53 invalidates setup.
+[Insert WIF chart: TD Sequential buy signal]
+Strategic Summary
+Token	Key Catalyst	Bullish Target	Invalidation
+BTC	Fed QT exit + ETF dominance	$105K	$94.7K
+ETH	Pectra upgrade + ETF inflows	$3K	$2.44K
+SOL	Golden cross + liquidity rotation	$220	$190
+WIF	Retail FOMO + whale buys	$0.75	$0.53
+Related Articles:
+Fed Balance Sheet Blueprint
+Crypto’s Macro Playbook
+Visualization Notes: Charts should emphasize breakout levels, RSI/MACD divergences, and volume trends aligned with Fed liquidity shifts.
