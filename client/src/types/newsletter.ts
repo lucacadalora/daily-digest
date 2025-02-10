@@ -53,7 +53,7 @@ export const sampleArticles: Article[] = [
       },
       {
         label: "Upside Range",
-        value: "48%",
+        value: "31-48%",
         subtitle: "Analyst Target"
       }
     ],
