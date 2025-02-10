@@ -65,31 +65,30 @@ Important: Only answer questions related to financial markets, investments, econ
 # 📊 Market Context
 Provide a concise overview of the current market landscape, focusing on recent significant developments, positioning, and broader macroeconomic trends. Use market-specific terminology and insights for the latest developments.
 ## 💡 Key Metrics
-* **Current Stock Price:** [Latest stock price] [[citation]](source_url)
-* **Price-to-Earnings (P/E):** [Value, with comparison to industry peers and historical trends] [[citation]](source_url)
-* **Discount to Peers:** [Value, comparison to regional peers or sector average] [[citation]](source_url)
-* **Market Capitalization:** [Total market cap, with comparison to industry average or historical trends] [[citation]](source_url)
-* **Earnings Growth (YoY/Quarterly):** [Latest earnings growth, with comparison to peers or historical growth] [[citation]](source_url)
-* **Price-to-Book (P/B):** [Current P/B ratio with relevant context] [[citation]](source_url)
-* **Debt-to-Equity Ratio:** [Ratio indicating leverage, with comparison to sector average] [[citation]](source_url)
+* **Current Stock Price:** [Latest stock price] 
+* **Price-to-Earnings (P/E):** [Value, with comparison to industry peers and historical trends]
+* **Discount to Peers:** [Value, comparison to regional peers or sector average]
+* **Market Capitalization:** [Total market cap, with comparison to industry average or historical trends]
+* **Earnings Growth (YoY/Quarterly):** [Latest earnings growth, with comparison to peers or historical growth]
+* **Price-to-Book (P/B):** [Current P/B ratio with relevant context]
+* **Debt-to-Equity Ratio:** [Ratio indicating leverage, with comparison to sector average]
 ## 💰 Dividend Outlook
-2025 Projections: Dividend Yield: [X%] (estimated final dividend of IDR [value] per share) [[citation]](source_url)
+2025 Projections: Dividend Yield: [X%] (estimated final dividend of IDR [value] per share)
 ## 💸 Fair Value Estimates
-💡 **Peter Lynch Fair Value:** [Fair Value IDR, implying X% upside from the current price] [[citation]](source_url)
-💸 **Analyst Consensus:** [Target prices range from IDR X to IDR Y, offering Z% upside] [[citation]](source_url)
+💡 **Peter Lynch Fair Value:** [Fair Value IDR, implying X% upside from the current price]
+💸 **Analyst Consensus:** [Target prices range from IDR X to IDR Y, offering Z% upside]
 ## 📈 Detailed Analysis
 Provide an in-depth analysis of the company's financial standing, including profit growth, asset quality, capital buffers, and key market catalysts. Highlight the company's competitive positioning and growth trajectory, particularly in areas such as market penetration and broader macroeconomic factors.
 ## 🎯 Expert Perspective
 > "[Insert relevant expert quote with specific metrics or insights]"
-— [Expert Name], [Organization] [[citation]](source_url)
 ## 💫 Growth Opportunities
-* [Growth drivers like rate cuts, new market penetration, or product innovation] [[citation]](source_url)
-* [Possible new revenue streams such as cross-selling services or expanding into new regions] [[citation]](source_url)
-* [Competitive advantage over peers, such as improved operational efficiency or strong loan book quality] [[citation]](source_url)
+* [Growth drivers like rate cuts, new market penetration, or product innovation]
+* [Possible new revenue streams such as cross-selling services or expanding into new regions]
+* [Competitive advantage over peers, such as improved operational efficiency or strong loan book quality]
 ## ⚠️ Risk Factors
-* [Primary risks such as macroeconomic sensitivity, interest rate changes, and currency fluctuations] [[citation]](source_url)
-* [Challenges with asset quality, such as rising NPLs or economic downturn impacts] [[citation]](source_url)
-* [Regulatory or political risks, particularly with state ownership or directed lending] [[citation]](source_url)
+* [Primary risks such as macroeconomic sensitivity, interest rate changes, and currency fluctuations]
+* [Challenges with asset quality, such as rising NPLs or economic downturn impacts]
+* [Regulatory or political risks, particularly with state ownership or directed lending]
 ## 📝 Bottom Line
 Summarize key takeaways with actionable insights, focusing on investment opportunities. Provide a concise view of the potential total returns, including dividends and growth, along with risks to monitor. Offer a strategic recommendation based on the company's fundamentals and market outlook.`;
 
@@ -105,43 +104,8 @@ Summarize key takeaways with actionable insights, focusing on investment opportu
       ],
       temperature: 0.2,
       top_p: 0.9,
-      max_tokens: 1000,  
-      frequency_penalty: 1,
-      search_domain_filter: [ 
-        "bloomberg.com",
-        "reuters.com",
-        "ft.com",
-        "wsj.com",
-        "cnbc.com",
-        "marketwatch.com",
-        "finance.yahoo.com",
-        "investing.com",
-        "seekingalpha.com",
-        "fool.com",
-        "morningstar.com",
-        "zacks.com",
-        "tradingview.com",
-        "benzinga.com",
-        "barrons.com",
-        "gurufocus.com",
-        "markets.ft.com",
-
-        "investortrust.id",
-        "kontan.co.id",
-        "bisnis.com",
-        "stockbit.com",
-        "idx.co.id",
-        "finance.detik.com",
-        "money.kompas.com",
-        "investor.id",
-        "cnbcindonesia.com",
-        "market.bisnis.com",
-        "pasardana.id",
-        "indopremier.com",
-        "bareksa.com",
-        "mncsekuritas.id",
-        "idx.co.id"
-      ]
+      max_tokens: 1000,
+      frequency_penalty: 1
     });
 
     if (!response?.choices?.[0]?.message?.content) {
@@ -150,11 +114,10 @@ Summarize key takeaways with actionable insights, focusing on investment opportu
 
     const result = {
       status: 'success',
-      reply: response.choices[0].message.content.trim(),
-      citations: response.citations || []
+      reply: response.choices[0].message.content.trim()
     };
 
-    log('Sending successful response:', result);
+    log('Sending successful response:', JSON.stringify(result));
     res.json(result);
 
   } catch (error) {

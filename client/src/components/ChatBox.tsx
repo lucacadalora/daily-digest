@@ -20,7 +20,6 @@ interface Message {
   role: 'user' | 'assistant';
   content: string;
   isSearching?: boolean;
-  citations?: string[];
   isStreaming?: boolean;
 }
 
@@ -103,8 +102,7 @@ export const ChatBox = () => {
         const filtered = prev.filter(msg => !msg.isSearching);
         return [...filtered, { 
           role: 'assistant', 
-          content: data.reply,
-          citations: data.citations 
+          content: data.reply
         }];
       });
     } catch (error) {
@@ -276,35 +274,6 @@ export const ChatBox = () => {
             >
               {formattedContent}
             </ReactMarkdown>
-          </motion.div>
-        )}
-        {message.citations && message.citations.length > 0 && (
-          <motion.div 
-            initial={{ opacity: 0, y: 5 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="mt-4 text-sm border-t border-gray-200 dark:border-gray-700 pt-2"
-          >
-            <p className="font-semibold mb-1">Sources:</p>
-            <ul className="list-none space-y-1">
-              {message.citations.map((citation, index) => (
-                <motion.li
-                  key={index}
-                  initial={{ opacity: 0, x: -5 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.3, delay: 0.3 + index * 0.1 }}
-                >
-                  <a 
-                    href={citation}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300 text-sm"
-                  >
-                    [{index + 1}] {new URL(citation).hostname}
-                  </a>
-                </motion.li>
-              ))}
-            </ul>
           </motion.div>
         )}
       </motion.div>
