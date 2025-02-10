@@ -45,7 +45,7 @@ const FedBalanceSheetPage: React.FC = () => {
           <span>Fed's Balance Sheet Blueprint</span>
         </div>
 
-        <header className="border-b border-gray-200 dark:border-gray-800 pb-4">
+        <header className="sticky top-0 z-20 bg-[#FBF7F4] dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800 pb-4">
           <div className="pt-4">
             <div className="flex items-center space-x-2 text-xs text-gray-600 dark:text-gray-400 mb-3">
               <span className="font-bold uppercase">{article.category}</span>

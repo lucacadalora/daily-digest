@@ -98,7 +98,7 @@ export default function IndonesiaEconomicCrisis() {
           <span>Indonesia's Growth Paradox</span>
         </div>
 
-        <header className="border-b border-gray-200 dark:border-gray-800 pb-4">
+        <header className="sticky top-0 z-20 bg-[#FBF7F4] dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800 pb-4">
           <div className="pt-4">
             <div className="flex items-center space-x-2 text-xs text-gray-600 dark:text-gray-400 mb-3">
               <span className="font-bold uppercase">{article.category}</span>
@@ -135,7 +135,6 @@ export default function IndonesiaEconomicCrisis() {
             The inventory overhang extends beyond the coal sector's unprecedented stockpiling, encompassing significant rice import surpluses and a broader accumulation in manufactured goods amid weakening global demand. This systemic inventory buildup represents a stark departure from historical norms—prior to 2024, the long-term average contribution of inventory changes to GDP growth maintained a neutral position. This deviation from the mean strongly suggests an impending growth deceleration in 2025, as the unsustainable inventory accumulation inevitably normalizes.
           </p>
         </div>
-
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 py-4">
           <Card className="bg-gray-50 dark:bg-gray-800">
             <CardContent className="p-4">
@@ -170,7 +169,6 @@ export default function IndonesiaEconomicCrisis() {
             </CardContent>
           </Card>
         </div>
-
         <section>
           <h2 className="text-xl font-serif font-bold text-gray-900 dark:text-white mb-3">Crisis Catalysts: Market Forces Converge</h2>
           <p className="text-gray-700 dark:text-gray-300 mb-4">
@@ -215,7 +213,6 @@ export default function IndonesiaEconomicCrisis() {
             </table>
           </div>
         </section>
-
         <section>
           <h2 className="text-xl font-serif font-bold text-gray-900 dark:text-white mb-3">Market Technicals: The Chart of Capitulation</h2>
           <div className="prose text-gray-700 dark:text-gray-300 max-w-none mb-4">
@@ -230,7 +227,6 @@ export default function IndonesiaEconomicCrisis() {
             </p>
           </div>
         </section>
-
         <section>
           <h2 className="text-xl font-serif font-bold text-gray-900 dark:text-white mb-3">The House of Cards: How Inventory Artifice Boosted Growth</h2>
           <div className="prose text-gray-700 dark:text-gray-300 max-w-none">
@@ -249,7 +245,6 @@ export default function IndonesiaEconomicCrisis() {
             </ul>
           </div>
         </section>
-
         <section>
           <h2 className="text-xl font-serif font-bold text-gray-900 dark:text-white mb-3">The Great Unwind: Scenarios & Strategic Imperatives</h2>
 
@@ -309,7 +304,6 @@ export default function IndonesiaEconomicCrisis() {
             </div>
           </div>
         </section>
-
         <section>
           <h2 className="text-xl font-serif font-bold text-gray-900 dark:text-white mb-3">Sectoral Reckoning: From Growth Driver to Liability</h2>
           <div className="prose text-gray-700 dark:text-gray-300 max-w-none">

@@ -94,7 +94,7 @@ export default function Home() {
 
           {/* Featured Section - 1/6 width */}
           <div className="hidden lg:block lg:w-[16.67%] flex-shrink-0">
-            <div className="sticky top-40">
+            <div>
               <h2 className="text-2xl font-serif font-bold text-gray-900 dark:text-white mb-4">
                 Featured
               </h2>
