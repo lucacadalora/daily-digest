@@ -7,14 +7,18 @@ import { Header } from "@/components/Header";
 
 export default function Newsletters() {
   const [location] = useLocation();
-  const category = location.split("/").pop() as Category | undefined;
+  const path = location.split("/");
+  const category = path[path.length - 1] as Category | undefined;
   const isViewAll = location === "/newsletter";
+  const isFeatured = path[path.length - 1] === "Featured";
 
-  // Filter articles based on category
-  const filteredArticles = category && !isViewAll
-    ? category === 'Featured'
+  // Filter articles based on category or featured status
+  const filteredArticles = !isViewAll
+    ? isFeatured
       ? sampleArticles.filter(article => article.slug === 'indonesia-mineral-criticality-matrix')
-      : sampleArticles.filter(article => article.category === category)
+      : category
+        ? sampleArticles.filter(article => article.category === category)
+        : sampleArticles
     : sampleArticles;
 
   return (
@@ -48,8 +52,9 @@ export default function Newsletters() {
             {['Featured', 'Markets', 'Economics', 'Industries', 'Tech'].map((tag) => (
               <Link key={tag} href={`/newsletter/category/${tag}`}
                 className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 
-                  ${category === tag ? 'bg-blue-600 text-white shadow-lg shadow-blue-500/30' : 
-                  'bg-blue-50 text-blue-600 hover:bg-blue-100 dark:bg-blue-900/20 dark:text-blue-400'}`}>
+                  ${(isFeatured && tag === 'Featured') || (!isFeatured && category === tag) 
+                    ? 'bg-blue-600 text-white shadow-lg shadow-blue-500/30' 
+                    : 'bg-blue-50 text-blue-600 hover:bg-blue-100 dark:bg-blue-900/20 dark:text-blue-400'}`}>
                 {tag === 'Featured' && (
                   <div className="inline-flex items-center gap-2">
                     <div className="relative">

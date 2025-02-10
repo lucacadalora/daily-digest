@@ -224,5 +224,34 @@ Action: Buy on dips near Rp580 (52-week low) with tight stop-loss at Rp550.
 SMGR:
 Long-Term Value: Undervalued at 0.5x P/S, but await infrastructure policy clarity.
 Action: Accumulate below Rp2,700 (near 2025 low) for dividend + potential rebound.`
+  },
+  {
+    slug: "fed-qt-exit-crypto-rally",
+    title: "Fed's QT Exit Ignites Crypto-Equity Rally: Strategic Plays for BTC, ETH, SOL",
+    description: "Comprehensive analysis of the Federal Reserve's quantitative tightening exit strategy and its implications for crypto markets, with focus on key resistance levels and institutional flows.",
+    category: "Markets",
+    source: "Daily Digest",
+    author: "Luca Cada Lora",
+    date: "February 10, 2025",
+    previewEmoji: "📈",
+    previewMetrics: [
+      {
+        label: "BTC Target",
+        value: "$120K",
+        subtitle: "EOY 2025"
+      },
+      {
+        label: "ETH/BTC",
+        value: "0.07",
+        subtitle: "Key Resistance"
+      },
+      {
+        label: "Fed QT Cut",
+        value: "$2T",
+        subtitle: "Since 2022"
+      }
+    ],
+    tags: ["Crypto", "Federal Reserve", "Technical Analysis"],
+    content: "[Insert BTC chart: Symmetrical triangle breakout]"
   }
 ];
