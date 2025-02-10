@@ -8,14 +8,6 @@ import { SubscribeModal } from "@/components/SubscribeModal";
 import { sampleArticles } from "@/types/newsletter";
 import { Header } from "@/components/Header";
 
-// Category-specific thumbnail images
-const categoryThumbnails = {
-  Markets: "https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?w=800&h=400",
-  Economics: "https://images.unsplash.com/photo-1543286386-2e659306cd6c?w=800&h=400",
-  Industries: "https://images.unsplash.com/photo-1563203369-26f2e4a5ccf7?w=800&h=400",
-  Tech: "https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&h=400"
-};
-
 export default function Home() {
   const [isSubscribeOpen, setIsSubscribeOpen] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
@@ -26,10 +18,15 @@ export default function Home() {
     new Date(b.date).getTime() - new Date(a.date).getTime()
   );
 
+  // Get featured article
+  const featuredArticle = sortedArticles.find(article => article.category === 'Featured');
+
   // Calculate the articles for the current page
   const indexOfLastArticle = currentPage * articlesPerPage;
   const indexOfFirstArticle = indexOfLastArticle - articlesPerPage;
-  const currentArticles = sortedArticles.slice(indexOfFirstArticle, indexOfLastArticle);
+  const currentArticles = sortedArticles
+    .filter(article => article.category !== 'Featured') // Exclude featured from main list
+    .slice(indexOfFirstArticle, indexOfLastArticle);
   const totalPages = Math.ceil(sortedArticles.length / articlesPerPage);
 
   return (
@@ -48,14 +45,14 @@ export default function Home() {
 
       {/* Main Content */}
       <main className="max-w-[1200px] mx-auto px-4 py-6 sm:py-8 dark:text-gray-200">
-        <div className="flex flex-col md:flex-row gap-8">
-          {/* Left Sidebar - ChatBox (Hidden on mobile) */}
-          <div id="chat" className="hidden md:block md:w-80 flex-shrink-0 scroll-mt-40">
+        <div className="flex flex-col lg:flex-row gap-8">
+          {/* ChatBox - 1/6 width */}
+          <div className="hidden lg:block lg:w-[16.67%] flex-shrink-0">
             <ChatBox />
           </div>
 
-          {/* Main Content Area */}
-          <div className="flex-1">
+          {/* Main Newsletter Content - 4/6 width */}
+          <div className="flex-1 lg:w-[66.66%]">
             {/* Newsletter Section */}
             <div className="flex justify-between items-center mb-6">
               <h2 className="text-xl font-bold text-gray-900 dark:text-white">Newsletter</h2>
@@ -90,10 +87,39 @@ export default function Home() {
               </div>
             )}
           </div>
+
+          {/* Featured Section - 1/6 width */}
+          <div className="hidden lg:block lg:w-[16.67%] flex-shrink-0">
+            <div className="sticky top-40">
+              <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-6">Featured</h2>
+              {featuredArticle && (
+                <Link href={`/newsletter/${featuredArticle.slug}`}>
+                  <Card className="hover:shadow-lg transition-shadow duration-200">
+                    <CardContent className="p-4">
+                      <div className="space-y-3">
+                        <div className="text-xs font-semibold text-blue-600 dark:text-blue-400">
+                          FEATURED
+                        </div>
+                        <h3 className="font-medium text-gray-900 dark:text-white line-clamp-2">
+                          {featuredArticle.title}
+                        </h3>
+                        <p className="text-sm text-gray-600 dark:text-gray-400 line-clamp-3">
+                          {featuredArticle.description}
+                        </p>
+                        <div className="text-xs text-gray-500 dark:text-gray-400">
+                          {featuredArticle.date}
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </Link>
+              )}
+            </div>
+          </div>
         </div>
 
         {/* Mobile Chat Box Section */}
-        <div id="mobile-chat" className="md:hidden mt-8 scroll-mt-40">
+        <div className="lg:hidden mt-8">
           <ChatBox />
         </div>
       </main>
