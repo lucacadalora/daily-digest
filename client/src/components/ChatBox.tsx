@@ -55,10 +55,12 @@ export const ChatBox = () => {
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const handleClear = () => {
     setMessages([]);
     setInput('');
+    setError(null);
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -67,6 +69,7 @@ export const ChatBox = () => {
 
     const userMessage = input.trim();
     setInput('');
+    setError(null);
     setMessages(prev => [...prev, { role: 'user', content: userMessage }]);
     setIsLoading(true);
 
@@ -87,10 +90,6 @@ export const ChatBox = () => {
         body: JSON.stringify({ message: userMessage })
       });
 
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-
       const data = await response.json();
       console.log('Received chat response:', data);
 
@@ -107,13 +106,9 @@ export const ChatBox = () => {
       });
     } catch (error) {
       console.error('Chat error:', error);
-      setMessages(prev => {
-        const filtered = prev.filter(msg => !msg.isSearching);
-        return [...filtered, { 
-          role: 'assistant', 
-          content: error instanceof Error ? error.message : 'Sorry, I encountered an error. Please try again.'
-        }];
-      });
+      const errorMessage = error instanceof Error ? error.message : 'Sorry, I encountered an error. Please try again.';
+      setError(errorMessage);
+      setMessages(prev => prev.filter(msg => !msg.isSearching));
     } finally {
       setIsLoading(false);
     }
@@ -325,6 +320,18 @@ export const ChatBox = () => {
         </h2>
       </div>
 
+      {error && (
+        <motion.div
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="p-4 bg-red-50 dark:bg-red-900/20 border-b border-red-200 dark:border-red-800"
+        >
+          <p className="text-sm text-red-600 dark:text-red-400">
+            {error}
+          </p>
+        </motion.div>
+      )}
+
       {/* Example Prompts - Only show when no messages */}
       {messages.length === 0 && (
         <div className="p-4 border-b border-gray-200 dark:border-gray-800">
@@ -370,9 +377,9 @@ export const ChatBox = () => {
           <Input
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            placeholder="Ask about market insights..."
+            placeholder={error ? "Please try again..." : "Ask about market insights..."}
             disabled={isLoading}
-            className="flex-1"
+            className={`flex-1 ${error ? 'border-red-300 dark:border-red-700' : ''}`}
           />
           <Button type="submit" disabled={isLoading}>
             <Send className="h-4 w-4" />

@@ -5,6 +5,11 @@ import { log } from "../vite";
 
 const router = express.Router();
 
+// Validate Perplexity API key format
+function isValidPerplexityKey(key: string): boolean {
+  return typeof key === 'string' && key.startsWith('pplx-');
+}
+
 router.post("/chat", async (req, res) => {
   try {
     log('Received chat request:', req.body);
@@ -27,6 +32,14 @@ router.post("/chat", async (req, res) => {
       });
     }
 
+    if (!isValidPerplexityKey(apiKey)) {
+      log('Error: Invalid API key format');
+      return res.status(500).json({
+        status: 'error',
+        error: 'Invalid API key format. Key should start with "pplx-"'
+      });
+    }
+
     // Detect off-topic queries
     const nonMarketTerms = /\b(code|programming|typescript|javascript|python|game|gaming|maze|algorithm|compiler|database|API|endpoint)\b/i;
     if (nonMarketTerms.test(message)) {
@@ -42,7 +55,9 @@ router.post("/chat", async (req, res) => {
       baseURL: "https://api.perplexity.ai",
       defaultHeaders: {
         'Accept': 'application/json',
-      }
+        'Content-Type': 'application/json'
+      },
+      timeout: 30000 // 30 second timeout
     });
 
     const today = new Date().toLocaleDateString('en-US', { 
