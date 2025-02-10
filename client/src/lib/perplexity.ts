@@ -45,14 +45,32 @@ export async function getCurrentStockPrice(symbol: string): Promise<number | nul
       return cached.price;
     }
 
-    // Fetch from Yahoo Finance
+    // Fetch from Yahoo Finance with updated headers and error handling
     const response = await axios.get(`https://query2.finance.yahoo.com/v8/finance/quote`, {
       params: {
         symbols: symbol,
-        fields: 'regularMarketPrice,regularMarketChangePercent'
+        fields: 'regularMarketPrice,regularMarketChangePercent,shortName',
+        region: 'US',
+        lang: 'en-US',
+        corsDomain: 'finance.yahoo.com'
       },
       headers: {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
+        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36',
+        'Accept': '*/*',
+        'Accept-Language': 'en-US,en;q=0.9',
+        'Accept-Encoding': 'gzip, deflate, br',
+        'Origin': 'https://finance.yahoo.com',
+        'Referer': 'https://finance.yahoo.com/',
+        'Sec-Fetch-Dest': 'empty',
+        'Sec-Fetch-Mode': 'cors',
+        'Sec-Fetch-Site': 'same-site',
+        'Cache-Control': 'no-cache',
+        'Connection': 'keep-alive'
+      },
+      timeout: 10000,
+      maxRedirects: 5,
+      validateStatus: function (status) {
+        return status >= 200 && status < 300 || status === 302;
       }
     });
 
