@@ -227,7 +227,7 @@ Action: Accumulate below Rp2,700 (near 2025 low) for dividend + potential reboun
   },
   {
     slug: "fed-qt-exit-crypto-rally",
-    title: "Fed's QT Exit: Liquidity Lifeline Ignites Crypto & Equity Rally - Strategic Plays for BTC, ETH & SOL",
+    title: "Crypto at Critical Junctures: Technical Analysis for BTC, ETH, SOL, and WIF's Next Moves",
     description: "Comprehensive analysis of the Federal Reserve's quantitative tightening exit strategy and its implications for crypto markets, with focus on key resistance levels and institutional flows.",
     category: "Markets",
     source: "Daily Digest",
@@ -236,19 +236,19 @@ Action: Accumulate below Rp2,700 (near 2025 low) for dividend + potential reboun
     previewEmoji: "📈",
     previewMetrics: [
       {
-        label: "BTC Target",
-        value: "$120K",
-        subtitle: "EOY 2025"
+        label: "BlackRock Dominance",
+        value: "150K+ BTC",
+        subtitle: "~3% BTC Supply"
       },
       {
-        label: "ETH/BTC",
-        value: "0.07",
-        subtitle: "Key Resistance"
+        label: "Daily ETF Volume",
+        value: "$48B",
+        subtitle: "4x Gold ETFs"
       },
       {
-        label: "Fed QT Cut",
-        value: "$2T",
-        subtitle: "Since 2022"
+        label: "Weekly Inflows",
+        value: "$1.2B",
+        subtitle: "Reverses Jan Outflow"
       }
     ],
     tags: ["Crypto", "Federal Reserve", "Technical Analysis"],
