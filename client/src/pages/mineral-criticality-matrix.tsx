@@ -22,17 +22,17 @@ const MineralCriticalityMatrix = () => {
         </div>
 
         {/* Breadcrumb */}
-        <div className="flex items-center space-x-2 text-sm text-gray-600 dark:text-gray-400 py-4 border-b border-gray-200 dark:border-gray-800">
+        <nav className="flex items-center space-x-2 text-sm text-gray-600 dark:text-gray-400 py-4">
           <a href="/" className="hover:text-blue-600 cursor-pointer">Home</a>
           <ChevronRight className="h-4 w-4" />
           <a href="/newsletter" className="hover:text-blue-600 cursor-pointer">Newsletter</a>
           <ChevronRight className="h-4 w-4" />
           <span>Indonesia's Mineral Criticality Matrix</span>
-        </div>
+        </nav>
 
         {/* Header */}
-        <header className="sticky top-0 z-20 bg-[#FBF7F4] dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800 pb-4">
-          <div className="pt-4">
+        <header className="border-b border-gray-200 dark:border-gray-800">
+          <div className="py-4">
             <h1 className="font-serif text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-3 leading-tight">
               Indonesia's Mineral Criticality Matrix: Strategic and Supply Chain Perspectives
             </h1>

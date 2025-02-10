@@ -43,24 +43,27 @@ const TradeWarTsunamiFeb1014 = () => {
         </div>
 
         {/* Header */}
-        <header className="py-4">
-          <h1 className="text-4xl font-serif font-bold text-gray-900 dark:text-white mb-4">
-            Trade War Tsunami: Indonesia Emerges as China's Surplus Dumping Ground
-          </h1>
-          <div className="flex items-center space-x-4 text-sm text-gray-600 dark:text-gray-400 mb-2">
-            <div className="flex items-center space-x-1">
-              <Clock className="h-4 w-4" />
-              <span>February 10, 2025</span>
+        <header className="border-b border-gray-200 dark:border-gray-800">
+          <div className="py-4">
+            <h1 className="text-3xl md:text-4xl font-serif font-bold text-gray-900 dark:text-white mb-4">
+              Trade War Tsunami: Indonesia Emerges as China's Surplus Dumping Ground
+            </h1>
+            <div className="flex items-center space-x-4 text-sm text-gray-600 dark:text-gray-400 mb-2">
+              <div className="flex items-center space-x-1">
+                <Clock className="h-4 w-4" />
+                <span>February 10, 2025</span>
+              </div>
+              <div className="flex items-center space-x-1">
+                <MapPin className="h-4 w-4" />
+                <span>JAKARTA</span>
+              </div>
             </div>
-            <div className="flex items-center space-x-1">
-              <MapPin className="h-4 w-4" />
-              <span>JAKARTA</span>
+            <div className="text-sm text-gray-600 dark:text-gray-400 mb-6">
+              By Luca Cada Lora
             </div>
-          </div>
-          <div className="text-sm text-gray-600 dark:text-gray-400 mb-6">
-            By Luca Cada Lora
           </div>
         </header>
+
 
         {/* Weekly Market Alert Section */}
         <div className="bg-[#FFF7ED] border-l-4 border-orange-500 p-4 rounded-r mb-8">
