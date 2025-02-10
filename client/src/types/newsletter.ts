@@ -63,16 +63,42 @@ export const sampleArticles: Article[] = [
 
 At IDR 4,190 per share, BBRI trades at a trailing P/E of 10.3x — a 46% discount to its Indonesian banking peers (14.7x) and nearly half the valuation of regional counterparts like Malaysia's CIMB (19.1x). This disparity becomes starker when contextualized against fundamentals:
 
-- Profit Growth: Net profit rose 12% YoY in Q3 2024 to IDR 16.2T, driven by a 34% surge in fee-based income from digital transactions and microloans.
-- Asset Quality: Gross NPL ratio held steady at 2.8% (vs. industry average 3.1%), with 89% of its IDR 1,895T loan book concentrated in resilient UMKM (micro-SME) segments.
-- Capital Buffers: CET1 ratio of 19.4% (Dec 2024) provides ample room for dividend hikes and share buybacks.
+Profit Growth: Net profit rose 12% YoY in Q3 2024 to IDR 16.2T, driven by a 34% surge in fee-based income from digital transactions and microloans.
+
+Asset Quality: Gross NPL ratio held steady at 2.8% (vs. industry average 3.1%), with 89% of its IDR 1,895T loan book concentrated in resilient UMKM (micro-SME) segments.
+
+Capital Buffers: CET1 ratio of 19.4% (Dec 2024) provides ample room for dividend hikes and share buybacks.
 
 The stock's appeal as a passive income vehicle is quantifiable:
-- 2024 Payout: IDR 135/share interim dividend (paid Jan 15, 2025), with a final dividend expected to bring the total to IDR 300–316/share (7.1–7.5% yield).
-- 2025 Forecast: Consensus estimates project IDR 350/share dividends (8.4% yield), supported by a government-mandated 35% payout ratio and IDR 220T in retained earnings.
+2024 Payout: IDR 135/share interim dividend (paid Jan 15, 2025), with a final dividend expected to bring the total to IDR 300–316/share (7.1–7.5% yield).
+2025 Forecast: Consensus estimates project IDR 350/share dividends (8.4% yield), supported by a government-mandated 35% payout ratio and IDR 220T in retained earnings.
 
 Notably, BBRI has increased dividends for 8 consecutive years — a track record unmatched by Indonesian peers.
 
+At 10.3x earnings and 1.9x book value, BBRI prices in excessive pessimism about Indonesian macro risks while ignoring its best-in-class yield, digital growth runway, and defensive SME exposure. For investors with a 12–18 month horizon, this represents a high-conviction opportunity to lock in 8%+ dividends while awaiting multiple expansion.
+
+The stock's appeal as a passive income vehicle is quantifiable:
+2024 Payout: IDR 135/share interim dividend (paid Jan 15, 2025), with a final dividend expected to bring the total to IDR 300–316/share (7.1–7.5% yield).
+2025 Forecast: Consensus estimates project IDR 350/share dividends (8.4% yield), supported by a government-mandated 35% payout ratio and IDR 220T in retained earnings.
+
+Catalysts: Rate Cuts, Digital Adoption, and Foreign Flows
+
+Monetary Policy Tailwinds
+Bank Indonesia's 25bps rate cut to 5.75% (Jan 2025) is expected to reduce BBRI's funding costs by 30–40bps, boosting net interest margins to 7.5% by Q4 2025.
+
+Digital Banking Breakthrough
+The BRI Mobile app now processes IDR 185T/month in microloan disbursements (+62% YoY), capturing 28% of Indonesia's digital lending market. Cross-selling insurance and wealth products to its 34 million users could add IDR 4.2T to 2025 non-interest income.
+
+Foreign Institutional Demand
+After a IDR 8.2T net sell-off in 2024, foreign investors turned net buyers in January 2025 (IDR 1.2T inflow), likely attracted by the IDR 4,000–4,200 support zone and yield spread over US Treasuries.
+
+Risks: What Could Derail the Thesis?
+
+Macro Sensitivity: 57% of BBRI's loan book is floating-rate, exposing it to BI rate volatility.
+NPL Creep: Restructuring of IDR 48T in pandemic-era microloans (3.2% of total) could pressure asset quality if economic growth dips below 4.5%.
+Political Pressures: As a 53% state-owned entity, BBRI faces risks of directed lending to priority sectors at suboptimal margins.
+
+The Bottom Line
 At 10.3x earnings and 1.9x book value, BBRI prices in excessive pessimism about Indonesian macro risks while ignoring its best-in-class yield, digital growth runway, and defensive SME exposure. For investors with a 12–18 month horizon, this represents a high-conviction opportunity to lock in 8%+ dividends while awaiting multiple expansion.`
   },
   {
