@@ -12,6 +12,7 @@ import MineralCriticalityMatrix from "@/pages/mineral-criticality-matrix";
 import IndonesiaEconomicCrisis from "@/pages/indonesia-economic-crisis";
 import About from "@/pages/about";
 import FedBalanceSheet from "@/pages/FedBalanceSheet";
+import FedQTExitCryptoRally from "@/pages/fed-qt-exit-crypto-rally";
 
 function Router() {
   return (
@@ -25,6 +26,7 @@ function Router() {
       <Route path="/newsletter/indonesia-mineral-criticality-matrix" component={MineralCriticalityMatrix} />
       <Route path="/newsletter/indonesia-economic-inventory-crisis" component={IndonesiaEconomicCrisis} />
       <Route path="/newsletter/fed-balance-sheet-blueprint" component={FedBalanceSheet} />
+      <Route path="/newsletter/fed-qt-exit-crypto-rally" component={FedQTExitCryptoRally} />
       <Route path="/newsletter/:slug" component={WSJArticle} />
       <Route path="/newsletter/category/:category" component={Newsletters} />
       <Route path="/newsletters" component={() => <Redirect to="/newsletter" />} />
