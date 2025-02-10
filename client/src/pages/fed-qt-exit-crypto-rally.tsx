@@ -6,7 +6,7 @@ import { useEffect } from "react";
 
 export default function FedQTExitCryptoRally() {
   useEffect(() => {
-    document.title = "Fed's QT Exit: Liquidity Lifeline Ignites Crypto & Equity Rally | Daily Digest";
+    document.title = "Crypto at Critical Junctures: Technical Analysis for BTC, ETH, SOL, and WIF's Next Moves | Daily Digest";
   }, []);
 
   return (
@@ -15,7 +15,6 @@ export default function FedQTExitCryptoRally() {
       <div className="h-36 sm:h-32"></div>
 
       <div className="max-w-[1200px] mx-auto px-4">
-        {/* Breadcrumb */}
         <div className="flex items-center space-x-2 text-sm text-gray-600 dark:text-gray-400 py-4 border-b border-gray-200 dark:border-gray-800">
           <Link href="/" className="hover:text-blue-600">Home</Link>
           <ChevronRight className="h-4 w-4" />
@@ -24,7 +23,35 @@ export default function FedQTExitCryptoRally() {
           <span>Fed's QT Exit Impact</span>
         </div>
 
-        {/* Disclaimer Warning */}
+        <header className="border-b border-gray-200 dark:border-gray-800 pb-4">
+          <div className="pt-4">
+            <div className="flex items-center space-x-2 text-xs text-gray-600 dark:text-gray-400 mb-3">
+              <span className="font-bold uppercase">Markets</span>
+              <span>•</span>
+              <span>Analysis</span>
+            </div>
+
+            <h1 className="font-serif text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-3 leading-tight">
+              Crypto at Critical Junctures: Technical Analysis for BTC, ETH, SOL, and WIF's Next Moves
+            </h1>
+
+            <div className="flex items-center space-x-4 text-sm text-gray-600 dark:text-gray-400 mb-3">
+              <div className="flex items-center space-x-1">
+                <Clock className="h-4 w-4" />
+                <span>February 10, 2025</span>
+              </div>
+              <div className="flex items-center space-x-1">
+                <MapPin className="h-4 w-4" />
+                <span>JAKARTA</span>
+              </div>
+            </div>
+
+            <div className="text-sm">
+              <p className="font-semibold dark:text-gray-300">By Luca Cada Lora</p>
+            </div>
+          </div>
+        </header>
+
         <div className="my-6">
           <Card className="bg-orange-50 dark:bg-orange-900/20 border-orange-200 dark:border-orange-800">
             <CardContent className="p-6">
@@ -40,35 +67,6 @@ export default function FedQTExitCryptoRally() {
             </CardContent>
           </Card>
         </div>
-
-        <header className="border-b border-gray-200 dark:border-gray-800 pb-4">
-          <div className="pt-4">
-            <div className="flex items-center space-x-2 text-xs text-gray-600 dark:text-gray-400 mb-3">
-              <span className="font-bold uppercase">Markets</span>
-              <span>•</span>
-              <span>Analysis</span>
-            </div>
-
-            <h1 className="font-serif text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-3 leading-tight">
-              Fed's QT Exit: Liquidity Lifeline Ignites Crypto & Equity Rally - Strategic Plays for BTC, ETH & SOL
-            </h1>
-
-            <div className="flex items-center space-x-4 text-sm text-gray-600 dark:text-gray-400 mb-3">
-              <div className="flex items-center space-x-1">
-                <Clock className="h-4 w-4" />
-                <span>February 10, 2025</span>
-              </div>
-              <div className="flex items-center space-x-1">
-                <MapPin className="h-4 w-4" />
-                <span>JAKARTA</span>
-              </div>
-            </div>
-
-            <div className="text-sm">
-              <p className="font-semibold dark:text-gray-300">By Daily | Digest Market Analysis Team</p>
-            </div>
-          </div>
-        </header>
 
         <div className="py-4 space-y-6">
           <section>
