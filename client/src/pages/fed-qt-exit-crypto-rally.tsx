@@ -70,11 +70,73 @@ export default function FedQTExitCryptoRally() {
 
         <div className="py-4 space-y-6">
           <section>
-            <h2 className="text-xl font-serif font-bold text-gray-900 dark:text-white mb-3">Early Narratives: The Macro Catalyst</h2>
-            <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
-              Fed's Accelerated QT Exit Fuels Risk-On Surge
-              The Federal Reserve's $2 trillion balance sheet reduction since June 2022—$297B pared since June 2024 alone—has outpaced Wall Street projections (vs. JPMorgan's $1.7T estimate), signaling a faster-than-expected pivot toward liquidity normalization. This strategic unwind removes a critical drag on risk assets, with the Fed's new guidance to halt QT when reserves are "somewhat above ample levels" (vs. prior "just above") cementing mid-2025 as the likely endpoint.
+            <h2 className="text-xl font-serif font-bold text-gray-900 dark:text-white mb-3">Bitcoin (BTC): Nearing $100K Amid ETF Frenzy – Resistance Battle Ahead</h2>
+            <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
+              Bitcoin trades at $97,600, inching closer to the psychological $100K milestone as institutional ETF inflows surge. However, overhead resistance and profit-taking risks loom. Here's a detailed breakdown:
             </p>
+
+            <div className="space-y-6">
+              <div>
+                <h3 className="font-bold text-lg mb-2">ETF Inflows: The $48B Daily Catalyst</h3>
+                <ul className="list-disc pl-5 space-y-2">
+                  <li><strong>BlackRock Dominance:</strong> iShares Bitcoin Trust (IBIT) leads with 150,000+ BTC ($14.7B AUM), absorbing ~3% of Bitcoin's circulating supply.</li>
+                  <li><strong>Daily Volume Surge:</strong> Combined ETF trading volume hit $48B (Feb 9), dwarfing gold ETFs ($12B) and signaling mainstream adoption.</li>
+                  <li><strong>Net Inflows:</strong> $1.2B flowed into BTC ETFs last week, reversing January's $450M outflow as macro fears eased.</li>
+                </ul>
+              </div>
+
+              <div>
+                <h3 className="font-bold text-lg mb-2">Key ETF Metrics</h3>
+                <div className="overflow-x-auto">
+                  <table className="min-w-full table-auto">
+                    <thead>
+                      <tr className="border-b dark:border-gray-700">
+                        <th className="text-left py-2">ETF Provider</th>
+                        <th className="text-left py-2">Ticker</th>
+                        <th className="text-left py-2">BTC Held</th>
+                        <th className="text-left py-2">7-Day Inflow</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr className="border-b dark:border-gray-700">
+                        <td className="py-2">BlackRock</td>
+                        <td className="py-2">IBIT</td>
+                        <td className="py-2">152,000</td>
+                        <td className="py-2">+$420M</td>
+                      </tr>
+                      <tr className="border-b dark:border-gray-700">
+                        <td className="py-2">Fidelity</td>
+                        <td className="py-2">FBTC</td>
+                        <td className="py-2">89,500</td>
+                        <td className="py-2">+$310M</td>
+                      </tr>
+                      <tr>
+                        <td className="py-2">Ark/21Shares</td>
+                        <td className="py-2">ARKB</td>
+                        <td className="py-2">42,300</td>
+                        <td className="py-2">+$180M</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              <div>
+                <h3 className="font-bold text-lg mb-2">Resistance at $100K: The Psychological Hurdle</h3>
+                <ul className="list-disc pl-5 space-y-2">
+                  <li><strong>Historic Precedent:</strong> BTC stalled at $64K (2021) and $84K (2024) due to profit-taking; $100K faces similar sentiment-driven friction.</li>
+                  <li><strong>Options Market:</strong> Over $2.5B in open interest clusters at $100K–$105K call options (March expiry), creating a "gamma squeeze" magnet.</li>
+                </ul>
+              </div>
+
+              <div>
+                <h3 className="font-bold text-lg mb-2">On-Chain Signals</h3>
+                <ul className="list-disc pl-5 space-y-2">
+                  <li><strong>Exchange Reserves:</strong> Hit 5-year lows (2.1M BTC), signaling long-term holder accumulation.</li>
+                  <li><strong>Whale Activity:</strong> Addresses holding 1K+ BTC grew by 4.2% in February.</li>
+                </ul>
+              </div>
+            </div>
           </section>
 
           <section>
@@ -93,14 +155,12 @@ export default function FedQTExitCryptoRally() {
                 <p><strong>Strategic Takeaway:</strong> Break above $2.75K targets $3K; ETH/BTC ratio recovery critical for altseason.</p>
                 <p className="text-gray-600 dark:text-gray-400 mt-2">[Insert ETH chart: RSI divergence + whale accumulation]</p>
               </div>
-
               <div>
                 <h3 className="font-bold text-lg mb-2">Solana (SOL): $204</h3>
                 <p className="mb-2"><strong>Catalyst:</strong> Golden cross (50D {'>'} 200D MA) + spot inflows ($16M). Fed-driven liquidity rotation favors high-beta SOL; exchange outflows ($100M) signal accumulation.</p>
                 <p><strong>Strategic Takeaway:</strong> Close above $210 opens path to $220; defend $200 support.</p>
                 <p className="text-gray-600 dark:text-gray-400 mt-2">[Insert SOL chart: Golden cross + volume spike]</p>
               </div>
-
               <div>
                 <h3 className="font-bold text-lg mb-2">Dogwifhat (WIF): $0.66</h3>
                 <p className="mb-2"><strong>Catalyst:</strong> Retail FOMO + whale accumulation ($7.17M Binance buy). Oversold RSI (22.28) and expanding triangle pattern hint at volatility squeeze.</p>
@@ -155,8 +215,11 @@ export default function FedQTExitCryptoRally() {
           <section>
             <h2 className="text-xl font-serif font-bold text-gray-900 dark:text-white mb-3">Related Articles</h2>
             <ul className="list-disc pl-5 space-y-2">
-              <li>Fed Balance Sheet Blueprint</li>
-              <li>Crypto's Macro Playbook</li>
+              <li>
+                <Link href="/newsletter/fed-balance-sheet-blueprint" className="text-blue-600 hover:underline">
+                  Fed Balance Sheet Blueprint
+                </Link>
+              </li>
             </ul>
           </section>
 
