@@ -9,6 +9,13 @@ export default function Newsletters() {
   const [location] = useLocation();
   const category = location.split("/").pop() as Category | undefined;
   const isViewAll = location === "/newsletter";
+
+  // Get featured article
+  const featuredArticle = sampleArticles.find(article => 
+    article.slug === 'indonesia-mineral-criticality-matrix'
+  );
+
+  // Filter articles based on category
   const filteredArticles = category && !isViewAll
     ? sampleArticles.filter(article => article.category === category)
     : sampleArticles;
@@ -30,6 +37,20 @@ export default function Newsletters() {
         </div>
 
         <h1 className="text-2xl sm:text-3xl font-bold mb-6 sm:mb-8 text-gray-900 dark:text-white">Newsletter</h1>
+
+        {/* Featured Article Section */}
+        {featuredArticle && (
+          <div className="mb-8">
+            <div className="flex items-center gap-2 mb-4">
+              <div className="relative">
+                <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
+                <div className="absolute -inset-1 bg-blue-500/50 rounded-full animate-ping"></div>
+              </div>
+              <h2 className="text-xl font-bold text-gray-900 dark:text-white">Featured</h2>
+            </div>
+            <ArticleCard article={featuredArticle} />
+          </div>
+        )}
 
         {/* Filter by tag */}
         <div className="mb-6 sm:mb-8">
@@ -54,9 +75,11 @@ export default function Newsletters() {
 
         {/* Articles Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-          {filteredArticles.map((article, index) => (
-            <ArticleCard key={index} article={article} />
-          ))}
+          {filteredArticles
+            .filter(article => article.slug !== 'indonesia-mineral-criticality-matrix')
+            .map((article, index) => (
+              <ArticleCard key={index} article={article} />
+            ))}
         </div>
 
         {/* Empty State */}
