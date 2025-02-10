@@ -148,7 +148,7 @@ export default function FedQTExitCryptoRally() {
                 <p><strong>Strategic Takeaway:</strong> Daily close above $100K confirms path to $105K; hold $94.7K as invalidation.</p>
                 <div className="mt-4">
                   <img 
-                    src="/charts/btc-chart.png" 
+                    src="/btc-strategic-targets.png" 
                     alt="BTC Chart: Symmetrical triangle breakout" 
                     className="w-full rounded-lg shadow-lg"
                   />
@@ -161,7 +161,7 @@ export default function FedQTExitCryptoRally() {
                 <p><strong>Strategic Takeaway:</strong> Break above $2.75K targets $3K; ETH/BTC ratio recovery critical for altseason.</p>
                 <div className="mt-4">
                   <img 
-                    src="/charts/eth-chart.png" 
+                    src="/eth-strategic-targets.png" 
                     alt="ETH Chart: RSI divergence and whale accumulation" 
                     className="w-full rounded-lg shadow-lg"
                   />
@@ -174,7 +174,7 @@ export default function FedQTExitCryptoRally() {
                 <p><strong>Strategic Takeaway:</strong> Close above $210 opens path to $220; defend $200 support.</p>
                 <div className="mt-4">
                   <img 
-                    src="/charts/sol-chart.png" 
+                    src="/sol-strategic-targets.png" 
                     alt="SOL Chart: Golden cross and volume spike" 
                     className="w-full rounded-lg shadow-lg"
                   />
@@ -187,7 +187,7 @@ export default function FedQTExitCryptoRally() {
                 <p><strong>Strategic Takeaway:</strong> Hold $0.60 for $0.75 target; breakdown below $0.53 invalidates setup.</p>
                 <div className="mt-4">
                   <img 
-                    src="/charts/wif-chart.png" 
+                    src="/wif-strategic-targets.png" 
                     alt="WIF Chart: TD Sequential buy signal" 
                     className="w-full rounded-lg shadow-lg"
                   />
