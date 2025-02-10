@@ -40,16 +40,16 @@ export default function Home() {
 
       <main className="max-w-[1200px] mx-auto px-4 py-6 sm:py-8 dark:text-gray-200">
         <div className="flex flex-col lg:flex-row gap-8">
-          {/* ChatBox - 1/6 width */}
-          <div className="hidden lg:block lg:w-[16.67%] flex-shrink-0">
+          {/* ChatBox - 2/6 width */}
+          <div className="hidden lg:block lg:w-[33.33%] flex-shrink-0">
             <ChatBox />
           </div>
 
-          {/* Main Newsletter Content - 4/6 width */}
-          <div className="flex-1 lg:w-[66.66%]">
+          {/* Main Newsletter Content - 3/6 width */}
+          <div className="flex-1 lg:w-[50%]">
             {/* Newsletter Section */}
             <div className="flex justify-between items-center mb-6">
-              <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Newsletter</h2>
+              <h2 className="text-2xl font-serif font-bold text-gray-900 dark:text-white">Newsletter</h2>
               <Link href="/newsletter" className="text-sm text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 flex items-center gap-1">
                 View All <ArrowRight className="h-4 w-4" />
               </Link>
@@ -85,7 +85,7 @@ export default function Home() {
           {/* Featured Section - 1/6 width */}
           <div className="hidden lg:block lg:w-[16.67%] flex-shrink-0">
             <div className="sticky top-40">
-              <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-4">Featured</h2>
+              <h2 className="text-2xl font-serif font-bold text-gray-900 dark:text-white mb-4">Featured</h2>
               {featuredArticle && (
                 <Link href={`/newsletter/${featuredArticle.slug}`}>
                   <Card className="group relative hover:shadow-lg transition-shadow duration-200">
@@ -104,7 +104,7 @@ export default function Home() {
                         <div className="text-xs font-semibold text-blue-600 dark:text-blue-400 uppercase tracking-wider mb-2">
                           Industries
                         </div>
-                        <h3 className="font-medium text-gray-900 dark:text-white">
+                        <h3 className="font-serif text-base font-medium text-gray-900 dark:text-white">
                           {featuredArticle.title}
                         </h3>
                       </div>
