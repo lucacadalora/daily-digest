@@ -2,6 +2,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { TrendingUp, AlertCircle, Clock, MapPin, ChevronRight, Shield, BarChart3, LineChart, Info } from 'lucide-react';
 import { Link } from "wouter";
 import { Header } from "@/components/Header";
+import { CryptoChart } from "@/components/ui/CryptoChart";
 import { useEffect } from "react";
 
 export default function FedQTExitCryptoRally() {
@@ -147,10 +148,9 @@ export default function FedQTExitCryptoRally() {
                 <p className="mb-2"><strong>Catalyst:</strong> Fed liquidity tailwind + ETF inflows ($48B daily volume). Institutional accumulation via BlackRock's ETF (150K+ BTC holdings) aligns with technical breakout above $105K.</p>
                 <p><strong>Strategic Takeaway:</strong> Daily close above $100K confirms path to $105K; hold $94.7K as invalidation.</p>
                 <div className="mt-4">
-                  <img 
-                    src="/btc-strategic-targets.png" 
-                    alt="BTC Chart: Symmetrical triangle breakout" 
-                    className="w-full rounded-lg shadow-lg"
+                  <CryptoChart 
+                    imagePath="/btc-strategic-targets.png"
+                    altText="BTC Chart: Symmetrical triangle breakout"
                   />
                 </div>
               </div>
@@ -160,10 +160,9 @@ export default function FedQTExitCryptoRally() {
                 <p className="mb-2"><strong>Catalyst:</strong> Pectra upgrade (March 2025) + spot ETF dominance ($505M inflows). Whale accumulation ($883M inflows) and oversold RSI (29) signal rebound potential.</p>
                 <p><strong>Strategic Takeaway:</strong> Break above $2.75K targets $3K; ETH/BTC ratio recovery critical for altseason.</p>
                 <div className="mt-4">
-                  <img 
-                    src="/eth-strategic-targets.png" 
-                    alt="ETH Chart: RSI divergence and whale accumulation" 
-                    className="w-full rounded-lg shadow-lg"
+                  <CryptoChart 
+                    imagePath="/eth-strategic-targets.png"
+                    altText="ETH Chart: RSI divergence and whale accumulation"
                   />
                 </div>
               </div>
@@ -173,10 +172,9 @@ export default function FedQTExitCryptoRally() {
                 <p className="mb-2"><strong>Catalyst:</strong> Golden cross (50D {'>'} 200D MA) + spot inflows ($16M). Fed-driven liquidity rotation favors high-beta SOL; exchange outflows ($100M) signal accumulation.</p>
                 <p><strong>Strategic Takeaway:</strong> Close above $210 opens path to $220; defend $200 support.</p>
                 <div className="mt-4">
-                  <img 
-                    src="/sol-strategic-targets.png" 
-                    alt="SOL Chart: Golden cross and volume spike" 
-                    className="w-full rounded-lg shadow-lg"
+                  <CryptoChart 
+                    imagePath="/sol-strategic-targets.png"
+                    altText="SOL Chart: Golden cross and volume spike"
                   />
                 </div>
               </div>
@@ -186,13 +184,10 @@ export default function FedQTExitCryptoRally() {
                 <p className="mb-2"><strong>Catalyst:</strong> Retail FOMO + whale accumulation ($7.17M Binance buy). Oversold RSI (22.28) and expanding triangle pattern hint at volatility squeeze.</p>
                 <p><strong>Strategic Takeaway:</strong> Hold $0.60 for $0.75 target; breakdown below $0.53 invalidates setup.</p>
                 <div className="mt-4">
-                  <div className="w-full max-w-3xl mx-auto bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden">
-                    <img 
-                      src="/wif-strategic-targets.png"
-                      alt="WIF Chart: TD Sequential buy signal" 
-                      className="w-full h-auto"
-                    />
-                  </div>
+                  <CryptoChart 
+                    imagePath="/wif-strategic-targets.png"
+                    altText="WIF Chart: TD Sequential buy signal"
+                  />
                 </div>
               </div>
             </div>
