@@ -1,6 +1,7 @@
 import { Card, CardContent } from '@/components/ui/card';
 import { TrendingUp, AlertCircle, Clock, MapPin, ChevronRight, Shield, BarChart3, LineChart, Info } from 'lucide-react';
 import { Link } from "wouter";
+import { Header } from "@/components/Header";
 import { useEffect } from "react";
 
 export default function FedQTExitCryptoRally() {
