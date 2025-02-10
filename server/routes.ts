@@ -143,28 +143,37 @@ class MarketDataCache {
     ].join(',');
 
     try {
-      const response = await axios.get('https://query2.finance.yahoo.com/v8/finance/quote', {
+      // Updated headers and query parameters for Yahoo Finance API
+      const response = await axios.get('https://query1.finance.yahoo.com/v7/finance/quote', {
         params: {
           symbols: allSymbols,
-          fields: 'regularMarketPrice,regularMarketChangePercent'
+          fields: 'regularMarketPrice,regularMarketChangePercent',
+          region: 'US',
+          lang: 'en-US'
         },
         headers: {
-          'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
-        }
+          'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
+          'Accept': 'application/json',
+          'Accept-Language': 'en-US,en;q=0.9',
+          'Accept-Encoding': 'gzip, deflate, br',
+          'Origin': 'https://finance.yahoo.com',
+          'Referer': 'https://finance.yahoo.com/'
+        },
+        timeout: 10000
       });
 
-      console.log('Yahoo Finance API Response:', {
-        status: response.status,
-        dataLength: response.data?.quoteResponse?.result?.length || 0
-      });
+      if (!response.data?.quoteResponse?.result) {
+        console.error('Invalid response format from Yahoo Finance:', response.data);
+        throw new Error('Invalid response format from Yahoo Finance API');
+      }
 
-      const quotes = response.data?.quoteResponse?.result || [];
+      const quotes = response.data.quoteResponse.result;
       const quoteMap = new Map(quotes.map((quote: any) => [quote.symbol, quote]));
 
       const mapQuote = (symbol: string): MarketPrice => {
         const quote = quoteMap.get(symbol);
-        if (!quote) {
-          console.warn(`No data available for symbol: ${symbol}`);
+        if (!quote?.regularMarketPrice) {
+          console.warn(`No valid price data for symbol: ${symbol}`);
           return { price: 0, change24h: 0 };
         }
         return {
@@ -202,6 +211,13 @@ class MarketDataCache {
       };
     } catch (error) {
       console.error('Error fetching market data:', error);
+      if (axios.isAxiosError(error)) {
+        console.error('Axios error details:', {
+          status: error.response?.status,
+          statusText: error.response?.statusText,
+          data: error.response?.data
+        });
+      }
       throw error;
     }
   }
