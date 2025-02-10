@@ -187,9 +187,9 @@ export default function FedQTExitCryptoRally() {
                 <p><strong>Strategic Takeaway:</strong> Hold $0.60 for $0.75 target; breakdown below $0.53 invalidates setup.</p>
                 <div className="mt-4">
                   <img 
-                    src="/wif-strategic-targets.png" 
+                    src="/wif-chart.png" 
                     alt="WIF Chart: TD Sequential buy signal" 
-                    className="w-full rounded-lg shadow-lg"
+                    className="w-full rounded-lg shadow-lg max-w-3xl mx-auto"
                   />
                 </div>
               </div>
