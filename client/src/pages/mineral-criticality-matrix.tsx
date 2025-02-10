@@ -31,7 +31,7 @@ const MineralCriticalityMatrix = () => {
         </div>
 
         {/* Header */}
-        <header className="border-b border-gray-200 dark:border-gray-800 pb-4">
+        <header className="sticky top-0 z-20 bg-[#FBF7F4] dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800 pb-4">
           <div className="pt-4">
             <h1 className="font-serif text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-3 leading-tight">
               Indonesia's Mineral Criticality Matrix: Strategic and Supply Chain Perspectives
