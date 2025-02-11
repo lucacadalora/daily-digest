@@ -19,13 +19,14 @@ const fetchStockData = async () => {
       symbols: 'BBRI.JK,TLKM.JK,ASII.JK,BBCA.JK,AAPL,MSFT,GOOGL,TSLA,^JKSE,^GSPC,^IXIC,^DJI,^N225,^HSI,IDR=X'
     },
     headers: {
-      'X-RapidAPI-Key': '3619a370a9msh2bf6825a1ba553bp1f0815jsn5490a3e2c230',
+      'X-RapidAPI-Key': import.meta.env.VITE_RAPIDAPI_KEY,
       'X-RapidAPI-Host': 'yahoo-finance15.p.rapidapi.com'
     }
   };
 
   try {
     const response = await axios.request(options);
+    console.log('API Response:', response.data); // Debug log
     if (response.data && response.data.data) {
       return response.data.data;
     }
