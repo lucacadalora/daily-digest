@@ -13,7 +13,6 @@ import IndonesiaEconomicCrisis from "@/pages/indonesia-economic-crisis";
 import About from "@/pages/about";
 import FedBalanceSheet from "@/pages/FedBalanceSheet";
 import FedQTExitCryptoRally from "@/pages/fed-qt-exit-crypto-rally";
-import { TickerSlide } from "@/components/TickerSlide";
 
 function Router() {
   return (
@@ -39,13 +38,8 @@ function Router() {
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <div className="flex flex-col min-h-screen">
-        <TickerSlide />
-        <div className="pt-10">
-          <Router />
-        </div>
-        <Toaster />
-      </div>
+      <Router />
+      <Toaster />
     </QueryClientProvider>
   );
 }
