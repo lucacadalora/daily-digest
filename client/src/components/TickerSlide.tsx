@@ -52,7 +52,7 @@ export const TickerSlide: React.FC = () => {
 
   if (isLoading) {
     return (
-      <Card className="w-full p-2 bg-muted/50">
+      <Card className="w-full p-2 bg-muted/50 fixed top-0 left-0 z-50">
         <div className="animate-pulse flex space-x-4">
           <div className="h-4 bg-muted-foreground/20 rounded w-full"></div>
         </div>
@@ -62,14 +62,14 @@ export const TickerSlide: React.FC = () => {
 
   if (isError || !data || data.length === 0) {
     return (
-      <Card className="w-full p-2">
+      <Card className="w-full p-2 fixed top-0 left-0 z-50">
         <p className="text-sm text-destructive">Error loading market data</p>
       </Card>
     );
   }
 
   return (
-    <Card className="w-full overflow-hidden bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+    <Card className="w-full overflow-hidden bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 fixed top-0 left-0 z-50">
       <motion.div
         className="flex space-x-8 p-2"
         animate={{
