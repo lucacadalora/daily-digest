@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
@@ -16,7 +16,7 @@ const fetchStockData = async () => {
     method: 'GET',
     url: 'https://yahoo-finance15.p.rapidapi.com/api/v1/markets/stock/quotes',
     params: {
-      ticker: 'AAPL,MSFT,^SPX,^NYA,BBCA.JK,BBRI.JK,ASII.JK,TLKM.JK'
+      symbols: 'BBRI.JK,TLKM.JK,ASII.JK,BBCA.JK,AAPL,MSFT,GOOGL,TSLA,^JKSE,^GSPC,^IXIC,^DJI,^N225,^HSI,IDR=X'
     },
     headers: {
       'X-RapidAPI-Key': '3619a370a9msh2bf6825a1ba553bp1f0815jsn5490a3e2c230',
@@ -24,8 +24,17 @@ const fetchStockData = async () => {
     }
   };
 
-  const response = await axios.request(options);
-  return response.data;
+  try {
+    const response = await axios.request(options);
+    if (response.data && response.data.data) {
+      return response.data.data;
+    }
+    console.error('Invalid response format:', response.data);
+    return [];
+  } catch (error) {
+    console.error('Error fetching stock data:', error);
+    return [];
+  }
 };
 
 export const TickerSlide: React.FC = () => {
@@ -45,7 +54,7 @@ export const TickerSlide: React.FC = () => {
     );
   }
 
-  if (isError) {
+  if (isError || !data || data.length === 0) {
     return (
       <Card className="w-full p-2">
         <p className="text-sm text-destructive">Error loading market data</p>
@@ -66,10 +75,10 @@ export const TickerSlide: React.FC = () => {
           ease: "linear"
         }}
       >
-        {data?.data?.map((quote: StockQuote) => (
+        {data.map((quote: StockQuote) => (
           <div key={quote.symbol} className="flex items-center space-x-2 whitespace-nowrap">
             <span className="font-medium">{quote.symbol}</span>
-            <span>{quote.regularMarketPrice.toFixed(2)}</span>
+            <span>{quote.regularMarketPrice?.toFixed(2) || '0.00'}</span>
             <span 
               className={`flex items-center ${
                 quote.regularMarketChangePercent >= 0 
@@ -82,7 +91,7 @@ export const TickerSlide: React.FC = () => {
               ) : (
                 <TrendingDown className="h-4 w-4 mr-1" />
               )}
-              {Math.abs(quote.regularMarketChangePercent).toFixed(2)}%
+              {Math.abs(quote.regularMarketChangePercent || 0).toFixed(2)}%
             </span>
           </div>
         ))}
