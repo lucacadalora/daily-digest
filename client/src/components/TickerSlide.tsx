@@ -16,17 +16,22 @@ const fetchStockData = async () => {
     method: 'GET',
     url: 'https://yahoo-finance15.p.rapidapi.com/api/v1/markets/stock/quotes',
     params: {
-      symbols: 'BBRI.JK,TLKM.JK,ASII.JK,BBCA.JK,AAPL,MSFT,GOOGL,TSLA,^JKSE,^GSPC,^IXIC,^DJI,^N225,^HSI,IDR=X'
+      ticker: 'AAPL,MSFT,^SPX,^NYA,BBCA.JK,BBRI.JK,ASII.JK,TLKM.JK'
     },
     headers: {
       'X-RapidAPI-Key': import.meta.env.VITE_RAPIDAPI_KEY,
-      'X-RapidAPI-Host': 'yahoo-finance15.p.rapidapi.com'
+      'X-RapidAPI-Host': 'yahoo-finance15.p.rapidapi.com',
+      'Accept': '*/*',
+      'User-Agent': 'Mozilla/5.0',
+      'Accept-Encoding': 'gzip, deflate, br'
     }
   };
 
   try {
+    console.log('Fetching with options:', options);
     const response = await axios.request(options);
-    console.log('API Response:', response.data); // Debug log
+    console.log('API Response:', response.data);
+
     if (response.data && response.data.data) {
       return response.data.data;
     }
