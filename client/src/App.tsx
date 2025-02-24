@@ -13,6 +13,7 @@ import IndonesiaEconomicCrisis from "@/pages/indonesia-economic-crisis";
 import About from "@/pages/about";
 import FedBalanceSheet from "@/pages/FedBalanceSheet";
 import FedQTExitCryptoRally from "@/pages/fed-qt-exit-crypto-rally";
+import IndonesiaCoalDilemma from "@/pages/indonesia-coal-dilemma";
 
 function Router() {
   return (
@@ -21,6 +22,7 @@ function Router() {
       <Route path="/about" component={About} />
       <Route path="/newsletter" component={Newsletters} />
       {/* Special routes must come before generic article route */}
+      <Route path="/newsletter/indonesia-coal-dilemma" component={IndonesiaCoalDilemma} />
       <Route path="/newsletter/bank-rakyat-indonesia-undervalued-dividend-powerhouse" component={BBRIArticle} />
       <Route path="/newsletter/us-china-trade-war-impact-ihsg" component={TradeWarAnalysis} />
       <Route path="/newsletter/trade-war-tsunami-feb-10-14" component={TradeWarTsunamiFeb1014} />
