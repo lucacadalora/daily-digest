@@ -1,0 +1,62 @@
+Early Narratives: Unpacking Indonesia’s Coal Dependency and Global Decarbonization Pressures
+Indonesia stands at a crossroads, its economic engine tethered to coal yet increasingly battered by the winds of global decarbonization. A groundbreaking study leveraging the EIRIN model and Network for Greening the Financial System (NGFS) scenarios lays bare the stakes: Indonesia’s heavy reliance on coal—powering 12% of GDP, 38% of electricity, and $30 billion in annual exports—faces mounting spillover risks from climate policies in major trading partners like China and the EU. These risks threaten to destabilize the nation’s balance of payments, inflate sovereign debt, and strand billions in carbon-heavy assets.
+
+The paper paints a vivid picture. China’s commitment to slash coal imports by 30% by 2030 could gut Indonesia’s export revenue, triggering a “demand shock” that reverberates through fiscal and financial systems. Under the Net Zero 2050 scenario, sovereign debt could surge by 23% of GDP by mid-century as coal royalties (15% of the budget) evaporate and borrowing spikes. The rupiah faces a potential 15% depreciation by 2030, amplifying the burden of $180 billion in dollar-denominated debt. Meanwhile, coal-fired power plants and mines risk becoming obsolete, with stranded assets threatening $40 billion in economic value.
+
+Yet, the study doesn’t just tally losses—it spotlights trade-offs and solutions. A disorderly transition could shrink GDP by 24%, but a coordinated climate policy aligning domestic diversification with global decarbonization could limit losses to 5-10%. Indonesia’s geothermal and solar potential, already drawing $5 billion annually, hints at a viable pivot. The paper stresses that timing is critical: delay risks financial instability, while haste could exacerbate fiscal strain. For stakeholders, this dual threat—declining coal demand and stranded asset risks—demands a nuanced understanding of Indonesia’s economic tightrope and the global forces reshaping it.
+
+Metrics Cards
+23%
+Potential increase in sovereign debt as a share of GDP by 2050 (Net Zero 2050 scenario)
+$30B
+Annual coal export revenue at risk from decarbonization spillovers
+12%
+Coal’s contribution to Indonesia’s GDP (2024)
+10%
+Banking sector loans tied to coal-related industries
+Spillover Risks: The Balance of Payments Trigger
+The study pinpoints Indonesia’s balance of payments (BoP) as ground zero. Coal exports, a $30 billion lifeline, face a 40% decline by 2040 under Net Zero 2050, draining foreign reserves and pressuring the current account. The rupiah could weaken by 15% by 2030, inflating the cost of servicing external debt and driving annual financing needs up by $10 billion. This isn’t hypothetical—China’s coal import cuts are already in motion, setting the stage for a liquidity crunch.
+
+Export Decline: 40% drop in coal exports by 2040 (Net Zero 2050).
+Currency Pressure: 15% depreciation of the rupiah by 2030.
+Borrowing Spike: $10B annual increase in external financing needs.
+These dynamics form a feedback loop, amplifying risks across the economy.
+
+Public Finance and Debt: A Looming Crisis
+The fallout hits public finance hard. Coal royalties and taxes underpin 15% of Indonesia’s budget—without them, the government faces a borrowing binge. The study forecasts a 23% GDP debt increase by 2050 under aggressive decarbonization, with bond yields climbing 2% as markets price in risk.
+
+Table 1: Sovereign Debt Projections (2050)
+
+Scenario	Debt Increase (% of GDP)	Fiscal Deficit (% of GDP)	Bond Yield Increase
+Current Policies	+5%	3%	+0.5%
+Below 2°C	+15%	5%	+1.2%
+Net Zero 2050	+23%	7%	+2.0%
+A credit downgrade to BB+ by 2035 looms, raising borrowing costs further.
+
+Trade-Offs and Stranded Assets: A Dual Threat
+The study frames a stark dilemma: decarbonize hastily, and financial instability spikes; lag, and stranded assets pile up. A chaotic Net Zero 2050 transition could slash GDP by 24%, while coal-related loans—$40 billion in banking exposure—risk turning toxic, with non-performing loans (NPLs) hitting 12% by 2035.
+
+Banking Risk: NPLs could quadruple to 12% by 2035.
+Asset Losses: Coal infrastructure may lose 50% of its value by 2040.
+Growth Hit: A 10% GDP loss by 2030 under a delayed transition.
+This dual threat demands swift recalibration to avert value destruction.
+
+The Coordinated Policy Lifeline
+Coordinated climate policy emerges as the linchpin. A synchronized push—pairing renewable investment with global decarbonization—could cap GDP losses at 5-10%. Indonesia’s solar and geothermal sectors, yielding 8-10% returns, offer a foothold. The planned 2025 green bond issuance signals momentum, but scaling up hinges on carbon pricing and subsidy reform.
+
+Renewable Potential: 8-10% returns in solar and geothermal projects.
+Green Financing: Green bonds provide ESG-aligned opportunities.
+Policy Alignment: Carbon pricing and subsidy cuts are critical.
+This lifeline balances risk mitigation with growth prospects.
+
+Strategic Moves: Enhancing Resilience Amid Transition Risks
+The paper’s insights reveal both current practices and gaps that need addressing to navigate Indonesia’s coal dilemma. Here’s how portfolios can adapt:
+
+Reassess Carbon Exposure: Many institutions already stress-test fossil fuel assets, but the paper flags a 50% value erosion in coal by 2040—far steeper than typical scenarios. Enhanced modeling, incorporating NGFS Net Zero 2050 shocks, is urgent to quantify stranded asset risks in energy and banking sectors.
+Diversify into Green Sectors: Some portfolios have dipped into renewables, yet the paper highlights untapped potential in Indonesia’s $5 billion solar and geothermal markets. Scaling allocations here can offset coal’s decline, but requires deeper due diligence into project viability and ESG impact.
+Hedge Currency Risks: FX hedging is common against rupiah volatility, but the projected 15% depreciation by 2030 demands more robust strategies—think multi-year derivatives or increased dollar-based holdings. The paper underscores this as a blind spot for under-hedged exposures.
+Advocate for Policy Coordination: Engagement with policymakers is growing, yet the paper calls for louder voices on carbon pricing and renewable subsidies. A managed transition slashes systemic risk, but requires proactive lobbying—something still nascent in current approaches.
+These steps build on existing efforts while pushing for sharper focus and execution, aligning with the paper’s call for agility in a carbon-constrained world.
+
+The Bottom Line
+Indonesia’s coal reliance is a dual-edged sword—powering prosperity but vulnerable to $30 billion in export losses and a 23% GDP debt surge as decarbonization accelerates. Coordinated policy offers a lifeline, potentially halving economic damage and unlocking green opportunities. For stakeholders, adapting now is non-negotiable—resilience hinges on foresight and decisive action.

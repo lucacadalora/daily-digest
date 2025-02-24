@@ -144,7 +144,7 @@ export default function IndonesiaCoalDilemma() {
                 <h3 className="font-bold text-gray-900 dark:text-white">Sovereign Debt Risk</h3>
               </div>
               <p className="text-2xl font-bold text-gray-900 dark:text-white mb-1">23%</p>
-              <p className="text-sm text-gray-600 dark:text-gray-400">GDP debt increase by 2050</p>
+              <p className="text-sm text-gray-600 dark:text-gray-400">Potential increase in sovereign debt as a share of GDP by 2050 (Net Zero 2050 scenario)</p>
             </CardContent>
           </Card>
 
@@ -155,7 +155,7 @@ export default function IndonesiaCoalDilemma() {
                 <h3 className="font-bold text-gray-900 dark:text-white">Export Revenue at Risk</h3>
               </div>
               <p className="text-2xl font-bold text-gray-900 dark:text-white mb-1">$30B</p>
-              <p className="text-sm text-gray-600 dark:text-gray-400">Annual coal export revenue</p>
+              <p className="text-sm text-gray-600 dark:text-gray-400">Annual coal export revenue at risk from decarbonization spillovers</p>
             </CardContent>
           </Card>
 
@@ -166,7 +166,7 @@ export default function IndonesiaCoalDilemma() {
                 <h3 className="font-bold text-gray-900 dark:text-white">GDP Contribution</h3>
               </div>
               <p className="text-2xl font-bold text-gray-900 dark:text-white mb-1">12%</p>
-              <p className="text-sm text-gray-600 dark:text-gray-400">Coal sector (2024)</p>
+              <p className="text-sm text-gray-600 dark:text-gray-400">Coal's contribution to Indonesia's GDP (2024)</p>
             </CardContent>
           </Card>
         </div>
@@ -236,9 +236,62 @@ export default function IndonesiaCoalDilemma() {
 
         <section className="py-4">
           <h2 className="text-xl font-serif font-bold text-gray-900 dark:text-white mb-3">
+            Trade-Offs and Stranded Assets: A Dual Threat
+          </h2>
+          <div className="prose text-gray-700 dark:text-gray-300 max-w-none">
+            <p className="mb-4">
+              The study frames a stark dilemma: decarbonize hastily, and financial instability spikes; lag, and stranded assets pile up. A chaotic Net Zero 2050 transition could slash GDP by 24%, while coal-related loans—$40 billion in banking exposure—risk turning toxic, with non-performing loans (NPLs) hitting 12% by 2035.
+            </p>
+            <ul className="list-none space-y-3 pl-0">
+              <li className="flex space-x-2">
+                <div className="w-2 h-2 mt-2 rounded-full bg-red-500 flex-shrink-0" />
+                <p className="mt-0"><strong>Banking Risk:</strong> NPLs could quadruple to 12% by 2035</p>
+              </li>
+              <li className="flex space-x-2">
+                <div className="w-2 h-2 mt-2 rounded-full bg-red-500 flex-shrink-0" />
+                <p className="mt-0"><strong>Asset Losses:</strong> Coal infrastructure may lose 50% of its value by 2040</p>
+              </li>
+              <li className="flex space-x-2">
+                <div className="w-2 h-2 mt-2 rounded-full bg-red-500 flex-shrink-0" />
+                <p className="mt-0"><strong>Growth Hit:</strong> A 10% GDP loss by 2030 under a delayed transition</p>
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        <section className="py-4">
+          <h2 className="text-xl font-serif font-bold text-gray-900 dark:text-white mb-3">
+            The Coordinated Policy Lifeline
+          </h2>
+          <div className="prose text-gray-700 dark:text-gray-300 max-w-none">
+            <p className="mb-4">
+              Coordinated climate policy emerges as the linchpin. A synchronized push—pairing renewable investment with global decarbonization—could cap GDP losses at 5-10%. Indonesia's solar and geothermal sectors, yielding 8-10% returns, offer a foothold. The planned 2025 green bond issuance signals momentum, but scaling up hinges on carbon pricing and subsidy reform.
+            </p>
+            <ul className="list-none space-y-3 pl-0">
+              <li className="flex space-x-2">
+                <div className="w-2 h-2 mt-2 rounded-full bg-blue-500 flex-shrink-0" />
+                <p className="mt-0"><strong>Renewable Potential:</strong> 8-10% returns in solar and geothermal projects</p>
+              </li>
+              <li className="flex space-x-2">
+                <div className="w-2 h-2 mt-2 rounded-full bg-blue-500 flex-shrink-0" />
+                <p className="mt-0"><strong>Green Financing:</strong> Green bonds provide ESG-aligned opportunities</p>
+              </li>
+              <li className="flex space-x-2">
+                <div className="w-2 h-2 mt-2 rounded-full bg-blue-500 flex-shrink-0" />
+                <p className="mt-0"><strong>Policy Alignment:</strong> Carbon pricing and subsidy cuts are critical</p>
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        <section className="py-4">
+          <h2 className="text-xl font-serif font-bold text-gray-900 dark:text-white mb-3">
             Strategic Moves: Enhancing Resilience Amid Transition Risks
           </h2>
           <div className="prose text-gray-700 dark:text-gray-300 max-w-none">
+            <p className="mb-4">
+              The paper's insights reveal both current practices and gaps that need addressing to navigate Indonesia's coal dilemma. Here's how portfolios can adapt:
+            </p>
             <ul className="list-none space-y-3 pl-0">
               <li className="flex space-x-2">
                 <div className="w-2 h-2 mt-2 rounded-full bg-blue-500 flex-shrink-0" />
@@ -275,12 +328,16 @@ export default function IndonesiaCoalDilemma() {
           <div className="mb-2">
             <p>Sources:</p>
             <ul className="list-disc pl-5">
-              <li>Climate Transition Spillovers and Sovereign Risk: Evidence from Indonesia (2025)</li>
-              <li>Network for Greening the Financial System (NGFS) Scenarios</li>
-              <li>World Bank and Indonesian Ministry of Finance Data</li>
+              <li>
+                <a href="https://www.sciencedirect.com/science/article/pii/S0140988325000349?via%3Dihub" 
+                   target="_blank" 
+                   rel="noopener noreferrer" 
+                   className="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300">
+                  Climate Transition Spillovers and Sovereign Risk: Evidence from Indonesia (2025)
+                </a>
+              </li>
             </ul>
           </div>
-          <p className="text-xs mb-2">Disclaimer: For general information only. Not financial advice. Consult your financial advisor before making investment decisions.</p>
           <p>© 2025 Market Analysis Report</p>
         </footer>
       </div>
