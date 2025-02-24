@@ -1,32 +1,92 @@
 import { Card, CardContent } from '@/components/ui/card';
 import { TrendingDown, AlertCircle, Shield, Clock, MapPin, ChevronRight } from 'lucide-react';
-import { Link } from "wouter";
+import { Link, useLocation } from "wouter";
+import { sampleArticles } from "@/types/newsletter";
 import { Header } from "@/components/Header";
+import { useEffect } from "react";
+import { Article } from "@/types/newsletter";
 
-interface MetricCardProps {
-  icon: React.ElementType;
-  title: string;
-  mainValue: string;
-  subtitle: string;
-  iconColor: string;
+function updateMetaTags(article: Article) {
+  // Create a richer description by combining metrics and description
+  const enrichedDescription = article.previewMetrics 
+    ? `${article.previewMetrics.map(m => `${m.label}: ${m.value}`).join(" | ")}. ${article.description}`
+    : article.description;
+
+  // Create a rich title that includes key metrics if available
+  const enrichedTitle = article.previewMetrics 
+    ? `${article.title} | ${article.previewMetrics[0].value} ${article.previewMetrics[0].label}`
+    : article.title;
+
+  const metaTags = {
+    // Open Graph
+    "og:title": enrichedTitle,
+    "og:description": enrichedDescription,
+    "og:type": "article",
+    "og:url": `https://lucaxyzz-digest.replit.app/newsletter/${article.slug}`,
+    "og:site_name": "Daily Digest",
+    "og:locale": "en_US",
+
+    // Twitter Card
+    "twitter:card": "summary",
+    "twitter:site": "@dailydigest",
+    "twitter:creator": "@dailydigest",
+    "twitter:title": enrichedTitle,
+    "twitter:description": enrichedDescription,
+    "twitter:domain": "lucaxyzz-digest.replit.app",
+
+    // Article Metadata
+    "article:published_time": article.date,
+    "article:author": article.author,
+    "article:section": article.category,
+    "article:tag": article.tags ? article.tags.join(",") : article.category,
+
+    // Basic SEO
+    "description": enrichedDescription,
+    "keywords": article.tags ? article.tags.join(",") : `${article.category},market analysis,financial news`,
+    "news_keywords": article.tags ? article.tags.join(",") : article.category
+  };
+
+  // Update meta tags
+  Object.entries(metaTags).forEach(([name, content]) => {
+    let tag;
+    if (name.startsWith('og:') || name.startsWith('article:')) {
+      tag = document.querySelector(`meta[property="${name}"]`);
+      if (!tag) {
+        tag = document.createElement('meta');
+        tag.setAttribute('property', name);
+        document.head.appendChild(tag);
+      }
+    } else {
+      tag = document.querySelector(`meta[name="${name}"]`);
+      if (!tag) {
+        tag = document.createElement('meta');
+        tag.setAttribute('name', name);
+        document.head.appendChild(tag);
+      }
+    }
+    tag.setAttribute('content', content);
+  });
+
+  // Update document title with the enriched title
+  document.title = `${enrichedTitle} | Daily Digest`;
 }
 
-const MetricCard: React.FC<MetricCardProps> = ({ icon: Icon, title, mainValue, subtitle, iconColor }) => {
-  return (
-    <Card className="bg-gray-50 dark:bg-gray-800">
-      <CardContent className="p-4">
-        <div className="flex items-center space-x-2 mb-2">
-          <Icon className={`h-5 w-5 ${iconColor}`} />
-          <h3 className="font-bold text-gray-900 dark:text-white">{title}</h3>
-        </div>
-        <p className="text-2xl font-bold text-gray-900 dark:text-white mb-1">{mainValue}</p>
-        <p className="text-sm text-gray-600 dark:text-gray-400">{subtitle}</p>
-      </CardContent>
-    </Card>
-  );
-};
-
 export default function IndonesiaCoalDilemma() {
+  const [location] = useLocation();
+  const slug = location.split("/").pop();
+
+  const article = sampleArticles.find(a => a.slug === slug);
+
+  useEffect(() => {
+    if (article) {
+      updateMetaTags(article);
+    }
+  }, [article]);
+
+  if (!article) {
+    return <div>Article not found</div>;
+  }
+
   return (
     <div className="min-h-screen bg-[#FBF7F4] dark:bg-gray-900 transition-colors">
       <Header simplified showCategories={false} />
@@ -60,7 +120,7 @@ export default function IndonesiaCoalDilemma() {
             <div className="flex items-center space-x-4 text-sm text-gray-600 dark:text-gray-400 mb-3">
               <div className="flex items-center space-x-1">
                 <Clock className="h-4 w-4" />
-                <span>February 7, 2025</span>
+                <span>February 24, 2025</span>
               </div>
               <div className="flex items-center space-x-1">
                 <MapPin className="h-4 w-4" />
@@ -77,27 +137,38 @@ export default function IndonesiaCoalDilemma() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 py-4">
-          <MetricCard
-            icon={TrendingDown}
-            title="Sovereign Debt Increase"
-            mainValue="23%"
-            subtitle="Potential increase in sovereign debt as a share of GDP by 2050 (Net Zero 2050 scenario)"
-            iconColor="text-red-600"
-          />
-          <MetricCard
-            icon={AlertCircle}
-            title="Coal Export Revenue"
-            mainValue="$30B"
-            subtitle="Annual coal export revenue at risk from decarbonization spillovers"
-            iconColor="text-amber-600"
-          />
-          <MetricCard
-            icon={Shield}
-            title="GDP Contribution"
-            mainValue="12%"
-            subtitle="Coal's contribution to Indonesia's GDP (2024)"
-            iconColor="text-blue-600"
-          />
+          <Card className="bg-gray-50 dark:bg-gray-800">
+            <CardContent className="p-4">
+              <div className="flex items-center space-x-2 mb-2">
+                <TrendingDown className="h-5 w-5 text-red-600" />
+                <h3 className="font-bold text-gray-900 dark:text-white">Sovereign Debt Risk</h3>
+              </div>
+              <p className="text-2xl font-bold text-gray-900 dark:text-white mb-1">23%</p>
+              <p className="text-sm text-gray-600 dark:text-gray-400">GDP debt increase by 2050</p>
+            </CardContent>
+          </Card>
+
+          <Card className="bg-gray-50 dark:bg-gray-800">
+            <CardContent className="p-4">
+              <div className="flex items-center space-x-2 mb-2">
+                <AlertCircle className="h-5 w-5 text-amber-600" />
+                <h3 className="font-bold text-gray-900 dark:text-white">Export Revenue at Risk</h3>
+              </div>
+              <p className="text-2xl font-bold text-gray-900 dark:text-white mb-1">$30B</p>
+              <p className="text-sm text-gray-600 dark:text-gray-400">Annual coal export revenue</p>
+            </CardContent>
+          </Card>
+
+          <Card className="bg-gray-50 dark:bg-gray-800">
+            <CardContent className="p-4">
+              <div className="flex items-center space-x-2 mb-2">
+                <Shield className="h-5 w-5 text-blue-600" />
+                <h3 className="font-bold text-gray-900 dark:text-white">GDP Contribution</h3>
+              </div>
+              <p className="text-2xl font-bold text-gray-900 dark:text-white mb-1">12%</p>
+              <p className="text-sm text-gray-600 dark:text-gray-400">Coal sector (2024)</p>
+            </CardContent>
+          </Card>
         </div>
 
         <section className="py-4">

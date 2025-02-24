@@ -32,6 +32,35 @@ export type Article = z.infer<typeof articleSchema>;
 
 export const sampleArticles: Article[] = [
   {
+    slug: "indonesia-coal-dilemma",
+    title: "Indonesia's Coal Dilemma: Navigating Commodity Risks in a Decarbonizing World",
+    description: "Deep analysis of Indonesia's coal sector challenges amid global energy transition, examining fiscal impacts, export risks, and strategic policy options in a decarbonizing world.",
+    category: "Economics",
+    source: "Daily Digest",
+    author: "Daily | Digest Market Analysis Team",
+    date: "February 24, 2025",
+    previewEmoji: "⛏️",
+    previewMetrics: [
+      {
+        label: "Sovereign Debt Risk",
+        value: "23%",
+        subtitle: "GDP debt increase by 2050"
+      },
+      {
+        label: "Export Revenue at Risk",
+        value: "$30B",
+        subtitle: "Annual coal exports"
+      },
+      {
+        label: "GDP Contribution",
+        value: "12%",
+        subtitle: "Coal sector (2024)"
+      }
+    ],
+    tags: ["Coal", "Energy Transition", "Economic Analysis"],
+    content: "Analysis of Indonesia's coal sector challenges..."
+  },
+  {
     slug: "bank-rakyat-indonesia-undervalued-dividend-powerhouse",
     title: "Bank Rakyat Indonesia: Undervalued Dividend Powerhouse",
     description: "Deep dive into BBRI's fundamental strengths, dividend sustainability, and valuation metrics against regional peers. Focus on micro-lending moat and digital transformation.",
