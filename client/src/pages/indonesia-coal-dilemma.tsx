@@ -114,7 +114,7 @@ export default function IndonesiaCoalDilemma() {
             </div>
 
             <h1 className="font-serif text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-3 leading-tight">
-              Indonesia's Coal Dilemma: Navigating the Dual Threats of Commodity Risks in a Decarbonizing World
+              Indonesia's Coal Dilemma: Navigating Commodity Risks in a Decarbonizing World
             </h1>
 
             <div className="flex items-center space-x-4 text-sm text-gray-600 dark:text-gray-400 mb-3">
@@ -132,7 +132,13 @@ export default function IndonesiaCoalDilemma() {
 
         <div className="py-4 border-b border-gray-200 dark:border-gray-800">
           <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
-            Indonesia stands at a crossroads, its economic engine tethered to coal yet increasingly battered by the winds of global decarbonization. A groundbreaking study leveraging the EIRIN model and Network for Greening the Financial System (NGFS) scenarios lays bare the stakes: Indonesia's heavy reliance on coal—powering 12% of GDP, 38% of electricity, and $30 billion in annual exports—faces mounting spillover risks from climate policies in major trading partners like China and the EU.
+            Indonesia stands at a crossroads, its economic engine tethered to coal yet increasingly battered by the winds of global decarbonization. A groundbreaking study leveraging the EIRIN model lays bare the stakes: Indonesia's heavy reliance on coal—powering 12% of GDP, 38% of electricity, and $30 billion in annual exports—faces mounting spillover risks from climate policies in major trading partners like China and the EU. These risks threaten to destabilize the nation's balance of payments, inflate sovereign debt, and strand billions in carbon-heavy assets.
+          </p>
+          <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed mt-4">
+            The paper paints a vivid picture. China's commitment to slash coal imports by 30% by 2030 could gut Indonesia's export revenue, triggering a "demand shock" that reverberates through fiscal and financial systems. Under the Net Zero 2050 scenario, sovereign debt could surge by 23% of GDP by mid-century as coal royalties (15% of the budget) evaporate and borrowing spikes. The rupiah faces a potential 15% depreciation by 2030, amplifying the burden of $180 billion in dollar-denominated debt. Meanwhile, coal-fired power plants and mines risk becoming obsolete, with stranded assets threatening $40 billion in economic value.
+          </p>
+          <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed mt-4">
+            Yet, the study doesn't just tally losses—it spotlights trade-offs and solutions. A disorderly transition could shrink GDP by 24%, but a coordinated climate policy aligning domestic diversification with global decarbonization could limit losses to 5-10%. Indonesia's geothermal and solar potential, already drawing $5 billion annually, hints at a viable pivot. The paper stresses that timing is critical: delay risks financial instability, while haste could exacerbate fiscal strain.
           </p>
         </div>
 
@@ -200,6 +206,12 @@ export default function IndonesiaCoalDilemma() {
           <h2 className="text-xl font-serif font-bold text-gray-900 dark:text-white mb-3">
             Public Finance and Debt: A Looming Crisis
           </h2>
+          <div className="prose text-gray-700 dark:text-gray-300 max-w-none">
+            <p className="mb-4">
+              The fallout hits public finance hard. Coal royalties and taxes underpin 15% of Indonesia's budget—without them, the government faces a borrowing binge. The study forecasts a 23% GDP debt increase by 2050 under aggressive decarbonization, with bond yields climbing 2% as markets price in risk.
+            </p>
+          </div>
+
           <div className="overflow-x-auto mb-6">
             <table className="w-full border-collapse bg-white dark:bg-gray-800 rounded-lg shadow-sm">
               <thead className="bg-gray-50 dark:bg-gray-700">
@@ -232,6 +244,9 @@ export default function IndonesiaCoalDilemma() {
               </tbody>
             </table>
           </div>
+          <p className="text-gray-700 dark:text-gray-300 mt-4">
+            A credit downgrade to BB+ by 2035 looms, raising borrowing costs further.
+          </p>
         </section>
 
         <section className="py-4">
