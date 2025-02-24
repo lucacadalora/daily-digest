@@ -114,7 +114,7 @@ export default function IndonesiaCoalDilemma() {
             </div>
 
             <h1 className="font-serif text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-3 leading-tight">
-              Indonesia's Coal Dilemma: Navigating the Dual Threats of Commodity Risks in a Decarbonizing World
+              Indonesia's Coal Dilemma: Navigating Commodity Risks in a Decarbonizing World
             </h1>
 
             <div className="flex items-center space-x-4 text-sm text-gray-600 dark:text-gray-400 mb-3">
@@ -131,9 +131,17 @@ export default function IndonesiaCoalDilemma() {
         </header>
 
         <div className="py-4 border-b border-gray-200 dark:border-gray-800">
-          <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
-            Indonesia stands at a crossroads, its economic engine tethered to coal yet increasingly battered by the winds of global decarbonization. A groundbreaking study leveraging the EIRIN model and Network for Greening the Financial System (NGFS) scenarios lays bare the stakes: Indonesia's heavy reliance on coal—powering 12% of GDP, 38% of electricity, and $30 billion in annual exports—faces mounting spillover risks from climate policies in major trading partners like China and the EU.
-          </p>
+          <div className="prose text-gray-700 dark:text-gray-300 leading-relaxed">
+            <p className="mb-4">
+              Indonesia stands at a crossroads, its economic engine tethered to coal yet increasingly battered by the winds of global decarbonization. A groundbreaking study leveraging the EIRIN model lays bare the stakes: Indonesia's heavy reliance on coal—powering 12% of GDP, 38% of electricity, and $30 billion in annual exports—faces mounting spillover risks from climate policies in major trading partners like China and the EU. These risks threaten to destabilize the nation's balance of payments, inflate sovereign debt, and strand billions in carbon-heavy assets.
+            </p>
+            <p className="mb-4">
+              The paper paints a vivid picture. China's commitment to slash coal imports by 30% by 2030 could gut Indonesia's export revenue, triggering a "demand shock" that reverberates through fiscal and financial systems. Under the Net Zero 2050 scenario, sovereign debt could surge by 23% of GDP by mid-century as coal royalties (15% of the budget) evaporate and borrowing spikes. The rupiah faces a potential 15% depreciation by 2030, amplifying the burden of $180 billion in dollar-denominated debt. Meanwhile, coal-fired power plants and mines risk becoming obsolete, with stranded assets threatening $40 billion in economic value.
+            </p>
+            <p className="mb-4">
+              Yet, the study doesn't just tally losses—it spotlights trade-offs and solutions. A disorderly transition could shrink GDP by 24%, but a coordinated climate policy aligning domestic diversification with global decarbonization could limit losses to 5-10%. Indonesia's geothermal and solar potential, already drawing $5 billion annually, hints at a viable pivot. The paper stresses that timing is critical: delay risks financial instability, while haste could exacerbate fiscal strain. For stakeholders, this dual threat—declining coal demand and stranded asset risks—demands a nuanced understanding of Indonesia's economic tightrope and the global forces reshaping it.
+            </p>
+          </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 py-4">
@@ -179,7 +187,7 @@ export default function IndonesiaCoalDilemma() {
             <p className="mb-4">
               The study pinpoints Indonesia's balance of payments (BoP) as ground zero. Coal exports, a $30 billion lifeline, face a 40% decline by 2040 under Net Zero 2050, draining foreign reserves and pressuring the current account. The rupiah could weaken by 15% by 2030, inflating the cost of servicing external debt and driving annual financing needs up by $10 billion.
             </p>
-            <ul className="list-none space-y-3 pl-0">
+            <ul className="list-none space-y-2 pl-0">
               <li className="flex space-x-2">
                 <div className="w-2 h-2 mt-2 rounded-full bg-red-500 flex-shrink-0" />
                 <p className="mt-0"><strong>Export Decline:</strong> 40% drop in coal exports by 2040 (Net Zero 2050)</p>
@@ -200,37 +208,42 @@ export default function IndonesiaCoalDilemma() {
           <h2 className="text-xl font-serif font-bold text-gray-900 dark:text-white mb-3">
             Public Finance and Debt: A Looming Crisis
           </h2>
-          <div className="overflow-x-auto mb-6">
-            <table className="w-full border-collapse bg-white dark:bg-gray-800 rounded-lg shadow-sm">
-              <thead className="bg-gray-50 dark:bg-gray-700">
-                <tr>
-                  <th className="p-4 text-left font-bold text-gray-900 dark:text-white">Scenario</th>
-                  <th className="p-4 text-left font-bold text-gray-900 dark:text-white">Debt Increase (% of GDP)</th>
-                  <th className="p-4 text-left font-bold text-gray-900 dark:text-white">Fiscal Deficit (% of GDP)</th>
-                  <th className="p-4 text-left font-bold text-gray-900 dark:text-white">Bond Yield Increase</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr className="border-t border-gray-200 dark:border-gray-600">
-                  <td className="p-4 font-medium text-gray-900 dark:text-white">Current Policies</td>
-                  <td className="p-4 text-gray-700 dark:text-gray-300">+5%</td>
-                  <td className="p-4 text-gray-700 dark:text-gray-300">3%</td>
-                  <td className="p-4 text-gray-700 dark:text-gray-300">+0.5%</td>
-                </tr>
-                <tr className="border-t border-gray-200 dark:border-gray-600">
-                  <td className="p-4 font-medium text-gray-900 dark:text-white">Below 2°C</td>
-                  <td className="p-4 text-gray-700 dark:text-gray-300">+15%</td>
-                  <td className="p-4 text-gray-700 dark:text-gray-300">5%</td>
-                  <td className="p-4 text-gray-700 dark:text-gray-300">+1.2%</td>
-                </tr>
-                <tr className="border-t border-gray-200 dark:border-gray-600">
-                  <td className="p-4 font-medium text-gray-900 dark:text-white">Net Zero 2050</td>
-                  <td className="p-4 text-gray-700 dark:text-gray-300">+23%</td>
-                  <td className="p-4 text-gray-700 dark:text-gray-300">7%</td>
-                  <td className="p-4 text-gray-700 dark:text-gray-300">+2.0%</td>
-                </tr>
-              </tbody>
-            </table>
+          <div className="prose text-gray-700 dark:text-gray-300 max-w-none">
+            <p className="mb-4">
+              The fallout hits public finance hard. Coal royalties and taxes underpin 15% of Indonesia's budget—without them, the government faces a borrowing binge. The study forecasts a 23% GDP debt increase by 2050 under aggressive decarbonization, with bond yields climbing 2% as markets price in risk.
+            </p>
+            <div className="overflow-x-auto mb-6">
+              <table className="w-full border-collapse bg-white dark:bg-gray-800 rounded-lg shadow-sm">
+                <thead className="bg-gray-50 dark:bg-gray-700">
+                  <tr>
+                    <th className="p-4 text-left font-bold text-gray-900 dark:text-white">Scenario</th>
+                    <th className="p-4 text-left font-bold text-gray-900 dark:text-white">Debt Increase (% of GDP)</th>
+                    <th className="p-4 text-left font-bold text-gray-900 dark:text-white">Fiscal Deficit (% of GDP)</th>
+                    <th className="p-4 text-left font-bold text-gray-900 dark:text-white">Bond Yield Increase</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr className="border-t border-gray-200 dark:border-gray-600">
+                    <td className="p-4 font-medium text-gray-900 dark:text-white">Current Policies</td>
+                    <td className="p-4 text-gray-700 dark:text-gray-300">+5%</td>
+                    <td className="p-4 text-gray-700 dark:text-gray-300">3%</td>
+                    <td className="p-4 text-gray-700 dark:text-gray-300">+0.5%</td>
+                  </tr>
+                  <tr className="border-t border-gray-200 dark:border-gray-600">
+                    <td className="p-4 font-medium text-gray-900 dark:text-white">Below 2°C</td>
+                    <td className="p-4 text-gray-700 dark:text-gray-300">+15%</td>
+                    <td className="p-4 text-gray-700 dark:text-gray-300">5%</td>
+                    <td className="p-4 text-gray-700 dark:text-gray-300">+1.2%</td>
+                  </tr>
+                  <tr className="border-t border-gray-200 dark:border-gray-600">
+                    <td className="p-4 font-medium text-gray-900 dark:text-white">Net Zero 2050</td>
+                    <td className="p-4 text-gray-700 dark:text-gray-300">+23%</td>
+                    <td className="p-4 text-gray-700 dark:text-gray-300">7%</td>
+                    <td className="p-4 text-gray-700 dark:text-gray-300">+2.0%</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
           </div>
         </section>
 
@@ -242,7 +255,7 @@ export default function IndonesiaCoalDilemma() {
             <p className="mb-4">
               The study frames a stark dilemma: decarbonize hastily, and financial instability spikes; lag, and stranded assets pile up. A chaotic Net Zero 2050 transition could slash GDP by 24%, while coal-related loans—$40 billion in banking exposure—risk turning toxic, with non-performing loans (NPLs) hitting 12% by 2035.
             </p>
-            <ul className="list-none space-y-3 pl-0">
+            <ul className="list-none space-y-2 pl-0">
               <li className="flex space-x-2">
                 <div className="w-2 h-2 mt-2 rounded-full bg-red-500 flex-shrink-0" />
                 <p className="mt-0"><strong>Banking Risk:</strong> NPLs could quadruple to 12% by 2035</p>
@@ -267,7 +280,7 @@ export default function IndonesiaCoalDilemma() {
             <p className="mb-4">
               Coordinated climate policy emerges as the linchpin. A synchronized push—pairing renewable investment with global decarbonization—could cap GDP losses at 5-10%. Indonesia's solar and geothermal sectors, yielding 8-10% returns, offer a foothold. The planned 2025 green bond issuance signals momentum, but scaling up hinges on carbon pricing and subsidy reform.
             </p>
-            <ul className="list-none space-y-3 pl-0">
+            <ul className="list-none space-y-2 pl-0">
               <li className="flex space-x-2">
                 <div className="w-2 h-2 mt-2 rounded-full bg-blue-500 flex-shrink-0" />
                 <p className="mt-0"><strong>Renewable Potential:</strong> 8-10% returns in solar and geothermal projects</p>
@@ -292,7 +305,7 @@ export default function IndonesiaCoalDilemma() {
             <p className="mb-4">
               The paper's insights reveal both current practices and gaps that need addressing to navigate Indonesia's coal dilemma. Here's how portfolios can adapt:
             </p>
-            <ul className="list-none space-y-3 pl-0">
+            <ul className="list-none space-y-2 pl-0">
               <li className="flex space-x-2">
                 <div className="w-2 h-2 mt-2 rounded-full bg-blue-500 flex-shrink-0" />
                 <p className="mt-0">
@@ -315,7 +328,7 @@ export default function IndonesiaCoalDilemma() {
           </div>
         </section>
 
-        <Card className="bg-blue-50 dark:bg-blue-900/20">
+        <Card className="bg-blue-50 dark:bg-blue-900/20 mb-8">
           <CardContent className="p-4">
             <h2 className="text-lg font-bold text-gray-900 dark:text-white mb-2">The Bottom Line</h2>
             <p className="text-gray-700 dark:text-gray-300">
@@ -324,7 +337,7 @@ export default function IndonesiaCoalDilemma() {
           </CardContent>
         </Card>
 
-        <footer className="text-sm text-gray-500 dark:text-gray-400 border-t border-gray-200 dark:border-gray-700 pt-4 mt-8">
+        <footer className="text-sm text-gray-500 dark:text-gray-400 border-t border-gray-200 dark:border-gray-700 pt-4">
           <div className="mb-2">
             <p>Sources:</p>
             <ul className="list-disc pl-5">
