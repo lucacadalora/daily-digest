@@ -8,7 +8,28 @@ if (!process.env.DATABASE_URL) {
   );
 }
 
-// Create a postgres connection
-const queryClient = postgres(process.env.DATABASE_URL);
+// Create a postgres connection with enhanced error handling and connection pooling
+const queryClient = postgres(process.env.DATABASE_URL, {
+  max: 10, // Connection pool size
+  idle_timeout: 20, // How long a connection can stay idle in pool
+  connect_timeout: 10, // Connection timeout
+  onnotice: (notice) => {
+    console.log("Database notice:", notice);
+  },
+});
 
+// Initialize db connection
 export const db = drizzle(queryClient, { schema });
+
+// Verify database connection
+export const verifyDbConnection = async () => {
+  try {
+    // Simple query to verify connection
+    const result = await queryClient`SELECT 1 as connected`;
+    console.log("Database connection verified:", result[0].connected === 1);
+    return true;
+  } catch (error) {
+    console.error("Database connection error:", error);
+    return false;
+  }
+};

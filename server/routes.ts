@@ -6,7 +6,7 @@ import { join } from "path";
 import { readFileSync, statSync, createReadStream } from "fs";
 import * as fs from "fs";
 import { sampleArticles } from "../client/src/types/newsletter";
-import { db } from "../db";
+import { db, verifyDbConnection } from "../db";
 import { subscribers } from "../db/schema";
 import { z } from "zod";
 import { eq } from "drizzle-orm";
@@ -241,6 +241,20 @@ class MarketDataCache {
 const marketDataCache = new MarketDataCache();
 
 export function registerRoutes(app: Express): Server {
+  // Verify database connection during server startup
+  (async () => {
+    try {
+      const isConnected = await verifyDbConnection();
+      if (isConnected) {
+        console.log("✅ Database connection established successfully");
+      } else {
+        console.error("❌ Failed to connect to database");
+      }
+    } catch (error) {
+      console.error("❌ Error verifying database connection:", error);
+    }
+  })();
+
   app.use((req, res, next) => {
     if (process.env.NODE_ENV === 'development') {
       res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, private');

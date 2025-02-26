@@ -64,18 +64,39 @@ export const SubscribeModal = ({ isOpen, onClose }: SubscribeModalProps) => {
         .filter(([_, isSelected]) => isSelected)
         .map(([category]) => category);
       
-      // Call the subscription API
-      await axios.post('/api/subscribe', {
-        email,
-        name: name || undefined, // Only send if provided
-        categories: selectedCategories
-      });
-
+      // Call the subscription API with timeout and retry
+      const subscribeWithRetry = async (retries = 2) => {
+        try {
+          return await axios.post('/api/subscribe', {
+            email,
+            name: name || undefined, // Only send if provided
+            categories: selectedCategories
+          }, {
+            timeout: 5000 // 5 seconds timeout
+          });
+        } catch (err) {
+          if (retries > 0 && axios.isAxiosError(err) && (err.code === 'ECONNABORTED' || !err.response)) {
+            // Network error or timeout, retry
+            console.log(`Retrying subscription request, ${retries} attempts left`);
+            return subscribeWithRetry(retries - 1);
+          }
+          throw err;
+        }
+      };
+      
+      const response = await subscribeWithRetry();
+      
+      // Check if successfully subscribed or updated
+      const status = response?.data?.status;
+      const isNewSubscription = status === 'created';
+      
       setIsSuccess(true);
       
       toast({
-        title: "Subscription successful!",
-        description: "Thank you for subscribing to our newsletter.",
+        title: isNewSubscription ? "Subscription successful!" : "Subscription updated!",
+        description: isNewSubscription 
+          ? "Thank you for subscribing to our newsletter." 
+          : "Your newsletter preferences have been updated.",
       });
       
       // Reset form after 2 seconds
@@ -89,13 +110,29 @@ export const SubscribeModal = ({ isOpen, onClose }: SubscribeModalProps) => {
       console.error("Subscription error:", error);
       
       let errorMessage = "Failed to subscribe. Please try again.";
-      if (axios.isAxiosError(error) && error.response) {
-        errorMessage = error.response.data.message || errorMessage;
+      let errorDetail = "";
+      
+      if (axios.isAxiosError(error)) {
+        if (error.code === 'ECONNABORTED') {
+          errorMessage = "Request timed out. Please try again.";
+        } else if (error.response) {
+          // Server responded with an error
+          errorMessage = error.response.data.message || errorMessage;
+          errorDetail = error.response.data.error || "";
+          
+          // Special case for validation errors
+          if (error.response.status === 400 && error.response.data.details) {
+            errorDetail = "Please check your email format.";
+          }
+        } else if (error.request) {
+          // Request was made but no response received
+          errorMessage = "No response from server. Please check your connection.";
+        }
       }
       
       toast({
         title: "Subscription failed",
-        description: errorMessage,
+        description: errorDetail ? `${errorMessage} ${errorDetail}` : errorMessage,
         variant: "destructive",
       });
     } finally {
