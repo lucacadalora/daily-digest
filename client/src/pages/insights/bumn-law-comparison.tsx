@@ -4,6 +4,7 @@ import { Header } from "@/components/Header";
 import { ChevronRight, Clock, MapPin, ExternalLink } from "lucide-react";
 import { LuLightbulb } from "react-icons/lu";
 import { sampleArticles } from "@/types/newsletter";
+import { Badge } from "@/components/ui/badge";
 
 export default function BUMNLawComparison() {
   const article = sampleArticles.find(a => a.slug === "bumn-law-comparison");
@@ -77,104 +78,84 @@ export default function BUMNLawComparison() {
         </div>
 
         <header className="border-b border-gray-200 dark:border-gray-800 py-6">
-          <div className="flex items-center space-x-3 mb-4">
-            <div className="bg-blue-100 dark:bg-blue-900 px-3 py-1 rounded-full">
-              <span className="text-xs font-bold text-blue-700 dark:text-blue-300 uppercase">
-                {article.category}
-              </span>
-            </div>
-            <div className="flex items-center space-x-2 text-xs text-gray-600 dark:text-gray-400">
-              <span className="font-bold uppercase">Regulatory Analysis</span>
-            </div>
-          </div>
-
+          <Badge variant="outline" className="mb-4 text-xs bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200 border-blue-200 dark:border-blue-800">
+            CLIENT ALERT
+          </Badge>
+          
           <h1 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4 leading-tight">
-            {article.title}
+            Perbandingan UU BUMN: UU No. 19/2003 vs UU No. 1/2025
           </h1>
 
           <div className="flex items-center space-x-4 text-sm text-gray-600 dark:text-gray-400 mb-3">
             <div className="flex items-center space-x-1">
               <Clock className="h-4 w-4" />
-              <span>{article.date}</span>
+              <span>26 Februari 2025</span>
             </div>
             <div className="flex items-center space-x-1">
               <MapPin className="h-4 w-4" />
               <span>JAKARTA</span>
             </div>
           </div>
-
-          <div className="text-sm mb-4">
-            <p className="font-semibold dark:text-gray-300">By {article.author}</p>
-          </div>
         </header>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 py-8">
           <div className="lg:col-span-2">
             <div className="prose prose-lg dark:prose-invert max-w-none">
-              <p className="lead">
-                <strong>Indonesia telah memberlakukan perubahan signifikan terhadap kerangka regulasi BUMN</strong> dengan disahkannya UU No. 1/2025 yang mengamendemen UU No. 19/2003. Reformasi ini mengubah paradigma pengelolaan BUMN dari Teori Sumber ke Teori Korporasi dan memperkenalkan Danantara dengan modal awal Rp 1.000 triliun.
-              </p>
+              <div className="bg-gray-50 dark:bg-gray-800 p-6 rounded-lg mb-8 not-prose">
+                <p className="text-gray-800 dark:text-gray-200 text-lg leading-relaxed">
+                  Indonesia telah memberlakukan perubahan signifikan terhadap kerangka regulasi BUMN dengan disahkannya UU No. 1/2025 yang mengamendemen UU No. 19/2003. Reformasi ini mengubah paradigma pengelolaan BUMN dari Teori Sumber ke Teori Korporasi dan memperkenalkan Danantara dengan modal awal Rp 1.000 triliun.
+                </p>
+              </div>
 
-              <p>
-                Perubahan utama mencakup pemisahan aset BUMN dari aset negara, penerapan business judgment rule, penghapusan status eksekutif BUMN sebagai penyelenggara negara, dan pengaturan Holding Investasi dan Holding Operasional di bawah Danantara.
-              </p>
-
-              <h2>9 Perubahan Utama dalam UU BUMN Baru</h2>
-
-              <ol>
-                <li>
-                  <strong>Perubahan Paradigma:</strong> Beralih dari Teori Sumber (BUMN sebagai sumber pendapatan negara) ke Teori Korporasi (BUMN sebagai entitas bisnis mandiri).
-                </li>
-                <li>
-                  <strong>Pemisahan Aset:</strong> Kekayaan BUMN bukan lagi kekayaan negara, melainkan terpisah sebagai entitas bisnis independen.
-                </li>
-                <li>
-                  <strong>Business Judgment Rule:</strong> Perlindungan hukum bagi direksi BUMN dalam pengambilan keputusan bisnis dengan itikad baik.
-                </li>
-                <li>
-                  <strong>Status Penyelenggara Negara:</strong> Pengurus BUMN tidak lagi berstatus sebagai penyelenggara negara.
-                </li>
-                <li>
-                  <strong>Danantara:</strong> Pembentukan badan investasi terintegrasi dengan modal awal Rp 1.000 triliun.
-                </li>
-                <li>
-                  <strong>Struktur Holding:</strong> Pengaturan BUMN dalam Holding Investasi dan Holding Operasional di bawah Danantara.
-                </li>
-                <li>
-                  <strong>Fleksibilitas Anggaran:</strong> BUMN dapat menetapkan anggaran sendiri tanpa persetujuan pemerintah.
-                </li>
-                <li>
-                  <strong>Penyertaan Modal:</strong> Penyederhanaan proses penyertaan modal negara ke BUMN.
-                </li>
-                <li>
-                  <strong>Periode Transisi:</strong> Masa transisi implementasi UU selama satu tahun.
-                </li>
-              </ol>
-
-              <h2>Implikasi bagi Bisnis dan Pasar</h2>
-
-              <p>
-                Reformasi UU BUMN membawa implikasi luas bagi operasional BUMN dan mitra bisnisnya seiring konsolidasi yang diperkirakan terjadi dalam beberapa tahun mendatang. Beberapa dampak utama meliputi:
-              </p>
-
-              <ul>
-                <li>Peningkatan fleksibilitas dalam pengambilan keputusan bisnis</li>
-                <li>Potensi akselerasi privatisasi dan IPO BUMN dalam jangka menengah</li>
-                <li>Peningkatan daya saing BUMN di pasar global</li>
-                <li>Perubahan struktur kerjasama dengan mitra swasta</li>
-                <li>Penguatan tata kelola korporasi dan transparansi</li>
-              </ul>
-
-              <div className="not-prose">
-                <div className="bg-blue-50 dark:bg-blue-900/20 p-6 rounded-lg mt-8 mb-8 border border-blue-100 dark:border-blue-800">
-                  <div className="flex items-center mb-4">
-                    <LuLightbulb className="h-5 w-5 text-blue-600 dark:text-blue-400 mr-2" />
-                    <h3 className="text-lg font-bold text-gray-900 dark:text-white">
-                      Analisis Komprehensif
-                    </h3>
+              <div className="space-y-4 mb-8 not-prose">
+                <div className="flex items-start">
+                  <div className="min-w-7 w-7 h-7 bg-blue-100 dark:bg-blue-900/30 rounded-full flex items-center justify-center mr-3 mt-0.5">
+                    <span className="text-blue-700 dark:text-blue-300 font-bold text-sm">1</span>
                   </div>
+                  <p className="text-gray-700 dark:text-gray-300">
+                    <span className="font-semibold text-gray-900 dark:text-white">Pemisahan aset BUMN dari aset negara</span>, memberikan fleksibilitas lebih besar dalam pengelolaan aset dan keputusan bisnis.
+                  </p>
+                </div>
+                
+                <div className="flex items-start">
+                  <div className="min-w-7 w-7 h-7 bg-blue-100 dark:bg-blue-900/30 rounded-full flex items-center justify-center mr-3 mt-0.5">
+                    <span className="text-blue-700 dark:text-blue-300 font-bold text-sm">2</span>
+                  </div>
+                  <p className="text-gray-700 dark:text-gray-300">
+                    <span className="font-semibold text-gray-900 dark:text-white">Penerapan business judgment rule</span> yang melindungi direksi dan komisaris BUMN untuk keputusan bisnis yang diambil dengan itikad baik.
+                  </p>
+                </div>
+                
+                <div className="flex items-start">
+                  <div className="min-w-7 w-7 h-7 bg-blue-100 dark:bg-blue-900/30 rounded-full flex items-center justify-center mr-3 mt-0.5">
+                    <span className="text-blue-700 dark:text-blue-300 font-bold text-sm">3</span>
+                  </div>
+                  <p className="text-gray-700 dark:text-gray-300">
+                    <span className="font-semibold text-gray-900 dark:text-white">Penghapusan status eksekutif BUMN sebagai penyelenggara negara</span>, mengurangi risiko kriminalisasi keputusan bisnis.
+                  </p>
+                </div>
+                
+                <div className="flex items-start">
+                  <div className="min-w-7 w-7 h-7 bg-blue-100 dark:bg-blue-900/30 rounded-full flex items-center justify-center mr-3 mt-0.5">
+                    <span className="text-blue-700 dark:text-blue-300 font-bold text-sm">4</span>
+                  </div>
+                  <p className="text-gray-700 dark:text-gray-300">
+                    <span className="font-semibold text-gray-900 dark:text-white">Pengaturan Holding Investasi dan Holding Operasional</span> di bawah Danantara untuk mengoptimalkan sinergi antar BUMN.
+                  </p>
+                </div>
+              </div>
+              
+              <p>
+                Reformasi ini membawa implikasi luas bagi operasional BUMN dan mitra bisnisnya seiring konsolidasi yang diperkirakan terjadi dalam beberapa tahun mendatang, dengan masa transisi ditetapkan selama satu tahun.
+              </p>
+              
+              <div className="bg-blue-50 dark:bg-blue-900/20 p-6 rounded-lg my-8 flex items-start not-prose">
+                <div className="min-w-10 w-10 h-10 bg-blue-100 dark:bg-blue-800 rounded-full flex items-center justify-center mr-4 mt-0.5">
+                  <LuLightbulb className="h-5 w-5 text-blue-700 dark:text-blue-200" />
+                </div>
+                <div>
                   <p className="text-gray-700 dark:text-gray-300 mb-4">
-                    Untuk analisis lebih mendalam mengenai 9 aspek perubahan utama dalam UU BUMN, silakan kunjungi:
+                    Untuk analisis komprehensif mengenai 9 aspek perubahan utama, silakan kunjungi:
                   </p>
                   <a href="https://bumn-vs-danantara.replit.app/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center text-blue-600 dark:text-blue-400 hover:underline font-medium">
                     Analisis Perbandingan UU BUMN
@@ -182,16 +163,6 @@ export default function BUMNLawComparison() {
                   </a>
                 </div>
               </div>
-
-              <h2>Kesimpulan</h2>
-              
-              <p>
-                UU BUMN No. 1/2025 memberikan kerangka baru yang lebih fleksibel untuk BUMN Indonesia beroperasi sebagai entitas bisnis yang berdaya saing global. Pemisahan aset BUMN dari aset negara, penerapan business judgment rule, dan pembentukan Danantara merupakan terobosan signifikan yang berpotensi mengubah lanskap bisnis Indonesia secara fundamental.
-              </p>
-              
-              <p>
-                Pelaku pasar perlu mencermati perkembangan implementasi UU ini selama masa transisi satu tahun ke depan, terutama terkait restrukturisasi holding dan potensi perubahan valuasi BUMN di pasar modal.
-              </p>
             </div>
           </div>
 
