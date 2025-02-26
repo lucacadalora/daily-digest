@@ -2,12 +2,19 @@ import { Link } from "wouter";
 import { MarketTicker } from "@/components/MarketTicker";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { Button } from "@/components/ui/button";
-import { Menu, ArrowRight } from "lucide-react";
+import { Menu, ArrowRight, ChevronDown, ExternalLink } from "lucide-react";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Form } from "@/components/ui/form";
 import { useForm } from "react-hook-form";
 import { Input } from "@/components/ui/input";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
+import { 
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger
+} from "@/components/ui/dropdown-menu";
 
 interface HeaderProps {
   onSubscribe?: () => void;
@@ -73,8 +80,48 @@ export const Header = ({ onSubscribe, showCategories = true, simplified = false 
           <div className="flex items-center gap-2">
             <ThemeToggle />
 
-            {/* Desktop About and Subscribe Buttons */}
+            {/* Desktop Data Dropdown, About and Subscribe Buttons */}
             <div className="hidden md:flex items-center gap-2">
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button 
+                    variant="ghost" 
+                    className="hover:text-blue-600 group"
+                    >
+                    <span className="flex items-center">
+                      DATA
+                      <ExternalLink className="ml-1 h-4 w-4 transform transition-transform duration-200 group-hover:translate-x-0.5 group-hover:translate-y-[-2px]" />
+                    </span>
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="start" className="w-[300px] p-4">
+                  <div className="mb-3">
+                    <h3 className="text-sm font-semibold text-gray-900 dark:text-white">Access Daily | Digest database</h3>
+                  </div>
+                  <DropdownMenuSeparator />
+                  <div className="mt-2 mb-1">
+                    <p className="text-xs text-gray-500 uppercase font-medium">EXPLORE OUR DATA</p>
+                  </div>
+                  <DropdownMenuItem className="py-2 cursor-pointer">
+                    <Link href="/data/explorer" className="w-full">
+                      <span className="text-sm font-medium">Data Explorer</span>
+                    </Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem className="py-2 cursor-pointer">
+                    <Link href="/data/methodology" className="w-full">
+                      <span className="text-sm font-medium">Our Methodology</span>
+                    </Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem 
+                    className="py-2 cursor-pointer hover:bg-blue-50 dark:hover:bg-blue-900 transition-colors"
+                  >
+                    <Link href="/data/law" className="w-full">
+                      <span className="text-sm font-medium">Law</span>
+                    </Link>
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+              
               <Link href="/about">
                 <Button variant="ghost" className="hover:text-blue-600">
                   About
@@ -108,6 +155,14 @@ export const Header = ({ onSubscribe, showCategories = true, simplified = false 
                     <Link href="/newsletter/category/Industries" className="block text-base hover:text-blue-600 transition-colors">Industries</Link>
                     <Link href="/newsletter/category/Tech" className="block text-base hover:text-blue-600 transition-colors">Tech</Link>
                   </nav>
+
+                  {/* Data Links */}
+                  <div className="mb-8">
+                    <h3 className="text-base font-medium text-gray-900 dark:text-white mb-4">Data</h3>
+                    <Link href="/data/explorer" className="block text-base hover:text-blue-600 transition-colors py-2">Data Explorer</Link>
+                    <Link href="/data/methodology" className="block text-base hover:text-blue-600 transition-colors py-2">Our Methodology</Link>
+                    <Link href="/data/law" className="block text-base hover:text-blue-600 transition-colors py-2">Law</Link>
+                  </div>
 
                   {/* About Link */}
                   <div className="mb-8">
