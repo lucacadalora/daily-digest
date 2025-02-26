@@ -2,8 +2,8 @@ import React from "react";
 import { useRoute, Link } from "wouter";
 import { Header } from "@/components/Header";
 import { ChevronRight, Calendar, Clock } from "lucide-react";
-import { PDFViewer } from "@/components/pdf/PDFViewer";
 import { Button } from "@/components/ui/button";
+import { PDFViewer } from "@/components/pdf/PDFViewer";
 
 interface LawDocument {
   id: string;
@@ -87,9 +87,8 @@ export default function LawDetailPage() {
             </div>
           </div>
           
-          <div className="mb-8">
-            <PDFViewer pdfUrl={document.pdfUrl} documentTitle={document.title} />
-          </div>
+          {/* Enhanced PDF Viewer */}
+          <PDFViewer pdfUrl={document.pdfUrl} documentTitle={document.title} />
         </div>
       </main>
     </div>
