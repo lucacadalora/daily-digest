@@ -303,6 +303,30 @@ export const SubscribeModal = ({ isOpen, onClose }: SubscribeModalProps) => {
             <p className="text-xs text-center text-gray-500 dark:text-gray-400 mt-4">
               We respect your privacy and will never share your email address with third parties.
             </p>
+            
+            {/* Connection status indicator */}
+            <div className="flex items-center justify-center mt-2">
+              {connectionStatus === 'checking' && (
+                <Badge variant="outline" className="text-xs py-1 gap-1 bg-gray-100 dark:bg-gray-800">
+                  <Loader2 className="h-3 w-3 animate-spin" />
+                  <span>Checking connection...</span>
+                </Badge>
+              )}
+              
+              {connectionStatus === 'connected' && (
+                <Badge variant="outline" className="text-xs py-1 gap-1 bg-green-50 text-green-700 border-green-200 dark:bg-green-900/20 dark:text-green-400 dark:border-green-800">
+                  <Wifi className="h-3 w-3" />
+                  <span>Connected to server</span>
+                </Badge>
+              )}
+              
+              {connectionStatus === 'error' && (
+                <Badge variant="outline" className="text-xs py-1 gap-1 bg-red-50 text-red-700 border-red-200 dark:bg-red-900/20 dark:text-red-400 dark:border-red-800">
+                  <ServerOff className="h-3 w-3" />
+                  <span>Connection issues, retry may be needed</span>
+                </Badge>
+              )}
+            </div>
           </form>
         </div>
       </div>
