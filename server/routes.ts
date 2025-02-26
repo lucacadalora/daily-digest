@@ -361,6 +361,7 @@ export function registerRoutes(app: Express): Server {
   app.get('/api/documents/:category/:id', (req, res) => {
     try {
       const { category, id } = req.params;
+      const forceDownload = req.query.download === 'true';
       
       // Only support law documents for now
       if (category !== 'law') {
@@ -396,16 +397,21 @@ export function registerRoutes(app: Express): Server {
         return res.status(404).json({ error: "Document file not found" });
       }
       
-      // Set appropriate headers for download
+      // Set content type header
       res.setHeader("Content-Type", document.contentType);
-      res.setHeader("Content-Disposition", `attachment; filename="${document.filename}"`);
+      
+      // Set download header only if requested
+      if (forceDownload) {
+        res.setHeader("Content-Disposition", `attachment; filename="${document.filename}"`);
+        console.log(`Document download: ${category}/${id} (${document.title})`);
+      } else {
+        res.setHeader("Content-Disposition", `inline; filename="${document.filename}"`);
+        console.log(`Document view: ${category}/${id} (${document.title})`);
+      }
       
       // Create read stream and pipe to response
       const fileStream = fs.createReadStream(filePath);
       fileStream.pipe(res);
-      
-      // Log the download
-      console.log(`Document download: ${category}/${id} (${document.title})`);
     } catch (error) {
       console.error('Error in /api/documents:', error);
       res.status(500).json({
