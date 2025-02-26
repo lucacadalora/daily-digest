@@ -19,7 +19,7 @@ export const PDFViewer: React.FC<PDFViewerProps> = ({ pdfUrl, documentTitle }) =
     }
     
     // Fallback to the original URL
-    return pdfUrl;
+    return `${pdfUrl}?download=true`;
   };
   
   const getViewUrl = (): string => {
@@ -47,14 +47,6 @@ export const PDFViewer: React.FC<PDFViewerProps> = ({ pdfUrl, documentTitle }) =
           <span className="text-sm text-gray-500">
             {documentTitle}
           </span>
-        </div>
-        <div className="flex items-center gap-2">
-          <Button onClick={viewPDF} variant="outline" size="sm">
-            <Eye className="h-4 w-4 mr-1" /> View
-          </Button>
-          <Button onClick={downloadPDF} variant="outline" size="sm">
-            <Download className="h-4 w-4 mr-1" /> Download
-          </Button>
         </div>
       </div>
 
