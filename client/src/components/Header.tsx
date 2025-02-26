@@ -174,28 +174,23 @@ export const Header = ({ onSubscribe, showCategories = true, simplified = false 
                     </Link>
                   </div>
 
-                  {/* Subscribe Form */}
+                  {/* Subscribe Button */}
                   <div className="mt-8">
                     <div className="bg-blue-600 rounded-xl p-6">
                       <h3 className="text-xl font-semibold text-white mb-2">Sign up for our newsletter!</h3>
                       <p className="text-white/90 text-sm mb-4">
                         Subscribe to stay up to date with the latest market insights and trends.
                       </p>
-                      <form onSubmit={form.handleSubmit((data) => console.log(data))} className="relative">
-                        <Input
-                          type="email"
-                          placeholder="Your Email"
-                          {...form.register("email")}
-                          className="w-full bg-white/90 dark:bg-white border-0 pr-12 placeholder:text-gray-500"
-                        />
-                        <Button 
-                          type="submit" 
-                          size="icon"
-                          className="absolute right-1 top-1 bottom-1 bg-blue-500 hover:bg-blue-700 rounded-full w-8 h-8 flex items-center justify-center p-0"
-                        >
-                          <ArrowRight className="h-4 w-4 text-white" />
-                        </Button>
-                      </form>
+                      <Button 
+                        onClick={() => {
+                          setIsSheetOpen(false); // Close the mobile menu
+                          if (onSubscribe) onSubscribe(); // Open the subscription modal
+                        }}
+                        className="w-full bg-white hover:bg-gray-100 text-blue-600 rounded-lg h-10 flex items-center justify-center"
+                      >
+                        Subscribe Now
+                        <ArrowRight className="ml-2 h-4 w-4" />
+                      </Button>
                     </div>
                   </div>
                 </SheetContent>
