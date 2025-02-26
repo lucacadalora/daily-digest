@@ -8,7 +8,17 @@ if (!process.env.DATABASE_URL) {
   );
 }
 
-// Create a postgres connection
-const queryClient = postgres(process.env.DATABASE_URL);
+// Create a postgres connection with retries
+const queryClient = postgres(process.env.DATABASE_URL, {
+  max: 10, // Max pool size
+  idle_timeout: 20, // Idle connection timeout in seconds
+  connect_timeout: 10, // Connection timeout in seconds
+});
+
+// Test the connection
+queryClient.connect().catch(err => {
+  console.error('Failed to connect to database:', err);
+  process.exit(1);
+});
 
 export const db = drizzle(queryClient, { schema });
