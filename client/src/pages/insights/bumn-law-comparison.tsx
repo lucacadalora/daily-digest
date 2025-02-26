@@ -176,7 +176,7 @@ export default function BUMNLawComparison() {
                   <p className="text-gray-700 dark:text-gray-300 mb-4">
                     Untuk analisis lebih mendalam mengenai 9 aspek perubahan utama dalam UU BUMN, silakan kunjungi:
                   </p>
-                  <a href="#" className="inline-flex items-center text-blue-600 dark:text-blue-400 hover:underline font-medium">
+                  <a href="https://bumn-vs-danantara.replit.app/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center text-blue-600 dark:text-blue-400 hover:underline font-medium">
                     Analisis Perbandingan UU BUMN
                     <ExternalLink className="h-4 w-4 ml-1" />
                   </a>
