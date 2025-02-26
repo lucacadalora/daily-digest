@@ -50,7 +50,7 @@ app.use('/api', chatRouter);
     serveStatic(app);
   }
 
-  const PORT = 3000;
+  const PORT = 3001;
   server.listen(PORT, "0.0.0.0", () => {
     log(`Server running in ${app.get('env')} mode`);
     log(`Frontend: http://0.0.0.0:${PORT}`);
