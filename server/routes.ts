@@ -6,7 +6,7 @@ import { join } from "path";
 import { readFileSync, statSync, createReadStream } from "fs";
 import * as fs from "fs";
 import { sampleArticles } from "../client/src/types/newsletter";
-import { db, verifyDbConnection } from "../db";
+import { db, verifyDbConnection } from "../db/index";
 import { subscribers } from "../db/schema";
 import { z } from "zod";
 import { eq } from "drizzle-orm";
