@@ -13,9 +13,13 @@ export const PDFViewer: React.FC<PDFViewerProps> = ({ pdfUrl, documentTitle }) =
     // Extract the document ID from the URL path
     const pathParts = pdfUrl.split('/');
     
-    // Expecting format like: /documents/law/UU_NO_1_2025.pdf
-    if (pathParts.includes('documents') && pathParts.includes('law')) {
-      return '/api/documents/law/undang-undang-nomor-1-tahun-2025?download=true';
+    // Expecting format like: /documents/law/UU_NO_1_2025.pdf or /documents/research/Paper.pdf
+    if (pathParts.includes('documents')) {
+      if (pathParts.includes('law')) {
+        return '/api/documents/law/undang-undang-nomor-1-tahun-2025?download=true';
+      } else if (pathParts.includes('research')) {
+        return '/api/documents/research/steel-tariff-exemptions-global-trade-impact?download=true';
+      }
     }
     
     // Fallback to the original URL
@@ -25,8 +29,12 @@ export const PDFViewer: React.FC<PDFViewerProps> = ({ pdfUrl, documentTitle }) =
   const getViewUrl = (): string => {
     const pathParts = pdfUrl.split('/');
     
-    if (pathParts.includes('documents') && pathParts.includes('law')) {
-      return '/api/documents/law/undang-undang-nomor-1-tahun-2025';
+    if (pathParts.includes('documents')) {
+      if (pathParts.includes('law')) {
+        return '/api/documents/law/undang-undang-nomor-1-tahun-2025';
+      } else if (pathParts.includes('research')) {
+        return '/api/documents/research/steel-tariff-exemptions-global-trade-impact';
+      }
     }
     
     return pdfUrl;

@@ -26,6 +26,8 @@ import DataMethodology from "@/pages/data/methodology";
 import DataDocuments from "@/pages/data/documents";
 import LawIndex from "@/pages/data/law/index";
 import LawDetail from "@/pages/data/law/[slug]";
+import ResearchIndex from "@/pages/data/research-index";
+import ResearchDetail from "@/pages/data/research-detail";
 
 function Router() {
   return (
@@ -44,6 +46,8 @@ function Router() {
       <Route path="/data/documents" component={DataDocuments} />
       <Route path="/data/law" component={LawIndex} />
       <Route path="/data/law/:slug" component={LawDetail} />
+      <Route path="/data/research-index" component={ResearchIndex} />
+      <Route path="/data/research-detail/:slug" component={ResearchDetail} />
       
       {/* Newsletter routes */}
       <Route path="/newsletter" component={Newsletters} />

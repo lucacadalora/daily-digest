@@ -120,6 +120,13 @@ export const Header = ({ onSubscribe, showCategories = true, simplified = false 
                       <span className="text-sm font-medium">Law</span>
                     </Link>
                   </DropdownMenuItem>
+                  <DropdownMenuItem 
+                    className="py-2 cursor-pointer hover:bg-blue-50 dark:hover:bg-blue-900 transition-colors"
+                  >
+                    <Link href="/data/research-index" className="w-full">
+                      <span className="text-sm font-medium">Research</span>
+                    </Link>
+                  </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
               
@@ -164,6 +171,7 @@ export const Header = ({ onSubscribe, showCategories = true, simplified = false 
                     <Link href="/data/explorer" className="block text-base hover:text-blue-600 transition-colors py-2">Data Explorer</Link>
                     <Link href="/data/methodology" className="block text-base hover:text-blue-600 transition-colors py-2">Our Methodology</Link>
                     <Link href="/data/law" className="block text-base hover:text-blue-600 transition-colors py-2">Law</Link>
+                    <Link href="/data/research-index" className="block text-base hover:text-blue-600 transition-colors py-2">Research</Link>
                   </div>
 
                   {/* About Link */}

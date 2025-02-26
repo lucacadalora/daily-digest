@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "wouter";
 import { Header } from "@/components/Header";
-import { ChevronRight, Database, Scale, FileText, BarChart3 } from "lucide-react";
+import { ChevronRight, Database, Scale, FileText, BarChart3, BookText } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 
 interface DataCategory {
@@ -36,6 +36,14 @@ const dataCategories: DataCategory[] = [
     description: "Access to Indonesian laws and regulations with analysis",
     icon: Scale,
     path: "/data/law",
+    isActive: true
+  },
+  {
+    id: "research",
+    title: "Research",
+    description: "Comprehensive research papers on global trade, economic policies, and market impacts",
+    icon: BookText,
+    path: "/data/research-index",
     isActive: true
   },
   {

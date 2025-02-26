@@ -381,18 +381,25 @@ export function registerRoutes(app: Express): Server {
       const { category, id } = req.params;
       const forceDownload = req.query.download === 'true';
       
-      // Only support law documents for now
-      if (category !== 'law') {
+      // Support both law and research documents
+      if (category !== 'law' && category !== 'research') {
         console.log(`Document category not supported: ${category}`);
         return res.status(404).json({ error: "Document category not found" });
       }
       
       // Simple document registry - in a real app, this would be in a database
       const documentsRegistry: Record<string, { filename: string, contentType: string, title: string }> = {
+        // Law documents
         "undang-undang-nomor-1-tahun-2025": {
           filename: "UU_NO_1_2025.pdf",
           contentType: "application/pdf",
           title: "Undang-Undang Nomor 1 Tahun 2025"
+        },
+        // Research papers
+        "steel-tariff-exemptions-global-trade-impact": {
+          filename: "Paper.pdf",
+          contentType: "application/pdf",
+          title: "Supply-Chain Disruptions from Revoking Section 232 Steel Tariff Exemptions"
         }
       };
       
