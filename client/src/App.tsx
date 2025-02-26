@@ -15,11 +15,29 @@ import FedBalanceSheet from "@/pages/FedBalanceSheet";
 import FedQTExitCryptoRally from "@/pages/fed-qt-exit-crypto-rally";
 import IndonesiaCoalDilemma from "@/pages/indonesia-coal-dilemma";
 
+// Data section pages
+import DataIndex from "@/pages/data/index";
+import DataExplorer from "@/pages/data/explorer";
+import DataMethodology from "@/pages/data/methodology";
+import DataDocuments from "@/pages/data/documents";
+import LawIndex from "@/pages/data/law/index";
+import LawDetail from "@/pages/data/law/[slug]";
+
 function Router() {
   return (
     <Switch>
       <Route path="/" component={Home} />
       <Route path="/about" component={About} />
+      
+      {/* Data section routes */}
+      <Route path="/data" component={DataIndex} />
+      <Route path="/data/explorer" component={DataExplorer} />
+      <Route path="/data/methodology" component={DataMethodology} />
+      <Route path="/data/documents" component={DataDocuments} />
+      <Route path="/data/law" component={LawIndex} />
+      <Route path="/data/law/:slug" component={LawDetail} />
+      
+      {/* Newsletter routes */}
       <Route path="/newsletter" component={Newsletters} />
       {/* Special routes must come before generic article route */}
       <Route path="/newsletter/indonesia-coal-dilemma" component={IndonesiaCoalDilemma} />
@@ -32,6 +50,7 @@ function Router() {
       <Route path="/newsletter/fed-qt-exit-crypto-rally" component={FedQTExitCryptoRally} />
       <Route path="/newsletter/category/:category" component={Newsletters} />
       <Route path="/newsletters" component={() => <Redirect to="/newsletter" />} />
+      
       <Route component={NotFound} />
     </Switch>
   );
