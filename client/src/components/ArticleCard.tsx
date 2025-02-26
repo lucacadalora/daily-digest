@@ -22,9 +22,14 @@ export interface ArticleCardProps {
 
 export const ArticleCard = ({ article }: ArticleCardProps) => {
   const Icon = CategoryIcons[article.category];
+  
+  // Use different path based on article category
+  const articlePath = article.category === "Insight" 
+    ? `/insights/${article.slug}` 
+    : `/newsletter/${article.slug}`;
 
   return (
-    <Link href={`/newsletter/${article.slug}`}>
+    <Link href={articlePath}>
       <Card className="cursor-pointer hover:shadow-lg transition-all duration-300 group dark:border-gray-800 dark:bg-gray-800">
         <CardContent className="p-4">
           {/* Header with emoji and category */}
