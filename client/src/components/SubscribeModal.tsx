@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, Loader2, CheckCircle } from "lucide-react";
+import { X, Loader2, CheckCircle, Wifi, WifiOff, ServerOff } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
+import { Badge } from "@/components/ui/badge";
 import axios from "axios";
 import { useToast } from "@/hooks/use-toast";
 
@@ -18,12 +19,36 @@ export const SubscribeModal = ({ isOpen, onClose }: SubscribeModalProps) => {
   const [name, setName] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [connectionStatus, setConnectionStatus] = useState<'connected' | 'checking' | 'error' | null>(null);
   const [categories, setCategories] = useState({
     "market-analysis": true,
     "financial-news": true,
     "crypto-updates": false,
     "economic-trends": false,
   });
+  
+  // Check database connectivity on modal open
+  useEffect(() => {
+    if (isOpen) {
+      const checkDatabaseConnection = async () => {
+        try {
+          setConnectionStatus('checking');
+          // Simple ping request to verify API is available
+          const response = await axios.get('/api/market-data', { timeout: 3000 });
+          if (response.status === 200) {
+            setConnectionStatus('connected');
+          } else {
+            setConnectionStatus('error');
+          }
+        } catch (error) {
+          console.error('Error checking API connection:', error);
+          setConnectionStatus('error');
+        }
+      };
+      
+      checkDatabaseConnection();
+    }
+  }, [isOpen]);
   
   // Handle keyboard events (Escape to close the modal)
   useEffect(() => {

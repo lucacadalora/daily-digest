@@ -439,7 +439,7 @@ export function registerRoutes(app: Express): Server {
     }
   });
 
-  // Subscribe endpoint to collect and store emails
+  // Subscribe endpoint to collect and store emails with enhanced error handling and retry logic
   app.post('/api/subscribe', async (req, res) => {
     try {
       // Define validation schema for subscription data
@@ -452,6 +452,7 @@ export function registerRoutes(app: Express): Server {
       // Validate request body
       const result = subscribeSchema.safeParse(req.body);
       if (!result.success) {
+        console.warn("Validation failed for subscription data:", result.error.format());
         return res.status(400).json({ 
           error: "Validation failed", 
           details: result.error.format() 
@@ -459,23 +460,50 @@ export function registerRoutes(app: Express): Server {
       }
       
       const { email, name, categories } = result.data;
+      console.log(`Processing subscription for email: ${email}, name: ${name || 'not provided'}`);
+      
+      // Helper function for database operations with retry
+      const executeWithRetry = async (operation: () => Promise<any>, maxRetries = 3) => {
+        let lastError;
+        
+        for (let attempt = 1; attempt <= maxRetries; attempt++) {
+          try {
+            return await operation();
+          } catch (error) {
+            lastError = error;
+            console.error(`Database operation failed (attempt ${attempt}/${maxRetries}):`, error);
+            
+            // If not the last attempt, wait before retrying
+            if (attempt < maxRetries) {
+              const delay = 500 * Math.pow(2, attempt - 1); // Exponential backoff
+              await new Promise(resolve => setTimeout(resolve, delay));
+            }
+          }
+        }
+        throw lastError;
+      };
       
       // Check if email already exists
-      const existingSubscriber = await db.select()
-        .from(subscribers)
-        .where(eq(subscribers.email, email))
-        .limit(1);
+      const existingSubscriber = await executeWithRetry(async () => {
+        return db.select()
+          .from(subscribers)
+          .where(eq(subscribers.email, email))
+          .limit(1);
+      });
       
-      if (existingSubscriber.length > 0) {
+      if (existingSubscriber && existingSubscriber.length > 0) {
         // Email already exists, update subscription if needed
-        await db.update(subscribers)
-          .set({ 
-            subscribed: true,
-            name: name || existingSubscriber[0].name,
-            categories: categories || existingSubscriber[0].categories
-          })
-          .where(eq(subscribers.email, email));
+        await executeWithRetry(async () => {
+          await db.update(subscribers)
+            .set({ 
+              subscribed: true,
+              name: name || existingSubscriber[0].name,
+              categories: categories || existingSubscriber[0].categories
+            })
+            .where(eq(subscribers.email, email));
+        });
         
+        console.log(`Subscription updated for email: ${email}`);
         return res.status(200).json({ 
           message: "Subscription updated successfully", 
           status: "updated" 
@@ -483,21 +511,43 @@ export function registerRoutes(app: Express): Server {
       }
       
       // Insert new subscriber
-      await db.insert(subscribers).values({
-        email,
-        name,
-        categories,
-        subscribed: true
+      await executeWithRetry(async () => {
+        await db.insert(subscribers).values({
+          email,
+          name,
+          categories,
+          subscribed: true
+        });
       });
       
+      console.log(`New subscription created for email: ${email}`);
       return res.status(201).json({
         message: "Subscription successful",
         status: "created"
       });
     } catch (error) {
       console.error("Error in subscription endpoint:", error);
-      return res.status(500).json({
-        error: "Failed to process subscription",
+      
+      // Provide more specific error messages based on the type of error
+      let errorMessage = "Failed to process subscription";
+      let statusCode = 500;
+      
+      if (error instanceof Error) {
+        // Check for specific database errors
+        const errorString = String(error);
+        if (errorString.includes('duplicate key') || errorString.includes('unique constraint')) {
+          errorMessage = "This email is already subscribed";
+          statusCode = 409; // Conflict
+        } else if (errorString.includes('timeout') || errorString.includes('connect')) {
+          errorMessage = "Database connection issue, please try again later";
+        } else if (errorString.includes('validation')) {
+          errorMessage = "Invalid subscription data";
+          statusCode = 400;
+        }
+      }
+      
+      return res.status(statusCode).json({
+        error: errorMessage,
         message: error instanceof Error ? error.message : "Unknown error"
       });
     }
