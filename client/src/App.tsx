@@ -15,6 +15,10 @@ import FedBalanceSheet from "@/pages/FedBalanceSheet";
 import FedQTExitCryptoRally from "@/pages/fed-qt-exit-crypto-rally";
 import IndonesiaCoalDilemma from "@/pages/indonesia-coal-dilemma";
 
+// Insights pages
+import Insights from "@/pages/insights";
+import BUMNLawComparison from "@/pages/insights/bumn-law-comparison";
+
 // Data section pages
 import DataIndex from "@/pages/data/index";
 import DataExplorer from "@/pages/data/explorer";
@@ -28,6 +32,10 @@ function Router() {
     <Switch>
       <Route path="/" component={Home} />
       <Route path="/about" component={About} />
+      
+      {/* Insights routes */}
+      <Route path="/insights" component={Insights} />
+      <Route path="/insights/bumn-law-comparison" component={BUMNLawComparison} />
       
       {/* Data section routes */}
       <Route path="/data" component={DataIndex} />

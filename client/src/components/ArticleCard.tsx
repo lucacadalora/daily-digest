@@ -5,6 +5,7 @@ import { SiMarketo } from "react-icons/si"; // Markets
 import { TbChartBar } from "react-icons/tb"; // Economics
 import { HiOutlineOfficeBuilding } from "react-icons/hi"; // Industries
 import { RiComputerLine } from "react-icons/ri"; // Tech
+import { LuLightbulb } from "react-icons/lu"; // Insight
 import type { Article } from "@/types/newsletter";
 
 const CategoryIcons = {
@@ -12,6 +13,7 @@ const CategoryIcons = {
   Economics: TbChartBar,
   Industries: HiOutlineOfficeBuilding,
   Tech: RiComputerLine,
+  Insight: LuLightbulb,
 };
 
 export interface ArticleCardProps {

@@ -4,7 +4,8 @@ export const categorySchema = z.enum([
   "Markets",
   "Economics",
   "Industries",
-  "Tech"
+  "Tech",
+  "Insight"
 ]);
 
 export type Category = z.infer<typeof categorySchema>;
@@ -31,6 +32,18 @@ export const articleSchema = z.object({
 export type Article = z.infer<typeof articleSchema>;
 
 export const sampleArticles: Article[] = [
+  {
+    slug: "bumn-law-comparison",
+    title: "Perbandingan UU BUMN: UU No. 19/2003 vs UU No. 1/2025",
+    description: "Indonesia telah memberlakukan perubahan signifikan terhadap kerangka regulasi BUMN dengan disahkannya UU No. 1/2025 yang mengamendemen UU No. 19/2003. Reformasi ini mengubah paradigma pengelolaan BUMN dari Teori Sumber ke Teori Korporasi dan memperkenalkan Danantara dengan modal awal Rp 1.000 triliun.",
+    category: "Insight",
+    source: "Daily Digest",
+    author: "Market Intelligence Team",
+    date: "February 26, 2025",
+    previewEmoji: "📜",
+    tags: ["BUMN", "Regulatory Changes", "Indonesia", "Law"],
+    content: "Indonesia telah memberlakukan perubahan signifikan terhadap kerangka regulasi BUMN dengan disahkannya UU No. 1/2025 yang mengamendemen UU No. 19/2003. Reformasi ini mengubah paradigma pengelolaan BUMN dari Teori Sumber ke Teori Korporasi dan memperkenalkan Danantara dengan modal awal Rp 1.000 triliun.\n\nPerubahan utama mencakup pemisahan aset BUMN dari aset negara, penerapan business judgment rule, penghapusan status eksekutif BUMN sebagai penyelenggara negara, dan pengaturan Holding Investasi dan Holding Operasional di bawah Danantara.\n\nReformasi ini membawa implikasi luas bagi operasional BUMN dan mitra bisnisnya seiring konsolidasi yang diperkirakan terjadi dalam beberapa tahun mendatang, dengan masa transisi ditetapkan selama satu tahun."
+  },
   {
     slug: "indonesia-coal-dilemma",
     title: "Indonesia's Coal Dilemma: Navigating Commodity Risks in a Decarbonizing World",

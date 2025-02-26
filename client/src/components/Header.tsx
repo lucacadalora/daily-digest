@@ -60,6 +60,7 @@ export const Header = ({ onSubscribe, showCategories = true, simplified = false 
               <Link href="/newsletter/category/Economics" className="hover:text-blue-600 transition-colors">Economics</Link>
               <Link href="/newsletter/category/Industries" className="hover:text-blue-600 transition-colors">Industries</Link>
               <Link href="/newsletter/category/Tech" className="hover:text-blue-600 transition-colors">Tech</Link>
+              <Link href="/insights" className="hover:text-blue-600 transition-colors">Insights</Link>
             </nav>
           ) : (
             <div className="w-10 md:hidden"></div>
@@ -154,6 +155,7 @@ export const Header = ({ onSubscribe, showCategories = true, simplified = false 
                     <Link href="/newsletter/category/Economics" className="block text-base hover:text-blue-600 transition-colors">Economics</Link>
                     <Link href="/newsletter/category/Industries" className="block text-base hover:text-blue-600 transition-colors">Industries</Link>
                     <Link href="/newsletter/category/Tech" className="block text-base hover:text-blue-600 transition-colors">Tech</Link>
+                    <Link href="/insights" className="block text-base hover:text-blue-600 transition-colors">Insights</Link>
                   </nav>
 
                   {/* Data Links */}
