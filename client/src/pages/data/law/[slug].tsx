@@ -24,7 +24,7 @@ const lawDocuments: LawDocument[] = [
     date: "24 Februari 2025",
     effectiveDate: "24 Februari 2025",
     slug: "undang-undang-nomor-1-tahun-2025",
-    pdfUrl: "/documents/UU_NO_1_2025.pdf"
+    pdfUrl: "/documents/law/UU_NO_1_2025.pdf"
   }
 ];
 
