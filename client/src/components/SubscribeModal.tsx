@@ -1,10 +1,9 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, ArrowRight, Loader2, CheckCircle } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
-import { DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import axios from "axios";
 import { useToast } from "@/hooks/use-toast";
 
@@ -25,6 +24,18 @@ export const SubscribeModal = ({ isOpen, onClose }: SubscribeModalProps) => {
     "crypto-updates": false,
     "economic-trends": false,
   });
+  
+  // Handle keyboard events (Escape to close the modal)
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (isOpen && e.key === 'Escape' && !isLoading) {
+        onClose();
+      }
+    };
+    
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isOpen, onClose, isLoading]);
 
   const handleCategoryChange = (category: string) => {
     setCategories(prev => ({
@@ -116,6 +127,10 @@ export const SubscribeModal = ({ isOpen, onClose }: SubscribeModalProps) => {
               stiffness: 300,
               damping: 30
             }}
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="dialog-title"
+            aria-describedby="dialog-description"
             className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[95%] max-w-[440px] mx-auto bg-white dark:bg-gray-900 rounded-lg p-6 shadow-lg z-50 overflow-y-auto max-h-[90vh]"
           >
             {/* Close button */}
@@ -123,26 +138,23 @@ export const SubscribeModal = ({ isOpen, onClose }: SubscribeModalProps) => {
               onClick={onClose}
               className="absolute right-4 top-4 text-gray-400 hover:text-gray-600"
               disabled={isLoading}
+              aria-label="Close dialog"
             >
-              <X className="h-4 w-4" />
+              <X className="h-4 w-4" aria-hidden="true" />
             </button>
 
             {/* Content */}
             <div className="space-y-4 pt-2">
-              <DialogTitle asChild>
-                <h2 className="text-3xl font-medium text-center">
-                  The best newsletter for{" "}
-                  <span className="text-blue-600 dark:text-blue-400">
-                    market insights
-                  </span>
-                </h2>
-              </DialogTitle>
+              <h2 id="dialog-title" className="text-3xl font-medium text-center">
+                The best newsletter for{" "}
+                <span className="text-blue-600 dark:text-blue-400">
+                  market insights
+                </span>
+              </h2>
 
-              <DialogDescription asChild>
-                <p className="text-sm text-center text-gray-600 dark:text-gray-400">
-                  Subscribe to stay up to date with the latest stocks, crypto, tech and financial market analysis.
-                </p>
-              </DialogDescription>
+              <p id="dialog-description" className="text-sm text-center text-gray-600 dark:text-gray-400">
+                Subscribe to stay up to date with the latest stocks, crypto, tech and financial market analysis.
+              </p>
 
               <form onSubmit={handleSubmit} className="mt-6 space-y-4">
                 {/* Email field */}
