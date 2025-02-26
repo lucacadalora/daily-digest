@@ -3,7 +3,8 @@ import { createServer, type Server } from "http";
 import axios from "axios";
 import { execFile } from "child_process";
 import { join } from "path";
-import { readFileSync } from "fs";
+import { readFileSync, statSync, createReadStream } from "fs";
+import * as fs from "fs";
 import { sampleArticles } from "../client/src/types/newsletter";
 
 interface MarketPrice {
@@ -181,7 +182,7 @@ class MarketDataCache {
       const quoteMap = new Map(quotes.map((quote: any) => [quote.symbol, quote]));
 
       const mapQuote = (symbol: string): MarketPrice => {
-        const quote = quoteMap.get(symbol);
+        const quote = quoteMap.get(symbol) as any;
         if (!quote?.regularMarketPrice) {
           console.warn(`No valid price data for symbol: ${symbol}`);
           return { price: 0, change24h: 0 };
@@ -351,6 +352,64 @@ export function registerRoutes(app: Express): Server {
       console.error('Error in /api/market-data:', error);
       res.status(500).json({
         error: 'Failed to fetch market data',
+        message: error instanceof Error ? error.message : 'Unknown error'
+      });
+    }
+  });
+  
+  // Document API endpoint for secure file downloads
+  app.get('/api/documents/:category/:id', (req, res) => {
+    try {
+      const { category, id } = req.params;
+      
+      // Only support law documents for now
+      if (category !== 'law') {
+        console.log(`Document category not supported: ${category}`);
+        return res.status(404).json({ error: "Document category not found" });
+      }
+      
+      // Simple document registry - in a real app, this would be in a database
+      const documentsRegistry: Record<string, { filename: string, contentType: string, title: string }> = {
+        "undang-undang-nomor-1-tahun-2025": {
+          filename: "UU_NO_1_2025.pdf",
+          contentType: "application/pdf",
+          title: "Undang-Undang Nomor 1 Tahun 2025"
+        }
+      };
+      
+      const document = documentsRegistry[id];
+      if (!document) {
+        console.log(`Document ID not found: ${id}`);
+        return res.status(404).json({ error: "Document not found" });
+      }
+      
+      const filePath = join(process.cwd(), "public", "documents", category, document.filename);
+      
+      // Check if file exists
+      try {
+        const stats = fs.statSync(filePath);
+        if (!stats.isFile()) {
+          throw new Error("Not a file");
+        }
+      } catch (err) {
+        console.error(`File not found or not accessible: ${filePath}`, err);
+        return res.status(404).json({ error: "Document file not found" });
+      }
+      
+      // Set appropriate headers for download
+      res.setHeader("Content-Type", document.contentType);
+      res.setHeader("Content-Disposition", `attachment; filename="${document.filename}"`);
+      
+      // Create read stream and pipe to response
+      const fileStream = fs.createReadStream(filePath);
+      fileStream.pipe(res);
+      
+      // Log the download
+      console.log(`Document download: ${category}/${id} (${document.title})`);
+    } catch (error) {
+      console.error('Error in /api/documents:', error);
+      res.status(500).json({
+        error: 'Failed to fetch document',
         message: error instanceof Error ? error.message : 'Unknown error'
       });
     }
