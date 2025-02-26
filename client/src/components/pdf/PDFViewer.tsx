@@ -10,15 +10,20 @@ interface PDFViewerProps {
 export const PDFViewer: React.FC<PDFViewerProps> = ({ pdfUrl, documentTitle }) => {
   // Generate API URLs for download and view
   const getDownloadUrl = (): string => {
-    // Extract the document ID from the URL path
-    const pathParts = pdfUrl.split('/');
-    
-    // Expecting format like: /documents/law/UU_NO_1_2025.pdf or /documents/research/Paper.pdf
-    if (pathParts.includes('documents')) {
-      if (pathParts.includes('law')) {
-        return '/api/documents/law/undang-undang-nomor-1-tahun-2025?download=true';
-      } else if (pathParts.includes('research')) {
-        return '/api/documents/research/steel-tariff-exemptions-global-trade-impact?download=true';
+    // Convert document path to API endpoint format
+    if (pdfUrl.startsWith('/documents/')) {
+      // Extract category and filename
+      const parts = pdfUrl.split('/');
+      if (parts.length >= 3) {
+        const category = parts[2]; // 'law' or 'research'
+        const slug = parts[3].split('.')[0]; // Remove file extension
+        
+        // For research, we know the slug from the route params
+        if (category === 'research') {
+          return `/api/documents/research/steel-tariff-exemptions-global-trade-impact?download=true`;
+        } else if (category === 'law') {
+          return `/api/documents/law/undang-undang-nomor-1-tahun-2025?download=true`;
+        }
       }
     }
     
@@ -27,13 +32,18 @@ export const PDFViewer: React.FC<PDFViewerProps> = ({ pdfUrl, documentTitle }) =
   };
   
   const getViewUrl = (): string => {
-    const pathParts = pdfUrl.split('/');
-    
-    if (pathParts.includes('documents')) {
-      if (pathParts.includes('law')) {
-        return '/api/documents/law/undang-undang-nomor-1-tahun-2025';
-      } else if (pathParts.includes('research')) {
-        return '/api/documents/research/steel-tariff-exemptions-global-trade-impact';
+    if (pdfUrl.startsWith('/documents/')) {
+      // Extract category and filename
+      const parts = pdfUrl.split('/');
+      if (parts.length >= 3) {
+        const category = parts[2]; // 'law' or 'research'
+        
+        // For research, we know the slug from the route params
+        if (category === 'research') {
+          return `/api/documents/research/steel-tariff-exemptions-global-trade-impact`;
+        } else if (category === 'law') {
+          return `/api/documents/law/undang-undang-nomor-1-tahun-2025`;
+        }
       }
     }
     
