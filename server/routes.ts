@@ -1,4 +1,4 @@
-import type { Express } from "express";
+import type { Express, Request, Response } from "express";
 import { createServer, type Server } from "http";
 import axios from "axios";
 import { execFile } from "child_process";
@@ -6,6 +6,10 @@ import { join } from "path";
 import { readFileSync, statSync, createReadStream } from "fs";
 import * as fs from "fs";
 import { sampleArticles } from "../client/src/types/newsletter";
+import { db } from "../db";
+import { subscribers } from "../db/schema";
+import { z } from "zod";
+import { eq } from "drizzle-orm";
 
 interface MarketPrice {
   price: number;
@@ -417,6 +421,137 @@ export function registerRoutes(app: Express): Server {
       res.status(500).json({
         error: 'Failed to fetch document',
         message: error instanceof Error ? error.message : 'Unknown error'
+      });
+    }
+  });
+
+  // Subscribe endpoint to collect and store emails
+  app.post('/api/subscribe', async (req, res) => {
+    try {
+      // Define validation schema for subscription data
+      const subscribeSchema = z.object({
+        email: z.string().email("Invalid email format"),
+        name: z.string().optional(),
+        categories: z.array(z.string()).optional().default(['market-analysis', 'financial-news'])
+      });
+      
+      // Validate request body
+      const result = subscribeSchema.safeParse(req.body);
+      if (!result.success) {
+        return res.status(400).json({ 
+          error: "Validation failed", 
+          details: result.error.format() 
+        });
+      }
+      
+      const { email, name, categories } = result.data;
+      
+      // Check if email already exists
+      const existingSubscriber = await db.select()
+        .from(subscribers)
+        .where(eq(subscribers.email, email))
+        .limit(1);
+      
+      if (existingSubscriber.length > 0) {
+        // Email already exists, update subscription if needed
+        await db.update(subscribers)
+          .set({ 
+            subscribed: true,
+            name: name || existingSubscriber[0].name,
+            categories: categories || existingSubscriber[0].categories
+          })
+          .where(eq(subscribers.email, email));
+        
+        return res.status(200).json({ 
+          message: "Subscription updated successfully", 
+          status: "updated" 
+        });
+      }
+      
+      // Insert new subscriber
+      await db.insert(subscribers).values({
+        email,
+        name,
+        categories,
+        subscribed: true
+      });
+      
+      return res.status(201).json({
+        message: "Subscription successful",
+        status: "created"
+      });
+    } catch (error) {
+      console.error("Error in subscription endpoint:", error);
+      return res.status(500).json({
+        error: "Failed to process subscription",
+        message: error instanceof Error ? error.message : "Unknown error"
+      });
+    }
+  });
+
+  // Get all subscribers (admin only)
+  app.get('/api/subscribers', async (req, res) => {
+    try {
+      // In a production app, you would add authentication here
+      // This is for demonstration purposes only
+      const allSubscribers = await db.select().from(subscribers);
+      return res.status(200).json(allSubscribers);
+    } catch (error) {
+      console.error("Error fetching subscribers:", error);
+      return res.status(500).json({
+        error: "Failed to fetch subscribers",
+        message: error instanceof Error ? error.message : "Unknown error"
+      });
+    }
+  });
+  
+  // Unsubscribe endpoint
+  app.post('/api/unsubscribe', async (req, res) => {
+    try {
+      const unsubscribeSchema = z.object({
+        email: z.string().email("Invalid email format")
+      });
+      
+      // Validate request body
+      const result = unsubscribeSchema.safeParse(req.body);
+      if (!result.success) {
+        return res.status(400).json({ 
+          error: "Validation failed", 
+          details: result.error.format() 
+        });
+      }
+      
+      const { email } = result.data;
+      
+      // Check if email exists
+      const existingSubscriber = await db.select()
+        .from(subscribers)
+        .where(eq(subscribers.email, email))
+        .limit(1);
+      
+      if (existingSubscriber.length === 0) {
+        return res.status(404).json({ 
+          error: "Email not found", 
+          message: "This email is not subscribed to our newsletter." 
+        });
+      }
+      
+      // Update subscriber status instead of deleting the record
+      await db.update(subscribers)
+        .set({ 
+          subscribed: false 
+        })
+        .where(eq(subscribers.email, email));
+      
+      return res.status(200).json({
+        message: "Successfully unsubscribed",
+        status: "unsubscribed"
+      });
+    } catch (error) {
+      console.error("Error in unsubscribe endpoint:", error);
+      return res.status(500).json({
+        error: "Failed to process unsubscribe request",
+        message: error instanceof Error ? error.message : "Unknown error"
       });
     }
   });
