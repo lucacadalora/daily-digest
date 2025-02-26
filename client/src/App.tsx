@@ -14,6 +14,7 @@ import About from "@/pages/about";
 import FedBalanceSheet from "@/pages/FedBalanceSheet";
 import FedQTExitCryptoRally from "@/pages/fed-qt-exit-crypto-rally";
 import IndonesiaCoalDilemma from "@/pages/indonesia-coal-dilemma";
+import TestPDF from "./pages/test-pdf";
 
 // Data section pages
 import DataIndex from "@/pages/data/index";
@@ -36,6 +37,9 @@ function Router() {
       <Route path="/data/documents" component={DataDocuments} />
       <Route path="/data/law" component={LawIndex} />
       <Route path="/data/law/:slug" component={LawDetail} />
+      
+      {/* Test routes */}
+      <Route path="/test-pdf" component={TestPDF} />
       
       {/* Newsletter routes */}
       <Route path="/newsletter" component={Newsletters} />
