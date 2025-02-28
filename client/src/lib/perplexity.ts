@@ -130,16 +130,11 @@ export async function getMarketAnalysis(query: string): Promise<string> {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        model: "llama-3.1-sonar-reasoning-pro",
+        model: "sonar-pro",
         messages,
         temperature: 0.2,
         top_p: 0.9,
-        max_tokens: 500,
-        frequency_penalty: 1,
-        search_domain_filter: ["perplexity.ai"],
-        return_images: false,
-        return_related_questions: false,
-        search_recency_filter: "month"
+        max_tokens: 500
       })
     });
 

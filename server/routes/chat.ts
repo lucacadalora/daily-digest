@@ -52,12 +52,7 @@ router.post("/chat", async (req, res) => {
     log('Initializing Perplexity client...');
     const client = new OpenAI({
       apiKey,
-      baseURL: "https://api.perplexity.ai",
-      defaultHeaders: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      timeout: 30000 // 30 second timeout
+      baseURL: "https://api.perplexity.ai"
     });
 
     const today = new Date().toLocaleDateString('en-US', { 
@@ -74,7 +69,7 @@ Only answer questions related to financial markets, investments, economic trends
 
     log('Sending request to Perplexity API...');
     const response = await client.chat.completions.create({
-      model: "llama-3.1-sonar-reasoning-pro",
+      model: "sonar-pro", // Using sonar-pro model as specified
       messages: [
         { 
           role: "system", 
@@ -84,8 +79,7 @@ Only answer questions related to financial markets, investments, economic trends
       ],
       temperature: 0.2,
       top_p: 0.9,
-      max_tokens: 1000,
-      frequency_penalty: 1
+      max_tokens: 1000
     });
 
     if (!response?.choices?.[0]?.message?.content) {
