@@ -22,6 +22,14 @@ const lawDocuments: LawDocument[] = [
     date: "24 Februari 2025",
     effectiveDate: "24 Februari 2025",
     slug: "undang-undang-nomor-1-tahun-2025"
+  },
+  {
+    id: "2",
+    title: "PP No. 10 Tahun 2025",
+    subtitle: "Peraturan Pemerintah Nomor 10 Tahun 2025 tentang Organisasi dan Tata Kelola Badan Pengelola Investasi Daya Anagata Nusantara (Danantara)",
+    date: "28 Februari 2025",
+    effectiveDate: "28 Februari 2025",
+    slug: "peraturan-pemerintah-nomor-10-tahun-2025"
   }
 ];
 

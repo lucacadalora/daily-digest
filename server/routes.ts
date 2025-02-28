@@ -395,6 +395,11 @@ export function registerRoutes(app: Express): Server {
           contentType: "application/pdf",
           title: "Undang-Undang Nomor 1 Tahun 2025"
         },
+        "peraturan-pemerintah-nomor-10-tahun-2025": {
+          filename: "Salinan PP Nomor 10 Tahun 2025.pdf",
+          contentType: "application/pdf",
+          title: "PP No. 10 Tahun 2025"
+        },
         // Research papers
         "steel-tariff-exemptions-global-trade-impact": {
           filename: "Paper.pdf",
