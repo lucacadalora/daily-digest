@@ -16,13 +16,14 @@ export const PDFViewer: React.FC<PDFViewerProps> = ({ pdfUrl, documentTitle }) =
       const parts = pdfUrl.split('/');
       if (parts.length >= 3) {
         const category = parts[2]; // 'law' or 'research'
-        const slug = parts[3].split('.')[0]; // Remove file extension
         
-        // For research, we know the slug from the route params
-        if (category === 'research') {
-          return `/api/documents/research/steel-tariff-exemptions-global-trade-impact?download=true`;
-        } else if (category === 'law') {
+        // Map specific files to their API endpoints
+        if (pdfUrl.includes('Salinan PP Nomor 10 Tahun 2025.pdf')) {
+          return `/api/documents/law/peraturan-pemerintah-nomor-10-tahun-2025?download=true`;
+        } else if (pdfUrl.includes('UU_NO_1_2025.pdf')) {
           return `/api/documents/law/undang-undang-nomor-1-tahun-2025?download=true`;
+        } else if (category === 'research') {
+          return `/api/documents/research/steel-tariff-exemptions-global-trade-impact?download=true`;
         }
       }
     }
@@ -38,11 +39,13 @@ export const PDFViewer: React.FC<PDFViewerProps> = ({ pdfUrl, documentTitle }) =
       if (parts.length >= 3) {
         const category = parts[2]; // 'law' or 'research'
         
-        // For research, we know the slug from the route params
-        if (category === 'research') {
-          return `/api/documents/research/steel-tariff-exemptions-global-trade-impact`;
-        } else if (category === 'law') {
+        // Map specific files to their API endpoints
+        if (pdfUrl.includes('Salinan PP Nomor 10 Tahun 2025.pdf')) {
+          return `/api/documents/law/peraturan-pemerintah-nomor-10-tahun-2025`;
+        } else if (pdfUrl.includes('UU_NO_1_2025.pdf')) {
           return `/api/documents/law/undang-undang-nomor-1-tahun-2025`;
+        } else if (category === 'research') {
+          return `/api/documents/research/steel-tariff-exemptions-global-trade-impact`;
         }
       }
     }
