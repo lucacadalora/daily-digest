@@ -10,10 +10,10 @@ import remarkGfm from "remark-gfm";
 import axios from "axios";
 
 const EXAMPLE_PROMPTS = [
-  "What are the current investment opportunities in Southeast Asian markets?",
-  "Explain the impact of rising interest rates on Indonesian banks",
-  "Compare the valuation metrics of BBRI, BMRI, and BBCA",
-  "How might geopolitical tensions affect global commodity markets?",
+  "Tell me a joke",
+  "What can you help me with?",
+  "How does AI work?",
+  "What's your favorite color?",
 ];
 
 interface Message {
@@ -304,7 +304,7 @@ export const ChatBox = () => {
         </div>
 
         <h2 className="text-sm font-medium mt-2 text-gray-700 dark:text-gray-300">
-          Ask questions about market trends
+          Ask me anything
         </h2>
       </div>
 
