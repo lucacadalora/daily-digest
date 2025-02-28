@@ -74,7 +74,7 @@ Only answer questions related to financial markets, investments, economic trends
 
     log('Sending request to Perplexity API...');
     const response = await client.chat.completions.create({
-      model: "llama-3.1-sonar-small-128k-online",
+      model: "llama-3.1-sonar-reasoning-pro",
       messages: [
         { 
           role: "system", 

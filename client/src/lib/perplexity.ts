@@ -130,7 +130,7 @@ export async function getMarketAnalysis(query: string): Promise<string> {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        model: "llama-3.1-sonar-huge-128k-online",
+        model: "llama-3.1-sonar-reasoning-pro",
         messages,
         temperature: 0.2,
         top_p: 0.9,
