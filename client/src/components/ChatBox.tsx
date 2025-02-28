@@ -10,10 +10,10 @@ import remarkGfm from "remark-gfm";
 import axios from "axios";
 
 const EXAMPLE_PROMPTS = [
-  "Tell me a joke",
-  "What can you help me with?",
-  "How does AI work?",
-  "What's your favorite color?",
+  "Analyze BBRI's current valuation and growth prospects",
+  "What's the latest market trend for Indonesian banking sector?",
+  "Compare dividend yields of top ASEAN banks",
+  "Analyze recent developments in digital banking adoption",
 ];
 
 interface Message {
@@ -23,10 +23,31 @@ interface Message {
   isStreaming?: boolean;
 }
 
-// No additional formatting needed as we're using the Perplexity API directly
 const formatMarketAnalysis = (content: string) => {
-  // Just return the original content; the Perplexity API response already has good formatting
-  return content;
+  if (content.includes('MARKET_CONTEXT')) {
+    const parts = content.split('MARKET_CONTEXT');
+    const [beforeContext, afterContext] = parts;
+
+    const formattedContext = afterContext
+      .replace(/📈 Latest Market Data:/g, '📈 Market Context\n')
+      .replace(/Current Price: (IDR \d+([,\.]\d+)*)/g, '💰 Current Price: 💵$1')
+      .replace(/Change: ([+-]\d+(\.\d{1,2})?%)/g, '📊 Change: $1')
+      .replace(/Fair Value Estimates:/g, '\n💡 Fair Value Estimates\n')
+      .replace(/Peter Lynch Fair Value:/g, '🎯 Peter Lynch Fair Value:')
+      .replace(/Analyst Consensus:/g, '👥 Analyst Consensus:')
+      .replace(/Dividend Outlook:/g, '\n💰 Dividend Outlook\n')
+      .replace(/(\d+(\.\d{1,2})?%)/g, '📝 $1')
+      .replace(/(IDR \d+([,\.]\d+)*)/g, '💵 $1')
+      .replace(/upside potential/g, '📈 upside potential')
+      .replace(/downside risk/g, '📉 downside risk');
+
+    return beforeContext + formattedContext;
+  }
+
+  return content
+    .replace(/Market Context:/g, '📈 Market Context\n')
+    .replace(/(\d+(\.\d{1,2})?%)/g, '📝 $1')
+    .replace(/(IDR \d+([,\.]\d+)*)/g, '💵 $1');
 };
 
 export const ChatBox = () => {
@@ -55,7 +76,7 @@ export const ChatBox = () => {
     // Add searching message with loading animation
     setMessages(prev => [...prev, { 
       role: 'assistant', 
-      content: 'Thinking...', 
+      content: 'Analyzing market data...', 
       isSearching: true 
     }]);
 
@@ -87,16 +108,7 @@ export const ChatBox = () => {
       console.error('Chat error:', error);
       const errorMessage = error instanceof Error ? error.message : 'Sorry, I encountered an error. Please try again.';
       setError(errorMessage);
-      
-      // Remove loading message
-      setMessages(prev => {
-        const filtered = prev.filter(msg => !msg.isSearching);
-        // Add a user-friendly error message as an assistant response
-        return [...filtered, { 
-          role: 'assistant', 
-          content: `I'm having trouble processing your request. ${errorMessage}` 
-        }];
-      });
+      setMessages(prev => prev.filter(msg => !msg.isSearching));
     } finally {
       setIsLoading(false);
     }
@@ -113,7 +125,7 @@ export const ChatBox = () => {
           <div className="flex items-center space-x-2">
             <Search className="h-4 w-4 animate-spin" />
             <span className="text-sm text-gray-600 dark:text-gray-400">
-              Thinking
+              Analyzing market data
               <motion.span
                 animate={{
                   opacity: [0, 1, 1, 1, 0],
@@ -304,7 +316,7 @@ export const ChatBox = () => {
         </div>
 
         <h2 className="text-sm font-medium mt-2 text-gray-700 dark:text-gray-300">
-          Ask me anything
+          Ask questions about market trends
         </h2>
       </div>
 
@@ -365,7 +377,7 @@ export const ChatBox = () => {
           <Input
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            placeholder={error ? "Please try again..." : "Ask me anything..."}
+            placeholder={error ? "Please try again..." : "Ask about market insights..."}
             disabled={isLoading}
             className={`flex-1 ${error ? 'border-red-300 dark:border-red-700' : ''}`}
           />

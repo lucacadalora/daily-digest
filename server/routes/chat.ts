@@ -1,5 +1,5 @@
 import express from "express";
-import axios from "axios";
+import OpenAI from "openai";
 import type { APIError } from "openai";
 import { log } from "../vite";
 
@@ -23,100 +23,81 @@ router.post("/chat", async (req, res) => {
       });
     }
 
-    // Get API key from environment
     const apiKey = process.env.PERPLEXITY_API_KEY;
-    
-    // Check if API key is valid
-    if (apiKey && isValidPerplexityKey(apiKey)) {
-      try {
-        log('Making request to Perplexity API...');
-        
-        // Make the API request to Perplexity according to their official documentation
-        // https://docs.perplexity.ai/reference/post_chat_completions
-        const perplexityResponse = await axios.post(
-          'https://api.perplexity.ai/chat/completions',
-          {
-            model: 'llama-3-sonar-large-32k-chat',  // Using the latest Llama-3 Sonar model
-            messages: [
-              { role: 'user', content: message }
-            ],
-            max_tokens: 1024,  // Reasonable token limit for responses
-            temperature: 0.7,  // Balanced between creativity and accuracy
-            stream: false      // Full response returned at once, not streamed
-          },
-          {
-            headers: {
-              'Content-Type': 'application/json',
-              'Authorization': `Bearer ${apiKey}`
-            }
-          }
-        );
-
-        if (!perplexityResponse?.data?.choices?.[0]?.message?.content) {
-          throw new Error('Invalid API response format');
-        }
-
-        const result = {
-          status: 'success',
-          reply: perplexityResponse.data.choices[0].message.content.trim()
-        };
-
-        log('Sending successful response from API');
-        return res.json(result);
-      } catch (err) {
-        const apiError = err as Error;
-        log('Error making API request, falling back to simulation mode:', apiError.message);
-        // Fall back to simulation mode on API error
-      }
-    } else {
-      log('No valid API key found, using simulation mode');
+    if (!apiKey) {
+      log('Error: Missing API key');
+      return res.status(500).json({
+        status: 'error',
+        error: 'API Configuration Error: Missing API key'
+      });
     }
-    
-    // Simple simulation mode - just enough to test the UI
-    log('Running in simulation mode');
-    
-    // Generate a simple response for a general-purpose chatbot
-    let simulatedResponse = "";
-    
-    // Convert to lowercase for case-insensitive matching
-    const lowerMessage = message.toLowerCase();
-    
-    if (lowerMessage.includes('hello') || lowerMessage.includes('hi') || lowerMessage === 'hey') {
-      simulatedResponse = "Hello! I'm a general-purpose assistant running in simulation mode. How can I help you today?";
-    } else if (lowerMessage.includes('how are you')) {
-      simulatedResponse = "I'm doing well, thanks for asking! I'm currently running in simulation mode, but I can still chat with you.";
-    } else if (lowerMessage.includes('your name') || lowerMessage.includes('who are you')) {
-      simulatedResponse = "I'm an AI assistant powered by Perplexity's Llama-3 Sonar model. I'm currently running in simulation mode since I don't have access to the actual API.";
-    } else if (lowerMessage.includes('weather')) {
-      simulatedResponse = "I'm in simulation mode so I can't check the current weather. When properly configured with a valid API key, I'll be able to provide more helpful responses.";
-    } else if (lowerMessage.includes('joke')) {
-      simulatedResponse = "Why don't scientists trust atoms? Because they make up everything! (Note: I'm responding in simulation mode since I don't have access to the Perplexity API)";
-    } else if (lowerMessage.includes('ai') && (lowerMessage.includes('work') || lowerMessage.includes('function'))) {
-      simulatedResponse = "AI systems like me work through pattern recognition in large datasets. Modern AI uses neural networks trained on massive amounts of text to predict what might come next in a sequence. This allows me to generate responses that seem natural and contextually appropriate. When properly configured with the Perplexity API, I'll have even better capabilities!";
-    } else if (lowerMessage === 'jakarta' || lowerMessage.includes('jakarta')) {
-      simulatedResponse = "Jakarta is the capital city of Indonesia. It's located on the northwest coast of Java island and is the country's economic, cultural, and political center. With a population of over 10 million in the city proper, it's one of the most populous urban areas in the world. (Note: I'm responding in simulation mode)";
-    } else if (lowerMessage.includes('help')) {
-      simulatedResponse = "I'm here to help answer questions and provide information on a wide range of topics. While I'm currently in simulation mode with limited capabilities, once configured with a valid Perplexity API key, I'll be able to assist with more complex queries. What would you like to know about?";
-    } else if (lowerMessage.includes('api key') || lowerMessage.includes('apikey') || lowerMessage.includes('perplexity')) {
-      simulatedResponse = "To use the Perplexity API, you'll need a valid API key that starts with 'pplx-'. You can get one by signing up at https://www.perplexity.ai and navigating to the API section. Once you have the key, add it to your environment variables as PERPLEXITY_API_KEY. I'm currently running in simulation mode because I don't have access to a valid API key.";
-    } else if (lowerMessage.includes('python') || lowerMessage.includes('javascript') || lowerMessage.includes('code')) {
-      simulatedResponse = "I can help with programming concepts and code examples when properly configured with a valid Perplexity API key. In simulation mode, I have limited capabilities, but I'd be happy to try answering basic programming questions.";
-    } else if (lowerMessage.includes('thank')) {
-      simulatedResponse = "You're welcome! I'm happy to help, even in simulation mode. Let me know if you have any other questions.";
-    } else if (lowerMessage.includes('time') || lowerMessage.includes('date') || lowerMessage.includes('day')) {
-      simulatedResponse = "I'm in simulation mode so I don't have access to the current time or date. With a valid Perplexity API key, I'd be able to provide real-time information.";
-    } else {
-      simulatedResponse = `I'm a general-purpose AI assistant currently running in simulation mode. When properly configured with a valid Perplexity API key, I'll be able to provide more helpful and detailed responses to your questions.
 
-To enable the full chatbot capabilities, please configure a valid Perplexity API key.`;
+    if (!isValidPerplexityKey(apiKey)) {
+      log('Error: Invalid API key format');
+      return res.status(500).json({
+        status: 'error',
+        error: 'Invalid API key format. Key should start with "pplx-"'
+      });
+    }
+
+    // Detect off-topic queries
+    const nonMarketTerms = /\b(code|programming|typescript|javascript|python|game|gaming|maze|algorithm|compiler|database|API|endpoint)\b/i;
+    if (nonMarketTerms.test(message)) {
+      return res.json({
+        status: 'error',
+        error: 'This AI assistant specializes in financial markets and investment analysis. For programming or other topics, please use appropriate specialized resources.',
+      });
+    }
+
+    log('Initializing Perplexity client...');
+    const client = new OpenAI({
+      apiKey,
+      baseURL: "https://api.perplexity.ai",
+      defaultHeaders: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      timeout: 30000 // 30 second timeout
+    });
+
+    const today = new Date().toLocaleDateString('en-US', { 
+      weekday: 'long', 
+      year: 'numeric', 
+      month: 'long', 
+      day: 'numeric' 
+    });
+
+    log('Preparing system prompt...');
+    const basePrompt = `You are an expert financial and business analyst specializing in market analysis and investment research. Today is ${today}. Provide clear, concise, and accurate information based on your extensive knowledge of global financial markets, company valuations, and investment analysis.
+
+Only answer questions related to financial markets, investments, economic trends, and business analysis. If the question is outside these domains, inform the user that you can only assist with market-related queries.`;
+
+    log('Sending request to Perplexity API...');
+    const response = await client.chat.completions.create({
+      model: "llama-3.1-sonar-small-128k-online",
+      messages: [
+        { 
+          role: "system", 
+          content: basePrompt
+        },
+        { role: "user", content: message }
+      ],
+      temperature: 0.2,
+      top_p: 0.9,
+      max_tokens: 1000,
+      frequency_penalty: 1
+    });
+
+    if (!response?.choices?.[0]?.message?.content) {
+      throw new Error('Invalid API response format');
     }
 
     const result = {
       status: 'success',
-      reply: simulatedResponse
+      reply: response.choices[0].message.content.trim()
     };
 
-    log('Sending simulated response');
+    log('Sending successful response:', JSON.stringify(result));
     res.json(result);
 
   } catch (error) {
@@ -130,15 +111,9 @@ To enable the full chatbot capabilities, please configure a valid Perplexity API
     if (apiError.status === 401) {
       errorMessage = 'Invalid API key. Please check your configuration.';
       statusCode = 401;
-    } else if (apiError.status === 403) {
-      errorMessage = 'Access forbidden. Please check your API permissions.';
-      statusCode = 403;
     } else if (apiError.status === 429) {
       errorMessage = 'Rate limit exceeded. Please try again later.';
       statusCode = 429;
-    } else if (apiError.status === 404) {
-      errorMessage = 'API endpoint not found. Please check the API URL.';
-      statusCode = 404;
     } else {
       errorMessage = apiError.message || 'Unknown error occurred';
       statusCode = apiError.status || 500;

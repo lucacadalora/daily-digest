@@ -130,17 +130,21 @@ export async function getMarketAnalysis(query: string): Promise<string> {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        model: "llama-3-sonar-large-32k-chat",
+        model: "llama-3.1-sonar-huge-128k-online",
         messages,
-        temperature: 0.7,
-        max_tokens: 1024
+        temperature: 0.2,
+        top_p: 0.9,
+        max_tokens: 500,
+        frequency_penalty: 1,
+        search_domain_filter: ["perplexity.ai"],
+        return_images: false,
+        return_related_questions: false,
+        search_recency_filter: "month"
       })
     });
 
     if (!response.ok) {
-      const errorData = await response.json().catch(() => null);
-      const errorMessage = errorData?.error || "Failed to get market analysis";
-      throw new Error(errorMessage);
+      throw new Error("Failed to get market analysis");
     }
 
     const data = await response.json();
