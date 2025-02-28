@@ -108,7 +108,16 @@ export const ChatBox = () => {
       console.error('Chat error:', error);
       const errorMessage = error instanceof Error ? error.message : 'Sorry, I encountered an error. Please try again.';
       setError(errorMessage);
-      setMessages(prev => prev.filter(msg => !msg.isSearching));
+      
+      // Remove loading message
+      setMessages(prev => {
+        const filtered = prev.filter(msg => !msg.isSearching);
+        // Add a user-friendly error message as an assistant response
+        return [...filtered, { 
+          role: 'assistant', 
+          content: `I'm having trouble connecting to the market data service. ${errorMessage}` 
+        }];
+      });
     } finally {
       setIsLoading(false);
     }

@@ -139,7 +139,9 @@ export async function getMarketAnalysis(query: string): Promise<string> {
     });
 
     if (!response.ok) {
-      throw new Error("Failed to get market analysis");
+      const errorData = await response.json().catch(() => null);
+      const errorMessage = errorData?.error || "Failed to get market analysis";
+      throw new Error(errorMessage);
     }
 
     const data = await response.json();

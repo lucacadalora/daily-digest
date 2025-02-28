@@ -105,9 +105,15 @@ Only answer questions related to financial markets, investments, economic trends
     if (apiError.status === 401) {
       errorMessage = 'Invalid API key. Please check your configuration.';
       statusCode = 401;
+    } else if (apiError.status === 403) {
+      errorMessage = 'Access forbidden. Please check your API permissions.';
+      statusCode = 403;
     } else if (apiError.status === 429) {
       errorMessage = 'Rate limit exceeded. Please try again later.';
       statusCode = 429;
+    } else if (apiError.status === 404) {
+      errorMessage = 'API endpoint not found. Please check the API URL.';
+      statusCode = 404;
     } else {
       errorMessage = apiError.message || 'Unknown error occurred';
       statusCode = apiError.status || 500;
