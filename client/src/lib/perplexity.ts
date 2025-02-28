@@ -130,11 +130,10 @@ export async function getMarketAnalysis(query: string): Promise<string> {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        model: "sonar-pro",
+        model: "llama-3-sonar-large-32k-chat",
         messages,
-        temperature: 0.2,
-        top_p: 0.9,
-        max_tokens: 500
+        temperature: 0.7,
+        max_tokens: 1024
       })
     });
 

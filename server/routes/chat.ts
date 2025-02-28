@@ -31,15 +31,18 @@ router.post("/chat", async (req, res) => {
       try {
         log('Making request to Perplexity API...');
         
-        // Make the API request to Perplexity using the Sonar model
-        // No custom system prompt - letting the model use its default behavior
+        // Make the API request to Perplexity according to their official documentation
+        // https://docs.perplexity.ai/reference/post_chat_completions
         const perplexityResponse = await axios.post(
           'https://api.perplexity.ai/chat/completions',
           {
-            model: 'sonar-small-chat',  // Use the Sonar model
+            model: 'llama-3-sonar-large-32k-chat',  // Using the latest Llama-3 Sonar model
             messages: [
               { role: 'user', content: message }
-            ]
+            ],
+            max_tokens: 1024,  // Reasonable token limit for responses
+            temperature: 0.7,  // Balanced between creativity and accuracy
+            stream: false      // Full response returned at once, not streamed
           },
           {
             headers: {
@@ -83,7 +86,7 @@ router.post("/chat", async (req, res) => {
     } else if (lowerMessage.includes('how are you')) {
       simulatedResponse = "I'm doing well, thanks for asking! I'm currently running in simulation mode, but I can still chat with you.";
     } else if (lowerMessage.includes('your name') || lowerMessage.includes('who are you')) {
-      simulatedResponse = "I'm an AI assistant powered by Perplexity's Sonar model. I'm currently running in simulation mode since I don't have access to the actual API.";
+      simulatedResponse = "I'm an AI assistant powered by Perplexity's Llama-3 Sonar model. I'm currently running in simulation mode since I don't have access to the actual API.";
     } else if (lowerMessage.includes('weather')) {
       simulatedResponse = "I'm in simulation mode so I can't check the current weather. When properly configured with a valid API key, I'll be able to provide more helpful responses.";
     } else if (lowerMessage.includes('joke')) {
@@ -95,7 +98,7 @@ router.post("/chat", async (req, res) => {
     } else if (lowerMessage.includes('help')) {
       simulatedResponse = "I'm here to help answer questions and provide information on a wide range of topics. While I'm currently in simulation mode with limited capabilities, once configured with a valid Perplexity API key, I'll be able to assist with more complex queries. What would you like to know about?";
     } else if (lowerMessage.includes('api key') || lowerMessage.includes('apikey') || lowerMessage.includes('perplexity')) {
-      simulatedResponse = "To use the Perplexity API, you'll need a valid API key that starts with 'pplx-'. You can get one by signing up at Perplexity's website. Once you have the key, you'll need to add it to your environment variables. I'm currently running in simulation mode because I don't have access to a valid API key.";
+      simulatedResponse = "To use the Perplexity API, you'll need a valid API key that starts with 'pplx-'. You can get one by signing up at https://www.perplexity.ai and navigating to the API section. Once you have the key, add it to your environment variables as PERPLEXITY_API_KEY. I'm currently running in simulation mode because I don't have access to a valid API key.";
     } else if (lowerMessage.includes('python') || lowerMessage.includes('javascript') || lowerMessage.includes('code')) {
       simulatedResponse = "I can help with programming concepts and code examples when properly configured with a valid Perplexity API key. In simulation mode, I have limited capabilities, but I'd be happy to try answering basic programming questions.";
     } else if (lowerMessage.includes('thank')) {
