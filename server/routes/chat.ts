@@ -75,16 +75,33 @@ router.post("/chat", async (req, res) => {
     // Generate a simple response for a general-purpose chatbot
     let simulatedResponse = "";
     
-    if (message.toLowerCase().includes('hello') || message.toLowerCase().includes('hi')) {
+    // Convert to lowercase for case-insensitive matching
+    const lowerMessage = message.toLowerCase();
+    
+    if (lowerMessage.includes('hello') || lowerMessage.includes('hi') || lowerMessage === 'hey') {
       simulatedResponse = "Hello! I'm a general-purpose assistant running in simulation mode. How can I help you today?";
-    } else if (message.toLowerCase().includes('how are you')) {
+    } else if (lowerMessage.includes('how are you')) {
       simulatedResponse = "I'm doing well, thanks for asking! I'm currently running in simulation mode, but I can still chat with you.";
-    } else if (message.toLowerCase().includes('your name') || message.toLowerCase().includes('who are you')) {
+    } else if (lowerMessage.includes('your name') || lowerMessage.includes('who are you')) {
       simulatedResponse = "I'm an AI assistant powered by Perplexity's Sonar model. I'm currently running in simulation mode since I don't have access to the actual API.";
-    } else if (message.toLowerCase().includes('weather')) {
+    } else if (lowerMessage.includes('weather')) {
       simulatedResponse = "I'm in simulation mode so I can't check the current weather. When properly configured with a valid API key, I'll be able to provide more helpful responses.";
-    } else if (message.toLowerCase().includes('joke')) {
+    } else if (lowerMessage.includes('joke')) {
       simulatedResponse = "Why don't scientists trust atoms? Because they make up everything! (Note: I'm responding in simulation mode since I don't have access to the Perplexity API)";
+    } else if (lowerMessage.includes('ai') && (lowerMessage.includes('work') || lowerMessage.includes('function'))) {
+      simulatedResponse = "AI systems like me work through pattern recognition in large datasets. Modern AI uses neural networks trained on massive amounts of text to predict what might come next in a sequence. This allows me to generate responses that seem natural and contextually appropriate. When properly configured with the Perplexity API, I'll have even better capabilities!";
+    } else if (lowerMessage === 'jakarta' || lowerMessage.includes('jakarta')) {
+      simulatedResponse = "Jakarta is the capital city of Indonesia. It's located on the northwest coast of Java island and is the country's economic, cultural, and political center. With a population of over 10 million in the city proper, it's one of the most populous urban areas in the world. (Note: I'm responding in simulation mode)";
+    } else if (lowerMessage.includes('help')) {
+      simulatedResponse = "I'm here to help answer questions and provide information on a wide range of topics. While I'm currently in simulation mode with limited capabilities, once configured with a valid Perplexity API key, I'll be able to assist with more complex queries. What would you like to know about?";
+    } else if (lowerMessage.includes('api key') || lowerMessage.includes('apikey') || lowerMessage.includes('perplexity')) {
+      simulatedResponse = "To use the Perplexity API, you'll need a valid API key that starts with 'pplx-'. You can get one by signing up at Perplexity's website. Once you have the key, you'll need to add it to your environment variables. I'm currently running in simulation mode because I don't have access to a valid API key.";
+    } else if (lowerMessage.includes('python') || lowerMessage.includes('javascript') || lowerMessage.includes('code')) {
+      simulatedResponse = "I can help with programming concepts and code examples when properly configured with a valid Perplexity API key. In simulation mode, I have limited capabilities, but I'd be happy to try answering basic programming questions.";
+    } else if (lowerMessage.includes('thank')) {
+      simulatedResponse = "You're welcome! I'm happy to help, even in simulation mode. Let me know if you have any other questions.";
+    } else if (lowerMessage.includes('time') || lowerMessage.includes('date') || lowerMessage.includes('day')) {
+      simulatedResponse = "I'm in simulation mode so I don't have access to the current time or date. With a valid Perplexity API key, I'd be able to provide real-time information.";
     } else {
       simulatedResponse = `I'm a general-purpose AI assistant currently running in simulation mode. When properly configured with a valid Perplexity API key, I'll be able to provide more helpful and detailed responses to your questions.
 
