@@ -55,7 +55,7 @@ export const ChatBox = () => {
     // Add searching message with loading animation
     setMessages(prev => [...prev, { 
       role: 'assistant', 
-      content: 'Analyzing market data...', 
+      content: 'Thinking...', 
       isSearching: true 
     }]);
 
@@ -94,7 +94,7 @@ export const ChatBox = () => {
         // Add a user-friendly error message as an assistant response
         return [...filtered, { 
           role: 'assistant', 
-          content: `I'm having trouble connecting to the market data service. ${errorMessage}` 
+          content: `I'm having trouble processing your request. ${errorMessage}` 
         }];
       });
     } finally {
@@ -113,7 +113,7 @@ export const ChatBox = () => {
           <div className="flex items-center space-x-2">
             <Search className="h-4 w-4 animate-spin" />
             <span className="text-sm text-gray-600 dark:text-gray-400">
-              Analyzing market data
+              Thinking
               <motion.span
                 animate={{
                   opacity: [0, 1, 1, 1, 0],
@@ -365,7 +365,7 @@ export const ChatBox = () => {
           <Input
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            placeholder={error ? "Please try again..." : "Ask about market insights..."}
+            placeholder={error ? "Please try again..." : "Ask me anything..."}
             disabled={isLoading}
             className={`flex-1 ${error ? 'border-red-300 dark:border-red-700' : ''}`}
           />
