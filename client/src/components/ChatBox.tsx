@@ -10,10 +10,10 @@ import remarkGfm from "remark-gfm";
 import axios from "axios";
 
 const EXAMPLE_PROMPTS = [
-  "Analyze BBRI's current valuation and growth prospects",
-  "What's the latest market trend for Indonesian banking sector?",
-  "Compare dividend yields of top ASEAN banks",
-  "Analyze recent developments in digital banking adoption",
+  "What are the current investment opportunities in Southeast Asian markets?",
+  "Explain the impact of rising interest rates on Indonesian banks",
+  "Compare the valuation metrics of BBRI, BMRI, and BBCA",
+  "How might geopolitical tensions affect global commodity markets?",
 ];
 
 interface Message {
@@ -23,31 +23,10 @@ interface Message {
   isStreaming?: boolean;
 }
 
+// No additional formatting needed as we're using the Perplexity API directly
 const formatMarketAnalysis = (content: string) => {
-  if (content.includes('MARKET_CONTEXT')) {
-    const parts = content.split('MARKET_CONTEXT');
-    const [beforeContext, afterContext] = parts;
-
-    const formattedContext = afterContext
-      .replace(/📈 Latest Market Data:/g, '📈 Market Context\n')
-      .replace(/Current Price: (IDR \d+([,\.]\d+)*)/g, '💰 Current Price: 💵$1')
-      .replace(/Change: ([+-]\d+(\.\d{1,2})?%)/g, '📊 Change: $1')
-      .replace(/Fair Value Estimates:/g, '\n💡 Fair Value Estimates\n')
-      .replace(/Peter Lynch Fair Value:/g, '🎯 Peter Lynch Fair Value:')
-      .replace(/Analyst Consensus:/g, '👥 Analyst Consensus:')
-      .replace(/Dividend Outlook:/g, '\n💰 Dividend Outlook\n')
-      .replace(/(\d+(\.\d{1,2})?%)/g, '📝 $1')
-      .replace(/(IDR \d+([,\.]\d+)*)/g, '💵 $1')
-      .replace(/upside potential/g, '📈 upside potential')
-      .replace(/downside risk/g, '📉 downside risk');
-
-    return beforeContext + formattedContext;
-  }
-
-  return content
-    .replace(/Market Context:/g, '📈 Market Context\n')
-    .replace(/(\d+(\.\d{1,2})?%)/g, '📝 $1')
-    .replace(/(IDR \d+([,\.]\d+)*)/g, '💵 $1');
+  // Just return the original content; the Perplexity API response already has good formatting
+  return content;
 };
 
 export const ChatBox = () => {
