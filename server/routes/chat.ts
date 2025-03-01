@@ -123,12 +123,47 @@ router.post(["/", "/chat"], async (req, res) => {
       });
     }
 
-    // Detect off-topic queries
-    const nonMarketTerms = /\b(code|programming|typescript|javascript|python|game|gaming|maze|algorithm|compiler|database|API|endpoint)\b/i;
-    if (nonMarketTerms.test(message)) {
+    // Enhanced security: Detect code and programming queries with additional pattern matching
+    const codePatterns = [
+      // Programming keywords
+      /\b(code|program|script|function|debug|compile|execute|runtime|import|export|class|interface|implements|extends)\b/i,
+      // Programming languages
+      /\b(typescript|javascript|python|java|c\+\+|ruby|php|swift|go|rust|kotlin|scala|perl|shell|bash|sql)\b/i,
+      // Programming concepts
+      /\b(algorithm|compiler|interpreter|framework|library|module|package|dependency|variable|array|object|api|endpoint)\b/i,
+      // Gaming terms (off-topic)
+      /\b(game|gaming|maze|puzzle|arcade|console|player|score)\b/i,
+      // Special characters that might indicate code
+      /[{}<>]/,
+      // Common code patterns
+      /\bimport\s+.*\s+from\s+/i,
+      /\brequire\s*\(/i,
+      /\bfunction\s*\w*\s*\(/i,
+      /\bclass\s+\w+\s*[{<]/i,
+      /\bconst\s+\w+\s*=/i,
+      /\blet\s+\w+\s*=/i,
+      /\bvar\s+\w+\s*=/i,
+      // Path-like patterns
+      /[\"\']\s*\.\.?\/.+[\"\']/, 
+      // HTML/XML tags
+      /<\/?[a-z][\s\S]*>/i
+    ];
+    
+    // Check if message contains any code pattern
+    for (const pattern of codePatterns) {
+      if (pattern.test(message)) {
+        return res.json({
+          status: 'error',
+          error: 'This AI assistant specializes in financial markets and investment analysis only. I cannot process code, programming, or technical queries. Please ask about financial markets, stocks, economic trends, or investment strategies.',
+        });
+      }
+    }
+    
+    // Additional security: Limit message length to prevent abuse
+    if (message.length > 500) {
       return res.json({
         status: 'error',
-        error: 'This AI assistant specializes in financial markets and investment analysis. For programming or other topics, please use appropriate specialized resources.',
+        error: 'Your message is too long. Please keep your questions concise (under 500 characters) and focused on financial topics.',
       });
     }
     
