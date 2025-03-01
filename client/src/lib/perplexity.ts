@@ -178,6 +178,11 @@ export async function getMarketAnalysis(query: string): Promise<string> {
       throw new Error(data.error || 'Failed to get market analysis');
     }
     
+    // Log successful model and endpoint details if available
+    if (data.model || data.endpoint) {
+      console.log(`Successfully received response from API using model: ${data.model || 'unknown'}, endpoint: ${data.endpoint || 'unknown'}`);
+    }
+    
     return data.reply;
   } catch (error) {
     console.error("Error getting market analysis:", error);

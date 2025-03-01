@@ -119,10 +119,29 @@ Only answer questions related to financial markets, investments, economic trends
     // Try different model options since we're getting 404 errors
     // Perplexity API models to try in order of preference
     const modelOptions = [
-      "llama-3.1-sonar-small-128k-online",
-      "sonar-small-online",
-      "sonar-small-chat",
-      "mistral-7b-instruct"
+      "sonar-medium-chat",           // Perplexity's mid-size model
+      "sonar-small-chat",            // Perplexity's small model
+      "sonar-medium-online",         // Another name for the same model
+      "sonar-small-online",          // Another name for the same model
+      "mistral-7b-instruct",         // Mistral's model
+      "mistral-medium",              // Another option
+      "llama-3-8b-instruct",         // Meta's model
+      "llama-2-70b-chat",            // Older but more widely supported
+      "mixtral-8x7b-instruct",       // Mixtral model
+      "gpt-3.5-turbo"                // OpenAI fallback option
+    ];
+    
+    // Alternative endpoints to try
+    const endpointOptions = [
+      "https://api.perplexity.ai/v1/chat/completions",
+      "https://api.perplexity.ai/chat/completions", 
+      "https://api.perplexity.ai/v1/messages",
+      "https://api.perplexity.ai/messages",
+      // Different formats entirely
+      "https://perplexity.ai/api/v1/chat/completions",
+      "https://perplexity.ai/api/chat/completions",
+      // Yet another possible endpoint structure
+      "https://labs-api.perplexity.ai/chat/completions"
     ];
     
     // Use the first model in our list
@@ -140,38 +159,49 @@ Only answer questions related to financial markets, investments, economic trends
       max_tokens: 1000
     };
 
-    // Try each model in sequence until one works
+    // Try each endpoint and model combination in sequence until one works
     let apiResponse;
     let modelUsed = '';
+    let endpointUsed = '';
     let lastError;
 
-    for (const model of modelOptions) {
-      try {
-        safeLog(`Trying model: ${model}`);
-        requestBody.model = model;
-        
-        apiResponse = await axios.post('https://api.perplexity.ai/v1/chat/completions', requestBody, {
-          headers: {
-            'Authorization': `Bearer ${apiKey}`,
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-          },
-          timeout: 30000
-        });
-        
-        modelUsed = model;
-        safeLog(`Successfully connected using model: ${model}`);
-        break; // Exit the loop if successful
-      } catch (error) {
-        safeLog(`Model ${model} failed with error:`, axios.isAxiosError(error) ? error.message : 'Unknown error');
-        lastError = error;
+    // Try each endpoint
+    for (const endpoint of endpointOptions) {
+      // Try each model with this endpoint
+      for (const model of modelOptions) {
+        try {
+          safeLog(`Trying endpoint: ${endpoint}, model: ${model}`);
+          requestBody.model = model;
+          
+          apiResponse = await axios.post(endpoint, requestBody, {
+            headers: {
+              'Authorization': `Bearer ${apiKey}`,
+              'Content-Type': 'application/json',
+              'Accept': 'application/json'
+            },
+            timeout: 30000
+          });
+          
+          modelUsed = model;
+          endpointUsed = endpoint;
+          safeLog(`Successfully connected using endpoint: ${endpoint}, model: ${model}`);
+          break; // Exit the inner loop if successful
+        } catch (error) {
+          safeLog(`Endpoint ${endpoint}, model ${model} failed with error:`, axios.isAxiosError(error) ? error.message : 'Unknown error');
+          lastError = error;
+        }
+      }
+      
+      // If we found a working endpoint+model, break out of the outer loop too
+      if (apiResponse) {
+        break;
       }
     }
     
-    // If all models failed, throw the last error
+    // If all combinations failed, throw the last error
     if (!apiResponse) {
-      safeLog('All models failed, using the last error');
-      throw lastError || new Error('Failed to connect to Perplexity API with all model options');
+      safeLog('All endpoint and model combinations failed, using the last error');
+      throw lastError || new Error('Failed to connect to Perplexity API with all endpoint and model combinations');
     }
 
     const response = apiResponse.data;
@@ -180,16 +210,16 @@ Only answer questions related to financial markets, investments, economic trends
       throw new Error('Invalid API response format');
     }
     
-    safeLog(`Using model: ${modelUsed} - Response received`);
+    safeLog(`Using endpoint: ${endpointUsed}, model: ${modelUsed} - Response received`);
     
-
     const result = {
       status: 'success',
       reply: response.choices[0].message.content.trim(),
-      model: modelUsed
+      model: modelUsed,
+      endpoint: endpointUsed.replace(/https:\/\/api\.perplexity\.ai/, '') // Just show the path for brevity
     };
 
-    safeLog('Sending successful response:', { status: 'success', model: modelUsed });
+    safeLog('Sending successful response:', { status: 'success', model: modelUsed, endpoint: endpointUsed });
     res.json(result);
 
   } catch (error) {
