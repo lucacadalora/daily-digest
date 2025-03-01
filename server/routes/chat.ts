@@ -285,12 +285,11 @@ Follow these guidelines:
       cleanedMessage = message.replace(speedParam[0], '').trim();
     }
     
-    // Optimized: Prioritize models that we've confirmed working reliably
-    // Prioritizing models that actually work over ones that return errors
+    // Use only the confirmed working models according to the Perplexity documentation
+    // https://docs.perplexity.ai/guides/model-cards
     const modelOptions = [
-      "sonar-pro",               // Most reliable model with good performance - our main model
-      "pplx-7b-chat",            // Backup smaller model
-      "llama-3-8b-instant",      // Fast Meta Llama 3 model but sometimes returns 400 errors
+      "sonar-pro",               // Llama 3.3 70B optimized with 8-12 verified sources - our primary model
+      "sonar-small-online",      // Smaller backup model if needed
     ];
     
     console.log(`Speed preference: ${speedPreference}, starting with model: ${modelOptions[0]}`);
@@ -625,6 +624,21 @@ Follow these guidelines:
           
           // Try an alternative URL format if we're getting 404s
           errorMessage = 'Unable to reach Perplexity API. Please verify the API endpoint and model availability.';
+        } else if (statusCode === 400) {
+          // Special handling for 400 errors which are common with model issues
+          const responseData = axiosError.response.data as any;
+          
+          // Check if this is a model-related error
+          if (responseData?.error?.message && responseData.error.message.includes('model')) {
+            console.error(`Model error: ${responseData.error.message}`);
+            errorMessage = 'The AI model is temporarily unavailable. We are using our best available model.';
+            
+            // Log detailed information about the model error for debugging
+            safeLog('Model error details:', responseData.error);
+            safeLog('Request body that caused error:', axiosError.config?.data);
+          } else {
+            errorMessage = `Request error: ${responseData?.error?.message || 'Invalid request format'}`;
+          }
         } else {
           const responseData = axiosError.response.data as any;
           errorMessage = `API error (${statusCode}): ${responseData?.error?.message || 'Unknown error'}`;
