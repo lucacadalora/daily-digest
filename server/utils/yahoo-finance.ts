@@ -81,9 +81,6 @@ export async function getYahooFinanceStockPrice(symbol: string): Promise<StockPr
  * Extract stock symbols from message text
  */
 export function extractStockSymbols(message: string): string[] {
-  // Normalize message for better matching (lowercase, extra spaces removed)
-  const normalizedMessage = message.toLowerCase().replace(/\s+/g, ' ');
-  
   // Enhanced pattern matching for stock symbols
   const patterns = [
     // Indonesian stock tickers
@@ -106,6 +103,15 @@ export function extractStockSymbols(message: string): string[] {
   ];
 
   const symbols = new Set<string>();
+  
+  // Normalize the message - multiple normalizations for different purposes
+  // 1. Basic normalization - lowercase and remove extra spaces
+  const normalizedMessage = message.toLowerCase().replace(/\s+/g, ' ');
+  
+  // Remove words like "latest" or "current" from the message for better matching
+  const messageWithoutTimeWords = normalizedMessage
+    .replace(/latest|current|recent|today\'s|now|real-?time/g, '')
+    .trim();
   
   // Process regex patterns
   patterns.forEach(pattern => {
@@ -176,12 +182,22 @@ export function extractStockSymbols(message: string): string[] {
     'netflix': 'NFLX',
     'nvidia': 'NVDA',
   };
-  
+    
+  // Process the original message
   Object.entries(stockNameMap).forEach(([name, symbol]) => {
     if (message.toLowerCase().includes(name.toLowerCase())) {
       symbols.add(symbol);
     }
   });
+  
+  // Also process the normalized message without "latest" etc.
+  if (messageWithoutTimeWords !== normalizedMessage) {
+    Object.entries(stockNameMap).forEach(([name, symbol]) => {
+      if (messageWithoutTimeWords.includes(name.toLowerCase())) {
+        symbols.add(symbol);
+      }
+    });
+  }
   
   return Array.from(symbols);
 }
