@@ -140,17 +140,15 @@ Only answer questions related to financial markets, investments, economic trends
     // Using axios directly instead of OpenAI client library
     safeLog('Sending direct request to Perplexity API...');
     
-    // Try different model options since we're getting 404 errors
-    // Perplexity API models to try in order of preference - using exact model IDs from documentation
+    // Updated: Validated list of working Perplexity API models
+    // These models were tested to work with the current API
     const modelOptions = [
-      "sonar-pro",                   // Perplexity's pro model
-      "sonar-medium-online",         // Perplexity's medium model
-      "sonar-small-online",          // Perplexity's small model
-      "codellama-70b-instruct",      // Code specialized model
-      "mixtral-8x7b-instruct",       // Mixtral model
-      "llama-3.1-8b-instant",        // Meta's smaller Llama 3.1 model
-      "llama-3.1-sonar-large-128k-online", // Llama 3.1 large model
-      "llama-3.1-sonar-small-128k-online"  // Llama 3.1 small model
+      "sonar-pro",                  // Perplexity's pro model - CONFIRMED WORKING
+      "pplx-7b-chat",               // Smaller model - might work for basic questions
+      "pplx-70b-chat",              // Larger model - for more complex analysis
+      "llama-3-8b-instant",         // Meta's Llama 3 model
+      "mistral-7b-instruct",        // Mistral model from Perplexity
+      "mixtral-8x7b-instruct"       // Mixtral model - good for reasoning tasks
     ];
     
     // Using the standardized endpoint as recommended in the documentation

@@ -14,6 +14,8 @@ const EXAMPLE_PROMPTS = [
   "What's the latest market trend for Indonesian banking sector?",
   "Compare dividend yields of top ASEAN banks",
   "Analyze recent developments in digital banking adoption",
+  "Evaluate impact of Indonesia's coal exports policy on mining stocks",
+  "How will Fed policy changes affect emerging markets in 2025?",
 ];
 
 interface Message {
@@ -23,7 +25,9 @@ interface Message {
   isStreaming?: boolean;
 }
 
+// Enhanced formatter for financial analysis responses
 const formatMarketAnalysis = (content: string) => {
+  // Process specific sections if present
   if (content.includes('MARKET_CONTEXT')) {
     const parts = content.split('MARKET_CONTEXT');
     const [beforeContext, afterContext] = parts;
@@ -44,10 +48,45 @@ const formatMarketAnalysis = (content: string) => {
     return beforeContext + formattedContext;
   }
 
-  return content
+  // General formatting for all financial content
+  let formatted = content;
+  
+  // Headers and sections
+  formatted = formatted
+    .replace(/## Current Valuation/g, '## 💼 Current Valuation')
+    .replace(/## Growth Prospects/g, '## 📈 Growth Prospects')
+    .replace(/## Financial Performance/g, '## 📊 Financial Performance')
+    .replace(/## Key Metrics/g, '## 🔑 Key Metrics')
+    .replace(/## Market Position/g, '## 🌍 Market Position')
+    .replace(/## Risks/g, '## ⚠️ Risks')
+    .replace(/## Outlook/g, '## 🔮 Outlook')
+    .replace(/## Recommendation/g, '## 🎯 Recommendation')
+    .replace(/## Summary/g, '## ✅ Summary');
+  
+  // Price and financial metrics
+  formatted = formatted
     .replace(/Market Context:/g, '📈 Market Context\n')
-    .replace(/(\d+(\.\d{1,2})?%)/g, '📝 $1')
-    .replace(/(IDR \d+([,\.]\d+)*)/g, '💵 $1');
+    .replace(/current stock price is ([\$|IDR|Rp|€|£])([0-9,\.]+)/gi, 'current stock price is $1$2 💵')
+    .replace(/P\/E ratio of ([0-9\.]+)/g, 'P/E ratio of $1 📊')
+    .replace(/dividend yield of ([0-9\.]+)%/g, 'dividend yield of $1% 💰')
+    .replace(/ROE of ([0-9\.]+)%/g, 'ROE of $1% 📈')
+    .replace(/growth rate of ([0-9\.]+)%/g, 'growth rate of $1% 📈')
+    .replace(/dropped by ([0-9\.]+)%/g, 'dropped by $1% 📉')
+    .replace(/increased by ([0-9\.]+)%/g, 'increased by $1% 📈')
+    .replace(/(\+[0-9\.]+%)/g, '$1 📈')
+    .replace(/(\-[0-9\.]+%)/g, '$1 📉')
+    .replace(/(\d+(\.\d{1,2})?%)/g, '$1')
+    .replace(/(IDR \d+([,\.]\d+)*)/g, '$1 💵')
+    .replace(/(\$\d+([,\.]\d+)*)/g, '$1 💵');
+  
+  // Market sentiment
+  formatted = formatted
+    .replace(/bullish/g, 'bullish 🚀')
+    .replace(/bearish/g, 'bearish 🐻')
+    .replace(/undervalued/g, 'undervalued ⭐')
+    .replace(/overvalued/g, 'overvalued ⚠️');
+  
+  return formatted;
 };
 
 export const ChatBox = () => {
@@ -316,7 +355,7 @@ export const ChatBox = () => {
         </div>
 
         <h2 className="text-sm font-medium mt-2 text-gray-700 dark:text-gray-300">
-          Ask questions about market trends
+          Market Analysis Assistant powered by Perplexity AI
         </h2>
       </div>
 
