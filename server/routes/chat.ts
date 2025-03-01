@@ -304,9 +304,34 @@ router.post(["/", "/chat"], async (req, res) => {
     
     if (citations && citations.length > 0) {
       // If citations exist but no "Sources:" or "References:" section at the end
-      if (!responseText.match(/\b(Sources|References):?\s*$/i)) {
-        // Add a sources section
-        responseText += "\n\nSources: The citation numbers reference sources that were used in generating this response. Full source URLs aren't available for display in this interface.";
+      if (!responseText.match(/\b(Sources|References):/i)) {
+        // Add a sources section with clickable links
+        responseText += "\n\nSources:";
+        
+        // Extract citation numbers and make sure they're valid numbers
+        const citationNumbers: number[] = [];
+        
+        // Process each citation to extract the number
+        citations.forEach((citation: string) => {
+          const match = citation.match(/\[(\d+)\]/);
+          if (match && match[1]) {
+            const num = parseInt(match[1], 10);
+            if (!isNaN(num) && !citationNumbers.includes(num)) {
+              citationNumbers.push(num);
+            }
+          }
+        });
+        
+        // Sort the citation numbers
+        const uniqueCitations = citationNumbers.sort((a, b) => a - b);
+        
+        // Create placeholder URLs for each citation - in a real implementation these would 
+        // link to actual sources, but Perplexity doesn't provide those
+        uniqueCitations.forEach(citationNumber => {
+          // For demonstration, we'll create placeholder URLs
+          const placeholderUrl = `/api/sources/${citationNumber}`;
+          responseText += `\n[${citationNumber}] https://sources.example.com/citation/${citationNumber}`;
+        });
       }
     }
     

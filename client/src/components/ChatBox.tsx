@@ -196,6 +196,40 @@ export const ChatBox = () => {
     em: ({ children }) => <em className="italic text-gray-600 dark:text-gray-400">{children}</em>,
     code: ({ children }) => <code className="bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded">{children}</code>,
     blockquote: ({ children }) => <blockquote className="border-l-4 border-blue-500 pl-4 italic bg-blue-50 dark:bg-blue-900/20 py-2 rounded-r">{children}</blockquote>,
+    // Format citation links properly
+    a: ({ node, href, children }) => {
+      // Check if this is a citation source URL
+      if (href && href.includes('sources.example.com/citation')) {
+        return (
+          <a 
+            href={href}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-blue-500 hover:text-blue-700 transition-colors underline"
+            onClick={(e) => {
+              e.preventDefault();
+              // In a real implementation, we would open a modal with the source details
+              // For now, we'll just show an alert
+              alert(`This would display source ${href.split('/').pop()} details in a production environment.`);
+            }}
+          >
+            {children}
+          </a>
+        );
+      }
+      
+      // Regular link handling
+      return (
+        <a 
+          href={href}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-blue-500 hover:text-blue-700 transition-colors underline"
+        >
+          {children}
+        </a>
+      );
+    }
   };
   
   const renderMessage = useCallback((message: Message) => {
