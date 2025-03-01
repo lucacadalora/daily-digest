@@ -227,7 +227,7 @@ export default function JapanEconomicSecurity() {
             </div>
             <div className="flex justify-center">
               <img 
-                src="/japan-fig1.png" 
+                src="/charts/japan-fig1.png" 
                 alt="Share of China in overall trade for Japan and the United States (%)" 
                 className="w-full max-w-2xl rounded shadow-md"
               />
@@ -307,7 +307,7 @@ export default function JapanEconomicSecurity() {
             </div>
             <div className="flex justify-center">
               <img 
-                src="/japan-fig3.png" 
+                src="/charts/japan-fig3.png" 
                 alt="Japan's trade distortive semiconductor industrial policies with stated motivation" 
                 className="w-full max-w-2xl rounded shadow-md"
               />
@@ -338,7 +338,7 @@ export default function JapanEconomicSecurity() {
             </div>
             <div className="flex justify-center">
               <img 
-                src="/japan-fig2.png" 
+                src="/charts/japan-fig2.png" 
                 alt="Share of China in overall FDI for Japan and the United States (%)" 
                 className="w-full max-w-2xl rounded shadow-md"
               />
