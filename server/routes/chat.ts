@@ -4,18 +4,66 @@ import { log } from "../vite";
 
 const router = express.Router();
 
+// Safer logging to prevent API key exposure
+function safeLog(message: string, data?: any): void {
+  if (!data) {
+    log(message);
+    return;
+  }
+  
+  try {
+    // For objects, create a sanitized copy
+    if (typeof data === 'object' && data !== null) {
+      // Deep clone the object to avoid modifying the original
+      const sanitized = JSON.parse(JSON.stringify(data));
+      
+      // Sanitize authorization headers or any obvious API key patterns
+      const sanitizeObject = (obj: any) => {
+        for (const key in obj) {
+          if (typeof obj[key] === 'object' && obj[key] !== null) {
+            sanitizeObject(obj[key]);
+          } else if (
+            // Sanitize potential sensitive fields
+            (typeof key === 'string' && 
+             (key.toLowerCase().includes('auth') || 
+              key.toLowerCase().includes('key') || 
+              key.toLowerCase().includes('secret') || 
+              key.toLowerCase().includes('token'))) ||
+            // Sanitize values that look like API keys
+            (typeof obj[key] === 'string' && 
+             (obj[key].startsWith('pplx-') || 
+              obj[key].includes('Bearer')))
+          ) {
+            obj[key] = '[REDACTED]';
+          }
+        }
+      };
+      
+      sanitizeObject(sanitized);
+      log(message, sanitized);
+    } else {
+      // For non-objects, just log the message and data directly
+      log(message, data);
+    }
+  } catch (error) {
+    // If anything goes wrong with sanitization, just log the message without the data
+    log(`${message} (data omitted due to sanitization error)`);
+  }
+}
+
 // Validate Perplexity API key format
 function isValidPerplexityKey(key: string): boolean {
   return typeof key === 'string' && key.startsWith('pplx-');
 }
 
-router.post("/chat", async (req, res) => {
+// Root endpoint and named endpoint both work
+router.post(["/", "/chat"], async (req, res) => {
   try {
-    log('Received chat request:', req.body);
+    safeLog('Received chat request:', req.body);
 
     const { message } = req.body;
     if (!message) {
-      log('Error: Message is required');
+      safeLog('Error: Message is required');
       return res.status(400).json({
         status: 'error',
         error: 'Message is required'
@@ -24,7 +72,7 @@ router.post("/chat", async (req, res) => {
 
     const apiKey = process.env.PERPLEXITY_API_KEY;
     if (!apiKey) {
-      log('Error: Missing API key');
+      safeLog('Error: Missing API key');
       return res.status(500).json({
         status: 'error',
         error: 'API Configuration Error: Missing API key'
@@ -34,10 +82,10 @@ router.post("/chat", async (req, res) => {
     // Log key status for debugging (without exposing the actual key)
     const keyPrefix = apiKey.substring(0, 5);
     const isValid = isValidPerplexityKey(apiKey);
-    log(`API Key validation: prefix=${keyPrefix}..., isValid=${isValid}`);
+    safeLog(`API Key validation: prefix=${keyPrefix}..., isValid=${isValid}`);
 
     if (!isValid) {
-      log('Error: Invalid API key format');
+      safeLog('Error: Invalid API key format');
       return res.status(500).json({
         status: 'error',
         error: 'Invalid API key format. Key should start with "pplx-"'
@@ -60,15 +108,26 @@ router.post("/chat", async (req, res) => {
       day: 'numeric' 
     });
 
-    log('Preparing system prompt...');
+    safeLog('Preparing system prompt...');
     const basePrompt = `You are an expert financial and business analyst specializing in market analysis and investment research. Today is ${today}. Provide clear, concise, and accurate information based on your extensive knowledge of global financial markets, company valuations, and investment analysis.
 
 Only answer questions related to financial markets, investments, economic trends, and business analysis. If the question is outside these domains, inform the user that you can only assist with market-related queries.`;
 
     // Using axios directly instead of OpenAI client library
-    log('Sending direct request to Perplexity API...');
+    safeLog('Sending direct request to Perplexity API...');
+    
+    // Try different model options since we're getting 404 errors
+    // Perplexity API models to try in order of preference
+    const modelOptions = [
+      "llama-3.1-sonar-small-128k-online",
+      "sonar-small-online",
+      "sonar-small-chat",
+      "mistral-7b-instruct"
+    ];
+    
+    // Use the first model in our list
     const requestBody = {
-      model: "llama-3.1-sonar-small-128k-online",
+      model: modelOptions[0],
       messages: [
         { 
           role: "system", 
@@ -81,27 +140,56 @@ Only answer questions related to financial markets, investments, economic trends
       max_tokens: 1000
     };
 
-    const apiResponse = await axios.post('https://api.perplexity.ai/v1/chat/completions', requestBody, {
-      headers: {
-        'Authorization': `Bearer ${apiKey}`,
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-      },
-      timeout: 30000
-    });
+    // Try each model in sequence until one works
+    let apiResponse;
+    let modelUsed = '';
+    let lastError;
+
+    for (const model of modelOptions) {
+      try {
+        safeLog(`Trying model: ${model}`);
+        requestBody.model = model;
+        
+        apiResponse = await axios.post('https://api.perplexity.ai/v1/chat/completions', requestBody, {
+          headers: {
+            'Authorization': `Bearer ${apiKey}`,
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
+          timeout: 30000
+        });
+        
+        modelUsed = model;
+        safeLog(`Successfully connected using model: ${model}`);
+        break; // Exit the loop if successful
+      } catch (error) {
+        safeLog(`Model ${model} failed with error:`, axios.isAxiosError(error) ? error.message : 'Unknown error');
+        lastError = error;
+      }
+    }
+    
+    // If all models failed, throw the last error
+    if (!apiResponse) {
+      safeLog('All models failed, using the last error');
+      throw lastError || new Error('Failed to connect to Perplexity API with all model options');
+    }
 
     const response = apiResponse.data;
     
     if (!response?.choices?.[0]?.message?.content) {
       throw new Error('Invalid API response format');
     }
+    
+    safeLog(`Using model: ${modelUsed} - Response received`);
+    
 
     const result = {
       status: 'success',
-      reply: response.choices[0].message.content.trim()
+      reply: response.choices[0].message.content.trim(),
+      model: modelUsed
     };
 
-    log('Sending successful response:', JSON.stringify(result));
+    safeLog('Sending successful response:', { status: 'success', model: modelUsed });
     res.json(result);
 
   } catch (error) {
@@ -128,30 +216,33 @@ Only answer questions related to financial markets, investments, economic trends
           errorMessage = 'The API endpoint is not found. Please check the URL.';
           
           // Additional logging for 404 errors to debug the endpoint issue
-          log(`404 Error Details - URL: ${axiosError.config?.url}, Method: ${axiosError.config?.method}`);
+          safeLog(`404 Error Details - URL: ${axiosError.config?.url}, Method: ${axiosError.config?.method}`);
+          
+          // Try an alternative URL format if we're getting 404s
+          errorMessage = 'Unable to reach Perplexity API. Please verify the API endpoint and model availability.';
         } else {
           const responseData = axiosError.response.data as any;
           errorMessage = `API error (${statusCode}): ${responseData?.error?.message || 'Unknown error'}`;
         }
         
-        log(`API Error response: ${statusCode}`, axiosError.response.data);
+        safeLog(`API Error response: ${statusCode}`, axiosError.response.data);
       } else if (axiosError.request) {
         // The request was made but no response was received
         errorMessage = 'No response received from API server. Please try again later.';
-        log('No response error:', axiosError.request);
+        safeLog('No response error:', { requestURL: axiosError.config?.url });
       } else {
         // Something happened in setting up the request that triggered an Error
         errorMessage = axiosError.message || 'Unknown error occurred';
-        log('Request setup error:', axiosError.message);
+        safeLog('Request setup error:', axiosError.message);
       }
     } else {
       // Non-Axios error
       const genericError = error as Error;
       errorMessage = genericError?.message || 'Unknown error occurred';
-      log('Non-Axios error:', genericError?.message || 'Unknown error type');
+      safeLog('Non-Axios error:', genericError?.message || 'Unknown error type');
     }
 
-    log('Error in chat endpoint:', errorMessage);
+    safeLog('Error in chat endpoint:', errorMessage);
     res.status(statusCode).json({
       status: 'error',
       error: errorMessage

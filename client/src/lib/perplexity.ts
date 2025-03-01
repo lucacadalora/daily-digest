@@ -125,13 +125,52 @@ export async function getMarketAnalysis(query: string): Promise<string> {
   try {
     // Use the server's API endpoint instead of direct Perplexity API access
     // This way we use the server's API key which is properly configured
-    const response = await fetch('/api/chat', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ message: query })
-    });
+    // Try multiple endpoints with fallback mechanism
+    let response: Response | undefined;
+    let error: Error | unknown;
+    
+    // Try the chat endpoint first
+    try {
+      response = await fetch('/chat', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ message: query })
+      });
+      
+      if (response.ok) {
+        console.log('Connected via /chat endpoint');
+      }
+    } catch (err) {
+      console.error('First endpoint failed:', err);
+      error = err;
+    }
+    
+    // If first attempt failed, try the /api/chat endpoint
+    if (!response || !response.ok) {
+      try {
+        response = await fetch('/api/chat', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ message: query })
+        });
+        
+        if (response.ok) {
+          console.log('Connected via /api/chat endpoint');
+        }
+      } catch (err) {
+        console.error('Second endpoint failed:', err);
+        error = err;
+      }
+    }
+    
+    // If all attempts failed, throw the last error
+    if (!response || !response.ok) {
+      throw error || new Error('Failed to connect to chat endpoints');
+    }
 
     const data = await response.json();
     
@@ -142,6 +181,6 @@ export async function getMarketAnalysis(query: string): Promise<string> {
     return data.reply;
   } catch (error) {
     console.error("Error getting market analysis:", error);
-    throw error;
+    throw new Error(error instanceof Error ? error.message : 'Unknown error occurred');
   }
 }
