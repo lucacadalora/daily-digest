@@ -9,16 +9,8 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import axios from "axios";
 
-const EXAMPLE_PROMPTS = [
-  "Analyze BBRI's current valuation and growth prospects",
-  "What's the latest market trend for Indonesian banking sector?",
-  "Compare dividend yields of top ASEAN banks",
-  "Analyze recent developments in digital banking adoption",
-  "Evaluate impact of Indonesia's coal exports policy on mining stocks",
-  "How will Fed policy changes affect emerging markets in 2025?",
-  "[speed=fast] Give me a quick summary of BBCA stock",
-  "[speed=accurate] Detailed analysis of Indonesia's bond market",
-];
+// No example prompts
+const EXAMPLE_PROMPTS: string[] = [];
 
 interface Message {
   role: 'user' | 'assistant';
@@ -333,28 +325,7 @@ export const ChatBox = () => {
             <span className="text-sm text-gray-500">Online</span>
             <div className="h-4 w-px bg-gray-300 mx-2" />
             <Globe className="h-4 w-4 text-gray-500" />
-            <div className="h-4 w-px bg-gray-300 mx-2" />
-            <div className="flex items-center space-x-1 text-xs text-gray-500">
-              <span className="font-medium">Speed:</span>
-              <button 
-                onClick={() => setInput(prev => `[speed=fast] ${prev.replace(/\[speed=(fast|balanced|accurate)\]\s*/i, '')}`)}
-                className="px-1.5 py-0.5 rounded bg-blue-100 text-blue-800 hover:bg-blue-200 dark:bg-blue-900/30 dark:text-blue-300 dark:hover:bg-blue-800/50"
-              >
-                Fast
-              </button>
-              <button 
-                onClick={() => setInput(prev => `[speed=balanced] ${prev.replace(/\[speed=(fast|balanced|accurate)\]\s*/i, '')}`)}
-                className="px-1.5 py-0.5 rounded bg-gray-100 text-gray-800 hover:bg-gray-200 dark:bg-gray-800/50 dark:text-gray-300 dark:hover:bg-gray-700/50"
-              >
-                Balanced
-              </button>
-              <button 
-                onClick={() => setInput(prev => `[speed=accurate] ${prev.replace(/\[speed=(fast|balanced|accurate)\]\s*/i, '')}`)}
-                className="px-1.5 py-0.5 rounded bg-green-100 text-green-800 hover:bg-green-200 dark:bg-green-900/30 dark:text-green-300 dark:hover:bg-green-800/50"
-              >
-                Accurate
-              </button>
-            </div>
+
           </div>
           <div className="flex items-center gap-2">
             {messages.length > 0 && (

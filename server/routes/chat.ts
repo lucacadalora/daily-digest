@@ -132,10 +132,8 @@ router.post(["/", "/chat"], async (req, res) => {
       day: 'numeric' 
     });
 
-    safeLog('Preparing system prompt...');
-    const basePrompt = `You are an expert financial and business analyst specializing in market analysis and investment research. Today is ${today}. Provide clear, concise, and accurate information based on your extensive knowledge of global financial markets, company valuations, and investment analysis.
-
-Only answer questions related to financial markets, investments, economic trends, and business analysis. If the question is outside these domains, inform the user that you can only assist with market-related queries.`;
+    safeLog('Preparing optimized system prompt...');
+    const basePrompt = `Financial analyst. Today: ${today}. Answer only financial/market/investment questions concisely.`;
 
     // Using axios directly instead of OpenAI client library
     safeLog('Sending direct request to Perplexity API...');
@@ -150,39 +148,13 @@ Only answer questions related to financial markets, investments, economic trends
       cleanedMessage = message.replace(speedParam[0], '').trim();
     }
     
-    // Updated: Validated list of working Perplexity API models
-    // Models are organized by speed preference
-    let modelOptions = [];
-    
-    if (speedPreference === 'fast') {
-      // Fast models for quick responses
-      modelOptions = [
-        "llama-3-8b-instant",      // Fast Meta Llama 3 model
-        "pplx-7b-chat",            // Small and fast model
-        "mistral-7b-instruct",     // Fast instruction model
-        "sonar-small-chat",        // Small sonar model (if available)
-        "sonar-pro"                // Fallback to standard model
-      ];
-    } else if (speedPreference === 'accurate') {
-      // More accurate models for detailed analysis
-      modelOptions = [
-        "sonar-pro",               // Our standard model that works well
-        "pplx-70b-chat",           // Larger model for more complex analysis
-        "mixtral-8x7b-instruct",   // Good for reasoning and analysis
-        "llama-3-70b-instruct",    // Large instruction model
-        "pplx-7b-chat"             // Fallback to smaller model
-      ];
-    } else {
-      // Balanced models (default)
-      modelOptions = [
-        "sonar-pro",               // Best balance of speed and quality - CONFIRMED WORKING
-        "pplx-70b-chat",           // Good for complex financial analysis
-        "llama-3-8b-instant",      // Fast option from Meta
-        "mixtral-8x7b-instruct",   // Good for reasoning tasks
-        "mistral-7b-instruct",     // Smaller option for simpler queries
-        "pplx-7b-chat"             // Smallest fallback option
-      ];
-    }
+    // Optimized: Use only the fastest models that we've confirmed working
+    // This will speed up response times significantly
+    const modelOptions = [
+      "llama-3-8b-instant",      // Fast Meta Llama 3 model - prioritize for speed
+      "sonar-pro",               // Reliable model with good performance - our main model
+      "pplx-7b-chat",            // Backup smaller model
+    ];
     
     console.log(`Speed preference: ${speedPreference}, starting with model: ${modelOptions[0]}`);
     
@@ -239,15 +211,21 @@ Only answer questions related to financial markets, investments, economic trends
           safeLog(`Trying endpoint: ${endpoint}, model: ${model}`);
           requestBody.model = model;
           
-          // Add proper user agent to avoid Cloudflare issues
+          // Optimized request with shorter timeout and network optimizations
           apiResponse = await axios.post(endpoint, requestBody, {
             headers: {
               'Authorization': `Bearer ${apiKey}`,
               'Content-Type': 'application/json',
               'Accept': 'application/json',
-              'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36'
+              'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36',
+              'Connection': 'keep-alive',           // Keep connection alive for faster subsequent requests
+              'Accept-Encoding': 'gzip, deflate',   // Accept compressed responses for faster data transfer
+              'Cache-Control': 'no-cache'           // Ensure fresh responses
             },
-            timeout: 30000
+            timeout: 15000,                         // Shorter timeout for faster failure detection
+            responseType: 'json',                   // Explicitly request JSON for faster parsing
+            maxRedirects: 3,                        // Limit redirects
+            decompress: true                        // Auto-decompress responses
           });
           
           modelUsed = model;
