@@ -21,11 +21,13 @@ interface Message {
 
 // Enhanced formatter for financial analysis responses
 const formatMarketAnalysis = (content: string) => {
-  // Don't process the Sources section to avoid messing up citations
-  const sourcesSectionMatch = content.match(/\n\n## 📚 Sources:|## Sources:|Sources:/);
-  if (sourcesSectionMatch) {
+  // Check for Sources section
+  const sourcesPattern = /\n\n## 📚 Sources:|## Sources:|Sources:/;
+  const sourcesSectionIndex = content.search(sourcesPattern);
+  
+  // If we found a Sources section
+  if (sourcesSectionIndex !== -1) {
     // Split content into main content and sources section
-    const sourcesSectionIndex = sourcesSectionMatch.index;
     const mainContent = content.substring(0, sourcesSectionIndex);
     const sourcesSection = content.substring(sourcesSectionIndex);
     
