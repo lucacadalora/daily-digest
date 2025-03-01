@@ -124,6 +124,43 @@ router.post(["/", "/chat"], async (req, res) => {
         error: 'This AI assistant specializes in financial markets and investment analysis. For programming or other topics, please use appropriate specialized resources.',
       });
     }
+    
+    // Check if the message is a simple stock price query for one of our tracked stocks
+    const stockPriceRegex = /\b(BBRI|TLKM|ASII|BBCA|AAPL|MSFT|GOOGL|TSLA)\s*(stock|price|stock price|stock ticker|ticker)\b/i;
+    const stockMatch = message.match(stockPriceRegex);
+    
+    if (stockMatch) {
+      try {
+        // Get the stock symbol from the match
+        const stockSymbol = stockMatch[1].toUpperCase();
+        
+        // Fetch market data from our API
+        const marketDataResponse = await axios.get('/api/market-data', {
+          baseURL: 'http://localhost:3000'
+        });
+        const marketData = marketDataResponse.data;
+        
+        if (marketData?.stocks && marketData.stocks[stockSymbol]) {
+          const stockData = marketData.stocks[stockSymbol];
+          const priceFormatted = stockSymbol.includes('BB') || stockSymbol === 'TLKM' || stockSymbol === 'ASII' 
+            ? `IDR ${stockData.price.toLocaleString('id-ID')}`
+            : `$${stockData.price.toLocaleString('en-US')}`;
+          
+          const changeDirection = stockData.change24h >= 0 ? '📈' : '📉';
+          const changeFormatted = `${stockData.change24h >= 0 ? '+' : ''}${stockData.change24h.toFixed(2)}%`;
+          
+          return res.json({
+            status: 'success',
+            reply: `Current ${stockSymbol} stock price is ${priceFormatted} with a 24-hour change of ${changeFormatted} ${changeDirection}.`,
+            model: 'market-data-api',
+            endpoint: '/api/market-data'
+          });
+        }
+      } catch (error) {
+        console.error('Error fetching stock price from market data API:', error);
+        // Continue with regular AI processing if market data API fails
+      }
+    }
 
     const today = new Date().toLocaleDateString('en-US', { 
       weekday: 'long', 
