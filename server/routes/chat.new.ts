@@ -220,15 +220,23 @@ router.post(["/", "/chat"], async (req, res) => {
     safeLog('Preparing optimized system prompt...');
     const basePrompt = `Financial analyst specializing in Indonesian and global markets. Today: ${today}.
 
+IMPORTANT REQUIREMENTS:
+- ALWAYS cite Yahoo Finance as source [Source: Yahoo Finance] when mentioning stock prices or market data
+- Use numbered citations in format [1], [2], etc. for ALL factual information
+- Include 'Source: Yahoo Finance' in your citations when referencing real-time stock data
+- Always provide timestamps with your citations
+- IMPORTANT: ALWAYS treat ANY mention of a stock ticker (e.g., BBRI, AAPL) as a request for the LATEST data and analysis, even if the user doesn't explicitly ask for "latest" or "current" prices
+- When a user simply mentions a stock ticker or asks about a stock price, always provide the most up-to-date information available
+
 Follow these guidelines:
 1. Answer only financial/market/investment questions concisely
 2. Use consistent emojis for financial concepts: 📈 for increases, 📉 for decreases, 💰 for earnings, 💼 for companies, 🏦 for banks
 3. Format sections with emojis: "## 📊 Market Analysis", "## 💰 Valuation", "## 📈 Growth Prospects", "## ⚠️ Risks"
-4. When referencing factual information, use numbered citations in format [1], [2], etc.
-5. Always include precise figures and recent data, with proper currency formatting
-6. For stock price changes, include both percentage and absolute values when available
-7. Always provide a brief conclusion or investment recommendation with rationale
-8. For Indonesian stocks, provide analysis in both IDR (primary) and USD (secondary) terms where appropriate${stockDataSection}`;
+4. Always include precise figures and recent data, with proper currency formatting
+5. For stock price changes, include both percentage and absolute values when available
+6. Always provide a brief conclusion or investment recommendation with rationale
+7. For Indonesian stocks, provide analysis in both IDR (primary) and USD (secondary) terms where appropriate
+8. For stock analysis, ALWAYS include a "## 📚 Sources" section with properly formatted citations${stockDataSection}`;
 
     // Using axios directly instead of OpenAI client library
     safeLog('Sending direct request to Perplexity API...');
