@@ -21,8 +21,8 @@ interface Message {
 
 // Enhanced formatter for financial analysis responses
 const formatMarketAnalysis = (content: string) => {
-  // Check for Sources section
-  const sourcesPattern = /\n\n## 📚 Sources:|## Sources:|Sources:/;
+  // Check for Sources section (with robust pattern matching to avoid duplicates)
+  const sourcesPattern = /\n\n## 📚 Sources:|\n\n## Sources:|\n\nSources:|## 📚 Sources|Sources:/;
   const sourcesSectionIndex = content.search(sourcesPattern);
   
   // If we found a Sources section
@@ -392,8 +392,9 @@ export const ChatBox = () => {
   );
 
   return (
-    <AnimatePresence>
+    <AnimatePresence mode="wait">
       <motion.div
+        key="chat-container"
         initial={false}
         animate={isExpanded ? {
           position: 'fixed',
@@ -430,6 +431,7 @@ export const ChatBox = () => {
       </motion.div>
       {isExpanded && (
         <motion.div
+          key="overlay"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
