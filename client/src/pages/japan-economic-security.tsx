@@ -226,9 +226,11 @@ export default function JapanEconomicSecurity() {
               <p className="text-xs text-gray-600 dark:text-gray-400">Showing trends from 1989-2023</p>
             </div>
             <div className="flex justify-center">
-              <div className="bg-gray-200 dark:bg-gray-700 w-full max-w-2xl h-64 flex items-center justify-center rounded">
-                <p className="text-gray-600 dark:text-gray-400 text-sm italic">Figure 1 Image Placeholder</p>
-              </div>
+              <img 
+                src="/img/japan-fig1.png" 
+                alt="Share of China in overall trade for Japan and the United States (%)" 
+                className="w-full max-w-2xl rounded shadow-md"
+              />
             </div>
           </div>
 
@@ -304,9 +306,11 @@ export default function JapanEconomicSecurity() {
               <p className="text-xs text-gray-600 dark:text-gray-400">Showing cumulative measures categorized by resilience security, strategic competitiveness, and geopolitical concern</p>
             </div>
             <div className="flex justify-center">
-              <div className="bg-gray-200 dark:bg-gray-700 w-full max-w-2xl h-64 flex items-center justify-center rounded">
-                <p className="text-gray-600 dark:text-gray-400 text-sm italic">Figure 3 Image Placeholder</p>
-              </div>
+              <img 
+                src="/img/japan-fig3.png" 
+                alt="Japan's trade distortive semiconductor industrial policies with stated motivation" 
+                className="w-full max-w-2xl rounded shadow-md"
+              />
             </div>
           </div>
         </section>
@@ -333,9 +337,11 @@ export default function JapanEconomicSecurity() {
               <p className="text-xs text-gray-600 dark:text-gray-400">Showing trends in both outflows and stock positions</p>
             </div>
             <div className="flex justify-center">
-              <div className="bg-gray-200 dark:bg-gray-700 w-full max-w-2xl h-64 flex items-center justify-center rounded">
-                <p className="text-gray-600 dark:text-gray-400 text-sm italic">Figure 2 Image Placeholder</p>
-              </div>
+              <img 
+                src="/img/japan-fig2.png" 
+                alt="Share of China in overall FDI for Japan and the United States (%)" 
+                className="w-full max-w-2xl rounded shadow-md"
+              />
             </div>
           </div>
 
