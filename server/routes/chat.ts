@@ -170,7 +170,7 @@ router.post(["/", "/chat"], async (req, res) => {
     });
 
     safeLog('Preparing optimized system prompt...');
-    const basePrompt = `Financial analyst. Today: ${today}. Answer only financial/market/investment questions concisely.`;
+    const basePrompt = `Financial analyst. Today: ${today}. Answer only financial/market/investment questions concisely. When referencing factual information, use numbered citations in format [1], [2], etc. Include precise figures and recent data when available.`;
 
     // Using axios directly instead of OpenAI client library
     safeLog('Sending direct request to Perplexity API...');
@@ -295,9 +295,24 @@ router.post(["/", "/chat"], async (req, res) => {
     
     safeLog(`Using endpoint: ${endpointUsed}, model: ${modelUsed} - Response received`);
     
+    // Process the response to ensure citations are properly formatted
+    let responseText = response.choices[0].message.content.trim();
+    
+    // Check if the response contains citations in [n] format but doesn't include the actual references
+    const citationPattern = /\[\d+\]/g;
+    const citations = responseText.match(citationPattern);
+    
+    if (citations && citations.length > 0) {
+      // If citations exist but no "Sources:" or "References:" section at the end
+      if (!responseText.match(/\b(Sources|References):?\s*$/i)) {
+        // Add a sources section
+        responseText += "\n\nSources: The citation numbers reference sources that were used in generating this response. Full source URLs aren't available for display in this interface.";
+      }
+    }
+    
     const result = {
       status: 'success',
-      reply: response.choices[0].message.content.trim(),
+      reply: responseText,
       model: modelUsed,
       endpoint: endpointUsed.replace(/https:\/\/api\.perplexity\.ai/, '') // Just show the path for brevity
     };
