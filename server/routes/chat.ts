@@ -1,6 +1,5 @@
 import express from "express";
-import OpenAI from "openai";
-import type { APIError } from "openai";
+import axios from "axios";
 import { log } from "../vite";
 
 const router = express.Router();
@@ -32,7 +31,12 @@ router.post("/chat", async (req, res) => {
       });
     }
 
-    if (!isValidPerplexityKey(apiKey)) {
+    // Log key status for debugging (without exposing the actual key)
+    const keyPrefix = apiKey.substring(0, 5);
+    const isValid = isValidPerplexityKey(apiKey);
+    log(`API Key validation: prefix=${keyPrefix}..., isValid=${isValid}`);
+
+    if (!isValid) {
       log('Error: Invalid API key format');
       return res.status(500).json({
         status: 'error',
@@ -49,17 +53,6 @@ router.post("/chat", async (req, res) => {
       });
     }
 
-    log('Initializing Perplexity client...');
-    const client = new OpenAI({
-      apiKey,
-      baseURL: "https://api.perplexity.ai/v1",
-      defaultHeaders: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      timeout: 30000 // 30 second timeout
-    });
-
     const today = new Date().toLocaleDateString('en-US', { 
       weekday: 'long', 
       year: 'numeric', 
@@ -72,8 +65,9 @@ router.post("/chat", async (req, res) => {
 
 Only answer questions related to financial markets, investments, economic trends, and business analysis. If the question is outside these domains, inform the user that you can only assist with market-related queries.`;
 
-    log('Sending request to Perplexity API...');
-    const response = await client.chat.completions.create({
+    // Using axios directly instead of OpenAI client library
+    log('Sending direct request to Perplexity API...');
+    const requestBody = {
       model: "llama-3.1-sonar-small-128k-online",
       messages: [
         { 
@@ -84,10 +78,20 @@ Only answer questions related to financial markets, investments, economic trends
       ],
       temperature: 0.2,
       top_p: 0.9,
-      max_tokens: 1000,
-      frequency_penalty: 1
+      max_tokens: 1000
+    };
+
+    const apiResponse = await axios.post('https://api.perplexity.ai/v1/chat/completions', requestBody, {
+      headers: {
+        'Authorization': `Bearer ${apiKey}`,
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      timeout: 30000
     });
 
+    const response = apiResponse.data;
+    
     if (!response?.choices?.[0]?.message?.content) {
       throw new Error('Invalid API response format');
     }
@@ -102,21 +106,33 @@ Only answer questions related to financial markets, investments, economic trends
 
   } catch (error) {
     console.error('Chat API Error:', error);
-    const apiError = error as APIError;
-
-    // Handle specific API errors
+    
+    // Handle axios errors
     let errorMessage = 'An unexpected error occurred';
     let statusCode = 500;
 
-    if (apiError.status === 401) {
-      errorMessage = 'Invalid API key. Please check your configuration.';
-      statusCode = 401;
-    } else if (apiError.status === 429) {
-      errorMessage = 'Rate limit exceeded. Please try again later.';
-      statusCode = 429;
+    if (error.response) {
+      // The request was made and the server responded with a status code
+      // that falls out of the range of 2xx
+      statusCode = error.response.status;
+      
+      if (statusCode === 401) {
+        errorMessage = 'Invalid API key. Please check your configuration.';
+      } else if (statusCode === 429) {
+        errorMessage = 'Rate limit exceeded. Please try again later.';
+      } else {
+        errorMessage = `API error (${statusCode}): ${error.response.data?.error?.message || 'Unknown error'}`;
+      }
+      
+      log(`API Error response: ${statusCode}`, error.response.data);
+    } else if (error.request) {
+      // The request was made but no response was received
+      errorMessage = 'No response received from API server. Please try again later.';
+      log('No response error:', error.request);
     } else {
-      errorMessage = apiError.message || 'Unknown error occurred';
-      statusCode = apiError.status || 500;
+      // Something happened in setting up the request that triggered an Error
+      errorMessage = error.message || 'Unknown error occurred';
+      log('Request setup error:', error.message);
     }
 
     log('Error in chat endpoint:', errorMessage);
