@@ -81,44 +81,40 @@ export async function getYahooFinanceStockPrice(symbol: string): Promise<StockPr
  * Extract stock symbols from message text
  */
 export function extractStockSymbols(message: string): string[] {
-  // Enhanced pattern matching for stock symbols
+  // Initialize a set to store unique stock symbols
+  const symbols = new Set<string>();
+  
+  // ===== STEP 1: Prepare different message formats for matching =====
+  // Basic normalization - lowercase and remove extra spaces
+  const basicNormalizedMsg = message.toLowerCase().replace(/\s+/g, ' ');
+  
+  // Create a version without time-related words for better matching
+  const msgWithoutTimeWords = basicNormalizedMsg
+    .replace(/latest|current|recent|today\'s|now|real-?time/g, '')
+    .trim();
+  
+  // ===== STEP 2: Direct regex pattern matching =====
   const patterns = [
     // Indonesian stock tickers
     /\b(?:BBRI|TLKM|BBCA|BMRI|UNVR|ASII|PGAS|INDF|ICBP|ANTM|WIFI|GOTO|BREN|BBNI)\b/gi,
-    
     // Match tickers followed by .JK (Indonesian stock exchange suffix)
     /\b[A-Z]{4}\.JK\b/gi,
-    
     // General 4-letter stock symbol pattern often used in IDX
     /\b[A-Z]{4}\b/g,
-    
     // US stock patterns
     /\b(?:AAPL|MSFT|GOOGL|GOOG|AMZN|TSLA|META|NFLX|NVDA)\b/gi,
-    
     // Detect stock symbols in analysis context
     /(?:analyze|analysis|saham|stock)\s+([A-Z]{1,5})\b/gi,
-    
     // Detect stock keywords in other formats
     /\b(?:ticker|symbol)\s*:\s*([A-Z]{1,5})\b/gi,
   ];
 
-  const symbols = new Set<string>();
-  
-  // Normalize the message - multiple normalizations for different purposes
-  // 1. Basic normalization - lowercase and remove extra spaces
-  const normalizedMessage = message.toLowerCase().replace(/\s+/g, ' ');
-  
-  // Remove words like "latest" or "current" from the message for better matching
-  const messageWithoutTimeWords = normalizedMessage
-    .replace(/latest|current|recent|today\'s|now|real-?time/g, '')
-    .trim();
-  
-  // Process regex patterns
+  // Process regex patterns on the basic normalized message
   patterns.forEach(pattern => {
-    const matches = normalizedMessage.match(pattern);
+    const matches = basicNormalizedMsg.match(pattern);
     if (matches) {
       matches.forEach(match => {
-        // Clean up the match to extract just the symbol part if needed
+        // Clean up the match to extract just the symbol part
         const cleanMatch = match.replace(/analyze|analysis|saham|stock|ticker|symbol|:|\.jk/gi, '').trim().toUpperCase();
         if (cleanMatch.length >= 2 && cleanMatch.length <= 5) {
           symbols.add(cleanMatch);
@@ -127,7 +123,7 @@ export function extractStockSymbols(message: string): string[] {
     }
   });
   
-  // Expanded stock name-to-symbol mapping
+  // ===== STEP 3: Name-to-Symbol mapping for company names =====
   const stockNameMap: Record<string, string> = {
     // Indonesian banks
     'bank rakyat': 'BBRI',
@@ -182,18 +178,19 @@ export function extractStockSymbols(message: string): string[] {
     'netflix': 'NFLX',
     'nvidia': 'NVDA',
   };
-    
-  // Process the original message
+  
+  // ===== STEP 4: Process company names in all message formats =====
+  // Check original message
   Object.entries(stockNameMap).forEach(([name, symbol]) => {
     if (message.toLowerCase().includes(name.toLowerCase())) {
       symbols.add(symbol);
     }
   });
   
-  // Also process the normalized message without "latest" etc.
-  if (messageWithoutTimeWords !== normalizedMessage) {
+  // Also check the version without time words (to catch "latest BBRI" etc.)
+  if (msgWithoutTimeWords !== basicNormalizedMsg) {
     Object.entries(stockNameMap).forEach(([name, symbol]) => {
-      if (messageWithoutTimeWords.includes(name.toLowerCase())) {
+      if (msgWithoutTimeWords.includes(name.toLowerCase())) {
         symbols.add(symbol);
       }
     });
