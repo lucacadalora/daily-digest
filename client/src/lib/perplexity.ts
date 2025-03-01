@@ -123,33 +123,23 @@ export async function getMarketAnalysis(query: string): Promise<string> {
   }
 
   try {
-    const response = await fetch("https://api.perplexity.ai/chat/completions", {
-      method: "POST",
+    // Use the server's API endpoint instead of direct Perplexity API access
+    // This way we use the server's API key which is properly configured
+    const response = await fetch('/api/chat', {
+      method: 'POST',
       headers: {
-        "Authorization": `Bearer ${import.meta.env.VITE_PERPLEXITY_API_KEY}`,
-        "Content-Type": "application/json"
+        'Content-Type': 'application/json',
       },
-      body: JSON.stringify({
-        model: "llama-3.1-sonar-huge-128k-online",
-        messages,
-        temperature: 0.2,
-        top_p: 0.9,
-        max_tokens: 500,
-        frequency_penalty: 1,
-        search_domain_filter: ["perplexity.ai"],
-        return_images: false,
-        return_related_questions: false,
-        search_recency_filter: "month"
-      })
+      body: JSON.stringify({ message: query })
     });
 
-    if (!response.ok) {
-      throw new Error("Failed to get market analysis");
-    }
-
     const data = await response.json();
-    const validatedData = perplexityResponseSchema.parse(data);
-    return validatedData.choices[0].message.content;
+    
+    if (data.status === 'error') {
+      throw new Error(data.error || 'Failed to get market analysis');
+    }
+    
+    return data.reply;
   } catch (error) {
     console.error("Error getting market analysis:", error);
     throw error;
