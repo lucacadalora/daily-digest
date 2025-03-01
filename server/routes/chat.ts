@@ -53,7 +53,31 @@ function safeLog(message: string, data?: any): void {
 
 // Validate Perplexity API key format
 function isValidPerplexityKey(key: string): boolean {
-  return typeof key === 'string' && key.startsWith('pplx-');
+  // Perplexity API keys always start with "pplx-" and consist of alphanumeric characters
+  // They are typically 40+ characters long
+  if (typeof key !== 'string') {
+    console.error('API key is not a string');
+    return false;
+  }
+  
+  if (!key.startsWith('pplx-')) {
+    console.error('API key does not start with "pplx-"');
+    return false;
+  }
+  
+  if (key.length < 20) {
+    console.error('API key is too short, should be at least 20 characters');
+    return false;
+  }
+  
+  // Check for valid characters (alphanumeric plus possibly some special chars)
+  const validKeyPattern = /^pplx-[a-zA-Z0-9_\-]+$/;
+  if (!validKeyPattern.test(key)) {
+    console.error('API key contains invalid characters');
+    return false;
+  }
+  
+  return true;
 }
 
 // Root endpoint and named endpoint both work
@@ -117,34 +141,25 @@ Only answer questions related to financial markets, investments, economic trends
     safeLog('Sending direct request to Perplexity API...');
     
     // Try different model options since we're getting 404 errors
-    // Perplexity API models to try in order of preference
+    // Perplexity API models to try in order of preference - using exact model IDs from documentation
     const modelOptions = [
-      "sonar-medium-chat",           // Perplexity's mid-size model
-      "sonar-small-chat",            // Perplexity's small model
-      "sonar-medium-online",         // Another name for the same model
-      "sonar-small-online",          // Another name for the same model
-      "mistral-7b-instruct",         // Mistral's model
-      "mistral-medium",              // Another option
-      "llama-3-8b-instruct",         // Meta's model
-      "llama-2-70b-chat",            // Older but more widely supported
+      "sonar-pro",                   // Perplexity's pro model
+      "sonar-medium-online",         // Perplexity's medium model
+      "sonar-small-online",          // Perplexity's small model
+      "codellama-70b-instruct",      // Code specialized model
       "mixtral-8x7b-instruct",       // Mixtral model
-      "gpt-3.5-turbo"                // OpenAI fallback option
+      "llama-3.1-8b-instant",        // Meta's smaller Llama 3.1 model
+      "llama-3.1-sonar-large-128k-online", // Llama 3.1 large model
+      "llama-3.1-sonar-small-128k-online"  // Llama 3.1 small model
     ];
     
-    // Alternative endpoints to try
+    // Using the standardized endpoint as recommended in the documentation
     const endpointOptions = [
-      "https://api.perplexity.ai/v1/chat/completions",
-      "https://api.perplexity.ai/chat/completions", 
-      "https://api.perplexity.ai/v1/messages",
-      "https://api.perplexity.ai/messages",
-      // Different formats entirely
-      "https://perplexity.ai/api/v1/chat/completions",
-      "https://perplexity.ai/api/chat/completions",
-      // Yet another possible endpoint structure
-      "https://labs-api.perplexity.ai/chat/completions"
+      "https://api.perplexity.ai/chat/completions" // This is the correct endpoint as per Perplexity documentation
     ];
     
-    // Use the first model in our list
+    // Simplify the request body to include only required parameters
+    // Strictly follow Perplexity documentation
     const requestBody = {
       model: modelOptions[0],
       messages: [
@@ -153,11 +168,29 @@ Only answer questions related to financial markets, investments, economic trends
           content: basePrompt
         },
         { role: "user", content: message }
-      ],
-      temperature: 0.2,
-      top_p: 0.9,
-      max_tokens: 1000
+      ]
     };
+    
+    // Log the API key format (masked for security)
+    const maskedKey = apiKey.substring(0, 7) + '...' + apiKey.substring(apiKey.length - 4);
+    console.log(`Using API key format: ${maskedKey} (length: ${apiKey.length})`);
+    
+    // For debugging purposes, log if the key starts with "pplx-"
+    console.log(`API key starts with "pplx-": ${apiKey.startsWith('pplx-')}`);
+    
+    // Output exact format of the first request for debugging
+    const debugRequestBody = JSON.stringify(requestBody, null, 2);
+    console.log(`Request body format:\n${debugRequestBody}`);
+    
+    // Output cURL equivalent command for manual testing (with masked API key)
+    const maskedCurlCommand = `curl -X POST "${endpointOptions[0]}" \\
+  -H "Content-Type: application/json" \\
+  -H "Accept: application/json" \\
+  -H "Authorization: Bearer ${maskedKey}" \\
+  -d '${debugRequestBody}'`;
+    
+    console.log("Equivalent cURL command for testing:");
+    console.log(maskedCurlCommand);
 
     // Try each endpoint and model combination in sequence until one works
     let apiResponse;
@@ -173,11 +206,13 @@ Only answer questions related to financial markets, investments, economic trends
           safeLog(`Trying endpoint: ${endpoint}, model: ${model}`);
           requestBody.model = model;
           
+          // Add proper user agent to avoid Cloudflare issues
           apiResponse = await axios.post(endpoint, requestBody, {
             headers: {
               'Authorization': `Bearer ${apiKey}`,
               'Content-Type': 'application/json',
-              'Accept': 'application/json'
+              'Accept': 'application/json',
+              'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36'
             },
             timeout: 30000
           });
@@ -240,6 +275,20 @@ Only answer questions related to financial markets, investments, economic trends
         
         if (statusCode === 401) {
           errorMessage = 'Invalid API key. Please check your configuration.';
+          console.error('401 Authentication Error: API key rejected. Make sure your key is valid and properly formatted.');
+        } else if (statusCode === 403) {
+          errorMessage = 'Access forbidden. Please make sure your API key is active and has the necessary permissions.';
+          console.error('403 Forbidden Error: This usually indicates an API key permissions issue or account restriction.');
+          console.error('Please verify in your Perplexity account that your key is active and has required permissions.');
+          
+          // Log request details for debugging
+          safeLog(`403 Error Details - URL: ${axiosError.config?.url}, Method: ${axiosError.config?.method}`);
+          
+          // Check if there's a specific error message in the response
+          const responseData = axiosError.response.data as any;
+          if (responseData?.error?.message) {
+            console.error(`API provided error message: ${responseData.error.message}`);
+          }
         } else if (statusCode === 429) {
           errorMessage = 'Rate limit exceeded. Please try again later.';
         } else if (statusCode === 404) {
