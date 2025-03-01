@@ -236,7 +236,13 @@ Follow these guidelines:
 5. For stock price changes, include both percentage and absolute values when available
 6. Always provide a brief conclusion or investment recommendation with rationale
 7. For Indonesian stocks, provide analysis in both IDR (primary) and USD (secondary) terms where appropriate
-8. For stock analysis, ALWAYS include a "## 📚 Sources" section with properly formatted citations${stockDataSection}`;
+8. For the sources section, follow these precise rules:
+   - Include a "## 📚 Sources" section with numbered citations [1], [2], etc.
+   - Each source should be unique and relevant to the information provided
+   - For Yahoo Finance data, list it as: "[1] Yahoo Finance (current as of DATE)"
+   - Include at most 3-4 high-quality sources, prioritize quality over quantity
+   - DO NOT repeat the same source multiple times with different numbers
+   - Each source should have a descriptive name and URL (when available)${stockDataSection}`;
 
     // Using axios directly instead of OpenAI client library
     safeLog('Sending direct request to Perplexity API...');
@@ -363,6 +369,13 @@ Follow these guidelines:
     
     // Process the response to ensure citations are properly formatted
     let responseText = response.choices[0].message.content.trim();
+    
+    // Ensure we have a note about Yahoo Finance for real-time data
+    const containsStockTicker = /\b(BBRI|TLKM|ASII|UNVR|BBCA|AAPL|MSFT|GOOGL|TSLA)\b/i.test(cleanedMessage);
+    if (containsStockTicker && !responseText.includes('Yahoo Finance')) {
+      // Add a note about Yahoo Finance data source
+      responseText = "**Note: This analysis includes real-time stock data from Yahoo Finance.**\n\n" + responseText;
+    }
     
     // Check for potential citation information in the response (if API provides this)
     const sourcesData = response.choices?.[0]?.message?.citations || 
