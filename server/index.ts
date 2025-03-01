@@ -30,7 +30,8 @@ app.use((req, res, next) => {
 });
 
 // API Routes - Mount before Vite middleware
-app.use('/api', chatRouter);
+app.use('/chat', chatRouter);     // Direct chat endpoint
+app.use('/api/chat', chatRouter); // Alternative path for consistency
 
 (async () => {
   try {

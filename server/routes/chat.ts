@@ -111,28 +111,44 @@ Only answer questions related to financial markets, investments, economic trends
     let errorMessage = 'An unexpected error occurred';
     let statusCode = 500;
 
-    if (error.response) {
-      // The request was made and the server responded with a status code
-      // that falls out of the range of 2xx
-      statusCode = error.response.status;
+    if (axios.isAxiosError(error)) {
+      // This is an Axios error
+      const axiosError = error;
       
-      if (statusCode === 401) {
-        errorMessage = 'Invalid API key. Please check your configuration.';
-      } else if (statusCode === 429) {
-        errorMessage = 'Rate limit exceeded. Please try again later.';
+      if (axiosError.response) {
+        // The request was made and the server responded with a status code
+        // that falls out of the range of 2xx
+        statusCode = axiosError.response.status;
+        
+        if (statusCode === 401) {
+          errorMessage = 'Invalid API key. Please check your configuration.';
+        } else if (statusCode === 429) {
+          errorMessage = 'Rate limit exceeded. Please try again later.';
+        } else if (statusCode === 404) {
+          errorMessage = 'The API endpoint is not found. Please check the URL.';
+          
+          // Additional logging for 404 errors to debug the endpoint issue
+          log(`404 Error Details - URL: ${axiosError.config?.url}, Method: ${axiosError.config?.method}`);
+        } else {
+          const responseData = axiosError.response.data as any;
+          errorMessage = `API error (${statusCode}): ${responseData?.error?.message || 'Unknown error'}`;
+        }
+        
+        log(`API Error response: ${statusCode}`, axiosError.response.data);
+      } else if (axiosError.request) {
+        // The request was made but no response was received
+        errorMessage = 'No response received from API server. Please try again later.';
+        log('No response error:', axiosError.request);
       } else {
-        errorMessage = `API error (${statusCode}): ${error.response.data?.error?.message || 'Unknown error'}`;
+        // Something happened in setting up the request that triggered an Error
+        errorMessage = axiosError.message || 'Unknown error occurred';
+        log('Request setup error:', axiosError.message);
       }
-      
-      log(`API Error response: ${statusCode}`, error.response.data);
-    } else if (error.request) {
-      // The request was made but no response was received
-      errorMessage = 'No response received from API server. Please try again later.';
-      log('No response error:', error.request);
     } else {
-      // Something happened in setting up the request that triggered an Error
-      errorMessage = error.message || 'Unknown error occurred';
-      log('Request setup error:', error.message);
+      // Non-Axios error
+      const genericError = error as Error;
+      errorMessage = genericError?.message || 'Unknown error occurred';
+      log('Non-Axios error:', genericError?.message || 'Unknown error type');
     }
 
     log('Error in chat endpoint:', errorMessage);
