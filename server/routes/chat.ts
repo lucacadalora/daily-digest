@@ -250,20 +250,27 @@ router.post(["/", "/chat"], async (req, res) => {
     });
 
     // Prepare a stock data section for the prompt if we have real-time data
+    const hasStockData = realTimeStockData.length > 0;
     const stockDataSection = generateStockDataSection(realTimeStockData);
 
     safeLog('Preparing optimized system prompt...');
     const basePrompt = `Financial analyst specializing in Indonesian and global markets. Today: ${today}.
 
+IMPORTANT REQUIREMENTS:
+${hasStockData ? "- ALWAYS cite Yahoo Finance as source [Source: Yahoo Finance] when mentioning stock prices or market data" : ""}
+- Use numbered citations in format [1], [2], etc. for ALL factual information
+- Include 'Source: Yahoo Finance' in your citations when referencing real-time stock data
+- Always provide timestamps with your citations
+
 Follow these guidelines:
 1. Answer only financial/market/investment questions concisely
 2. Use consistent emojis for financial concepts: 📈 for increases, 📉 for decreases, 💰 for earnings, 💼 for companies, 🏦 for banks
 3. Format sections with emojis: "## 📊 Market Analysis", "## 💰 Valuation", "## 📈 Growth Prospects", "## ⚠️ Risks"
-4. When referencing factual information, use numbered citations in format [1], [2], etc.
-5. Always include precise figures and recent data, with proper currency formatting
-6. For stock price changes, include both percentage and absolute values when available
-7. Always provide a brief conclusion or investment recommendation with rationale
-8. For Indonesian stocks, provide analysis in both IDR (primary) and USD (secondary) terms where appropriate${stockDataSection}`;
+4. Always include precise figures and recent data, with proper currency formatting
+5. For stock price changes, include both percentage and absolute values when available
+6. Always provide a brief conclusion or investment recommendation with rationale
+7. For Indonesian stocks, provide analysis in both IDR (primary) and USD (secondary) terms where appropriate
+8. For stock analysis, ALWAYS include a "## 📚 Sources" section with properly formatted citations${stockDataSection}`;
 
     // Using axios directly instead of OpenAI client library
     safeLog('Sending direct request to Perplexity API...');
@@ -391,6 +398,12 @@ Follow these guidelines:
     // Process the response to ensure citations are properly formatted
     let responseText = response.choices[0].message.content.trim();
     
+    // Ensure there's a Yahoo Finance citation if we have real-time stock data
+    if (hasStockData && !responseText.includes('Yahoo Finance')) {
+      // If there's no mention of Yahoo Finance, add a note at the beginning
+      responseText = "**Note: This analysis includes real-time stock data from Yahoo Finance.**\n\n" + responseText;
+    }
+    
     // Check for potential citation information in the response (if API provides this)
     const sourcesData = response.choices?.[0]?.message?.citations || 
                       response.choices?.[0]?.message?.source_info ||
@@ -401,11 +414,18 @@ Follow these guidelines:
     const citationPattern = /\[\d+\]/g;
     const citations = responseText.match(citationPattern);
     
-    if (citations && citations.length > 0) {
-      // If citations exist but no "Sources:" or "References:" section at the end
-      if (!responseText.match(/\b(Sources|References):/i)) {
-        // Add a proper sources section
-        responseText += "\n\n## 📚 Sources:";
+    // Always ensure we have a proper sources section with Yahoo Finance for stock data
+    if (!responseText.match(/\b(Sources|References):/i)) {
+      responseText += "\n\n## 📚 Sources:";
+      
+      // Add Yahoo Finance as the primary source if we have stock data
+      if (hasStockData) {
+        const timestamp = new Date().toLocaleString();
+        responseText += `\n[0] Yahoo Finance - https://finance.yahoo.com/ (Real-time stock data as of ${timestamp})`;
+      }
+      
+      // Continue with numbered citations if we have them
+      if (citations && citations.length > 0) {
         
         // Extract citation numbers and make sure they're valid numbers
         const citationNumbers: number[] = [];

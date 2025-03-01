@@ -81,42 +81,100 @@ export async function getYahooFinanceStockPrice(symbol: string): Promise<StockPr
  * Extract stock symbols from message text
  */
 export function extractStockSymbols(message: string): string[] {
-  // Common Indonesian stock patterns
+  // Normalize message for better matching (lowercase, extra spaces removed)
+  const normalizedMessage = message.toLowerCase().replace(/\s+/g, ' ');
+  
+  // Enhanced pattern matching for stock symbols
   const patterns = [
-    // Match standalone stock tickers like BBRI, TLKM, etc.
+    // Indonesian stock tickers
+    /\b(?:BBRI|TLKM|BBCA|BMRI|UNVR|ASII|PGAS|INDF|ICBP|ANTM|WIFI|GOTO|BREN|BBNI)\b/gi,
+    
+    // Match tickers followed by .JK (Indonesian stock exchange suffix)
+    /\b[A-Z]{4}\.JK\b/gi,
+    
+    // General 4-letter stock symbol pattern often used in IDX
     /\b[A-Z]{4}\b/g,
-    // Match tickers followed by .JK
-    /\b[A-Z]{4}\.JK\b/g,
-    // Match common abbreviations with period
-    /\bBBRI\b|\bTLKM\b|\bBBCA\b|\bBMRI\b|\bUNVR\b|\bASII\b|\bPGAS\b|\bINDF\b|\bICBP\b/gi,
+    
+    // US stock patterns
+    /\b(?:AAPL|MSFT|GOOGL|GOOG|AMZN|TSLA|META|NFLX|NVDA)\b/gi,
+    
+    // Detect stock symbols in analysis context
+    /(?:analyze|analysis|saham|stock)\s+([A-Z]{1,5})\b/gi,
+    
+    // Detect stock keywords in other formats
+    /\b(?:ticker|symbol)\s*:\s*([A-Z]{1,5})\b/gi,
   ];
 
   const symbols = new Set<string>();
   
-  // Extract using each pattern
+  // Process regex patterns
   patterns.forEach(pattern => {
-    const matches = message.match(pattern);
+    const matches = normalizedMessage.match(pattern);
     if (matches) {
-      matches.forEach(match => symbols.add(match.toUpperCase()));
+      matches.forEach(match => {
+        // Clean up the match to extract just the symbol part if needed
+        const cleanMatch = match.replace(/analyze|analysis|saham|stock|ticker|symbol|:|\.jk/gi, '').trim().toUpperCase();
+        if (cleanMatch.length >= 2 && cleanMatch.length <= 5) {
+          symbols.add(cleanMatch);
+        }
+      });
     }
   });
   
-  // Also check for specific stock names in message
+  // Expanded stock name-to-symbol mapping
   const stockNameMap: Record<string, string> = {
+    // Indonesian banks
     'bank rakyat': 'BBRI',
     'bri': 'BBRI',
-    'telkom': 'TLKM',
-    'telekomunikasi': 'TLKM',
-    'astra': 'ASII',
-    'unilever': 'UNVR',
+    'bank bri': 'BBRI',
     'bank central asia': 'BBCA',
     'bca': 'BBCA',
-    'mandiri': 'BMRI',
     'bank mandiri': 'BMRI',
+    'mandiri': 'BMRI',
+    'bank negara indonesia': 'BBNI',
+    'bni': 'BBNI',
+    
+    // Telecoms
+    'telkom': 'TLKM',
+    'telekomunikasi': 'TLKM',
+    'telekomunikasi indonesia': 'TLKM',
+    'wifi': 'WIFI',
+    'smartfren': 'WIFI',
+    
+    // Consumer goods
+    'unilever': 'UNVR',
+    'unilever indonesia': 'UNVR',
+    'indofood': 'INDF',
+    'indofood cbp': 'ICBP',
+    
+    // Industrials
+    'astra': 'ASII',
+    'astra international': 'ASII',
+    
+    // Energy & Mining
     'perusahaan gas': 'PGAS',
     'pgn': 'PGAS',
-    'indofood': 'INDF',
-    'indofood cbp': 'ICBP'
+    'aneka tambang': 'ANTM',
+    'antam': 'ANTM',
+    
+    // Tech
+    'goto': 'GOTO',
+    'gojek': 'GOTO',
+    'tokopedia': 'GOTO',
+    'gojek tokopedia': 'GOTO',
+    'barito renewables': 'BREN',
+    'bren': 'BREN',
+    
+    // US tech
+    'apple': 'AAPL',
+    'microsoft': 'MSFT',
+    'google': 'GOOGL',
+    'amazon': 'AMZN',
+    'tesla': 'TSLA',
+    'meta': 'META',
+    'facebook': 'META',
+    'netflix': 'NFLX',
+    'nvidia': 'NVDA',
   };
   
   Object.entries(stockNameMap).forEach(([name, symbol]) => {
@@ -190,13 +248,21 @@ export function generateStockDataSection(stockData: StockPrice[]): string {
     return '';
   }
   
-  let section = '\n\n## Latest Real-Time Stock Data (from Yahoo Finance):\n';
+  // Create a more prominent section to ensure the AI model emphasizes this data
+  let section = '\n\n## 📊 REAL-TIME STOCK DATA (YAHOO FINANCE):\n';
+  section += '**Important: Always cite this data with [Source: Yahoo Finance] in your analysis**\n\n';
   
   stockData.forEach(stock => {
     const isIndonesianStock = ['BBRI', 'TLKM', 'ASII', 'BBCA', 'BMRI', 'UNVR', 'PGAS', 'INDF', 'ICBP'].includes(stock.symbol);
     const { priceFormatted, changeFormatted, changeDirection } = formatStockPrice(stock, isIndonesianStock);
     
-    section += `- ${stock.name || stock.symbol} (${stock.symbol}): ${priceFormatted}, Change: ${changeFormatted} ${changeDirection}\n`;
+    const timestamp = new Date().toLocaleString();
+    // Add more details and make the formatting more prominent
+    section += `### ${stock.name || stock.symbol} (${stock.symbol}):\n`;
+    section += `- **Current Price:** ${priceFormatted} ${changeDirection}\n`;
+    section += `- **Change:** ${changeFormatted}\n`;
+    section += `- **Last Updated:** ${timestamp}\n`;
+    section += `- **Citation:** When referencing this data, cite as [Source: Yahoo Finance, ${timestamp}]\n\n`;
   });
   
   section += '\nPlease incorporate this latest data in your analysis.';
