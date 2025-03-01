@@ -140,16 +140,51 @@ Only answer questions related to financial markets, investments, economic trends
     // Using axios directly instead of OpenAI client library
     safeLog('Sending direct request to Perplexity API...');
     
+    // Extract speed preference from the query if present
+    const speedParam = message.match(/\[speed=(fast|balanced|accurate)\]/i);
+    const speedPreference = speedParam ? speedParam[1].toLowerCase() : 'balanced';
+    
+    // Remove the speed parameter from the message if present and create a clean version
+    let cleanedMessage = message;
+    if (speedParam) {
+      cleanedMessage = message.replace(speedParam[0], '').trim();
+    }
+    
     // Updated: Validated list of working Perplexity API models
-    // These models were tested to work with the current API
-    const modelOptions = [
-      "sonar-pro",                  // Perplexity's pro model - CONFIRMED WORKING
-      "pplx-7b-chat",               // Smaller model - might work for basic questions
-      "pplx-70b-chat",              // Larger model - for more complex analysis
-      "llama-3-8b-instant",         // Meta's Llama 3 model
-      "mistral-7b-instruct",        // Mistral model from Perplexity
-      "mixtral-8x7b-instruct"       // Mixtral model - good for reasoning tasks
-    ];
+    // Models are organized by speed preference
+    let modelOptions = [];
+    
+    if (speedPreference === 'fast') {
+      // Fast models for quick responses
+      modelOptions = [
+        "llama-3-8b-instant",      // Fast Meta Llama 3 model
+        "pplx-7b-chat",            // Small and fast model
+        "mistral-7b-instruct",     // Fast instruction model
+        "sonar-small-chat",        // Small sonar model (if available)
+        "sonar-pro"                // Fallback to standard model
+      ];
+    } else if (speedPreference === 'accurate') {
+      // More accurate models for detailed analysis
+      modelOptions = [
+        "sonar-pro",               // Our standard model that works well
+        "pplx-70b-chat",           // Larger model for more complex analysis
+        "mixtral-8x7b-instruct",   // Good for reasoning and analysis
+        "llama-3-70b-instruct",    // Large instruction model
+        "pplx-7b-chat"             // Fallback to smaller model
+      ];
+    } else {
+      // Balanced models (default)
+      modelOptions = [
+        "sonar-pro",               // Best balance of speed and quality - CONFIRMED WORKING
+        "pplx-70b-chat",           // Good for complex financial analysis
+        "llama-3-8b-instant",      // Fast option from Meta
+        "mixtral-8x7b-instruct",   // Good for reasoning tasks
+        "mistral-7b-instruct",     // Smaller option for simpler queries
+        "pplx-7b-chat"             // Smallest fallback option
+      ];
+    }
+    
+    console.log(`Speed preference: ${speedPreference}, starting with model: ${modelOptions[0]}`);
     
     // Using the standardized endpoint as recommended in the documentation
     const endpointOptions = [
@@ -165,7 +200,7 @@ Only answer questions related to financial markets, investments, economic trends
           role: "system", 
           content: basePrompt
         },
-        { role: "user", content: message }
+        { role: "user", content: cleanedMessage }
       ]
     };
     
