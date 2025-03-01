@@ -148,12 +148,12 @@ router.post(["/", "/chat"], async (req, res) => {
       cleanedMessage = message.replace(speedParam[0], '').trim();
     }
     
-    // Optimized: Use only the fastest models that we've confirmed working
-    // This will speed up response times significantly
+    // Optimized: Prioritize models that we've confirmed working reliably
+    // Prioritizing models that actually work over ones that return errors
     const modelOptions = [
-      "llama-3-8b-instant",      // Fast Meta Llama 3 model - prioritize for speed
-      "sonar-pro",               // Reliable model with good performance - our main model
+      "sonar-pro",               // Most reliable model with good performance - our main model
       "pplx-7b-chat",            // Backup smaller model
+      "llama-3-8b-instant",      // Fast Meta Llama 3 model but sometimes returns 400 errors
     ];
     
     console.log(`Speed preference: ${speedPreference}, starting with model: ${modelOptions[0]}`);

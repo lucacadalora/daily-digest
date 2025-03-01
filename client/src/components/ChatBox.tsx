@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useCallback, memo } from "react";
 import { Send, Search, Globe, Maximize2, Minimize2, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -7,7 +7,7 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { motion, AnimatePresence } from "framer-motion";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
-import axios from "axios";
+import type { Components } from "react-markdown";
 
 // No example prompts
 const EXAMPLE_PROMPTS: string[] = [];
@@ -96,117 +96,115 @@ export const ChatBox = () => {
     setError(null);
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = useCallback(async (e: React.FormEvent) => {
     e.preventDefault();
     if (!input.trim() || isLoading) return;
 
     const userMessage = input.trim();
     setInput('');
     setError(null);
-    setMessages(prev => [...prev, { role: 'user', content: userMessage }]);
+    
+    // Update messages in a single batch for better performance
+    setMessages(prev => [
+      ...prev, 
+      { role: 'user', content: userMessage },
+      { role: 'assistant', content: 'Analyzing market data...', isSearching: true }
+    ]);
+    
     setIsLoading(true);
-
-    // Add searching message with loading animation
-    setMessages(prev => [...prev, { 
-      role: 'assistant', 
-      content: 'Analyzing market data...', 
-      isSearching: true 
-    }]);
 
     try {
       console.log('Sending chat request:', userMessage);
+      
+      // Use AbortController to handle timeouts
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 20000); // 20 second timeout
+      
       const response = await fetch('/api/chat', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Cache-Control': 'no-cache', // Prevent caching
         },
-        body: JSON.stringify({ message: userMessage })
+        body: JSON.stringify({ message: userMessage }),
+        signal: controller.signal
       });
+      
+      clearTimeout(timeoutId);
 
       const data = await response.json();
-      console.log('Received chat response:', data);
-
+      
       if (data.status === 'error') {
         throw new Error(data.error || 'Failed to get response');
       }
 
+      // Single state update for better performance
       setMessages(prev => {
         const filtered = prev.filter(msg => !msg.isSearching);
-        return [...filtered, { 
-          role: 'assistant', 
-          content: data.reply
-        }];
+        return [...filtered, { role: 'assistant', content: data.reply }];
       });
     } catch (error) {
       console.error('Chat error:', error);
-      const errorMessage = error instanceof Error ? error.message : 'Sorry, I encountered an error. Please try again.';
+      const errorMessage = error instanceof Error 
+        ? (error.name === 'AbortError' 
+            ? 'Request timed out. Please try again.' 
+            : error.message)
+        : 'Sorry, I encountered an error. Please try again.';
+      
       setError(errorMessage);
       setMessages(prev => prev.filter(msg => !msg.isSearching));
     } finally {
       setIsLoading(false);
     }
-  };
+  }, [input, isLoading]);
 
-  const renderMessage = (message: Message) => {
+  // Memoize message rendering components for better performance
+  const LoadingMessage = memo(() => (
+    <motion.div
+      initial={{ opacity: 0, y: 5 }}
+      animate={{ opacity: 1, y: 0 }}
+      className="flex flex-col space-y-2"
+    >
+      <div className="flex items-center space-x-2">
+        <Search className="h-4 w-4 animate-spin" />
+        <span className="text-sm text-gray-600 dark:text-gray-400">
+          Analyzing market data
+          <motion.span
+            animate={{ opacity: [0, 1, 0] }}
+            transition={{ duration: 1.5, repeat: Infinity }}
+          >...</motion.span>
+        </span>
+      </div>
+      <motion.div
+        initial={{ width: 0 }}
+        animate={{ width: "100%" }}
+        transition={{ duration: 2, repeat: Infinity }}
+        className="h-0.5 bg-gradient-to-r from-blue-500 to-transparent"
+      />
+    </motion.div>
+  ));
+
+  // Properly typed markdown components for react-markdown
+  const markdownComponents: Components = {
+    h1: ({ children }) => <h1 className="text-xl font-bold mb-2">{children}</h1>,
+    h2: ({ children }) => <h2 className="text-lg font-semibold mb-2">{children}</h2>,
+    h3: ({ children }) => <h3 className="text-base font-semibold mb-2">{children}</h3>,
+    p: ({ children }) => <p className="mb-2 leading-relaxed">{children}</p>,
+    ul: ({ children }) => <ul className="list-disc pl-4 mb-2 space-y-1">{children}</ul>,
+    li: ({ children }) => <li className="mb-1">{children}</li>,
+    strong: ({ children }) => <strong className="font-semibold text-blue-600 dark:text-blue-400">{children}</strong>,
+    em: ({ children }) => <em className="italic text-gray-600 dark:text-gray-400">{children}</em>,
+    code: ({ children }) => <code className="bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded">{children}</code>,
+    blockquote: ({ children }) => <blockquote className="border-l-4 border-blue-500 pl-4 italic bg-blue-50 dark:bg-blue-900/20 py-2 rounded-r">{children}</blockquote>,
+  };
+  
+  const renderMessage = useCallback((message: Message) => {
+    // If message is in searching/loading state
     if (message.isSearching) {
-      return (
-        <motion.div
-          initial={{ opacity: 0, y: 5 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="flex flex-col space-y-2"
-        >
-          <div className="flex items-center space-x-2">
-            <Search className="h-4 w-4 animate-spin" />
-            <span className="text-sm text-gray-600 dark:text-gray-400">
-              Analyzing market data
-              <motion.span
-                animate={{
-                  opacity: [0, 1, 1, 1, 0],
-                }}
-                transition={{
-                  duration: 2,
-                  repeat: Infinity,
-                  times: [0, 0.25, 0.5, 0.75, 1]
-                }}
-              >
-                .
-              </motion.span>
-              <motion.span
-                animate={{
-                  opacity: [0, 0, 1, 1, 0],
-                }}
-                transition={{
-                  duration: 2,
-                  repeat: Infinity,
-                  times: [0, 0.25, 0.5, 0.75, 1]
-                }}
-              >
-                .
-              </motion.span>
-              <motion.span
-                animate={{
-                  opacity: [0, 0, 0, 1, 0],
-                }}
-                transition={{
-                  duration: 2,
-                  repeat: Infinity,
-                  times: [0, 0.25, 0.5, 0.75, 1]
-                }}
-              >
-                .
-              </motion.span>
-            </span>
-          </div>
-          <motion.div
-            initial={{ width: 0 }}
-            animate={{ width: "100%" }}
-            transition={{ duration: 2, repeat: Infinity }}
-            className="h-0.5 bg-gradient-to-r from-blue-500 to-transparent"
-          />
-        </motion.div>
-      );
+      return <LoadingMessage />;
     }
 
+    // Format the content with market-specific formatting
     const formattedContent = formatMarketAnalysis(message.content);
 
     return (
@@ -216,97 +214,21 @@ export const ChatBox = () => {
         transition={{ duration: 0.3 }}
         className="prose prose-sm dark:prose-invert max-w-none"
       >
-        {message.isStreaming ? (
-          <div className="relative">
-            <ReactMarkdown 
-              remarkPlugins={[remarkGfm]}
-              components={{
-                h1: ({ children }) => <h1 className="text-xl font-bold mb-2">{children}</h1>,
-                h2: ({ children }) => <h2 className="text-lg font-semibold mb-2">{children}</h2>,
-                h3: ({ children }) => <h3 className="text-base font-semibold mb-2">{children}</h3>,
-                p: ({ children }) => (
-                  <div className="mb-2 leading-relaxed">
-                    {children}
-                    {message.isStreaming && (
-                      <motion.span
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: [0.3, 1] }}
-                        transition={{
-                          duration: 0.8,
-                          repeat: Infinity,
-                          repeatType: "reverse",
-                          ease: "easeInOut"
-                        }}
-                        className="inline-block ml-0.5 w-0.5 h-4 bg-blue-500 translate-y-1"
-                      />
-                    )}
-                  </div>
-                ),
-                ul: ({ children }) => <ul className="list-disc pl-4 mb-2 space-y-1">{children}</ul>,
-                li: ({ children }) => <li className="mb-1">{children}</li>,
-                strong: ({ children }) => (
-                  <motion.strong 
-                    initial={{ backgroundColor: "rgba(59, 130, 246, 0.1)" }}
-                    animate={{ backgroundColor: "rgba(59, 130, 246, 0)" }}
-                    transition={{ duration: 1 }}
-                    className="font-semibold text-blue-600 dark:text-blue-400"
-                  >
-                    {children}
-                  </motion.strong>
-                ),
-                em: ({ children }) => <em className="italic text-gray-600 dark:text-gray-400">{children}</em>,
-                code: ({ children }) => (
-                  <code className="bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded">{children}</code>
-                ),
-                blockquote: ({ children }) => (
-                  <motion.blockquote 
-                    initial={{ borderLeftColor: "rgba(59, 130, 246, 0.5)" }}
-                    animate={{ borderLeftColor: "rgba(59, 130, 246, 1)" }}
-                    transition={{ duration: 0.5 }}
-                    className="border-l-4 pl-4 italic bg-blue-50 dark:bg-blue-900/20 py-2 rounded-r"
-                  >
-                    {children}
-                  </motion.blockquote>
-                ),
-              }}
-            >
-              {formattedContent}
-            </ReactMarkdown>
-          </div>
-        ) : (
-          <motion.div
-            initial={{ opacity: 0.8 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.5 }}
+        <motion.div
+          initial={{ opacity: 0.8 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5 }}
+        >
+          <ReactMarkdown 
+            remarkPlugins={[remarkGfm]}
+            components={markdownComponents}
           >
-            <ReactMarkdown 
-              remarkPlugins={[remarkGfm]}
-              components={{
-                h1: ({ children }) => <h1 className="text-xl font-bold mb-2">{children}</h1>,
-                h2: ({ children }) => <h2 className="text-lg font-semibold mb-2">{children}</h2>,
-                h3: ({ children }) => <h3 className="text-base font-semibold mb-2">{children}</h3>,
-                p: ({ children }) => <p className="mb-2 leading-relaxed">{children}</p>,
-                ul: ({ children }) => <ul className="list-disc pl-4 mb-2 space-y-1">{children}</ul>,
-                li: ({ children }) => <li className="mb-1">{children}</li>,
-                strong: ({ children }) => <strong className="font-semibold text-blue-600 dark:text-blue-400">{children}</strong>,
-                em: ({ children }) => <em className="italic text-gray-600 dark:text-gray-400">{children}</em>,
-                code: ({ children }) => (
-                  <code className="bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded">{children}</code>
-                ),
-                blockquote: ({ children }) => (
-                  <blockquote className="border-l-4 border-blue-500 pl-4 italic bg-blue-50 dark:bg-blue-900/20 py-2 rounded-r">
-                    {children}
-                  </blockquote>
-                ),
-              }}
-            >
-              {formattedContent}
-            </ReactMarkdown>
-          </motion.div>
-        )}
+            {formattedContent}
+          </ReactMarkdown>
+        </motion.div>
       </motion.div>
     );
-  };
+  }, []);
 
   const toggleExpand = () => {
     setIsExpanded(!isExpanded);
