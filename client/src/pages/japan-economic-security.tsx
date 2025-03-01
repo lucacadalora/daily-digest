@@ -120,7 +120,7 @@ export default function JapanEconomicSecurity() {
               </div>
               <div className="flex items-center space-x-1">
                 <MapPin className="h-4 w-4" />
-                <span>TOKYO / JAKARTA</span>
+                <span>Jakarta</span>
               </div>
             </div>
 

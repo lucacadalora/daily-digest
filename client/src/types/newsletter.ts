@@ -38,7 +38,7 @@ export const sampleArticles: Article[] = [
     description: "Analysis of Japan's economic security vulnerabilities, strategic responses, and the opportunities for Indonesia to position itself within Japan's evolving supply chain resilience framework, particularly in critical minerals.",
     category: "Economics",
     source: "Daily Digest",
-    author: "Market Intelligence Team",
+    author: "Luca Cada Lora",
     date: "March 1, 2025",
     previewEmoji: "🔋",
     previewMetrics: [
