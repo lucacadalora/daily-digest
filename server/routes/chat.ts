@@ -170,7 +170,14 @@ router.post(["/", "/chat"], async (req, res) => {
     });
 
     safeLog('Preparing optimized system prompt...');
-    const basePrompt = `Financial analyst. Today: ${today}. Answer only financial/market/investment questions concisely. When referencing factual information, use numbered citations in format [1], [2], etc. Include precise figures and recent data when available.`;
+    const basePrompt = `Financial analyst. Today: ${today}. Follow these guidelines:
+1. Answer only financial/market/investment questions concisely
+2. Use consistent emojis for financial concepts: 📈 for increases, 📉 for decreases, 💰 for earnings, 💼 for companies, 🏦 for banks
+3. Format sections with emojis: "## 📊 Market Analysis", "## 💰 Valuation", "## 📈 Growth Prospects", "## ⚠️ Risks"
+4. When referencing factual information, use numbered citations in format [1], [2], etc.
+5. Always include precise figures and recent data, with proper currency formatting
+6. For stock price changes, include both percentage and absolute values when available
+7. Always provide a brief conclusion or investment recommendation with rationale`;
 
     // Using axios directly instead of OpenAI client library
     safeLog('Sending direct request to Perplexity API...');
@@ -298,15 +305,21 @@ router.post(["/", "/chat"], async (req, res) => {
     // Process the response to ensure citations are properly formatted
     let responseText = response.choices[0].message.content.trim();
     
-    // Check if the response contains citations in [n] format but doesn't include the actual references
+    // Check for potential citation information in the response (if API provides this)
+    const sourcesData = response.choices?.[0]?.message?.citations || 
+                      response.choices?.[0]?.message?.source_info ||
+                      response.choices?.[0]?.message?.references || 
+                      [];
+                      
+    // Check if the response contains citations in [n] format
     const citationPattern = /\[\d+\]/g;
     const citations = responseText.match(citationPattern);
     
     if (citations && citations.length > 0) {
       // If citations exist but no "Sources:" or "References:" section at the end
       if (!responseText.match(/\b(Sources|References):/i)) {
-        // Add a sources section with clickable links
-        responseText += "\n\nSources:";
+        // Add a proper sources section
+        responseText += "\n\n## 📚 Sources:";
         
         // Extract citation numbers and make sure they're valid numbers
         const citationNumbers: number[] = [];
@@ -325,13 +338,34 @@ router.post(["/", "/chat"], async (req, res) => {
         // Sort the citation numbers
         const uniqueCitations = citationNumbers.sort((a, b) => a - b);
         
-        // Create placeholder URLs for each citation - in a real implementation these would 
-        // link to actual sources, but Perplexity doesn't provide those
-        uniqueCitations.forEach(citationNumber => {
-          // For demonstration, we'll create placeholder URLs
-          const placeholderUrl = `/api/sources/${citationNumber}`;
-          responseText += `\n[${citationNumber}] https://sources.example.com/citation/${citationNumber}`;
-        });
+        // Check if we have source information from the API
+        if (sourcesData && Array.isArray(sourcesData) && sourcesData.length > 0) {
+          // Use actual sources from the API if available
+          uniqueCitations.forEach(citationNumber => {
+            const index = citationNumber - 1;
+            if (index >= 0 && index < sourcesData.length) {
+              const source = sourcesData[index];
+              // Handle different source info formats from various API responses
+              if (typeof source === 'string') {
+                responseText += `\n[${citationNumber}] ${source}`;
+              } else if (source.url || source.link) {
+                responseText += `\n[${citationNumber}] ${source.url || source.link}`;
+              } else if (source.title) {
+                responseText += `\n[${citationNumber}] ${source.title}${source.url ? ` - ${source.url}` : ''}`;
+              } else {
+                responseText += `\n[${citationNumber}] Source ${citationNumber}`;
+              }
+            } else {
+              // Fallback if we don't have enough source data
+              responseText += `\n[${citationNumber}] Source ${citationNumber}`;
+            }
+          });
+        } else {
+          // If no source data is available from API, create generic entries
+          uniqueCitations.forEach(citationNumber => {
+            responseText += `\n[${citationNumber}] Source ${citationNumber}`;
+          });
+        }
       }
     }
     

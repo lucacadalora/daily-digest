@@ -21,6 +21,24 @@ interface Message {
 
 // Enhanced formatter for financial analysis responses
 const formatMarketAnalysis = (content: string) => {
+  // Don't process the Sources section to avoid messing up citations
+  const sourcesSectionMatch = content.match(/\n\n## 📚 Sources:|## Sources:|Sources:/);
+  if (sourcesSectionMatch) {
+    // Split content into main content and sources section
+    const sourcesSectionIndex = sourcesSectionMatch.index;
+    const mainContent = content.substring(0, sourcesSectionIndex);
+    const sourcesSection = content.substring(sourcesSectionIndex);
+    
+    // Only format the main content and leave the sources section intact
+    return formatMarketAnalysisContent(mainContent) + sourcesSection;
+  }
+  
+  // If no sources section, format the whole content
+  return formatMarketAnalysisContent(content);
+};
+
+// Helper function to format just the market analysis content (not sources)
+const formatMarketAnalysisContent = (content: string) => {
   // Process specific sections if present
   if (content.includes('MARKET_CONTEXT')) {
     const parts = content.split('MARKET_CONTEXT');
@@ -34,8 +52,6 @@ const formatMarketAnalysis = (content: string) => {
       .replace(/Peter Lynch Fair Value:/g, '🎯 Peter Lynch Fair Value:')
       .replace(/Analyst Consensus:/g, '👥 Analyst Consensus:')
       .replace(/Dividend Outlook:/g, '\n💰 Dividend Outlook\n')
-      .replace(/(\d+(\.\d{1,2})?%)/g, '📝 $1')
-      .replace(/(IDR \d+([,\.]\d+)*)/g, '💵 $1')
       .replace(/upside potential/g, '📈 upside potential')
       .replace(/downside risk/g, '📉 downside risk');
 
@@ -45,40 +61,38 @@ const formatMarketAnalysis = (content: string) => {
   // General formatting for all financial content
   let formatted = content;
   
-  // Headers and sections
+  // Headers and sections (only if they don't already have emojis)
   formatted = formatted
-    .replace(/## Current Valuation/g, '## 💼 Current Valuation')
-    .replace(/## Growth Prospects/g, '## 📈 Growth Prospects')
-    .replace(/## Financial Performance/g, '## 📊 Financial Performance')
-    .replace(/## Key Metrics/g, '## 🔑 Key Metrics')
-    .replace(/## Market Position/g, '## 🌍 Market Position')
-    .replace(/## Risks/g, '## ⚠️ Risks')
-    .replace(/## Outlook/g, '## 🔮 Outlook')
-    .replace(/## Recommendation/g, '## 🎯 Recommendation')
-    .replace(/## Summary/g, '## ✅ Summary');
+    .replace(/## Current Valuation(?!\s*💼)/g, '## 💼 Current Valuation')
+    .replace(/## Growth Prospects(?!\s*📈)/g, '## 📈 Growth Prospects')
+    .replace(/## Financial Performance(?!\s*📊)/g, '## 📊 Financial Performance')
+    .replace(/## Key Metrics(?!\s*🔑)/g, '## 🔑 Key Metrics')
+    .replace(/## Market Position(?!\s*🌍)/g, '## 🌍 Market Position')
+    .replace(/## Market Analysis(?!\s*📊)/g, '## 📊 Market Analysis')
+    .replace(/## Valuation(?!\s*💰)/g, '## 💰 Valuation')
+    .replace(/## Risks(?!\s*⚠️)/g, '## ⚠️ Risks')
+    .replace(/## Outlook(?!\s*🔮)/g, '## 🔮 Outlook')
+    .replace(/## Recommendation(?!\s*🎯)/g, '## 🎯 Recommendation')
+    .replace(/## Summary(?!\s*✅)/g, '## ✅ Summary')
+    .replace(/## Conclusion(?!\s*🏁)/g, '## 🏁 Conclusion');
   
-  // Price and financial metrics
+  // Price and financial metrics (but avoid applying to citation sources)
   formatted = formatted
-    .replace(/Market Context:/g, '📈 Market Context\n')
-    .replace(/current stock price is ([\$|IDR|Rp|€|£])([0-9,\.]+)/gi, 'current stock price is $1$2 💵')
-    .replace(/P\/E ratio of ([0-9\.]+)/g, 'P/E ratio of $1 📊')
-    .replace(/dividend yield of ([0-9\.]+)%/g, 'dividend yield of $1% 💰')
-    .replace(/ROE of ([0-9\.]+)%/g, 'ROE of $1% 📈')
-    .replace(/growth rate of ([0-9\.]+)%/g, 'growth rate of $1% 📈')
-    .replace(/dropped by ([0-9\.]+)%/g, 'dropped by $1% 📉')
-    .replace(/increased by ([0-9\.]+)%/g, 'increased by $1% 📈')
-    .replace(/(\+[0-9\.]+%)/g, '$1 📈')
-    .replace(/(\-[0-9\.]+%)/g, '$1 📉')
-    .replace(/(\d+(\.\d{1,2})?%)/g, '$1')
-    .replace(/(IDR \d+([,\.]\d+)*)/g, '$1 💵')
-    .replace(/(\$\d+([,\.]\d+)*)/g, '$1 💵');
+    .replace(/market context/gi, '📈 Market Context')
+    .replace(/\b([Cc]urrent stock price|current price) is ([\$|IDR|Rp|€|£])([0-9,\.]+)/g, 'current stock price is $2$3 💵')
+    .replace(/\bP\/E ratio of ([0-9\.]+)/g, 'P/E ratio of $1 📊')
+    .replace(/\bdividend yield of ([0-9\.]+)%/g, 'dividend yield of $1% 💰')
+    .replace(/\bROE of ([0-9\.]+)%/g, 'ROE of $1% 📈')
+    .replace(/\bgrowth rate of ([0-9\.]+)%/g, 'growth rate of $1% 📈')
+    .replace(/\bdropped by ([0-9\.]+)%/g, 'dropped by $1% 📉')
+    .replace(/\bincreased by ([0-9\.]+)%/g, 'increased by $1% 📈');
   
-  // Market sentiment
+  // Market sentiment (only apply to complete words with word boundaries)
   formatted = formatted
-    .replace(/bullish/g, 'bullish 🚀')
-    .replace(/bearish/g, 'bearish 🐻')
-    .replace(/undervalued/g, 'undervalued ⭐')
-    .replace(/overvalued/g, 'overvalued ⚠️');
+    .replace(/\bbullish\b/g, 'bullish 🚀')
+    .replace(/\bbearish\b/g, 'bearish 🐻')
+    .replace(/\bundervalued\b/g, 'undervalued ⭐')
+    .replace(/\bovervalued\b/g, 'overvalued ⚠️');
   
   return formatted;
 };
@@ -198,37 +212,33 @@ export const ChatBox = () => {
     blockquote: ({ children }) => <blockquote className="border-l-4 border-blue-500 pl-4 italic bg-blue-50 dark:bg-blue-900/20 py-2 rounded-r">{children}</blockquote>,
     // Format citation links properly
     a: ({ node, href, children }) => {
-      // Check if this is a citation source URL
-      if (href && href.includes('sources.example.com/citation')) {
+      // Make any link clickable, whether it's a citation source or regular URL
+      if (href) {
+        let className = "text-blue-500 hover:text-blue-700 transition-colors underline";
+        const isCitationLink = 
+          href.includes('sources.example.com') || 
+          children && children.toString().match(/^\[\d+\]$/);
+        
+        if (isCitationLink) {
+          className += " font-bold"; // Make citation links stand out a bit
+        }
+        
         return (
           <a 
             href={href}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-blue-500 hover:text-blue-700 transition-colors underline"
-            onClick={(e) => {
-              e.preventDefault();
-              // In a real implementation, we would open a modal with the source details
-              // For now, we'll just show an alert
-              alert(`This would display source ${href.split('/').pop()} details in a production environment.`);
-            }}
+            className={className}
+            // For citation links, we can later add a modal to show details,
+            // but for now, we'll just open in a new tab like a normal link
           >
             {children}
           </a>
         );
       }
       
-      // Regular link handling
-      return (
-        <a 
-          href={href}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-blue-500 hover:text-blue-700 transition-colors underline"
-        >
-          {children}
-        </a>
-      );
+      // Fallback for cases where href might be missing
+      return <span className="text-blue-500">{children}</span>;
     }
   };
   
