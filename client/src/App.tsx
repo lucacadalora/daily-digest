@@ -54,13 +54,16 @@ function Router() {
       <Route path="/newsletter" component={Newsletters} />
       {/* Special routes must come before generic article route */}
       <Route path="/newsletter/japan-economic-security-indonesia-minerals" component={JapanEconomicSecurity} />
+      <Route path="/japan-economic-security" component={JapanEconomicSecurity} />
       <Route path="/newsletter/indonesia-coal-dilemma" component={IndonesiaCoalDilemma} />
       <Route path="/newsletter/bank-rakyat-indonesia-undervalued-dividend-powerhouse" component={BBRIArticle} />
       <Route path="/newsletter/us-china-trade-war-impact-ihsg" component={TradeWarAnalysis} />
       <Route path="/newsletter/trade-war-tsunami-feb-10-14" component={TradeWarTsunamiFeb1014} />
       <Route path="/newsletter/indonesia-mineral-criticality-matrix" component={MineralCriticalityMatrix} />
       <Route path="/newsletter/indonesia-economic-inventory-crisis" component={IndonesiaEconomicCrisis} />
+      <Route path="/indonesia-economic-crisis" component={IndonesiaEconomicCrisis} />
       <Route path="/newsletter/fed-balance-sheet-blueprint" component={FedBalanceSheet} />
+      <Route path="/fed-balance-sheet" component={FedBalanceSheet} />
       <Route path="/newsletter/fed-qt-exit-crypto-rally" component={FedQTExitCryptoRally} />
       <Route path="/newsletter/category/:category" component={Newsletters} />
       <Route path="/newsletters" component={() => <Redirect to="/newsletter" />} />
