@@ -1,12 +1,18 @@
 import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { X, Loader2, CheckCircle, Wifi, WifiOff, ServerOff } from "lucide-react";
+import { Loader2, CheckCircle, Wifi, WifiOff, ServerOff } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
 import { Badge } from "@/components/ui/badge";
 import axios from "axios";
 import { useToast } from "@/hooks/use-toast";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 
 interface SubscribeModalProps {
   isOpen: boolean;
@@ -49,18 +55,6 @@ export const SubscribeModal = ({ isOpen, onClose }: SubscribeModalProps) => {
       checkDatabaseConnection();
     }
   }, [isOpen]);
-  
-  // Handle keyboard events (Escape to close the modal)
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (isOpen && e.key === 'Escape' && !isLoading) {
-        onClose();
-      }
-    };
-    
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [isOpen, onClose, isLoading]);
 
   const handleCategoryChange = (category: string) => {
     setCategories(prev => ({
@@ -165,171 +159,141 @@ export const SubscribeModal = ({ isOpen, onClose }: SubscribeModalProps) => {
     }
   };
 
-  // Important: only render the modal when it's open
-  if (!isOpen) return null;
-
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center">
-      {/* Backdrop */}
-      <div 
-        className="absolute inset-0 bg-black/50" 
-        onClick={onClose}
-        aria-hidden="true"
-      />
-      
-      {/* Modal */}
-      <div 
-        className="relative w-[95%] max-w-[440px] bg-white dark:bg-gray-900 rounded-lg p-6 shadow-lg overflow-y-auto max-h-[90vh] z-50"
-        role="dialog"
-        aria-modal="true"
-        aria-labelledby="modal-title"
-        aria-describedby="modal-description"
-      >
-        {/* Close button */}
-        <button
-          type="button"
-          onClick={onClose}
-          className="absolute right-4 top-4 text-gray-400 hover:text-gray-600"
-          disabled={isLoading}
-          aria-label="Close"
-        >
-          <X className="h-4 w-4" aria-hidden="true" />
-        </button>
-
-        {/* Content */}
-        <div className="space-y-4 pt-2">
-          <h2 id="modal-title" className="text-3xl font-medium text-center">
+    <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
+      <DialogContent className="w-[95%] max-w-[440px] overflow-y-auto max-h-[90vh]">
+        <DialogHeader>
+          <DialogTitle className="text-3xl font-medium text-center">
             The best newsletter for{" "}
             <span className="text-blue-600 dark:text-blue-400">
               market insights
             </span>
-          </h2>
-
-          <p id="modal-description" className="text-sm text-center text-gray-600 dark:text-gray-400">
+          </DialogTitle>
+          <DialogDescription className="text-sm text-center">
             Subscribe to stay up to date with the latest stocks, crypto, tech and financial market analysis.
-          </p>
+          </DialogDescription>
+        </DialogHeader>
 
-          <form onSubmit={handleSubmit} className="mt-6 space-y-4">
-            {/* Email field */}
-            <div className="space-y-2">
-              <Label htmlFor="email">Email Address</Label>
-              <Input
-                id="email"
-                type="email"
-                placeholder="your.email@example.com"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="w-full"
-                required
-                disabled={isLoading || isSuccess}
-              />
-            </div>
-            
-            {/* Name field */}
-            <div className="space-y-2">
-              <Label htmlFor="name">Name (Optional)</Label>
-              <Input
-                id="name"
-                type="text"
-                placeholder="Your Name"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                className="w-full"
-                disabled={isLoading || isSuccess}
-              />
-            </div>
+        <form onSubmit={handleSubmit} className="mt-6 space-y-4">
+          {/* Email field */}
+          <div className="space-y-2">
+            <Label htmlFor="email">Email Address</Label>
+            <Input
+              id="email"
+              type="email"
+              placeholder="your.email@example.com"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="w-full"
+              required
+              disabled={isLoading || isSuccess}
+            />
+          </div>
+          
+          {/* Name field */}
+          <div className="space-y-2">
+            <Label htmlFor="name">Name (Optional)</Label>
+            <Input
+              id="name"
+              type="text"
+              placeholder="Your Name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              className="w-full"
+              disabled={isLoading || isSuccess}
+            />
+          </div>
 
-            {/* Categories */}
-            <div className="space-y-2">
-              <Label className="text-sm font-medium">Topics you're interested in:</Label>
-              <div className="grid grid-cols-2 gap-2 mt-2">
-                <div className="flex items-center space-x-2">
-                  <Checkbox 
-                    id="market-analysis"
-                    checked={categories["market-analysis"]} 
-                    onCheckedChange={() => handleCategoryChange("market-analysis")}
-                    disabled={isLoading || isSuccess}
-                  />
-                  <Label htmlFor="market-analysis" className="text-sm cursor-pointer">Market Analysis</Label>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <Checkbox 
-                    id="financial-news"
-                    checked={categories["financial-news"]} 
-                    onCheckedChange={() => handleCategoryChange("financial-news")}
-                    disabled={isLoading || isSuccess}
-                  />
-                  <Label htmlFor="financial-news" className="text-sm cursor-pointer">Financial News</Label>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <Checkbox 
-                    id="crypto-updates"
-                    checked={categories["crypto-updates"]} 
-                    onCheckedChange={() => handleCategoryChange("crypto-updates")}
-                    disabled={isLoading || isSuccess}
-                  />
-                  <Label htmlFor="crypto-updates" className="text-sm cursor-pointer">Crypto Updates</Label>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <Checkbox 
-                    id="economic-trends"
-                    checked={categories["economic-trends"]} 
-                    onCheckedChange={() => handleCategoryChange("economic-trends")}
-                    disabled={isLoading || isSuccess}
-                  />
-                  <Label htmlFor="economic-trends" className="text-sm cursor-pointer">Economic Trends</Label>
-                </div>
+          {/* Categories */}
+          <div className="space-y-2">
+            <Label className="text-sm font-medium">Topics you're interested in:</Label>
+            <div className="grid grid-cols-2 gap-2 mt-2">
+              <div className="flex items-center space-x-2">
+                <Checkbox 
+                  id="market-analysis"
+                  checked={categories["market-analysis"]} 
+                  onCheckedChange={() => handleCategoryChange("market-analysis")}
+                  disabled={isLoading || isSuccess}
+                />
+                <Label htmlFor="market-analysis" className="text-sm cursor-pointer">Market Analysis</Label>
+              </div>
+              <div className="flex items-center space-x-2">
+                <Checkbox 
+                  id="financial-news"
+                  checked={categories["financial-news"]} 
+                  onCheckedChange={() => handleCategoryChange("financial-news")}
+                  disabled={isLoading || isSuccess}
+                />
+                <Label htmlFor="financial-news" className="text-sm cursor-pointer">Financial News</Label>
+              </div>
+              <div className="flex items-center space-x-2">
+                <Checkbox 
+                  id="crypto-updates"
+                  checked={categories["crypto-updates"]} 
+                  onCheckedChange={() => handleCategoryChange("crypto-updates")}
+                  disabled={isLoading || isSuccess}
+                />
+                <Label htmlFor="crypto-updates" className="text-sm cursor-pointer">Crypto Updates</Label>
+              </div>
+              <div className="flex items-center space-x-2">
+                <Checkbox 
+                  id="economic-trends"
+                  checked={categories["economic-trends"]} 
+                  onCheckedChange={() => handleCategoryChange("economic-trends")}
+                  disabled={isLoading || isSuccess}
+                />
+                <Label htmlFor="economic-trends" className="text-sm cursor-pointer">Economic Trends</Label>
               </div>
             </div>
+          </div>
 
-            {/* Submit button */}
-            <button
-              type="submit"
-              className="w-full h-11 flex items-center justify-center bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors disabled:opacity-70 disabled:cursor-not-allowed"
-              disabled={isLoading || isSuccess || !email}
-            >
-              {isLoading ? (
-                <Loader2 className="h-5 w-5 animate-spin" />
-              ) : isSuccess ? (
-                <div className="flex items-center">
-                  <CheckCircle className="h-5 w-5 mr-2" />
-                  <span>Subscribed!</span>
-                </div>
-              ) : (
-                <span>Subscribe to Newsletter</span>
-              )}
-            </button>
+          {/* Submit button */}
+          <button
+            type="submit"
+            className="w-full h-11 flex items-center justify-center bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors disabled:opacity-70 disabled:cursor-not-allowed"
+            disabled={isLoading || isSuccess || !email}
+          >
+            {isLoading ? (
+              <Loader2 className="h-5 w-5 animate-spin" />
+            ) : isSuccess ? (
+              <div className="flex items-center">
+                <CheckCircle className="h-5 w-5 mr-2" />
+                <span>Subscribed!</span>
+              </div>
+            ) : (
+              <span>Subscribe to Newsletter</span>
+            )}
+          </button>
+          
+          <p className="text-xs text-center text-gray-500 dark:text-gray-400 mt-4">
+            We respect your privacy and will never share your email address with third parties.
+          </p>
+          
+          {/* Connection status indicator */}
+          <div className="flex items-center justify-center mt-2">
+            {connectionStatus === 'checking' && (
+              <Badge variant="outline" className="text-xs py-1 gap-1 bg-gray-100 dark:bg-gray-800">
+                <Loader2 className="h-3 w-3 animate-spin" />
+                <span>Checking connection...</span>
+              </Badge>
+            )}
             
-            <p className="text-xs text-center text-gray-500 dark:text-gray-400 mt-4">
-              We respect your privacy and will never share your email address with third parties.
-            </p>
+            {connectionStatus === 'connected' && (
+              <Badge variant="outline" className="text-xs py-1 gap-1 bg-green-50 text-green-700 border-green-200 dark:bg-green-900/20 dark:text-green-400 dark:border-green-800">
+                <Wifi className="h-3 w-3" />
+                <span>Connected to server</span>
+              </Badge>
+            )}
             
-            {/* Connection status indicator */}
-            <div className="flex items-center justify-center mt-2">
-              {connectionStatus === 'checking' && (
-                <Badge variant="outline" className="text-xs py-1 gap-1 bg-gray-100 dark:bg-gray-800">
-                  <Loader2 className="h-3 w-3 animate-spin" />
-                  <span>Checking connection...</span>
-                </Badge>
-              )}
-              
-              {connectionStatus === 'connected' && (
-                <Badge variant="outline" className="text-xs py-1 gap-1 bg-green-50 text-green-700 border-green-200 dark:bg-green-900/20 dark:text-green-400 dark:border-green-800">
-                  <Wifi className="h-3 w-3" />
-                  <span>Connected to server</span>
-                </Badge>
-              )}
-              
-              {connectionStatus === 'error' && (
-                <Badge variant="outline" className="text-xs py-1 gap-1 bg-red-50 text-red-700 border-red-200 dark:bg-red-900/20 dark:text-red-400 dark:border-red-800">
-                  <ServerOff className="h-3 w-3" />
-                  <span>Connection issues, retry may be needed</span>
-                </Badge>
-              )}
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
+            {connectionStatus === 'error' && (
+              <Badge variant="outline" className="text-xs py-1 gap-1 bg-red-50 text-red-700 border-red-200 dark:bg-red-900/20 dark:text-red-400 dark:border-red-800">
+                <ServerOff className="h-3 w-3" />
+                <span>Connection issues, retry may be needed</span>
+              </Badge>
+            )}
+          </div>
+        </form>
+      </DialogContent>
+    </Dialog>
   );
 };

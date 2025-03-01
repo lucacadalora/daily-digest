@@ -95,7 +95,7 @@ export const Header = ({ onSubscribe, showCategories = true, simplified = false 
                     </span>
                   </Button>
                 </DropdownMenuTrigger>
-                <DropdownMenuContent align="start" className="w-[300px] p-4">
+                <DropdownMenuContent align="start" className="w-[300px] p-4 max-h-[calc(100vh-100px)] overflow-y-auto">
                   <div className="mb-3">
                     <h3 className="text-sm font-semibold text-gray-900 dark:text-white">Access Daily | Digest database</h3>
                   </div>
@@ -154,51 +154,53 @@ export const Header = ({ onSubscribe, showCategories = true, simplified = false 
                     <span className="sr-only">Toggle Menu</span>
                   </Button>
                 </SheetTrigger>
-                <SheetContent side="bottom" className="px-6 py-8">
-                  {/* Categories */}
-                  <nav className="space-y-4 mb-8">
-                    <h3 className="text-base font-medium text-gray-900 dark:text-white mb-4">Categories</h3>
-                    <Link href="/newsletter/category/Markets" className="block text-base hover:text-blue-600 transition-colors">Markets</Link>
-                    <Link href="/newsletter/category/Economics" className="block text-base hover:text-blue-600 transition-colors">Economics</Link>
-                    <Link href="/newsletter/category/Industries" className="block text-base hover:text-blue-600 transition-colors">Industries</Link>
-                    <Link href="/newsletter/category/Tech" className="block text-base hover:text-blue-600 transition-colors">Tech</Link>
-                    <Link href="/insights" className="block text-base hover:text-blue-600 transition-colors">Insights</Link>
-                  </nav>
+                <SheetContent side="bottom" className="px-6 py-8 max-h-[90vh] overflow-y-auto">
+                  <div className="max-h-full overflow-y-auto">
+                    {/* Categories */}
+                    <nav className="space-y-4 mb-8">
+                      <h3 className="text-base font-medium text-gray-900 dark:text-white mb-4">Categories</h3>
+                      <Link href="/newsletter/category/Markets" className="block text-base hover:text-blue-600 transition-colors">Markets</Link>
+                      <Link href="/newsletter/category/Economics" className="block text-base hover:text-blue-600 transition-colors">Economics</Link>
+                      <Link href="/newsletter/category/Industries" className="block text-base hover:text-blue-600 transition-colors">Industries</Link>
+                      <Link href="/newsletter/category/Tech" className="block text-base hover:text-blue-600 transition-colors">Tech</Link>
+                      <Link href="/insights" className="block text-base hover:text-blue-600 transition-colors">Insights</Link>
+                    </nav>
 
-                  {/* Data Links */}
-                  <div className="mb-8">
-                    <h3 className="text-base font-medium text-gray-900 dark:text-white mb-4">Data</h3>
-                    <Link href="/data/explorer" className="block text-base hover:text-blue-600 transition-colors py-2">Data Explorer</Link>
-                    <Link href="/data/methodology" className="block text-base hover:text-blue-600 transition-colors py-2">Our Methodology</Link>
-                    <Link href="/data/law" className="block text-base hover:text-blue-600 transition-colors py-2">Law</Link>
-                    <Link href="/data/research-index" className="block text-base hover:text-blue-600 transition-colors py-2">Research</Link>
-                  </div>
+                    {/* Data Links */}
+                    <div className="mb-8">
+                      <h3 className="text-base font-medium text-gray-900 dark:text-white mb-4">Data</h3>
+                      <Link href="/data/explorer" className="block text-base hover:text-blue-600 transition-colors py-2">Data Explorer</Link>
+                      <Link href="/data/methodology" className="block text-base hover:text-blue-600 transition-colors py-2">Our Methodology</Link>
+                      <Link href="/data/law" className="block text-base hover:text-blue-600 transition-colors py-2">Law</Link>
+                      <Link href="/data/research-index" className="block text-base hover:text-blue-600 transition-colors py-2">Research</Link>
+                    </div>
 
-                  {/* About Link */}
-                  <div className="mb-8">
-                    <Link href="/about" className="flex items-center justify-between text-lg font-medium hover:text-blue-600 transition-colors">
-                      About
-                      <ArrowRight className="h-4 w-4" />
-                    </Link>
-                  </div>
+                    {/* About Link */}
+                    <div className="mb-8">
+                      <Link href="/about" className="flex items-center justify-between text-lg font-medium hover:text-blue-600 transition-colors">
+                        About
+                        <ArrowRight className="h-4 w-4" />
+                      </Link>
+                    </div>
 
-                  {/* Subscribe Button */}
-                  <div className="mt-8">
-                    <div className="bg-blue-600 rounded-xl p-6">
-                      <h3 className="text-xl font-semibold text-white mb-2">Sign up for our newsletter!</h3>
-                      <p className="text-white/90 text-sm mb-4">
-                        Subscribe to stay up to date with the latest market insights and trends.
-                      </p>
-                      <Button 
-                        onClick={() => {
-                          setIsSheetOpen(false); // Close the mobile menu
-                          if (onSubscribe) onSubscribe(); // Open the subscription modal
-                        }}
-                        className="w-full bg-white hover:bg-gray-100 text-blue-600 rounded-lg h-10 flex items-center justify-center"
-                      >
-                        Subscribe Now
-                        <ArrowRight className="ml-2 h-4 w-4" />
-                      </Button>
+                    {/* Subscribe Button */}
+                    <div className="mt-8 pb-4">
+                      <div className="bg-blue-600 rounded-xl p-6">
+                        <h3 className="text-xl font-semibold text-white mb-2">Sign up for our newsletter!</h3>
+                        <p className="text-white/90 text-sm mb-4">
+                          Subscribe to stay up to date with the latest market insights and trends.
+                        </p>
+                        <Button 
+                          onClick={() => {
+                            setIsSheetOpen(false); // Close the mobile menu
+                            if (onSubscribe) onSubscribe(); // Open the subscription modal
+                          }}
+                          className="w-full bg-white hover:bg-gray-100 text-blue-600 rounded-lg h-10 flex items-center justify-center"
+                        >
+                          Subscribe Now
+                          <ArrowRight className="ml-2 h-4 w-4" />
+                        </Button>
+                      </div>
                     </div>
                   </div>
                 </SheetContent>
