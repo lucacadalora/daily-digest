@@ -1,13 +1,7 @@
 import express from "express";
 import axios from "axios";
 import { log } from "../vite";
-import { 
-  extractStockSymbols, 
-  fetchMultipleStockPrices, 
-  formatStockPrice,
-  generateStockDataSection, 
-  StockPrice 
-} from "../utils/yahoo-finance";
+import { extractStockSymbols, fetchMultipleStockPrices, formatStockPrice, generateStockDataSection, StockPrice } from "../utils/yahoo-finance";
 
 const router = express.Router();
 
@@ -56,6 +50,120 @@ function safeLog(message: string, data?: any): void {
     // If anything goes wrong with sanitization, just log the message without the data
     log(`${message} (data omitted due to sanitization error)`);
   }
+}
+
+// Yahoo Finance stock price fetcher
+async function getYahooFinanceStockPrice(symbol: string): Promise<{ price: number | null, change: number | null, name: string | null }> {
+  try {
+    // If the symbol doesn't have a suffix for Indonesian stocks, add .JK
+    const querySymbol = symbol.includes('.') ? symbol : 
+                      ['BBRI', 'TLKM', 'ASII', 'BBCA', 'BMRI', 'UNVR', 'PGAS', 'INDF', 'ICBP'].includes(symbol) 
+                      ? `${symbol}.JK` : symbol;
+    
+    const response = await axios.get(`https://query1.finance.yahoo.com/v8/finance/quote`, {
+      params: {
+        symbols: querySymbol,
+        fields: 'regularMarketPrice,regularMarketChange,regularMarketChangePercent,shortName,longName',
+        region: 'US',
+        lang: 'en-US',
+        corsDomain: 'finance.yahoo.com'
+      },
+      headers: {
+        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36',
+        'Accept': '*/*',
+        'Accept-Language': 'en-US,en;q=0.9',
+        'Origin': 'https://finance.yahoo.com',
+        'Referer': 'https://finance.yahoo.com/',
+        'Cache-Control': 'no-cache',
+      },
+      timeout: 5000,
+    });
+
+    if (response.data?.quoteResponse?.result?.[0]) {
+      const data = response.data.quoteResponse.result[0];
+      return {
+        price: data.regularMarketPrice || null,
+        change: data.regularMarketChangePercent || null,
+        name: data.shortName || data.longName || null
+      };
+    }
+    
+    // Try with a different API if the first one failed
+    const alternativeResponse = await axios.get(`https://query2.finance.yahoo.com/v8/finance/quote`, {
+      params: {
+        symbols: querySymbol,
+      },
+      headers: {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
+        'Accept': '*/*',
+        'Cache-Control': 'no-cache',
+      },
+      timeout: 5000,
+    });
+
+    if (alternativeResponse.data?.quoteResponse?.result?.[0]) {
+      const data = alternativeResponse.data.quoteResponse.result[0];
+      return {
+        price: data.regularMarketPrice || null,
+        change: data.regularMarketChangePercent || null,
+        name: data.shortName || data.longName || null
+      };
+    }
+
+    return { price: null, change: null, name: null };
+  } catch (error) {
+    console.error(`Failed to fetch stock price for ${symbol}:`, error);
+    return { price: null, change: null, name: null };
+  }
+}
+
+// Extract stock tickers from message
+function extractStockSymbols(message: string): string[] {
+  // Common Indonesian stock patterns
+  const patterns = [
+    // Match standalone stock tickers like BBRI, TLKM, etc.
+    /\b[A-Z]{4}\b/g,
+    // Match tickers followed by .JK
+    /\b[A-Z]{4}\.JK\b/g,
+    // Match common abbreviations with period
+    /\bBBRI\b|\bTLKM\b|\bBBCA\b|\bBMRI\b|\bUNVR\b|\bASII\b|\bPGAS\b|\bINDF\b|\bICBP\b/gi,
+  ];
+
+  const symbols = new Set<string>();
+  
+  // Extract using each pattern
+  patterns.forEach(pattern => {
+    const matches = message.match(pattern);
+    if (matches) {
+      matches.forEach(match => symbols.add(match.toUpperCase()));
+    }
+  });
+  
+  // Also check for specific stock names in message
+  const stockNameMap: Record<string, string> = {
+    'bank rakyat': 'BBRI',
+    'bri': 'BBRI',
+    'telkom': 'TLKM',
+    'telekomunikasi': 'TLKM',
+    'astra': 'ASII',
+    'unilever': 'UNVR',
+    'bank central asia': 'BBCA',
+    'bca': 'BBCA',
+    'mandiri': 'BMRI',
+    'bank mandiri': 'BMRI',
+    'perusahaan gas': 'PGAS',
+    'pgn': 'PGAS',
+    'indofood': 'INDF',
+    'indofood cbp': 'ICBP'
+  };
+  
+  Object.entries(stockNameMap).forEach(([name, symbol]) => {
+    if (message.toLowerCase().includes(name.toLowerCase())) {
+      symbols.add(symbol);
+    }
+  });
+  
+  return Array.from(symbols);
 }
 
 // Validate Perplexity API key format
@@ -123,7 +231,121 @@ router.post(["/", "/chat"], async (req, res) => {
       });
     }
 
-    // Detect off-topic queries
+    // Yahoo Finance stock price fetcher
+async function getYahooFinanceStockPrice(symbol: string): Promise<{ price: number | null, change: number | null, name: string | null }> {
+  try {
+    // If the symbol doesn't have a suffix for Indonesian stocks, add .JK
+    const querySymbol = symbol.includes('.') ? symbol : 
+                      ['BBRI', 'TLKM', 'ASII', 'BBCA', 'BMRI', 'UNVR', 'PGAS', 'INDF', 'ICBP'].includes(symbol) 
+                      ? `${symbol}.JK` : symbol;
+    
+    const response = await axios.get(`https://query1.finance.yahoo.com/v8/finance/quote`, {
+      params: {
+        symbols: querySymbol,
+        fields: 'regularMarketPrice,regularMarketChange,regularMarketChangePercent,shortName,longName',
+        region: 'US',
+        lang: 'en-US',
+        corsDomain: 'finance.yahoo.com'
+      },
+      headers: {
+        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36',
+        'Accept': '*/*',
+        'Accept-Language': 'en-US,en;q=0.9',
+        'Origin': 'https://finance.yahoo.com',
+        'Referer': 'https://finance.yahoo.com/',
+        'Cache-Control': 'no-cache',
+      },
+      timeout: 5000,
+    });
+
+    if (response.data?.quoteResponse?.result?.[0]) {
+      const data = response.data.quoteResponse.result[0];
+      return {
+        price: data.regularMarketPrice || null,
+        change: data.regularMarketChangePercent || null,
+        name: data.shortName || data.longName || null
+      };
+    }
+    
+    // Try with a different API if the first one failed
+    const alternativeResponse = await axios.get(`https://query2.finance.yahoo.com/v8/finance/quote`, {
+      params: {
+        symbols: querySymbol,
+      },
+      headers: {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
+        'Accept': '*/*',
+        'Cache-Control': 'no-cache',
+      },
+      timeout: 5000,
+    });
+
+    if (alternativeResponse.data?.quoteResponse?.result?.[0]) {
+      const data = alternativeResponse.data.quoteResponse.result[0];
+      return {
+        price: data.regularMarketPrice || null,
+        change: data.regularMarketChangePercent || null,
+        name: data.shortName || data.longName || null
+      };
+    }
+
+    return { price: null, change: null, name: null };
+  } catch (error) {
+    console.error(`Failed to fetch stock price for ${symbol}:`, error);
+    return { price: null, change: null, name: null };
+  }
+}
+
+// Extract stock tickers from message
+function extractStockSymbols(message: string): string[] {
+  // Common Indonesian stock patterns
+  const patterns = [
+    // Match standalone stock tickers like BBRI, TLKM, etc.
+    /\b[A-Z]{4}\b/g,
+    // Match tickers followed by .JK
+    /\b[A-Z]{4}\.JK\b/g,
+    // Match common abbreviations with period
+    /\bBBRI\b|\bTLKM\b|\bBBCA\b|\bBMRI\b|\bUNVR\b|\bASII\b|\bPGAS\b|\bINDF\b|\bICBP\b/gi,
+  ];
+
+  const symbols = new Set<string>();
+  
+  // Extract using each pattern
+  patterns.forEach(pattern => {
+    const matches = message.match(pattern);
+    if (matches) {
+      matches.forEach(match => symbols.add(match.toUpperCase()));
+    }
+  });
+  
+  // Also check for specific stock names in message
+  const stockNameMap: Record<string, string> = {
+    'bank rakyat': 'BBRI',
+    'bri': 'BBRI',
+    'telkom': 'TLKM',
+    'telekomunikasi': 'TLKM',
+    'astra': 'ASII',
+    'unilever': 'UNVR',
+    'bank central asia': 'BBCA',
+    'bca': 'BBCA',
+    'mandiri': 'BMRI',
+    'bank mandiri': 'BMRI',
+    'perusahaan gas': 'PGAS',
+    'pgn': 'PGAS',
+    'indofood': 'INDF',
+    'indofood cbp': 'ICBP'
+  };
+  
+  Object.entries(stockNameMap).forEach(([name, symbol]) => {
+    if (message.toLowerCase().includes(name.toLowerCase())) {
+      symbols.add(symbol);
+    }
+  });
+  
+  return Array.from(symbols);
+}
+
+// Detect off-topic queries
     const nonMarketTerms = /\b(code|programming|typescript|javascript|python|game|gaming|maze|algorithm|compiler|database|API|endpoint)\b/i;
     if (nonMarketTerms.test(message)) {
       return res.json({
@@ -132,16 +354,25 @@ router.post(["/", "/chat"], async (req, res) => {
       });
     }
     
-    // Extract stock symbols from message using our utility
+    // Extract stock symbols from message
     const stockSymbols = extractStockSymbols(message);
-    let realTimeStockData: StockPrice[] = [];
+    let realTimeStockData = [];
     
     // Check if any stock symbols were found in the message and fetch real-time data
     if (stockSymbols.length > 0) {
       safeLog(`Found stock symbols in query: ${stockSymbols.join(', ')}`);
       
-      // Fetch real-time data for all symbols using our utility
-      realTimeStockData = await fetchMultipleStockPrices(stockSymbols);
+      // Fetch real-time data for each stock symbol
+      const stockDataPromises = stockSymbols.map(symbol => getYahooFinanceStockPrice(symbol));
+      const stockDataResults = await Promise.all(stockDataPromises);
+      
+      // Map stock symbols to their data
+      realTimeStockData = stockSymbols.map((symbol, index) => {
+        return {
+          symbol,
+          ...stockDataResults[index]
+        };
+      }).filter(data => data.price !== null);
       
       safeLog(`Got real-time stock data:`, realTimeStockData);
       
@@ -152,8 +383,14 @@ router.post(["/", "/chat"], async (req, res) => {
         const stockData = realTimeStockData[0];
         const isIndonesianStock = ['BBRI', 'TLKM', 'ASII', 'BBCA', 'BMRI', 'UNVR', 'PGAS', 'INDF', 'ICBP'].includes(stockData.symbol);
         
-        // Format the stock price data using our utility
-        const { priceFormatted, changeFormatted, changeDirection } = formatStockPrice(stockData, isIndonesianStock);
+        // Format the price based on stock type
+        const priceFormatted = isIndonesianStock
+          ? `IDR ${stockData.price!.toLocaleString('id-ID')}`
+          : `$${stockData.price!.toLocaleString('en-US')}`;
+        
+        // Format the change
+        const changeDirection = stockData.change! >= 0 ? '📈' : '📉';
+        const changeFormatted = `${stockData.change! >= 0 ? '+' : ''}${stockData.change!.toFixed(2)}%`;
         
         // Return a simple response with stock price info
         return res.json({
@@ -166,46 +403,44 @@ router.post(["/", "/chat"], async (req, res) => {
     }
     
     // If we get here, this isn't a simple stock price query or we need the AI to analyze
-    // Fallback to our market data API if Yahoo Finance fails
-    if (stockSymbols.length > 0 && realTimeStockData.length === 0) {
+    
+    // Check if the message is a simple stock price query for one of our tracked stocks
+    // Keeping the original code as fallback but improving it with our realTimeStockData if available
+    const stockPriceRegex = /\b(BBRI|TLKM|ASII|BBCA|AAPL|MSFT|GOOGL|TSLA)\s*(stock|price|stock price|stock ticker|ticker)\b/i;
+    const stockMatch = message.match(stockPriceRegex);
+    
+    if (stockMatch && realTimeStockData.length === 0) {
       try {
-        const stockPriceRegex = /\b(BBRI|TLKM|ASII|BBCA|AAPL|MSFT|GOOGL|TSLA)\s*(stock|price|stock price|stock ticker|ticker)\b/i;
-        const stockMatch = message.match(stockPriceRegex);
+        // Get the stock symbol from the match
+        const stockSymbol = stockMatch[1].toUpperCase();
         
-        if (stockMatch) {
-          // Get the stock symbol from the match
-          const stockSymbol = stockMatch[1].toUpperCase();
+        // Fetch market data from our API
+        const marketDataResponse = await axios.get('/api/market-data', {
+          baseURL: 'http://localhost:3000'
+        });
+        const marketData = marketDataResponse.data;
+        
+        if (marketData?.stocks && marketData.stocks[stockSymbol]) {
+          const stockData = marketData.stocks[stockSymbol];
+          const priceFormatted = stockSymbol.includes('BB') || stockSymbol === 'TLKM' || stockSymbol === 'ASII' 
+            ? `IDR ${stockData.price.toLocaleString('id-ID')}`
+            : `$${stockData.price.toLocaleString('en-US')}`;
           
-          // Fetch market data from our API
-          const marketDataResponse = await axios.get('/api/market-data', {
-            baseURL: 'http://localhost:3000'
+          const changeDirection = stockData.change24h >= 0 ? '📈' : '📉';
+          const changeFormatted = `${stockData.change24h >= 0 ? '+' : ''}${stockData.change24h.toFixed(2)}%`;
+          
+          return res.json({
+            status: 'success',
+            reply: `Current ${stockSymbol} stock price is ${priceFormatted} with a 24-hour change of ${changeFormatted} ${changeDirection}.`,
+            model: 'market-data-api',
+            endpoint: '/api/market-data'
           });
-          const marketData = marketDataResponse.data;
-          
-          if (marketData?.stocks && marketData.stocks[stockSymbol]) {
-            const stockData = marketData.stocks[stockSymbol];
-            const priceFormatted = stockSymbol.includes('BB') || stockSymbol === 'TLKM' || stockSymbol === 'ASII' 
-              ? `IDR ${stockData.price.toLocaleString('id-ID')}`
-              : `$${stockData.price.toLocaleString('en-US')}`;
-            
-            const changeDirection = stockData.change24h >= 0 ? '📈' : '📉';
-            const changeFormatted = `${stockData.change24h >= 0 ? '+' : ''}${stockData.change24h.toFixed(2)}%`;
-            
-            return res.json({
-              status: 'success',
-              reply: `Current ${stockSymbol} stock price is ${priceFormatted} with a 24-hour change of ${changeFormatted} ${changeDirection}.`,
-              model: 'market-data-api',
-              endpoint: '/api/market-data'
-            });
-          }
         }
       } catch (error) {
         console.error('Error fetching stock price from market data API:', error);
         // Continue with regular AI processing if market data API fails
       }
     }
-
-    // Process with Perplexity AI
 
     const today = new Date().toLocaleDateString('en-US', { 
       weekday: 'long', 
@@ -215,7 +450,21 @@ router.post(["/", "/chat"], async (req, res) => {
     });
 
     // Prepare a stock data section for the prompt if we have real-time data
-    const stockDataSection = generateStockDataSection(realTimeStockData);
+    let stockDataSection = '';
+    if (realTimeStockData.length > 0) {
+      stockDataSection = '\n\n## Latest Real-Time Stock Data (from Yahoo Finance):\n';
+      realTimeStockData.forEach(stock => {
+        const isIndonesianStock = ['BBRI', 'TLKM', 'ASII', 'BBCA', 'BMRI', 'UNVR', 'PGAS', 'INDF', 'ICBP'].includes(stock.symbol);
+        const priceFormatted = isIndonesianStock 
+          ? `IDR ${stock.price!.toLocaleString('id-ID')}` 
+          : `$${stock.price!.toLocaleString('en-US')}`;
+        const changeDirection = stock.change! >= 0 ? '📈' : '📉';
+        const changeFormatted = `${stock.change! >= 0 ? '+' : ''}${stock.change!.toFixed(2)}%`;
+        
+        stockDataSection += `- ${stock.name || stock.symbol} (${stock.symbol}): ${priceFormatted}, Change: ${changeFormatted} ${changeDirection}\n`;
+      });
+      stockDataSection += '\nPlease incorporate this latest data in your analysis.';
+    }
 
     safeLog('Preparing optimized system prompt...');
     const basePrompt = `Financial analyst specializing in Indonesian and global markets. Today: ${today}.
