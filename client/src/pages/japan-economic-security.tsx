@@ -1,5 +1,8 @@
 import { Card, CardContent } from '@/components/ui/card';
-import { BarChart3, Globe, Clock, MapPin, ChevronRight, TrendingUp, AlertCircle, Unlink, FileLock2 } from 'lucide-react';
+import { 
+  BarChart3, Globe, Clock, MapPin, ChevronRight, TrendingUp, 
+  AlertCircle, Unlink, FileLock2, FileText, ExternalLink 
+} from 'lucide-react';
 import { Link, useLocation } from "wouter";
 import { sampleArticles } from "@/types/newsletter";
 import { Header } from "@/components/Header";
@@ -129,7 +132,7 @@ export default function JapanEconomicSecurity() {
 
         <div className="py-4 border-b border-gray-200 dark:border-gray-800">
           <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
-            As meticulously documented by Armstrong, Solís, and Urata in their 2025 paper "Economic Security and New Industrial Policy" published in the Asian Economic Policy Review, Japan exhibits persistent vulnerabilities in its supply chain resilience despite comprehensive policy initiatives. Recent analysis reveals Japan's increased dependence on China for rare earth elements—rising precipitously from 50% in 2014 to 70% in 2022—notwithstanding Beijing's tightening export controls over strategic minerals including germanium, gallium, graphite, and antimony.
+            As meticulously documented by <a href="#citation-1" className="text-blue-600 dark:text-blue-400 hover:underline inline-flex items-center">Armstrong, Solís, and Urata in their 2025 paper "Economic Security and New Industrial Policy"<sup className="text-xs ml-0.5">[1]</sup></a> published in the Asian Economic Policy Review, Japan exhibits persistent vulnerabilities in its supply chain resilience despite comprehensive policy initiatives. Recent analysis reveals Japan's increased dependence on China for rare earth elements—rising precipitously from 50% in 2014 to 70% in 2022—notwithstanding Beijing's tightening export controls over strategic minerals including germanium, gallium, graphite, and antimony.
           </p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 py-4">
@@ -216,6 +219,18 @@ export default function JapanEconomicSecurity() {
           <p className="text-gray-700 dark:text-gray-300 mb-4">
             According to the Mitsubishi Research Institute's analysis, computation of import sources for ten specified critical materials designated under the Economic Security Promotion Act (ESPA) reveals China's dominant position across multiple categories. China represents the primary source of imports for fertilizers (42%), machine tools and industrial robots (30%), rechargeable batteries (52%), and ship parts (22%). Additionally, China ranks second in permanent magnets (36%), semiconductors (24%), and rare earths (30%).
           </p>
+          
+          <div className="my-6 bg-gray-100 dark:bg-gray-800 p-4 rounded-lg">
+            <div className="text-center mb-3">
+              <p className="font-semibold text-gray-900 dark:text-white">Figure 1: Share of China in overall trade for Japan and the United States (%)</p>
+              <p className="text-xs text-gray-600 dark:text-gray-400">Showing trends from 1989-2023</p>
+            </div>
+            <div className="flex justify-center">
+              <div className="bg-gray-200 dark:bg-gray-700 w-full max-w-2xl h-64 flex items-center justify-center rounded">
+                <p className="text-gray-600 dark:text-gray-400 text-sm italic">Figure 1 Image Placeholder</p>
+              </div>
+            </div>
+          </div>
 
           <p className="text-gray-700 dark:text-gray-300 mb-4">
             The International Energy Agency further confirms that China maintains an extraordinary dominance in processing critical minerals, accounting for 70% of global rare earth elements production and an overwhelming 90% of processing capacity—a bottleneck of particular strategic concern.
@@ -282,6 +297,18 @@ export default function JapanEconomicSecurity() {
               </Card>
             </div>
           </div>
+          
+          <div className="my-6 bg-gray-100 dark:bg-gray-800 p-4 rounded-lg">
+            <div className="text-center mb-3">
+              <p className="font-semibold text-gray-900 dark:text-white">Figure 3: Japan's trade distortive semiconductor industrial policies with stated motivation</p>
+              <p className="text-xs text-gray-600 dark:text-gray-400">Showing cumulative measures categorized by resilience security, strategic competitiveness, and geopolitical concern</p>
+            </div>
+            <div className="flex justify-center">
+              <div className="bg-gray-200 dark:bg-gray-700 w-full max-w-2xl h-64 flex items-center justify-center rounded">
+                <p className="text-gray-600 dark:text-gray-400 text-sm italic">Figure 3 Image Placeholder</p>
+              </div>
+            </div>
+          </div>
         </section>
         <section>
           <h2 className="text-xl font-serif font-bold text-gray-900 dark:text-white mb-3">Indonesia's Strategic Position in Japan's Economic Security Framework</h2>
@@ -299,6 +326,18 @@ export default function JapanEconomicSecurity() {
           <p className="text-gray-700 dark:text-gray-300 mb-4">
             Japan has explicitly adopted a policy objective to systematically reduce dependency on China across multiple dimensions of economic interaction. This imperative is central to Japan's "strategic autonomy" doctrine articulated by the LDP in 2020 and embedded in subsequent policy frameworks. Economic data reveals the tangible manifestation of this strategic shift in Japanese investment patterns, with FDI outflows to China declining precipitously from their peak of 18.9% of total Japanese outbound investment.
           </p>
+          
+          <div className="my-6 bg-gray-100 dark:bg-gray-800 p-4 rounded-lg">
+            <div className="text-center mb-3">
+              <p className="font-semibold text-gray-900 dark:text-white">Figure 2: Share of China in overall FDI for Japan and the United States (%)</p>
+              <p className="text-xs text-gray-600 dark:text-gray-400">Showing trends in both outflows and stock positions</p>
+            </div>
+            <div className="flex justify-center">
+              <div className="bg-gray-200 dark:bg-gray-700 w-full max-w-2xl h-64 flex items-center justify-center rounded">
+                <p className="text-gray-600 dark:text-gray-400 text-sm italic">Figure 2 Image Placeholder</p>
+              </div>
+            </div>
+          </div>
 
           <div className="mb-6">
             <h4 className="font-semibold text-gray-800 dark:text-gray-200 mb-2">Multiple drivers underpin this strategic recalibration:</h4>
@@ -439,6 +478,29 @@ export default function JapanEconomicSecurity() {
             </p>
           </div>
         </section>
+        
+        {/* Citation Footer */}
+        <footer className="mt-12 pt-8 border-t border-gray-200 dark:border-gray-800">
+          <div id="citation-1" className="flex items-start gap-3 mb-6">
+            <div className="flex-shrink-0 w-8 h-8 bg-blue-100 dark:bg-blue-900/30 rounded-full flex items-center justify-center">
+              <FileText className="h-4 w-4 text-blue-600 dark:text-blue-400" />
+            </div>
+            <div>
+              <h4 className="text-sm font-semibold text-gray-900 dark:text-gray-100 mb-1">Source [1]</h4>
+              <p className="text-sm text-gray-700 dark:text-gray-300">
+                Armstrong, S., Solís, M., & Urata, S. (2025). Economic Security and New Industrial Policy. <i>Asian Economic Policy Review</i>.
+              </p>
+              <a 
+                href="https://onlinelibrary.wiley.com/doi/full/10.1111/aepr.12502?msockid=38e8ce1644eb6c2c0bf3dcdf45bd6d60" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="text-xs text-blue-600 dark:text-blue-400 hover:underline mt-1 inline-flex items-center"
+              >
+                View publication <ExternalLink className="h-3 w-3 ml-1" />
+              </a>
+            </div>
+          </div>
+        </footer>
       </div>
     </div>
   );
