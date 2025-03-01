@@ -302,7 +302,7 @@ export default function JapanEconomicSecurity() {
           
           <div className="my-6 bg-gray-100 dark:bg-gray-800 p-4 rounded-lg">
             <div className="text-center mb-3">
-              <p className="font-semibold text-gray-900 dark:text-white">Figure 3: Japan's trade distortive semiconductor industrial policies with stated motivation</p>
+              <p className="font-semibold text-gray-900 dark:text-white">Figure 2: Japan's trade distortive semiconductor industrial policies with stated motivation</p>
               <p className="text-xs text-gray-600 dark:text-gray-400">Showing cumulative measures categorized by resilience security, strategic competitiveness, and geopolitical concern</p>
             </div>
             <div className="flex justify-center">
@@ -333,7 +333,7 @@ export default function JapanEconomicSecurity() {
           
           <div className="my-6 bg-gray-100 dark:bg-gray-800 p-4 rounded-lg">
             <div className="text-center mb-3">
-              <p className="font-semibold text-gray-900 dark:text-white">Figure 2: Share of China in overall FDI for Japan and the United States (%)</p>
+              <p className="font-semibold text-gray-900 dark:text-white">Figure 3: Share of China in overall FDI for Japan and the United States (%)</p>
               <p className="text-xs text-gray-600 dark:text-gray-400">Showing trends in both outflows and stock positions</p>
             </div>
             <div className="flex justify-center">

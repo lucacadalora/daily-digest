@@ -79,7 +79,7 @@ export default function BUMNLawComparison() {
 
         <header className="border-b border-gray-200 dark:border-gray-800 py-6">
           <Badge variant="outline" className="mb-4 text-xs bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200 border-blue-200 dark:border-blue-800">
-            CLIENT ALERT
+            LAW REVIEW
           </Badge>
           
           <h1 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4 leading-tight">
