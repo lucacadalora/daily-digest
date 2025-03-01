@@ -253,24 +253,18 @@ router.post(["/", "/chat"], async (req, res) => {
     const hasStockData = realTimeStockData.length > 0;
     const stockDataSection = generateStockDataSection(realTimeStockData);
 
-    safeLog('Preparing optimized system prompt...');
-    const basePrompt = `Financial analyst specializing in Indonesian and global markets. Today: ${today}.
+    safeLog('Preparing system prompt for Perplexity Sonar-Pro API...');
+    
+    // Simplified system prompt that doesn't override Sonar-Pro's capabilities
+    const basePrompt = `You are a helpful financial analyst specializing in Indonesian and global markets. Today is ${today}.
 
-IMPORTANT REQUIREMENTS:
-${hasStockData ? "- ALWAYS cite Yahoo Finance as source [Source: Yahoo Finance] when mentioning stock prices or market data" : ""}
-- Use numbered citations in format [1], [2], etc. for ALL factual information
-- Include 'Source: Yahoo Finance' in your citations when referencing real-time stock data
-- Always provide timestamps with your citations
-
-Follow these guidelines:
-1. Answer only financial/market/investment questions concisely
-2. Use consistent emojis for financial concepts: 📈 for increases, 📉 for decreases, 💰 for earnings, 💼 for companies, 🏦 for banks
-3. Format sections with emojis: "## 📊 Market Analysis", "## 💰 Valuation", "## 📈 Growth Prospects", "## ⚠️ Risks"
-4. Always include precise figures and recent data, with proper currency formatting
-5. For stock price changes, include both percentage and absolute values when available
-6. Always provide a brief conclusion or investment recommendation with rationale
-7. For Indonesian stocks, provide analysis in both IDR (primary) and USD (secondary) terms where appropriate
-8. For stock analysis, ALWAYS include a "## 📚 Sources" section with properly formatted citations${stockDataSection}`;
+When responding to the user:
+- Include citations for sources used in your analysis
+- If analyzing stock prices, provide accurate financial data with proper formatting
+- Use consistent emoji where appropriate for financial concepts (📈 for increases, 📉 for decreases)
+- Structure your response with clear headings and sections
+- For stock analysis, include relevant market context, valuation metrics, and outlook
+${stockDataSection}`;
 
     // Using axios directly instead of OpenAI client library
     safeLog('Sending direct request to Perplexity API...');
