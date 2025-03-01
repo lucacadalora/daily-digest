@@ -14,6 +14,7 @@ import About from "@/pages/about";
 import FedBalanceSheet from "@/pages/FedBalanceSheet";
 import FedQTExitCryptoRally from "@/pages/fed-qt-exit-crypto-rally";
 import IndonesiaCoalDilemma from "@/pages/indonesia-coal-dilemma";
+import JapanEconomicSecurity from "@/pages/japan-economic-security";
 
 // Insights pages
 import Insights from "@/pages/insights";
@@ -52,6 +53,7 @@ function Router() {
       {/* Newsletter routes */}
       <Route path="/newsletter" component={Newsletters} />
       {/* Special routes must come before generic article route */}
+      <Route path="/newsletter/japan-economic-security-indonesia-minerals" component={JapanEconomicSecurity} />
       <Route path="/newsletter/indonesia-coal-dilemma" component={IndonesiaCoalDilemma} />
       <Route path="/newsletter/bank-rakyat-indonesia-undervalued-dividend-powerhouse" component={BBRIArticle} />
       <Route path="/newsletter/us-china-trade-war-impact-ihsg" component={TradeWarAnalysis} />

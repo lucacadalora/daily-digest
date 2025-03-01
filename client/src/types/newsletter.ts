@@ -33,6 +33,35 @@ export type Article = z.infer<typeof articleSchema>;
 
 export const sampleArticles: Article[] = [
   {
+    slug: "japan-economic-security-indonesia-minerals",
+    title: "Strategic Supply Chain Positioning and Critical Minerals: Japan's Economic Security Strategy and Implications for Indonesia",
+    description: "Analysis of Japan's economic security vulnerabilities, strategic responses, and the opportunities for Indonesia to position itself within Japan's evolving supply chain resilience framework, particularly in critical minerals.",
+    category: "Economics",
+    source: "Daily Digest",
+    author: "Market Intelligence Team",
+    date: "March 1, 2025",
+    previewEmoji: "🔋",
+    previewMetrics: [
+      {
+        label: "Chinese Dependency",
+        value: "70%",
+        subtitle: "Japan's rare earth imports"
+      },
+      {
+        label: "Nickel Reserves",
+        value: "21%",
+        subtitle: "Indonesia's global share"
+      },
+      {
+        label: "Strategic Index",
+        value: "86 vs 12",
+        subtitle: "Japan HHI vs G7 average"
+      }
+    ],
+    tags: ["Economic Security", "Critical Minerals", "Japan", "Indonesia", "Supply Chain"],
+    content: "Strategic Supply Chain Positioning and Critical Minerals: Japan's Economic Security Strategy and Implications for Indonesia"
+  },
+  {
     slug: "bumn-law-comparison",
     title: "Perbandingan UU BUMN: UU No. 19/2003 vs UU No. 1/2025",
     description: "Indonesia telah memberlakukan perubahan signifikan terhadap kerangka regulasi BUMN dengan disahkannya UU No. 1/2025 yang mengamendemen UU No. 19/2003. Reformasi ini mengubah paradigma pengelolaan BUMN dari Teori Sumber ke Teori Korporasi dan memperkenalkan Danantara dengan modal awal Rp 1.000 triliun.",
