@@ -52,7 +52,7 @@ router.post("/chat", async (req, res) => {
     log('Initializing Perplexity client...');
     const client = new OpenAI({
       apiKey,
-      baseURL: "https://api.perplexity.ai",
+      baseURL: "https://api.perplexity.ai/v1",
       defaultHeaders: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
