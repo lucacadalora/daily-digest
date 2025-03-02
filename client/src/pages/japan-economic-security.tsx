@@ -7,79 +7,27 @@ import { Link, useLocation } from "wouter";
 import { sampleArticles } from "@/types/newsletter";
 import { Header } from "@/components/Header";
 import { useEffect } from "react";
+import MetaTags from '@/components/SEO/MetaTags'; 
+import type { ArticleMetadata } from '@/lib/meta-tags';
 
 export default function JapanEconomicSecurity() {
   const [location] = useLocation();
   const article = sampleArticles.find(a => a.slug === 'japan-economic-security-indonesia-minerals');
 
-  useEffect(() => {
-    if (article) {
-      // Create rich preview metadata
-      const metrics = article.previewMetrics || [];
-      const metricsText = metrics.length > 0 
-        ? metrics.map(m => `${m.label}: ${m.value}`).join(" | ")
-        : '';
-
-      const previewTitle = `${article.title} | Daily Digest`;
-      const previewDescription = metricsText 
-        ? `${metricsText}. ${article.description}`
-        : article.description;
-
-      const metaTags = {
-        // Open Graph tags for rich previews
-        'og:title': previewTitle,
-        'og:description': previewDescription,
-        'og:type': 'article',
-        'og:url': `https://lucaxyzz-digest.replit.app/newsletter/${article.slug}`,
-        'og:site_name': 'Daily Digest',
-        'og:locale': 'en_US',
-
-        // Twitter Card tags
-        'twitter:card': 'summary',
-        'twitter:site': '@dailydigest',
-        'twitter:creator': '@dailydigest',
-        'twitter:title': previewTitle,
-        'twitter:description': previewDescription,
-
-        // Article metadata
-        'article:published_time': article.date,
-        'article:author': article.author,
-        'article:section': article.category,
-        'article:tag': article.tags?.join(',') || article.category,
-
-        // Basic SEO tags
-        'description': previewDescription,
-        'keywords': article.tags?.join(',') || `${article.category},market analysis,financial news`,
-        'news_keywords': article.tags?.join(',') || article.category
-      };
-
-      // Update meta tags in the document head
-      Object.entries(metaTags).forEach(([name, content]) => {
-        let tag;
-        if (name.startsWith('og:') || name.startsWith('article:')) {
-          // Handle Open Graph and article tags
-          tag = document.querySelector(`meta[property="${name}"]`);
-          if (!tag) {
-            tag = document.createElement('meta');
-            tag.setAttribute('property', name);
-            document.head.appendChild(tag);
-          }
-        } else {
-          // Handle other meta tags
-          tag = document.querySelector(`meta[name="${name}"]`);
-          if (!tag) {
-            tag = document.createElement('meta');
-            tag.setAttribute('name', name);
-            document.head.appendChild(tag);
-          }
-        }
-        tag.setAttribute('content', content);
-      });
-
-      // Update the document title
-      document.title = previewTitle;
-    }
-  }, [article]);
+  // Create article metadata for the MetaTags component
+  const metadata: ArticleMetadata | null = article ? {
+    title: `${article.title} | Daily Digest`,
+    description: article.description,
+    url: `https://lucaxyzz-digest.replit.app/japan-economic-security`,
+    image: '/images/japan-economic-security.jpg',
+    author: article.author,
+    publishedTime: article.date,
+    section: article.category,
+    tags: article.tags || [article.category],
+    siteName: 'Daily Digest',
+    twitterSite: '@dailydigest',
+    twitterCreator: '@dailydigest'
+  } : null;
 
   if (!article) {
     return <div>Article not found</div>;
@@ -87,6 +35,9 @@ export default function JapanEconomicSecurity() {
 
   return (
     <div className="min-h-screen bg-[#FBF7F4] dark:bg-gray-900 transition-colors">
+      {/* Add MetaTags component for SEO */}
+      {metadata && <MetaTags metadata={metadata} cacheBuster="20250302" />}
+      
       <Header simplified showCategories={false} />
 
       <div className="h-36 sm:h-32"></div>

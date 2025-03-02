@@ -56,6 +56,9 @@ export default function WSJArticle() {
 
   return (
     <div className="min-h-screen bg-[#FBF7F4] dark:bg-gray-900 transition-colors">
+      {/* Add MetaTags component for SEO */}
+      {metadata && <MetaTags metadata={metadata} cacheBuster="20250302" />}
+      
       {/* Header */}
       <Header simplified showCategories={false} />
 
