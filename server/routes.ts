@@ -242,6 +242,31 @@ class MarketDataCache {
 const marketDataCache = new MarketDataCache();
 
 export function registerRoutes(app: Express): Server {
+  // Special middleware to catch Twitter crawler requests at the highest level
+  // This must be the FIRST middleware in the chain to ensure it catches Twitter bot requests
+  app.use((req, res, next) => {
+    // Check if this is the twitter bot and the specific URL
+    const userAgent = req.headers['user-agent'] || '';
+    const path = req.path;
+    
+    // Handle direct Twitter bot requests to the china-steel-reform article
+    if (userAgent.includes('Twitterbot') && 
+        (path === '/latest/china-steel-reform' || path === '/latest/china-steel-reform/')) {
+      console.log('🤖 TWITTER BOT DETECTED! Serving special content for Twitter crawler');
+      
+      // Set cache control headers to ensure Twitter gets fresh content
+      res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+      res.setHeader('Pragma', 'no-cache');
+      res.setHeader('Expires', '0');
+      
+      // Serve the static HTML file directly without any redirects
+      return res.sendFile(join(process.cwd(), 'public', 'latest', 'china-steel-reform', 'index.html'));
+    }
+    
+    // For all other requests, continue with regular processing
+    next();
+  });
+  
   // Configure Express to serve static files outside of Vite's control FIRST in the middleware chain
   // This ensures it catches routes before any other middleware or route handlers
   app.use('/static', express.static(join(process.cwd(), 'public', 'static'), { 
