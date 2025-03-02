@@ -14,7 +14,7 @@ export const ExternalNewsCard: React.FC<ExternalNewsCardProps> = ({
   compact = false,
   showSource = true
 }) => {
-  // Format the timestamp to show relative time (e.g., "2 hours ago")
+  // Format the timestamp to show relative time (e.g., "3 HR AGO")
   const getRelativeTime = (timestamp?: number) => {
     if (!timestamp) return article.publishedDate;
     
@@ -25,19 +25,19 @@ export const ExternalNewsCard: React.FC<ExternalNewsCardProps> = ({
     const minutes = Math.floor(diff / (1000 * 60));
     
     if (minutes < 60) {
-      return `${minutes} ${minutes === 1 ? 'minute' : 'minutes'} ago`;
+      return `${minutes} MIN AGO`;
     }
     
     // Convert to hours
     const hours = Math.floor(minutes / 60);
     if (hours < 24) {
-      return `${hours} ${hours === 1 ? 'hour' : 'hours'} ago`;
+      return `${hours} HR AGO`;
     }
     
     // Convert to days
     const days = Math.floor(hours / 24);
     if (days < 7) {
-      return `${days} ${days === 1 ? 'day' : 'days'} ago`;
+      return `${days} DAY AGO`;
     }
     
     // Just return the date for older articles
@@ -75,9 +75,8 @@ export const ExternalNewsCard: React.FC<ExternalNewsCardProps> = ({
               </h4>
               
               {/* Time */}
-              <div className="mt-1 text-xs text-gray-500 dark:text-gray-400 flex items-center gap-1">
-                <Clock className="h-3 w-3" />
-                <span>{getRelativeTime(article.timestamp)}</span>
+              <div className="mt-1 text-xs font-bold text-teal-600 dark:text-teal-400 uppercase">
+                {getRelativeTime(article.timestamp)}
               </div>
             </div>
           </div>
@@ -116,15 +115,9 @@ export const ExternalNewsCard: React.FC<ExternalNewsCardProps> = ({
             {article.title}
           </h4>
           
-          {/* Footer info */}
-          <div className="flex items-center justify-between text-xs">
-            <div className="text-gray-500 dark:text-gray-400">
-              By {article.author}
-            </div>
-            <div className="text-gray-500 dark:text-gray-400 flex items-center gap-1">
-              <Clock className="h-3 w-3" />
-              <span>{getRelativeTime(article.timestamp)}</span>
-            </div>
+          {/* Footer info - Timestamp */}
+          <div className="text-xs font-bold text-teal-600 dark:text-teal-400 uppercase">
+            {getRelativeTime(article.timestamp)}
           </div>
         </div>
       </div>

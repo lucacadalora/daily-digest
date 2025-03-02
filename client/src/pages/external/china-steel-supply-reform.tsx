@@ -55,16 +55,15 @@ export default function ChinaSteel() {
             China's Steel Sector: 'Supply Reform 2.0' Looms
           </h1>
           
-          <div className="flex items-center text-sm text-gray-500 dark:text-gray-400 mb-6">
+          <div className="flex items-center text-sm mb-6">
             <span className="font-medium text-blue-600 dark:text-blue-400 mr-3">Markets</span>
-            <span className="mr-3">March 2, 2025</span>
-            <span>By Daily Digest Research</span>
+            <span className="font-bold text-teal-600 dark:text-teal-400 uppercase">3 HR AGO</span>
           </div>
         </div>
 
         <div className="mb-8">
           <img 
-            src="/images/external/china-steel.png" 
+            src="/latest/china-steel.png" 
             alt="Steel factory production line with rolled steel coils" 
             className="w-full rounded-lg"
           />

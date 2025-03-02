@@ -34,11 +34,11 @@ export const sampleExternalNews: ExternalNews[] = [
     id: "1",
     title: "China's Steel Sector: 'Supply Reform 2.0' Looms",
     source: "Bloomberg",
-    author: "Daily Digest Research",
+    author: "",
     publishedDate: "March 2, 2025",
     url: "/external/china-steel-supply-reform",
-    imageUrl: "/images/external/china-steel.png",
+    imageUrl: "/latest/china-steel.png",
     category: "Markets",
-    timestamp: Date.now() - 1000 * 60 * 30 // 30 minutes ago
+    timestamp: Date.now() - 1000 * 60 * 60 * 3 // 3 hours ago
   }
 ];
