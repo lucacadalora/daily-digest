@@ -16,7 +16,7 @@ export default function IndonesiaEconomicCrisis() {
     title: `${article.title} | Daily Digest`,
     description: article.description,
     url: `https://lucaxyzz-digest.replit.app/indonesia-economic-crisis`,
-    image: '/images/indonesia-economic-crisis.jpg',
+    // Don't include image to avoid using the wrong one in social sharing
     author: article.author,
     publishedTime: article.date,
     section: article.category,

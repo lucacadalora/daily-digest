@@ -24,7 +24,7 @@ function convertToMetadata(article: Article): ArticleMetadata {
     title: enrichedTitle,
     description: enrichedDescription,
     url: `https://lucaxyzz-digest.replit.app/indonesia-coal-dilemma`,
-    image: 'https://lucaxyzz-digest.replit.app/steel-image?v=20250302', // Use our universal image endpoint
+    // Don't include image to avoid using the wrong one in social sharing
     author: article.author,
     publishedTime: article.date,
     section: article.category,

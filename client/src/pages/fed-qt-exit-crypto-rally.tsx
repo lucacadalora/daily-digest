@@ -4,12 +4,24 @@ import { Link } from "wouter";
 import { Header } from "@/components/Header";
 import { WIFChart } from "@/components/ui/WIFChart";
 import { CryptoChart } from "@/components/ui/CryptoChart";
-import { useEffect } from "react";
+import MetaTags from '@/components/SEO/MetaTags';
+import type { ArticleMetadata } from '@/lib/meta-tags';
 
 export default function FedQTExitCryptoRally() {
-  useEffect(() => {
-    document.title = "Crypto at Critical Junctures: Technical Analysis for BTC, ETH, SOL, and WIF's Next Moves | Daily Digest";
-  }, []);
+  // Create article metadata for the MetaTags component
+  const metadata: ArticleMetadata = {
+    title: "Crypto at Critical Junctures: Technical Analysis for BTC, ETH, SOL, and WIF's Next Moves | Daily Digest",
+    description: "Analysis of how the Fed's accelerated Quantitative Tightening exit strategy is creating a liquidity-driven rally in crypto assets, with specific technical outlooks for Bitcoin, Ethereum, Solana, and WIF.",
+    url: "https://lucaxyzz-digest.replit.app/fed-qt-exit-crypto-rally",
+    // Don't include image to avoid using the wrong one in social sharing
+    author: "Daily Digest Markets Desk",
+    publishedTime: "2025-02-09T14:00:00Z",
+    section: "Markets",
+    tags: ["Crypto", "Bitcoin", "Ethereum", "Solana", "Fed", "QT", "Technical Analysis"],
+    siteName: "Daily Digest",
+    twitterSite: "@dailydigest",
+    twitterCreator: "@dailydigest"
+  };
 
   return (
     <div className="min-h-screen bg-[#FBF7F4] dark:bg-gray-900 transition-colors">
