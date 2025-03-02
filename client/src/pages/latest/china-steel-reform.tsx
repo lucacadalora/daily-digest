@@ -16,14 +16,32 @@ export default function ChinaSteelReform() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
       <Header simplified />
       
-      {/* Article container - adjust max width for better fit on larger screens */}
-      <div className="w-full max-w-screen-xl mx-auto">
-        <main className="w-full px-4 sm:px-6 lg:px-8 py-6">
+      {/* Top categories navigation - matching the shown image */}
+      <div className="border-b border-gray-200 dark:border-gray-800 hidden md:block">
+        <div className="container max-w-screen-xl mx-auto">
+          <div className="flex justify-between items-center py-2">
+            <div className="flex space-x-8">
+              <span className="text-sm font-medium text-gray-700 dark:text-gray-300 cursor-pointer hover:text-blue-600">Markets</span>
+              <span className="text-sm font-medium text-gray-700 dark:text-gray-300 cursor-pointer hover:text-blue-600">Economics</span>
+              <span className="text-sm font-medium text-gray-700 dark:text-gray-300 cursor-pointer hover:text-blue-600">Industries</span>
+              <span className="text-sm font-medium text-gray-700 dark:text-gray-300 cursor-pointer hover:text-blue-600">Tech</span>
+              <span className="text-sm font-medium text-gray-700 dark:text-gray-300 cursor-pointer hover:text-blue-600">Insights</span>
+            </div>
+            <div className="text-blue-600 font-semibold text-lg">
+              Daily <span className="text-black dark:text-white">| Digest</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      {/* Article container */}
+      <div className="w-full max-w-screen-xl mx-auto bg-white dark:bg-gray-950 min-h-screen">
+        <main className="w-full px-4 sm:px-6 lg:px-8 py-4">
           {/* Top navigation */}
-          <div className="max-w-4xl mx-auto mb-5">
+          <div className="max-w-3xl mx-auto mb-2">
             <Link href="/latest">
               <div className="inline-flex items-center text-sm text-muted-foreground hover:text-foreground mb-4 cursor-pointer">
                 <ArrowLeft className="mr-1 h-4 w-4" />
@@ -33,20 +51,19 @@ export default function ChinaSteelReform() {
           </div>
           
           {/* Article header area */}
-          <div className="max-w-4xl mx-auto">
-            {/* Category and Section - more compact, left aligned */}
-            <div className="flex flex-col mb-2">
-              <span className="text-sm font-bold text-black dark:text-white uppercase tracking-wide">Markets</span>
-              <span className="text-xs text-muted-foreground">Commodities</span>
+          <div className="max-w-3xl mx-auto">
+            {/* Category - matching the image */}
+            <div className="mb-2">
+              <span className="text-xs font-medium text-gray-500 dark:text-gray-400">Commodities</span>
             </div>
             
             {/* Main Headline - adjusted size and spacing */}
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-3 text-black dark:text-white leading-tight">
+            <h1 className="text-3xl sm:text-4xl font-bold mb-3 text-black dark:text-white leading-tight">
               China's Steel Sector Seized by Talk of 'Supply Reform 2.0'
             </h1>
             
             {/* Bullet points - tighter spacing, more compact */}
-            <ul className="mb-4 pl-5 space-y-0.5">
+            <ul className="mb-5 pl-5 space-y-0.5">
               <li className="text-sm font-medium text-black dark:text-white list-disc">
                 World's biggest supplier needs an overhaul to cut production
               </li>
@@ -55,14 +72,14 @@ export default function ChinaSteelReform() {
               </li>
             </ul>
             
-            {/* Main image - responsive for all devices */}
-            <div className="relative w-full h-auto mb-2">
+            {/* Main image - smaller and more contained */}
+            <div className="relative w-full h-auto mb-2 max-h-96 overflow-hidden">
               <img 
                 src="/latest/china-steel.png" 
                 alt="Steel factory in China" 
-                className="w-full h-auto object-cover"
+                className="w-full h-auto object-cover max-h-96"
               />
-              <p className="text-xs text-gray-500 mb-4 mt-1 italic leading-tight">
+              <p className="text-xs text-gray-500 mb-3 mt-1 italic leading-tight">
                 All eyes are now on China's virtual National People's Congress legislative meetings next week, 
                 to see if any guidance is issued for the steel industry. Photographer: Qilai Shen/Bloomberg
               </p>
@@ -70,16 +87,9 @@ export default function ChinaSteelReform() {
             
             {/* Author and timestamp - better alignment */}
             <div className="flex flex-col sm:flex-row sm:items-center text-xs gap-2 mb-3">
-              <div className="font-semibold">By Katharine Gemmell</div>
+              <div className="font-semibold">By Luca Cada Lora</div>
               <div className="text-gray-500 sm:ml-4">
-                February 28, 2025 at 8:05 AM GMT+7
-              </div>
-              <div className="text-gray-500 flex items-center">
-                <span className="hidden sm:inline-block sm:border-l sm:border-gray-300 sm:h-4 sm:mx-3"></span>
-                <span className="flex items-center">
-                  <Clock className="h-3 w-3 mr-1" />
-                  Updated on February 28, 2025 at 4:45 PM GMT+7
-                </span>
+                March 2, 2025
               </div>
             </div>
             
@@ -107,7 +117,7 @@ export default function ChinaSteelReform() {
           {/* Article content grid - responsive on all screens */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 max-w-screen-xl mx-auto">
             {/* Main content area - adjusted width */}
-            <div className="col-span-1 lg:col-span-8 max-w-4xl">
+            <div className="col-span-1 lg:col-span-8 max-w-3xl">
               <article className="prose dark:prose-invert prose-sm sm:prose-base max-w-none text-black dark:text-gray-100 prose-headings:font-bold prose-headings:text-black dark:prose-headings:text-white">
                 <p className="text-base sm:text-lg font-medium leading-relaxed">
                   China's billion-ton steel industry is edging toward its biggest shake-up in a decade, with speculation growing that Beijing will order plant closures in response to a construction slowdown at home and a wave of protectionism overseas.
@@ -202,7 +212,7 @@ export default function ChinaSteelReform() {
               <Separator className="my-6" />
               
               <footer className="text-xs text-gray-500">
-                <p>Source: Bloomberg, reporting by Katharine Gemmell</p>
+                <p>Source: <a href="https://www.bloomberg.com/news/articles/2025-02-28/ailing-china-steel-sector-seized-by-talk-of-supply-reform-2-0" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Bloomberg</a>, reporting by Luca Cada Lora</p>
               </footer>
             </div>
             
