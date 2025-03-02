@@ -242,6 +242,19 @@ class MarketDataCache {
 const marketDataCache = new MarketDataCache();
 
 export function registerRoutes(app: Express): Server {
+  // Configure Express to serve static files outside of Vite's control FIRST in the middleware chain
+  // This ensures it catches routes before any other middleware or route handlers
+  app.use('/static', express.static(join(process.cwd(), 'public', 'static'), { 
+    index: false,
+    extensions: ['html'],
+    setHeaders: (res: Response) => {
+      // Set appropriate headers for static files
+      res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+      res.setHeader('Pragma', 'no-cache');
+      res.setHeader('Expires', '0');
+    }
+  }));
+  
   // Verify database connection during server startup
   (async () => {
     try {
@@ -385,10 +398,9 @@ export function registerRoutes(app: Express): Server {
     }
   });
   
-  // Configure Express to serve static files outside of Vite's control
-  app.use('/static', express.static(join(process.cwd(), 'public', 'static'), { 
+  // Configure direct serving for static images used in Open Graph
+  app.use('/public', express.static(join(process.cwd(), 'public'), { 
     index: false,
-    extensions: ['html'],
     setHeaders: (res: Response) => {
       // Set appropriate headers for static files
       res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
@@ -400,11 +412,22 @@ export function registerRoutes(app: Express): Server {
   // Direct access to static HTML version for social sharing (both paths)
   app.get(['/share/china-steel-reform', '/share/china-steel-reform/'], (req, res) => {
     try {
-      // Redirect to the static version we'll setup for crawlers
-      console.log('[Share Route] Redirecting to static version for China Steel Reform');
-      return res.redirect('/static/share/china-steel-reform.html');
+      // Serve the static HTML file directly
+      console.log('[Share Route] Serving static HTML for China Steel Reform');
+      const filePath = join(process.cwd(), 'public', 'static', 'share', 'china-steel-reform.html');
+      
+      if (!fs.existsSync(filePath)) {
+        console.error(`[Share Route] HTML file not found at path: ${filePath}`);
+        return res.status(404).send('Share page not found');
+      }
+      
+      const html = readFileSync(filePath, 'utf-8');
+      console.log('[Share Route] Successfully read HTML file, length:', html.length);
+      
+      res.setHeader('Content-Type', 'text/html');
+      return res.send(html);
     } catch (error) {
-      console.error('Error redirecting to China Steel Reform share page:', error);
+      console.error('Error serving China Steel Reform share page:', error);
       return res.status(500).send(`Error loading share page: ${error instanceof Error ? error.message : 'Unknown error'}`);
     }
   });
