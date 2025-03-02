@@ -5,71 +5,58 @@ import { ArrowLeft, ChevronRight, Share2, Printer, Clock, Mail, Facebook, Twitte
 import { Separator } from '@/components/ui/separator';
 import { Badge } from '@/components/ui/badge';
 
+// Function to update HTML head with meta tags
+function updateHtmlHead() {
+  // Create a link element for the canonical URL
+  const canonicalLink = document.querySelector('link[rel="canonical"]') || document.createElement('link');
+  canonicalLink.setAttribute('rel', 'canonical');
+  canonicalLink.setAttribute('href', 'https://lucaxyzz-digest.replit.app/latest/china-steel-reform');
+  document.head.appendChild(canonicalLink);
+
+  // Update the title
+  document.title = "China's Steel Sector Seized by Talk of 'Supply Reform 2.0' | Daily Digest";
+
+  // Update specific meta tags that are essential for social media sharing
+  const metaTags = {
+    // Make sure these exact property/name attributes match what's in the HTML
+    'description': "World's biggest supplier needs an overhaul to cut production. Beijing may order 50 million tons of capacity cuts: Citigroup",
+    'og:title': "China's Steel Sector Seized by Talk of 'Supply Reform 2.0' | Daily Digest",
+    'og:description': "World's biggest supplier needs an overhaul to cut production. Beijing may order 50 million tons of capacity cuts: Citigroup",
+    'og:url': 'https://lucaxyzz-digest.replit.app/latest/china-steel-reform',
+    'og:type': 'article',
+    'og:image': 'https://lucaxyzz-digest.replit.app/latest/china-steel.png',
+    'twitter:title': "China's Steel Sector Seized by Talk of 'Supply Reform 2.0' | Daily Digest",
+    'twitter:description': "World's biggest supplier needs an overhaul to cut production. Beijing may order 50 million tons of capacity cuts: Citigroup",
+    'twitter:image': 'https://lucaxyzz-digest.replit.app/latest/china-steel.png',
+    'twitter:card': 'summary_large_image'
+  };
+  
+  // Update each meta tag
+  Object.entries(metaTags).forEach(([name, content]) => {
+    // For Open Graph tags which use property attribute
+    if (name.startsWith('og:')) {
+      const tag = document.querySelector(`meta[property="${name}"]`);
+      if (tag) tag.setAttribute('content', content);
+    }
+    // For Twitter and other tags which use name attribute
+    else {
+      const tag = document.querySelector(`meta[name="${name}"]`);
+      if (tag) tag.setAttribute('content', content);
+    }
+  });
+}
+
 export default function ChinaSteelReform() {
-  // Update page title and meta tags on component mount
+  // Update meta tags when component mounts
   useEffect(() => {
-    const title = "China's Steel Sector Seized by Talk of 'Supply Reform 2.0'";
-    const description = "World's biggest supplier needs an overhaul to cut production. Beijing may order 50 million tons of capacity cuts: Citigroup";
-    const imageUrl = "https://lucaxyzz-digest.replit.app/latest/china-steel.png";
-    const url = "https://lucaxyzz-digest.replit.app/latest/china-steel-reform";
-    
-    document.title = title;
-    
-    // Define all the meta tags we need to set
-    const metaTags = {
-      // Basic SEO
-      "description": description,
-      "keywords": "China,steel,supply reform,industry,production cuts,commodities,industrial policy",
-      "news_keywords": "China steel,supply reform,industrial policy,commodities",
-      
-      // Open Graph (Facebook, LinkedIn, etc.)
-      "og:title": title,
-      "og:description": description,
-      "og:image": imageUrl,
-      "og:url": url,
-      "og:type": "article",
-      "og:site_name": "Daily Digest",
-      "og:locale": "en_US",
-      
-      // Twitter Card
-      "twitter:card": "summary_large_image",
-      "twitter:site": "@dailydigest",
-      "twitter:creator": "@dailydigest",
-      "twitter:title": title,
-      "twitter:description": description,
-      "twitter:image": imageUrl,
-      "twitter:domain": "lucaxyzz-digest.replit.app",
-      
-      // Article Metadata
-      "article:published_time": "2025-03-02",
-      "article:author": "Luca Cada Lora",
-      "article:section": "Commodities",
-      "article:tag": "China,steel,supply reform,industrial policy,commodities"
-    };
-    
     // Update meta tags in the document head
-    Object.entries(metaTags).forEach(([name, content]) => {
-      let tag;
-      if (name.startsWith('og:') || name.startsWith('article:')) {
-        // Handle Open Graph and article tags
-        tag = document.querySelector(`meta[property="${name}"]`);
-        if (!tag) {
-          tag = document.createElement('meta');
-          tag.setAttribute('property', name);
-          document.head.appendChild(tag);
-        }
-        tag.setAttribute('content', content);
-      } else {
-        // Handle other meta tags
-        tag = document.querySelector(`meta[name="${name}"]`);
-        if (!tag) {
-          tag = document.createElement('meta');
-          tag.setAttribute('name', name);
-          document.head.appendChild(tag);
-        }
-        tag.setAttribute('content', content);
-      }
-    });
+    updateHtmlHead();
+    
+    // Clean up if needed when component unmounts
+    return () => {
+      // Reset to default title if needed
+      document.title = "Daily Digest - Market Intelligence";
+    };
   }, []);
 
   return (
