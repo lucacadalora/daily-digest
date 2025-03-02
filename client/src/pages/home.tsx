@@ -178,9 +178,15 @@ export default function Home() {
 
       <footer className="border-t border-gray-200 dark:border-gray-700 mt-12 bg-white dark:bg-gray-900">
         <div className="max-w-[1200px] mx-auto px-4 py-6">
-          <p className="text-sm text-gray-500 dark:text-gray-400">
-            © 2025 Daily Digest. All rights reserved.
-          </p>
+          <div className="space-y-2">
+            <p className="text-sm text-gray-500 dark:text-gray-400">
+              © 2025 Daily Digest. All rights reserved.
+            </p>
+            <p className="text-xs italic text-gray-500 dark:text-gray-400">
+              Disclaimer: The content provided on this website is for informational purposes only. It is not intended to be financial advice. 
+              Consult a qualified financial advisor before making investment decisions.
+            </p>
+          </div>
         </div>
       </footer>
     </div>
