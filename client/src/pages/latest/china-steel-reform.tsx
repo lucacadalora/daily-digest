@@ -244,7 +244,7 @@ export default function ChinaSteelReform() {
                   <div className="flex items-start gap-3 mb-4">
                     <div className="w-20 h-14 bg-gray-200 dark:bg-gray-800 overflow-hidden flex-shrink-0">
                       <img 
-                        src="/latest/china-steel.png" 
+                        src="/china-steel.png" 
                         alt="Steel factory" 
                         className="w-full h-full object-cover"
                       />
@@ -263,7 +263,7 @@ export default function ChinaSteelReform() {
                   <div className="flex items-start gap-3 mb-4">
                     <div className="w-20 h-14 bg-gray-200 dark:bg-gray-800 overflow-hidden flex-shrink-0">
                       <img 
-                        src="/latest/china-steel.png" 
+                        src="/china-steel.png" 
                         alt="Steel factory" 
                         className="w-full h-full object-cover"
                       />
