@@ -370,25 +370,25 @@ export function registerRoutes(app: Express): Server {
       const isCrawler = /facebookexternalhit|Twitterbot|LinkedInBot|WhatsApp|Googlebot|bingbot|DuckDuckBot|Slackbot|TelegramBot/i.test(userAgent);
       
       if (isCrawler) {
-        // For social media crawlers, serve the static HTML with optimized meta tags
+        // For social media crawlers, redirect to our static share page
         console.log(`[SSR] Detected crawler in user-agent: ${userAgent}`);
-        const html = readFileSync(join(__dirname, '..', 'public', 'latest', 'china-steel-reform.html'), 'utf-8');
-        res.setHeader('Content-Type', 'text/html');
-        return res.send(html);
+        console.log('[SSR] Redirecting to static share page');
+        return res.redirect(302, '/share/china-steel-reform/');
       }
       
       // For regular users, continue with normal React app rendering
       next();
     } catch (error) {
-      console.error('Error serving China Steel Reform static page:', error);
+      console.error('Error in China Steel Reform crawler detection:', error);
       next(); // Fall back to client-side rendering
     }
   });
   
-  // Direct access to static HTML version for social sharing
-  app.get('/share/china-steel-reform', (req, res) => {
+  // Direct access to static HTML version for social sharing (both paths)
+  app.get(['/share/china-steel-reform', '/share/china-steel-reform/'], (req, res) => {
     try {
-      const html = readFileSync(join(__dirname, '..', 'public', 'latest', 'china-steel-reform.html'), 'utf-8');
+      console.log('[Share Route] Serving static HTML for China Steel Reform');
+      const html = readFileSync(join(__dirname, '..', 'public', 'share', 'china-steel-reform', 'index.html'), 'utf-8');
       res.setHeader('Content-Type', 'text/html');
       return res.send(html);
     } catch (error) {
