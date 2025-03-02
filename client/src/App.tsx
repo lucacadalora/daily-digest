@@ -10,6 +10,7 @@ import Newsletters from "@/pages/newsletters";
 import Latest from "@/pages/latest";
 import TradeWarAnalysis from "@/pages/trade-war-analysis";
 import TradeWarTsunamiFeb1014 from "@/pages/trade-war-tsunami-feb-10-14";
+import IHSGOutlookMarch37 from "@/pages/ihsg-outlook-march-3-7";
 import MineralCriticalityMatrix from "@/pages/mineral-criticality-matrix";
 import IndonesiaEconomicCrisis from "@/pages/indonesia-economic-crisis";
 import About from "@/pages/about";
