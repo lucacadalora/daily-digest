@@ -131,17 +131,11 @@ export default function ChinaSteelReform() {
                   No plans have been announced, but the widespread speculation reflect broad recognition that the struggling steel industry needs a fresh overhaul, nearly a decade after President Xi Jinping launched his first supply side reforms. The country's chronic property crisis has sent domestic steel demand falling for the past four years.
                 </p>
                 
-                {/* Chart component - improved styling */}
-                <div className="bg-gray-50 dark:bg-gray-900 p-3 my-6 border border-gray-200 dark:border-gray-800">
-                  <h3 className="text-base font-bold mb-1 text-black dark:text-white">
-                    China's Steelmaker Profits Slump
-                  </h3>
-                  <h4 className="text-xs sm:text-sm font-medium mb-2 text-gray-600 dark:text-gray-400">
-                    Steel companies see lowest profits in decades
-                  </h4>
-                  <div className="relative w-full bg-white dark:bg-gray-800 flex items-center justify-center overflow-hidden">
+                {/* Chart component - using actual image */}
+                <div className="bg-white dark:bg-gray-950 p-3 my-6 border border-gray-200 dark:border-gray-800">
+                  <div className="relative w-full flex items-center justify-center">
                     <img 
-                      src="/latest/charts/china-steel-profits.svg" 
+                      src="/latest/images/china-steel-profits.jpg" 
                       alt="Chart showing Chinese steel industry profits slump"
                       className="w-full h-auto object-contain"
                     />
@@ -173,12 +167,12 @@ export default function ChinaSteelReform() {
                   Trump argued that his blanket 25% tariffs against steel imports were necessary to protect American industry against China-fueled overcapacity. But criticism of Beijing's steel dominance has grown more widespread as the country's economic troubles have sent it looking abroad for steel buyers.
                 </p>
                 
-                {/* Second chart component */}
-                <div className="bg-gray-50 dark:bg-gray-900 p-3 my-6 border border-gray-200 dark:border-gray-800">
-                  <div className="relative w-full bg-white dark:bg-gray-800 flex items-center justify-center overflow-hidden">
+                {/* Second chart component - using actual image */}
+                <div className="bg-white dark:bg-gray-950 p-3 my-6 border border-gray-200 dark:border-gray-800">
+                  <div className="relative w-full flex items-center justify-center">
                     <img 
-                      src="/latest/charts/china-steel-exports.svg" 
-                      alt="Chart showing Chinese steel exports rising as domestic demand falls"
+                      src="/latest/images/china-steel-exports.jpg" 
+                      alt="Chinese Steel Exports Soar as Domestic Demand Sags"
                       className="w-full h-auto object-contain"
                     />
                   </div>
