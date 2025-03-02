@@ -135,7 +135,7 @@ export default function ChinaSteelReform() {
                 <div className="bg-white dark:bg-gray-950 p-3 my-6 border border-gray-200 dark:border-gray-800">
                   <div className="relative w-full flex items-center justify-center">
                     <img 
-                      src="/latest/charts/china-steel-profits.svg" 
+                      src="/latest/charts/china-steel-profits.jpg" 
                       alt="Chart showing Chinese steel industry profits slump"
                       className="w-full h-auto object-contain"
                     />
@@ -171,7 +171,7 @@ export default function ChinaSteelReform() {
                 <div className="bg-white dark:bg-gray-950 p-3 my-6 border border-gray-200 dark:border-gray-800">
                   <div className="relative w-full flex items-center justify-center">
                     <img 
-                      src="/latest/charts/china-steel-exports.svg" 
+                      src="/latest/charts/china-steel-exports.jpg" 
                       alt="Chinese Steel Exports Soar as Domestic Demand Sags"
                       className="w-full h-auto object-contain"
                     />
