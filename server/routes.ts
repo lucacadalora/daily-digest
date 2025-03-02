@@ -249,18 +249,23 @@ export function registerRoutes(app: Express): Server {
     const userAgent = req.headers['user-agent'] || '';
     const path = req.path;
     
+    // Log the user agent for debug purposes
+    if (userAgent.includes('Twitter') || userAgent.includes('twitter')) {
+      console.log(`🐦 Twitter-related user agent detected: ${userAgent.substring(0, 100)}`);
+    }
+    
     // Handle direct Twitter bot requests to the china-steel-reform article
-    if (userAgent.includes('Twitterbot') && 
+    if ((userAgent.includes('Twitterbot') || userAgent.includes('Twitter')) && 
         (path === '/latest/china-steel-reform' || path === '/latest/china-steel-reform/')) {
-      console.log('🤖 TWITTER BOT DETECTED! Serving special content for Twitter crawler');
+      console.log('🤖 TWITTER BOT DETECTED! Serving super simple Twitter card page');
       
       // Set cache control headers to ensure Twitter gets fresh content
       res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
       res.setHeader('Pragma', 'no-cache');
       res.setHeader('Expires', '0');
       
-      // Serve the static HTML file directly without any redirects
-      return res.sendFile(join(process.cwd(), 'public', 'latest', 'china-steel-reform', 'index.html'));
+      // Serve a dedicated HTML file optimized just for Twitter cards
+      return res.sendFile(join(process.cwd(), 'public', 't-steel.html'));
     }
     
     // For all other requests, continue with regular processing
@@ -618,8 +623,23 @@ export function registerRoutes(app: Express): Server {
     console.log(`[Referer Debug] ${referer}`);
     
     if (isSocialCrawler) {
+      // For Twitter bots specifically, serve the super simplified card page
+      if (userAgent.includes('Twitterbot') || userAgent.includes('Twitter') || referer.includes('twitter') || referer.includes('t.co')) {
+        console.log(`Detected Twitter crawler - serving Twitter-optimized page: ${userAgent.substring(0, 30)}`);
+        
+        // Set cache control headers
+        res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+        res.setHeader('Pragma', 'no-cache');
+        res.setHeader('Expires', '0');
+        
+        // Serve the minimal Twitter card HTML
+        return res.sendFile(join(process.cwd(), 'public', 't-steel.html'));
+      }
+      
+      // For other social crawlers
       console.log(`Detected social media crawler - serving static HTML directly: ${userAgent.substring(0, 30)}`);
-      // Serve the content directly - NOT redirecting to avoid breaking Twitter's card
+      
+      // Serve the content directly - NOT redirecting to avoid breaking previews
       return res.sendFile(join(process.cwd(), 'public', 'latest', 'china-steel-share', 'index.html'));
     }
     
