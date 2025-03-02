@@ -570,6 +570,38 @@ export function registerRoutes(app: Express): Server {
     }
   });
   
+  // Special route for proper Twitter Card preview of the article
+  app.use('/latest/china-steel-reform', (req, res, next) => {
+    // Check if this is a social media crawler
+    const userAgent = req.headers['user-agent'] || '';
+    const referer = req.headers['referer'] || '';
+    
+    const isSocialCrawler = (
+      userAgent.includes('Twitterbot') || 
+      userAgent.includes('facebookexternalhit') || 
+      userAgent.includes('WhatsApp') ||
+      userAgent.includes('LinkedInBot') ||
+      userAgent.includes('Slackbot-LinkExpanding') ||
+      referer.includes('twitter.com') ||
+      referer.includes('t.co') ||
+      referer.includes('facebook.com') ||
+      referer.includes('whatsapp.com')
+    );
+    
+    // Log crawler detection for debugging
+    console.log(`[UserAgent Debug] ${userAgent.substring(0, 100)}`);
+    console.log(`[Referer Debug] ${referer}`);
+    
+    if (isSocialCrawler) {
+      console.log(`Detected social media crawler - serving static HTML`);
+      // Serve the pre-rendered file with all meta tags for social media
+      return res.sendFile(join(process.cwd(), 'public', 'share', 'china-steel-reform', 'index.html'));
+    }
+    
+    // Not a crawler, continue with normal React app rendering
+    next();
+  });
+  
   // Optimized image serving route for social sharing with proper cache headers
   app.get('/latest/china-steel.png', (req, res) => {
     try {
