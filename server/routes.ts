@@ -362,75 +362,38 @@ export function registerRoutes(app: Express): Server {
     }
   });
 
-  // Server-side rendering for China Steel Reform article meta tags
+  // Special route for China Steel Reform article with improved social media sharing
   app.get('/latest/china-steel-reform', (req, res, next) => {
     try {
-      // Read the index.html template
-      let html = readFileSync(join(__dirname, '..', 'client', 'index.html'), 'utf-8');
-
-      // Helper function to escape HTML content
-      const escapeHtml = (unsafe: string) => {
-        return unsafe
-          .replace(/&/g, "&amp;")
-          .replace(/</g, "&lt;")
-          .replace(/>/g, "&gt;")
-          .replace(/"/g, "&quot;")
-          .replace(/'/g, "&#039;");
-      };
-
-      // Create article metadata
-      const title = "China's Steel Sector Seized by Talk of 'Supply Reform 2.0'";
-      const description = "World's biggest supplier needs an overhaul to cut production. Beijing may order 50 million tons of capacity cuts: Citigroup";
-      const imageUrl = "https://lucaxyzz-digest.replit.app/latest/china-steel.png";
-      const articleUrl = "https://lucaxyzz-digest.replit.app/latest/china-steel-reform";
-      const publishedDate = "2025-03-02";
-      const author = "Luca Cada Lora";
-      const category = "Commodities";
-      const tags = "China,steel,supply reform,industrial policy,commodities";
-
-      const previewTitle = escapeHtml(`${title} | Daily Digest`);
-      const previewDescription = escapeHtml(description);
-
-      // Define meta tags for social media previews
-      const metaTags = [
-        `<title>${previewTitle}</title>`,
-        `<meta name="description" content="${previewDescription}">`,
-        `<meta name="keywords" content="${escapeHtml(tags)}">`,
-
-        // Open Graph (Facebook, LinkedIn, etc.)
-        `<meta property="og:title" content="${previewTitle}">`,
-        `<meta property="og:description" content="${previewDescription}">`,
-        `<meta property="og:image" content="${escapeHtml(imageUrl)}">`,
-        `<meta property="og:url" content="${escapeHtml(articleUrl)}">`,
-        `<meta property="og:type" content="article">`,
-        `<meta property="og:site_name" content="Daily Digest">`,
-        `<meta property="og:locale" content="en_US">`,
-
-        // Twitter Card
-        `<meta name="twitter:card" content="summary_large_image">`,
-        `<meta name="twitter:site" content="@dailydigest">`,
-        `<meta name="twitter:creator" content="@dailydigest">`,
-        `<meta name="twitter:title" content="${previewTitle}">`,
-        `<meta name="twitter:description" content="${previewDescription}">`,
-        `<meta name="twitter:image" content="${escapeHtml(imageUrl)}">`,
-        `<meta name="twitter:domain" content="lucaxyzz-digest.replit.app">`,
-
-        // Article Metadata
-        `<meta property="article:published_time" content="${escapeHtml(publishedDate)}">`,
-        `<meta property="article:author" content="${escapeHtml(author)}">`,
-        `<meta property="article:section" content="${escapeHtml(category)}">`,
-        `<meta property="article:tag" content="${escapeHtml(tags)}">`
-      ].join('\n        ');
-
-      // Find the head tag and insert meta tags right after it
-      html = html.replace('<head>', `<head>\n        ${metaTags}`);
-
-      // Set proper content type
-      res.setHeader('Content-Type', 'text/html');
-      res.send(html);
+      // Check if the request is from a social media crawler or bot
+      const userAgent = req.headers['user-agent'] || '';
+      const isCrawler = /facebookexternalhit|Twitterbot|LinkedInBot|WhatsApp|Googlebot|bingbot|DuckDuckBot|Slackbot|TelegramBot/i.test(userAgent);
+      
+      if (isCrawler) {
+        // For social media crawlers, serve the static HTML with optimized meta tags
+        console.log(`[SSR] Detected crawler in user-agent: ${userAgent}`);
+        const html = readFileSync(join(__dirname, '..', 'public', 'latest', 'china-steel-reform.html'), 'utf-8');
+        res.setHeader('Content-Type', 'text/html');
+        return res.send(html);
+      }
+      
+      // For regular users, continue with normal React app rendering
+      next();
     } catch (error) {
-      console.error('Error rendering China Steel Reform meta tags:', error);
+      console.error('Error serving China Steel Reform static page:', error);
       next(); // Fall back to client-side rendering
+    }
+  });
+  
+  // Direct access to static HTML version for social sharing
+  app.get('/share/china-steel-reform', (req, res) => {
+    try {
+      const html = readFileSync(join(__dirname, '..', 'public', 'latest', 'china-steel-reform.html'), 'utf-8');
+      res.setHeader('Content-Type', 'text/html');
+      return res.send(html);
+    } catch (error) {
+      console.error('Error serving China Steel Reform share page:', error);
+      res.status(500).send('Error loading share page');
     }
   });
 
