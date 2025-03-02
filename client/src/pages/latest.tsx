@@ -45,11 +45,8 @@ export default function Latest() {
       <main className="max-w-[1200px] mx-auto px-4 py-6 sm:py-8 dark:text-gray-200">
         <div className="mb-8">
           <h1 className="text-3xl font-serif font-bold text-gray-900 dark:text-white mb-2">
-            Latest Stories
+            Latest
           </h1>
-          <p className="text-lg text-gray-600 dark:text-gray-400">
-            Breaking news and analysis from Bloomberg, The Economist, and other trusted sources
-          </p>
         </div>
 
         {/* Search */}
