@@ -209,7 +209,7 @@ export default function ChinaSteelReform() {
             
             {/* More From Bloomberg Section - Similar to reference image */}
             <div className="mb-12">
-              <h2 className="text-2xl font-bold mb-6">More From Bloomberg</h2>
+              <h2 className="text-2xl font-bold mb-6">More From Daily | Digest</h2>
               <div className="grid grid-cols-1 md:grid-cols-4 gap-5">
                 <Link href="#" className="group block">
                   <div className="aspect-[4/3] overflow-hidden bg-gray-200 dark:bg-gray-800 mb-2">
