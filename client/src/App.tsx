@@ -16,6 +16,7 @@ import FedBalanceSheet from "@/pages/FedBalanceSheet";
 import FedQTExitCryptoRally from "@/pages/fed-qt-exit-crypto-rally";
 import IndonesiaCoalDilemma from "@/pages/indonesia-coal-dilemma";
 import JapanEconomicSecurity from "@/pages/japan-economic-security";
+import ChinaSteel from "@/pages/external/china-steel-supply-reform";
 
 // Insights pages
 import Insights from "@/pages/insights";
@@ -37,9 +38,9 @@ function Router() {
       <Route path="/" component={Home} />
       <Route path="/about" component={About} />
       
-      {/* Insights routes */}
-      {/* Latest news route */}
+      {/* Latest news routes */}
       <Route path="/latest" component={Latest} />
+      <Route path="/external/china-steel-supply-reform" component={ChinaSteel} />
       
       {/* Insights routes */}
       <Route path="/insights" component={Insights} />
