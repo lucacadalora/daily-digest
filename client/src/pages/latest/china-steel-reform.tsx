@@ -135,7 +135,7 @@ export default function ChinaSteelReform() {
                 <div className="bg-white dark:bg-gray-950 p-3 my-6 border border-gray-200 dark:border-gray-800">
                   <div className="relative w-full flex items-center justify-center">
                     <img 
-                      src="/latest/images/china-steel-profits.jpg" 
+                      src="/latest/charts/china-steel-profits.svg" 
                       alt="Chart showing Chinese steel industry profits slump"
                       className="w-full h-auto object-contain"
                     />
@@ -171,7 +171,7 @@ export default function ChinaSteelReform() {
                 <div className="bg-white dark:bg-gray-950 p-3 my-6 border border-gray-200 dark:border-gray-800">
                   <div className="relative w-full flex items-center justify-center">
                     <img 
-                      src="/latest/images/china-steel-exports.jpg" 
+                      src="/latest/charts/china-steel-exports.svg" 
                       alt="Chinese Steel Exports Soar as Domestic Demand Sags"
                       className="w-full h-auto object-contain"
                     />
@@ -244,7 +244,7 @@ export default function ChinaSteelReform() {
                   <div className="flex items-start gap-3 mb-4">
                     <div className="w-20 h-14 bg-gray-200 dark:bg-gray-800 overflow-hidden flex-shrink-0">
                       <img 
-                        src="/latest/china-steel.png" 
+                        src="/latest/charts/china-steel.png" 
                         alt="Steel factory" 
                         className="w-full h-full object-cover"
                       />
@@ -263,7 +263,7 @@ export default function ChinaSteelReform() {
                   <div className="flex items-start gap-3 mb-4">
                     <div className="w-20 h-14 bg-gray-200 dark:bg-gray-800 overflow-hidden flex-shrink-0">
                       <img 
-                        src="/latest/china-steel.png" 
+                        src="/latest/charts/china-steel.png" 
                         alt="Steel factory" 
                         className="w-full h-full object-cover"
                       />
