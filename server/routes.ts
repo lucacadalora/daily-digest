@@ -245,27 +245,48 @@ export function registerRoutes(app: Express): Server {
   // Special middleware to catch Twitter crawler requests at the highest level
   // This must be the FIRST middleware in the chain to ensure it catches Twitter bot requests
   app.use((req, res, next) => {
-    // Check if this is the twitter bot and the specific URL
+    // Check if this is the Twitter bot or Twitter-related request
     const userAgent = req.headers['user-agent'] || '';
     const path = req.path;
+    const referer = req.headers['referer'] || '';
     
-    // Log the user agent for debug purposes
-    if (userAgent.includes('Twitter') || userAgent.includes('twitter')) {
-      console.log(`🐦 Twitter-related user agent detected: ${userAgent.substring(0, 100)}`);
+    // Define patterns for Twitter-related user agents and referrers
+    const twitterBotPatterns = ['Twitterbot', 'Twitter'];
+    const twitterRefererPatterns = ['twitter.com', 't.co'];
+    
+    // Check if request is Twitter-related but not our own curl testing
+    const isTwitterRelated = (
+      twitterBotPatterns.some(pattern => userAgent.includes(pattern)) ||
+      twitterRefererPatterns.some(pattern => referer.includes(pattern))
+    ) && !userAgent.includes('curl');
+    
+    // Log Twitter-related requests for debugging
+    if (isTwitterRelated) {
+      console.log(`🐦 Twitter-related request detected:`);
+      console.log(`  • User-Agent: ${userAgent.substring(0, 100)}`);
+      console.log(`  • Referer: ${referer}`);
+      console.log(`  • Path: ${path}`);
     }
     
-    // Handle direct Twitter bot requests to the china-steel-reform article
-    if ((userAgent.includes('Twitterbot') || userAgent.includes('Twitter')) && 
-        (path === '/latest/china-steel-reform' || path === '/latest/china-steel-reform/')) {
-      console.log('🤖 TWITTER BOT DETECTED! Serving super simple Twitter card page');
+    // Handle the China Steel Reform article for Twitter
+    if (isTwitterRelated && (path === '/latest/china-steel-reform' || path === '/latest/china-steel-reform/')) {
+      console.log('🤖 TWITTER CLIENT DETECTED! Serving specialized Twitter card page...');
       
-      // Set cache control headers to ensure Twitter gets fresh content
-      res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
-      res.setHeader('Pragma', 'no-cache');
-      res.setHeader('Expires', '0');
+      // Set cache headers that work better for Twitter
+      // Twitter needs some caching, but not too long to prevent updates from appearing
+      // Twitter Cards work better with a moderate cache time (30 minutes)
+      const thirtyMinutes = 30 * 60; // 30 minutes in seconds
+      res.setHeader('Cache-Control', `public, max-age=${thirtyMinutes}`);
+      res.setHeader('Expires', new Date(Date.now() + thirtyMinutes * 1000).toUTCString());
       
-      // Serve a dedicated HTML file optimized just for Twitter cards
-      return res.sendFile(join(process.cwd(), 'public', 't-steel.html'));
+      // These cross-origin headers ensure Twitter can access everything
+      res.setHeader('Access-Control-Allow-Origin', '*');
+      res.setHeader('Access-Control-Allow-Methods', 'GET');
+      res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+      
+      // Serve our dedicated Twitter Card HTML - optimized to work with Twitter's crawler
+      // This file is ultra-minimalist with just what Twitter needs to display a card
+      return res.sendFile(join(process.cwd(), 'public', 'twitter-card', 'steel.html'));
     }
     
     // For all other requests, continue with regular processing
@@ -717,10 +738,19 @@ export function registerRoutes(app: Express): Server {
       res.setHeader('Access-Control-Allow-Methods', 'GET');
       res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
       
-      // Very short cache time for Twitter Cards image
-      res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
-      res.setHeader('Pragma', 'no-cache');
-      res.setHeader('Expires', '0');
+      // Use moderate caching for Twitter - Twitter needs this for the card to work!
+      // Too little caching can cause Twitter to drop the card
+      const oneHour = 60 * 60; // 1 hour in seconds
+      if (req.query.v) {
+        // For versioned requests, use a longer cache time
+        res.setHeader('Cache-Control', `public, max-age=${oneHour}`);
+        res.setHeader('Expires', new Date(Date.now() + oneHour * 1000).toUTCString());
+      } else {
+        // For non-versioned requests, use a shorter cache time
+        const fifteenMinutes = 15 * 60; // 15 minutes in seconds
+        res.setHeader('Cache-Control', `public, max-age=${fifteenMinutes}`);
+        res.setHeader('Expires', new Date(Date.now() + fifteenMinutes * 1000).toUTCString());
+      }
       
       console.log(`Serving Twitter-compatible PNG image: ${filePath}`);
       
@@ -730,6 +760,51 @@ export function registerRoutes(app: Express): Server {
     } catch (error) {
       console.error('Error serving true PNG image:', error);
       return res.status(500).send(`Error serving image: ${error instanceof Error ? error.message : 'Unknown error'}`);
+    }
+  });
+  
+  // Add a dedicated handler for Twitter card files
+  app.get('/twitter-card/:filename', (req, res) => {
+    try {
+      const { filename } = req.params;
+      console.log(`[Twitter Card Route] Serving Twitter Card file: ${filename}`);
+      
+      const filePath = join(process.cwd(), 'public', 'twitter-card', filename);
+      
+      if (!fs.existsSync(filePath)) {
+        console.error(`[Twitter Card Route] File not found at path: ${filePath}`);
+        return res.status(404).send('Twitter Card file not found');
+      }
+      
+      // Determine content type based on extension
+      let contentType = 'text/html';
+      if (filename.endsWith('.png')) {
+        contentType = 'image/png';
+      } else if (filename.endsWith('.jpg') || filename.endsWith('.jpeg')) {
+        contentType = 'image/jpeg';
+      } else if (filename.endsWith('.css')) {
+        contentType = 'text/css';
+      } else if (filename.endsWith('.js')) {
+        contentType = 'application/javascript';
+      }
+      
+      // Set moderate cache headers - Twitter needs some caching to maintain the preview
+      // but not too long to prevent updates from appearing
+      const fifteenMinutes = 15 * 60; // 15 minutes in seconds
+      res.setHeader('Cache-Control', `public, max-age=${fifteenMinutes}`);
+      res.setHeader('Expires', new Date(Date.now() + fifteenMinutes * 1000).toUTCString());
+      
+      // Add Cross-Origin headers to ensure Twitter can access the resources
+      res.setHeader('Access-Control-Allow-Origin', '*');
+      res.setHeader('Access-Control-Allow-Methods', 'GET');
+      res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+      
+      res.setHeader('Content-Type', contentType);
+      const fileStream = fs.createReadStream(filePath);
+      fileStream.pipe(res);
+    } catch (error) {
+      console.error('Error serving Twitter Card file:', error);
+      return res.status(500).send(`Error loading file: ${error instanceof Error ? error.message : 'Unknown error'}`);
     }
   });
 
