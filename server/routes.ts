@@ -388,12 +388,44 @@ export function registerRoutes(app: Express): Server {
   app.get(['/share/china-steel-reform', '/share/china-steel-reform/'], (req, res) => {
     try {
       console.log('[Share Route] Serving static HTML for China Steel Reform');
-      const html = readFileSync(join(__dirname, '..', 'public', 'share', 'china-steel-reform', 'index.html'), 'utf-8');
+      const filePath = join(process.cwd(), 'public', 'share', 'china-steel-reform', 'index.html');
+      console.log('[Share Route] Checking file path:', filePath);
+      
+      // Check if file exists first
+      if (!fs.existsSync(filePath)) {
+        console.error(`[Share Route] File not found at path: ${filePath}`);
+        return res.status(404).send('File not found');
+      }
+      
+      const html = readFileSync(filePath, 'utf-8');
+      console.log('[Share Route] Successfully read file, length:', html.length);
+      
       res.setHeader('Content-Type', 'text/html');
       return res.send(html);
     } catch (error) {
       console.error('Error serving China Steel Reform share page:', error);
-      res.status(500).send('Error loading share page');
+      // More detailed error message
+      return res.status(500).send(`Error loading share page: ${error instanceof Error ? error.message : 'Unknown error'}`);
+    }
+  });
+  
+  // Serve the steel image for Open Graph meta tag use
+  app.get('/latest/china-steel.png', (req, res) => {
+    try {
+      console.log('[Image Route] Serving China Steel image');
+      const filePath = join(process.cwd(), 'public', 'latest', 'china-steel.png');
+      
+      if (!fs.existsSync(filePath)) {
+        console.error(`[Image Route] Image not found at path: ${filePath}`);
+        return res.status(404).send('Image not found');
+      }
+      
+      res.setHeader('Content-Type', 'image/png');
+      const fileStream = fs.createReadStream(filePath);
+      fileStream.pipe(res);
+    } catch (error) {
+      console.error('Error serving China Steel image:', error);
+      return res.status(500).send(`Error loading image: ${error instanceof Error ? error.message : 'Unknown error'}`);
     }
   });
 
