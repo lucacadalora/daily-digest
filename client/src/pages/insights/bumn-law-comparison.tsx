@@ -16,7 +16,7 @@ export default function BUMNLawComparison() {
     title: `${article.title} | Daily Digest`,
     description: article.description,
     url: `https://lucaxyzz-digest.replit.app/insights/bumn-law-comparison`,
-    image: '/images/bumn-law-comparison.jpg',
+    // Don't include image to avoid using the wrong one in social sharing
     author: article.author,
     publishedTime: article.date,
     section: article.category,

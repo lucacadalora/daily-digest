@@ -19,7 +19,7 @@ export default function JapanEconomicSecurity() {
     title: `${article.title} | Daily Digest`,
     description: article.description,
     url: `https://lucaxyzz-digest.replit.app/japan-economic-security`,
-    image: '/images/japan-economic-security.jpg',
+    // Don't include image to avoid using the wrong one in social sharing
     author: article.author,
     publishedTime: article.date,
     section: article.category,

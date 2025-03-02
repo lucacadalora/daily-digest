@@ -12,7 +12,7 @@ export interface ArticleMetadata {
   title: string;
   description: string;
   url: string;
-  image: string;
+  image?: string;
   author?: string;
   publishedTime?: string;
   section?: string;
@@ -42,17 +42,40 @@ export function updateMetaTags(metadata: ArticleMetadata, cacheBuster?: string):
     document.head.appendChild(canonicalLink);
   }
   
-  // Process image URL to add cache buster if needed
-  const imageUrl = cacheBuster 
-    ? `${metadata.image}${metadata.image.includes('?') ? '&' : '?'}v=${cacheBuster}`
-    : metadata.image;
-  
   // Default site name if not provided
   const siteName = metadata.siteName || 'Daily Digest';
   
   // Default Twitter accounts if not provided
   const twitterSite = metadata.twitterSite || '@dailydigest';
   const twitterCreator = metadata.twitterCreator || '@dailydigest';
+  
+  // Define image-related meta tags if an image URL is provided
+  let imageMetaTags: Record<string, string> = {};
+  
+  if (metadata.image && metadata.image.trim() !== '') {
+    // Process image URL to add cache buster if needed
+    const imageUrl = cacheBuster 
+      ? `${metadata.image}${metadata.image.includes('?') ? '&' : '?'}v=${cacheBuster}`
+      : metadata.image;
+    
+    imageMetaTags = {
+      'og:image': imageUrl,
+      'og:image:url': imageUrl,
+      'og:image:secure_url': imageUrl,
+      'og:image:type': 'image/png',
+      'og:image:width': '1200',
+      'og:image:height': '630',
+      'og:image:alt': metadata.title,
+      'twitter:card': 'summary_large_image',
+      'twitter:image': imageUrl,
+      'twitter:image:src': imageUrl,
+    };
+  } else {
+    // Use summary card type instead of summary_large_image when no image is present
+    imageMetaTags = {
+      'twitter:card': 'summary',
+    };
+  }
   
   // Define all meta tags
   const metaTags = {
@@ -66,26 +89,19 @@ export function updateMetaTags(metadata: ArticleMetadata, cacheBuster?: string):
     'og:description': metadata.description,
     'og:url': metadata.url,
     'og:type': 'article',
-    'og:image': imageUrl,
-    'og:image:url': imageUrl,
-    'og:image:secure_url': imageUrl,
-    'og:image:type': 'image/png',
-    'og:image:width': '1200',
-    'og:image:height': '630',
-    'og:image:alt': metadata.title,
     'og:site_name': siteName,
     'og:locale': 'en_US',
     
-    // Twitter Card tags
-    'twitter:card': 'summary_large_image',
+    // Twitter Card tags without image
     'twitter:title': metadata.title,
     'twitter:description': metadata.description,
-    'twitter:image': imageUrl,
-    'twitter:image:src': imageUrl,
     'twitter:url': metadata.url,
     'twitter:site': twitterSite,
     'twitter:creator': twitterCreator,
     'twitter:domain': new URL(metadata.url).hostname,
+    
+    // Include image tags if an image was provided
+    ...imageMetaTags,
     
     // Article metadata if available
     ...(metadata.publishedTime && { 'article:published_time': metadata.publishedTime }),
