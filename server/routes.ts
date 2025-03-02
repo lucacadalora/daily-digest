@@ -514,6 +514,38 @@ export function registerRoutes(app: Express): Server {
     }
   });
   
+  // Special Twitter-optimized image route with forced caching
+  app.get('/latest/china-steel-true.png', (req, res) => {
+    try {
+      console.log('[Twitter Image] Serving Twitter-optimized China Steel image');
+      const filePath = join(process.cwd(), 'public', 'latest', 'china-steel-true.png');
+      
+      if (!fs.existsSync(filePath)) {
+        console.error(`[Twitter Image] Image not found at path: ${filePath}`);
+        return res.status(404).send('Image not found');
+      }
+      
+      // Special Twitter-friendly caching headers
+      // Twitter seems to work better with a moderate cache time that's consistent
+      // This prevents cards from disappearing after posting
+      const oneDayInSeconds = 24 * 60 * 60;
+      res.setHeader('Cache-Control', `public, max-age=${oneDayInSeconds}`);
+      res.setHeader('Expires', new Date(Date.now() + oneDayInSeconds * 1000).toUTCString());
+      
+      // Add additional headers that help with cross-origin requests
+      res.setHeader('Access-Control-Allow-Origin', '*');
+      res.setHeader('Vary', 'Accept-Encoding');
+      res.setHeader('Content-Type', 'image/png');
+      
+      // Serve the image directly from the file system
+      const fileStream = fs.createReadStream(filePath);
+      fileStream.pipe(res);
+    } catch (error) {
+      console.error('Error serving Twitter-optimized China Steel image:', error);
+      return res.status(500).send(`Error loading image: ${error instanceof Error ? error.message : 'Unknown error'}`);
+    }
+  });
+  
   // Simple test route for OG meta tags
   app.get('/share-test', (req, res) => {
     try {
