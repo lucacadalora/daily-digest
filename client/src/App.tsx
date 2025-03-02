@@ -1,3 +1,4 @@
+import React from "react";
 import { Switch, Route, Redirect } from "wouter";
 import { queryClient } from "./lib/queryClient";
 import { QueryClientProvider } from "@tanstack/react-query";
@@ -17,6 +18,7 @@ import FedQTExitCryptoRally from "@/pages/fed-qt-exit-crypto-rally";
 import IndonesiaCoalDilemma from "@/pages/indonesia-coal-dilemma";
 import JapanEconomicSecurity from "@/pages/japan-economic-security";
 import ChinaSteel from "@/pages/external/china-steel-supply-reform";
+import ChinaSteelReform from "@/pages/latest/china-steel-reform";
 
 // Insights pages
 import Insights from "@/pages/insights";
@@ -40,6 +42,7 @@ function Router() {
       
       {/* Latest news routes */}
       <Route path="/latest" component={Latest} />
+      <Route path="/latest/china-steel-reform" component={ChinaSteelReform} />
       <Route path="/external/china-steel-supply-reform" component={ChinaSteel} />
       
       {/* Insights routes */}

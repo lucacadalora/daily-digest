@@ -35,8 +35,8 @@ export const sampleExternalNews: ExternalNews[] = [
     title: "China's Steel Sector: 'Supply Reform 2.0' Looms",
     source: "Bloomberg",
     author: "",
-    publishedDate: "March 2, 2025",
-    url: "/external/china-steel-supply-reform",
+    publishedDate: "February 28, 2025",
+    url: "/latest/china-steel-reform",
     imageUrl: "/latest/china-steel.png",
     category: "Markets",
     timestamp: Date.now() - 1000 * 60 * 60 * 3 // 3 hours ago
