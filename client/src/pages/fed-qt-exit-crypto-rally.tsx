@@ -25,6 +25,9 @@ export default function FedQTExitCryptoRally() {
 
   return (
     <div className="min-h-screen bg-[#FBF7F4] dark:bg-gray-900 transition-colors">
+      {/* Add MetaTags component for SEO */}
+      <MetaTags metadata={metadata} cacheBuster="20250302" />
+      
       <Header simplified showCategories={false} />
       <div className="h-36 sm:h-32"></div>
 

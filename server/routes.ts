@@ -596,6 +596,63 @@ export function registerRoutes(app: Express): Server {
     }
   });
   
+  // API endpoint for serving images for meta tags
+  app.get('/api/image', (req, res) => {
+    try {
+      const { path } = req.query;
+      
+      if (!path || typeof path !== 'string') {
+        return res.status(400).send('Missing or invalid path parameter');
+      }
+      
+      // For security, only allow paths with specific patterns (e.g., '/latest/...')
+      if (!path.startsWith('/latest/')) {
+        return res.status(403).send('Invalid path prefix');
+      }
+      
+      // Remove the leading '/' to match file system paths
+      const cleanPath = path.startsWith('/') ? path.substring(1) : path;
+      
+      // Build the actual file path
+      const filePath = join(process.cwd(), 'public', cleanPath);
+      
+      console.log(`[API Image] Serving image from path: ${filePath}`);
+      
+      if (!fs.existsSync(filePath)) {
+        console.error(`[API Image Error] Image not found at path: ${filePath}`);
+        return res.status(404).send('Image not found');
+      }
+      
+      // Set special headers that work well across multiple platforms
+      // Cache for 1 hour for better performance
+      const oneHour = 60 * 60;
+      res.setHeader('Cache-Control', `public, max-age=${oneHour}`);
+      res.setHeader('Expires', new Date(Date.now() + oneHour * 1000).toUTCString());
+      
+      // Add cross-origin support for all platforms
+      res.setHeader('Access-Control-Allow-Origin', '*');
+      res.setHeader('Access-Control-Allow-Methods', 'GET');
+      res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+      
+      // Determine content type based on file extension
+      const extension = filePath.split('.').pop()?.toLowerCase();
+      const contentType = extension === 'png' ? 'image/png' : 
+                         extension === 'jpg' || extension === 'jpeg' ? 'image/jpeg' :
+                         extension === 'gif' ? 'image/gif' :
+                         extension === 'svg' ? 'image/svg+xml' :
+                         'application/octet-stream';
+      
+      res.setHeader('Content-Type', contentType);
+      
+      // Create a readable stream and pipe it to the response
+      const fileStream = fs.createReadStream(filePath);
+      fileStream.pipe(res);
+    } catch (error) {
+      console.error('Error serving API image:', error);
+      return res.status(500).send(`Error: ${error instanceof Error ? error.message : 'Unknown error'}`);
+    }
+  });
+  
   // Simple test route for OG meta tags
   app.get('/share-test', (req, res) => {
     try {
