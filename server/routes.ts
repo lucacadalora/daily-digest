@@ -506,6 +506,61 @@ export function registerRoutes(app: Express): Server {
       return res.status(500).send(`Error redirecting: ${error instanceof Error ? error.message : 'Unknown error'}`);
     }
   });
+  
+  // Social share optimized route for China Steel Reform article
+  app.get('/share/china-steel-reform', (req, res) => {
+    try {
+      console.log('[Debug] Redirecting to China Steel Reform share page');
+      // Add cache control headers to prevent caching of this redirector
+      res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+      res.setHeader('Pragma', 'no-cache');
+      res.setHeader('Expires', '0');
+      return res.redirect(302, '/static/share/china-steel-reform.html');
+    } catch (error) {
+      console.error('Error redirecting to China Steel Reform share page:', error);
+      return res.status(500).send(`Error redirecting: ${error instanceof Error ? error.message : 'Unknown error'}`);
+    }
+  });
+  
+  // Optimized image serving route for social sharing with proper cache headers
+  app.get('/latest/china-steel.png', (req, res) => {
+    try {
+      const filePath = join(process.cwd(), 'public', 'latest', 'china-steel.png');
+      
+      // Check if file exists
+      try {
+        const stats = fs.statSync(filePath);
+        if (!stats.isFile()) {
+          throw new Error("Not a file");
+        }
+      } catch (err) {
+        console.error(`Image file not found: ${filePath}`, err);
+        return res.status(404).send("Image not found");
+      }
+      
+      // Set content type
+      res.setHeader('Content-Type', 'image/png');
+      
+      // Set cache headers based on version parameter
+      if (req.query.v) {
+        // Strong caching for versioned requests (30 days)
+        res.setHeader('Cache-Control', 'public, max-age=2592000, immutable');
+        res.setHeader('Expires', new Date(Date.now() + 2592000000).toUTCString());
+        console.log(`Serving versioned image (v=${req.query.v}) with strong cache: ${filePath}`);
+      } else {
+        // Shorter cache time for non-versioned requests (1 day)
+        res.setHeader('Cache-Control', 'public, max-age=86400');
+        console.log(`Serving non-versioned image with short cache: ${filePath}`);
+      }
+      
+      // Stream the file
+      const fileStream = fs.createReadStream(filePath);
+      fileStream.pipe(res);
+    } catch (error) {
+      console.error('Error serving image:', error);
+      return res.status(500).send(`Error serving image: ${error instanceof Error ? error.message : 'Unknown error'}`);
+    }
+  });
 
   app.get('/api/market-data', async (req, res) => {
     try {
