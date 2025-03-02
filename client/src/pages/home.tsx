@@ -4,6 +4,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { ArrowRight } from "lucide-react";
 import { ArticleCard } from "@/components/ArticleCard";
 import { LatestNews } from "@/components/LatestNews";
+import { ChatBox } from "@/components/ChatBox";
 import { SubscribeModal } from "@/components/SubscribeModal";
 import { sampleArticles } from "@/types/newsletter";
 import { Header } from "@/components/Header";
@@ -124,13 +125,30 @@ export default function Home() {
                   </Card>
                 </Link>
               )}
+              
+              {/* ChatBox below Featured Section */}
+              <div className="mt-8">
+                <h2 className="text-2xl font-serif font-bold text-gray-900 dark:text-white mb-4">
+                  Market AI
+                </h2>
+                <ChatBox />
+              </div>
             </div>
           </div>
         </div>
 
-        {/* Mobile Latest News Section */}
+        {/* Mobile Sections */}
         <div className="lg:hidden mt-8">
+          {/* Mobile Latest News Section */}
           <LatestNews articles={sampleArticles} maxItems={5} />
+          
+          {/* Mobile ChatBox Section */}
+          <div className="mt-8">
+            <h2 className="text-2xl font-serif font-bold text-gray-900 dark:text-white mb-4">
+              Market AI
+            </h2>
+            <ChatBox />
+          </div>
         </div>
       </main>
 
