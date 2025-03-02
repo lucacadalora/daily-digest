@@ -443,6 +443,17 @@ export function registerRoutes(app: Express): Server {
         return res.status(404).send('Image not found');
       }
       
+      // Set cache headers based on version parameter
+      if (req.query.v) {
+        // If version parameter is present, set long cache time (helps with preview caching)
+        res.setHeader('Cache-Control', 'public, max-age=86400, immutable'); // 24 hours
+      } else {
+        // Otherwise use default no-cache policy
+        res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+        res.setHeader('Pragma', 'no-cache');
+        res.setHeader('Expires', '0');
+      }
+      
       res.setHeader('Content-Type', 'image/png');
       const fileStream = fs.createReadStream(filePath);
       fileStream.pipe(res);

@@ -152,17 +152,21 @@ export default function ChinaSteelReform() {
               </li>
             </ul>
             
-            {/* Main image - smaller and more contained */}
-            <div className="relative w-full h-auto mb-2 max-h-96 overflow-hidden">
-              <img 
-                src="/latest/china-steel.png" 
-                alt="Steel factory in China" 
-                className="w-full h-auto object-cover max-h-96"
-              />
-              <p className="text-xs sm:text-sm text-gray-500 mb-3 mt-1 italic leading-tight px-1">
-                All eyes are now on China's virtual National People's Congress legislative meetings next week, 
-                to see if any guidance is issued for the steel industry. Credit: industrieblick, Adobe Stock
-              </p>
+            {/* Main image - smaller and more contained with caption that's always visible */}
+            <div className="relative w-full h-auto mb-6">
+              <div className="w-full max-h-96 overflow-hidden">
+                <img 
+                  src="/latest/china-steel.png" 
+                  alt="Steel factory in China" 
+                  className="w-full h-auto object-cover"
+                />
+              </div>
+              <div className="w-full">
+                <p className="text-xs sm:text-sm text-gray-500 mb-3 mt-2 italic leading-tight px-1">
+                  All eyes are now on China's virtual National People's Congress legislative meetings next week, 
+                  to see if any guidance is issued for the steel industry. Credit: industrieblick, Adobe Stock
+                </p>
+              </div>
             </div>
             
             {/* Author and timestamp - better alignment */}
@@ -209,18 +213,20 @@ export default function ChinaSteelReform() {
                 No plans have been announced, but the widespread speculation reflect broad recognition that the struggling steel industry needs a fresh overhaul, nearly a decade after President Xi Jinping launched his first supply side reforms. The country's chronic property crisis has sent domestic steel demand falling for the past four years.
               </p>
               
-              {/* Chart component - using actual image */}
+              {/* Chart component - using actual image with consistent styling */}
               <div className="bg-white dark:bg-gray-950 p-3 my-6 border border-gray-200 dark:border-gray-800">
-                <div className="relative w-full flex items-center justify-center">
+                <div className="w-full">
                   <img 
                     src="/latest/charts/china-steel-profits.jpg" 
                     alt="Chart showing Chinese steel industry profits slump"
                     className="w-full h-auto object-contain"
                   />
                 </div>
-                <p className="text-xs text-gray-500 mt-2 px-1 italic">
-                  Source: China's National Bureau of Statistics
-                </p>
+                <div className="w-full">
+                  <p className="text-xs sm:text-sm text-gray-500 mt-2 px-1 italic">
+                    Source: China's National Bureau of Statistics
+                  </p>
+                </div>
               </div>
               
               <p>
@@ -245,18 +251,20 @@ export default function ChinaSteelReform() {
                 Trump argued that his blanket 25% tariffs against steel imports were necessary to protect American industry against China-fueled overcapacity. But criticism of Beijing's steel dominance has grown more widespread as the country's economic troubles have sent it looking abroad for steel buyers.
               </p>
               
-              {/* Second chart component - using actual image */}
+              {/* Second chart component - using actual image with consistent styling */}
               <div className="bg-white dark:bg-gray-950 p-3 my-6 border border-gray-200 dark:border-gray-800">
-                <div className="relative w-full flex items-center justify-center">
+                <div className="w-full">
                   <img 
                     src="/latest/charts/china-steel-exports.jpg" 
                     alt="Chinese Steel Exports Soar as Domestic Demand Sags"
                     className="w-full h-auto object-contain"
                   />
                 </div>
-                <p className="text-xs text-gray-500 mt-2 px-1 italic">
-                  Source: China's General Administration of Customs
-                </p>
+                <div className="w-full">
+                  <p className="text-xs sm:text-sm text-gray-500 mt-2 px-1 italic">
+                    Source: China's General Administration of Customs
+                  </p>
+                </div>
               </div>
               
               <h3 className="text-lg font-bold mt-6 mb-2">Trade tensions are intensifying:</h3>
