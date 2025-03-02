@@ -135,7 +135,7 @@ export default function ChinaSteelReform() {
                 <div className="bg-white dark:bg-gray-950 p-3 my-6 border border-gray-200 dark:border-gray-800">
                   <div className="relative w-full flex items-center justify-center">
                     <img 
-                      src="/latest/images/china-steel-profits.jpg" 
+                      src="/china-steel-profits.jpg" 
                       alt="Chart showing Chinese steel industry profits slump"
                       className="w-full h-auto object-contain"
                     />
@@ -171,7 +171,7 @@ export default function ChinaSteelReform() {
                 <div className="bg-white dark:bg-gray-950 p-3 my-6 border border-gray-200 dark:border-gray-800">
                   <div className="relative w-full flex items-center justify-center">
                     <img 
-                      src="/latest/images/china-steel-exports.jpg" 
+                      src="/china-steel-exports.jpg" 
                       alt="Chinese Steel Exports Soar as Domestic Demand Sags"
                       className="w-full h-auto object-contain"
                     />
@@ -206,7 +206,7 @@ export default function ChinaSteelReform() {
               <Separator className="my-6" />
               
               <footer className="text-xs text-gray-500">
-                <p>Source: <a href="https://www.bloomberg.com/news/articles/2025-02-28/ailing-china-steel-sector-seized-by-talk-of-supply-reform-2-0" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Bloomberg</a>, reporting by Luca Cada Lora</p>
+                <p>Source: <a href="https://www.bloomberg.com/news/articles/2025-02-28/ailing-china-steel-sector-seized-by-talk-of-supply-reform-2-0" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Bloomberg</a>, curated by Luca Cada Lora</p>
               </footer>
             </div>
             
