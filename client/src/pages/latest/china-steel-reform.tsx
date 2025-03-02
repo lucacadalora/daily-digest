@@ -23,14 +23,14 @@ function updateHtmlHead() {
     'keywords': "China,steel,supply reform,industry,production cuts,commodities,industrial policy",
     'news_keywords': "China steel,supply reform,industrial policy,commodities",
     
-    // Open Graph tags
+    // Open Graph tags - enhanced for better WhatsApp compatibility
     'og:title': "China's Steel Sector Seized by Talk of 'Supply Reform 2.0' | Daily Digest",
     'og:description': "World's biggest supplier needs an overhaul to cut production. Beijing may order 50 million tons of capacity cuts: Citigroup",
     'og:url': 'https://lucaxyzz-digest.replit.app/latest/china-steel-reform',
     'og:type': 'article',
-    'og:image': 'https://lucaxyzz-digest.replit.app/latest/china-steel.png?v=2',
-    'og:image:url': 'https://lucaxyzz-digest.replit.app/latest/china-steel.png?v=2',
-    'og:image:secure_url': 'https://lucaxyzz-digest.replit.app/latest/china-steel.png?v=2',
+    'og:image': 'https://lucaxyzz-digest.replit.app/latest/china-steel.png?v=3',
+    'og:image:url': 'https://lucaxyzz-digest.replit.app/latest/china-steel.png?v=3',
+    'og:image:secure_url': 'https://lucaxyzz-digest.replit.app/latest/china-steel.png?v=3',
     'og:image:type': 'image/png',
     'og:image:width': '1200',
     'og:image:height': '630',
@@ -38,12 +38,13 @@ function updateHtmlHead() {
     'og:site_name': 'Daily Digest',
     'og:locale': 'en_US',
     
-    // Twitter Card tags
+    // Twitter Card tags - enhanced for better X (Twitter) compatibility
+    'twitter:card': 'summary_large_image',
     'twitter:title': "China's Steel Sector Seized by Talk of 'Supply Reform 2.0' | Daily Digest",
     'twitter:description': "World's biggest supplier needs an overhaul to cut production. Beijing may order 50 million tons of capacity cuts: Citigroup",
-    'twitter:image': 'https://lucaxyzz-digest.replit.app/latest/china-steel.png?v=2',
-    'twitter:image:src': 'https://lucaxyzz-digest.replit.app/latest/china-steel.png?v=2',
-    'twitter:card': 'summary_large_image',
+    'twitter:image': 'https://lucaxyzz-digest.replit.app/latest/china-steel.png?v=3',
+    'twitter:image:src': 'https://lucaxyzz-digest.replit.app/latest/china-steel.png?v=3',
+    'twitter:url': 'https://lucaxyzz-digest.replit.app/latest/china-steel-reform',
     'twitter:site': '@dailydigest',
     'twitter:creator': '@dailydigest',
     'twitter:domain': 'lucaxyzz-digest.replit.app',

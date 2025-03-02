@@ -484,6 +484,17 @@ export function registerRoutes(app: Express): Server {
       return res.status(500).send(`Error loading test page: ${error instanceof Error ? error.message : 'Unknown error'}`);
     }
   });
+  
+  // Test route for WhatsApp and X preview
+  app.get('/test', (req, res) => {
+    try {
+      console.log('[Debug] Redirecting to image preview test');
+      return res.redirect(302, '/static/share/test.html');
+    } catch (error) {
+      console.error('Error redirecting to test page:', error);
+      return res.status(500).send(`Error redirecting: ${error instanceof Error ? error.message : 'Unknown error'}`);
+    }
+  });
 
   app.get('/api/market-data', async (req, res) => {
     try {
