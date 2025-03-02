@@ -11,6 +11,7 @@ import { db, verifyDbConnection } from "../db/index";
 import { subscribers } from "../db/schema";
 import { z } from "zod";
 import { eq } from "drizzle-orm";
+import { detectSocialMediaCrawler, setSocialMediaCacheHeaders } from "./utils/crawler-detection";
 
 interface MarketPrice {
   price: number;
@@ -242,51 +243,64 @@ class MarketDataCache {
 const marketDataCache = new MarketDataCache();
 
 export function registerRoutes(app: Express): Server {
-  // Special middleware to catch Twitter crawler requests at the highest level
-  // This must be the FIRST middleware in the chain to ensure it catches Twitter bot requests
+  // Special middleware to handle social media crawler requests at the highest level
+  // This must be the FIRST middleware in the chain to ensure it catches crawler requests
   app.use((req, res, next) => {
-    // Check if this is the Twitter bot or Twitter-related request
-    const userAgent = req.headers['user-agent'] || '';
+    // Use our crawler detection utility to check for social media crawlers
+    const { isCrawler, platform, isTwitter, isFacebook, isWhatsApp } = detectSocialMediaCrawler(req);
+    
+    // Get the request path and user agent
     const path = req.path;
-    const referer = req.headers['referer'] || '';
+    const userAgent = req.headers['user-agent'] || '';
     
-    // Define patterns for Twitter-related user agents and referrers
-    const twitterBotPatterns = ['Twitterbot', 'Twitter'];
-    const twitterRefererPatterns = ['twitter.com', 't.co'];
-    
-    // Check if request is Twitter-related but not our own curl testing
-    const isTwitterRelated = (
-      twitterBotPatterns.some(pattern => userAgent.includes(pattern)) ||
-      twitterRefererPatterns.some(pattern => referer.includes(pattern))
-    ) && !userAgent.includes('curl');
-    
-    // Log Twitter-related requests for debugging
-    if (isTwitterRelated) {
-      console.log(`🐦 Twitter-related request detected:`);
+    // Log crawler-related requests for debugging
+    if (isCrawler) {
+      console.log(`🤖 Social media crawler detected:`);
+      console.log(`  • Platform: ${platform || 'unknown'}`);
       console.log(`  • User-Agent: ${userAgent.substring(0, 100)}`);
-      console.log(`  • Referer: ${referer}`);
       console.log(`  • Path: ${path}`);
     }
     
-    // Handle the China Steel Reform article for Twitter
-    if (isTwitterRelated && (path === '/latest/china-steel-reform' || path === '/latest/china-steel-reform/')) {
-      console.log('🤖 TWITTER CLIENT DETECTED! Serving specialized Twitter card page...');
+    // Handle the China Steel Reform article for Twitter/X
+    if (isTwitter && (path === '/latest/china-steel-reform' || path === '/latest/china-steel-reform/')) {
+      console.log('🐦 Twitter/X client detected! Serving specialized Twitter card page...');
       
-      // Set cache headers that work better for Twitter
-      // Twitter needs some caching, but not too long to prevent updates from appearing
-      // Twitter Cards work better with a moderate cache time (30 minutes)
+      // Set cache headers optimized for Twitter previews
       const thirtyMinutes = 30 * 60; // 30 minutes in seconds
       res.setHeader('Cache-Control', `public, max-age=${thirtyMinutes}`);
       res.setHeader('Expires', new Date(Date.now() + thirtyMinutes * 1000).toUTCString());
       
-      // These cross-origin headers ensure Twitter can access everything
+      // Add cross-origin headers to ensure Twitter can access everything
       res.setHeader('Access-Control-Allow-Origin', '*');
       res.setHeader('Access-Control-Allow-Methods', 'GET');
       res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
       
-      // Serve our dedicated Twitter Card HTML - optimized to work with Twitter's crawler
-      // This file is ultra-minimalist with just what Twitter needs to display a card
+      // Serve our dedicated Twitter Card HTML
       return res.sendFile(join(process.cwd(), 'public', 'twitter-card', 'steel.html'));
+    }
+    
+    // Handle the China Steel Reform article for WhatsApp
+    if (isWhatsApp && (path === '/latest/china-steel-reform' || path === '/latest/china-steel-reform/')) {
+      console.log('📱 WhatsApp client detected! Serving specialized WhatsApp preview page...');
+      
+      // Set no-cache headers for WhatsApp to ensure fresh content
+      setSocialMediaCacheHeaders(res);
+      
+      // Serve our WhatsApp-optimized page with Open Graph tags
+      return res.sendFile(join(process.cwd(), 'public', 'shares', 'whatsapp', 'china-steel.html'));
+    }
+    
+    // Handle the China Steel Reform article for Facebook
+    if (isFacebook && (path === '/latest/china-steel-reform' || path === '/latest/china-steel-reform/')) {
+      console.log('👍 Facebook client detected! Serving specialized Facebook preview page...');
+      
+      // Set moderate cache headers for Facebook
+      const oneHour = 60 * 60; // 1 hour in seconds
+      res.setHeader('Cache-Control', `public, max-age=${oneHour}`);
+      res.setHeader('Expires', new Date(Date.now() + oneHour * 1000).toUTCString());
+      
+      // Serve our general share page which works well with Facebook
+      return res.sendFile(join(process.cwd(), 'public', 'shares', 'china-steel-reform.html'));
     }
     
     // For all other requests, continue with regular processing
