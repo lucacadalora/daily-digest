@@ -507,6 +507,36 @@ export function registerRoutes(app: Express): Server {
     }
   });
   
+  // Super simplified Twitter card test - minimal HTML with only essential tags
+  app.get('/t/steel', (req, res) => {
+    try {
+      console.log('[Debug] Redirecting to minimal Twitter Card test');
+      // Add cache control headers to prevent caching
+      res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+      res.setHeader('Pragma', 'no-cache');
+      res.setHeader('Expires', '0');
+      return res.redirect(302, '/static/share/twitter-steel.html');
+    } catch (error) {
+      console.error('Error redirecting to minimal Twitter Card test:', error);
+      return res.status(500).send(`Error redirecting: ${error instanceof Error ? error.message : 'Unknown error'}`);
+    }
+  });
+  
+  // Super minimal JPG test for Twitter Cards
+  app.get('/t/jpg', (req, res) => {
+    try {
+      console.log('[Debug] Redirecting to JPG Twitter Card test');
+      // Add cache control headers to prevent caching
+      res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+      res.setHeader('Pragma', 'no-cache');
+      res.setHeader('Expires', '0');
+      return res.redirect(302, '/static/share/jpg-test.html');
+    } catch (error) {
+      console.error('Error redirecting to JPG Twitter Card test:', error);
+      return res.status(500).send(`Error redirecting: ${error instanceof Error ? error.message : 'Unknown error'}`);
+    }
+  });
+  
   // Social share optimized route for China Steel Reform article
   app.get('/share/china-steel-reform', (req, res) => {
     try {
