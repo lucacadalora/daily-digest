@@ -376,27 +376,27 @@ export function registerRoutes(app: Express): Server {
     }
   });
 
-  // Special route for China Steel Reform article with improved social media sharing
-  app.get('/latest/china-steel-reform', (req, res, next) => {
-    try {
-      // Check if the request is from a social media crawler or bot
-      const userAgent = req.headers['user-agent'] || '';
-      const isCrawler = /facebookexternalhit|Twitterbot|LinkedInBot|WhatsApp|Googlebot|bingbot|DuckDuckBot|Slackbot|TelegramBot/i.test(userAgent);
-      
-      if (isCrawler) {
-        // For social media crawlers, redirect to our static share page
-        console.log(`[SSR] Detected crawler in user-agent: ${userAgent}`);
-        console.log('[SSR] Redirecting to static share page');
-        return res.redirect(302, '/share/china-steel-reform/');
-      }
-      
-      // For regular users, continue with normal React app rendering
-      next();
-    } catch (error) {
-      console.error('Error in China Steel Reform crawler detection:', error);
-      next(); // Fall back to client-side rendering
-    }
-  });
+  // DISABLED - now using the comprehensive crawler detection below
+  // app.get('/latest/china-steel-reform', (req, res, next) => {
+  //   try {
+  //     // Check if the request is from a social media crawler or bot
+  //     const userAgent = req.headers['user-agent'] || '';
+  //     const isCrawler = /facebookexternalhit|Twitterbot|LinkedInBot|WhatsApp|Googlebot|bingbot|DuckDuckBot|Slackbot|TelegramBot/i.test(userAgent);
+  //     
+  //     if (isCrawler) {
+  //       // For social media crawlers, redirect to our static share page
+  //       console.log(`[SSR] Detected crawler in user-agent: ${userAgent}`);
+  //       console.log('[SSR] Redirecting to static share page');
+  //       return res.redirect(302, '/share/china-steel-reform/');
+  //     }
+  //     
+  //     // For regular users, continue with normal React app rendering
+  //     next();
+  //   } catch (error) {
+  //     console.error('Error in China Steel Reform crawler detection:', error);
+  //     next(); // Fall back to client-side rendering
+  //   }
+  // });
   
   // Configure direct serving for static images used in Open Graph
   app.use('/public', express.static(join(process.cwd(), 'public'), { 
