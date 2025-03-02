@@ -3,7 +3,7 @@ import { Link } from "wouter";
 import { Card, CardContent } from "@/components/ui/card";
 import { ArrowRight } from "lucide-react";
 import { ArticleCard } from "@/components/ArticleCard";
-import { ChatBox } from "@/components/ChatBox";
+import { LatestNews } from "@/components/LatestNews";
 import { SubscribeModal } from "@/components/SubscribeModal";
 import { sampleArticles } from "@/types/newsletter";
 import { Header } from "@/components/Header";
@@ -45,9 +45,9 @@ export default function Home() {
 
       <main className="max-w-[1200px] mx-auto px-4 py-6 sm:py-8 dark:text-gray-200">
         <div className="flex flex-col lg:flex-row gap-8">
-          {/* ChatBox - 1.5/6 width */}
+          {/* Latest News Section - 1.5/6 width */}
           <div className="hidden lg:block lg:w-[25%] flex-shrink-0">
-            <ChatBox />
+            <LatestNews articles={sampleArticles} maxItems={8} />
           </div>
 
           {/* Main Newsletter Content - 3/6 width */}
@@ -128,9 +128,9 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Mobile Chat Box Section */}
+        {/* Mobile Latest News Section */}
         <div className="lg:hidden mt-8">
-          <ChatBox />
+          <LatestNews articles={sampleArticles} maxItems={5} />
         </div>
       </main>
 
