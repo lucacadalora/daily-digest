@@ -48,34 +48,35 @@ export const ExternalNewsCard: React.FC<ExternalNewsCardProps> = ({
   if (compact && article.imageUrl) {
     return (
       <Link href={article.url || '#'}>
-        <div className="group cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors rounded-lg p-3">
+        <div className="group cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors p-3">
           <div className="flex gap-3">
             {/* Thumbnail for compact view */}
-            <div className="w-24 h-24 flex-shrink-0 rounded-md overflow-hidden relative">
+            <div className="w-24 h-24 flex-shrink-0 overflow-hidden relative">
               <img 
                 src={article.imageUrl} 
                 alt={article.title}
                 className="w-full h-full object-cover"
               />
+              {/* Category label overlaid on image */}
+              <div className="absolute left-0 bottom-0 bg-white py-0.5 px-2">
+                <div className="text-[10px] font-bold text-teal-600 dark:text-teal-600 uppercase tracking-wider">
+                  {article.category || (showSource ? article.source : '')}
+                </div>
+              </div>
               <div className="absolute right-1 bottom-1 bg-white rounded-full p-1 shadow-sm group-hover:scale-110 transition-transform">
-                <ArrowRight className="h-3 w-3 text-blue-600" />
+                <ArrowRight className="h-3 w-3 text-green-600" />
               </div>
             </div>
             
             {/* Content */}
             <div className="flex-1">
-              {/* Category */}
-              <div className="text-xs font-bold text-teal-600 dark:text-teal-400 uppercase tracking-wider mb-1">
-                {article.category || (showSource ? article.source : '')}
-              </div>
-              
               {/* Title */}
-              <h4 className="font-serif text-sm font-semibold line-clamp-2 group-hover:text-blue-600 transition-colors dark:group-hover:text-blue-400">
+              <h4 className="font-serif text-sm font-semibold line-clamp-2 group-hover:text-blue-600 transition-colors dark:group-hover:text-blue-400 mb-2">
                 {article.title}
               </h4>
               
               {/* Time */}
-              <div className="mt-1 text-xs font-bold text-teal-600 dark:text-teal-400 uppercase">
+              <div className="text-xs font-bold text-teal-600 dark:text-teal-400 uppercase">
                 {getRelativeTime(article.timestamp)}
               </div>
             </div>
@@ -88,27 +89,28 @@ export const ExternalNewsCard: React.FC<ExternalNewsCardProps> = ({
   // Full card layout (default)
   return (
     <Link href={article.url || '#'}>
-      <div className="group cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors rounded-lg p-3">
+      <div className="group cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors p-3">
         <div className="relative">
           {/* New design based on reference */}
           {article.imageUrl && (
-            <div className="relative w-full rounded-lg overflow-hidden mb-3">
+            <div className="relative w-full overflow-hidden mb-3">
               <img 
                 src={article.imageUrl} 
                 alt={article.title}
                 className="w-full h-40 object-cover"
               />
+              {/* Category label overlaid on image */}
+              <div className="absolute left-0 bottom-0 bg-white py-1 px-4">
+                <div className="text-xs font-bold text-teal-600 dark:text-teal-600 uppercase tracking-wider">
+                  {article.category || (showSource ? article.source : '')}
+                </div>
+              </div>
               {/* Arrow button overlay */}
               <div className="absolute right-3 top-1/2 -translate-y-1/2 bg-white rounded-full p-2 shadow-md group-hover:scale-110 transition-transform">
-                <ArrowRight className="h-5 w-5 text-blue-600" />
+                <ArrowRight className="h-5 w-5 text-green-600" />
               </div>
             </div>
           )}
-          
-          {/* Category */}
-          <div className="text-xs font-bold text-teal-600 dark:text-teal-400 uppercase tracking-wider mb-2">
-            {article.category || (showSource ? article.source : '')}
-          </div>
           
           {/* Title */}
           <h4 className="font-serif text-base font-semibold line-clamp-2 group-hover:text-blue-600 transition-colors dark:group-hover:text-blue-400 mb-2">
