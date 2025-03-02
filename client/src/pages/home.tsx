@@ -3,10 +3,11 @@ import { Link } from "wouter";
 import { Card, CardContent } from "@/components/ui/card";
 import { ArrowRight } from "lucide-react";
 import { ArticleCard } from "@/components/ArticleCard";
-import { LatestNews } from "@/components/LatestNews";
+import { LatestExternalNews } from "@/components/LatestExternalNews";
 import { ChatBox } from "@/components/ChatBox";
 import { SubscribeModal } from "@/components/SubscribeModal";
 import { sampleArticles } from "@/types/newsletter";
+import { sampleExternalNews } from "@/types/external-news";
 import { Header } from "@/components/Header";
 
 export default function Home() {
@@ -48,7 +49,7 @@ export default function Home() {
         <div className="flex flex-col lg:flex-row gap-8">
           {/* Latest News Section - 1.5/6 width */}
           <div className="hidden lg:block lg:w-[25%] flex-shrink-0">
-            <LatestNews articles={sampleArticles} maxItems={8} />
+            <LatestExternalNews articles={sampleExternalNews} maxItems={8} />
           </div>
 
           {/* Main Newsletter Content - 3/6 width */}
@@ -129,7 +130,7 @@ export default function Home() {
               {/* ChatBox below Featured Section */}
               <div className="mt-8">
                 <h2 className="text-2xl font-serif font-bold text-gray-900 dark:text-white mb-4">
-                  Market AI
+                  Daily | Digest AI
                 </h2>
                 <ChatBox />
               </div>
@@ -140,12 +141,12 @@ export default function Home() {
         {/* Mobile Sections */}
         <div className="lg:hidden mt-8">
           {/* Mobile Latest News Section */}
-          <LatestNews articles={sampleArticles} maxItems={5} />
+          <LatestExternalNews articles={sampleExternalNews} maxItems={5} />
           
           {/* Mobile ChatBox Section */}
           <div className="mt-8">
             <h2 className="text-2xl font-serif font-bold text-gray-900 dark:text-white mb-4">
-              Market AI
+              Daily | Digest AI
             </h2>
             <ChatBox />
           </div>
