@@ -6,6 +6,7 @@ import NotFound from "@/pages/not-found";
 import BBRIArticle from "@/pages/bank-rakyat-indonesia";
 import Home from "@/pages/home";
 import Newsletters from "@/pages/newsletters";
+import Latest from "@/pages/latest";
 import TradeWarAnalysis from "@/pages/trade-war-analysis";
 import TradeWarTsunamiFeb1014 from "@/pages/trade-war-tsunami-feb-10-14";
 import MineralCriticalityMatrix from "@/pages/mineral-criticality-matrix";
@@ -35,6 +36,10 @@ function Router() {
     <Switch>
       <Route path="/" component={Home} />
       <Route path="/about" component={About} />
+      
+      {/* Insights routes */}
+      {/* Latest news route */}
+      <Route path="/latest" component={Latest} />
       
       {/* Insights routes */}
       <Route path="/insights" component={Insights} />
