@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Header } from '@/components/Header';
 import { Link } from 'wouter';
 import { ArrowLeft, ChevronRight, Share2, Printer, Clock, Mail, Facebook, Twitter } from 'lucide-react';
@@ -7,12 +7,69 @@ import { Badge } from '@/components/ui/badge';
 
 export default function ChinaSteelReform() {
   // Update page title and meta tags on component mount
-  React.useEffect(() => {
-    document.title = "China's Steel Sector Seized by Talk of 'Supply Reform 2.0'";
-    const metaDescription = document.querySelector('meta[name="description"]');
-    if (metaDescription) {
-      metaDescription.setAttribute('content', "World's biggest supplier needs an overhaul to cut production. Beijing may order 50 million tons of capacity cuts: Citigroup");
-    }
+  useEffect(() => {
+    const title = "China's Steel Sector Seized by Talk of 'Supply Reform 2.0'";
+    const description = "World's biggest supplier needs an overhaul to cut production. Beijing may order 50 million tons of capacity cuts: Citigroup";
+    const imageUrl = "https://lucaxyzz-digest.replit.app/latest/china-steel.png";
+    const url = "https://lucaxyzz-digest.replit.app/latest/china-steel-reform";
+    
+    document.title = title;
+    
+    // Define all the meta tags we need to set
+    const metaTags = {
+      // Basic SEO
+      "description": description,
+      "keywords": "China,steel,supply reform,industry,production cuts,commodities,industrial policy",
+      "news_keywords": "China steel,supply reform,industrial policy,commodities",
+      
+      // Open Graph (Facebook, LinkedIn, etc.)
+      "og:title": title,
+      "og:description": description,
+      "og:image": imageUrl,
+      "og:url": url,
+      "og:type": "article",
+      "og:site_name": "Daily Digest",
+      "og:locale": "en_US",
+      
+      // Twitter Card
+      "twitter:card": "summary_large_image",
+      "twitter:site": "@dailydigest",
+      "twitter:creator": "@dailydigest",
+      "twitter:title": title,
+      "twitter:description": description,
+      "twitter:image": imageUrl,
+      "twitter:domain": "lucaxyzz-digest.replit.app",
+      
+      // Article Metadata
+      "article:published_time": "2025-03-02",
+      "article:author": "Luca Cada Lora",
+      "article:section": "Commodities",
+      "article:tag": "China,steel,supply reform,industrial policy,commodities"
+    };
+    
+    // Update meta tags in the document head
+    Object.entries(metaTags).forEach(([name, content]) => {
+      let tag;
+      if (name.startsWith('og:') || name.startsWith('article:')) {
+        // Handle Open Graph and article tags
+        tag = document.querySelector(`meta[property="${name}"]`);
+        if (!tag) {
+          tag = document.createElement('meta');
+          tag.setAttribute('property', name);
+          document.head.appendChild(tag);
+        }
+        tag.setAttribute('content', content);
+      } else {
+        // Handle other meta tags
+        tag = document.querySelector(`meta[name="${name}"]`);
+        if (!tag) {
+          tag = document.createElement('meta');
+          tag.setAttribute('name', name);
+          document.head.appendChild(tag);
+        }
+        tag.setAttribute('content', content);
+      }
+    });
   }, []);
 
   return (
