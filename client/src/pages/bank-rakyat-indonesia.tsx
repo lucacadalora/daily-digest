@@ -6,8 +6,11 @@ import { sampleArticles } from "@/types/newsletter";
 import { Header } from "@/components/Header";
 import { useEffect } from "react";
 import { Article } from "@/types/newsletter";
+import MetaTags from '@/components/SEO/MetaTags'; 
+import type { ArticleMetadata } from '@/lib/meta-tags';
 
-function updateMetaTags(article: Article) {
+// Function to convert Article to ArticleMetadata format
+function convertToMetadata(article: Article): ArticleMetadata {
   // Create a richer description by combining metrics and description
   const enrichedDescription = article.previewMetrics 
     ? `${article.previewMetrics.map(m => `${m.label}: ${m.value}`).join(" | ")}. ${article.description}`
@@ -18,58 +21,19 @@ function updateMetaTags(article: Article) {
     ? `${article.title} | ${article.previewMetrics[0].value} ${article.previewMetrics[0].label}`
     : article.title;
 
-  const metaTags = {
-    // Open Graph
-    "og:title": enrichedTitle,
-    "og:description": enrichedDescription,
-    "og:type": "article",
-    "og:url": `https://lucaxyzz-digest.replit.app/newsletter/${article.slug}`,
-    "og:site_name": "Daily Digest",
-    "og:locale": "en_US",
-
-    // Twitter Card
-    "twitter:card": "summary",
-    "twitter:site": "@dailydigest",
-    "twitter:creator": "@dailydigest",
-    "twitter:title": enrichedTitle,
-    "twitter:description": enrichedDescription,
-    "twitter:domain": "lucaxyzz-digest.replit.app",
-
-    // Article Metadata
-    "article:published_time": article.date,
-    "article:author": article.author,
-    "article:section": article.category,
-    "article:tag": article.tags ? article.tags.join(",") : article.category,
-
-    // Basic SEO
-    "description": enrichedDescription,
-    "keywords": article.tags ? article.tags.join(",") : `${article.category},market analysis,financial news`,
-    "news_keywords": article.tags ? article.tags.join(",") : article.category
+  return {
+    title: enrichedTitle,
+    description: enrichedDescription,
+    url: `https://lucaxyzz-digest.replit.app/bank-rakyat-indonesia`,
+    image: 'https://lucaxyzz-digest.replit.app/steel-image?v=20250302', // Use our universal image endpoint
+    author: article.author,
+    publishedTime: article.date,
+    section: article.category,
+    tags: article.tags || [article.category],
+    siteName: 'Daily Digest',
+    twitterSite: '@dailydigest',
+    twitterCreator: '@dailydigest'
   };
-
-  // Update meta tags
-  Object.entries(metaTags).forEach(([name, content]) => {
-    let tag;
-    if (name.startsWith('og:') || name.startsWith('article:')) {
-      tag = document.querySelector(`meta[property="${name}"]`);
-      if (!tag) {
-        tag = document.createElement('meta');
-        tag.setAttribute('property', name);
-        document.head.appendChild(tag);
-      }
-    } else {
-      tag = document.querySelector(`meta[name="${name}"]`);
-      if (!tag) {
-        tag = document.createElement('meta');
-        tag.setAttribute('name', name);
-        document.head.appendChild(tag);
-      }
-    }
-    tag.setAttribute('content', content);
-  });
-
-  // Update document title with the enriched title
-  document.title = `${enrichedTitle} | Daily Digest`;
 }
 
 export default function WSJArticle() {
@@ -83,11 +47,8 @@ export default function WSJArticle() {
 
   const article = sampleArticles.find(a => a.slug === slug);
 
-  useEffect(() => {
-    if (article) {
-      updateMetaTags(article);
-    }
-  }, [article]);
+  // Convert article to metadata format for MetaTags component
+  const metadata = article ? convertToMetadata(article) : null;
 
   if (!article) {
     return <div>Article not found</div>;

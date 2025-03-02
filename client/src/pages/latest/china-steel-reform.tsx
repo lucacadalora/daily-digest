@@ -12,7 +12,8 @@ const articleMetadata: ArticleMetadata = {
   title: "China's Steel Sector Seized by Talk of 'Supply Reform 2.0' | Daily Digest",
   description: "World's biggest supplier needs an overhaul to cut production. Beijing may order 50 million tons of capacity cuts: Citigroup",
   url: 'https://lucaxyzz-digest.replit.app/latest/china-steel-reform',
-  image: 'https://lucaxyzz-digest.replit.app/latest/china-steel-true.png',
+  // Use special image route that works for all platforms (WhatsApp, Telegram, Twitter)
+  image: 'https://lucaxyzz-digest.replit.app/steel-image',
   author: 'Luca Cada Lora',
   publishedTime: '2025-03-02',
   section: 'Commodities',
