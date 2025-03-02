@@ -4,94 +4,34 @@ import { Link } from 'wouter';
 import { ArrowLeft, ChevronRight, Share2, Printer, Clock, Mail, Facebook, Twitter } from 'lucide-react';
 import { Separator } from '@/components/ui/separator';
 import { Badge } from '@/components/ui/badge';
+import { updateMetaTags, removeMetaTags } from '@/lib/meta-tags';
 
-// Function to update HTML head with meta tags
-function updateHtmlHead() {
-  // Create a link element for the canonical URL
-  const canonicalLink = document.querySelector('link[rel="canonical"]') || document.createElement('link');
-  canonicalLink.setAttribute('rel', 'canonical');
-  canonicalLink.setAttribute('href', 'https://lucaxyzz-digest.replit.app/latest/china-steel-reform');
-  document.head.appendChild(canonicalLink);
-
-  // Update the title
-  document.title = "China's Steel Sector Seized by Talk of 'Supply Reform 2.0' | Daily Digest";
-
-  // Define all meta tags that are essential for social media sharing
-  const metaTags = {
-    // Basic meta tags
-    'description': "World's biggest supplier needs an overhaul to cut production. Beijing may order 50 million tons of capacity cuts: Citigroup",
-    'keywords': "China,steel,supply reform,industry,production cuts,commodities,industrial policy",
-    'news_keywords': "China steel,supply reform,industrial policy,commodities",
-    
-    // Open Graph tags - enhanced for better WhatsApp and X compatibility
-    'og:title': "China's Steel Sector Seized by Talk of 'Supply Reform 2.0' | Daily Digest",
-    'og:description': "World's biggest supplier needs an overhaul to cut production. Beijing may order 50 million tons of capacity cuts: Citigroup",
-    'og:url': 'https://lucaxyzz-digest.replit.app/latest/china-steel-reform',
-    'og:type': 'article',
-    'og:image': 'https://lucaxyzz-digest.replit.app/latest/china-steel-true.png?v=25',
-    'og:image:url': 'https://lucaxyzz-digest.replit.app/latest/china-steel-true.png?v=25',
-    'og:image:secure_url': 'https://lucaxyzz-digest.replit.app/latest/china-steel-true.png?v=25',
-    'og:image:type': 'image/png',
-    'og:image:width': '1200',
-    'og:image:height': '630',
-    'og:image:alt': 'Steel factory in China',
-    'og:site_name': 'Daily Digest',
-    'og:locale': 'en_US',
-    
-    // Twitter Card tags - specifically optimized for X (Twitter) compatibility
-    'twitter:card': 'summary_large_image',
-    'twitter:title': "China's Steel Sector Seized by Talk of 'Supply Reform 2.0'",
-    'twitter:description': "World's biggest supplier needs an overhaul to cut production. Beijing may order 50 million tons of capacity cuts: Citigroup",
-    'twitter:image': 'https://lucaxyzz-digest.replit.app/latest/china-steel-true.png?v=2',
-    'twitter:image:src': 'https://lucaxyzz-digest.replit.app/latest/china-steel-true.png?v=2',
-    'twitter:url': 'https://lucaxyzz-digest.replit.app/latest/china-steel-reform',
-    'twitter:site': '@dailydigest',
-    'twitter:creator': '@dailydigest',
-    'twitter:domain': 'lucaxyzz-digest.replit.app',
-    
-    // Article metadata
-    'article:published_time': '2025-03-02',
-    'article:author': 'Luca Cada Lora',
-    'article:section': 'Commodities',
-    'article:tag': 'China,steel,supply reform,industrial policy,commodities'
-  };
-  
-  // Update each meta tag, creating it if it doesn't exist
-  Object.entries(metaTags).forEach(([name, content]) => {
-    // For Open Graph tags which use property attribute
-    if (name.startsWith('og:') || name.startsWith('article:')) {
-      let tag = document.querySelector(`meta[property="${name}"]`);
-      if (!tag) {
-        // Create the tag if it doesn't exist
-        tag = document.createElement('meta');
-        tag.setAttribute('property', name);
-        document.head.appendChild(tag);
-      }
-      tag.setAttribute('content', content);
-    }
-    // For Twitter and other tags which use name attribute
-    else {
-      let tag = document.querySelector(`meta[name="${name}"]`);
-      if (!tag) {
-        // Create the tag if it doesn't exist
-        tag = document.createElement('meta');
-        tag.setAttribute('name', name);
-        document.head.appendChild(tag);
-      }
-      tag.setAttribute('content', content);
-    }
-  });
-}
+// Article metadata for the China Steel Reform article
+const articleMetadata = {
+  title: "China's Steel Sector Seized by Talk of 'Supply Reform 2.0' | Daily Digest",
+  description: "World's biggest supplier needs an overhaul to cut production. Beijing may order 50 million tons of capacity cuts: Citigroup",
+  url: 'https://lucaxyzz-digest.replit.app/latest/china-steel-reform',
+  image: 'https://lucaxyzz-digest.replit.app/latest/china-steel-true.png',
+  author: 'Luca Cada Lora',
+  publishedTime: '2025-03-02',
+  section: 'Commodities',
+  tags: ['China', 'steel', 'supply reform', 'industry', 'production cuts', 'commodities', 'industrial policy'],
+  siteName: 'Daily Digest',
+  twitterSite: '@dailydigest',
+  twitterCreator: '@dailydigest'
+};
 
 export default function ChinaSteelReform() {
   // Update meta tags when component mounts
   useEffect(() => {
-    // Update meta tags in the document head
-    updateHtmlHead();
+    // Update meta tags in the document head with cache-busting
+    updateMetaTags(articleMetadata, '25');
     
     // Clean up if needed when component unmounts
     return () => {
-      // Reset to default title if needed
+      // Remove all meta tags when navigating away
+      removeMetaTags();
+      // Reset to default title
       document.title = "Daily Digest - Market Intelligence";
     };
   }, []);
@@ -345,52 +285,9 @@ export default function ChinaSteelReform() {
                     />
                   </div>
                   <h3 className="font-medium text-sm group-hover:text-blue-600 leading-tight">
-                    China Says Plans for Talks With US Military Are in the Works
+                    China Military Talks With US Show Tenuous Engagement Amid Tensions
                   </h3>
                 </Link>
-              </div>
-            </div>
-            
-            {/* Top Reads Section - Based on the reference image */}
-            <div className="mb-10">
-              <h2 className="text-2xl font-bold mb-6">Top Reads</h2>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div className="group cursor-pointer">
-                  <div className="aspect-[4/3] overflow-hidden bg-gray-200 dark:bg-gray-800 mb-3">
-                    <img 
-                      src="/latest/charts/china-steel.png" 
-                      alt="Rich People Economy" 
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                    />
-                  </div>
-                  <h3 className="font-medium text-base group-hover:text-blue-600">
-                    Rich People Are Filing a Cash Common to the US Economy—But at What Cost?
-                  </h3>
-                </div>
-                <div className="group cursor-pointer">
-                  <div className="aspect-[4/3] overflow-hidden bg-gray-200 dark:bg-gray-800 mb-3">
-                    <img 
-                      src="/latest/charts/china-steel.png" 
-                      alt="Trump SAT Tax" 
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                    />
-                  </div>
-                  <h3 className="font-medium text-base group-hover:text-blue-600">
-                    Trump's SAT Tax Promise Hinges on Changes to Section 1031
-                  </h3>
-                </div>
-                <div className="group cursor-pointer">
-                  <div className="aspect-[4/3] overflow-hidden bg-gray-200 dark:bg-gray-800 mb-3">
-                    <img 
-                      src="/latest/charts/china-steel.png" 
-                      alt="OpenSea NFTs" 
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                    />
-                  </div>
-                  <h3 className="font-medium text-base group-hover:text-blue-600">
-                    OpenSea Reveals Theoretical Margin of Up to 99.99% on NFTs
-                  </h3>
-                </div>
               </div>
             </div>
           </div>
