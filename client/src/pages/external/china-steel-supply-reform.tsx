@@ -9,34 +9,26 @@ import type { ArticleMetadata } from '@/lib/meta-tags';
 export default function ChinaSteel() {
   const [isSubscribeOpen, setIsSubscribeOpen] = React.useState(false);
 
-  React.useEffect(() => {
-    // Update meta tags for better SEO and sharing
-    document.title = "China's Steel Sector: 'Supply Reform 2.0' Looms - Daily Digest";
-    
-    const metaDescription = document.querySelector('meta[name="description"]');
-    if (metaDescription) {
-      metaDescription.setAttribute("content", "China's steel sector faces a new round of supply-side structural reforms as the government aims to reduce carbon emissions and tackle overcapacity.");
-    }
-
-    // Add Open Graph and Twitter Card meta tags for better social sharing
-    const ogTitle = document.querySelector('meta[property="og:title"]');
-    if (ogTitle) {
-      ogTitle.setAttribute("content", "China's Steel Sector: 'Supply Reform 2.0' Looms");
-    }
-    
-    const ogDescription = document.querySelector('meta[property="og:description"]');
-    if (ogDescription) {
-      ogDescription.setAttribute("content", "China's steel sector faces a new round of supply-side structural reforms as the government aims to reduce carbon emissions and tackle overcapacity.");
-    }
-    
-    const ogImage = document.querySelector('meta[property="og:image"]');
-    if (ogImage) {
-      ogImage.setAttribute("content", window.location.origin + "/images/external/china-steel.png");
-    }
-  }, []);
+  // Define article metadata for MetaTags component
+  const articleMetadata: ArticleMetadata = {
+    title: "China's Steel Sector: 'Supply Reform 2.0' Looms | Daily Digest",
+    description: "China's steel sector faces a new round of supply-side structural reforms as the government aims to reduce carbon emissions and tackle overcapacity.",
+    url: "https://lucaxyzz-digest.replit.app/external/china-steel-supply-reform",
+    image: "/api/image?path=/latest/china-steel.png",
+    author: "Daily Digest Staff",
+    publishedTime: "2025-03-02T18:00:00Z",
+    section: "Markets",
+    tags: ["China", "Steel", "Supply Reform", "Manufacturing", "Commodities"],
+    siteName: "Daily Digest",
+    twitterSite: "@dailydigest",
+    twitterCreator: "@dailydigest"
+  };
 
   return (
     <div className="min-h-screen bg-[#FBF7F4] dark:bg-gray-900 transition-colors">
+      {/* Add MetaTags component for SEO and social sharing */}
+      <MetaTags metadata={articleMetadata} cacheBuster="20250302" />
+      
       <Header onSubscribe={() => setIsSubscribeOpen(true)} showCategories={false} />
 
       <SubscribeModal
