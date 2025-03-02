@@ -537,6 +537,24 @@ export function registerRoutes(app: Express): Server {
     }
   });
   
+  // Direct HTML page for Twitter Cards without redirects
+  app.get('/t/direct', (req, res) => {
+    try {
+      console.log('[Debug] Serving direct Twitter Card page');
+      // Add cache control headers to prevent caching
+      res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+      res.setHeader('Pragma', 'no-cache');
+      res.setHeader('Expires', '0');
+      
+      // Serve the file directly without redirections
+      const filePath = join(process.cwd(), 'public', 'static', 't', 'direct.html');
+      return res.sendFile(filePath);
+    } catch (error) {
+      console.error('Error serving direct Twitter Card page:', error);
+      return res.status(500).send(`Error serving page: ${error instanceof Error ? error.message : 'Unknown error'}`);
+    }
+  });
+  
   // Social share optimized route for China Steel Reform article
   app.get('/share/china-steel-reform', (req, res) => {
     try {
