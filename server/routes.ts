@@ -571,16 +571,22 @@ export function registerRoutes(app: Express): Server {
       // Set content type
       res.setHeader('Content-Type', 'image/png');
       
+      // Add Cross-Origin headers to ensure Twitter can access the image
+      res.setHeader('Access-Control-Allow-Origin', '*');
+      res.setHeader('Access-Control-Allow-Methods', 'GET');
+      res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+      
       // Set cache headers based on version parameter
       if (req.query.v) {
-        // Strong caching for versioned requests (30 days)
-        res.setHeader('Cache-Control', 'public, max-age=2592000, immutable');
-        res.setHeader('Expires', new Date(Date.now() + 2592000000).toUTCString());
-        console.log(`Serving versioned image (v=${req.query.v}) with strong cache: ${filePath}`);
+        // Avoid excessive caching for social media crawlers
+        // Maximum 1 hour cache for versioned requests to allow for revalidation
+        res.setHeader('Cache-Control', 'public, max-age=3600, must-revalidate');
+        res.setHeader('Expires', new Date(Date.now() + 3600000).toUTCString());
+        console.log(`Serving versioned image (v=${req.query.v}) with short cache: ${filePath}`);
       } else {
-        // Shorter cache time for non-versioned requests (1 day)
-        res.setHeader('Cache-Control', 'public, max-age=86400');
-        console.log(`Serving non-versioned image with short cache: ${filePath}`);
+        // Very short cache time for non-versioned requests (5 minutes)
+        res.setHeader('Cache-Control', 'public, max-age=300, must-revalidate');
+        console.log(`Serving non-versioned image with minimal cache: ${filePath}`);
       }
       
       // Stream the file
