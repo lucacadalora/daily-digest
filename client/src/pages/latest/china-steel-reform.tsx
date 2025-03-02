@@ -95,18 +95,18 @@ export default function ChinaSteelReform() {
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
       <Header simplified />
       
-      {/* Top categories navigation - matching the shown image */}
-      <div className="border-b border-gray-200 dark:border-gray-800 hidden md:block">
+      {/* Top categories navigation - responsive for both desktop and mobile */}
+      <div className="border-b border-gray-200 dark:border-gray-800">
         <div className="container max-w-screen-xl mx-auto">
-          <div className="flex justify-between items-center py-2">
-            <div className="flex space-x-8">
-              <span className="text-sm font-medium text-gray-700 dark:text-gray-300 cursor-pointer hover:text-blue-600">Markets</span>
-              <span className="text-sm font-medium text-gray-700 dark:text-gray-300 cursor-pointer hover:text-blue-600">Economics</span>
-              <span className="text-sm font-medium text-gray-700 dark:text-gray-300 cursor-pointer hover:text-blue-600">Industries</span>
-              <span className="text-sm font-medium text-gray-700 dark:text-gray-300 cursor-pointer hover:text-blue-600">Tech</span>
-              <span className="text-sm font-medium text-gray-700 dark:text-gray-300 cursor-pointer hover:text-blue-600">Insights</span>
+          <div className="flex justify-between items-center py-2 px-4 md:px-0">
+            <div className="flex space-x-3 md:space-x-8 overflow-x-auto scrollbar-hide whitespace-nowrap w-full md:w-auto">
+              <span className="text-xs md:text-sm font-medium text-gray-700 dark:text-gray-300 cursor-pointer hover:text-blue-600">Markets</span>
+              <span className="text-xs md:text-sm font-medium text-gray-700 dark:text-gray-300 cursor-pointer hover:text-blue-600">Economics</span>
+              <span className="text-xs md:text-sm font-medium text-gray-700 dark:text-gray-300 cursor-pointer hover:text-blue-600">Industries</span>
+              <span className="text-xs md:text-sm font-medium text-gray-700 dark:text-gray-300 cursor-pointer hover:text-blue-600">Tech</span>
+              <span className="text-xs md:text-sm font-medium text-gray-700 dark:text-gray-300 cursor-pointer hover:text-blue-600">Insights</span>
             </div>
-            <div className="text-blue-600 font-semibold text-lg">
+            <div className="hidden md:block text-blue-600 font-semibold text-lg">
               Daily <span className="text-black dark:text-white">| Digest</span>
             </div>
           </div>
@@ -155,7 +155,7 @@ export default function ChinaSteelReform() {
                 alt="Steel factory in China" 
                 className="w-full h-auto object-cover max-h-96"
               />
-              <p className="text-xs text-gray-500 mb-3 mt-1 italic leading-tight">
+              <p className="text-xs text-gray-500 mb-3 mt-1 italic leading-tight px-1">
                 All eyes are now on China's virtual National People's Congress legislative meetings next week, 
                 to see if any guidance is issued for the steel industry. Photographer: Qilai Shen/Bloomberg
               </p>
@@ -214,7 +214,7 @@ export default function ChinaSteelReform() {
                     className="w-full h-auto object-contain"
                   />
                 </div>
-                <p className="text-xs text-gray-500 mt-2 pl-1 italic">
+                <p className="text-xs text-gray-500 mt-2 px-1 italic">
                   Source: China's National Bureau of Statistics
                 </p>
               </div>
@@ -250,7 +250,7 @@ export default function ChinaSteelReform() {
                     className="w-full h-auto object-contain"
                   />
                 </div>
-                <p className="text-xs text-gray-500 mt-2 pl-1 italic">
+                <p className="text-xs text-gray-500 mt-2 px-1 italic">
                   Source: China's General Administration of Customs
                 </p>
               </div>
