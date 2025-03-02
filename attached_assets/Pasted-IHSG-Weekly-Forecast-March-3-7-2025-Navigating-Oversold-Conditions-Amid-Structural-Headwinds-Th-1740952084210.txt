@@ -1,0 +1,77 @@
+IHSG Weekly Forecast (March 3-7, 2025): Navigating Oversold Conditions Amid Structural Headwinds
+The IHSG enters March 2025 at a critical inflection point after a historic 7.83% weekly decline to 6,270.597, its lowest close since October 2021. Foreign investors drove the sell-off, with Rp10.22 trillion in net outflows last week alone (Rp18.98 trillion YTD), exacerbated by MSCI’s reweighting of Indonesia from 2.2% to 1.5% in its EM index1710. While technical indicators signal oversold conditions, structural pressures from global trade risks and domestic liquidity constraints complicate rebound prospects.
+Key Drivers for the Week Ahead
+1.	MSCI Rebalancing Fallout (Effective March 3):
+•	The reduction in Indonesia’s weighting forces passive fund outflows of ~$120 million, disproportionately affecting large caps like BBCA, BBRI, and BMRI49.
+•	Stocks added to MSCI Small Cap (MDKA, INKP, CLEO) may see volatility as active funds reposition12.
+2.	Technical Positioning:
+•	Oversold Signals: RSI (41.16) and Stochastic RSI hint at exhaustion, but MACD’s bearish slope suggests lingering downside risk1011.
+•	Critical Levels:
+•	Support: 6,050–6,200 (2021 lows); breach risks test of 5,900.
+•	Resistance: 6,450 (MA20) and 6,640 (Feb 21 close)1011.
+3.	Global Sentiment Risks:
+•	Trump’s tariff threats against Mexico/Canada and Fed policy uncertainty keep risk assets under pressure. The USDIDR nearing 16,500 raises intervention risks713.
+Sector & Stock Spotlight
+•	Big-Cap Bloodbath:
+•	BREN (-25.61% YTD) and BMRI (-10.96%) face continued foreign selling due to MSCI adjustments910.
+•	Tech Outliers: The sector (+59.31% YTD) remains resilient (e.g., INET +34.48% last week) but may lack liquidity to offset broader declines39.
+•	Rebound Candidates:
+•	TLKM and BBNI: Oversold blue chips with dividend yields >4%; technical basing patterns observed610.
+•	ANTM: Leverages gold’s safe-haven appeal ($2,885/oz) and BI’s potential rate hikes1013.
+Market Scenarios & Actionable Strategies
+Scenario	Probability	IHSG Range	Catalysts	Action
+Bear	40%	6,050–6,200	MSCI outflows accelerate; USDIDR >16,500	Short-term hedges (ASII puts); accumulate cash for 6,000 support.
+Base	50%	6,200–6,450	Technical rebound; mild foreign buying	Rotate into oversold banks (BBRI, BMRI) and high-yield telcos (TLKM).
+Bull	10%	6,450–6,640	BI rate hike; global risk-on rebound	Buy beaten-down tech (INET) and gold proxies (MDKA).
+
+
+Top Contrarian Plays: Deep-Value Banks & Gold Exposure
+1. BBRI (PT Bank Rakyat Indonesia)
+•	Price (Feb 28 Close): Rp3,360 (-7.44% WoW, YTD low)
+•	Dividend Yield: 6.1% (Rp204/share FY2024 payout)
+•	Valuation: 0.66x P/B (vs 5-year avg 1.4x) | ROE: 18.4%
+•	Technical Setup:
+•	Oversold RSI 28.3 | MACD bearish but nearing reversal
+•	Critical support at Rp3,360 (2025 low) | Resistance Rp3,800
+Action:
+•	Entry: Rp3,300–3,400 (6–6.5% yield zone)
+•	Target: Rp3,900 (+16% upside + dividend)
+•	Stop-loss: Rp3,250 (below key support)
+Catalysts:
+•	March 15 dividend declaration (Rp204/share)
+•	Prabowo’s MSME stimulus to boost UMKM loan growth (82% of portfolio).
+2. BMRI (PT Bank Mandiri)
+•	Price (Feb 28 Close): Rp4,600 | YTD Performance: -10.96%
+•	Dividend Yield: 7.83% (Rp358.6/share FY2024 payout)
+•	Hidden Value: $1.2B unrealized gain from 20% Telkomsel stake
+•	Technical Edge:
+•	Descending wedge breakdown halted at Rp4,450 support
+•	Institutional accumulation: 18.3M shares bought last week
+Action:
+•	Entry: Rp4,450–4,700 (Fibonacci 61.8% retracement)
+•	Target: Rp5,800 (+26% upside)
+•	Hedge: Pair with USDIDR futures (32% foreign ownership sensitivity).
+3. MDKA (PT Merdeka Copper Gold)
+•	Price (Feb 28 Close): Rp1,400 (-4.00% intraday)
+•	Gold Proxy: Leverages gold at $2,885/oz | Technical rebound potential
+•	Risks: Negative EPS (-35 IDR) | High volatility
+Action:
+•	Entry: Rp1,350–1,400 (gold price correlation)
+•	Target: Rp1,650 (+18% upside)
+•	Stop-loss: Rp1,300 (psychological support).
+Sector Comparison Matrix
+Metric	BBRI	BMRI	MDKA
+Dividend Yield	6.1%	7.8%	0%
+P/B Ratio	0.66x	1.1x	2.5x
+YTD Performance	-34%	-31%	-15%
+Foreign Ownership	41%	32%	18%
+Liquidity (Avg Vol)	150M/day	90M/day	10M/day
+
+
+
+
+Macro Catalysts to Watch
+•	March 3: February inflation data (expected 0.5% YoY vs. 0.76% prior) – benign print may ease BI pressure713.
+•	March 5: Fed Chair Powell’s testimony – hawkish tilt could extend EM outflows.
+Bottom Line: The IHSG’s path hinges on foreign flow reversals and BI’s response to rupiah volatility. While a technical bounce to 6,450 is plausible, sustained recovery requires global risk sentiment stabilization. Accumulate quality names (BBCA, TLKM) at distressed valuations but remain hedged against downside.
+
