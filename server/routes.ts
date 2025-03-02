@@ -615,6 +615,46 @@ export function registerRoutes(app: Express): Server {
       return res.status(500).send(`Error serving image: ${error instanceof Error ? error.message : 'Unknown error'}`);
     }
   });
+  
+  // Serving true PNG image for Twitter Cards (converted from WebP)
+  app.get('/latest/china-steel-true.png', (req, res) => {
+    try {
+      const filePath = join(process.cwd(), 'public', 'latest', 'china-steel-true.png');
+      
+      // Check if file exists
+      try {
+        const stats = fs.statSync(filePath);
+        if (!stats.isFile()) {
+          throw new Error("Not a file");
+        }
+      } catch (err) {
+        console.error(`True PNG image file not found: ${filePath}`, err);
+        return res.status(404).send("Image not found");
+      }
+      
+      // Set content type
+      res.setHeader('Content-Type', 'image/png');
+      
+      // Add Cross-Origin headers to ensure Twitter can access the image
+      res.setHeader('Access-Control-Allow-Origin', '*');
+      res.setHeader('Access-Control-Allow-Methods', 'GET');
+      res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+      
+      // Very short cache time for Twitter Cards image
+      res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+      res.setHeader('Pragma', 'no-cache');
+      res.setHeader('Expires', '0');
+      
+      console.log(`Serving Twitter-compatible PNG image: ${filePath}`);
+      
+      // Stream the file
+      const fileStream = fs.createReadStream(filePath);
+      fileStream.pipe(res);
+    } catch (error) {
+      console.error('Error serving true PNG image:', error);
+      return res.status(500).send(`Error serving image: ${error instanceof Error ? error.message : 'Unknown error'}`);
+    }
+  });
 
   app.get('/api/market-data', async (req, res) => {
     try {
