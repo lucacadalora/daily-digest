@@ -28,7 +28,10 @@ function updateHtmlHead() {
     'og:description': "World's biggest supplier needs an overhaul to cut production. Beijing may order 50 million tons of capacity cuts: Citigroup",
     'og:url': 'https://lucaxyzz-digest.replit.app/latest/china-steel-reform',
     'og:type': 'article',
-    'og:image': 'https://lucaxyzz-digest.replit.app/latest/china-steel.png',
+    'og:image': 'https://lucaxyzz-digest.replit.app/latest/china-steel.png?v=2',
+    'og:image:url': 'https://lucaxyzz-digest.replit.app/latest/china-steel.png?v=2',
+    'og:image:secure_url': 'https://lucaxyzz-digest.replit.app/latest/china-steel.png?v=2',
+    'og:image:type': 'image/png',
     'og:image:width': '1200',
     'og:image:height': '630',
     'og:image:alt': 'Steel factory in China',
@@ -38,7 +41,8 @@ function updateHtmlHead() {
     // Twitter Card tags
     'twitter:title': "China's Steel Sector Seized by Talk of 'Supply Reform 2.0' | Daily Digest",
     'twitter:description': "World's biggest supplier needs an overhaul to cut production. Beijing may order 50 million tons of capacity cuts: Citigroup",
-    'twitter:image': 'https://lucaxyzz-digest.replit.app/latest/china-steel.png',
+    'twitter:image': 'https://lucaxyzz-digest.replit.app/latest/china-steel.png?v=2',
+    'twitter:image:src': 'https://lucaxyzz-digest.replit.app/latest/china-steel.png?v=2',
     'twitter:card': 'summary_large_image',
     'twitter:site': '@dailydigest',
     'twitter:creator': '@dailydigest',
@@ -128,8 +132,8 @@ export default function ChinaSteelReform() {
           
           {/* Article header area */}
           <div className="max-w-3xl mx-auto">
-            {/* Category - matching the image */}
-            <div className="mb-2">
+            {/* Category - matching the image with improved spacing */}
+            <div className="mt-4 mb-2">
               <span className="text-xs font-medium text-gray-500 dark:text-gray-400">Commodities</span>
             </div>
             
