@@ -3,6 +3,8 @@ import { Header } from "@/components/Header";
 import { SubscribeModal } from "@/components/SubscribeModal";
 import { ArrowLeft } from "lucide-react";
 import { Link } from "wouter";
+import MetaTags from '@/components/SEO/MetaTags';
+import type { ArticleMetadata } from '@/lib/meta-tags';
 
 export default function ChinaSteel() {
   const [isSubscribeOpen, setIsSubscribeOpen] = React.useState(false);

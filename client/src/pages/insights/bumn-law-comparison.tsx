@@ -5,58 +5,26 @@ import { ChevronRight, Clock, MapPin, ExternalLink } from "lucide-react";
 import { LuLightbulb } from "react-icons/lu";
 import { sampleArticles } from "@/types/newsletter";
 import { Badge } from "@/components/ui/badge";
+import MetaTags from '@/components/SEO/MetaTags';
+import type { ArticleMetadata } from '@/lib/meta-tags';
 
 export default function BUMNLawComparison() {
   const article = sampleArticles.find(a => a.slug === "bumn-law-comparison");
 
-  useEffect(() => {
-    if (article) {
-      // Update meta tags for SEO
-      const metaTags = {
-        'og:title': article.title,
-        'og:description': article.description,
-        'og:type': 'article',
-        'og:url': window.location.href,
-        
-        // Article metadata
-        'article:published_time': article.date,
-        'article:author': article.author,
-        'article:section': article.category,
-        'article:tag': article.tags?.join(',') || article.category,
-
-        // Basic SEO tags
-        'description': article.description,
-        'keywords': article.tags?.join(',') || `${article.category},BUMN,Indonesia,Law`,
-        'news_keywords': article.tags?.join(',') || article.category
-      };
-
-      // Update meta tags in the document head
-      Object.entries(metaTags).forEach(([name, content]) => {
-        let tag;
-        if (name.startsWith('og:') || name.startsWith('article:')) {
-          // Handle Open Graph and article tags
-          tag = document.querySelector(`meta[property="${name}"]`);
-          if (!tag) {
-            tag = document.createElement('meta');
-            tag.setAttribute('property', name);
-            document.head.appendChild(tag);
-          }
-        } else {
-          // Handle other meta tags
-          tag = document.querySelector(`meta[name="${name}"]`);
-          if (!tag) {
-            tag = document.createElement('meta');
-            tag.setAttribute('name', name);
-            document.head.appendChild(tag);
-          }
-        }
-        tag.setAttribute('content', content);
-      });
-
-      // Update the document title
-      document.title = article.title + " | Daily Digest";
-    }
-  }, [article]);
+  // Create article metadata for the MetaTags component
+  const metadata: ArticleMetadata | null = article ? {
+    title: `${article.title} | Daily Digest`,
+    description: article.description,
+    url: `https://lucaxyzz-digest.replit.app/insights/bumn-law-comparison`,
+    image: '/images/bumn-law-comparison.jpg',
+    author: article.author,
+    publishedTime: article.date,
+    section: article.category,
+    tags: article.tags || [article.category, 'BUMN', 'Indonesia', 'Law'],
+    siteName: 'Daily Digest',
+    twitterSite: '@dailydigest',
+    twitterCreator: '@dailydigest'
+  } : null;
 
   if (!article) {
     return <div>Article not found</div>;
@@ -64,6 +32,9 @@ export default function BUMNLawComparison() {
 
   return (
     <div className="min-h-screen bg-white dark:bg-gray-900">
+      {/* Add MetaTags component for SEO */}
+      {metadata && <MetaTags metadata={metadata} cacheBuster="20250302" />}
+      
       <Header simplified showCategories={false} />
       <div className="h-36 sm:h-32"></div>
 
