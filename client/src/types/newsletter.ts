@@ -324,5 +324,34 @@ Action: Accumulate below Rp2,700 (near 2025 low) for dividend + potential reboun
     ],
     tags: ["Crypto", "Federal Reserve", "Technical Analysis"],
     content: "fed-qt-exit-crypto-rally"
+  },
+  {
+    slug: "ihsg-outlook-march-3-7",
+    title: "IHSG at Critical Juncture: Inflation Relief Creates Bullish Momentum",
+    description: "Technical and fundamental analysis of IHSG's potential trend reversal following improved inflation data and renewed foreign investor confidence. Focus on key technical levels and pre-Ramadan consumer sector opportunities.",
+    category: "Markets",
+    source: "Daily Digest",
+    author: "Luca Cada Lora",
+    date: "March 3, 2025",
+    previewEmoji: "📊",
+    previewMetrics: [
+      {
+        label: "IHSG Range",
+        value: "6,950–7,150",
+        subtitle: "Cautiously Bullish"
+      },
+      {
+        label: "USDIDR",
+        value: "16,150",
+        subtitle: "Strengthening Trend"
+      },
+      {
+        label: "Consumer Play",
+        value: "Buy UNVR",
+        subtitle: "Pre-Ramadan Boost"
+      }
+    ],
+    tags: ["IHSG", "Technical Analysis", "Market Strategy", "Weekly Special"],
+    content: "Weekly Market Alert March 3-7, 2025\nWith inflation easing and foreign inflows resuming, IHSG shows signs of reversing its bearish trend. Indonesia's February inflation came in at a surprisingly low 2.8% YoY (vs. 3.1% consensus), marking the second consecutive month of moderation. This cooling inflation, combined with Bank Indonesia's decision to hold rates steady at 6.00% last month, has created a more favorable backdrop for equities. Foreign investors have registered net inflows of $215M in the last week – the strongest weekly inflow since November 2024."
   }
 ];

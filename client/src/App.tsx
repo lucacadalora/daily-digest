@@ -69,6 +69,9 @@ function Router() {
       <Route path="/newsletter/bank-rakyat-indonesia-undervalued-dividend-powerhouse" component={BBRIArticle} />
       <Route path="/newsletter/us-china-trade-war-impact-ihsg" component={TradeWarAnalysis} />
       <Route path="/newsletter/trade-war-tsunami-feb-10-14" component={TradeWarTsunamiFeb1014} />
+      <Route path="/trade-war-tsunami-feb-10-14" component={TradeWarTsunamiFeb1014} />
+      <Route path="/newsletter/ihsg-outlook-march-3-7" component={IHSGOutlookMarch37} />
+      <Route path="/ihsg-outlook-march-3-7" component={IHSGOutlookMarch37} />
       <Route path="/newsletter/indonesia-mineral-criticality-matrix" component={MineralCriticalityMatrix} />
       <Route path="/newsletter/indonesia-economic-inventory-crisis" component={IndonesiaEconomicCrisis} />
       <Route path="/indonesia-economic-crisis" component={IndonesiaEconomicCrisis} />
