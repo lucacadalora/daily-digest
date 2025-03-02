@@ -570,8 +570,8 @@ export function registerRoutes(app: Express): Server {
     }
   });
   
-  // Special route for proper Twitter Card preview of the article
-  app.use('/latest/china-steel-reform', (req, res, next) => {
+  // Special route that serves static HTML for social media crawlers directly at the original URL
+  app.get('/latest/china-steel-reform', (req, res, next) => {
     // Check if this is a social media crawler
     const userAgent = req.headers['user-agent'] || '';
     const referer = req.headers['referer'] || '';
@@ -593,9 +593,9 @@ export function registerRoutes(app: Express): Server {
     console.log(`[Referer Debug] ${referer}`);
     
     if (isSocialCrawler) {
-      console.log(`Detected social media crawler - serving static HTML`);
-      // Serve the pre-rendered file with all meta tags for social media
-      return res.sendFile(join(process.cwd(), 'public', 'share', 'china-steel-reform', 'index.html'));
+      console.log(`Detected social media crawler - serving static HTML directly: ${userAgent.substring(0, 30)}`);
+      // Serve the content directly - NOT redirecting to avoid breaking Twitter's card
+      return res.sendFile(join(process.cwd(), 'public', 'latest', 'china-steel-share', 'index.html'));
     }
     
     // Not a crawler, continue with normal React app rendering
