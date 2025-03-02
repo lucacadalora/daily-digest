@@ -43,14 +43,14 @@ export const LatestExternalNews = ({ articles, maxItems = 7 }: LatestExternalNew
           </p>
         </div>
         
-        {/* Articles List */}
+        {/* Articles List - Grid layout for card-style design */}
         <ScrollArea className="h-[calc(100vh-14rem)] max-h-[660px]">
-          <div className="divide-y divide-gray-100 dark:divide-gray-800">
+          <div className="p-3 grid grid-cols-1 gap-4">
             {latestArticles.map(article => (
               <ExternalNewsCard 
                 key={article.id} 
                 article={article} 
-                compact={false}
+                showSource={false}
               />
             ))}
           </div>

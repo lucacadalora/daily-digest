@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'wouter';
-import { Clock } from 'lucide-react';
+import { ArrowRight, Clock } from 'lucide-react';
 import type { ExternalNews } from '@/types/external-news';
 
 interface ExternalNewsCardProps {
@@ -44,42 +44,86 @@ export const ExternalNewsCard: React.FC<ExternalNewsCardProps> = ({
     return article.publishedDate;
   };
 
-  return (
-    <Link href={article.url || '#'}>
-      <div className="group cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors rounded-lg p-3">
-        <div className="flex gap-3">
-          {/* Image thumbnail - only show if not compact view */}
-          {!compact && article.imageUrl && (
-            <div className="w-20 h-20 flex-shrink-0 rounded-md overflow-hidden">
+  // For compact layout, we'll use a side-by-side design
+  if (compact && article.imageUrl) {
+    return (
+      <Link href={article.url || '#'}>
+        <div className="group cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors rounded-lg p-3">
+          <div className="flex gap-3">
+            {/* Thumbnail for compact view */}
+            <div className="w-24 h-24 flex-shrink-0 rounded-md overflow-hidden relative">
               <img 
                 src={article.imageUrl} 
                 alt={article.title}
                 className="w-full h-full object-cover"
               />
-            </div>
-          )}
-          
-          {/* Content */}
-          <div className="flex-1">
-            {/* Source/Category and timestamp */}
-            <div className="flex items-center justify-between mb-1 text-xs">
-              <div className="font-medium text-blue-600 dark:text-blue-400 uppercase">
-                {showSource ? article.source : article.category}
+              <div className="absolute right-1 bottom-1 bg-white rounded-full p-1 shadow-sm group-hover:scale-110 transition-transform">
+                <ArrowRight className="h-3 w-3 text-blue-600" />
               </div>
-              <div className="text-gray-500 dark:text-gray-400 flex items-center gap-1">
+            </div>
+            
+            {/* Content */}
+            <div className="flex-1">
+              {/* Category */}
+              <div className="text-xs font-bold text-teal-600 dark:text-teal-400 uppercase tracking-wider mb-1">
+                {article.category || (showSource ? article.source : '')}
+              </div>
+              
+              {/* Title */}
+              <h4 className="font-serif text-sm font-semibold line-clamp-2 group-hover:text-blue-600 transition-colors dark:group-hover:text-blue-400">
+                {article.title}
+              </h4>
+              
+              {/* Time */}
+              <div className="mt-1 text-xs text-gray-500 dark:text-gray-400 flex items-center gap-1">
                 <Clock className="h-3 w-3" />
                 <span>{getRelativeTime(article.timestamp)}</span>
               </div>
             </div>
-            
-            {/* Title */}
-            <h4 className="font-serif text-sm font-medium line-clamp-2 group-hover:text-blue-600 transition-colors dark:group-hover:text-blue-400">
-              {article.title}
-            </h4>
-            
-            {/* Author */}
-            <div className="mt-1 text-xs text-gray-500 dark:text-gray-400">
+          </div>
+        </div>
+      </Link>
+    );
+  }
+
+  // Full card layout (default)
+  return (
+    <Link href={article.url || '#'}>
+      <div className="group cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors rounded-lg p-3">
+        <div className="relative">
+          {/* New design based on reference */}
+          {article.imageUrl && (
+            <div className="relative w-full rounded-lg overflow-hidden mb-3">
+              <img 
+                src={article.imageUrl} 
+                alt={article.title}
+                className="w-full h-40 object-cover"
+              />
+              {/* Arrow button overlay */}
+              <div className="absolute right-3 top-1/2 -translate-y-1/2 bg-white rounded-full p-2 shadow-md group-hover:scale-110 transition-transform">
+                <ArrowRight className="h-5 w-5 text-blue-600" />
+              </div>
+            </div>
+          )}
+          
+          {/* Category */}
+          <div className="text-xs font-bold text-teal-600 dark:text-teal-400 uppercase tracking-wider mb-2">
+            {article.category || (showSource ? article.source : '')}
+          </div>
+          
+          {/* Title */}
+          <h4 className="font-serif text-base font-semibold line-clamp-2 group-hover:text-blue-600 transition-colors dark:group-hover:text-blue-400 mb-2">
+            {article.title}
+          </h4>
+          
+          {/* Footer info */}
+          <div className="flex items-center justify-between text-xs">
+            <div className="text-gray-500 dark:text-gray-400">
               By {article.author}
+            </div>
+            <div className="text-gray-500 dark:text-gray-400 flex items-center gap-1">
+              <Clock className="h-3 w-3" />
+              <span>{getRelativeTime(article.timestamp)}</span>
             </div>
           </div>
         </div>

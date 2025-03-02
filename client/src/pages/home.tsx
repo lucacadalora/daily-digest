@@ -3,6 +3,7 @@ import { Link } from "wouter";
 import { Card, CardContent } from "@/components/ui/card";
 import { ArrowRight } from "lucide-react";
 import { ArticleCard } from "@/components/ArticleCard";
+import { ExternalNewsCard } from "@/components/ExternalNewsCard";
 import { LatestExternalNews } from "@/components/LatestExternalNews";
 import { ChatBox } from "@/components/ChatBox";
 import { SubscribeModal } from "@/components/SubscribeModal";
@@ -141,7 +142,29 @@ export default function Home() {
         {/* Mobile Sections */}
         <div className="lg:hidden mt-8">
           {/* Mobile Latest News Section */}
-          <LatestExternalNews articles={sampleExternalNews} maxItems={5} />
+          <div>
+            <div className="flex justify-between items-center mb-4">
+              <h2 className="text-2xl font-serif font-bold text-gray-900 dark:text-white">
+                Latest
+              </h2>
+              <Link
+                href="/latest"
+                className="text-sm text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 flex items-center gap-1"
+              >
+                More Stories <ArrowRight className="h-4 w-4" />
+              </Link>
+            </div>
+            <div className="space-y-4">
+              {sampleExternalNews.slice(0, 5).map(article => (
+                <ExternalNewsCard 
+                  key={article.id} 
+                  article={article} 
+                  compact={true}
+                  showSource={false}
+                />
+              ))}
+            </div>
+          </div>
           
           {/* Mobile ChatBox Section */}
           <div className="mt-8">

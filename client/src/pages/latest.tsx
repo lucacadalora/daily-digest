@@ -67,23 +67,12 @@ export default function Latest() {
         {/* Articles Grid */}
         <div className="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
           {sortedArticles.map(article => (
-            <Card key={article.id} className="overflow-hidden">
-              <CardContent className="p-0">
-                {article.imageUrl && (
-                  <div className="aspect-video overflow-hidden">
-                    <img 
-                      src={article.imageUrl} 
-                      alt={article.title}
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                )}
-                <div className="p-4">
-                  <ExternalNewsCard 
-                    article={article} 
-                    compact={true}
-                  />
-                </div>
+            <Card key={article.id} className="overflow-hidden border-0 shadow-sm hover:shadow-md transition-shadow duration-200">
+              <CardContent className="p-4">
+                <ExternalNewsCard 
+                  article={article} 
+                  showSource={false}
+                />
               </CardContent>
             </Card>
           ))}
