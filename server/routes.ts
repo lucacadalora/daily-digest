@@ -495,6 +495,17 @@ export function registerRoutes(app: Express): Server {
       return res.status(500).send(`Error redirecting: ${error instanceof Error ? error.message : 'Unknown error'}`);
     }
   });
+  
+  // Specific test route for Twitter Cards
+  app.get('/twitter-test', (req, res) => {
+    try {
+      console.log('[Debug] Redirecting to Twitter Card test');
+      return res.redirect(302, '/static/share/twitter-test.html');
+    } catch (error) {
+      console.error('Error redirecting to Twitter test page:', error);
+      return res.status(500).send(`Error redirecting: ${error instanceof Error ? error.message : 'Unknown error'}`);
+    }
+  });
 
   app.get('/api/market-data', async (req, res) => {
     try {

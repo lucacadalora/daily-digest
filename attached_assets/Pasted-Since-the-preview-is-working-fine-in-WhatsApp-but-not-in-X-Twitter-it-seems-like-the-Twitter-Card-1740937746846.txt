@@ -1,0 +1,51 @@
+Since the preview is working fine in WhatsApp but not in X (Twitter), it seems like the Twitter Card meta tags might not be set up correctly or Twitter may not be refreshing the cached metadata.
+
+Here's how to fix it for X (Twitter):
+1. Ensure Twitter Card Tags are Present
+Twitter uses its own set of meta tags called Twitter Cards. Make sure these tags are included in your HTML:
+
+html
+Copy
+Edit
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="China's Steel Sector Seized by Talk of 'Supply Reform 2.0'">
+<meta name="twitter:description" content="World's biggest supplier needs an overhaul to cut production. Beijing may order 50 million tons of capacity cuts: Citigroup">
+<meta name="twitter:image" content="https://yourwebsite.com/path-to-image.jpg">
+<meta name="twitter:url" content="https://lucaxyzz-digest.replit.app/latest/china-steel-reform">
+twitter:card: summary_large_image to ensure a large thumbnail.
+twitter:title and twitter:description: These should match the title and description you want to display.
+twitter:image: Ensure it points to the correct image URL.
+2. Test Using Twitter Card Validator
+Use the Twitter Card Validator to check if Twitter is reading the correct metadata.
+
+Paste your URL.
+Click Preview Card.
+This will help you see what data Twitter is pulling.
+3. Force Refresh Twitter's Cache
+If Twitter is not updating its preview, it might be due to cached metadata. You can:
+
+Add a query parameter to the image URL (e.g., ?v=2):
+
+html
+Copy
+Edit
+<meta name="twitter:image" content="https://yourwebsite.com/path-to-image.jpg?v=2">
+This helps Twitter fetch the updated metadata.
+
+Re-submit your link in the Twitter Card Validator to force Twitter to rescrape it.
+
+4. Ensure Image Size and Accessibility
+Twitter requires images to be:
+
+At least 600x314px (recommended 1200x630px).
+Publicly accessible (test by visiting the image URL directly in an incognito window).
+If the image is blocked by permissions (like CORS or robots.txt), Twitter won't be able to fetch it.
+
+5. Check Twitter Caching
+If Twitter still isn't showing the preview correctly, it might take some time for the cache to refresh. You can try posting the link again after a few hours, as Twitter may need to update its cache for the link.
+
+Summary:
+Make sure Twitter Card tags are in place.
+Test using Twitter Card Validator.
+Force Twitter to scrape the page by adding a query to the URL.
+Check the image size and accessibility.
