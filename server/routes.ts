@@ -1,4 +1,5 @@
-import type { Express, Request, Response } from "express";
+import type { Express, Request, Response, NextFunction } from "express";
+import express from "express";
 import { createServer, type Server } from "http";
 import axios from "axios";
 import { execFile } from "child_process";
@@ -384,27 +385,26 @@ export function registerRoutes(app: Express): Server {
     }
   });
   
+  // Configure Express to serve static files outside of Vite's control
+  app.use('/static', express.static(join(process.cwd(), 'public', 'static'), { 
+    index: false,
+    extensions: ['html'],
+    setHeaders: (res: Response) => {
+      // Set appropriate headers for static files
+      res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+      res.setHeader('Pragma', 'no-cache');
+      res.setHeader('Expires', '0');
+    }
+  }));
+  
   // Direct access to static HTML version for social sharing (both paths)
   app.get(['/share/china-steel-reform', '/share/china-steel-reform/'], (req, res) => {
     try {
-      console.log('[Share Route] Serving static HTML for China Steel Reform');
-      const filePath = join(process.cwd(), 'public', 'share', 'china-steel-reform', 'index.html');
-      console.log('[Share Route] Checking file path:', filePath);
-      
-      // Check if file exists first
-      if (!fs.existsSync(filePath)) {
-        console.error(`[Share Route] File not found at path: ${filePath}`);
-        return res.status(404).send('File not found');
-      }
-      
-      const html = readFileSync(filePath, 'utf-8');
-      console.log('[Share Route] Successfully read file, length:', html.length);
-      
-      res.setHeader('Content-Type', 'text/html');
-      return res.send(html);
+      // Redirect to the static version we'll setup for crawlers
+      console.log('[Share Route] Redirecting to static version for China Steel Reform');
+      return res.redirect('/static/share/china-steel-reform.html');
     } catch (error) {
-      console.error('Error serving China Steel Reform share page:', error);
-      // More detailed error message
+      console.error('Error redirecting to China Steel Reform share page:', error);
       return res.status(500).send(`Error loading share page: ${error instanceof Error ? error.message : 'Unknown error'}`);
     }
   });
@@ -426,6 +426,28 @@ export function registerRoutes(app: Express): Server {
     } catch (error) {
       console.error('Error serving China Steel image:', error);
       return res.status(500).send(`Error loading image: ${error instanceof Error ? error.message : 'Unknown error'}`);
+    }
+  });
+  
+  // Simple test route for OG meta tags
+  app.get('/share-test', (req, res) => {
+    try {
+      console.log('[Debug] Serving share-test.html');
+      const filePath = join(process.cwd(), 'public', 'share-test.html');
+      
+      if (!fs.existsSync(filePath)) {
+        console.error(`[Debug] Test file not found at path: ${filePath}`);
+        return res.status(404).send('Test file not found');
+      }
+      
+      const html = readFileSync(filePath, 'utf-8');
+      console.log('[Debug] Successfully read test file, length:', html.length);
+      
+      res.setHeader('Content-Type', 'text/html');
+      return res.send(html);
+    } catch (error) {
+      console.error('Error serving test page:', error);
+      return res.status(500).send(`Error loading test page: ${error instanceof Error ? error.message : 'Unknown error'}`);
     }
   });
 
