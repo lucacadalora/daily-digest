@@ -159,9 +159,9 @@ export default function ChinaSteelReform() {
                 alt="Steel factory in China" 
                 className="w-full h-auto object-cover max-h-96"
               />
-              <p className="text-xs text-gray-500 mb-3 mt-1 italic leading-tight px-1">
+              <p className="text-xs sm:text-sm text-gray-500 mb-3 mt-1 italic leading-tight px-1">
                 All eyes are now on China's virtual National People's Congress legislative meetings next week, 
-                to see if any guidance is issued for the steel industry. Photographer: Qilai Shen/Bloomberg
+                to see if any guidance is issued for the steel industry. Credit: industrieblick, Adobe Stock
               </p>
             </div>
             
