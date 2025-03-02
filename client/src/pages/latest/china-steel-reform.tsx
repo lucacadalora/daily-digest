@@ -1,13 +1,14 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Header } from '@/components/Header';
 import { Link } from 'wouter';
 import { ArrowLeft, ChevronRight, Share2, Printer, Clock, Mail, Facebook, Twitter } from 'lucide-react';
 import { Separator } from '@/components/ui/separator';
 import { Badge } from '@/components/ui/badge';
-import { updateMetaTags, removeMetaTags } from '@/lib/meta-tags';
+import MetaTags from '@/components/SEO/MetaTags';
+import type { ArticleMetadata } from '@/lib/meta-tags';
 
 // Article metadata for the China Steel Reform article
-const articleMetadata = {
+const articleMetadata: ArticleMetadata = {
   title: "China's Steel Sector Seized by Talk of 'Supply Reform 2.0' | Daily Digest",
   description: "World's biggest supplier needs an overhaul to cut production. Beijing may order 50 million tons of capacity cuts: Citigroup",
   url: 'https://lucaxyzz-digest.replit.app/latest/china-steel-reform',
@@ -22,22 +23,11 @@ const articleMetadata = {
 };
 
 export default function ChinaSteelReform() {
-  // Update meta tags when component mounts
-  useEffect(() => {
-    // Update meta tags in the document head with cache-busting
-    updateMetaTags(articleMetadata, '25');
-    
-    // Clean up if needed when component unmounts
-    return () => {
-      // Remove all meta tags when navigating away
-      removeMetaTags();
-      // Reset to default title
-      document.title = "Daily Digest - Market Intelligence";
-    };
-  }, []);
-
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+      {/* MetaTags component handles meta tag updates and cleanup */}
+      <MetaTags metadata={articleMetadata} cacheBuster="25" />
+      
       <Header simplified />
       
       {/* Top categories navigation - responsive for both desktop and mobile */}
