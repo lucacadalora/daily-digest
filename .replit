@@ -15,7 +15,7 @@ localPort = 5000
 externalPort = 80
 
 [workflows]
-runButton = "Run Next.js"
+runButton = "Start application"
 
 [[workflows.workflow]]
 name = "Project"
@@ -38,7 +38,7 @@ task = "packager.installForAll"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "npm run dev"
+args = "node run-dev.cjs"
 waitForPort = 5000
 
 [[workflows.workflow]]
