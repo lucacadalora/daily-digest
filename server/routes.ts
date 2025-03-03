@@ -445,6 +445,7 @@ export function registerRoutes(app: Express): Server {
         : article.description);
 
       // Define meta tags for social media previews
+      // For newsletter articles, we don't include images in social previews
       const metaTags = [
         `<title>${previewTitle}</title>`,
         `<meta name="description" content="${previewDescription}">`,
@@ -456,16 +457,16 @@ export function registerRoutes(app: Express): Server {
         `<meta property="og:url" content="https://lucaxyzz-digest.replit.app/newsletter/${escapeHtml(slug)}">`,
         `<meta property="og:site_name" content="Daily Digest">`,
         `<meta property="og:locale" content="en_US">`,
-        `<meta property="og:image" content="https://lucaxyzz-digest.replit.app/logo.png">`,
+        // Image meta tag removed for newsletters
 
-        // Twitter Card
+        // Twitter Card - using summary card without image
         `<meta name="twitter:card" content="summary">`,
         `<meta name="twitter:site" content="@dailydigest">`,
         `<meta name="twitter:creator" content="@dailydigest">`,
         `<meta name="twitter:title" content="${previewTitle}">`,
         `<meta name="twitter:description" content="${previewDescription}">`,
         `<meta name="twitter:domain" content="lucaxyzz-digest.replit.app">`,
-        `<meta name="twitter:image" content="https://lucaxyzz-digest.replit.app/logo.png">`,
+        // Image meta tag removed for newsletters
 
         // Article Metadata
         `<meta property="article:published_time" content="${escapeHtml(article.date)}">`,
