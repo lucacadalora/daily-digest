@@ -26,7 +26,6 @@ export interface ArticleMetadata {
   imageAlt?: string; // Accessible alt text for social media images
   locale?: string; // For international content
   fbAppId?: string; // Facebook app ID if available
-  useDefaultImage?: boolean; // Flag to use default site logo when no image is provided
 }
 
 /**
@@ -65,29 +64,12 @@ export function updateMetaTags(metadata: ArticleMetadata, cacheBuster?: string):
   // Define image-related meta tags if an image URL is provided
   let imageMetaTags: Record<string, string> = {};
   
-  // Determine if we need to use a default image
-  // If image is not provided but useDefaultImage is true, use the default site logo
-  const useDefaultLogo = (!metadata.image || metadata.image.trim() === '') && metadata.useDefaultImage;
-  
-  // Get the appropriate image URL (provided image or default)
-  let imageUrl: string;
   if (metadata.image && metadata.image.trim() !== '') {
-    imageUrl = metadata.image;
-  } else if (useDefaultLogo) {
-    // Use default site logo - this path should be consistent and accessible
-    const domain = typeof window !== 'undefined' ? 
-      (window.location.origin) : "https://market-insights.repl.app";
-    imageUrl = `${domain}/images/default/site-logo.png`;
-  } else {
-    imageUrl = '';
-  }
-  
-  // Process image URL to add cache buster if needed
-  if (imageUrl && cacheBuster) {
-    imageUrl = `${imageUrl}${imageUrl.includes('?') ? '&' : '?'}v=${cacheBuster}`;
-  }
-  
-  if (imageUrl) {
+    // Process image URL to add cache buster if needed
+    const imageUrl = cacheBuster 
+      ? `${metadata.image}${metadata.image.includes('?') ? '&' : '?'}v=${cacheBuster}`
+      : metadata.image;
+    
     // Determine image format for proper MIME type 
     let imageMimeType = 'image/jpeg';
     if (imageUrl.endsWith('.png') || imageUrl.includes('.png?')) {

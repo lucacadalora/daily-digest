@@ -52,7 +52,7 @@ export const articles: ArticleConfig[] = [
     id: "china-steel-reform",
     title: "China's Steel Sector: 'Supply Reform 2.0' Looms",
     description: "China's billion-ton steel industry faces unprecedented consolidation and capacity reduction pressures as environmental regulations tighten and authorities target excess production to meet decarbonization goals.",
-    image: "/images/articles/factory-smoke.jpg",
+    image: "/images/articles/china-steel.png",
     imageAlt: "Chinese steel factory with smokestacks",
     author: "Financial Markets Team",
     publishedDate: "February 28, 2025",
@@ -88,33 +88,21 @@ export function getArticleBySlug(slug: string): ArticleConfig | undefined {
  * Get the full article URL (including domain)
  */
 export function getArticleUrl(article: ArticleConfig): string {
-  const domain = getDomain();
-  return `${domain}/${article.slug}`;
-}
-
-/**
- * Get the domain for URL construction
- */
-function getDomain(): string {
-  // In browser environment, use window.location.origin
-  // In server environment, use a fallback domain
-  return typeof window !== 'undefined' 
-    ? window.location.origin
+  // Use the appropriate domain based on environment
+  const domain = typeof window !== 'undefined' ? 
+    (import.meta.env.PROD ? "https://market-insights.repl.app" : window.location.origin)
     : "https://market-insights.repl.app";
+    
+  return `${domain}/${article.slug}`;
 }
 
 /**
  * Get the full image URL (including domain)
  */
 export function getArticleImageUrl(article: ArticleConfig): string {
-  const domain = getDomain();
+  const domain = typeof window !== 'undefined' ? 
+    (import.meta.env.PROD ? "https://market-insights.repl.app" : window.location.origin)
+    : "https://market-insights.repl.app";
+    
   return `${domain}${article.image}`;
-}
-
-/**
- * Get the default site logo URL for articles without images
- */
-export function getDefaultSiteLogoUrl(): string {
-  const domain = getDomain();
-  return `${domain}/images/default/site-logo.png`;
 }

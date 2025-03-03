@@ -1,12 +1,5 @@
 import React, { useEffect } from 'react';
-import { 
-  getArticleById, 
-  getArticleBySlug, 
-  getArticleUrl, 
-  getArticleImageUrl, 
-  getDefaultSiteLogoUrl,
-  ArticleConfig 
-} from '@/config/articles';
+import { getArticleById, getArticleBySlug, getArticleUrl, getArticleImageUrl, ArticleConfig } from '@/config/articles';
 import { ArticleMetadata } from '@/lib/meta-tags';
 import MetaTags from './MetaTags';
 
@@ -55,27 +48,22 @@ export default function ArticleSEO({ articleId, articleSlug, article }: ArticleS
     return null;
   }
   
-  // Determine if article has a valid image
-  const hasValidImage = resolvedArticle.image && resolvedArticle.image.trim() !== '';
-  
   // Generate structured metadata for the article
   const metadata: ArticleMetadata = {
     title: resolvedArticle.title,
     description: resolvedArticle.description,
     url: getArticleUrl(resolvedArticle),
-    image: hasValidImage ? getArticleImageUrl(resolvedArticle) : undefined,
+    image: getArticleImageUrl(resolvedArticle),
     author: resolvedArticle.author,
     publishedTime: resolvedArticle.publishedDate,
     section: resolvedArticle.category,
     tags: resolvedArticle.tags,
-    siteName: 'Daily Digest',
-    twitterSite: '@dailydigest',
-    twitterCreator: '@dailydigest',
+    siteName: 'Market Insights',
+    twitterSite: '@MarketInsights',
+    twitterCreator: '@MarketInsights',
     imageAlt: resolvedArticle.imageAlt || resolvedArticle.title,
     locale: 'en_US',
     imageWidth: resolvedArticle.imageWidth?.toString(),
-    // If no image is provided, use default site logo
-    useDefaultImage: !hasValidImage,
     imageHeight: resolvedArticle.imageHeight?.toString(),
   };
   
