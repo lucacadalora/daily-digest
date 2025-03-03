@@ -32,7 +32,7 @@ export type ExternalNews = z.infer<typeof externalNewsSchema>;
 export const sampleExternalNews: ExternalNews[] = [
   {
     id: "1",
-    title: "Global Coal's Price Slump Masks Brewing Supply Crisis",
+    title: "Global Coal's Price Slump Masks Brewing Supply Crisis and Potential Price Surge",
     source: "Bloomberg",
     author: "Luca Cada Lora",
     publishedDate: "March 3, 2025",

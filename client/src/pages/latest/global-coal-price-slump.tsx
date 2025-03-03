@@ -149,11 +149,7 @@ export default function GlobalCoalPriceSlump() {
                     className="w-full h-auto object-contain"
                   />
                 </div>
-                <div className="w-full">
-                  <p className="text-xs sm:text-sm text-gray-500 mt-2 px-1 italic">
-                    Source: Bloomberg
-                  </p>
-                </div>
+
               </div>
               
               <h3 className="text-xl font-bold mt-8 mb-3">Investment Retreat vs. Stubborn Demand</h3>
@@ -192,11 +188,7 @@ export default function GlobalCoalPriceSlump() {
                     className="w-full h-auto object-contain"
                   />
                 </div>
-                <div className="w-full">
-                  <p className="text-xs sm:text-sm text-gray-500 mt-2 px-1 italic">
-                    Source: International Energy Agency
-                  </p>
-                </div>
+
               </div>
               
               <p>
