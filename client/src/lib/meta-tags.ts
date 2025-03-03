@@ -20,6 +20,12 @@ export interface ArticleMetadata {
   siteName?: string;
   twitterSite?: string;
   twitterCreator?: string;
+  // Additional fields for more comprehensive social media coverage
+  imageWidth?: string; // Image width for OG tags
+  imageHeight?: string; // Image height for OG tags
+  imageAlt?: string; // Accessible alt text for social media images
+  locale?: string; // For international content
+  fbAppId?: string; // Facebook app ID if available
 }
 
 /**
@@ -49,6 +55,12 @@ export function updateMetaTags(metadata: ArticleMetadata, cacheBuster?: string):
   const twitterSite = metadata.twitterSite || '@dailydigest';
   const twitterCreator = metadata.twitterCreator || '@dailydigest';
   
+  // Set defaults for optional fields
+  const locale = metadata.locale || 'en_US';
+  const imageAlt = metadata.imageAlt || metadata.title;
+  const imageWidth = metadata.imageWidth || '1200';
+  const imageHeight = metadata.imageHeight || '630';
+  
   // Define image-related meta tags if an image URL is provided
   let imageMetaTags: Record<string, string> = {};
   
@@ -58,17 +70,29 @@ export function updateMetaTags(metadata: ArticleMetadata, cacheBuster?: string):
       ? `${metadata.image}${metadata.image.includes('?') ? '&' : '?'}v=${cacheBuster}`
       : metadata.image;
     
+    // Determine image format for proper MIME type 
+    let imageMimeType = 'image/jpeg';
+    if (imageUrl.endsWith('.png') || imageUrl.includes('.png?')) {
+      imageMimeType = 'image/png';
+    } else if (imageUrl.endsWith('.webp') || imageUrl.includes('.webp?')) {
+      imageMimeType = 'image/webp';
+    }
+    
     imageMetaTags = {
+      // Open Graph image tags
       'og:image': imageUrl,
       'og:image:url': imageUrl,
       'og:image:secure_url': imageUrl,
-      'og:image:type': 'image/png',
-      'og:image:width': '1200',
-      'og:image:height': '630',
-      'og:image:alt': metadata.title,
+      'og:image:type': imageMimeType,
+      'og:image:width': imageWidth,
+      'og:image:height': imageHeight,
+      'og:image:alt': imageAlt,
+
+      // Twitter card tags - use large image format for better visibility
       'twitter:card': 'summary_large_image',
       'twitter:image': imageUrl,
       'twitter:image:src': imageUrl,
+      'twitter:image:alt': imageAlt,
     };
   } else {
     // Use summary card type instead of summary_large_image when no image is present
@@ -90,7 +114,7 @@ export function updateMetaTags(metadata: ArticleMetadata, cacheBuster?: string):
     'og:url': metadata.url,
     'og:type': 'article',
     'og:site_name': siteName,
-    'og:locale': 'en_US',
+    'og:locale': locale,
     
     // Twitter Card tags without image
     'twitter:title': metadata.title,
@@ -107,7 +131,10 @@ export function updateMetaTags(metadata: ArticleMetadata, cacheBuster?: string):
     ...(metadata.publishedTime && { 'article:published_time': metadata.publishedTime }),
     ...(metadata.author && { 'article:author': metadata.author }),
     ...(metadata.section && { 'article:section': metadata.section }),
-    ...(metadata.tags && { 'article:tag': metadata.tags.join(',') })
+    ...(metadata.tags && { 'article:tag': metadata.tags.join(',') }),
+    
+    // Facebook App ID if available
+    ...(metadata.fbAppId && { 'fb:app_id': metadata.fbAppId }),
   };
   
   // Update each meta tag, creating it if it doesn't exist
@@ -145,8 +172,8 @@ export function updateMetaTags(metadata: ArticleMetadata, cacheBuster?: string):
  * Useful when navigating away from a page
  */
 export function removeMetaTags(): void {
-  // Remove Open Graph tags
-  document.querySelectorAll('meta[property^="og:"], meta[property^="article:"]').forEach(tag => {
+  // Remove Open Graph tags and article-related tags
+  document.querySelectorAll('meta[property^="og:"], meta[property^="article:"], meta[property^="fb:"]').forEach(tag => {
     tag.remove();
   });
   
@@ -161,4 +188,8 @@ export function removeMetaTags(): void {
     const tag = document.querySelector(`meta[name="${name}"]`);
     if (tag) tag.remove();
   });
+  
+  // Also remove canonical link when navigating away
+  const canonicalLink = document.querySelector('link[rel="canonical"]');
+  if (canonicalLink) canonicalLink.remove();
 }
