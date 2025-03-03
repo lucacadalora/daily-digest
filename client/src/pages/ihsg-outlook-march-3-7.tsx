@@ -14,8 +14,22 @@ import MetaTags from '@/components/SEO/MetaTags';
 import { ArticleMetadata } from '@/lib/meta-tags';
 
 const IHSGOutlookMarch37 = () => {
+  // Create metadata for SEO without including an image for newsletter
+  const metadata: ArticleMetadata = {
+    title: "IHSG Weekly Forecast: Navigating Oversold Conditions Amid Structural Headwinds",
+    description: "Analysis of IHSG's historic 7.83% weekly decline to 6,270.597, with focus on MSCI rebalancing impact, technical indicators and actionable contrarian plays amid foreign investor outflows.",
+    url: typeof window !== 'undefined' ? window.location.href : 'https://market-insights.repl.app/newsletter/ihsg-outlook-march-3-7',
+    author: "Luca Cada Lora",
+    publishedTime: "March 3, 2025",
+    section: "Markets",
+    tags: ["IHSG", "Technical Analysis", "Market Strategy", "Weekly Special"],
+    siteName: "Daily Digest",
+    // No image specified intentionally for newsletter link previews
+  };
   return (
     <div className="min-h-screen bg-[#FBF7F4] dark:bg-gray-900 transition-colors">
+      {/* Add MetaTags component for SEO without image for newsletter */}
+      <MetaTags metadata={metadata} cacheBuster={new Date().getTime().toString()} />
       <div className="max-w-[1200px] mx-auto px-4">
         {/* Website Title */}
         <div className="text-center py-4 border-b border-gray-200 dark:border-gray-800">
