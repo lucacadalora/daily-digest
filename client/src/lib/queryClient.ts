@@ -8,9 +8,23 @@ const isDevelopment = () => {
     return process.env.NODE_ENV === 'development';
   }
   
-  // Check for Vite environment variable as fallback
-  if (typeof import.meta !== 'undefined' && import.meta.env) {
-    return import.meta.env.DEV === true;
+  // Check for Vite environment variable as fallback (safely)
+  try {
+    if (typeof import.meta !== 'undefined' && import.meta.env) {
+      return import.meta.env.DEV === true;
+    }
+  } catch (e) {
+    // Ignore error if import.meta is not available
+  }
+  
+  // Default to development if we're in a browser environment with no production flag
+  if (typeof window !== 'undefined') {
+    // Check if the URL contains localhost or a port in dev range
+    const hostname = window.location.hostname;
+    const port = parseInt(window.location.port, 10);
+    if (hostname === 'localhost' || hostname === '0.0.0.0' || (port > 3000 && port < 5000)) {
+      return true;
+    }
   }
   
   // Default to production if cannot detect
@@ -33,15 +47,11 @@ export const queryClient = new QueryClient({
             'Cache-Control': 'no-cache, no-store, must-revalidate',
             'Pragma': 'no-cache',
             'Expires': '0'
-          } : undefined
+          } : {}
         });
 
         if (!res.ok) {
-          if (res.status >= 500) {
-            throw new Error(`${res.status}: ${res.statusText}`);
-          }
-
-          throw new Error(`${res.status}: ${await res.text()}`);
+          throw new Error(`API error: ${res.status}`);
         }
 
         return res.json();
@@ -54,13 +64,20 @@ export const queryClient = new QueryClient({
     },
     mutations: {
       retry: false,
-    }
+    },
   },
 });
 
-// Reset cache on HMR updates
-if (typeof import.meta !== 'undefined' && import.meta.hot) {
-  import.meta.hot.accept(() => {
-    queryClient.clear();
-  });
+// Safely handle HMR updates
+if (typeof window !== 'undefined') {
+  try {
+    if (typeof import.meta !== 'undefined' && import.meta.hot) {
+      import.meta.hot.accept(() => {
+        queryClient.clear();
+      });
+    }
+  } catch (e) {
+    // Ignore error if import.meta is not available
+    console.debug('HMR not available for queryClient');
+  }
 }
