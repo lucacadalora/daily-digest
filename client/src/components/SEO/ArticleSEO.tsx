@@ -48,22 +48,27 @@ export default function ArticleSEO({ articleId, articleSlug, article }: ArticleS
     return null;
   }
   
+  // Determine if article has a valid image
+  const hasValidImage = resolvedArticle.image && resolvedArticle.image.trim() !== '';
+  
   // Generate structured metadata for the article
   const metadata: ArticleMetadata = {
     title: resolvedArticle.title,
     description: resolvedArticle.description,
     url: getArticleUrl(resolvedArticle),
-    image: getArticleImageUrl(resolvedArticle),
+    image: hasValidImage ? getArticleImageUrl(resolvedArticle) : undefined,
     author: resolvedArticle.author,
     publishedTime: resolvedArticle.publishedDate,
     section: resolvedArticle.category,
     tags: resolvedArticle.tags,
-    siteName: 'Market Insights',
-    twitterSite: '@MarketInsights',
-    twitterCreator: '@MarketInsights',
+    siteName: 'Daily Digest',
+    twitterSite: '@dailydigest',
+    twitterCreator: '@dailydigest',
     imageAlt: resolvedArticle.imageAlt || resolvedArticle.title,
     locale: 'en_US',
     imageWidth: resolvedArticle.imageWidth?.toString(),
+    // If no image is provided, use default site logo
+    useDefaultImage: !hasValidImage,
     imageHeight: resolvedArticle.imageHeight?.toString(),
   };
   

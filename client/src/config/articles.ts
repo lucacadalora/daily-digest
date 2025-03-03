@@ -106,3 +106,14 @@ export function getArticleImageUrl(article: ArticleConfig): string {
     
   return `${domain}${article.image}`;
 }
+
+/**
+ * Get the default site logo URL for articles without images
+ */
+export function getDefaultSiteLogoUrl(): string {
+  const domain = typeof window !== 'undefined' ? 
+    (import.meta.env.PROD ? "https://market-insights.repl.app" : window.location.origin)
+    : "https://market-insights.repl.app";
+    
+  return `${domain}/images/default/site-logo.png`;
+}

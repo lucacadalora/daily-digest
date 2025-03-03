@@ -51,10 +51,20 @@ export function generateSocialPreviewHTML(
   platform: SocialPlatform,
   baseUrl: string
 ): string {
-  // Ensure image URL is absolute
-  const imageUrl = article.imageUrl.startsWith('http') 
-    ? article.imageUrl 
-    : `${baseUrl}${article.imageUrl}`;
+  // Check if article has a valid image URL
+  const hasValidImage = article.imageUrl && article.imageUrl.trim() !== '';
+  
+  // Set image URL - either the article image or a default site logo
+  let imageUrl: string;
+  if (hasValidImage) {
+    // Ensure image URL is absolute
+    imageUrl = article.imageUrl.startsWith('http') 
+      ? article.imageUrl 
+      : `${baseUrl}${article.imageUrl}`;
+  } else {
+    // Use default site logo
+    imageUrl = `${baseUrl}/images/default/site-logo.png`;
+  }
   
   // Canonical URL for the article
   const canonicalUrl = article.url.startsWith('http') 
@@ -77,7 +87,7 @@ export function generateSocialPreviewHTML(
     <meta property="og:description" content="${article.description}">
     <meta property="og:url" content="${canonicalUrl}">
     <meta property="og:image" content="${imageUrl}">
-    <meta property="og:site_name" content="Market Insights">
+    <meta property="og:site_name" content="Daily Digest">
     <meta property="article:published_time" content="${article.publishedDate}">
     <meta property="article:author" content="${article.author}">
     ${article.category ? `<meta property="article:section" content="${article.category}">` : ''}
@@ -85,11 +95,11 @@ export function generateSocialPreviewHTML(
     
     <!-- Twitter Card tags -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:site" content="@MarketInsights">
+    <meta name="twitter:site" content="@dailydigest">
     <meta name="twitter:title" content="${article.title}">
     <meta name="twitter:description" content="${article.description}">
     <meta name="twitter:image" content="${imageUrl}">
-    <meta name="twitter:creator" content="@MarketInsights">
+    <meta name="twitter:creator" content="@dailydigest">
   `;
 
   // Platform-specific optimizations
