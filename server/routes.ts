@@ -738,6 +738,50 @@ export function registerRoutes(app: Express): Server {
     }
   });
   
+  // Dedicated route to serve the coal image with proper headers for social media
+  app.get('/latest/coal-image.jpeg', (req, res) => {
+    try {
+      console.log('[Coal Image] Serving coal image for social media sharing');
+      const filePath = join(process.cwd(), 'public', 'latest', 'tongkang.jpeg');
+      
+      // Check if file exists
+      if (!fs.existsSync(filePath)) {
+        console.error(`[Coal Image Error] Image not found at path: ${filePath}`);
+        return res.status(404).send('Coal image not found');
+      }
+      
+      // Set content type (important for proper rendering)
+      res.setHeader('Content-Type', 'image/jpeg');
+      
+      // Add Cross-Origin headers to ensure platforms can access the image
+      res.setHeader('Access-Control-Allow-Origin', '*');
+      res.setHeader('Access-Control-Allow-Methods', 'GET');
+      res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+      
+      // Set moderate cache headers - balancing caching needs
+      const oneHour = 60 * 60; // 1 hour in seconds
+      if (req.query.v) {
+        // For versioned requests, use a longer cache time
+        res.setHeader('Cache-Control', `public, max-age=${oneHour}`);
+        res.setHeader('Expires', new Date(Date.now() + oneHour * 1000).toUTCString());
+        console.log(`[Coal Image] Serving versioned image (v=${req.query.v}) with 1 hour cache`);
+      } else {
+        // For non-versioned requests, use a shorter cache time
+        const fifteenMinutes = 15 * 60; // 15 minutes in seconds
+        res.setHeader('Cache-Control', `public, max-age=${fifteenMinutes}`);
+        res.setHeader('Expires', new Date(Date.now() + fifteenMinutes * 1000).toUTCString());
+        console.log('[Coal Image] Serving non-versioned image with 15 min cache');
+      }
+      
+      // Stream the file directly
+      const fileStream = fs.createReadStream(filePath);
+      fileStream.pipe(res);
+    } catch (error) {
+      console.error('Error serving coal image:', error);
+      return res.status(500).send(`Error: ${error instanceof Error ? error.message : 'Unknown error'}`);
+    }
+  });
+  
   // Test route for WhatsApp and X preview
   app.get('/test', (req, res) => {
     try {
@@ -864,6 +908,53 @@ export function registerRoutes(app: Express): Server {
       
       // Serve the content directly - NOT redirecting to avoid breaking previews
       return res.sendFile(join(process.cwd(), 'public', 'latest', 'china-steel-share', 'index.html'));
+    }
+    
+    // Not a crawler, continue with normal React app rendering
+    next();
+  });
+  
+  // Special route for Coal Price Slump article that handles social media crawlers
+  app.get('/latest/global-coal-price-slump', (req, res, next) => {
+    // Check if this is a social media crawler
+    const userAgent = req.headers['user-agent'] || '';
+    const referer = req.headers['referer'] || '';
+    
+    const isSocialCrawler = (
+      userAgent.includes('Twitterbot') || 
+      userAgent.includes('facebookexternalhit') || 
+      userAgent.includes('WhatsApp') ||
+      userAgent.includes('LinkedInBot') ||
+      userAgent.includes('Slackbot-LinkExpanding') ||
+      referer.includes('twitter.com') ||
+      referer.includes('t.co') ||
+      referer.includes('facebook.com') ||
+      referer.includes('whatsapp.com')
+    );
+    
+    // Log crawler detection for debugging
+    console.log(`[Coal Article UA Debug] ${userAgent.substring(0, 100)}`);
+    console.log(`[Coal Article Referer Debug] ${referer}`);
+    
+    if (isSocialCrawler) {
+      // For Twitter bots specifically, serve the super simplified card page
+      if (userAgent.includes('Twitterbot') || userAgent.includes('Twitter') || referer.includes('twitter') || referer.includes('t.co')) {
+        console.log(`Detected Twitter crawler for coal article - serving Twitter-optimized page: ${userAgent.substring(0, 30)}`);
+        
+        // Set cache control headers
+        res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+        res.setHeader('Pragma', 'no-cache');
+        res.setHeader('Expires', '0');
+        
+        // Serve the minimal Twitter card HTML for coal
+        return res.sendFile(join(process.cwd(), 'public', 't-coal.html'));
+      }
+      
+      // For other social crawlers
+      console.log(`Detected social media crawler for coal article - serving static HTML directly: ${userAgent.substring(0, 30)}`);
+      
+      // Serve the content directly - NOT redirecting to avoid breaking previews
+      return res.sendFile(join(process.cwd(), 'public', 'latest', 'global-coal-share', 'index.html'));
     }
     
     // Not a crawler, continue with normal React app rendering

@@ -12,8 +12,8 @@ const articleMetadata: ArticleMetadata = {
   title: "Global Coal's Price Slump Masks Brewing Supply Crisis and Potential Price Surge | Daily Digest",
   description: "Analysis of why today's depressed coal prices conceal a brewing market tension between collapsing investment and stubborn demand that could lead to a sharp price rebound.",
   url: 'https://lucaxyzz-digest.replit.app/latest/global-coal-price-slump',
-  // Use special image route that works for all platforms (WhatsApp, Telegram, Twitter)
-  image: 'https://lucaxyzz-digest.replit.app/coal-image?v=20250303_v2',
+  // Use optimized image route specifically for this article with version for cache control
+  image: 'https://lucaxyzz-digest.replit.app/latest/coal-image.jpeg?v=20250303_v3',
   author: 'Luca Cada Lora',
   publishedTime: '2025-03-03',
   section: 'Commodities',
@@ -27,7 +27,7 @@ export default function GlobalCoalPriceSlump() {
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
       {/* MetaTags component handles meta tag updates and cleanup */}
-      <MetaTags metadata={articleMetadata} cacheBuster="20250303_v2" />
+      <MetaTags metadata={articleMetadata} cacheBuster="20250303_v3" />
       
       <Header simplified />
       
