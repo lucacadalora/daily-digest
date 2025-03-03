@@ -1,6 +1,6 @@
 
-import { spawn } from 'child_process';
-import path from 'path';
+const { spawn } = require('child_process');
+const path = require('path');
 
 // Start Next.js development server
 const nextDev = spawn('npm', ['run', 'dev'], {
