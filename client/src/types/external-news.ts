@@ -32,6 +32,17 @@ export type ExternalNews = z.infer<typeof externalNewsSchema>;
 export const sampleExternalNews: ExternalNews[] = [
   {
     id: "1",
+    title: "Global Coal's Price Slump Masks Brewing Supply Crisis",
+    source: "Bloomberg",
+    author: "Luca Cada Lora",
+    publishedDate: "March 3, 2025",
+    url: "/latest/global-coal-price-slump",
+    imageUrl: "/latest/tongkang.jpeg",
+    category: "Commodities",
+    timestamp: Date.now() // Most recent
+  },
+  {
+    id: "2",
     title: "China's Steel Sector: 'Supply Reform 2.0' Looms",
     source: "Bloomberg",
     author: "",
@@ -39,6 +50,6 @@ export const sampleExternalNews: ExternalNews[] = [
     url: "/latest/china-steel-reform",
     imageUrl: "/latest/china-steel.png",
     category: "Markets",
-    timestamp: Date.now() - 1000 * 60 * 60 * 3 // 3 hours ago
+    timestamp: Date.now() - 1000 * 60 * 60 * 72 // 3 days ago
   }
 ];

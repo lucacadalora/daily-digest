@@ -33,6 +33,35 @@ export type Article = z.infer<typeof articleSchema>;
 
 export const sampleArticles: Article[] = [
   {
+    slug: "global-coal-price-slump",
+    title: "Global Coal's Price Slump Masks Brewing Supply Crisis and Potential Price Surge",
+    description: "Analysis of why today's depressed coal prices conceal a brewing market tension between collapsing investment and stubborn demand that could lead to a sharp price rebound.",
+    category: "Industries",
+    source: "Daily Digest",
+    author: "Luca Cada Lora",
+    date: "March 3, 2025",
+    previewEmoji: "⛏️",
+    previewMetrics: [
+      {
+        label: "Coal Price",
+        value: "$100/ton",
+        subtitle: "Multi-year low"
+      },
+      {
+        label: "New Project Decline",
+        value: "85%",
+        subtitle: "vs. Previous Cycles"
+      },
+      {
+        label: "Demand Growth",
+        value: "3.1%",
+        subtitle: "Annual (India)"
+      }
+    ],
+    tags: ["Coal", "Energy", "Commodities", "Supply Crisis"],
+    content: "Global Coal's Price Slump Masks Brewing Supply Crisis and Potential Price Surge"
+  },
+  {
     slug: "japan-economic-security-indonesia-minerals",
     title: "Strategic Supply Chain Positioning and Critical Minerals: Japan's Economic Security Strategy and Implications for Indonesia",
     description: "Analysis of Japan's economic security vulnerabilities, strategic responses, and the opportunities for Indonesia to position itself within Japan's evolving supply chain resilience framework, particularly in critical minerals.",
