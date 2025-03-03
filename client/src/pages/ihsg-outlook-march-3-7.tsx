@@ -10,6 +10,8 @@ import {
 } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Link } from 'wouter';
+import MetaTags from '@/components/SEO/MetaTags';
+import { ArticleMetadata } from '@/lib/meta-tags';
 
 const IHSGOutlookMarch37 = () => {
   return (
