@@ -1,17 +1,22 @@
 
-// Debug script to verify environment variable detection
+// Debug environment variables and settings
 console.log('=== ENVIRONMENT VARIABLES DEBUG ===');
+console.log('process.env.NODE_ENV:', process.env.NODE_ENV);
 
-// Check Node.js process environment
-console.log('process.env.NODE_ENV:', typeof process !== 'undefined' ? process.env.NODE_ENV : 'undefined');
-
-// Try to safely check Vite environment
 try {
-  console.log('import.meta.env.DEV:', typeof import.meta !== 'undefined' ? import.meta.env.DEV : 'undefined');
-} catch (error) {
-  console.log('Error accessing import.meta.env:', error.message);
+  console.log('Is browser:', typeof window !== 'undefined');
+  console.log('Is Node.js:', typeof process !== 'undefined' && !!process.versions && !!process.versions.node);
+} catch (e) {
+  console.error('Error checking environment:', e);
 }
 
-// Check execution context
-console.log('Is browser:', typeof window !== 'undefined');
-console.log('Is Node.js:', typeof process !== 'undefined' && typeof process.versions !== 'undefined');
+// Log any detected environment info
+if (typeof window !== 'undefined') {
+  try {
+    console.log('Window location:', window.location.href);
+    console.log('Hostname:', window.location.hostname);
+    console.log('Port:', window.location.port);
+  } catch (e) {
+    console.error('Error checking window location:', e);
+  }
+}

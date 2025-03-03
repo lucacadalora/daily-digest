@@ -1,83 +1,71 @@
+import { QueryClient } from '@tanstack/react-query';
 
-import { QueryClient } from "@tanstack/react-query";
-
-// Helper function to detect development environment in both Next.js and Vite
-const isDevelopment = () => {
-  // Check for Next.js environment variable
-  if (typeof process !== 'undefined' && process.env && process.env.NODE_ENV) {
+/**
+ * Helper function to detect development environment
+ * Works across Node.js, Vite, and Next.js
+ */
+function isDevelopment() {
+  // First check Node.js environment variable
+  if (typeof process !== 'undefined' && process.env) {
     return process.env.NODE_ENV === 'development';
   }
-  
-  // Check for Vite environment variable as fallback (safely)
-  try {
-    if (typeof import.meta !== 'undefined' && import.meta.env) {
-      return import.meta.env.DEV === true;
-    }
-  } catch (e) {
-    // Ignore error if import.meta is not available
-  }
-  
-  // Default to development if we're in a browser environment with no production flag
+
+  // Safely check for browser environment
   if (typeof window !== 'undefined') {
-    // Check if the URL contains localhost or a port in dev range
+    // Check for development-specific hostnames
     const hostname = window.location.hostname;
+    if (hostname === 'localhost' || hostname === '0.0.0.0' || hostname.includes('replit.dev')) {
+      return true;
+    }
+
+    // Check for development ports
     const port = parseInt(window.location.port, 10);
-    if (hostname === 'localhost' || hostname === '0.0.0.0' || (port > 3000 && port < 5000)) {
+    if (!isNaN(port) && port >= 3000 && port < 5000) {
       return true;
     }
   }
-  
-  // Default to production if cannot detect
-  return false;
-};
 
+  // Default to production
+  return false;
+}
+
+// Create a new QueryClient instance with custom configuration
 export const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      queryFn: async ({ queryKey }) => {
-        // Add cache busting parameter for development
-        const isDevMode = isDevelopment();
-        const url = isDevMode 
-          ? `${queryKey[0]}${queryKey[0].includes('?') ? '&' : '?'}_t=${Date.now()}`
-          : queryKey[0];
-
-        const res = await fetch(url as string, {
-          credentials: "include",
-          headers: isDevMode ? {
-            'Cache-Control': 'no-cache, no-store, must-revalidate',
-            'Pragma': 'no-cache',
-            'Expires': '0'
-          } : {}
-        });
-
-        if (!res.ok) {
-          throw new Error(`API error: ${res.status}`);
-        }
-
-        return res.json();
+      refetchOnWindowFocus: isDevelopment() ? false : true,
+      retry: 1,
+      staleTime: 5 * 60 * 1000, // 5 minutes
+      cacheTime: 10 * 60 * 1000, // 10 minutes
+      refetchOnMount: true,
+      refetchOnReconnect: true,
+      suspense: false,
+      useErrorBoundary: false,
+      retryDelay: (attemptIndex) => Math.min(1000 * 2 ** attemptIndex, 30000),
+      onError: (err) => {
+        console.error('Query error:', err);
       },
-      refetchInterval: false,
-      refetchOnWindowFocus: isDevelopment(),
-      staleTime: isDevelopment() ? 0 : Infinity,
-      retry: false,
-      cacheTime: isDevelopment() ? 0 : 300000, // 5 minutes in production
     },
     mutations: {
       retry: false,
+      onError: (err) => {
+        console.error('Mutation error:', err);
+      },
     },
   },
 });
 
-// Safely handle HMR updates
+// Handle HMR safely
 if (typeof window !== 'undefined') {
   try {
-    if (typeof import.meta !== 'undefined' && import.meta.hot) {
-      import.meta.hot.accept(() => {
+    // Create a safe wrapper for module hot reloading
+    const moduleHot = typeof module !== 'undefined' && module.hot;
+    if (moduleHot) {
+      moduleHot.accept(() => {
         queryClient.clear();
       });
     }
   } catch (e) {
-    // Ignore error if import.meta is not available
     console.debug('HMR not available for queryClient');
   }
 }
