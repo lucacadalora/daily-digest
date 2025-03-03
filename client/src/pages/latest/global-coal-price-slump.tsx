@@ -151,7 +151,7 @@ export default function GlobalCoalPriceSlump() {
                 </div>
                 <div className="w-full">
                   <p className="text-xs sm:text-sm text-gray-500 mt-2 px-1 italic">
-                    Source: Bloomberg, Global Coal Index
+                    Source: Bloomberg
                   </p>
                 </div>
               </div>
@@ -194,7 +194,7 @@ export default function GlobalCoalPriceSlump() {
                 </div>
                 <div className="w-full">
                   <p className="text-xs sm:text-sm text-gray-500 mt-2 px-1 italic">
-                    Source: International Energy Agency, Annual Coal Reports
+                    Source: International Energy Agency
                   </p>
                 </div>
               </div>
@@ -265,7 +265,7 @@ export default function GlobalCoalPriceSlump() {
             <Separator className="my-6" />
             
             <footer className="text-xs text-gray-500 mb-10">
-              <p>Source: <a href="https://www.bloomberg.com/" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Bloomberg</a>, curated by Luca Cada Lora</p>
+              <p>Source: <a href="https://www.bloomberg.com/news/articles/2025-03-02/investors-are-scouring-emerging-markets-for-trump-proof-bets?srnd=undefined&sref=DLVyDcXJ" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Bloomberg</a>, curated by Luca Cada Lora</p>
             </footer>
             
             {/* More From Daily | Digest Section */}
