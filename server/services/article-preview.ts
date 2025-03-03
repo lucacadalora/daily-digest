@@ -70,7 +70,8 @@ export function generateSocialPreviewHTML(
     <!-- Canonical link -->
     <link rel="canonical" href="${canonicalUrl}">
     
-    <!-- Open Graph tags (used by Facebook, WhatsApp, LinkedIn) -->
+    <!-- Open Graph tags (used by Facebook, LinkedIn) -->
+    <!-- Note: WhatsApp is no longer specially handled - we want direct access to real site -->
     <meta property="og:type" content="article">
     <meta property="og:title" content="${article.title}">
     <meta property="og:description" content="${article.description}">
@@ -116,7 +117,7 @@ export function generateSocialPreviewHTML(
       `;
       break;
       
-    // WhatsApp case removed - we want WhatsApp users to see the actual site
+    // WhatsApp handling completely removed - we want WhatsApp users to see the actual site
       
     case 'linkedin':
       platformSpecificTags = `
