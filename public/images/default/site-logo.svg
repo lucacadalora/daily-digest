@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="1200" height="630" fill="#1a365d" />
+  
+  <!-- Daily Digest Logo -->
+  <g transform="translate(300, 140)">
+    <!-- Title text -->
+    <text x="300" y="150" font-family="Arial, sans-serif" font-size="80" font-weight="bold" fill="#ffffff" text-anchor="middle">Daily Digest</text>
+    
+    <!-- Tagline -->
+    <text x="300" y="220" font-family="Arial, sans-serif" font-size="40" fill="#f7fafc" text-anchor="middle">Market Analysis & Insights</text>
+    
+    <!-- Document/Newspaper Icon -->
+    <g transform="translate(220, 70) scale(0.8)">
+      <!-- Document Background -->
+      <rect x="0" y="0" width="160" height="200" rx="10" fill="#ffffff" />
+      
+      <!-- Document Lines -->
+      <line x1="20" y1="40" x2="140" y2="40" stroke="#1a365d" stroke-width="6" />
+      <line x1="20" y1="70" x2="140" y2="70" stroke="#1a365d" stroke-width="6" />
+      <line x1="20" y1="100" x2="140" y2="100" stroke="#1a365d" stroke-width="6" />
+      <line x1="20" y1="130" x2="140" y2="130" stroke="#1a365d" stroke-width="6" />
+      <line x1="20" y1="160" x2="90" y2="160" stroke="#1a365d" stroke-width="6" />
+    </g>
+  </g>
+  
+  <!-- Footer text -->
+  <text x="600" y="560" font-family="Arial, sans-serif" font-size="28" fill="#f7fafc" text-anchor="middle">Market Intelligence for Informed Decisions</text>
+</svg>

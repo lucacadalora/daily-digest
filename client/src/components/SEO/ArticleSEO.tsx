@@ -1,5 +1,12 @@
 import React, { useEffect } from 'react';
-import { getArticleById, getArticleBySlug, getArticleUrl, getArticleImageUrl, ArticleConfig } from '@/config/articles';
+import { 
+  getArticleById, 
+  getArticleBySlug, 
+  getArticleUrl, 
+  getArticleImageUrl, 
+  getDefaultSiteLogoUrl,
+  ArticleConfig 
+} from '@/config/articles';
 import { ArticleMetadata } from '@/lib/meta-tags';
 import MetaTags from './MetaTags';
 
