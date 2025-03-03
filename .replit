@@ -40,3 +40,11 @@ task = "packager.installForAll"
 task = "shell.exec"
 args = "npm run dev"
 waitForPort = 5000
+
+[[workflows.workflow]]
+name = "Build SSR"
+author = 36490326
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "node ssr-build.js"
