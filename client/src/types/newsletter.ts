@@ -33,35 +33,6 @@ export type Article = z.infer<typeof articleSchema>;
 
 export const sampleArticles: Article[] = [
   {
-    slug: "global-coal-price-slump",
-    title: "Global Coal's Price Slump Masks Brewing Supply Crisis and Potential Price Surge",
-    description: "Analysis of why today's depressed coal prices conceal a brewing market tension between collapsing investment and stubborn demand that could lead to a sharp price rebound.",
-    category: "Industries",
-    source: "Daily Digest",
-    author: "Luca Cada Lora",
-    date: "March 3, 2025",
-    previewEmoji: "⛏️",
-    previewMetrics: [
-      {
-        label: "Coal Price",
-        value: "$100/ton",
-        subtitle: "Multi-year low"
-      },
-      {
-        label: "New Project Decline",
-        value: "85%",
-        subtitle: "vs. Previous Cycles"
-      },
-      {
-        label: "Demand Growth",
-        value: "3.1%",
-        subtitle: "Annual (India)"
-      }
-    ],
-    tags: ["Coal", "Energy", "Commodities", "Supply Crisis"],
-    content: "Global Coal's Price Slump Masks Brewing Supply Crisis and Potential Price Surge"
-  },
-  {
     slug: "japan-economic-security-indonesia-minerals",
     title: "Strategic Supply Chain Positioning and Critical Minerals: Japan's Economic Security Strategy and Implications for Indonesia",
     description: "Analysis of Japan's economic security vulnerabilities, strategic responses, and the opportunities for Indonesia to position itself within Japan's evolving supply chain resilience framework, particularly in critical minerals.",
@@ -216,7 +187,7 @@ export const sampleArticles: Article[] = [
       }
     ],
     tags: ["Mining", "Supply Chain", "Commodities"],
-    content: `[Content from the mineral criticality matrix article]`
+    content: "[Content from the mineral criticality matrix article]"
   },
   {
     slug: "indonesia-economic-inventory-crisis",
@@ -245,7 +216,7 @@ export const sampleArticles: Article[] = [
       }
     ],
     tags: ["Economics", "Market Analysis", "Indonesia"],
-    content: `Indonesia's economic narrative took a dramatic turn in early 2025...`
+    content: "Indonesia's economic narrative took a dramatic turn in early 2025..."
   },
   {
     slug: "fed-balance-sheet-blueprint",
@@ -274,7 +245,7 @@ export const sampleArticles: Article[] = [
       }
     ],
     tags: ["Federal Reserve", "Monetary Policy", "QT", "Risk Assets"],
-    content: `Fed's QT Exit: A Liquidity Lifeline for Risk Assets`
+    content: "Fed's QT Exit: A Liquidity Lifeline for Risk Assets"
   },
   {
     slug: "trade-war-tsunami-feb-10-14",
@@ -303,27 +274,7 @@ export const sampleArticles: Article[] = [
       }
     ],
     tags: ["IHSG", "Trade War", "Market Analysis", "Weekly Special"],
-    content: `Weekly Market Alert February 10–14, 2025
-The New Narrative: Indonesia as a Chinese Surplus Dumping Ground
-Bank Indonesia (BI) issued a stark warning this week: "Chinese goods barred from US markets are flooding Indonesia," threatening to overwhelm domestic industries. Key insights:
-
-Mechanism: Trump's 10% China tariffs have redirected $48B worth of Chinese exports (textiles, electronics, ceramics) to ASEAN markets. Indonesia, with its porous import controls, absorbed 32% of this diverted volume.
-
-Impact: Local MSMEs face existential risks. Textile producers like ERAT (-18% WoW) and ceramic firm ARTI (-23%) collapsed as Chinese imports undercut prices by 40–60%.
-
-Policy Paralysis: Indonesia's retaliatory 200% tariffs on Chinese goods (announced Jan 2025) remain unimplemented, exposing regulatory inertia.
-
-Defensive Pivot - Strategic Plan
-
-Dividend Shelter: Rotate into HMSP (8.2% yield) and SMGR (6.7%).
-
-HMSP:
-Short-Term Play: High yield attractive for income, but monitor payout sustainability.
-Action: Buy on dips near Rp580 (52-week low) with tight stop-loss at Rp550.
-
-SMGR:
-Long-Term Value: Undervalued at 0.5x P/S, but await infrastructure policy clarity.
-Action: Accumulate below Rp2,700 (near 2025 low) for dividend + potential rebound.`
+    content: "Weekly Market Alert February 10–14, 2025\nThe New Narrative: Indonesia as a Chinese Surplus Dumping Ground\nBank Indonesia (BI) issued a stark warning this week: \"Chinese goods barred from US markets are flooding Indonesia,\" threatening to overwhelm domestic industries. Key insights:\n\nMechanism: Trump's 10% China tariffs have redirected $48B worth of Chinese exports (textiles, electronics, ceramics) to ASEAN markets. Indonesia, with its porous import controls, absorbed 32% of this diverted volume.\n\nImpact: Local MSMEs face existential risks. Textile producers like ERAT (-18% WoW) and ceramic firm ARTI (-23%) collapsed as Chinese imports undercut prices by 40–60%.\n\nPolicy Paralysis: Indonesia's retaliatory 200% tariffs on Chinese goods (announced Jan 2025) remain unimplemented, exposing regulatory inertia.\n\nDefensive Pivot - Strategic Plan\n\nDividend Shelter: Rotate into HMSP (8.2% yield) and SMGR (6.7%).\n\nHMSP:\nShort-Term Play: High yield attractive for income, but monitor payout sustainability.\nAction: Buy on dips near Rp580 (52-week low) with tight stop-loss at Rp550.\n\nSMGR:\nLong-Term Value: Undervalued at 0.5x P/S, but await infrastructure policy clarity.\nAction: Accumulate below Rp2,700 (near 2025 low) for dividend + potential rebound."
   },
   {
     slug: "fed-qt-exit-crypto-rally",
