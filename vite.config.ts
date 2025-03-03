@@ -20,4 +20,8 @@ export default defineConfig({
     outDir: path.resolve(__dirname, "dist/public"),
     emptyOutDir: true,
   },
+  // Enable SSR in development
+  ssr: {
+    noExternal: ['react-dom/server', '@tanstack/react-query'],
+  },
 });

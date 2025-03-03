@@ -2,6 +2,9 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import App from './App';
 import "./index.css";
+import { QueryClientProvider } from '@tanstack/react-query';
+import { queryClient } from './lib/queryClient'; // Assuming this file exists and is correctly configured
+
 
 // Initialize theme
 const theme = localStorage.getItem('theme') || 'light';
@@ -28,8 +31,18 @@ if (import.meta.env.DEV) {
   sessionStorage.setItem('last-update', timestamp.toString());
 }
 
-createRoot(document.getElementById("root")!).render(
-  <StrictMode>
-    <App/>
-  </StrictMode>,
-);
+// Check if the window has been rehydrated
+const shouldHydrate = window.__PRELOADED_STATE__ !== undefined;
+
+if (!shouldHydrate) {
+  // Standard CSR render if no SSR data exists
+  createRoot(document.getElementById("root")!).render(
+    <StrictMode>
+      <QueryClientProvider client={queryClient}>
+        <App/>
+      </QueryClientProvider>
+    </StrictMode>,
+  );
+}
+
+// NOTE: If shouldHydrate is true, entry-client.tsx handles the hydration
