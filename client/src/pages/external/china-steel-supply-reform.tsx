@@ -14,8 +14,7 @@ export default function ChinaSteel() {
     title: "China's Steel Sector: 'Supply Reform 2.0' Looms | Daily Digest",
     description: "China's steel sector faces a new round of supply-side structural reforms as the government aims to reduce carbon emissions and tackle overcapacity.",
     url: "https://lucaxyzz-digest.replit.app/external/china-steel-supply-reform",
-    // Use the dynamic OG image generation
-    image: `${process.env.NEXT_PUBLIC_BASE_URL || ''}/api/og?title=${encodeURIComponent("China's Steel Sector: Supply Reform 2.0")}&description=${encodeURIComponent("Beijing tackles carbon emissions and overcapacity in world's largest steel industry")}`,
+    image: "/api/image?path=/latest/china-steel.png",
     author: "Daily Digest Staff",
     publishedTime: "2025-03-02T18:00:00Z",
     section: "Markets",

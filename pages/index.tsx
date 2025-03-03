@@ -1,15 +1,16 @@
 
+import Head from 'next/head';
 import App from '../client/src/App';
-import MetaTags from '../client/src/components/MetaTags';
 
 export default function Home() {
   return (
     <>
-      <MetaTags 
-        title="Daily Digest - Market Analysis"
-        description="Expert financial analysis and market insights to inform your investment decisions"
-        imageUrl="/api/og?title=Daily%20Digest&description=Market%20Analysis"
-      />
+      <Head>
+        <title>Your Application</title>
+        <meta name="description" content="Your application description" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
       <App />
     </>
   );
