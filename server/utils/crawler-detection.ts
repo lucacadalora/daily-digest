@@ -78,8 +78,9 @@ export function detectSocialMediaCrawler(req: Request): {
   // Check if this is a Facebook crawler
   const isFacebook = CRAWLER_PATTERNS.facebook.some(pattern => pattern.test(userAgent));
   
-  // Check if this is a WhatsApp crawler
-  const isWhatsApp = CRAWLER_PATTERNS.whatsapp.some(pattern => pattern.test(userAgent));
+  // WhatsApp crawler detection is disabled
+  // We manually check here in case it's needed somewhere, but we always return false
+  const isWhatsApp = false;
   
   // Check if this is a LinkedIn crawler
   const isLinkedIn = CRAWLER_PATTERNS.linkedin.some(pattern => pattern.test(userAgent));
@@ -94,16 +95,17 @@ export function detectSocialMediaCrawler(req: Request): {
   let platform = null;
   if (isTwitter) platform = 'twitter';
   else if (isFacebook) platform = 'facebook';
-  else if (isWhatsApp) platform = 'whatsapp';
+  // We no longer detect WhatsApp as a platform
   else if (isLinkedIn) platform = 'linkedin';
   else if (isGenericCrawler || isSocialReferer) platform = 'unknown';
   
   return {
-    isCrawler: isTwitter || isFacebook || isWhatsApp || isLinkedIn || isGenericCrawler || isSocialReferer,
+    // WhatsApp is excluded from the crawler detection
+    isCrawler: isTwitter || isFacebook || isLinkedIn || isGenericCrawler || isSocialReferer,
     platform,
     isTwitter,
     isFacebook,
-    isWhatsApp,
+    isWhatsApp, // Always false
     isLinkedIn
   };
 }

@@ -4,8 +4,9 @@ import { detectSocialMediaCrawler } from '../utils/crawler-detection';
 
 /**
  * Social media platforms we support optimized previews for
+ * Note: WhatsApp is intentionally not included as we want WhatsApp users to see the actual site
  */
-export type SocialPlatform = 'twitter' | 'facebook' | 'whatsapp' | 'linkedin' | 'other';
+export type SocialPlatform = 'twitter' | 'facebook' | 'linkedin' | 'other';
 
 /**
  * Article data needed for preview generation
@@ -33,9 +34,7 @@ export function getCacheControlHeaders(platform: SocialPlatform): string {
     case 'facebook':
       // Facebook's crawler respects cache headers
       return 'max-age=3600, s-maxage=43200';
-    case 'whatsapp':
-      // WhatsApp needs fresh content for sharing
-      return 'max-age=0, no-cache, no-store, must-revalidate';
+    // WhatsApp case removed - now using standard website
     default:
       // Default moderate caching
       return 'max-age=3600, s-maxage=86400';
@@ -117,14 +116,7 @@ export function generateSocialPreviewHTML(
       `;
       break;
       
-    case 'whatsapp':
-      // WhatsApp is very picky about image formats and sizes
-      platformSpecificTags = `
-        <!-- WhatsApp-specific optimizations -->
-        <meta property="og:image:type" content="image/jpeg">
-        <meta property="og:locale" content="en_US">
-      `;
-      break;
+    // WhatsApp case removed - we want WhatsApp users to see the actual site
       
     case 'linkedin':
       platformSpecificTags = `
@@ -242,7 +234,7 @@ export function handleArticlePreview(
   let platform: SocialPlatform = 'other';
   if (crawlerInfo.isTwitter) platform = 'twitter';
   else if (crawlerInfo.isFacebook) platform = 'facebook';
-  else if (crawlerInfo.isWhatsApp) platform = 'whatsapp';
+  // WhatsApp detection removed - we want WhatsApp users to see the actual site
   else if (crawlerInfo.isLinkedIn) platform = 'linkedin';
   
   // Set cache control headers based on platform
