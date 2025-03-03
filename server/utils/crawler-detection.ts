@@ -18,10 +18,10 @@ const CRAWLER_PATTERNS = {
     /facebookcatalog/i
   ],
   
-  // WhatsApp crawlers
+  // WhatsApp crawler detection is intentionally disabled
+  // We want WhatsApp users to access the real site
   whatsapp: [
-    /WhatsApp/i,
-    /^WhatsApp/
+    // Empty array - no longer detecting WhatsApp
   ],
   
   // LinkedIn crawlers
@@ -50,8 +50,8 @@ const SOCIAL_REFERERS = [
   /facebook\.com/i,
   /fb\.com/i,
   /linkedin\.com/i,
-  /t\.co\//i,
-  /whatsapp/i
+  /t\.co\//i
+  // WhatsApp referer pattern removed - we don't want to treat WhatsApp referrals as special
 ];
 
 /**
