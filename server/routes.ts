@@ -542,15 +542,28 @@ export function registerRoutes(app: Express): Server {
     }
   });
   
-  // Serve the steel image for Open Graph meta tag use
+  // Serve the factory image for Open Graph meta tag use (replacing old china-steel.png)
   app.get('/latest/china-steel.png', (req, res) => {
     try {
-      console.log('[Image Route] Serving China Steel image');
-      const filePath = join(process.cwd(), 'public', 'latest', 'china-steel.png');
+      console.log('[Image Route] Redirecting China Steel image request to factory-smoke.jpg');
+      // Redirect to the new image path
+      return res.redirect(301, '/images/articles/factory-smoke.jpg');
+    } catch (error) {
+      console.error('Error redirecting China Steel image:', error);
+      return res.status(500).send(`Error redirecting image: ${error instanceof Error ? error.message : 'Unknown error'}`);
+    }
+  });
+  
+  // Serve the factory smoke image for Open Graph meta tag use
+  app.get('/images/articles/factory-smoke.jpg', (req, res) => {
+    try {
+      console.log('[Image Route] Serving factory-smoke image');
+      const filePath = join(process.cwd(), 'public', 'images', 'articles', 'factory-smoke.jpg');
       
       if (!fs.existsSync(filePath)) {
         console.error(`[Image Route] Image not found at path: ${filePath}`);
-        return res.status(404).send('Image not found');
+        // If specific image not found, serve default site logo
+        return res.redirect(302, '/images/default/site-logo.png');
       }
       
       // Set cache headers based on version parameter
@@ -564,11 +577,11 @@ export function registerRoutes(app: Express): Server {
         res.setHeader('Expires', '0');
       }
       
-      res.setHeader('Content-Type', 'image/png');
+      res.setHeader('Content-Type', 'image/jpeg');
       const fileStream = fs.createReadStream(filePath);
       fileStream.pipe(res);
     } catch (error) {
-      console.error('Error serving China Steel image:', error);
+      console.error('Error serving factory image:', error);
       return res.status(500).send(`Error loading image: ${error instanceof Error ? error.message : 'Unknown error'}`);
     }
   });
@@ -576,67 +589,23 @@ export function registerRoutes(app: Express): Server {
   // Special Twitter-optimized image route with forced caching
   app.get('/latest/china-steel-true.png', (req, res) => {
     try {
-      console.log('[Twitter Image] Serving Twitter-optimized China Steel image');
-      const filePath = join(process.cwd(), 'public', 'latest', 'china-steel-true.png');
-      
-      if (!fs.existsSync(filePath)) {
-        console.error(`[Twitter Image] Image not found at path: ${filePath}`);
-        return res.status(404).send('Image not found');
-      }
-      
-      // Special Twitter-friendly caching headers
-      // Twitter seems to work better with a moderate cache time that's consistent
-      // This prevents cards from disappearing after posting
-      const oneDayInSeconds = 24 * 60 * 60;
-      res.setHeader('Cache-Control', `public, max-age=${oneDayInSeconds}`);
-      res.setHeader('Expires', new Date(Date.now() + oneDayInSeconds * 1000).toUTCString());
-      
-      // Add additional headers that help with cross-origin requests
-      res.setHeader('Access-Control-Allow-Origin', '*');
-      res.setHeader('Vary', 'Accept-Encoding');
-      res.setHeader('Content-Type', 'image/png');
-      
-      // Serve the image directly from the file system
-      const fileStream = fs.createReadStream(filePath);
-      fileStream.pipe(res);
+      console.log('[Twitter Image] Redirecting old china-steel-true.png request to factory-smoke.jpg');
+      // Redirect to the new image path with cache busting
+      return res.redirect(301, '/images/articles/factory-smoke.jpg?v=' + Date.now());
     } catch (error) {
-      console.error('Error serving Twitter-optimized China Steel image:', error);
-      return res.status(500).send(`Error loading image: ${error instanceof Error ? error.message : 'Unknown error'}`);
+      console.error('Error redirecting Twitter-optimized image:', error);
+      return res.status(500).send(`Error redirecting image: ${error instanceof Error ? error.message : 'Unknown error'}`);
     }
   });
   
   // Universal image endpoint that works for all social platforms (WhatsApp, Telegram, Twitter, etc)
   app.get('/steel-image', (req, res) => {
     try {
-      console.log('[Universal Image] Serving optimized steel image for social media');
-      
-      // Get the actual image file path
-      const filePath = join(process.cwd(), 'public', 'latest', 'china-steel.png');
-      
-      if (!fs.existsSync(filePath)) {
-        console.error(`[Image Error] Image not found at path: ${filePath}`);
-        return res.status(404).send('Image not found');
-      }
-      
-      // Set special headers that work well across multiple platforms
-      // Cache for 1 hour for better performance
-      const oneHour = 60 * 60;
-      res.setHeader('Cache-Control', `public, max-age=${oneHour}`);
-      res.setHeader('Expires', new Date(Date.now() + oneHour * 1000).toUTCString());
-      
-      // Add cross-origin support for all platforms
-      res.setHeader('Access-Control-Allow-Origin', '*');
-      res.setHeader('Access-Control-Allow-Methods', 'GET');
-      res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-      
-      // Set content type
-      res.setHeader('Content-Type', 'image/png');
-      
-      // Create a readable stream and pipe it to the response
-      const fileStream = fs.createReadStream(filePath);
-      fileStream.pipe(res);
+      console.log('[Universal Image] Redirecting to optimized factory image for social media');
+      // Redirect to the factory-smoke image with cache busting
+      return res.redirect(301, '/images/articles/factory-smoke.jpg?v=' + Date.now());
     } catch (error) {
-      console.error('Error serving social media image:', error);
+      console.error('Error redirecting steel image request:', error);
       return res.status(500).send(`Error: ${error instanceof Error ? error.message : 'Unknown error'}`);
     }
   });
@@ -705,6 +674,34 @@ export function registerRoutes(app: Express): Server {
     } catch (error) {
       console.error('Error serving Coal article image:', error);
       return res.status(500).send(`Error loading image: ${error instanceof Error ? error.message : 'Unknown error'}`);
+    }
+  });
+  
+  // Serve the default site logo for articles without specific images
+  app.get('/images/default/site-logo.png', (req, res) => {
+    try {
+      console.log('[Image Route] Serving default site logo');
+      const filePath = join(process.cwd(), 'public', 'images', 'default', 'site-logo.png');
+      
+      if (!fs.existsSync(filePath)) {
+        console.error(`[Image Route] Default site logo not found at path: ${filePath}`);
+        return res.status(404).send('Default logo not found');
+      }
+      
+      // Set cache headers to allow caching for improved performance
+      const oneDay = 24 * 60 * 60; // 24 hours in seconds
+      res.setHeader('Cache-Control', `public, max-age=${oneDay}`);
+      res.setHeader('Expires', new Date(Date.now() + oneDay * 1000).toUTCString());
+      
+      // Add cross-origin support for social media platforms
+      res.setHeader('Access-Control-Allow-Origin', '*');
+      res.setHeader('Content-Type', 'image/png');
+      
+      const fileStream = fs.createReadStream(filePath);
+      fileStream.pipe(res);
+    } catch (error) {
+      console.error('Error serving default site logo:', error);
+      return res.status(500).send(`Error loading default logo: ${error instanceof Error ? error.message : 'Unknown error'}`);
     }
   });
   

@@ -52,7 +52,7 @@ export const articles: ArticleConfig[] = [
     id: "china-steel-reform",
     title: "China's Steel Sector: 'Supply Reform 2.0' Looms",
     description: "China's billion-ton steel industry faces unprecedented consolidation and capacity reduction pressures as environmental regulations tighten and authorities target excess production to meet decarbonization goals.",
-    image: "/images/articles/china-steel.png",
+    image: "/images/articles/factory-smoke.jpg",
     imageAlt: "Chinese steel factory with smokestacks",
     author: "Financial Markets Team",
     publishedDate: "February 28, 2025",

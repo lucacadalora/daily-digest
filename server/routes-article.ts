@@ -105,11 +105,19 @@ async function findArticleBySlug(slug: string): Promise<ArticleConfig | undefine
  * Convert ArticleConfig to ArticlePreviewData format needed by the preview service
  */
 function convertToPreviewData(article: ArticleConfig, baseUrl: string): ArticlePreviewData {
+  // Check if the article has a valid image
+  const hasValidImage = article.image && article.image.trim() !== '';
+  
+  // Determine the image URL to use
+  const imageUrl = hasValidImage 
+    ? article.image 
+    : '/images/default/site-logo.png'; // Default site logo
+  
   return {
     id: article.id,
     title: article.title,
     description: article.description,
-    imageUrl: article.image,
+    imageUrl: imageUrl,
     author: article.author,
     publishedDate: article.publishedDate,
     url: article.slug.startsWith('/') ? article.slug : '/' + article.slug,
