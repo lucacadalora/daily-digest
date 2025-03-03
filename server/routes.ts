@@ -1446,6 +1446,9 @@ export function registerRoutes(app: Express): Server {
     }
   });
 
+  // Register the article routes
+  registerArticleRoutes(app);
+
   const httpServer = createServer(app);
   return httpServer;
 }
