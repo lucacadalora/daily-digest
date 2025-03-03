@@ -412,12 +412,20 @@ export function registerRoutes(app: Express): Server {
   // Server-side rendering for article meta tags
   app.get('/newsletter/:slug', (req, res, next) => {
     const { slug } = req.params;
+    console.log(`[OG Debug] Processing request for newsletter slug: ${slug}`);
+    console.log(`[OG Debug] User-Agent: ${req.headers['user-agent']}`);
+    
     const article = sampleArticles.find(a => a.slug === slug);
 
     if (!article) {
+      console.log(`[OG Debug] Article not found for slug: ${slug}`);
       next(); // Let client-side handle 404
       return;
     }
+    
+    console.log(`[OG Debug] Found article: ${article.title}`);
+    console.log(`[OG Debug] Article has metrics: ${!!article.previewMetrics}`);
+    
 
     try {
       // Read the index.html template
@@ -477,6 +485,24 @@ export function registerRoutes(app: Express): Server {
 
       // Find the head tag and insert meta tags right after it
       html = html.replace('<head>', `<head>\n        ${metaTags}`);
+      
+      // Debug: Log the meta tags being inserted
+      console.log(`[OG Debug] Inserted meta tags for ${slug}:`);
+      const metaTagsArr = metaTags.split('\n');
+      metaTagsArr.forEach(tag => {
+        if (tag.trim()) console.log(`[OG Debug] ${tag.trim()}`);
+      });
+      
+      // Also check for any existing meta tags in the template
+      const existingOgImageTag = html.match(/<meta\s+property=["']og:image["'][^>]*>/i);
+      if (existingOgImageTag) {
+        console.log(`[OG Debug] Found existing og:image tag: ${existingOgImageTag[0]}`);
+      }
+      
+      const existingTwitterImageTag = html.match(/<meta\s+name=["']twitter:image["'][^>]*>/i);
+      if (existingTwitterImageTag) {
+        console.log(`[OG Debug] Found existing twitter:image tag: ${existingTwitterImageTag[0]}`);
+      }
 
       // Set proper content type
       res.setHeader('Content-Type', 'text/html');
