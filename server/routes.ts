@@ -303,6 +303,50 @@ export function registerRoutes(app: Express): Server {
       return res.sendFile(join(process.cwd(), 'public', 'shares', 'china-steel-reform.html'));
     }
     
+    // ---------- GLOBAL COAL PRICE ARTICLE SOCIAL MEDIA HANDLERS ----------
+    
+    // Handle the Global Coal Price article for Twitter/X
+    if (isTwitter && (path === '/latest/global-coal-price-slump' || path === '/latest/global-coal-price-slump/')) {
+      console.log('🐦 Twitter/X client detected for Coal article! Serving specialized Twitter card page...');
+      
+      // Set cache headers optimized for Twitter previews - shorter for latest news
+      const fifteenMinutes = 15 * 60; // 15 minutes in seconds
+      res.setHeader('Cache-Control', `public, max-age=${fifteenMinutes}`);
+      res.setHeader('Expires', new Date(Date.now() + fifteenMinutes * 1000).toUTCString());
+      
+      // Add cross-origin headers to ensure Twitter can access everything
+      res.setHeader('Access-Control-Allow-Origin', '*');
+      res.setHeader('Access-Control-Allow-Methods', 'GET');
+      res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+      
+      // Serve our dedicated Twitter Card HTML
+      return res.sendFile(join(process.cwd(), 'public', 'twitter-card', 'coal.html'));
+    }
+    
+    // Handle the Global Coal Price article for WhatsApp
+    if (isWhatsApp && (path === '/latest/global-coal-price-slump' || path === '/latest/global-coal-price-slump/')) {
+      console.log('📱 WhatsApp client detected for Coal article! Serving specialized WhatsApp preview page...');
+      
+      // Set no-cache headers for WhatsApp to ensure fresh content
+      setSocialMediaCacheHeaders(res);
+      
+      // Serve our WhatsApp-optimized page with Open Graph tags
+      return res.sendFile(join(process.cwd(), 'public', 'shares', 'whatsapp', 'coal.html'));
+    }
+    
+    // Handle the Global Coal Price article for Facebook
+    if (isFacebook && (path === '/latest/global-coal-price-slump' || path === '/latest/global-coal-price-slump/')) {
+      console.log('👍 Facebook client detected for Coal article! Serving specialized Facebook preview page...');
+      
+      // Set moderate cache headers for Facebook
+      const oneHour = 60 * 60; // 1 hour in seconds
+      res.setHeader('Cache-Control', `public, max-age=${oneHour}`);
+      res.setHeader('Expires', new Date(Date.now() + oneHour * 1000).toUTCString());
+      
+      // Serve our general share page which works well with Facebook
+      return res.sendFile(join(process.cwd(), 'public', 'shares', 'coal.html'));
+    }
+    
     // For all other requests, continue with regular processing
     next();
   });
