@@ -409,7 +409,7 @@ export function registerRoutes(app: Express): Server {
     next();
   });
 
-  // Server-side rendering for article meta tags
+  // Server-side rendering for newsletter meta tags
   app.get('/newsletter/:slug', (req, res, next) => {
     const { slug } = req.params;
     console.log(`[OG Debug] Processing request for newsletter slug: ${slug}`);
@@ -425,6 +425,10 @@ export function registerRoutes(app: Express): Server {
     
     console.log(`[OG Debug] Found article: ${article.title}`);
     console.log(`[OG Debug] Article has metrics: ${!!article.previewMetrics}`);
+    console.log(`[OG Debug] Article has previewImage: ${!!article.previewImage}`);
+    
+    // For newsletters, explicitly set this flag to ensure no images in social previews
+    const isNewsletter = true;
     
 
     try {
