@@ -4,51 +4,13 @@ import { Link } from 'wouter';
 import { ArrowLeft, ChevronRight, Share2, Printer, Clock, Mail, Facebook, Twitter } from 'lucide-react';
 import { Separator } from '@/components/ui/separator';
 import { Badge } from '@/components/ui/badge';
-import MetaTags from '@/components/SEO/MetaTags';
-import type { ArticleMetadata } from '@/lib/meta-tags';
-
-/**
- * Enhanced article metadata for the Global Coal Price Slump article
- * This metadata is optimized for social media sharing across all platforms
- * including Facebook, WhatsApp, Twitter/X, and LinkedIn
- */
-const articleMetadata: ArticleMetadata = {
-  // Core metadata
-  title: "Global Coal's Price Slump Masks Brewing Supply Crisis and Potential Price Surge | Daily Digest",
-  description: "Analysis of why today's depressed coal prices conceal a brewing market tension between collapsing investment and stubborn demand that could lead to a sharp price rebound.",
-  url: 'https://lucaxyzz-digest.replit.app/latest/global-coal-price-slump',
-  
-  // Image with cache busting parameter to ensure fresh images on social platforms
-  image: 'https://lucaxyzz-digest.replit.app/latest/coal-image.jpeg?v=20250303_v3',
-  imageWidth: '1200',
-  imageHeight: '630',
-  imageAlt: 'Global coal mining barge with price chart overlay showing the current slump and potential future rebound',
-  
-  // Article metadata
-  author: 'Luca Cada Lora',
-  publishedTime: '2025-03-03',
-  section: 'Commodities',
-  
-  // Content categorization
-  tags: ['Coal', 'Energy', 'ESG', 'Climate', 'Commodities', 'Industry', 'Price', 'Supply'],
-  
-  // Site information
-  siteName: 'Daily Digest',
-  locale: 'en_US',
-  
-  // Twitter specific metadata
-  twitterSite: '@dailydigest',
-  twitterCreator: '@dailydigest',
-  
-  // Optional Facebook App ID (not needed for this implementation)
-  // fbAppId: '123456789'
-};
+import ArticleSEO from '@/components/SEO/ArticleSEO';
 
 export default function GlobalCoalPriceSlump() {
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
-      {/* MetaTags component handles meta tag updates and cleanup */}
-      <MetaTags metadata={articleMetadata} cacheBuster="20250303_v3" />
+      {/* ArticleSEO component uses centralized article config for SEO */}
+      <ArticleSEO articleId="global-coal-price-slump" />
       
       <Header simplified />
       

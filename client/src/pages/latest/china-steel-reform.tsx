@@ -4,30 +4,13 @@ import { Link } from 'wouter';
 import { ArrowLeft, ChevronRight, Share2, Printer, Clock, Mail, Facebook, Twitter } from 'lucide-react';
 import { Separator } from '@/components/ui/separator';
 import { Badge } from '@/components/ui/badge';
-import MetaTags from '@/components/SEO/MetaTags';
-import type { ArticleMetadata } from '@/lib/meta-tags';
-
-// Article metadata for the China Steel Reform article
-const articleMetadata: ArticleMetadata = {
-  title: "China's Steel Sector Seized by Talk of 'Supply Reform 2.0' | Daily Digest",
-  description: "World's biggest supplier needs an overhaul to cut production. Beijing may order 50 million tons of capacity cuts: Citigroup",
-  url: 'https://lucaxyzz-digest.replit.app/latest/china-steel-reform',
-  // Use special image route that works for all platforms (WhatsApp, Telegram, Twitter)
-  image: 'https://lucaxyzz-digest.replit.app/steel-image',
-  author: 'Luca Cada Lora',
-  publishedTime: '2025-03-02',
-  section: 'Commodities',
-  tags: ['China', 'steel', 'supply reform', 'industry', 'production cuts', 'commodities', 'industrial policy'],
-  siteName: 'Daily Digest',
-  twitterSite: '@dailydigest',
-  twitterCreator: '@dailydigest'
-};
+import ArticleSEO from '@/components/SEO/ArticleSEO';
 
 export default function ChinaSteelReform() {
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
-      {/* MetaTags component handles meta tag updates and cleanup */}
-      <MetaTags metadata={articleMetadata} cacheBuster="25" />
+      {/* ArticleSEO component uses centralized article config for SEO */}
+      <ArticleSEO articleId="china-steel-reform" />
       
       <Header simplified />
       
