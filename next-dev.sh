@@ -1,1 +1,3 @@
-#!/bin/bash\ncd "$(dirname "$0")"\nnpx next dev -p 3000
+#!/bin/bash
+export PORT=3000
+npx next dev
