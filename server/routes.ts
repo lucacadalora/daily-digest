@@ -676,6 +676,37 @@ export function registerRoutes(app: Express): Server {
     }
   });
   
+  // Direct access to coal article images with proper cache control
+  app.get('/latest/coal-image.jpeg', (req, res) => {
+    try {
+      console.log('[Image Route] Serving Coal article image');
+      const filePath = join(process.cwd(), 'public', 'latest', 'tongkang.jpeg');
+      
+      if (!fs.existsSync(filePath)) {
+        console.error(`[Image Route] Image not found at path: ${filePath}`);
+        return res.status(404).send('Image not found');
+      }
+      
+      // Set cache headers based on version parameter
+      if (req.query.v) {
+        // If version parameter is present, set long cache time (helps with preview caching)
+        res.setHeader('Cache-Control', 'public, max-age=86400, immutable'); // 24 hours
+      } else {
+        // Otherwise use default no-cache policy
+        res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+        res.setHeader('Pragma', 'no-cache');
+        res.setHeader('Expires', '0');
+      }
+      
+      res.setHeader('Content-Type', 'image/jpeg');
+      const fileStream = fs.createReadStream(filePath);
+      fileStream.pipe(res);
+    } catch (error) {
+      console.error('Error serving Coal article image:', error);
+      return res.status(500).send(`Error loading image: ${error instanceof Error ? error.message : 'Unknown error'}`);
+    }
+  });
+  
   // API endpoint for serving images for meta tags
   app.get('/api/image', (req, res) => {
     try {
@@ -782,49 +813,7 @@ export function registerRoutes(app: Express): Server {
     }
   });
   
-  // Dedicated route to serve the coal image with proper headers for social media
-  app.get('/latest/coal-image.jpeg', (req, res) => {
-    try {
-      console.log('[Coal Image] Serving coal image for social media sharing');
-      const filePath = join(process.cwd(), 'public', 'latest', 'tongkang.jpeg');
-      
-      // Check if file exists
-      if (!fs.existsSync(filePath)) {
-        console.error(`[Coal Image Error] Image not found at path: ${filePath}`);
-        return res.status(404).send('Coal image not found');
-      }
-      
-      // Set content type (important for proper rendering)
-      res.setHeader('Content-Type', 'image/jpeg');
-      
-      // Add Cross-Origin headers to ensure platforms can access the image
-      res.setHeader('Access-Control-Allow-Origin', '*');
-      res.setHeader('Access-Control-Allow-Methods', 'GET');
-      res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-      
-      // Set moderate cache headers - balancing caching needs
-      const oneHour = 60 * 60; // 1 hour in seconds
-      if (req.query.v) {
-        // For versioned requests, use a longer cache time
-        res.setHeader('Cache-Control', `public, max-age=${oneHour}`);
-        res.setHeader('Expires', new Date(Date.now() + oneHour * 1000).toUTCString());
-        console.log(`[Coal Image] Serving versioned image (v=${req.query.v}) with 1 hour cache`);
-      } else {
-        // For non-versioned requests, use a shorter cache time
-        const fifteenMinutes = 15 * 60; // 15 minutes in seconds
-        res.setHeader('Cache-Control', `public, max-age=${fifteenMinutes}`);
-        res.setHeader('Expires', new Date(Date.now() + fifteenMinutes * 1000).toUTCString());
-        console.log('[Coal Image] Serving non-versioned image with 15 min cache');
-      }
-      
-      // Stream the file directly
-      const fileStream = fs.createReadStream(filePath);
-      fileStream.pipe(res);
-    } catch (error) {
-      console.error('Error serving coal image:', error);
-      return res.status(500).send(`Error: ${error instanceof Error ? error.message : 'Unknown error'}`);
-    }
-  });
+
   
   // Test route for WhatsApp and X preview
   app.get('/test', (req, res) => {
