@@ -13,7 +13,7 @@ const articleMetadata: ArticleMetadata = {
   description: "Asian benchmark at lowest levels since 2021, hovering near $100 a ton. ESG pressures and climate policies stifling investment in new production.",
   url: 'https://lucaxyzz-digest.replit.app/latest/global-coal-price-slump',
   // Use special image route that works for all platforms (WhatsApp, Telegram, Twitter)
-  image: 'https://lucaxyzz-digest.replit.app/latest/tongkang.jpeg',
+  image: 'https://lucaxyzz-digest.replit.app/coal-image',
   author: 'Luca Cada Lora',
   publishedTime: '2025-03-03',
   section: 'Commodities',

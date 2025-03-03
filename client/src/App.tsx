@@ -20,6 +20,7 @@ import IndonesiaCoalDilemma from "@/pages/indonesia-coal-dilemma";
 import JapanEconomicSecurity from "@/pages/japan-economic-security";
 import ChinaSteel from "@/pages/external/china-steel-supply-reform";
 import ChinaSteelReform from "@/pages/latest/china-steel-reform";
+import GlobalCoalPriceSlump from "@/pages/latest/global-coal-price-slump";
 
 // Insights pages
 import Insights from "@/pages/insights";
@@ -43,6 +44,7 @@ function Router() {
       
       {/* Latest news routes */}
       <Route path="/latest" component={Latest} />
+      <Route path="/latest/global-coal-price-slump" component={GlobalCoalPriceSlump} />
       <Route path="/latest/china-steel-reform" component={ChinaSteelReform} />
       <Route path="/external/china-steel-supply-reform" component={ChinaSteel} />
       
