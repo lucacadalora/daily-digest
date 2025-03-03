@@ -355,11 +355,11 @@ const IHSGOutlookMarch37 = () => {
                     </li>
                     <li className="flex space-x-2">
                       <div className="w-2 h-2 mt-2 rounded-full bg-blue-500 flex-shrink-0" />
-                      <p className="mt-0"><strong>Dividend Yield:</strong> 6.1% (Rp204/share FY2024 payout)</p>
+                      <p className="mt-0"><strong>Dividend Yield:</strong> 6.07% (Rp204/share FY2024 payout)</p>
                     </li>
                     <li className="flex space-x-2">
                       <div className="w-2 h-2 mt-2 rounded-full bg-blue-500 flex-shrink-0" />
-                      <p className="mt-0"><strong>Valuation:</strong> 0.66x P/B (vs 5-year avg 1.4x) | ROE: 18.4%</p>
+                      <p className="mt-0"><strong>Valuation:</strong> 1.60x P/B (vs 5-year avg 1.8-2.4x) | ROE: 18.4%</p>
                     </li>
                     <li className="flex space-x-2">
                       <div className="w-2 h-2 mt-2 rounded-full bg-blue-500 flex-shrink-0" />
