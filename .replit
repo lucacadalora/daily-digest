@@ -47,4 +47,4 @@ author = 36490326
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "node run-dev.js"
+args = "node run-dev.cjs"
