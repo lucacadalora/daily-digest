@@ -711,6 +711,33 @@ export function registerRoutes(app: Express): Server {
     }
   });
   
+  // Specialized route for coal article sharing test
+  app.get('/coal-share', (req, res) => {
+    try {
+      console.log('[Debug] Serving coal-share-test.html');
+      const filePath = join(process.cwd(), 'public', 'coal-share-test.html');
+      
+      if (!fs.existsSync(filePath)) {
+        console.error(`[Debug] Coal share test file not found at path: ${filePath}`);
+        return res.status(404).send('Coal share test page not found');
+      }
+      
+      // Set special headers for social media platforms
+      res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+      res.setHeader('Pragma', 'no-cache');
+      res.setHeader('Expires', '0');
+      
+      const html = readFileSync(filePath, 'utf-8');
+      console.log('[Debug] Successfully read coal share test HTML file, length:', html.length);
+      
+      res.setHeader('Content-Type', 'text/html');
+      return res.send(html);
+    } catch (error) {
+      console.error('Error serving coal share test page:', error);
+      return res.status(500).send(`Error loading coal share page: ${error instanceof Error ? error.message : 'Unknown error'}`);
+    }
+  });
+  
   // Test route for WhatsApp and X preview
   app.get('/test', (req, res) => {
     try {
