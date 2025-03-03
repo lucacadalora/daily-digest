@@ -12,6 +12,7 @@ import { subscribers } from "../db/schema";
 import { z } from "zod";
 import { eq } from "drizzle-orm";
 import { detectSocialMediaCrawler, setSocialMediaCacheHeaders } from "./utils/crawler-detection";
+import { registerArticleRoutes } from "./routes-article";
 
 interface MarketPrice {
   price: number;
