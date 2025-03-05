@@ -33,6 +33,22 @@ export type ArticleConfig = z.infer<typeof articleSchema>;
  */
 export const articles: ArticleConfig[] = [
   {
+    id: "saving-usd-50-billion-pp-no-8-2025",
+    title: "Saving USD 50 Billion: How PP No 8 2025 Could Transform Indonesia's Liquidity",
+    description: "Analysis of how Indonesia's PP No 8 2025 regulation aims to consolidate state cash management, potentially freeing up to USD 50 billion in liquidity through systematic reforms of government institution cash management.",
+    image: "/images/articles/cash-management.jpg",
+    imageAlt: "Financial documents and charts representing government cash management",
+    author: "Luca Cada Lora",
+    publishedDate: "March 5, 2025",
+    category: "Economics",
+    tags: ["Government Policy", "Liquidity", "Economic Reform", "Indonesia"],
+    slug: "newsletter/saving-usd-50-billion-pp-no-8-2025",
+    featured: true,
+    imageWidth: 1200,
+    imageHeight: 630,
+    summary: "How Indonesia's new regulation could unlock USD 50 billion through improved cash management."
+  },
+  {
     id: "global-coal-price-slump",
     title: "Global Coal's Price Slump Masks Brewing Supply Crisis and Potential Price Surge",
     description: "Today's depressed coal prices conceal brewing market tensions that may drive significant price increases in the medium term as investment shortfalls, shifting trade patterns, and increasing Asian demand create a perfect storm for supply constraints.",

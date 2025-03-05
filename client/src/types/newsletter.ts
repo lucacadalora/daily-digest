@@ -33,6 +33,35 @@ export type Article = z.infer<typeof articleSchema>;
 
 export const sampleArticles: Article[] = [
   {
+    slug: "saving-usd-50-billion-pp-no-8-2025",
+    title: "Saving USD 50 Billion: How PP No 8 2025 Could Transform Indonesia's Liquidity",
+    description: "Analysis of how Indonesia's PP No 8 2025 regulation aims to consolidate state cash management, potentially freeing up to USD 50 billion in liquidity through systematic reforms of government institution cash management.",
+    category: "Economics",
+    source: "Daily Digest",
+    author: "Luca Cada Lora",
+    date: "March 5, 2025",
+    previewEmoji: "💰",
+    previewMetrics: [
+      {
+        label: "Liquidity Potential",
+        value: "$50B",
+        subtitle: "Cash flow optimization"
+      },
+      {
+        label: "Idle Cash",
+        value: "18%",
+        subtitle: "Of government funds"
+      },
+      {
+        label: "Implementation",
+        value: "2025-2026",
+        subtitle: "Timeline"
+      }
+    ],
+    tags: ["Government Policy", "Liquidity", "Economic Reform", "Indonesia"],
+    content: "Saving USD 50 Billion: How PP No 8 2025 Could Transform Indonesia's Liquidity"
+  },
+  {
     slug: "japan-economic-security-indonesia-minerals",
     title: "Strategic Supply Chain Positioning and Critical Minerals: Japan's Economic Security Strategy and Implications for Indonesia",
     description: "Analysis of Japan's economic security vulnerabilities, strategic responses, and the opportunities for Indonesia to position itself within Japan's evolving supply chain resilience framework, particularly in critical minerals.",
