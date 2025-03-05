@@ -34,7 +34,7 @@ export type Article = z.infer<typeof articleSchema>;
 export const sampleArticles: Article[] = [
   {
     slug: "indonesia-economic-tightrope-export-rules",
-    title: "Indonesia's Economic Tightrope – Can New Export Rules Steady the Rupiah?",
+    title: "Saving USD 50 Billion: How PP No 8 2025 Could Transform Indonesia's Liquidity",
     description: "Indonesia's economy faces a pivotal moment with a liquidity deficit in the banking system and Rupiah depreciation. PP No 8 2025 mandating export proceed repatriation could unlock USD 50 billion and reshape liquidity dynamics if successfully implemented.",
     category: "Economics",
     source: "Daily Digest",

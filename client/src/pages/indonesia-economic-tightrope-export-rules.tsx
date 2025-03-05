@@ -13,9 +13,9 @@ export default function IndonesiaEconomicTightrope() {
 
   // Create article metadata for the MetaTags component
   const metadata: ArticleMetadata | null = article ? {
-    title: `${article.title} | Daily Digest`,
+    title: `Saving USD 50 Billion: How PP No 8 2025 Could Transform Indonesia's Liquidity | Daily Digest`,
     description: article.description,
-    url: `https://lucaxyzz-digest.replit.app/indonesia-economic-tightrope-export-rules`,
+    url: `https://lucaxyzz-digest.replit.app/newsletter/indonesia-economic-tightrope-export-rules`,
     // Don't include image to avoid using the wrong one in social sharing
     author: article.author,
     publishedTime: article.date,
@@ -46,7 +46,7 @@ export default function IndonesiaEconomicTightrope() {
           <ChevronRight className="h-4 w-4" />
           <Link href="/newsletter" className="hover:text-blue-600">Newsletter</Link>
           <ChevronRight className="h-4 w-4" />
-          <span>Indonesia's Economic Tightrope</span>
+          <span>Saving USD 50 Billion</span>
         </div>
 
         <header className="border-b border-gray-200 dark:border-gray-800 pb-4">
@@ -786,38 +786,17 @@ export default function IndonesiaEconomicTightrope() {
         <section className="mb-8">
           <h2 className="text-xl font-serif font-bold text-gray-900 dark:text-white mb-4">The Bottom Line</h2>
           
-          <Card className="border-2 border-gray-200 dark:border-gray-700 overflow-hidden shadow-md">
-            <div className="bg-gradient-to-r from-blue-500 to-blue-700 p-4">
-              <h3 className="text-white font-bold text-lg flex items-center">
-                <TrendingUp className="h-5 w-5 mr-2" />
-                Success Scenario
-              </h3>
-            </div>
-            <CardContent className="p-5 bg-white dark:bg-gray-800 grid grid-cols-1 md:grid-cols-3 gap-4">
-              <div className="flex flex-col items-center text-center p-3 bg-green-50 dark:bg-green-900/20 rounded-lg">
-                <DollarSign className="h-8 w-8 text-green-600 dark:text-green-400 mb-2" />
-                <p className="font-semibold text-gray-900 dark:text-white">USD 50B Injection</p>
-                <p className="text-sm text-gray-600 dark:text-gray-400">DHE-SDA repatriation</p>
-              </div>
-              
-              <div className="flex flex-col items-center text-center p-3 bg-green-50 dark:bg-green-900/20 rounded-lg">
-                <TrendingUp className="h-8 w-8 text-green-600 dark:text-green-400 mb-2" />
-                <p className="font-semibold text-gray-900 dark:text-white">Rupiah Stabilization</p>
-                <p className="text-sm text-gray-600 dark:text-gray-400">Lower inflation</p>
-              </div>
-              
-              <div className="flex flex-col items-center text-center p-3 bg-green-50 dark:bg-green-900/20 rounded-lg">
-                <Calculator className="h-8 w-8 text-green-600 dark:text-green-400 mb-2" />
-                <p className="font-semibold text-gray-900 dark:text-white">Improved NBB</p>
-                <p className="text-sm text-gray-600 dark:text-gray-400">Better liquidity</p>
+          <Card className="border border-gray-200 dark:border-gray-700 overflow-hidden shadow-sm">
+            <CardContent className="p-5 bg-gray-50 dark:bg-gray-800">
+              <div className="flex items-start mb-4">
+                <div className="bg-blue-100 dark:bg-blue-900/30 p-2 rounded-full mr-3 mt-1">
+                  <DollarSign className="h-5 w-5 text-blue-600 dark:text-blue-400" />
+                </div>
+                <p className="text-gray-700 dark:text-gray-300">
+                  Indonesia's economic tightrope hinges on execution. PP No 8 2025 could inject USD 50 billion, but capturing "missing money" is critical to easing liquidity and steadying the Rupiah. Success could lower inflation and boost confidence; failure risks prolonged volatility. Stakeholders should track enforcement and liquidity metrics closely as 2025 unfolds.
+                </p>
               </div>
             </CardContent>
-            
-            <div className="p-4 bg-gray-50 dark:bg-gray-850 border-t border-gray-200 dark:border-gray-700">
-              <p className="text-gray-700 dark:text-gray-300">
-                <span className="font-bold">Critical Success Factor:</span> Indonesia's economic tightrope hinges on execution. Success requires capturing the "missing money" through effective enforcement of PP No 8 2025. Stakeholders should track enforcement metrics and NBB trends closely as 2025 unfolds.
-              </p>
-            </div>
           </Card>
         </section>
 
