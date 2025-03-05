@@ -174,7 +174,34 @@ export default function IndonesiaEconomicTightrope() {
         </div>
 
         <section className="mb-8">
-          <h2 className="text-xl font-serif font-bold text-gray-900 dark:text-white mb-4">1. The Liquidity Crunch: A Banking System Under Strain</h2>
+          <h2 className="text-xl font-serif font-bold text-gray-900 dark:text-white mb-4">1. DHE-SDA: A Potential Game-Changer?</h2>
+          <p className="text-gray-700 dark:text-gray-300 mb-4">
+            Signed into law on February 17, 2025, PP No 8 2025 replaces the less stringent PP No 36 2023 and zeroes in on natural resource exports (excluding oil and gas). It's a cornerstone of Prabowo's strategy to shore up liquidity and assert economic sovereignty. Here's how it works:
+          </p>
+
+          <h3 className="text-lg font-bold text-gray-900 dark:text-white mt-6 mb-3">Core Provisions</h3>
+          <ul className="list-disc pl-5 space-y-2 text-gray-700 dark:text-gray-300 mb-6">
+            <li><span className="font-semibold">100% Repatriation:</span> Exporters in mining (e.g., coal, nickel, copper), plantations (e.g., palm oil), forestry, and fisheries must return all export proceeds to Indonesia.</li>
+            <li><span className="font-semibold">12-Month Lock-In:</span> Funds must remain in special accounts at national banks for a full year.</li>
+            <li><span className="font-semibold">Permitted Uses:</span> Proceeds can fund operational costs, tax payments, or foreign currency dividends, offering some flexibility.</li>
+            <li><span className="font-semibold">Enforcement Teeth:</span> Non-compliance triggers suspension of export services, a severe penalty for commodity giants.</li>
+            <li><span className="font-semibold">Exclusions:</span> Oil and gas exports stay under PP No 36 2023, reflecting their unique fiscal role.</li>
+          </ul>
+
+          <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-3">Why It Matters</h3>
+          <p className="text-gray-700 dark:text-gray-300 mb-4">
+            Indonesia's commodity exports are a lifeline, yet billions leak offshore annually. The report estimates USD 10-20 billion vanishes through practices like under-invoicing (declaring lower export values) and transfer pricing (shifting profits to low-tax jurisdictions). PP No 8 2025 aims to plug this gap, channeling funds back into the domestic economy. If successful, it could improve NBB by up to 2% of GDP and strengthen the Rupiah significantly.
+          </p>
+          <p className="text-gray-700 dark:text-gray-300 mb-4">
+            Signed February 17, 2025, PP No 8 2025 mandates that commodity exporters (coal, palm oil, nickel) repatriate 100% of proceeds for 12 months, up from 30% for 3 months. Non-compliance risks export bans, a strong incentive for compliance. The goal? Up to USD 50 billion in inflows.
+          </p>
+          <p className="text-gray-700 dark:text-gray-300 mb-4">
+            Yet, the report distinguishes "known money" (reported proceeds) from "missing money" (USD 10-20 billion annually from mis-invoicing and transfer pricing in the "Big-3" commodities). While "known money" boosts deposits, it's offset by lending, leaving NBB unchanged. Capturing "missing money" could improve NBB by 2% of GDP and strengthen the Rupiah.
+          </p>
+        </section>
+
+        <section className="mb-8">
+          <h2 className="text-xl font-serif font-bold text-gray-900 dark:text-white mb-4">2. The Liquidity Crunch: A Banking System Under Strain</h2>
           <p className="text-gray-700 dark:text-gray-300 mb-4">
             Indonesia's banking system ended 2024 with a liquidity deficit, as borrowing outpaced deposits. The NBB, a measure of net liquidity, stood at -1.70% of GDP, typically implying a 6-8% Rupiah depreciation. That it fell only 4.4% reflects IDR 162 trillion in foreign inflows from Bank Indonesia's SRBI securities. Yet, with BI's issuance capacity limited and equity outflows rising, this relief may be short-lived.
           </p>
@@ -187,7 +214,7 @@ export default function IndonesiaEconomicTightrope() {
         </section>
 
         <section className="mb-8">
-          <h2 className="text-xl font-serif font-bold text-gray-900 dark:text-white mb-4">2. Policy Evolution: From Jokowi to Prabowo</h2>
+          <h2 className="text-xl font-serif font-bold text-gray-900 dark:text-white mb-4">3. Policy Evolution: From Jokowi to Prabowo</h2>
           <p className="text-gray-700 dark:text-gray-300 mb-4">
             In December 2024, a tax collection "extra effort" shifted liquidity from private hands to the government, boosting Ministry of Finance reserves to IDR 500 trillion. However, individual deposits shrank by 2.1% YoY, and consumer loan growth slowed, deepening the private sector's liquidity squeeze.
           </p>
@@ -322,33 +349,6 @@ export default function IndonesiaEconomicTightrope() {
         </section>
 
         <section className="mb-8">
-          <h2 className="text-xl font-serif font-bold text-gray-900 dark:text-white mb-4">3. DHE-SDA: A Potential Game-Changer?</h2>
-          <p className="text-gray-700 dark:text-gray-300 mb-4">
-            Signed into law on February 17, 2025, PP No 8 2025 replaces the less stringent PP No 36 2023 and zeroes in on natural resource exports (excluding oil and gas). It's a cornerstone of Prabowo's strategy to shore up liquidity and assert economic sovereignty. Here's how it works:
-          </p>
-
-          <h3 className="text-lg font-bold text-gray-900 dark:text-white mt-6 mb-3">Core Provisions</h3>
-          <ul className="list-disc pl-5 space-y-2 text-gray-700 dark:text-gray-300 mb-6">
-            <li><span className="font-semibold">100% Repatriation:</span> Exporters in mining (e.g., coal, nickel, copper), plantations (e.g., palm oil), forestry, and fisheries must return all export proceeds to Indonesia.</li>
-            <li><span className="font-semibold">12-Month Lock-In:</span> Funds must remain in special accounts at national banks for a full year.</li>
-            <li><span className="font-semibold">Permitted Uses:</span> Proceeds can fund operational costs, tax payments, or foreign currency dividends, offering some flexibility.</li>
-            <li><span className="font-semibold">Enforcement Teeth:</span> Non-compliance triggers suspension of export services, a severe penalty for commodity giants.</li>
-            <li><span className="font-semibold">Exclusions:</span> Oil and gas exports stay under PP No 36 2023, reflecting their unique fiscal role.</li>
-          </ul>
-
-          <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-3">Why It Matters</h3>
-          <p className="text-gray-700 dark:text-gray-300 mb-4">
-            Indonesia's commodity exports are a lifeline, yet billions leak offshore annually. The report estimates USD 10-20 billion vanishes through practices like under-invoicing (declaring lower export values) and transfer pricing (shifting profits to low-tax jurisdictions). PP No 8 2025 aims to plug this gap, channeling funds back into the domestic economy. If successful, it could improve NBB by up to 2% of GDP and strengthen the Rupiah significantly.
-          </p>
-          <p className="text-gray-700 dark:text-gray-300 mb-4">
-            Signed February 17, 2025, PP No 8 2025 mandates that commodity exporters (coal, palm oil, nickel) repatriate 100% of proceeds for 12 months, up from 30% for 3 months. Non-compliance risks export bans, a strong incentive for compliance. The goal? Up to USD 50 billion in inflows.
-          </p>
-          <p className="text-gray-700 dark:text-gray-300 mb-4">
-            Yet, the report distinguishes "known money" (reported proceeds) from "missing money" (USD 10-20 billion annually from mis-invoicing and transfer pricing in the "Big-3" commodities). While "known money" boosts deposits, it's offset by lending, leaving NBB unchanged. Capturing "missing money" could improve NBB by 2% of GDP and strengthen the Rupiah.
-          </p>
-        </section>
-
-        <section className="mb-8">
           <h2 className="text-xl font-serif font-bold text-gray-900 dark:text-white mb-4">4. Growth vs. Rupiah: The Core Tradeoff</h2>
           <p className="text-gray-700 dark:text-gray-300 mb-4">
             Indonesia faces a dilemma: boosting growth often weakens the Rupiah, while stabilizing the currency can stifle activity.
@@ -419,7 +419,7 @@ export default function IndonesiaEconomicTightrope() {
         </section>
 
         <section className="mb-8">
-          <h2 className="text-xl font-serif font-bold text-gray-900 dark:text-white mb-4">6. Investor Outlook: Navigating Uncertainty in 2025</h2>
+          <h2 className="text-xl font-serif font-bold text-gray-900 dark:text-white mb-4">5. Investor Outlook: Navigating Uncertainty in 2025</h2>
           <p className="text-gray-700 dark:text-gray-300 mb-4">
             As a retail investor in Indonesia, the 2025 economic landscape offers a mix of opportunities and challenges, shaped by modest growth, persistent risks, and policy uncertainties. Drawing from BCA Research's projections and additional insights, here's a comprehensive guide to positioning your portfolio across the Jakarta Composite Index (IHSG), bonds, yields, and other factors.
           </p>
