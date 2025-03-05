@@ -41,7 +41,7 @@ export const articles: ArticleConfig[] = [
     author: "Luca Cada Lora",
     publishedDate: "March 5, 2025",
     category: "Economics",
-    tags: ["Rupiah", "Liquidity", "Export Policy", "Indonesia"],
+    tags: ["Economic Policy", "Banking", "Export Regulations", "Financial Markets"],
     slug: "newsletter/indonesia-economic-tightrope-export-rules",
     featured: true,
     imageWidth: 1200,

@@ -439,33 +439,6 @@ export default function IndonesiaEconomicTightrope() {
           </p>
         </section>
 
-        <section className="mb-8 border-t border-gray-200 dark:border-gray-800 pt-6">
-          <h2 className="text-xl font-serif font-bold text-gray-900 dark:text-white mb-4">Source</h2>
-          <p className="text-gray-700 dark:text-gray-300 mb-4">
-            Mamia, B. K. (2025). Bringing it all back home (Follow the Money No. 1-2025). Jakarta, Indonesia: BCA Economic and Industry Research.
-          </p>
-          <p className="text-gray-700 dark:text-gray-300 mb-4">
-            <a 
-              href="https://www.bca.co.id/-/media/Feature/Report/File/S8/Laporan-Riset-Ekonomi/2025/03/follow-the-money-1-bringing-it-all-back-home-04-march-2025.pdf" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="text-blue-600 hover:underline"
-            >
-              https://www.bca.co.id/-/media/Feature/Report/File/S8/Laporan-Riset-Ekonomi/2025/03/follow-the-money-1-bringing-it-all-back-home-04-march-2025.pdf
-            </a>
-          </p>
-        </section>
-
-        <div className="py-6 border-t border-gray-200 dark:border-gray-800">
-          <div className="flex flex-wrap gap-2">
-            {article.tags?.map((tag, index) => (
-              <span key={index} className="px-3 py-1 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-full text-sm">
-                #{tag}
-              </span>
-            ))}
-          </div>
-        </div>
-
         <div className="py-6 border-t border-gray-200 dark:border-gray-800">
           <h3 className="font-bold text-lg text-gray-900 dark:text-white mb-4">Related Articles</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -485,6 +458,25 @@ export default function IndonesiaEconomicTightrope() {
               ))}
           </div>
         </div>
+
+        <footer className="mt-8 pt-6 border-t border-gray-200 dark:border-gray-800">
+          <div className="text-sm text-gray-600 dark:text-gray-400">
+            <p className="mb-2">
+              Source: <a 
+                href="https://www.bca.co.id/-/media/Feature/Report/File/S8/Laporan-Riset-Ekonomi/2025/03/follow-the-money-1-bringing-it-all-back-home-04-march-2025.pdf" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-blue-600 hover:underline inline-flex items-center"
+              >
+                "Follow The Money #1-2025" by BCA Economic and Industry Research
+                <ChevronRight className="h-4 w-4 ml-1" />
+              </a>
+            </p>
+            <p className="text-xs text-gray-500 dark:text-gray-500">
+              Mamia, B. K. (2025). Bringing it all back home (Follow the Money No. 1-2025). Jakarta, Indonesia: BCA Economic and Industry Research.
+            </p>
+          </div>
+        </footer>
       </div>
     </div>
   );
