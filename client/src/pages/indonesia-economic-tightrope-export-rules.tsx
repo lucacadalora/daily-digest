@@ -82,9 +82,7 @@ export default function IndonesiaEconomicTightrope() {
           <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
             Indonesia's economy faces a pivotal moment. A liquidity deficit in the banking system—reflected in a Net Bank Balance (NBB) of -1.70% of GDP—drove a 4.4% Rupiah depreciation in 2024, raising costs for importers and threatening inflation. Enter PP No 8 2025, a bold regulation effective March 1, 2025, mandating 100% repatriation of commodity export proceeds for 12 months. With potential inflows of USD 50 billion, this could reshape liquidity and stabilize the Rupiah—if it can capture the "missing money" that leaks offshore through under-invoicing and transfer pricing.
           </p>
-          <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed mt-4">
-            This newsletter, tailored for high-value industries, policymakers, and retail investors, explores Indonesia's liquidity crunch, evolving policies, and the delicate balance between growth and currency stability.
-          </p>
+
         </div>
         
         <div className="py-6">
@@ -760,9 +758,22 @@ export default function IndonesiaEconomicTightrope() {
 
         <section className="mb-8">
           <h2 className="text-xl font-serif font-bold text-gray-900 dark:text-white mb-4">6. Investor Outlook: Navigating Uncertainty in 2025</h2>
-          <p className="text-gray-700 dark:text-gray-300 mb-4">
-            As a retail investor in Indonesia, the 2025 economic landscape offers a mix of opportunities and challenges, shaped by modest growth, persistent risks, and policy uncertainties. Drawing from BCA Research's projections and additional insights, here's a comprehensive guide to positioning your portfolio across the Jakarta Composite Index (IHSG), bonds, yields, and other factors.
-          </p>
+          <div className="bg-blue-50 dark:bg-gray-800 rounded-lg p-5 border-l-4 border-blue-500 mb-6">
+            <p className="text-gray-700 dark:text-gray-300 mb-4">
+              For retail investors in Indonesia, 2025 brings opportunities and risks with GDP growth at 4.9%, a weaker Rupiah (16,887 USD/IDR), and a current account deficit (-0.9% of GDP). The Jakarta Composite Index (IHSG) may face pressure from liquidity issues and equity outflows, but commodity stocks (e.g., mining, palm oil) could shine if policies like PP No 8 2025 strengthen the Rupiah, while consumer staples offer stability. Bonds look promising with a BI rate of 5.50% and 10-year SBN yields at 7.47%, though global rate hikes could push yields up. Inflation at 2.5% supports fixed-income investments.
+            </p>
+            <div className="bg-white dark:bg-gray-700 rounded-lg p-4 shadow-sm border border-gray-200 dark:border-gray-600">
+              <h4 className="font-bold text-gray-900 dark:text-white flex items-center mb-3">
+                <div className="bg-green-100 dark:bg-green-800 p-1 rounded-full mr-2">
+                  <TrendingUp className="h-4 w-4 text-green-600 dark:text-green-400" />
+                </div>
+                What to Do:
+              </h4>
+              <p className="text-gray-700 dark:text-gray-300">
+                Diversify across commodity exporters, consumer staples, and government bonds (SBN) for safety. Hedge Rupiah risks with USD assets (e.g., US ETFs). Watch policy enforcement (e.g., DHE-SDA) and global trends (e.g., US rates) to adjust your mix—banks may struggle with 4.1% manufacturing NPLs, so limit exposure there. Stay flexible and informed to handle uncertainties.
+              </p>
+            </div>
+          </div>
 
           <h3 className="text-lg font-bold text-gray-900 dark:text-white mt-6 mb-3">Strategic Insights: What to Watch</h3>
           <ul className="list-disc pl-5 space-y-2 text-gray-700 dark:text-gray-300 mb-4">
@@ -774,9 +785,40 @@ export default function IndonesiaEconomicTightrope() {
 
         <section className="mb-8">
           <h2 className="text-xl font-serif font-bold text-gray-900 dark:text-white mb-4">The Bottom Line</h2>
-          <p className="text-gray-700 dark:text-gray-300 mb-4">
-            Indonesia's economic tightrope hinges on execution. PP No 8 2025 could inject USD 50 billion, but capturing "missing money" is critical to easing liquidity and steadying the Rupiah. Success could lower inflation and boost confidence; failure risks prolonged volatility. Stakeholders should track enforcement and liquidity metrics closely as 2025 unfolds.
-          </p>
+          
+          <Card className="border-2 border-gray-200 dark:border-gray-700 overflow-hidden shadow-md">
+            <div className="bg-gradient-to-r from-blue-500 to-blue-700 p-4">
+              <h3 className="text-white font-bold text-lg flex items-center">
+                <TrendingUp className="h-5 w-5 mr-2" />
+                Success Scenario
+              </h3>
+            </div>
+            <CardContent className="p-5 bg-white dark:bg-gray-800 grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div className="flex flex-col items-center text-center p-3 bg-green-50 dark:bg-green-900/20 rounded-lg">
+                <DollarSign className="h-8 w-8 text-green-600 dark:text-green-400 mb-2" />
+                <p className="font-semibold text-gray-900 dark:text-white">USD 50B Injection</p>
+                <p className="text-sm text-gray-600 dark:text-gray-400">DHE-SDA repatriation</p>
+              </div>
+              
+              <div className="flex flex-col items-center text-center p-3 bg-green-50 dark:bg-green-900/20 rounded-lg">
+                <TrendingUp className="h-8 w-8 text-green-600 dark:text-green-400 mb-2" />
+                <p className="font-semibold text-gray-900 dark:text-white">Rupiah Stabilization</p>
+                <p className="text-sm text-gray-600 dark:text-gray-400">Lower inflation</p>
+              </div>
+              
+              <div className="flex flex-col items-center text-center p-3 bg-green-50 dark:bg-green-900/20 rounded-lg">
+                <Calculator className="h-8 w-8 text-green-600 dark:text-green-400 mb-2" />
+                <p className="font-semibold text-gray-900 dark:text-white">Improved NBB</p>
+                <p className="text-sm text-gray-600 dark:text-gray-400">Better liquidity</p>
+              </div>
+            </CardContent>
+            
+            <div className="p-4 bg-gray-50 dark:bg-gray-850 border-t border-gray-200 dark:border-gray-700">
+              <p className="text-gray-700 dark:text-gray-300">
+                <span className="font-bold">Critical Success Factor:</span> Indonesia's economic tightrope hinges on execution. Success requires capturing the "missing money" through effective enforcement of PP No 8 2025. Stakeholders should track enforcement metrics and NBB trends closely as 2025 unfolds.
+              </p>
+            </div>
+          </Card>
         </section>
 
         <div className="py-6 border-t border-gray-200 dark:border-gray-800">
