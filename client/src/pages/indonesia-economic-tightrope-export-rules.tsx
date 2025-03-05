@@ -58,7 +58,7 @@ export default function IndonesiaEconomicTightrope() {
             </div>
 
             <h1 className="font-serif text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-3 leading-tight">
-              {article.title}
+              Indonesia's Economic Tightrope – Can New Export Rules Steady the Rupiah?
             </h1>
 
             <div className="flex items-center space-x-4 text-sm text-gray-600 dark:text-gray-400 mb-3">
@@ -74,7 +74,6 @@ export default function IndonesiaEconomicTightrope() {
 
             <div className="text-sm">
               <p className="font-semibold dark:text-gray-300">By {article.author}</p>
-              <p className="text-gray-600 dark:text-gray-400 mt-1">Source: "Follow The Money #1-2025" by BCA Economic and Industry Research</p>
             </div>
           </div>
         </header>
@@ -198,24 +197,127 @@ export default function IndonesiaEconomicTightrope() {
 
           <h3 className="text-lg font-bold text-gray-900 dark:text-white mt-6 mb-3">Policy Comparison: Jokowinomics vs. Prabowonomics</h3>
           
-          <div className="mb-4">
-            <h4 className="font-bold text-gray-900 dark:text-white">Jokowinomics (2014-2024):</h4>
-            <ul className="list-disc pl-5 space-y-2 text-gray-700 dark:text-gray-300">
-              <li><span className="font-semibold">Fiscal Expansion:</span> Jokowi raised government capital expenditure (CAPEX) by 46% in 2015, funded partly by slashing fuel subsidies. This fueled infrastructure projects like toll roads and airports.</li>
-              <li><span className="font-semibold">Debt Strategy:</span> To bridge revenue gaps (tax-to-GDP ratio stagnated below 11%), Jokowi injected IDR 283 trillion into state-owned enterprises (SOEs) from 2015-2019, boosting their equity and enabling borrowing of IDR 250 trillion domestically and USD 15.4 billion externally. A tax amnesty in 2016-17 netted IDR 130 trillion in penalties and IDR 90 trillion in repatriated deposits, easing fiscal pressure temporarily.</li>
-              <li><span className="font-semibold">SRBI Inflows:</span> In 2024, Bank Indonesia's SRBI securities attracted IDR 162 trillion (0.73% of GDP) in foreign inflows, cushioning Rupiah depreciation.</li>
-              <li><span className="font-semibold">Debt Burden:</span> The report doesn't quantify total debt, but Jokowi's reliance on SOE borrowing and fiscal stimulus suggests a significant increase in public and quasi-public debt. External borrowing by SOEs (USD 15.4 billion, or ~IDR 240 trillion at 2024 rates) and domestic loans added to the fiscal load, though kept within the statutory 3% GDP deficit ceiling.</li>
-            </ul>
-          </div>
-          
-          <div className="mb-4">
-            <h4 className="font-bold text-gray-900 dark:text-white">Prabowonomics (2024-):</h4>
-            <ul className="list-disc pl-5 space-y-2 text-gray-700 dark:text-gray-300">
-              <li><span className="font-semibold">Spending Cuts:</span> Prabowo pivots from fiscal expansion, cutting "unnecessary spending" to reallocate funds toward welfare, such as the free school meals program (MBG). The report notes this isn't about reducing overall spending but redirecting it.</li>
-              <li><span className="font-semibold">DHE-SDA Repatriation:</span> PP No 8 2025 targets USD 50 billion in export proceeds from natural resources, aiming to retain domestic wealth without new borrowing.</li>
-              <li><span className="font-semibold">SOE Super-Holding:</span> The creation of BPI Danantara as an SOE super-holding seeks to reallocate USD 20 billion/year from the state budget as equity, attracting foreign co-investment and loans to grow assets by USD 120-160 billion/year.</li>
-              <li><span className="font-semibold">Debt Approach:</span> Unlike Jokowi, Prabowo avoids direct fiscal deficits, leveraging existing resources (export proceeds, gold monetization) and private investment. However, SOE borrowing under BPI Danantara could indirectly increase debt if foreign loans materialize.</li>
-            </ul>
+          <div className="overflow-x-auto mb-6">
+            <table className="w-full border-collapse">
+              <thead>
+                <tr className="bg-gray-50 dark:bg-gray-800">
+                  <th className="p-3 text-left font-semibold text-gray-900 dark:text-white border border-gray-200 dark:border-gray-700">Policy Area</th>
+                  <th className="p-3 text-left font-semibold text-gray-900 dark:text-white border border-gray-200 dark:border-gray-700">Jokowinomics (2014-2024)</th>
+                  <th className="p-3 text-left font-semibold text-gray-900 dark:text-white border border-gray-200 dark:border-gray-700">Prabowonomics (2024-)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr className="hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
+                  <td className="p-3 border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 font-semibold">Spending Focus</td>
+                  <td className="p-3 border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300">
+                    <div className="flex items-start">
+                      <div className="bg-blue-100 dark:bg-blue-900 p-1 rounded-full mr-2 mt-1">
+                        <BarChart className="h-4 w-4 text-blue-600 dark:text-blue-400" />
+                      </div>
+                      <div>
+                        Capital expenditure (+46% in 2015)<br/>
+                        Infrastructure focus (toll roads, airports)
+                      </div>
+                    </div>
+                  </td>
+                  <td className="p-3 border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300">
+                    <div className="flex items-start">
+                      <div className="bg-green-100 dark:bg-green-900 p-1 rounded-full mr-2 mt-1">
+                        <LineChart className="h-4 w-4 text-green-600 dark:text-green-400" />
+                      </div>
+                      <div>
+                        Welfare programs<br/>
+                        Free school meals (MBG)<br/>
+                        Reallocation vs. expansion
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+                
+                <tr className="hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
+                  <td className="p-3 border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 font-semibold">Liquidity Strategy</td>
+                  <td className="p-3 border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300">
+                    <div className="flex items-start">
+                      <div className="bg-blue-100 dark:bg-blue-900 p-1 rounded-full mr-2 mt-1">
+                        <DollarSign className="h-4 w-4 text-blue-600 dark:text-blue-400" />
+                      </div>
+                      <div>
+                        SRBI securities (IDR 162T in 2024)<br/>
+                        Tax amnesty (IDR 130T penalties)<br/>
+                        Foreign capital attraction
+                      </div>
+                    </div>
+                  </td>
+                  <td className="p-3 border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300">
+                    <div className="flex items-start">
+                      <div className="bg-green-100 dark:bg-green-900 p-1 rounded-full mr-2 mt-1">
+                        <DollarSign className="h-4 w-4 text-green-600 dark:text-green-400" />
+                      </div>
+                      <div>
+                        DHE-SDA repatriation (USD 50B potential)<br/>
+                        Capturing "missing money"<br/>
+                        Domestic wealth retention
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+                
+                <tr className="hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
+                  <td className="p-3 border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 font-semibold">SOE Approach</td>
+                  <td className="p-3 border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300">
+                    <div className="flex items-start">
+                      <div className="bg-blue-100 dark:bg-blue-900 p-1 rounded-full mr-2 mt-1">
+                        <Calculator className="h-4 w-4 text-blue-600 dark:text-blue-400" />
+                      </div>
+                      <div>
+                        Direct equity injections (IDR 283T)<br/>
+                        Enabled borrowing (IDR 250T domestic, USD 15.4B external)
+                      </div>
+                    </div>
+                  </td>
+                  <td className="p-3 border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300">
+                    <div className="flex items-start">
+                      <div className="bg-green-100 dark:bg-green-900 p-1 rounded-full mr-2 mt-1">
+                        <Calculator className="h-4 w-4 text-green-600 dark:text-green-400" />
+                      </div>
+                      <div>
+                        BPI Danantara super-holding<br/>
+                        USD 20B/year equity allocation<br/>
+                        Foreign co-investment model
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+                
+                <tr className="hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
+                  <td className="p-3 border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 font-semibold">Debt Philosophy</td>
+                  <td className="p-3 border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300">
+                    <div className="flex items-start">
+                      <div className="bg-blue-100 dark:bg-blue-900 p-1 rounded-full mr-2 mt-1">
+                        <TrendingDown className="h-4 w-4 text-blue-600 dark:text-blue-400" />
+                      </div>
+                      <div>
+                        Increase in public and quasi-public debt<br/>
+                        SOE-driven borrowing<br/>
+                        3% GDP deficit ceiling maintained
+                      </div>
+                    </div>
+                  </td>
+                  <td className="p-3 border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300">
+                    <div className="flex items-start">
+                      <div className="bg-green-100 dark:bg-green-900 p-1 rounded-full mr-2 mt-1">
+                        <TrendingDown className="h-4 w-4 text-green-600 dark:text-green-400" />
+                      </div>
+                      <div>
+                        Avoids direct fiscal deficits<br/>
+                        Leverages existing resources<br/>
+                        Potential indirect debt via SOE holdings
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </section>
 
