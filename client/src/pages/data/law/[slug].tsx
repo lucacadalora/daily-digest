@@ -42,7 +42,7 @@ const lawDocuments: LawDocument[] = [
     date: "5 Maret 2025",
     effectiveDate: "15 Maret 2025",
     slug: "permen-esdm-no-5-tahun-2025",
-    pdfUrl: "/documents/law/Permen_ESDM_No_5_Tahun_2025.pdf"
+    pdfUrl: "/documents/law/permen-esdm-no-5-tahun-2025.pdf"
   }
 ];
 
