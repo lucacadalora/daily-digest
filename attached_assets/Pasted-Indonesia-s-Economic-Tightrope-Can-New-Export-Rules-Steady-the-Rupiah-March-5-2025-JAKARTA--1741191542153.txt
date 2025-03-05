@@ -1,0 +1,97 @@
+Indonesia’s Economic Tightrope – Can New Export Rules Steady the Rupiah?
+March 5, 2025 | JAKARTA | By Luca Cada Lora
+Source: "Follow The Money #1-2025" by BCA Economic and Industry Research
+Indonesia’s economy faces a pivotal moment. A liquidity deficit in the banking system—reflected in a Net Bank Balance (NBB) of -1.70% of GDP—drove a 4.4% Rupiah depreciation in 2024, raising costs for importers and threatening inflation. Enter PP No 8 2025, a bold regulation effective March 1, 2025, mandating 100% repatriation of commodity export proceeds for 12 months. With potential inflows of USD 50 billion, this could reshape liquidity and stabilize the Rupiah—if it captures “missing money” lost to mis-invoicing and transfer pricing.
+This newsletter, tailored for high-value industries, policymakers, and retail investors, explores Indonesia’s liquidity crunch, evolving policies, and the delicate balance between growth and currency stability.
+________________________________________
+Key Insights at a Glance
+•	Liquidity Strain: NBB hit -1.70% of GDP by end-2024, signaling a borrowing-deposit gap.
+•	Rupiah Pressure: Depreciated 4.4% in 2024, reaching 16,102 USD/IDR, with risks ahead.
+•	DHE-SDA Potential: New rules could unlock USD 50 billion, but enforcement is key.
+•	Bond Market Boost: A 25 bps BI rate cut and lower yields offer relief, though equity outflows persist.
+•	Policy Shift: Tax efforts swelled reserves to IDR 500 trillion, shifting liquidity to the public sector.
+________________________________________
+The Numbers That Matter
+Metric	Value	Implication
+Net Bank Balance (NBB)	-1.70% of GDP	Liquidity deficit pressures Rupiah
+Rupiah Depreciation	-4.4% (2024)	Raises import costs, inflation risks
+DHE-SDA Inflow Potential	USD 50 billion	Could offset NBB if “missing money” is captured
+"Missing Money" Estimate	USD 10-20 billion	Annual loss from Big-3 commodities
+SRBI Inflows (2024)	IDR 162 trillion	Supported Rupiah but capacity is limited
+________________________________________
+1. The Liquidity Crunch: A Banking System Under Strain
+Indonesia’s banking system ended 2024 with a liquidity deficit, as borrowing outpaced deposits. The NBB, a measure of net liquidity, stood at -1.70% of GDP, typically implying a 6-8% Rupiah depreciation. That it fell only 4.4% reflects IDR 162 trillion in foreign inflows from Bank Indonesia’s SRBI securities. Yet, with BI’s issuance capacity limited and equity outflows rising, this relief may be short-lived.
+
+•	Banks in Indonesia are lending out more money (loans and bonds) than people are putting in as deposits. By the end of 2024, this gap (called Net Bank Balance or NBB) was -1.70% of GDP (a measure of the country’s total economic activity).
+
+Bond markets improved in early 2025, driven by a 25 bps rate cut in January and a “Trump trade” reversal (easing expectations of higher US rates). Lower yields reduced the crowding-out effect, where government bonds (SBN) absorb funds needed for private investment. Still, the Rupiah remains vulnerable unless liquidity improves.
+________________________________________
+2. Policy Evolution: From Jokowi to Prabowo
+In December 2024, a tax collection “extra effort” shifted liquidity from private hands to the government, boosting Ministry of Finance reserves to IDR 500 trillion. However, individual deposits shrank by 2.1% YoY, and consumer loan growth slowed, deepening the private sector’s liquidity squeeze.
+President Prabowo’s Prabowonomics diverges from Jokowi’s infrastructure-heavy Jokowinomics. While Jokowi used fiscal expansion and SRBI to draw foreign capital, Prabowo cuts spending to fund welfare (e.g., free school meals, MBG) and targets export proceeds via PP No 8 2025. This shift aims to retain domestic wealth without widening deficits.
+Policy Comparison: Jokowinomics vs. Prabowonomics
+•	Jokowinomics (2014-2024): 
+o	Fiscal Expansion: Jokowi raised government capital expenditure (CAPEX) by 46% in 2015, funded partly by slashing fuel subsidies (page 15). This fueled infrastructure projects like toll roads and airports.
+o	Debt Strategy: To bridge revenue gaps (tax-to-GDP ratio stagnated below 11%), Jokowi injected IDR 283 trillion into state-owned enterprises (SOEs) from 2015-2019, boosting their equity and enabling borrowing of IDR 250 trillion domestically and USD 15.4 billion externally (page 15). A tax amnesty in 2016-17 netted IDR 130 trillion in penalties and IDR 90 trillion in repatriated deposits, easing fiscal pressure temporarily.
+o	SRBI Inflows: In 2024, Bank Indonesia’s SRBI securities attracted IDR 162 trillion (0.73% of GDP) in foreign inflows, cushioning Rupiah depreciation (page 2).
+o	Debt Burden: The report doesn’t quantify total debt, but Jokowi’s reliance on SOE borrowing and fiscal stimulus suggests a significant increase in public and quasi-public debt. External borrowing by SOEs (USD 15.4 billion, or ~IDR 240 trillion at 2024 rates) and domestic loans added to the fiscal load, though kept within the statutory 3% GDP deficit ceiling (noted in external sources like East Asia Forum).
+•	Prabowonomics (2024-): 
+o	Spending Cuts: Prabowo pivots from fiscal expansion, cutting "unnecessary spending" to reallocate funds toward welfare, such as the free school meals program (MBG) (page 2). The report notes this isn’t about reducing overall spending but redirecting it (page 2).
+o	DHE-SDA Repatriation: PP No 8 2025 targets USD 50 billion in export proceeds from natural resources, aiming to retain domestic wealth without new borrowing (pages 13-15).
+o	SOE Super-Holding: The creation of BPI Danantara as an SOE super-holding seeks to reallocate USD 20 billion/year from the state budget as equity, attracting foreign co-investment and loans to grow assets by USD 120-160 billion/year (page 15).
+o	Debt Approach: Unlike Jokowi, Prabowo avoids direct fiscal deficits, leveraging existing resources (export proceeds, gold monetization) and private investment. However, SOE borrowing under BPI Danantara could indirectly increase debt if foreign loans materialize.
+________________________________________
+3. DHE-SDA: A Potential Game-Changer?
+Signed into law on February 17, 2025, PP No 8 2025 replaces the less stringent PP No 36 2023 and zeroes in on natural resource exports (excluding oil and gas). It’s a cornerstone of Prabowo’s strategy to shore up liquidity and assert economic sovereignty. Here’s how it works:
+Core Provisions
+•	100% Repatriation: Exporters in mining (e.g., coal, nickel, copper), plantations (e.g., palm oil), forestry, and fisheries must return all export proceeds to Indonesia.
+•	12-Month Lock-In: Funds must remain in special accounts at national banks for a full year.
+•	Permitted Uses: Proceeds can fund operational costs, tax payments, or foreign currency dividends, offering some flexibility.
+•	Enforcement Teeth: Non-compliance triggers suspension of export services, a severe penalty for commodity giants.
+•	Exclusions: Oil and gas exports stay under PP No 36 2023, reflecting their unique fiscal role.
+Why It Matters
+Indonesia’s commodity exports are a lifeline, yet billions leak offshore annually. The report estimates USD 10-20 billion vanishes through practices like under-invoicing (declaring lower export values) and transfer pricing (shifting profits to low-tax jurisdictions). PP No 8 2025 aims to plug this gap, channeling funds back into the domestic economy. If successful, it could improve NBB by up to 2% of GDP and strengthen the Rupiah significantly.
+
+Signed February 17, 2025, PP No 8 2025 mandates that commodity exporters (coal, palm oil, nickel) repatriate 100% of proceeds for 12 months, up from 30% for 3 months. Non-compliance risks export bans, a strong incentive for compliance. The goal? Up to USD 50 billion in inflows.
+Yet, the report distinguishes “known money” (reported proceeds) from “missing money” (USD 10-20 billion annually from mis-invoicing and transfer pricing in the “Big-3” commodities). While “known money” boosts deposits, it’s offset by lending, leaving NBB unchanged. Capturing “missing money” could improve NBB by 2% of GDP and strengthen
+
+________________________________________
+4. Growth vs. Rupiah: The Core Tradeoff
+Indonesia faces a dilemma: boosting growth often weakens the Rupiah, while stabilizing the currency can stifle activity. 
+Market Catalysts: What’s at Stake?
+PP No 8 2025 isn’t just policy—it’s a market mover. Here’s how it could ripple through the economy:
+Catalyst	Potential Impact	Key Linkage
+Liquidity Injection	USD 50B boosts bank reserves	Strengthens Rupiah, lowers borrowing costs
+"Missing Money" Recovery	USD 10-20B reclaimed	Reduces NBB deficit, lifts investor confidence
+Compliance Costs	Higher burdens for exporters	May squeeze margins in mining, agriculture
+Policy Enforcement	Suspension of export violators	Deters evasion but risks trade disruptions
+•	Upside: Capturing "missing money" could stabilize the Rupiah, reduce inflation (projected at 2.5-3.5% in 2025), and ease fiscal pressures on Prabowo’s 8% GDP growth target.
+•	Downside: If funds are lent out rapidly or exporters evade rules, liquidity gains could evaporate, leaving the Rupiah vulnerable to further slides.
+
+________________________________________
+
+5. 2025 Outlook: Modest Growth, Persistent Risks
+BCA Research projects:
+•	GDP Growth: 4.9% (from 5.0% in 2024)
+•	CPI Inflation: 2.5%
+•	BI Rate: 5.50%
+•	USD/IDR: 16,887 (year-end)
+•	Current Account: -0.9% of GDP
+Sectoral Impacts:
+•	Banking: Liquidity strain may lift lending rates; manufacturing NPLs hit 4.1%.
+•	Commodities: Exporters face compliance costs but gain from a stronger Rupiah.
+•	Consumers: Importers benefit from stability; local firms face demand risks.
+________________________________________
+6. Investor Outlook: Navigating Uncertainty in 2025
+As a retail investor in Indonesia, the 2025 economic landscape offers a mix of opportunities and challenges, shaped by modest growth, persistent risks, and policy uncertainties. Drawing from BCA Research’s projections and additional insights, here’s a comprehensive guide to positioning your portfolio across the Jakarta Composite Index (IHSG), bonds, yields, and other factors.
+Strategic Insights: What to Watch
+•	For Industries: Exporters must adapt to DHE-SDA compliance; importers should hedge against Rupiah volatility.
+•	For Policymakers: Enforce PP No 8 2025 to target “missing money” and monitor NBB trends.
+•	For Investors: Bonds offer opportunities post-rate cut; watch commodity prices and equity flows.
+
+The Bottom Line
+Indonesia’s economic tightrope hinges on execution. PP No 8 2025 could inject USD 50 billion, but capturing “missing money” is critical to easing liquidity and steadying the Rupiah. Success could lower inflation and boost confidence; failure risks prolonged volatility. Stakeholders should track enforcement and liquidity metrics closely as 2025 unfolds.
+
+Source
+Mamia, B. K. (2025). Bringing it all back home (Follow the Money No. 1-2025). Jakarta, Indonesia: BCA Economic and Industry Research.
+https://www.bca.co.id/-/media/Feature/Report/File/S8/Laporan-Riset-Ekonomi/2025/03/follow-the-money-1-bringing-it-all-back-home-04-march-2025.pdf

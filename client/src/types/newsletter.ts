@@ -33,33 +33,33 @@ export type Article = z.infer<typeof articleSchema>;
 
 export const sampleArticles: Article[] = [
   {
-    slug: "saving-usd-50-billion-pp-no-8-2025",
-    title: "Saving USD 50 Billion: How PP No 8 2025 Could Transform Indonesia's Liquidity",
-    description: "Analysis of how Indonesia's PP No 8 2025 regulation aims to consolidate state cash management, potentially freeing up to USD 50 billion in liquidity through systematic reforms of government institution cash management.",
+    slug: "indonesia-economic-tightrope-export-rules",
+    title: "Indonesia's Economic Tightrope – Can New Export Rules Steady the Rupiah?",
+    description: "Indonesia's economy faces a pivotal moment with a liquidity deficit in the banking system and Rupiah depreciation. PP No 8 2025 mandating export proceed repatriation could unlock USD 50 billion and reshape liquidity dynamics if successfully implemented.",
     category: "Economics",
     source: "Daily Digest",
     author: "Luca Cada Lora",
     date: "March 5, 2025",
-    previewEmoji: "💰",
+    previewEmoji: "🌊",
     previewMetrics: [
       {
-        label: "Liquidity Potential",
+        label: "Net Bank Balance",
+        value: "-1.70%",
+        subtitle: "of GDP"
+      },
+      {
+        label: "Rupiah Depreciation",
+        value: "-4.4%",
+        subtitle: "2024 performance"
+      },
+      {
+        label: "DHE-SDA Potential",
         value: "$50B",
-        subtitle: "Cash flow optimization"
-      },
-      {
-        label: "Idle Cash",
-        value: "18%",
-        subtitle: "Of government funds"
-      },
-      {
-        label: "Implementation",
-        value: "2025-2026",
-        subtitle: "Timeline"
+        subtitle: "Export proceeds"
       }
     ],
-    tags: ["Government Policy", "Liquidity", "Economic Reform", "Indonesia"],
-    content: "Saving USD 50 Billion: How PP No 8 2025 Could Transform Indonesia's Liquidity"
+    tags: ["Rupiah", "Liquidity", "Export Policy", "Indonesia"],
+    content: "Indonesia's Economic Tightrope – Can New Export Rules Steady the Rupiah? March 5, 2025 | JAKARTA | By Luca Cada Lora. Source: \"Follow The Money #1-2025\" by BCA Economic and Industry Research. Indonesia's economy faces a pivotal moment. A liquidity deficit in the banking system—reflected in a Net Bank Balance (NBB) of -1.70% of GDP—drove a 4.4% Rupiah depreciation in 2024, raising costs for importers and threatening inflation. Enter PP No 8 2025, a bold regulation effective March 1, 2025, mandating 100% repatriation of commodity export proceeds for 12 months. With potential inflows of USD 50 billion, this could reshape liquidity and stabilize the Rupiah."
   },
   {
     slug: "japan-economic-security-indonesia-minerals",

@@ -33,20 +33,20 @@ export type ArticleConfig = z.infer<typeof articleSchema>;
  */
 export const articles: ArticleConfig[] = [
   {
-    id: "saving-usd-50-billion-pp-no-8-2025",
-    title: "Saving USD 50 Billion: How PP No 8 2025 Could Transform Indonesia's Liquidity",
-    description: "Analysis of how Indonesia's PP No 8 2025 regulation aims to consolidate state cash management, potentially freeing up to USD 50 billion in liquidity through systematic reforms of government institution cash management.",
-    image: "/images/articles/cash-management.jpg",
-    imageAlt: "Financial documents and charts representing government cash management",
+    id: "indonesia-economic-tightrope-export-rules",
+    title: "Indonesia's Economic Tightrope – Can New Export Rules Steady the Rupiah?",
+    description: "Indonesia's economy faces a pivotal moment with a liquidity deficit in the banking system and Rupiah depreciation. PP No 8 2025 mandating export proceed repatriation could unlock USD 50 billion and reshape liquidity dynamics if successfully implemented.",
+    image: "/images/articles/rupiah-export.jpg",
+    imageAlt: "Indonesian rupiah currency with export shipping containers in background",
     author: "Luca Cada Lora",
     publishedDate: "March 5, 2025",
     category: "Economics",
-    tags: ["Government Policy", "Liquidity", "Economic Reform", "Indonesia"],
-    slug: "newsletter/saving-usd-50-billion-pp-no-8-2025",
+    tags: ["Rupiah", "Liquidity", "Export Policy", "Indonesia"],
+    slug: "newsletter/indonesia-economic-tightrope-export-rules",
     featured: true,
     imageWidth: 1200,
     imageHeight: 630,
-    summary: "How Indonesia's new regulation could unlock USD 50 billion through improved cash management."
+    summary: "How new export repatriation rules could unlock USD 50 billion to steady Indonesia's currency amid liquidity challenges."
   },
   {
     id: "global-coal-price-slump",
