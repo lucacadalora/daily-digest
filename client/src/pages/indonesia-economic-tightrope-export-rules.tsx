@@ -16,14 +16,19 @@ export default function IndonesiaEconomicTightrope() {
     title: `Saving USD 50 Billion: How PP No 8 2025 Could Transform Indonesia's Liquidity | Daily Digest`,
     description: article.description,
     url: `https://lucaxyzz-digest.replit.app/newsletter/indonesia-economic-tightrope-export-rules`,
-    // Don't include image to avoid using the wrong one in social sharing
+    // Explicitly include the correct image for this article
+    image: `${window.location.origin}/images/articles/rupiah-export.jpg`,
     author: article.author,
     publishedTime: article.date,
     section: article.category,
     tags: article.tags || [article.category],
     siteName: 'Daily Digest',
     twitterSite: '@dailydigest',
-    twitterCreator: '@dailydigest'
+    twitterCreator: '@dailydigest',
+    // Add image dimensions for better social previews
+    imageWidth: "1200",
+    imageHeight: "630",
+    imageAlt: "Indonesian rupiah currency with export shipping containers in background"
   } : null;
 
   if (!article) {

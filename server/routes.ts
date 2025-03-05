@@ -607,7 +607,159 @@ export function registerRoutes(app: Express): Server {
     }
   });
 
-  // Simple pass-through for all newsletter routes - no special handling
+  // Special handling for Indonesia Economic Tightrope article
+  app.get('/newsletter/indonesia-economic-tightrope-export-rules', (req, res, next) => {
+    console.log(`[OG Debug] Processing Indonesia Economic Tightrope newsletter request with proper image meta tags`);
+    console.log(`[OG Debug] User-Agent: ${req.headers['user-agent']}`);
+    
+    // Check if the request is from a social media crawler
+    const userAgent = req.headers['user-agent'] || '';
+    const isCrawler = /facebookexternalhit|Twitterbot|LinkedInBot|WhatsApp|Googlebot|bingbot|DuckDuckBot|Slackbot|TelegramBot/i.test(userAgent);
+    
+    if (!isCrawler) {
+      // If not a crawler, just pass through to the client app
+      return next();
+    }
+    
+    // Find the article in the sample articles
+    const article = sampleArticles.find(a => a.slug === 'indonesia-economic-tightrope-export-rules');
+
+    if (!article) {
+      console.log(`[OG Debug] Indonesia Economic Tightrope article not found`);
+      next(); // Let client-side handle 404
+      return;
+    }
+    
+    console.log(`[OG Debug] Found Indonesia Economic Tightrope article: ${article.title}`);
+    
+    try {
+      // Helper function to escape HTML content
+      const escapeHtml = (unsafe: string) => {
+        return unsafe
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/"/g, "&quot;")
+          .replace(/'/g, "&#039;");
+      };
+
+      // Create rich preview content
+      const previewTitle = escapeHtml(`${article.title} | Daily Digest`);
+      const previewDescription = escapeHtml(article.description);
+      
+      // Get the base URL for the images
+      const protocol = req.headers['x-forwarded-proto'] || req.protocol;
+      const baseUrl = `${protocol}://${req.get('host')}`;
+      const imageUrl = `${baseUrl}/images/articles/rupiah-export.jpg`;
+
+      // Create HTML with proper meta tags including the correct image
+      const htmlContent = `<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    
+    <title>${previewTitle}</title>
+    <meta name="description" content="${previewDescription}">
+    
+    <!-- Open Graph tags (used by Facebook, LinkedIn) -->
+    <meta property="og:title" content="${previewTitle}">
+    <meta property="og:description" content="${previewDescription}">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="${baseUrl}/newsletter/indonesia-economic-tightrope-export-rules">
+    <meta property="og:image" content="${imageUrl}">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:site_name" content="Daily Digest">
+    <meta property="og:locale" content="en_US">
+
+    <!-- Twitter Card tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@dailydigest">
+    <meta name="twitter:creator" content="@dailydigest">
+    <meta name="twitter:title" content="${previewTitle}">
+    <meta name="twitter:description" content="${previewDescription}">
+    <meta name="twitter:image" content="${imageUrl}">
+    <meta name="twitter:domain" content="${req.get('host')}">
+
+    <!-- Article Metadata -->
+    <meta property="article:published_time" content="${escapeHtml(article.date)}">
+    <meta property="article:author" content="${escapeHtml(article.author)}">
+    <meta property="article:section" content="${escapeHtml(article.category)}">
+    <meta property="article:tag" content="${escapeHtml(article.tags?.join(',') || article.category)}">
+    
+    <style>
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+        }
+        header {
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+        }
+        h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+        .meta {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+        .content {
+            font-size: 16px;
+            line-height: 1.8;
+        }
+        img.featured {
+            max-width: 100%;
+            height: auto;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>${previewTitle}</h1>
+        <div class="meta">
+            By ${escapeHtml(article.author)} | ${escapeHtml(article.date)} | ${escapeHtml(article.category)}
+        </div>
+    </header>
+    
+    <div class="content">
+        <img class="featured" src="${imageUrl}" alt="Indonesian rupiah currency with export shipping containers in background" />
+        <p>${previewDescription}</p>
+        <p>To continue reading this analysis, please visit our site.</p>
+    </div>
+</body>
+</html>`;
+      
+      // Log that we're serving a completely custom HTML
+      console.log('[OG Debug] Serving custom HTML with proper image meta tags');
+      
+      // Set proper content type and headers
+      res.setHeader('Content-Type', 'text/html');
+      
+      // Set cache control headers with short expiration to prevent stale images
+      res.setHeader('Cache-Control', 'public, max-age=300'); // 5 minutes
+      
+      // Send our custom HTML
+      res.send(htmlContent);
+    } catch (error) {
+      console.error('Error rendering Indonesia Economic Tightrope meta tags:', error);
+      next(); // Fall back to client-side rendering
+    }
+  });
+
+  // Generic handler for other newsletter routes
   app.get('/newsletter/:slug', (req, res, next) => {
     // Always just pass through to the actual application
     next();
@@ -635,6 +787,32 @@ export function registerRoutes(app: Express): Server {
   //   }
   // });
   
+  // Serve the rupiah-export.jpg image with proper MIME type for social media sharing
+  app.get('/images/articles/rupiah-export.jpg', (req, res) => {
+    try {
+      console.log('[Image Route] Serving rupiah-export.jpg image');
+      const filePath = path.join(process.cwd(), 'public', 'images', 'articles', 'rupiah-export-jpg-actual');
+      
+      // Set content type for SVG (using content-type: image/svg+xml)
+      res.setHeader('Content-Type', 'image/svg+xml');
+      
+      // Set cache headers for better social media preview caching
+      res.setHeader('Cache-Control', 'public, max-age=3600'); // 1 hour cache
+      
+      // Read the file and send it
+      if (fs.existsSync(filePath)) {
+        const fileContent = fs.readFileSync(filePath, 'utf-8');
+        return res.send(fileContent);
+      } else {
+        console.error(`[Image Route] SVG file not found at path: ${filePath}`);
+        return res.status(404).send('Image not found');
+      }
+    } catch (error) {
+      console.error('Error serving rupiah export image:', error);
+      return res.status(500).send(`Error loading image: ${error instanceof Error ? error.message : 'Unknown error'}`);
+    }
+  });
+
   // Configure direct serving for static images used in Open Graph
   app.use('/public', express.static(join(process.cwd(), 'public'), { 
     index: false,
