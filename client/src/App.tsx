@@ -13,6 +13,7 @@ import TradeWarTsunamiFeb1014 from "@/pages/trade-war-tsunami-feb-10-14";
 import IHSGOutlookMarch37 from "@/pages/ihsg-outlook-march-3-7";
 import MineralCriticalityMatrix from "@/pages/mineral-criticality-matrix";
 import IndonesiaEconomicCrisis from "@/pages/indonesia-economic-crisis";
+import SavingUSD50Billion from "@/pages/saving-usd-50-billion-pp-no-8-2025";
 import About from "@/pages/about";
 import FedBalanceSheet from "@/pages/FedBalanceSheet";
 import FedQTExitCryptoRally from "@/pages/fed-qt-exit-crypto-rally";
@@ -77,6 +78,8 @@ function Router() {
       <Route path="/newsletter/indonesia-mineral-criticality-matrix" component={MineralCriticalityMatrix} />
       <Route path="/newsletter/indonesia-economic-inventory-crisis" component={IndonesiaEconomicCrisis} />
       <Route path="/indonesia-economic-crisis" component={IndonesiaEconomicCrisis} />
+      <Route path="/newsletter/saving-usd-50-billion-pp-no-8-2025" component={SavingUSD50Billion} />
+      <Route path="/saving-usd-50-billion-pp-no-8-2025" component={SavingUSD50Billion} />
       <Route path="/newsletter/fed-balance-sheet-blueprint" component={FedBalanceSheet} />
       <Route path="/fed-balance-sheet" component={FedBalanceSheet} />
       <Route path="/newsletter/fed-qt-exit-crypto-rally" component={FedQTExitCryptoRally} />
