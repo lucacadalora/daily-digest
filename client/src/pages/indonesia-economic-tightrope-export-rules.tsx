@@ -790,7 +790,6 @@ export default function IndonesiaEconomicTightrope() {
             <CardContent className="p-5 bg-gray-50 dark:bg-gray-800">
               <div className="flex items-start mb-4">
                 <div className="bg-blue-100 dark:bg-blue-900/30 p-2 rounded-full mr-3 mt-1">
-                  <DollarSign className="h-5 w-5 text-blue-600 dark:text-blue-400" />
                 </div>
                 <p className="text-gray-700 dark:text-gray-300">
                   Indonesia's economic tightrope hinges on execution. PP No 8 2025 could inject USD 50 billion, but capturing "missing money" is critical to easing liquidity and steadying the Rupiah. Success could lower inflation and boost confidence; failure risks prolonged volatility. Stakeholders should track enforcement and liquidity metrics closely as 2025 unfolds.
