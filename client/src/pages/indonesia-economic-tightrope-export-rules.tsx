@@ -58,7 +58,7 @@ export default function IndonesiaEconomicTightrope() {
             </div>
 
             <h1 className="font-serif text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-3 leading-tight">
-              Indonesia's Economic Tightrope – Can New Export Rules Steady the Rupiah?
+              Saving USD 50 Billion: How PP No 8 2025 Could Transform Indonesia's Liquidity
             </h1>
 
             <div className="flex items-center space-x-4 text-sm text-gray-600 dark:text-gray-400 mb-3">
@@ -323,29 +323,237 @@ export default function IndonesiaEconomicTightrope() {
 
         <section className="mb-8">
           <h2 className="text-xl font-serif font-bold text-gray-900 dark:text-white mb-4">3. DHE-SDA: A Potential Game-Changer?</h2>
-          <p className="text-gray-700 dark:text-gray-300 mb-4">
-            Signed into law on February 17, 2025, PP No 8 2025 replaces the less stringent PP No 36 2023 and zeroes in on natural resource exports (excluding oil and gas). It's a cornerstone of Prabowo's strategy to shore up liquidity and assert economic sovereignty. Here's how it works:
-          </p>
+          
+          <div className="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-5 mb-6 border-l-4 border-blue-500">
+            <div className="flex flex-wrap items-center gap-3 mb-4">
+              <div className="bg-blue-100 dark:bg-blue-800 p-2 rounded-full">
+                <DollarSign className="h-6 w-6 text-blue-600 dark:text-blue-400" />
+              </div>
+              <h3 className="text-lg font-bold text-gray-900 dark:text-white">Decree PP No 8 2025</h3>
+              <span className="bg-green-100 dark:bg-green-800 text-green-800 dark:text-green-300 text-xs px-2.5 py-0.5 rounded-full">
+                Effective March 1, 2025
+              </span>
+            </div>
+            <p className="text-gray-700 dark:text-gray-300 mb-4">
+              Signed into law on February 17, 2025, this regulation replaces the less stringent PP No 36 2023 and zeroes in on natural resource exports (excluding oil and gas). It's a cornerstone of Prabowo's strategy to shore up liquidity and assert economic sovereignty.
+            </p>
+          </div>
 
-          <h3 className="text-lg font-bold text-gray-900 dark:text-white mt-6 mb-3">Core Provisions</h3>
-          <ul className="list-disc pl-5 space-y-2 text-gray-700 dark:text-gray-300 mb-6">
-            <li><span className="font-semibold">100% Repatriation:</span> Exporters in mining (e.g., coal, nickel, copper), plantations (e.g., palm oil), forestry, and fisheries must return all export proceeds to Indonesia.</li>
-            <li><span className="font-semibold">12-Month Lock-In:</span> Funds must remain in special accounts at national banks for a full year.</li>
-            <li><span className="font-semibold">Permitted Uses:</span> Proceeds can fund operational costs, tax payments, or foreign currency dividends, offering some flexibility.</li>
-            <li><span className="font-semibold">Enforcement Teeth:</span> Non-compliance triggers suspension of export services, a severe penalty for commodity giants.</li>
-            <li><span className="font-semibold">Exclusions:</span> Oil and gas exports stay under PP No 36 2023, reflecting their unique fiscal role.</li>
-          </ul>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+            <Card className="overflow-hidden border border-gray-200 dark:border-gray-800">
+              <div className="bg-green-50 dark:bg-green-900/20 p-4 border-b border-gray-200 dark:border-gray-800">
+                <h3 className="font-bold text-gray-900 dark:text-white flex items-center">
+                  <span className="bg-green-100 dark:bg-green-800 p-1 rounded mr-2">
+                    <DollarSign className="h-4 w-4 text-green-600 dark:text-green-400" />
+                  </span>
+                  Before: PP No 36 2023
+                </h3>
+              </div>
+              <CardContent className="p-4">
+                <ul className="space-y-3">
+                  <li className="flex items-start">
+                    <span className="text-gray-400 mr-2">•</span>
+                    <span className="text-gray-700 dark:text-gray-300">
+                      <span className="font-semibold">30% repatriation</span> of export proceeds
+                    </span>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-gray-400 mr-2">•</span>
+                    <span className="text-gray-700 dark:text-gray-300">
+                      <span className="font-semibold">3-month holding period</span> in special accounts
+                    </span>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-gray-400 mr-2">•</span>
+                    <span className="text-gray-700 dark:text-gray-300">
+                      <span className="font-semibold">Limited enforcement</span> and compliance tracking
+                    </span>
+                  </li>
+                </ul>
+              </CardContent>
+            </Card>
 
-          <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-3">Why It Matters</h3>
-          <p className="text-gray-700 dark:text-gray-300 mb-4">
-            Indonesia's commodity exports are a lifeline, yet billions leak offshore annually. The report estimates USD 10-20 billion vanishes through practices like under-invoicing (declaring lower export values) and transfer pricing (shifting profits to low-tax jurisdictions). PP No 8 2025 aims to plug this gap, channeling funds back into the domestic economy. If successful, it could improve NBB by up to 2% of GDP and strengthen the Rupiah significantly.
-          </p>
-          <p className="text-gray-700 dark:text-gray-300 mb-4">
-            Signed February 17, 2025, PP No 8 2025 mandates that commodity exporters (coal, palm oil, nickel) repatriate 100% of proceeds for 12 months, up from 30% for 3 months. Non-compliance risks export bans, a strong incentive for compliance. The goal? Up to USD 50 billion in inflows.
-          </p>
-          <p className="text-gray-700 dark:text-gray-300 mb-4">
-            Yet, the report distinguishes "known money" (reported proceeds) from "missing money" (USD 10-20 billion annually from mis-invoicing and transfer pricing in the "Big-3" commodities). While "known money" boosts deposits, it's offset by lending, leaving NBB unchanged. Capturing "missing money" could improve NBB by 2% of GDP and strengthen the Rupiah.
-          </p>
+            <Card className="overflow-hidden border border-gray-200 dark:border-gray-800">
+              <div className="bg-blue-50 dark:bg-blue-900/20 p-4 border-b border-gray-200 dark:border-gray-800">
+                <h3 className="font-bold text-gray-900 dark:text-white flex items-center">
+                  <span className="bg-blue-100 dark:bg-blue-800 p-1 rounded mr-2">
+                    <DollarSign className="h-4 w-4 text-blue-600 dark:text-blue-400" />
+                  </span>
+                  After: PP No 8 2025
+                </h3>
+              </div>
+              <CardContent className="p-4">
+                <ul className="space-y-3">
+                  <li className="flex items-start">
+                    <span className="text-blue-500 mr-2">•</span>
+                    <span className="text-gray-700 dark:text-gray-300">
+                      <span className="font-semibold">100% repatriation</span> of all export proceeds
+                    </span>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-blue-500 mr-2">•</span>
+                    <span className="text-gray-700 dark:text-gray-300">
+                      <span className="font-semibold">12-month lock-in period</span> in national banks
+                    </span>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-blue-500 mr-2">•</span>
+                    <span className="text-gray-700 dark:text-gray-300">
+                      <span className="font-semibold">Strict enforcement</span> with export service suspension
+                    </span>
+                  </li>
+                </ul>
+              </CardContent>
+            </Card>
+          </div>
+
+          <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-5 mb-6">
+            <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-4">Key Commodities Affected</h3>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              <div className="bg-white dark:bg-gray-700 p-3 rounded shadow-sm flex flex-col items-center">
+                <div className="bg-amber-100 dark:bg-amber-900/30 p-2 rounded-full mb-2">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-amber-600 dark:text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707" />
+                  </svg>
+                </div>
+                <span className="font-medium text-gray-900 dark:text-white">Coal</span>
+                <span className="text-xs text-gray-500 dark:text-gray-400">Major export</span>
+              </div>
+              
+              <div className="bg-white dark:bg-gray-700 p-3 rounded shadow-sm flex flex-col items-center">
+                <div className="bg-green-100 dark:bg-green-900/30 p-2 rounded-full mb-2">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-green-600 dark:text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+                  </svg>
+                </div>
+                <span className="font-medium text-gray-900 dark:text-white">Palm Oil</span>
+                <span className="text-xs text-gray-500 dark:text-gray-400">Plantations</span>
+              </div>
+              
+              <div className="bg-white dark:bg-gray-700 p-3 rounded shadow-sm flex flex-col items-center">
+                <div className="bg-blue-100 dark:bg-blue-900/30 p-2 rounded-full mb-2">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-blue-600 dark:text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                  </svg>
+                </div>
+                <span className="font-medium text-gray-900 dark:text-white">Nickel</span>
+                <span className="text-xs text-gray-500 dark:text-gray-400">Mining</span>
+              </div>
+              
+              <div className="bg-white dark:bg-gray-700 p-3 rounded shadow-sm flex flex-col items-center">
+                <div className="bg-orange-100 dark:bg-orange-900/30 p-2 rounded-full mb-2">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-orange-600 dark:text-orange-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                </div>
+                <span className="font-medium text-gray-900 dark:text-white">Copper</span>
+                <span className="text-xs text-gray-500 dark:text-gray-400">Mining</span>
+              </div>
+            </div>
+          </div>
+
+          <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-3">Missing Money: The Critical Target</h3>
+          
+          <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-4 mb-6">
+            <div className="flex flex-col md:flex-row gap-6">
+              <div className="flex-1">
+                <h4 className="font-semibold text-gray-900 dark:text-white mb-2">The Problem</h4>
+                <p className="text-gray-700 dark:text-gray-300 mb-4">
+                  Indonesia's commodity exports are a lifeline, yet billions leak offshore annually through two main mechanisms:
+                </p>
+                <ul className="space-y-2">
+                  <li className="flex items-start">
+                    <div className="bg-red-100 dark:bg-red-900/30 p-1 rounded-full mr-2 mt-1">
+                      <TrendingDown className="h-4 w-4 text-red-600 dark:text-red-400" />
+                    </div>
+                    <div>
+                      <span className="font-semibold">Under-invoicing:</span>
+                      <span className="text-gray-700 dark:text-gray-300"> Declaring lower export values to reduce taxes and keep proceeds offshore</span>
+                    </div>
+                  </li>
+                  <li className="flex items-start">
+                    <div className="bg-red-100 dark:bg-red-900/30 p-1 rounded-full mr-2 mt-1">
+                      <TrendingDown className="h-4 w-4 text-red-600 dark:text-red-400" />
+                    </div>
+                    <div>
+                      <span className="font-semibold">Transfer pricing:</span>
+                      <span className="text-gray-700 dark:text-gray-300"> Shifting profits to related entities in low-tax jurisdictions</span>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+              
+              <div className="flex-1">
+                <h4 className="font-semibold text-gray-900 dark:text-white mb-2">The Potential</h4>
+                <div className="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-4 mb-4">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <p className="text-sm text-gray-600 dark:text-gray-400">Annual "Missing Money"</p>
+                      <p className="text-2xl font-bold text-gray-900 dark:text-white">$10-20 Billion</p>
+                    </div>
+                    <div className="bg-blue-100 dark:bg-blue-800 p-2 rounded-full">
+                      <DollarSign className="h-8 w-8 text-blue-600 dark:text-blue-400" />
+                    </div>
+                  </div>
+                </div>
+                <p className="text-gray-700 dark:text-gray-300 mb-2">
+                  If PP No 8 2025 successfully captures this "missing money":
+                </p>
+                <ul className="space-y-2">
+                  <li className="flex items-start">
+                    <div className="bg-green-100 dark:bg-green-900/30 p-1 rounded-full mr-2 mt-1">
+                      <TrendingDown className="h-4 w-4 text-green-600 dark:text-green-400" />
+                    </div>
+                    <div>
+                      <span className="font-semibold">NBB improvement:</span>
+                      <span className="text-gray-700 dark:text-gray-300"> Up to 2% of GDP</span>
+                    </div>
+                  </li>
+                  <li className="flex items-start">
+                    <div className="bg-green-100 dark:bg-green-900/30 p-1 rounded-full mr-2 mt-1">
+                      <TrendingDown className="h-4 w-4 text-green-600 dark:text-green-400" />
+                    </div>
+                    <div>
+                      <span className="font-semibold">Rupiah:</span>
+                      <span className="text-gray-700 dark:text-gray-300"> Significant strengthening</span>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          
+          <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-4">
+            <h4 className="font-semibold text-gray-900 dark:text-white mb-2">The Critical Distinction</h4>
+            <p className="text-gray-700 dark:text-gray-300 mb-4">
+              The report makes a crucial distinction that determines the regulation's ultimate impact:
+            </p>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="bg-white dark:bg-gray-700 p-4 rounded-lg border border-gray-200 dark:border-gray-700">
+                <h5 className="font-medium text-gray-900 dark:text-white flex items-center mb-2">
+                  <span className="bg-blue-100 dark:bg-blue-900/30 p-1 rounded-full mr-2">
+                    <DollarSign className="h-4 w-4 text-blue-600 dark:text-blue-400" />
+                  </span>
+                  "Known Money"
+                </h5>
+                <p className="text-sm text-gray-700 dark:text-gray-300">
+                  Currently reported export proceeds that are already visible to authorities. While repatriation boosts bank deposits, these are typically matched by lending, leaving NBB unchanged.
+                </p>
+              </div>
+              
+              <div className="bg-white dark:bg-gray-700 p-4 rounded-lg border border-gray-200 dark:border-gray-700">
+                <h5 className="font-medium text-gray-900 dark:text-white flex items-center mb-2">
+                  <span className="bg-green-100 dark:bg-green-900/30 p-1 rounded-full mr-2">
+                    <DollarSign className="h-4 w-4 text-green-600 dark:text-green-400" />
+                  </span>
+                  "Missing Money"
+                </h5>
+                <p className="text-sm text-gray-700 dark:text-gray-300">
+                  Unreported proceeds from under-invoicing and transfer pricing. Capturing this hidden wealth is what would truly transform Indonesia's liquidity and strengthen the Rupiah.
+                </p>
+              </div>
+            </div>
+          </div>
         </section>
 
         <section className="mb-8">
