@@ -34,6 +34,15 @@ const lawDocuments: LawDocument[] = [
     effectiveDate: "28 Februari 2025",
     slug: "peraturan-pemerintah-nomor-10-tahun-2025",
     pdfUrl: "/documents/law/Salinan PP Nomor 10 Tahun 2025.pdf"
+  },
+  {
+    id: "3",
+    title: "Permen ESDM No. 5 Tahun 2025",
+    subtitle: "Analisis Permen ESDM No. 5 Tahun 2025: Komparasi dan Analisis Perubahan antara Permen ESDM No. 5/2025 (yang Mencabut Permen ESDM No. 10/2017) dan Perpres 112/2022",
+    date: "5 Maret 2025",
+    effectiveDate: "15 Maret 2025",
+    slug: "permen-esdm-no-5-tahun-2025",
+    pdfUrl: "/documents/law/Permen_ESDM_No_5_Tahun_2025.pdf"
   }
 ];
 
