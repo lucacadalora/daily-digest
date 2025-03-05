@@ -1,5 +1,5 @@
 import { Card, CardContent } from '@/components/ui/card';
-import { TrendingDown, DollarSign, Clock, MapPin, ChevronRight, Calculator, BarChart, LineChart } from 'lucide-react';
+import { TrendingDown, DollarSign, Clock, MapPin, ChevronRight, Calculator, BarChart, LineChart, TrendingUp } from 'lucide-react';
 import { Link, useLocation } from "wouter";
 import { sampleArticles } from "@/types/newsletter";
 import { Header } from "@/components/Header";
@@ -175,15 +175,147 @@ export default function IndonesiaEconomicTightrope() {
 
         <section className="mb-8">
           <h2 className="text-xl font-serif font-bold text-gray-900 dark:text-white mb-4">1. The Liquidity Crunch: A Banking System Under Strain</h2>
-          <p className="text-gray-700 dark:text-gray-300 mb-4">
-            Indonesia's banking system ended 2024 with a liquidity deficit, as borrowing outpaced deposits. The NBB, a measure of net liquidity, stood at -1.70% of GDP, typically implying a 6-8% Rupiah depreciation. That it fell only 4.4% reflects IDR 162 trillion in foreign inflows from Bank Indonesia's SRBI securities. Yet, with BI's issuance capacity limited and equity outflows rising, this relief may be short-lived.
-          </p>
-          <p className="text-gray-700 dark:text-gray-300 mb-4">
-            Banks in Indonesia are lending out more money (loans and bonds) than people are putting in as deposits. By the end of 2024, this gap (called Net Bank Balance or NBB) was -1.70% of GDP (a measure of the country's total economic activity).
-          </p>
-          <p className="text-gray-700 dark:text-gray-300 mb-4">
-            Bond markets improved in early 2025, driven by a 25 bps rate cut in January and a "Trump trade" reversal (easing expectations of higher US rates). Lower yields reduced the crowding-out effect, where government bonds (SBN) absorb funds needed for private investment. Still, the Rupiah remains vulnerable unless liquidity improves.
-          </p>
+          
+          <div className="bg-red-50 dark:bg-red-900/20 rounded-lg p-5 mb-6 border-l-4 border-red-500">
+            <div className="flex items-center gap-3 mb-3">
+              <div className="bg-red-100 dark:bg-red-800 p-2 rounded-full">
+                <TrendingDown className="h-5 w-5 text-red-600 dark:text-red-400" />
+              </div>
+              <h3 className="font-bold text-gray-900 dark:text-white">Net Bank Balance: -1.70% of GDP</h3>
+            </div>
+            <p className="text-gray-700 dark:text-gray-300">
+              Indonesia's banking system faces a critical liquidity deficit as lending has outpaced deposits throughout 2024. This imbalance threatens currency stability and economic growth.
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+            <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-5">
+              <h3 className="font-bold text-gray-900 dark:text-white mb-3 flex items-center">
+                <div className="bg-amber-100 dark:bg-amber-900/30 p-1 rounded-full mr-2">
+                  <Calculator className="h-4 w-4 text-amber-600 dark:text-amber-400" />
+                </div>
+                Understanding the Deficit
+              </h3>
+              <ul className="space-y-3">
+                <li className="flex items-start">
+                  <div className="text-gray-400 mr-2 mt-1">•</div>
+                  <p className="text-gray-700 dark:text-gray-300">
+                    <span className="font-medium">Net Bank Balance (NBB)</span> measures the difference between bank lending and deposits as a percentage of GDP
+                  </p>
+                </li>
+                <li className="flex items-start">
+                  <div className="text-gray-400 mr-2 mt-1">•</div>
+                  <p className="text-gray-700 dark:text-gray-300">
+                    <span className="font-medium">Historical correlation:</span> An NBB of -1.70% typically correlates with a 6-8% Rupiah depreciation
+                  </p>
+                </li>
+                <li className="flex items-start">
+                  <div className="text-gray-400 mr-2 mt-1">•</div>
+                  <p className="text-gray-700 dark:text-gray-300">
+                    <span className="font-medium">Current impact:</span> The Rupiah fell only 4.4% in 2024, better than expected due to policy interventions
+                  </p>
+                </li>
+              </ul>
+            </div>
+            
+            <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-5">
+              <h3 className="font-bold text-gray-900 dark:text-white mb-3 flex items-center">
+                <div className="bg-blue-100 dark:bg-blue-900/30 p-1 rounded-full mr-2">
+                  <Calculator className="h-4 w-4 text-blue-600 dark:text-blue-400" />
+                </div>
+                Bank Indonesia's Intervention
+              </h3>
+              <ul className="space-y-3">
+                <li className="flex items-start">
+                  <div className="text-gray-400 mr-2 mt-1">•</div>
+                  <p className="text-gray-700 dark:text-gray-300">
+                    <span className="font-medium">SRBI securities</span> attracted IDR 162 trillion in foreign inflows, temporarily supporting the Rupiah
+                  </p>
+                </li>
+                <li className="flex items-start">
+                  <div className="text-gray-400 mr-2 mt-1">•</div>
+                  <p className="text-gray-700 dark:text-gray-300">
+                    <span className="font-medium">Limited capacity:</span> BI's issuance ability is reaching its ceiling, making this solution unsustainable
+                  </p>
+                </li>
+                <li className="flex items-start">
+                  <div className="text-gray-400 mr-2 mt-1">•</div>
+                  <p className="text-gray-700 dark:text-gray-300">
+                    <span className="font-medium">Rising equity outflows</span> threaten to reverse these gains, increasing pressure on the Rupiah
+                  </p>
+                </li>
+              </ul>
+            </div>
+          </div>
+          
+          <div className="rounded-lg border border-gray-200 dark:border-gray-700 overflow-hidden mb-6">
+            <div className="bg-gray-50 dark:bg-gray-800 p-4 border-b border-gray-200 dark:border-gray-700">
+              <h3 className="font-bold text-gray-900 dark:text-white">Recent Bond Market Developments</h3>
+            </div>
+            <div className="p-5 bg-white dark:bg-gray-800">
+              <div className="flex flex-col md:flex-row gap-6">
+                <div className="flex-1">
+                  <h4 className="font-medium text-gray-900 dark:text-white mb-2">Positive Factors</h4>
+                  <ul className="space-y-2">
+                    <li className="flex items-start">
+                      <div className="bg-green-100 dark:bg-green-900/30 p-1 rounded-full mr-2 mt-1">
+                        <TrendingUp className="h-3 w-3 text-green-600 dark:text-green-400" />
+                      </div>
+                      <p className="text-gray-700 dark:text-gray-300 text-sm">
+                        25 bps rate cut by Bank Indonesia in January 2025
+                      </p>
+                    </li>
+                    <li className="flex items-start">
+                      <div className="bg-green-100 dark:bg-green-900/30 p-1 rounded-full mr-2 mt-1">
+                        <TrendingUp className="h-3 w-3 text-green-600 dark:text-green-400" />
+                      </div>
+                      <p className="text-gray-700 dark:text-gray-300 text-sm">
+                        "Trump trade" reversal easing expectations of higher US rates
+                      </p>
+                    </li>
+                    <li className="flex items-start">
+                      <div className="bg-green-100 dark:bg-green-900/30 p-1 rounded-full mr-2 mt-1">
+                        <TrendingUp className="h-3 w-3 text-green-600 dark:text-green-400" />
+                      </div>
+                      <p className="text-gray-700 dark:text-gray-300 text-sm">
+                        Lower yields on government securities
+                      </p>
+                    </li>
+                  </ul>
+                </div>
+                
+                <div className="flex-1">
+                  <h4 className="font-medium text-gray-900 dark:text-white mb-2">Ongoing Challenges</h4>
+                  <ul className="space-y-2">
+                    <li className="flex items-start">
+                      <div className="bg-red-100 dark:bg-red-900/30 p-1 rounded-full mr-2 mt-1">
+                        <TrendingDown className="h-3 w-3 text-red-600 dark:text-red-400" />
+                      </div>
+                      <p className="text-gray-700 dark:text-gray-300 text-sm">
+                        "Crowding-out effect" where government bonds absorb private investment funds
+                      </p>
+                    </li>
+                    <li className="flex items-start">
+                      <div className="bg-red-100 dark:bg-red-900/30 p-1 rounded-full mr-2 mt-1">
+                        <TrendingDown className="h-3 w-3 text-red-600 dark:text-red-400" />
+                      </div>
+                      <p className="text-gray-700 dark:text-gray-300 text-sm">
+                        Rupiah remains vulnerable without structural liquidity improvements
+                      </p>
+                    </li>
+                    <li className="flex items-start">
+                      <div className="bg-red-100 dark:bg-red-900/30 p-1 rounded-full mr-2 mt-1">
+                        <TrendingDown className="h-3 w-3 text-red-600 dark:text-red-400" />
+                      </div>
+                      <p className="text-gray-700 dark:text-gray-300 text-sm">
+                        Short-term improvements may mask longer-term structural issues
+                      </p>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
         </section>
 
         <section className="mb-8">
