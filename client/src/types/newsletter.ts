@@ -33,6 +33,35 @@ export type Article = z.infer<typeof articleSchema>;
 
 export const sampleArticles: Article[] = [
   {
+    slug: "indonesia-ree-potential",
+    title: "$2 Billion USD Rare Earth Elements Potential",
+    description: "Unlocking value from Indonesian tin smelter byproduct recovery in the Bangka Belitung Islands, with 116,142 tons of REE oxides estimated at $1.99 billion USD market value.",
+    category: "Industries",
+    source: "Daily Digest",
+    author: "Luca Cada Lora",
+    date: "March 13, 2025",
+    previewEmoji: "⛏️",
+    previewMetrics: [
+      {
+        label: "REE Reserves",
+        value: "116,142",
+        subtitle: "tons of REE oxides"
+      },
+      {
+        label: "Market Value",
+        value: "$1.99B",
+        subtitle: "USD estimated value"
+      },
+      {
+        label: "Source Minerals",
+        value: "2",
+        subtitle: "Monazite & Xenotime"
+      }
+    ],
+    tags: ["Rare Earth Elements", "Mining", "Commodities", "Indonesia"],
+    content: "$2 Billion USD Rare Earth Elements Potential: Unlocking value from Indonesian tin smelter byproduct recovery in the Bangka Belitung Islands. Tin smelters in Bangka Belitung Islands are the primary source for REE recovery, with PT Timah leading efforts. Estimated REE oxide reserves are around 116,142 tons, with light REEs from monazite and heavy REEs from xenotime. Major REE oxides include cerium, lanthanum, neodymium from monazite, and yttrium, dysprosium, erbium from xenotime."
+  },
+  {
     slug: "indonesia-economic-tightrope-export-rules",
     title: "Saving USD 50 Billion: How PP No 8 2025 Could Transform Indonesia's Liquidity",
     description: "Indonesia's economy faces a pivotal moment with a liquidity deficit in the banking system and Rupiah depreciation. PP No 8 2025 mandating export proceed repatriation could unlock USD 50 billion and reshape liquidity dynamics if successfully implemented.",
