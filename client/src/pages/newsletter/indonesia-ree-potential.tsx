@@ -512,44 +512,59 @@ export default function IndonesiaREEPotential() {
             <p className="font-semibold">Sources:</p>
             <ul className="list-disc pl-5">
               <li>
-                <a href="#" 
+                <a href="https://asiatimes.com/2020/09/race-is-on-for-indonesias-untapped-rare-earths/" 
                    target="_blank" 
                    rel="noopener noreferrer" 
                    className="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300">
-                  Indonesia Mineral Resources Report 2025 (Ministry of Energy and Mineral Resources)
+                  "Race is on for Indonesia's untapped rare earths" – Asia Times (2020-09-09)
                 </a>
+                <p className="text-sm text-gray-500 dark:text-gray-400 ml-5 mt-1">
+                  This article explores Indonesia's untapped REE potential, emphasizing PT Timah's role in extracting valuable REEs like neodymium and praseodymium from tin mining tailings. It highlights the strategic importance of these reserves for high-tech and military applications.
+                </p>
               </li>
-              <li>
-                <a href="#" 
+              <li className="mt-3">
+                <a href="https://www.thejakartapost.com/news/2015/10/23/timah-start-mass-production-rare-earth-two-years.html" 
                    target="_blank" 
                    rel="noopener noreferrer" 
                    className="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300">
-                  PT Timah REE Processing Status Report, Q1 2025
+                  "Timah to start mass production of rare earth in two years" – The Jakarta Post (2015-10-22)
                 </a>
+                <p className="text-sm text-gray-500 dark:text-gray-400 ml-5 mt-1">
+                  This piece details PT Timah's plans to construct a rare earth processing facility with a capacity of 500 tons per annum. The anticipated revenue boost from this initiative underscores the economic potential of Indonesia's REE reserves.
+                </p>
               </li>
-              <li>
-                <a href="#" 
+              <li className="mt-3">
+                <a href="https://www.thejakartapost.com/paper/2022/04/12/government-maps-rare-earth-reserves-for-industry-goals.html" 
                    target="_blank" 
                    rel="noopener noreferrer" 
                    className="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300">
-                  Bangka Belitung Mineral Mapping Project (BRIN, March 2025)
+                  "Government maps rare earth reserves for industry goals" – The Jakarta Post (2022-04-12)
                 </a>
+                <p className="text-sm text-gray-500 dark:text-gray-400 ml-5 mt-1">
+                  This article confirms the Indonesian government's mapping of REE reserves, reporting 207,397 tons in Bangka Belitung. This figure aligns with estimates of 116,142 tons of REE oxides, forming the basis for the $2 billion USD valuation.
+                </p>
               </li>
-              <li>
-                <a href="#" 
+              <li className="mt-3">
+                <a href="https://www.researchgate.net/publication/265096672_CHARACTERIZATION_OF_INDONESIA_RARE_EARTH_MINERALS_AND_THEIR_POTENTIAL_PROCESSING_TECHNIQUES" 
                    target="_blank" 
                    rel="noopener noreferrer" 
                    className="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300">
-                  Global REE Market Analysis, Morgan Stanley Research (February 2025)
+                  "CHARACTERIZATION OF INDONESIA RARE EARTH MINERALS AND THEIR POTENTIAL PROCESSING TECHNIQUES" – ResearchGate (2024-01-09)
                 </a>
+                <p className="text-sm text-gray-500 dark:text-gray-400 ml-5 mt-1">
+                  This research paper provides a detailed analysis of Indonesia's REE minerals, such as monazite and xenotime, and their processing potential. It supports reserve estimates and identifies key REEs, reinforcing the economic value argument.
+                </p>
               </li>
-              <li>
-                <a href="#" 
+              <li className="mt-3">
+                <a href="https://indonesiabusinesspost.com/risks-opportunities/pt-timah-unveils-strategic-programs-in-rare-earth-metal-downstreaming/" 
                    target="_blank" 
                    rel="noopener noreferrer" 
                    className="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300">
-                  Critical Minerals Global Supply Chain Report (World Bank, January 2025)
+                  "PT Timah unveils strategic programs in rare earth metal downstreaming" – Indonesia Business Post (2024-04-03)
                 </a>
+                <p className="text-sm text-gray-500 dark:text-gray-400 ml-5 mt-1">
+                  This article outlines PT Timah's strategic efforts to develop downstream REE processing, highlighting ongoing investments and initiatives that enhance the economic viability of Indonesia's REE reserves.
+                </p>
               </li>
             </ul>
           </div>
