@@ -108,13 +108,17 @@ export default function Home() {
                       <CardContent className="p-0">
                         <div className="relative">
                           <img
-                            src={article.slug === "indonesia-mineral-criticality-matrix" 
+                            src={article.previewImage || (
+                              article.slug === "indonesia-mineral-criticality-matrix" 
                                 ? "/Figure_1.png" 
-                                : article.slug === "indonesia-ree-potential" 
-                                  ? "/indonesia-ree-processing.png" 
-                                  : "/test-image.png"}
+                                : "/test-image.png"
+                            )}
                             alt={article.title}
                             className="w-full aspect-video object-cover rounded-lg"
+                            onError={(e) => {
+                              console.error(`Failed to load image: ${e.currentTarget.src}`);
+                              e.currentTarget.src = "/test-image.png"; // Fallback image
+                            }}
                           />
                           <div className="absolute right-2 top-1/2 -translate-y-1/2 bg-white/90 dark:bg-gray-800/90 rounded-full p-2 shadow-sm group-hover:scale-110 transition-transform">
                             <ArrowRight className="h-5 w-5 text-blue-600" />
