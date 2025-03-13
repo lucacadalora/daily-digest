@@ -146,16 +146,8 @@ export default function IndonesiaREEPotential() {
           </h2>
           <div className="prose text-gray-700 dark:text-gray-300 max-w-none">
             <p className="mb-4">
-              REEs comprise 17 elements including the lanthanides, scandium, and yttrium, vital for high-tech applications such as electronics, electric vehicles, and renewable energy technologies. Despite their name, most REEs are not particularly rare in the Earth's crust, but economically viable concentrations are less common.
+              Rare Earth Elements (REEs) comprise 17 elements including the lanthanides, scandium, and yttrium, which are vital for high-tech applications such as electronics, electric vehicles, and renewable energy technologies. Despite their name, most REEs are not particularly rare in the Earth's crust, but economically viable concentrations are less common.
             </p>
-            
-            <div className="my-6 rounded-lg overflow-hidden shadow-md">
-              <img src="/ree-image" alt="Rare Earth Elements Processing Facility" className="w-full h-auto" />
-              <p className="bg-gray-100 dark:bg-gray-800 text-xs p-2 text-gray-600 dark:text-gray-400">
-                PT Timah's rare earth element processing facility in Bangka Belitung Islands. Source: Ministry of Energy and Mineral Resources, Republic of Indonesia.
-              </p>
-            </div>
-            
             <p className="mb-4">
               Indonesia's critical mineral resources include nickel, copper, bauxite, and tin, with recent designations of 47 critical minerals by the Ministry of Energy and Mineral Resources. This reflects the country's growing recognition of the strategic importance of these resources for economic development and technological sovereignty.
             </p>
