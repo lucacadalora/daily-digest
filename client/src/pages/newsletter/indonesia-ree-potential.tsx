@@ -509,14 +509,14 @@ export default function IndonesiaREEPotential() {
 
         <footer className="text-sm text-gray-500 dark:text-gray-400 border-t border-gray-200 dark:border-gray-700 pt-4 mt-8">
           <div className="mb-2">
-            <p>Sources:</p>
+            <p className="font-semibold">Sources:</p>
             <ul className="list-disc pl-5">
               <li>
                 <a href="#" 
                    target="_blank" 
                    rel="noopener noreferrer" 
                    className="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300">
-                  PT Timah Annual Report 2024
+                  Indonesia Mineral Resources Report 2025 (Ministry of Energy and Mineral Resources)
                 </a>
               </li>
               <li>
@@ -524,7 +524,7 @@ export default function IndonesiaREEPotential() {
                    target="_blank" 
                    rel="noopener noreferrer" 
                    className="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300">
-                  Indonesia Ministry of Energy and Mineral Resources (March 2025)
+                  PT Timah REE Processing Status Report, Q1 2025
                 </a>
               </li>
               <li>
@@ -532,7 +532,23 @@ export default function IndonesiaREEPotential() {
                    target="_blank" 
                    rel="noopener noreferrer" 
                    className="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300">
-                  Global Rare Earth Elements Market Analysis (February 2025)
+                  Bangka Belitung Mineral Mapping Project (BRIN, March 2025)
+                </a>
+              </li>
+              <li>
+                <a href="#" 
+                   target="_blank" 
+                   rel="noopener noreferrer" 
+                   className="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300">
+                  Global REE Market Analysis, Morgan Stanley Research (February 2025)
+                </a>
+              </li>
+              <li>
+                <a href="#" 
+                   target="_blank" 
+                   rel="noopener noreferrer" 
+                   className="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300">
+                  Critical Minerals Global Supply Chain Report (World Bank, January 2025)
                 </a>
               </li>
             </ul>
