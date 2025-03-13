@@ -1,6 +1,7 @@
+
 # MarketMind AI - Advanced Market Insights Platform
 
-An advanced AI-powered market insights platform delivering comprehensive financial market analysis with a focus on Indonesian and global market dynamics, emphasizing real-time geopolitical and economic intelligence.
+MarketMind AI is an advanced AI-powered market insights platform providing comprehensive financial market analysis with a focus on Indonesian and global market dynamics, emphasizing real-time geopolitical and economic intelligence.
 
 ![MarketMind AI Dashboard](https://placeholder-for-dashboard-screenshot.png)
 
@@ -40,11 +41,6 @@ MarketMind AI provides intelligent, contextual market intelligence by integratin
 - Llama-3.1-sonar-reasoning-pro model for advanced analysis
 - Enhanced inline citation system
 
-### Development
-- Vite for fast development and optimized production builds
-- TypeScript for type safety
-- React Query for efficient data fetching
-
 ## Key Sections
 
 1. **Market Dashboard**: Real-time updates on crypto, stocks, indices, and forex
@@ -64,14 +60,19 @@ marketmind-ai/
 │   │   ├── lib/           # Utility functions and services
 │   │   ├── pages/         # Application pages and routes
 │   │   └── types/         # TypeScript type definitions
+├── public/                # Static assets and files
+│   ├── documents/         # PDF documents and reports
+│   ├── images/            # Image assets
+│   └── shares/            # Social media share templates
 ├── db/                    # Database related files
 │   ├── index.ts           # Database connection setup
 │   └── schema.ts          # Drizzle ORM schema definitions
 ├── server/                # Backend Express server
 │   ├── routes/            # API route definitions
-│   ├── index.ts           # Server entry point
-│   └── routes.ts          # API route registration
-└── scripts/               # Utility scripts
+│   ├── services/          # Business logic and services
+│   └── utils/             # Helper functions
+├── scripts/               # Utility scripts
+└── types/                 # Shared TypeScript types
 ```
 
 ## Getting Started
@@ -112,9 +113,15 @@ npm run db:push
 npm run dev
 ```
 
-## API Documentation
+## Development
 
-The MarketMind AI platform provides several API endpoints:
+The application uses Vite for development and builds. The main scripts are:
+
+- `npm run dev`: Start the development server
+- `npm run build`: Build for production
+- `npm run start`: Run the production build
+
+## API Documentation
 
 ### Market Data Endpoints
 
@@ -127,11 +134,11 @@ The MarketMind AI platform provides several API endpoints:
   - Request body: `{ "messages": [{ "role": "user", "content": "your query here" }] }`
   - Response: AI-generated analysis based on your query.
 
-### User & Subscription Endpoints
+### Article Endpoints
 
-- `POST /api/subscribe`: Subscribe to the newsletter.
-  - Request body: `{ "email": "user@example.com", "category": "MARKETS" }`
-  - Categories: `MARKETS`, `ECONOMY`, `TECHNOLOGY`, `INDONESIA`
+- `GET /api/articles`: Get a list of all articles
+- `GET /api/articles/:id`: Get a specific article by ID
+- `POST /api/articles`: Create a new article (requires authentication)
 
 ## Contributing
 
