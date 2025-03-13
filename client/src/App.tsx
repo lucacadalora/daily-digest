@@ -23,6 +23,7 @@ import JapanEconomicSecurity from "@/pages/japan-economic-security";
 import ChinaSteel from "@/pages/external/china-steel-supply-reform";
 import ChinaSteelReform from "@/pages/latest/china-steel-reform";
 import GlobalCoalPriceSlump from "@/pages/latest/global-coal-price-slump";
+import IndonesiaREEPotential from "@/pages/newsletter/indonesia-ree-potential";
 
 // Insights pages
 import Insights from "@/pages/insights";
@@ -85,6 +86,7 @@ function Router() {
       <Route path="/newsletter/fed-balance-sheet-blueprint" component={FedBalanceSheet} />
       <Route path="/fed-balance-sheet" component={FedBalanceSheet} />
       <Route path="/newsletter/fed-qt-exit-crypto-rally" component={FedQTExitCryptoRally} />
+      <Route path="/newsletter/indonesia-ree-potential" component={IndonesiaREEPotential} />
       <Route path="/newsletter/category/:category" component={Newsletters} />
       <Route path="/newsletters" component={() => <Redirect to="/newsletter" />} />
       
