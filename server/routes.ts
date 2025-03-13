@@ -825,6 +825,16 @@ export function registerRoutes(app: Express): Server {
     }
   }));
   
+  // Dedicated route for images directory
+  app.use('/images', express.static(join(process.cwd(), 'public', 'images'), { 
+    index: false,
+    setHeaders: (res: Response) => {
+      // Set appropriate headers for static files
+      res.setHeader('Cache-Control', 'public, max-age=86400'); // Cache for 1 day
+      res.setHeader('Access-Control-Allow-Origin', '*');
+    }
+  }));
+  
   // Direct access to static HTML version for social sharing (both paths)
   app.get(['/share/china-steel-reform', '/share/china-steel-reform/'], (req, res) => {
     try {
@@ -1117,6 +1127,34 @@ export function registerRoutes(app: Express): Server {
     } catch (error) {
       console.error('Error serving coal share test page:', error);
       return res.status(500).send(`Error loading coal share page: ${error instanceof Error ? error.message : 'Unknown error'}`);
+    }
+  });
+  
+  // Dedicated endpoint for REE article image
+  app.get('/ree-image', (req, res) => {
+    try {
+      console.log('[Image Route] Serving REE article image');
+      const filePath = join(process.cwd(), 'public', 'images', 'ree-processing.png');
+      
+      if (!fs.existsSync(filePath)) {
+        console.error(`[Image Route] REE image not found at path: ${filePath}`);
+        return res.status(404).send('Image not found');
+      }
+      
+      // Set cache headers for better performance
+      const oneDay = 24 * 60 * 60;
+      res.setHeader('Cache-Control', `public, max-age=${oneDay}`);
+      res.setHeader('Expires', new Date(Date.now() + oneDay * 1000).toUTCString());
+      
+      // Add cross-origin support
+      res.setHeader('Access-Control-Allow-Origin', '*');
+      
+      res.setHeader('Content-Type', 'image/png');
+      const fileStream = fs.createReadStream(filePath);
+      fileStream.pipe(res);
+    } catch (error) {
+      console.error('Error serving REE article image:', error);
+      return res.status(500).send(`Error loading image: ${error instanceof Error ? error.message : 'Unknown error'}`);
     }
   });
   
