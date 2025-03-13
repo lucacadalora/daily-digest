@@ -21,9 +21,9 @@ export default function Home() {
     new Date(b.date).getTime() - new Date(a.date).getTime()
   );
 
-  // Get featured article - Mineral Criticality Matrix
-  const featuredArticle = sampleArticles.find(
-    (article) => article.slug === "indonesia-mineral-criticality-matrix"
+  // Get featured articles - Mineral Criticality Matrix and Rare Earth Elements
+  const featuredArticles = sampleArticles.filter(
+    (article) => article.featured || article.slug === "indonesia-mineral-criticality-matrix"
   );
 
   // Calculate the articles for the current page
@@ -101,32 +101,34 @@ export default function Home() {
               <h2 className="text-2xl font-serif font-bold text-gray-900 dark:text-white mb-4">
                 Featured
               </h2>
-              {featuredArticle && (
-                <Link href={`/newsletter/${featuredArticle.slug}`}>
-                  <Card className="group relative hover:shadow-lg transition-shadow duration-200">
-                    <CardContent className="p-0">
-                      <div className="relative">
-                        <img
-                          src="/Figure_1.png"
-                          alt="Mineral Criticality Matrix"
-                          className="w-full aspect-video object-cover rounded-lg"
-                        />
-                        <div className="absolute right-2 top-1/2 -translate-y-1/2 bg-white/90 dark:bg-gray-800/90 rounded-full p-2 shadow-sm group-hover:scale-110 transition-transform">
-                          <ArrowRight className="h-5 w-5 text-blue-600" />
+              {featuredArticles.map((article, index) => (
+                <div key={article.slug} className={index > 0 ? "mt-4" : ""}>
+                  <Link href={`/newsletter/${article.slug}`}>
+                    <Card className="group relative hover:shadow-lg transition-shadow duration-200">
+                      <CardContent className="p-0">
+                        <div className="relative">
+                          <img
+                            src={article.slug === "indonesia-mineral-criticality-matrix" ? "/Figure_1.png" : "/test-image.png"}
+                            alt={article.title}
+                            className="w-full aspect-video object-cover rounded-lg"
+                          />
+                          <div className="absolute right-2 top-1/2 -translate-y-1/2 bg-white/90 dark:bg-gray-800/90 rounded-full p-2 shadow-sm group-hover:scale-110 transition-transform">
+                            <ArrowRight className="h-5 w-5 text-blue-600" />
+                          </div>
                         </div>
-                      </div>
-                      <div className="p-4">
-                        <div className="text-xs font-semibold text-blue-600 dark:text-blue-400 uppercase tracking-wider mb-2">
-                          Industries
+                        <div className="p-4">
+                          <div className="text-xs font-semibold text-blue-600 dark:text-blue-400 uppercase tracking-wider mb-2">
+                            {article.category}
+                          </div>
+                          <h3 className="font-serif text-base text-gray-900 dark:text-white line-clamp-2">
+                            {article.title}
+                          </h3>
                         </div>
-                        <h3 className="font-serif text-base text-gray-900 dark:text-white">
-                          {featuredArticle.title}
-                        </h3>
-                      </div>
-                    </CardContent>
-                  </Card>
-                </Link>
-              )}
+                      </CardContent>
+                    </Card>
+                  </Link>
+                </div>
+              ))}
               
               {/* ChatBox below Featured Section */}
               <div className="mt-8">

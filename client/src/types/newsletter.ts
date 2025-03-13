@@ -27,6 +27,7 @@ export const articleSchema = z.object({
   previewEmoji: z.string().optional(),
   previewImage: z.string().optional(),
   tags: z.array(z.string()).optional(),
+  featured: z.boolean().optional(),
 });
 
 export type Article = z.infer<typeof articleSchema>;
@@ -41,6 +42,7 @@ export const sampleArticles: Article[] = [
     author: "Luca Cada Lora",
     date: "March 13, 2025",
     previewEmoji: "⛏️",
+    featured: true,
     previewMetrics: [
       {
         label: "REE Reserves",
