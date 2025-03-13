@@ -1,20 +1,20 @@
 
-# MarketMind AI - Advanced Market Insights Platform
+# Daily Digest - Financial Markets Analysis Platform
 
-MarketMind AI is an advanced AI-powered market insights platform providing comprehensive financial market analysis with a focus on Indonesian and global market dynamics, emphasizing real-time geopolitical and economic intelligence.
+A comprehensive financial news and analysis platform delivering in-depth insights on global markets with a focus on Indonesian and international financial dynamics.
 
-![MarketMind AI Dashboard](https://placeholder-for-dashboard-screenshot.png)
+![Daily Digest Dashboard](https://placeholder-for-dashboard-screenshot.png)
 
 *Note: The above screenshot is a placeholder. Add actual application screenshot when available.*
 
 ## Overview
 
-MarketMind AI provides intelligent, contextual market intelligence by integrating multiple data streams, leveraging advanced natural language AI, and offering nuanced financial insights with enhanced visualization and user interaction. The platform focuses on delivering complex economic narratives through intuitive, data-driven storytelling and advanced content management.
+Daily Digest provides intelligent market analysis and financial news by integrating multiple data sources, leveraging advanced natural language processing, and offering nuanced financial insights with enhanced visualization and user interaction. The platform focuses on delivering complex economic narratives through intuitive, data-driven storytelling.
 
 ## Features
 
-- **Real-time Market Monitoring**: Track crypto, stocks, indices, and forex markets with up-to-date price and change data
-- **AI-Powered Analysis**: Leverage Perplexity AI and Llama-3.1-sonar-reasoning-pro for advanced market intelligence
+- **Real-time Market Monitoring**: Track crypto, stocks, indices, and forex markets with up-to-date price data
+- **AI-Powered Analysis**: Leverage advanced AI models for market intelligence and insights
 - **Interactive Data Visualization**: Explore financial data through intuitive charts and visual representations
 - **Comprehensive Article Library**: Access in-depth analysis on key market trends and economic events
 - **Law & Regulatory Database**: Browse through Indonesian legal documents with PDF viewing capabilities
@@ -26,7 +26,7 @@ MarketMind AI provides intelligent, contextual market intelligence by integratin
 - React.js with TypeScript
 - Tailwind CSS for styling
 - Shadcn UI component library
-- Framer Motion for smooth animations
+- Framer Motion for animations
 - Recharts for data visualization
 - Wouter for routing
 
@@ -36,9 +36,7 @@ MarketMind AI provides intelligent, contextual market intelligence by integratin
 - WebSockets for real-time updates
 
 ### AI & Data Integration
-- Perplexity AI integration
-- Local source integration (Investor Trust, Kompas, Stockbit)
-- Llama-3.1-sonar-reasoning-pro model for advanced analysis
+- Integration with AI analysis tools
 - Enhanced inline citation system
 
 ## Key Sections
@@ -47,23 +45,24 @@ MarketMind AI provides intelligent, contextual market intelligence by integratin
 2. **Insights Hub**: AI-generated analysis and expert commentary on market trends
 3. **Data Explorer**: Interactive tools for exploring financial and economic datasets
 4. **Document Library**: Comprehensive collection of laws, regulations, and economic papers
-5. **Chat Interface**: Ask questions and receive AI-powered market insights
+5. **Newsletter**: Regular financial market updates and analysis
 
 ## Project Structure
 
 ```
-marketmind-ai/
+daily-digest/
 ├── client/                # Frontend React application
 │   ├── src/
 │   │   ├── components/    # Reusable UI components
 │   │   ├── hooks/         # Custom React hooks
 │   │   ├── lib/           # Utility functions and services
 │   │   ├── pages/         # Application pages and routes
-│   │   └── types/         # TypeScript type definitions
+│   │   └── config/        # Configuration files
 ├── public/                # Static assets and files
 │   ├── documents/         # PDF documents and reports
 │   ├── images/            # Image assets
-│   └── shares/            # Social media share templates
+│   ├── shares/            # Social media share templates
+│   └── twitter-card/      # Twitter card templates
 ├── db/                    # Database related files
 │   ├── index.ts           # Database connection setup
 │   └── schema.ts          # Drizzle ORM schema definitions
@@ -85,8 +84,8 @@ marketmind-ai/
 
 1. Clone the repository
 ```bash
-git clone https://github.com/your-username/marketmind-ai.git
-cd marketmind-ai
+git clone https://github.com/your-username/daily-digest.git
+cd daily-digest
 ```
 
 2. Install dependencies
@@ -97,14 +96,12 @@ npm install
 3. Set up environment variables
 Create a `.env` file with the following variables:
 ```
-DATABASE_URL=postgresql://username:password@localhost:5432/marketmind
-PERPLEXITY_API_KEY=your-perplexity-api-key
+DATABASE_URL=postgresql://username:password@localhost:5432/dailydigest
+API_KEY=your-api-key-here
 ```
 
 4. Set up the database
 ```bash
-# Initialize PostgreSQL database (if using Replit)
-# The DATABASE_URL environment variable will be automatically set
 npm run db:push
 ```
 
@@ -128,29 +125,20 @@ The application uses Vite for development and builds. The main scripts are:
 - `GET /api/market-data`: Retrieve current market data for cryptocurrencies, stocks, indices, and forex.
   - Response includes price and 24-hour change data for each asset.
 
-### Chat & Analysis Endpoints
-
-- `POST /api/chat`: Send a query to the AI analysis engine.
-  - Request body: `{ "messages": [{ "role": "user", "content": "your query here" }] }`
-  - Response: AI-generated analysis based on your query.
-
 ### Article Endpoints
 
 - `GET /api/articles`: Get a list of all articles
 - `GET /api/articles/:id`: Get a specific article by ID
 - `POST /api/articles`: Create a new article (requires authentication)
 
+### Newsletter Subscription
+
+- `POST /api/subscribe`: Subscribe to the newsletter
+  - Request body: `{ "email": "user@example.com", "category": "MARKETS" }`
+
 ## Contributing
 
-We welcome contributions to MarketMind AI! Please feel free to submit issues or pull requests to help improve the platform.
-
-### Development Workflow
-
-1. Fork the repository
-2. Create a feature branch: `git checkout -b feature/amazing-feature`
-3. Commit your changes: `git commit -m 'Add some amazing feature'`
-4. Push to the branch: `git push origin feature/amazing-feature`
-5. Open a Pull Request
+Contributions to Daily Digest are welcome! Please feel free to submit issues or pull requests to help improve the platform.
 
 ## License
 
