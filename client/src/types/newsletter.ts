@@ -42,6 +42,7 @@ export const sampleArticles: Article[] = [
     author: "Luca Cada Lora",
     date: "March 13, 2025",
     previewEmoji: "⛏️",
+    previewImage: "/indonesia-ree-processing.png",
     featured: true,
     previewMetrics: [
       {

@@ -21,10 +21,10 @@ export default function Home() {
     new Date(b.date).getTime() - new Date(a.date).getTime()
   );
 
-  // Get featured articles - Mineral Criticality Matrix and Rare Earth Elements
+  // Get featured articles - REE and Mineral Criticality Matrix
   const featuredArticles = sampleArticles.filter(
-    (article) => article.featured || article.slug === "indonesia-mineral-criticality-matrix"
-  );
+    (article) => article.featured
+  ).sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
   // Calculate the articles for the current page
   const indexOfLastArticle = currentPage * articlesPerPage;
@@ -108,7 +108,11 @@ export default function Home() {
                       <CardContent className="p-0">
                         <div className="relative">
                           <img
-                            src={article.slug === "indonesia-mineral-criticality-matrix" ? "/Figure_1.png" : "/test-image.png"}
+                            src={article.slug === "indonesia-mineral-criticality-matrix" 
+                                ? "/Figure_1.png" 
+                                : article.slug === "indonesia-ree-potential" 
+                                  ? "/indonesia-ree-processing.png" 
+                                  : "/test-image.png"}
                             alt={article.title}
                             className="w-full aspect-video object-cover rounded-lg"
                           />
