@@ -791,20 +791,21 @@ export function registerRoutes(app: Express): Server {
   app.get('/images/articles/rupiah-export.jpg', (req, res) => {
     try {
       console.log('[Image Route] Serving rupiah-export.jpg image');
-      const filePath = path.join(process.cwd(), 'public', 'images', 'articles', 'rupiah-export-jpg-actual');
+      const filePath = join(process.cwd(), 'public', 'images', 'articles', 'rupiah-export.jpg');
       
-      // Set content type for SVG (using content-type: image/svg+xml)
-      res.setHeader('Content-Type', 'image/svg+xml');
+      // Set content type for JPG
+      res.setHeader('Content-Type', 'image/jpeg');
       
       // Set cache headers for better social media preview caching
       res.setHeader('Cache-Control', 'public, max-age=3600'); // 1 hour cache
       
-      // Read the file and send it
+      // Check if the file exists
       if (fs.existsSync(filePath)) {
-        const fileContent = fs.readFileSync(filePath, 'utf-8');
-        return res.send(fileContent);
+        // Use createReadStream for better performance with binary files
+        const fileStream = fs.createReadStream(filePath);
+        fileStream.pipe(res);
       } else {
-        console.error(`[Image Route] SVG file not found at path: ${filePath}`);
+        console.error(`[Image Route] JPG file not found at path: ${filePath}`);
         return res.status(404).send('Image not found');
       }
     } catch (error) {

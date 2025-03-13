@@ -1,0 +1,779 @@
+import Image from "next/image"
+import { BarChart, PieChart, ValuePieChart } from "@/components/charts"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { ArrowRight, Layers, Map, BarChart3, FileText, AlertTriangle, DollarSign } from "lucide-react"
+
+export default function Home() {
+  return (
+    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-slate-100 dark:from-slate-950 dark:to-slate-900">
+      {/* Header */}
+      <header className="relative bg-primary py-10 sm:py-16 text-primary-foreground">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl">
+            <h1 className="mb-4 text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight">
+              $2 Billion USD Rare Earth Elements Potential
+            </h1>
+            <p className="text-lg sm:text-xl opacity-90">
+              Unlocking value from Indonesian tin smelter byproduct recovery in the Bangka Belitung Islands
+            </p>
+            <div className="mt-4 inline-flex items-center rounded-lg bg-green-600 bg-opacity-20 px-3 py-1 text-sm font-medium text-white">
+              <DollarSign className="mr-1 h-4 w-4" />
+              116,142 tons of REE oxides with estimated market value of $1.99 billion USD
+            </div>
+          </div>
+        </div>
+        <div className="absolute bottom-0 right-0 hidden h-full w-1/3 md:block">
+          <Image
+            src="/placeholder.svg?height=400&width=400"
+            alt="Rare Earth Elements"
+            width={400}
+            height={400}
+            className="h-full w-full object-cover opacity-20"
+          />
+        </div>
+      </header>
+
+      {/* Key Findings */}
+      <section className="py-12">
+        <div className="container mx-auto px-4">
+          <h2 className="mb-8 text-center text-3xl font-bold">Key Findings</h2>
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            <Card className="border-l-4 border-l-blue-500">
+              <CardHeader className="pb-2">
+                <CardTitle className="text-lg">Primary Source</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p>
+                  Tin smelters in Bangka Belitung Islands are the primary source for REE recovery, with PT Timah leading
+                  efforts.
+                </p>
+              </CardContent>
+            </Card>
+
+            <Card className="border-l-4 border-l-green-500">
+              <CardHeader className="pb-2">
+                <CardTitle className="text-lg">Estimated Reserves</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p>
+                  Estimated REE oxide reserves are around 116,142 tons, with light REEs from monazite and heavy REEs
+                  from xenotime.
+                </p>
+              </CardContent>
+            </Card>
+
+            <Card className="border-l-4 border-l-purple-500">
+              <CardHeader className="pb-2">
+                <CardTitle className="text-lg">Major REE Oxides</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p>
+                  Major REE oxides include cerium, lanthanum, neodymium from monazite, and yttrium, dysprosium, erbium
+                  from xenotime.
+                </p>
+              </CardContent>
+            </Card>
+
+            <Card className="border-l-4 border-l-amber-500">
+              <CardHeader className="pb-2">
+                <CardTitle className="text-lg">Unexpected Finding</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p>
+                  The presence of xenotime reserves (20,734 tons) adds potential for heavy REE recovery, which is less
+                  commonly discussed.
+                </p>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
+
+      {/* Background & Context */}
+      <section className="bg-white py-12 dark:bg-slate-800">
+        <div className="container mx-auto px-4">
+          <div className="mx-auto max-w-4xl">
+            <h2 className="mb-6 text-3xl font-bold">Background on REEs and Critical Minerals</h2>
+            <div className="prose prose-slate max-w-none dark:prose-invert">
+              <p>
+                REEs comprise 17 elements including the lanthanides, scandium, and yttrium, vital for high-tech
+                applications such as electronics, electric vehicles, and renewable energy technologies.
+              </p>
+              <p>
+                Indonesia's critical mineral resources include nickel, copper, bauxite, and tin, with recent
+                designations of 47 critical minerals by the Ministry of Energy and Mineral Resources.
+              </p>
+              <p>
+                REEs are often found as by-products in certain ores, notably monazite, which is associated with tin
+                mining, and xenotime, which contributes heavy REEs and yttrium.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Major Smelters Table */}
+      <section className="py-12">
+        <div className="container mx-auto px-4">
+          <div className="mx-auto max-w-5xl">
+            <h2 className="mb-6 text-center text-2xl sm:text-3xl font-bold">
+              Major Smelters in Indonesia with Potential REE Recovery
+            </h2>
+            <div className="overflow-x-auto rounded-lg border border-slate-200 shadow-sm dark:border-slate-700">
+              <div className="min-w-[800px]">
+                <table className="w-full border-collapse">
+                  <thead>
+                    <tr className="bg-slate-100 dark:bg-slate-800">
+                      <th className="border-b p-3 text-left font-medium dark:border-slate-700">Smelter Name</th>
+                      <th className="border-b p-3 text-left font-medium dark:border-slate-700">Location</th>
+                      <th className="border-b p-3 text-left font-medium dark:border-slate-700">Type</th>
+                      <th className="border-b p-3 text-left font-medium dark:border-slate-700">Capacity (Tons/Year)</th>
+                      <th className="border-b p-3 text-left font-medium dark:border-slate-700">REE Source</th>
+                      <th className="border-b p-3 text-left font-medium dark:border-slate-700">
+                        Notes on REE Potential
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr className="border-b hover:bg-slate-50 dark:border-slate-700 dark:hover:bg-slate-900">
+                      <td className="p-3 font-medium">PT Timah</td>
+                      <td className="p-3">Bangka Belitung Islands</td>
+                      <td className="p-3">Tin</td>
+                      <td className="p-3">~30,000 (tin)</td>
+                      <td className="p-3">Monazite, xenotime in tailings</td>
+                      <td className="p-3">Actively processing, pilot plant operational</td>
+                    </tr>
+                    <tr className="border-b hover:bg-slate-50 dark:border-slate-700 dark:hover:bg-slate-900">
+                      <td className="p-3 font-medium">PT Bangka Global Mandiri Internasional</td>
+                      <td className="p-3">Bangka Belitung Islands</td>
+                      <td className="p-3">Tin</td>
+                      <td className="p-3">15,000-18,000 (tin)</td>
+                      <td className="p-3">Monazite, xenotime in tailings</td>
+                      <td className="p-3">Likely REE by-products, joint venture</td>
+                    </tr>
+                    <tr className="border-b hover:bg-slate-50 dark:border-slate-700 dark:hover:bg-slate-900">
+                      <td className="p-3 font-medium">Other smaller tin smelters</td>
+                      <td className="p-3">Bangka Belitung Islands</td>
+                      <td className="p-3">Tin</td>
+                      <td className="p-3">Varies, {">"}190,000 total</td>
+                      <td className="p-3">Monazite, xenotime in tailings</td>
+                      <td className="p-3">Potential REE, data limited</td>
+                    </tr>
+                    <tr className="border-b hover:bg-slate-50 dark:border-slate-700 dark:hover:bg-slate-900">
+                      <td className="p-3 font-medium">PT Smelting</td>
+                      <td className="p-3">Gresik, East Java</td>
+                      <td className="p-3">Copper</td>
+                      <td className="p-3">1.7 million (concentrate)</td>
+                      <td className="p-3">Minimal, not significant</td>
+                      <td className="p-3">By-products focus on gold, silver, no REE evidence</td>
+                    </tr>
+                    <tr className="hover:bg-slate-50 dark:hover:bg-slate-900">
+                      <td className="p-3 font-medium">Amman Mineral</td>
+                      <td className="p-3">West Sumbawa</td>
+                      <td className="p-3">Copper</td>
+                      <td className="p-3">Recent, capacity TBD</td>
+                      <td className="p-3">Minimal, not significant</td>
+                      <td className="p-3">By-products focus on gold, silver, no REE evidence</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Tin Smelters & REE Potential */}
+      <section className="py-8 sm:py-12">
+        <div className="container mx-auto px-4">
+          <div className="grid gap-8 md:grid-cols-2">
+            <div>
+              <div className="mb-4 sm:mb-6 flex items-center">
+                <Map className="mr-2 h-5 w-5 sm:h-6 sm:w-6 text-primary" />
+                <h2 className="text-2xl sm:text-3xl font-bold">Tin Smelters & REE Potential</h2>
+              </div>
+              <div className="prose prose-sm sm:prose-base prose-slate dark:prose-invert">
+                <p>
+                  Tin mining in Indonesia is concentrated in the Bangka Belitung Islands, where monazite and xenotime,
+                  REE-bearing minerals, are common by-products in tailings.
+                </p>
+                <p>
+                  PT Timah, a state-owned company, has been actively developing REE processing, with a pilot plant for
+                  converting monazite into Rare Earth Hydroxide (REOH) since 2015.
+                </p>
+                <p>
+                  At least 16 smelters operate on Bangka Island, contributing to over 190,000 tonnes annual capacity.
+                </p>
+              </div>
+            </div>
+            <div className="flex items-center justify-center">
+              <div className="h-64 w-full max-w-md rounded-lg bg-slate-100 p-4 dark:bg-slate-800">
+                <Image
+                  src="/placeholder.svg?height=300&width=400"
+                  alt="Map of Bangka Belitung Islands showing tin smelter locations"
+                  width={400}
+                  height={300}
+                  className="h-full w-full rounded object-cover"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Estimated Reserves & Composition */}
+      <section className="bg-white py-8 sm:py-12 dark:bg-slate-800">
+        <div className="container mx-auto px-4">
+          <div className="mb-6 sm:mb-8 text-center">
+            <div className="mb-2 inline-flex items-center">
+              <Layers className="mr-2 h-5 w-5 sm:h-6 sm:w-6 text-primary" />
+              <h2 className="text-2xl sm:text-3xl font-bold">Estimated Reserves & Composition</h2>
+            </div>
+            <p className="mx-auto max-w-2xl text-sm sm:text-base text-slate-600 dark:text-slate-400">
+              Analysis of REE oxide reserves from monazite and xenotime based on available data
+            </p>
+          </div>
+
+          <Tabs defaultValue="monazite" className="mx-auto max-w-4xl">
+            <TabsList className="grid w-full grid-cols-2">
+              <TabsTrigger value="monazite">Monazite</TabsTrigger>
+              <TabsTrigger value="xenotime">Xenotime</TabsTrigger>
+            </TabsList>
+            <TabsContent value="monazite" className="mt-6">
+              <Card>
+                <CardHeader>
+                  <CardTitle>Monazite Reserves and Composition</CardTitle>
+                  <CardDescription>
+                    Total monazite reserves: approximately 186,663 tons, with 55% REE oxides, yielding about 102,665
+                    tons of REE oxides
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="grid gap-8 md:grid-cols-2">
+                    <div>
+                      <h4 className="mb-4 text-lg font-medium">Composition Breakdown</h4>
+                      <ul className="space-y-2">
+                        <li className="flex justify-between">
+                          <span>Cerium oxide (CeO₂):</span>
+                          <span className="font-medium">47,800 tons</span>
+                        </li>
+                        <li className="flex justify-between">
+                          <span>Lanthanum oxide (La₂O₃):</span>
+                          <span className="font-medium">24,640 tons</span>
+                        </li>
+                        <li className="flex justify-between">
+                          <span>Neodymium oxide (Nd₂O₃):</span>
+                          <span className="font-medium">17,453 tons</span>
+                        </li>
+                        <li className="flex justify-between">
+                          <span>Praseodymium oxide (Pr₂O₃):</span>
+                          <span className="font-medium">5,133 tons</span>
+                        </li>
+                        <li className="flex justify-between">
+                          <span>Other light REEs:</span>
+                          <span className="font-medium">7,700 tons</span>
+                        </li>
+                      </ul>
+                    </div>
+                    <div className="h-64">
+                      <PieChart
+                        data={[
+                          { name: "Cerium oxide", value: 47800, color: "#4f46e5" },
+                          { name: "Lanthanum oxide", value: 24640, color: "#8b5cf6" },
+                          { name: "Neodymium oxide", value: 17453, color: "#a855f7" },
+                          { name: "Praseodymium oxide", value: 5133, color: "#d946ef" },
+                          { name: "Other light REEs", value: 7700, color: "#ec4899" },
+                        ]}
+                      />
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </TabsContent>
+            <TabsContent value="xenotime" className="mt-6">
+              <Card>
+                <CardHeader>
+                  <CardTitle>Xenotime Reserves and Composition</CardTitle>
+                  <CardDescription>
+                    Total xenotime reserves: approximately 20,734 tons, with 65% REE oxides, yielding about 13,477 tons
+                    of REE oxides
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="grid gap-8 md:grid-cols-2">
+                    <div>
+                      <h4 className="mb-4 text-lg font-medium">Composition Breakdown</h4>
+                      <ul className="space-y-2">
+                        <li className="flex justify-between">
+                          <span>Yttrium oxide (Y₂O₃):</span>
+                          <span className="font-medium">9,300 tons</span>
+                        </li>
+                        <li className="flex justify-between">
+                          <span>Dysprosium oxide (Dy₂O₃):</span>
+                          <span className="font-medium">1,262 tons</span>
+                        </li>
+                        <li className="flex justify-between">
+                          <span>Erbium oxide (Er₂O₃):</span>
+                          <span className="font-medium">1,005 tons</span>
+                        </li>
+                        <li className="flex justify-between">
+                          <span>Ytterbium oxide (Yb₂O₃):</span>
+                          <span className="font-medium">751 tons</span>
+                        </li>
+                        <li className="flex justify-between">
+                          <span>Other heavy REEs:</span>
+                          <span className="font-medium">1,159 tons</span>
+                        </li>
+                      </ul>
+                    </div>
+                    <div className="h-64">
+                      <PieChart
+                        data={[
+                          { name: "Yttrium oxide", value: 9300, color: "#0ea5e9" },
+                          { name: "Dysprosium oxide", value: 1262, color: "#06b6d4" },
+                          { name: "Erbium oxide", value: 1005, color: "#14b8a6" },
+                          { name: "Ytterbium oxide", value: 751, color: "#10b981" },
+                          { name: "Other heavy REEs", value: 1159, color: "#22c55e" },
+                        ]}
+                      />
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </TabsContent>
+          </Tabs>
+        </div>
+      </section>
+
+      {/* Comparative Analysis */}
+      <section className="py-12">
+        <div className="container mx-auto px-4">
+          <div className="mb-8 text-center">
+            <div className="mb-2 inline-flex items-center">
+              <BarChart3 className="mr-2 h-6 w-6 text-primary" />
+              <h2 className="text-3xl font-bold">Comparative Analysis</h2>
+            </div>
+            <p className="mx-auto max-w-2xl text-slate-600 dark:text-slate-400">
+              Comparing the major REE oxides from monazite and xenotime sources
+            </p>
+          </div>
+
+          <div className="mx-auto max-w-4xl">
+            <Card>
+              <CardContent className="pt-6">
+                <div className="h-80">
+                  <BarChart />
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
+
+      {/* Detailed Table */}
+      <section className="bg-white py-12 dark:bg-slate-800">
+        <div className="container mx-auto px-4">
+          <div className="mb-8 text-center">
+            <div className="mb-2 inline-flex items-center">
+              <FileText className="mr-2 h-6 w-6 text-primary" />
+              <h2 className="text-3xl font-bold">Estimated REE Oxide Reserves</h2>
+            </div>
+            <p className="mx-auto max-w-2xl text-slate-600 dark:text-slate-400">
+              Comprehensive table of estimated REE oxide reserves from monazite and xenotime
+            </p>
+          </div>
+
+          <div className="mx-auto max-w-4xl overflow-x-auto">
+            <div className="min-w-[600px]">
+              <table className="w-full border-collapse">
+                <thead>
+                  <tr className="border-b bg-slate-50 dark:border-slate-700 dark:bg-slate-900">
+                    <th className="p-3 text-left font-medium">REE Oxide</th>
+                    <th className="p-3 text-left font-medium">Source</th>
+                    <th className="p-3 text-right font-medium">Estimated Reserve (tons)</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr className="border-b dark:border-slate-700">
+                    <td className="p-3">CeO₂</td>
+                    <td className="p-3">Monazite</td>
+                    <td className="p-3 text-right">47,800</td>
+                  </tr>
+                  <tr className="border-b dark:border-slate-700">
+                    <td className="p-3">La₂O₃</td>
+                    <td className="p-3">Monazite</td>
+                    <td className="p-3 text-right">24,640</td>
+                  </tr>
+                  <tr className="border-b dark:border-slate-700">
+                    <td className="p-3">Nd₂O₃</td>
+                    <td className="p-3">Monazite</td>
+                    <td className="p-3 text-right">17,453</td>
+                  </tr>
+                  <tr className="border-b dark:border-slate-700">
+                    <td className="p-3">Pr₂O₃</td>
+                    <td className="p-3">Monazite</td>
+                    <td className="p-3 text-right">5,133</td>
+                  </tr>
+                  <tr className="border-b dark:border-slate-700">
+                    <td className="p-3">Other light REEs</td>
+                    <td className="p-3">Monazite</td>
+                    <td className="p-3 text-right">7,700</td>
+                  </tr>
+                  <tr className="border-b dark:border-slate-700">
+                    <td className="p-3">Y₂O₃</td>
+                    <td className="p-3">Xenotime</td>
+                    <td className="p-3 text-right">9,300</td>
+                  </tr>
+                  <tr className="border-b dark:border-slate-700">
+                    <td className="p-3">Dy₂O₃</td>
+                    <td className="p-3">Xenotime</td>
+                    <td className="p-3 text-right">1,262</td>
+                  </tr>
+                  <tr className="border-b dark:border-slate-700">
+                    <td className="p-3">Er₂O₃</td>
+                    <td className="p-3">Xenotime</td>
+                    <td className="p-3 text-right">1,005</td>
+                  </tr>
+                  <tr className="border-b dark:border-slate-700">
+                    <td className="p-3">Yb₂O₃</td>
+                    <td className="p-3">Xenotime</td>
+                    <td className="p-3 text-right">751</td>
+                  </tr>
+                  <tr className="border-b dark:border-slate-700">
+                    <td className="p-3">Gd₂O₃</td>
+                    <td className="p-3">Xenotime</td>
+                    <td className="p-3 text-right">633</td>
+                  </tr>
+                  <tr className="border-b dark:border-slate-700">
+                    <td className="p-3">Tb₂O₃</td>
+                    <td className="p-3">Xenotime</td>
+                    <td className="p-3 text-right">253</td>
+                  </tr>
+                  <tr className="border-b dark:border-slate-700">
+                    <td className="p-3">Ho₂O₃</td>
+                    <td className="p-3">Xenotime</td>
+                    <td className="p-3 text-right">127</td>
+                  </tr>
+                  <tr className="border-b dark:border-slate-700">
+                    <td className="p-3">Tm₂O₃</td>
+                    <td className="p-3">Xenotime</td>
+                    <td className="p-3 text-right">62</td>
+                  </tr>
+                  <tr className="border-b dark:border-slate-700">
+                    <td className="p-3">Lu₂O₃</td>
+                    <td className="p-3">Xenotime</td>
+                    <td className="p-3 text-right">62</td>
+                  </tr>
+                </tbody>
+                <tfoot>
+                  <tr className="bg-slate-50 dark:bg-slate-900">
+                    <td className="p-3 font-medium">Total</td>
+                    <td className="p-3"></td>
+                    <td className="p-3 text-right font-medium">116,142</td>
+                  </tr>
+                </tfoot>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Estimated Value Section */}
+      <section className="py-12">
+        <div className="container mx-auto px-4">
+          <div className="mb-8 text-center">
+            <div className="mb-2 inline-flex items-center">
+              <DollarSign className="mr-2 h-6 w-6 text-green-600" />
+              <h2 className="text-2xl sm:text-3xl font-bold">Estimated Market Value</h2>
+            </div>
+            <p className="mx-auto max-w-2xl text-sm sm:text-base text-slate-600 dark:text-slate-400">
+              The total estimated value of the 116,142 tons of REE oxide reserves is approximately $1,998,787,773 USD,
+              or roughly $2 billion USD
+            </p>
+          </div>
+
+          <div className="mx-auto max-w-5xl">
+            <div className="grid gap-8 md:grid-cols-2">
+              <Card className="md:col-span-2">
+                <CardHeader>
+                  <CardTitle>Value Distribution by REE Oxide</CardTitle>
+                  <CardDescription>
+                    Breakdown of the estimated $2 billion USD total value across different rare earth oxides
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="h-80">
+                    <ValuePieChart />
+                  </div>
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardHeader>
+                  <CardTitle>Price Reference (USD per metric ton)</CardTitle>
+                  <CardDescription>Market prices as of March 13, 2025, sourced from metal.com</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="overflow-x-auto">
+                    <div className="min-w-[400px]">
+                      <table className="w-full border-collapse text-sm">
+                        <thead>
+                          <tr className="border-b">
+                            <th className="p-2 text-left font-medium">REE Oxide</th>
+                            <th className="p-2 text-right font-medium">Price (USD/mt)</th>
+                            <th className="p-2 text-left font-medium">Notes</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr className="border-b">
+                            <td className="p-2">CeO₂</td>
+                            <td className="p-2 text-right">1,524.38</td>
+                            <td className="p-2">Standard price</td>
+                          </tr>
+                          <tr className="border-b">
+                            <td className="p-2">La₂O₃</td>
+                            <td className="p-2 text-right">536.58</td>
+                            <td className="p-2">Potentially low</td>
+                          </tr>
+                          <tr className="border-b">
+                            <td className="p-2">Nd₂O₃</td>
+                            <td className="p-2 text-right">55,731.22</td>
+                            <td className="p-2">Standard price</td>
+                          </tr>
+                          <tr className="border-b">
+                            <td className="p-2">Pr₂O₃</td>
+                            <td className="p-2 text-right">56,219.03</td>
+                            <td className="p-2">Standard price</td>
+                          </tr>
+                          <tr className="border-b">
+                            <td className="p-2">Y₂O₃</td>
+                            <td className="p-2 text-right">6,829.21</td>
+                            <td className="p-2">Standard price</td>
+                          </tr>
+                          <tr className="border-b">
+                            <td className="p-2">Dy₂O₃</td>
+                            <td className="p-2 text-right">207,930.00</td>
+                            <td className="p-2">Converted from kg</td>
+                          </tr>
+                          <tr className="border-b">
+                            <td className="p-2">Tb₂O₃</td>
+                            <td className="p-2 text-right">804,870.00</td>
+                            <td className="p-2">Converted from kg</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardHeader>
+                  <CardTitle>Value Calculation Method</CardTitle>
+                  <CardDescription>
+                    How the total value was calculated by multiplying each reserve quantity by its current market price
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-4 text-sm">
+                    <p>
+                      The total value is calculated by multiplying each reserve by its price and summing the results:
+                    </p>
+                    <ul className="space-y-2">
+                      <li className="flex justify-between">
+                        <span>Nd₂O₃: 17,453 tons × $55,731.22/mt</span>
+                        <span className="font-medium">≈ $972.7M</span>
+                      </li>
+                      <li className="flex justify-between">
+                        <span>Pr₂O₃: 5,133 tons × $56,219.03/mt</span>
+                        <span className="font-medium">≈ $288.6M</span>
+                      </li>
+                      <li className="flex justify-between">
+                        <span>Dy₂O₃: 1,262 tons × $207,930/mt</span>
+                        <span className="font-medium">≈ $262.4M</span>
+                      </li>
+                      <li className="flex justify-between">
+                        <span>Tb₂O₃: 253 tons × $804,870/mt</span>
+                        <span className="font-medium">≈ $203.6M</span>
+                      </li>
+                      <li className="flex justify-between">
+                        <span>Other REEs combined</span>
+                        <span className="font-medium">≈ $271.5M</span>
+                      </li>
+                    </ul>
+                    <p className="font-medium text-green-600">Total estimated value: $1,998,787,773 USD</p>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Foreign Company Involvement */}
+      <section className="bg-white py-12 dark:bg-slate-800">
+        <div className="container mx-auto px-4">
+          <div className="mx-auto max-w-5xl">
+            <h2 className="mb-6 text-center text-2xl sm:text-3xl font-bold">
+              Summary of Foreign Company Involvement in Indonesia's REE Projects
+            </h2>
+            <p className="mb-8 text-center text-sm sm:text-base text-slate-600 dark:text-slate-400">
+              An overview of international partnerships and interests in Indonesia's rare earth element recovery,
+              particularly from tin smelter by-products
+            </p>
+
+            {/* Foreign Companies Table */}
+            <div className="mb-10 overflow-x-auto rounded-lg border border-slate-200 shadow-sm dark:border-slate-700">
+              <div className="min-w-[800px]">
+                <table className="w-full border-collapse">
+                  <thead>
+                    <tr className="bg-slate-100 dark:bg-slate-800">
+                      <th className="border-b p-3 text-left font-medium dark:border-slate-700">Company Origin</th>
+                      <th className="border-b p-3 text-left font-medium dark:border-slate-700">Company Name</th>
+                      <th className="border-b p-3 text-left font-medium dark:border-slate-700">
+                        Details of Involvement
+                      </th>
+                      <th className="border-b p-3 text-left font-medium dark:border-slate-700">Year</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr className="border-b hover:bg-slate-50 dark:border-slate-700 dark:hover:bg-slate-900">
+                      <td className="p-3 font-medium">Canada</td>
+                      <td className="p-3">Unknown</td>
+                      <td className="p-3">
+                        In talks with PT Timah for REE development from monazite; discussions in 2018 highlighted
+                        technology partnerships. A 2023 report suggests ongoing interest in global REE supply chains.
+                      </td>
+                      <td className="p-3">2018, 2023 (update)</td>
+                    </tr>
+                    <tr className="border-b hover:bg-slate-50 dark:border-slate-700 dark:hover:bg-slate-900">
+                      <td className="p-3 font-medium">China</td>
+                      <td className="p-3">Shenghe Resources Holdings Ltd.</td>
+                      <td className="p-3">
+                        Purchasing monazite sand, likely from PT Timah, for REE processing in China. This ongoing
+                        engagement reflects China's strategy to secure REE supplies globally.
+                      </td>
+                      <td className="p-3">Ongoing (pre-2023)</td>
+                    </tr>
+                    <tr className="border-b hover:bg-slate-50 dark:border-slate-700 dark:hover:bg-slate-900">
+                      <td className="p-3 font-medium">Japan</td>
+                      <td className="p-3">Governmental interest, no specific company</td>
+                      <td className="p-3">
+                        Japan expressed interest in Indonesia's REEs for EV supply chains in 2021, with no specific
+                        companies named. Governmental interest persists.
+                      </td>
+                      <td className="p-3">2021</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            {/* Updates and Analysis */}
+            <div className="space-y-6">
+              <h3 className="text-xl sm:text-2xl font-bold">Updates and Analysis</h3>
+
+              <div className="grid gap-6 sm:grid-cols-1 md:grid-cols-2">
+                <div className="rounded-lg border border-slate-200 p-4 sm:p-5 dark:border-slate-700">
+                  <h4 className="mb-2 text-lg sm:text-xl font-semibold text-primary">Canada (2023 Update)</h4>
+                  <p className="text-sm sm:text-base text-slate-700 dark:text-slate-300">
+                    The Canada Rare Earth Corporation website emphasizes developing a global vertically-integrated REE
+                    supply chain, with projects to produce concentrates and essential mineral products. While no direct
+                    2023 news specifies a new agreement with PT Timah, a parliamentary report from February 17, 2025,
+                    highlights Canada's significant REE reserves and interest in international partnerships.
+                  </p>
+                </div>
+
+                <div className="rounded-lg border border-slate-200 p-4 sm:p-5 dark:border-slate-700">
+                  <h4 className="mb-2 text-lg sm:text-xl font-semibold text-primary">China</h4>
+                  <p className="text-sm sm:text-base text-slate-700 dark:text-slate-300">
+                    Shenghe Resources Holdings Ltd.'s involvement continues, focusing on raw material acquisition
+                    (monazite) from Indonesia, likely PT Timah, for processing in China. No specific 2023 or later
+                    updates were found, but their ongoing purchases align with China's dominance in REE processing (85%
+                    globally as of 2023).
+                  </p>
+                </div>
+
+                <div className="rounded-lg border border-slate-200 p-4 sm:p-5 dark:border-slate-700">
+                  <h4 className="mb-2 text-lg sm:text-xl font-semibold text-primary">Japan</h4>
+                  <p className="text-sm sm:text-base text-slate-700 dark:text-slate-300">
+                    The 2021 Nikkei Asia report remains the latest specific mention, with Japan's interest tied to EV
+                    supply chains. No post-2023 updates confirm corporate involvement, suggesting Japan's engagement is
+                    still at a governmental level, awaiting private sector action.
+                  </p>
+                </div>
+
+                <div className="rounded-lg border border-slate-200 p-4 sm:p-5 dark:border-slate-700">
+                  <h4 className="mb-2 text-lg sm:text-xl font-semibold text-primary">USA and Others</h4>
+                  <p className="text-sm sm:text-base text-slate-700 dark:text-slate-300">
+                    No recent (2023-2025) reports confirm specific US company involvement in Indonesia's REE projects
+                    related to tin smelters. General US interest in diversifying REE supply chains exists (e.g.,
+                    Mountain Pass mine developments), but no direct link to Indonesia was found.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Environmental & Regulatory Context */}
+      <section className="py-12">
+        <div className="container mx-auto px-4">
+          <div className="mx-auto max-w-4xl">
+            <div className="mb-6 flex items-center">
+              <AlertTriangle className="mr-2 h-6 w-6 text-amber-500" />
+              <h2 className="text-3xl font-bold">Environmental & Regulatory Context</h2>
+            </div>
+            <Card>
+              <CardContent className="pt-6">
+                <div className="prose prose-slate max-w-none dark:prose-invert">
+                  <p>
+                    The environmental impact of tin mining, particularly in Bangka Belitung, includes unreclaimed pits
+                    and deforestation, with regulatory efforts pushing for downstream processing of REEs.
+                  </p>
+                  <p>
+                    This context is crucial for investors, requiring attention to sustainability and compliance,
+                    especially given the radioactive thorium content in monazite.
+                  </p>
+                  <p>
+                    Recent regulations by Indonesia's Ministry of Energy and Mineral Resources designate 47 critical
+                    minerals, including REEs, highlighting the strategic importance of these resources.
+                  </p>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
+
+      {/* Conclusion */}
+      <section className="bg-primary py-8 sm:py-12 text-primary-foreground">
+        <div className="container mx-auto px-4">
+          <div className="mx-auto max-w-4xl text-center">
+            <h2 className="mb-4 sm:mb-6 text-2xl sm:text-3xl font-bold">Conclusion</h2>
+            <p className="mb-6 text-base sm:text-lg">
+              Indonesia's tin smelters, particularly in the Bangka Belitung Islands, present significant opportunities
+              for REE recovery from by-products. With estimated reserves of 116,142 tons of REE oxides and the
+              unexpected presence of xenotime for heavy REE recovery, this represents a valuable resource for high-tech
+              applications globally.
+            </p>
+            <button className="inline-flex items-center rounded-lg bg-white px-4 py-2 font-medium text-primary hover:bg-opacity-90">
+              Download Full Report
+              <ArrowRight className="ml-2 h-4 w-4" />
+            </button>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="bg-slate-900 py-8 text-slate-400">
+        <div className="container mx-auto px-4 text-center">
+          <p>© 2025 Rare Earth Elements Analysis. All rights reserved.</p>
+        </div>
+      </footer>
+    </div>
+  )
+}
+
