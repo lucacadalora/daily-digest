@@ -62,12 +62,8 @@ export function generateSocialPreviewHTML(
   // Ensure image URL is absolute
   let imageUrl;
   
-  // Check if the article already uses image.social format
-  if (article.imageUrl.includes('image.social/get?url=')) {
-    imageUrl = article.imageUrl;
-  } 
   // If it's just a relative URL, make it absolute
-  else if (!article.imageUrl.startsWith('http')) {
+  if (!article.imageUrl.startsWith('http')) {
     imageUrl = `${baseUrl}${article.imageUrl}`;
   }
   // Otherwise, use the URL as is
@@ -75,14 +71,9 @@ export function generateSocialPreviewHTML(
     imageUrl = article.imageUrl;
   }
   
-  // For important articles, consider using image.social dynamic screenshots
-  const host = baseUrl.replace(/^https?:\/\//, '');
-  const path = article.url.startsWith('/') ? article.url.substring(1) : article.url;
-  
-  // Option to use image.social for dynamic screenshots - follows format: https://image.social/get?url=domain/path
-  // Only apply for articles with specific categories or when original image isn't available
-  if (article.category === 'featured' || !imageUrl || imageUrl.includes('placeholder')) {
-    imageUrl = `https://image.social/get?url=${host}/${path}&t=${Date.now()}`;
+  // For cases where no image is available, use a default logo image
+  if (!imageUrl || imageUrl.includes('placeholder')) {
+    imageUrl = `${baseUrl}/logo-large.png`;
   }
   
   // Canonical URL for the article

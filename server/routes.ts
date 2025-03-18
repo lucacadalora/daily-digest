@@ -12,6 +12,7 @@ import { subscribers } from "../db/schema";
 import { z } from "zod";
 import { eq } from "drizzle-orm";
 import { detectSocialMediaCrawler, setSocialMediaCacheHeaders } from "./utils/crawler-detection";
+import { registerAdditionalRoutes } from "./routes-add";
 
 // Extend Express Request to include the skipPreview property
 declare global {
@@ -2123,6 +2124,9 @@ export function registerRoutes(app: Express): Server {
 
   // Register the article routes
   registerArticleRoutes(app);
+  
+  // Register additional routes (replacing image.social integration)
+  registerAdditionalRoutes(app);
 
   const httpServer = createServer(app);
   return httpServer;
