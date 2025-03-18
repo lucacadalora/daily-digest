@@ -30,6 +30,24 @@ const CRAWLER_PATTERNS = {
     /^LinkedIn/
   ],
   
+  // Telegram crawlers
+  telegram: [
+    /TelegramBot/i,
+    /Telegram/i
+  ],
+  
+  // Additional messaging apps
+  discord: [/Discordbot/i],
+  slack: [/Slackbot/i],
+  viber: [/Viber/i],
+  line: [/Line\//i],
+  skype: [/SkypeUriPreview/i],
+  
+  // Other social platforms
+  snapchat: [/Snapchat/i],
+  medium: [/Medium/i],
+  reddit: [/Redditbot/i],
+  
   // Generic social media crawlers
   generic: [
     /bot/i,
@@ -50,7 +68,17 @@ const SOCIAL_REFERERS = [
   /facebook\.com/i,
   /fb\.com/i,
   /linkedin\.com/i,
-  /t\.co\//i
+  /t\.co\//i,
+  /telegram\.org/i,
+  /t\.me\//i,
+  /discord\.com/i,
+  /discordapp\.com/i,
+  /viber\.com/i,
+  /line\.me/i,
+  /skype\.com/i,
+  /snapchat\.com/i,
+  /medium\.com/i,
+  /reddit\.com/i
   // WhatsApp referer pattern removed - we don't want to treat WhatsApp referrals as special
 ];
 
@@ -69,6 +97,7 @@ export function detectSocialMediaCrawler(req: Request): {
   isWhatsApp: boolean;
   isInstagram: boolean;
   isLinkedIn: boolean;
+  isTelegram?: boolean;
 } {
   const userAgent = req.headers['user-agent'] || '';
   const referer = req.headers['referer'] || '';
@@ -106,6 +135,11 @@ export function detectSocialMediaCrawler(req: Request): {
   // Check if this is a LinkedIn crawler
   const isLinkedIn = CRAWLER_PATTERNS.linkedin.some(pattern => pattern.test(userAgent));
   
+  // Check if this is a Telegram crawler
+  const isTelegram = CRAWLER_PATTERNS.telegram.some(pattern => pattern.test(userAgent)) || 
+                    referer.includes('telegram.org') || 
+                    referer.includes('t.me');
+  
   // Check if this is a generic social media crawler
   const isGenericCrawler = CRAWLER_PATTERNS.generic.some(pattern => pattern.test(userAgent));
   
@@ -117,17 +151,19 @@ export function detectSocialMediaCrawler(req: Request): {
   if (isTwitter) platform = 'twitter';
   else if (isFacebook) platform = 'facebook';
   else if (isLinkedIn) platform = 'linkedin';
+  else if (isTelegram) platform = 'telegram';
   else if (isGenericCrawler || isSocialReferer) platform = 'unknown';
   
   return {
     // We exclude WhatsApp and Instagram from crawler detection
-    isCrawler: isTwitter || isFacebook || isLinkedIn || (isGenericCrawler && !isWhatsAppRequest && !isInstagramRequest) || (isSocialReferer && !isWhatsAppRequest && !isInstagramRequest),
+    isCrawler: isTwitter || isFacebook || isLinkedIn || isTelegram || (isGenericCrawler && !isWhatsAppRequest && !isInstagramRequest) || (isSocialReferer && !isWhatsAppRequest && !isInstagramRequest),
     platform,
     isTwitter,
     isFacebook,
     isWhatsApp: isWhatsAppRequest,
     isInstagram: isInstagramRequest,
-    isLinkedIn
+    isLinkedIn,
+    isTelegram
   };
 }
 

@@ -780,26 +780,21 @@ export function registerRoutes(app: Express): Server {
   app.use((req, res, next) => {
     // Check if this is a newsletter route
     if (req.path.startsWith('/newsletter/') || req.path === '/newsletter') {
-      // Check for WhatsApp and Instagram in the user agent or referer
+      // For ALL newsletter routes - ALWAYS set the skipPreview flag
+      // This ensures no special preview handling for any social platform
+      req.skipPreview = true;
+      
+      // Log that we're forcing the normal site for this newsletter link
+      console.log(`[Newsletter] Path detected: ${req.path} - forcing normal site display for all platforms`);
+      
+      // Get user agent for debugging
       const userAgent = req.headers['user-agent'] || '';
-      const referer = req.headers['referer'] || '';
       
-      const isWhatsAppRequest = 
-        userAgent.includes('WhatsApp') || 
-        referer.includes('whatsapp.com') || 
-        referer.includes('wa.me');
-        
-      const isInstagramRequest = 
-        userAgent.includes('Instagram') || 
-        referer.includes('instagram.com') ||
-        referer.includes('ig.me');
+      // Check if this is from a social media crawler for reporting purposes
+      const isCrawler = /facebookexternalhit|Twitterbot|LinkedInBot|WhatsApp|Instagram|Telegram|Googlebot|bingbot|DuckDuckBot|Slackbot|TelegramBot/i.test(userAgent);
       
-      // Log that we detected a social media app requesting a newsletter
-      if (isWhatsAppRequest || isInstagramRequest) {
-        console.log(`[Newsletter] ${isWhatsAppRequest ? 'WhatsApp' : 'Instagram'} client detected for ${req.path}! Showing normal site...`);
-        
-        // Set a flag in the request to skip any special preview handling
-        req.skipPreview = true;
+      if (isCrawler) {
+        console.log(`[Newsletter] Social media crawler detected in request: ${userAgent.substring(0, 50)}...`);
       }
     }
     
