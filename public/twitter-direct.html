@@ -6,11 +6,11 @@
   <title>Twitter/X Card Test | Daily Digest</title>
   <meta name="description" content="Testing Twitter Card integration with image.social dynamic previews">
   
-  <!-- Twitter Card tags - using the correct image.social format -->
+  <!-- Twitter Card tags - using the EXACT image.social format from the documentation -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Twitter Card Test - image.social Integration">
-  <meta name="twitter:description" content="Testing Twitter Card with image.social using the correct URL format: https://image.social/get?url=domain/path">
-  <meta name="twitter:image" content="https://image.social/get?url=dailydigest.id/latest/china-steel-reform&t=20250318">
+  <meta name="twitter:description" content="Testing Twitter Card with image.social using the correct URL format">
+  <meta name="twitter:image" content="https://image.social/get?url=dailydigest.id/latest/china-steel-reform">
   <meta name="twitter:site" content="@dailydigestID">
   
   <!-- No Open Graph tags to ensure we're testing Twitter-specific implementation -->
@@ -140,7 +140,7 @@
           the correct URL format:
         </p>
         <div class="url-display">
-          https://image.social/get?url=dailydigest.id/latest/china-steel-reform&t=20250318
+          https://image.social/get?url=dailydigest.id/latest/china-steel-reform
         </div>
         <p>
           When this page is shared on Twitter/X, it should display a large preview image 
@@ -152,7 +152,7 @@
         <ul>
           <li>Using <span class="highlight">twitter:card</span> with value <span class="highlight">summary_large_image</span></li>
           <li>The <span class="highlight">twitter:image</span> meta tag uses the proper image.social URL format</li>
-          <li>A timestamp parameter is added to ensure fresh content from image.social</li>
+          <li>No timestamp parameter is added - exact format from documentation</li>
           <li>No Open Graph tags to ensure we're testing Twitter-specific implementation</li>
         </ul>
         

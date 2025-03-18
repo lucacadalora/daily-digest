@@ -2191,6 +2191,25 @@ export function registerRoutes(app: Express): Server {
     // Send the file
     res.sendFile(join(process.cwd(), 'public', 'social-media-testing-suite.html'));
   });
+  
+  app.get('/image-social-test.html', (req, res) => {
+    // Set cache headers for social media platforms
+    res.setHeader('Cache-Control', 'public, max-age=300');
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    
+    // Check if it's a social media crawler
+    const userAgent = req.headers['user-agent'] || '';
+    if (userAgent.includes('facebookexternalhit') || 
+        userAgent.includes('Twitterbot') ||
+        userAgent.includes('LinkedInBot') ||
+        userAgent.includes('Telegram') ||
+        userAgent.includes('WhatsApp')) {
+      console.log(`[Image.Social Test] Social crawler detected: ${userAgent.substring(0, 50)}...`);
+    }
+    
+    // Send the file
+    res.sendFile(join(process.cwd(), 'public', 'image-social-test.html'));
+  });
 
   // Register the article routes
   registerArticleRoutes(app);

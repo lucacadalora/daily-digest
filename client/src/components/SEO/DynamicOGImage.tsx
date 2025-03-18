@@ -28,7 +28,7 @@ interface DynamicOGImageProps {
   
   /**
    * Optional flag to enable cache busting with timestamp parameter
-   * Default is true
+   * Default is false to match the exact image.social documentation format
    */
   enableCacheBusting?: boolean;
   
@@ -80,7 +80,7 @@ export default function DynamicOGImage({
   description, 
   path, 
   domain = 'dailydigest.id',
-  enableCacheBusting = true,
+  enableCacheBusting = false,
   prioritize = true,
   platform = 'all'
 }: DynamicOGImageProps) {
