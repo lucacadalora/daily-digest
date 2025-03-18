@@ -921,7 +921,61 @@ export function registerRoutes(app: Express): Server {
   // Serve social media image test page
   app.get('/social-image-test', (req, res) => {
     try {
-      console.log('[Debug] Serving social-image-test.html');
+      // Detect if request is from a social media crawler
+      const userAgent = req.headers['user-agent'] || '';
+      const isSocialCrawler = 
+        userAgent.includes('Twitterbot') || 
+        userAgent.includes('facebookexternalhit') || 
+        userAgent.includes('LinkedInBot') || 
+        userAgent.includes('Telegram') || 
+        userAgent.includes('WhatsApp');
+      
+      if (isSocialCrawler) {
+        console.log(`[Debug] Social media crawler detected: ${userAgent.substring(0, 50)}...`);
+        
+        // Generate a timestamp for cache busting
+        const timestamp = new Date().getTime();
+        const imageSocialUrl = `https://image.social/get?url=dailydigest.id/social-image-test&t=${timestamp}`;
+        
+        // Set appropriate cache control headers based on crawler type
+        if (userAgent.includes('Twitterbot')) {
+          // Twitter often needs a shorter cache period to refresh properly
+          res.setHeader('Cache-Control', 'public, max-age=900'); // 15 minutes
+        } else if (userAgent.includes('Telegram')) {
+          // Telegram is aggressive with caching, use no-cache
+          res.setHeader('Cache-Control', 'no-cache, max-age=0');
+        } else {
+          // General social media platforms
+          res.setHeader('Cache-Control', 'public, max-age=3600'); // 1 hour
+        }
+        
+        // Return a minimal HTML response with the necessary meta tags
+        res.send(`<!DOCTYPE html>
+<html>
+<head>
+  <title>Social Image Test - Daily Digest</title>
+  <meta property="og:title" content="Daily Digest Social Media Image Test" />
+  <meta property="og:description" content="Testing our implementation of automated social media preview images using image.social" />
+  <meta property="og:image" content="${imageSocialUrl}" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:url" content="https://dailydigest.id/social-image-test" />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Daily Digest Social Media Image Test" />
+  <meta name="twitter:description" content="Testing our implementation of automated social media preview images using image.social" />
+  <meta name="twitter:image" content="${imageSocialUrl}" />
+</head>
+<body>
+  <h1>Social Image Test - Daily Digest</h1>
+  <p>This page is optimized for social media crawler preview.</p>
+</body>
+</html>`);
+        return;
+      }
+      
+      // For regular users, serve the normal HTML file
+      console.log('[Debug] Serving social-image-test.html to regular user');
       const filePath = join(process.cwd(), 'public', 'social-image-test.html');
       
       if (!fs.existsSync(filePath)) {
@@ -1212,7 +1266,60 @@ export function registerRoutes(app: Express): Server {
   // Test route for social image (image.social) integration
   app.get('/social-image-test', (req, res) => {
     try {
-      console.log('[Debug] Serving social-image-test.html');
+      // Detect if request is from a social media crawler
+      const userAgent = req.headers['user-agent'] || '';
+      const isSocialCrawler = 
+        userAgent.includes('Twitterbot') || 
+        userAgent.includes('facebookexternalhit') || 
+        userAgent.includes('LinkedInBot') || 
+        userAgent.includes('Telegram') || 
+        userAgent.includes('WhatsApp');
+      
+      if (isSocialCrawler) {
+        console.log(`[Debug] Social media crawler detected for image.social test: ${userAgent.substring(0, 50)}...`);
+        
+        // Generate a timestamp for cache busting
+        const timestamp = new Date().getTime();
+        const imageSocialUrl = `https://image.social/get?url=dailydigest.id/social-image-test&t=${timestamp}`;
+        
+        // Set appropriate cache control headers based on crawler type
+        if (userAgent.includes('Twitterbot')) {
+          // Twitter often needs a shorter cache period to refresh properly
+          res.setHeader('Cache-Control', 'public, max-age=900'); // 15 minutes
+        } else if (userAgent.includes('Telegram')) {
+          // Telegram is aggressive with caching, use no-cache
+          res.setHeader('Cache-Control', 'no-cache, max-age=0');
+        } else {
+          // General social media platforms
+          res.setHeader('Cache-Control', 'public, max-age=3600'); // 1 hour
+        }
+        
+        // Return a minimal HTML response with the necessary meta tags
+        res.send(`<!DOCTYPE html>
+<html>
+<head>
+  <title>Social Image Test - Daily Digest</title>
+  <meta property="og:title" content="Daily Digest Social Media Image Test" />
+  <meta property="og:description" content="Testing our implementation of automated social media preview images using image.social" />
+  <meta property="og:image" content="${imageSocialUrl}" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:url" content="https://dailydigest.id/social-image-test" />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Daily Digest Social Media Image Test" />
+  <meta name="twitter:description" content="Testing our implementation of automated social media preview images using image.social" />
+  <meta name="twitter:image" content="${imageSocialUrl}" />
+</head>
+<body>
+  <h1>Social Image Test - Daily Digest</h1>
+  <p>This page is optimized for social media crawler preview.</p>
+</body>
+</html>`);
+        return;
+      }
+      
+      console.log('[Debug] Serving social-image-test.html to regular user');
       const filePath = join(process.cwd(), 'public', 'social-image-test.html');
       
       if (!fs.existsSync(filePath)) {
