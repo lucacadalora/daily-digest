@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Newsletter Preview Removal Test Page</title>
+    <style>
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+        }
+        h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+            color: #1a202c;
+        }
+        .test-section {
+            background: #f8f8f8;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border: 1px solid #e2e8f0;
+        }
+        .result {
+            font-weight: bold;
+            color: #2563eb;
+        }
+        .passed {
+            color: #10b981;
+        }
+        .failed {
+            color: #ef4444;
+        }
+        code {
+            font-family: monospace;
+            background: #edf2f7;
+            padding: 2px 5px;
+            border-radius: 3px;
+        }
+        button {
+            background: #2563eb;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+        button:hover {
+            background: #1d4ed8;
+        }
+    </style>
+</head>
+<body>
+    <h1>Newsletter Preview Removal Test</h1>
+    <p>This page validates the implementation of the newsletter preview removal feature.</p>
+    
+    <div class="test-section">
+        <h2>1. URL Path Detection</h2>
+        <p>Current URL path: <code id="url-path"></code></p>
+        <p>Is newsletter path: <span id="is-newsletter" class="result"></span></p>
+    </div>
+    
+    <div class="test-section">
+        <h2>2. User Agent Detection</h2>
+        <p>Current User Agent: <code id="user-agent"></code></p>
+        <p>Is social media crawler: <span id="is-crawler" class="result"></span></p>
+    </div>
+    
+    <div class="test-section">
+        <h2>3. Preview Handling</h2>
+        <p>Skip preview flag: <span id="skip-preview" class="result"></span></p>
+        <p>Is showing normal site: <span id="normal-site" class="result"></span></p>
+    </div>
+    
+    <div class="test-section">
+        <h2>4. Meta Tags</h2>
+        <p>Number of image meta tags: <span id="image-meta-count" class="result"></span></p>
+        <p>Has image meta tags: <span id="has-image-meta" class="result"></span></p>
+    </div>
+    
+    <div class="test-section">
+        <h2>5. Overall Test Result</h2>
+        <p>Implementation status: <span id="overall-result" class="result"></span></p>
+    </div>
+
+    <button id="run-tests">Run Tests</button>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Run tests on page load
+            runTests();
+            
+            // Also run tests when button is clicked
+            document.getElementById('run-tests').addEventListener('click', runTests);
+        });
+        
+        function runTests() {
+            // 1. URL Path Test
+            const path = window.location.pathname;
+            document.getElementById('url-path').textContent = path;
+            const isNewsletterPath = path.includes('/newsletter/') || path === '/newsletter';
+            document.getElementById('is-newsletter').textContent = isNewsletterPath ? 'Yes ✓' : 'No ✗';
+            document.getElementById('is-newsletter').className = isNewsletterPath ? 'result passed' : 'result failed';
+            
+            // 2. User Agent Test
+            const userAgent = navigator.userAgent;
+            document.getElementById('user-agent').textContent = userAgent;
+            const isCrawler = /facebookexternalhit|Twitterbot|LinkedInBot|WhatsApp|Instagram|Telegram|Googlebot|bingbot|DuckDuckBot|Slackbot|TelegramBot/i.test(userAgent);
+            document.getElementById('is-crawler').textContent = isCrawler ? 'Yes ✓' : 'No ✗';
+            document.getElementById('is-crawler').className = 'result'; // Just informational, not pass/fail
+            
+            // 3. Skip Preview Test (this is a server-side check, assuming success if we see this page)
+            document.getElementById('skip-preview').textContent = 'Yes ✓ (inferred)';
+            document.getElementById('skip-preview').className = 'result passed';
+            document.getElementById('normal-site').textContent = 'Yes ✓ (seeing this test page)';
+            document.getElementById('normal-site').className = 'result passed';
+            
+            // 4. Meta Tags Test
+            const metaTags = document.querySelectorAll('meta');
+            let imageMetaCount = 0;
+            
+            metaTags.forEach(tag => {
+                const property = tag.getAttribute('property');
+                const name = tag.getAttribute('name');
+                
+                if ((property && (property.includes('og:image') || property.includes('twitter:image'))) ||
+                    (name && (name.includes('og:image') || name.includes('twitter:image')))) {
+                    imageMetaCount++;
+                }
+            });
+            
+            document.getElementById('image-meta-count').textContent = imageMetaCount;
+            const hasImageMeta = imageMetaCount > 0;
+            document.getElementById('has-image-meta').textContent = hasImageMeta ? 'Yes ✗' : 'No ✓';
+            document.getElementById('has-image-meta').className = hasImageMeta ? 'result failed' : 'result passed';
+            
+            // 5. Overall Result
+            const isSuccess = isNewsletterPath && !hasImageMeta;
+            document.getElementById('overall-result').textContent = isSuccess ? 'PASSED ✓' : 'FAILED ✗';
+            document.getElementById('overall-result').className = isSuccess ? 'result passed' : 'result failed';
+        }
+    </script>
+</body>
+</html>

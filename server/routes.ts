@@ -780,6 +780,10 @@ export function registerRoutes(app: Express): Server {
   app.use((req, res, next) => {
     // Check if this is a newsletter route
     if (req.path.startsWith('/newsletter/') || req.path === '/newsletter') {
+      // DEBUG MODE: Always log newsletter requests
+      console.log(`[DEBUG][Newsletter] Intercepted path: ${req.path}`);
+      console.log(`[DEBUG][Newsletter] User-Agent: ${req.headers['user-agent']}`);
+      
       // For ALL newsletter routes - ALWAYS set the skipPreview flag
       // This ensures no special preview handling for any social platform
       req.skipPreview = true;
@@ -794,12 +798,20 @@ export function registerRoutes(app: Express): Server {
       const isCrawler = /facebookexternalhit|Twitterbot|LinkedInBot|WhatsApp|Instagram|Telegram|Googlebot|bingbot|DuckDuckBot|Slackbot|TelegramBot/i.test(userAgent);
       
       if (isCrawler) {
-        console.log(`[Newsletter] Social media crawler detected in request: ${userAgent.substring(0, 50)}...`);
+        console.log(`[Newsletter] Social media crawler detected in request: ${userAgent}`);
       }
     }
     
     // Always continue to the next middleware
     next();
+  });
+  
+  // Special test page for verifying newsletter preview removal
+  app.get('/newsletter/test', (req, res) => {
+    console.log('[Newsletter] Serving test page for newsletter preview removal');
+    
+    // Serve our test HTML page
+    res.sendFile(join(process.cwd(), 'public', 'test-newsletter-preview.html'));
   });
   
   // Generic handler for other newsletter routes - simply serves the app 
