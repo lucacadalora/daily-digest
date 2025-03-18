@@ -61,45 +61,61 @@ export function updateMetaTags(metadata: ArticleMetadata, cacheBuster?: string):
   const imageWidth = metadata.imageWidth || '1200';
   const imageHeight = metadata.imageHeight || '630';
   
-  // Define image-related meta tags if an image URL is provided
+  // Define image-related meta tags
   let imageMetaTags: Record<string, string> = {};
   
-  if (metadata.image && metadata.image.trim() !== '') {
-    // Process image URL to add cache buster if needed
-    const imageUrl = cacheBuster 
-      ? `${metadata.image}${metadata.image.includes('?') ? '&' : '?'}v=${cacheBuster}`
-      : metadata.image;
-    
-    // Determine image format for proper MIME type 
-    let imageMimeType = 'image/jpeg';
-    if (imageUrl.endsWith('.png') || imageUrl.includes('.png?')) {
-      imageMimeType = 'image/png';
-    } else if (imageUrl.endsWith('.webp') || imageUrl.includes('.webp?')) {
-      imageMimeType = 'image/webp';
+  // Function to create image.social URL if needed
+  const getImageUrl = (baseUrl: string): string => {
+    // If already using image.social, just return with cache buster
+    if (baseUrl.includes('image.social/get?url=')) {
+      return cacheBuster 
+        ? `${baseUrl}${baseUrl.includes('?') ? '&' : '?'}t=${cacheBuster}`
+        : baseUrl;
     }
     
-    imageMetaTags = {
-      // Open Graph image tags
-      'og:image': imageUrl,
-      'og:image:url': imageUrl,
-      'og:image:secure_url': imageUrl,
-      'og:image:type': imageMimeType,
-      'og:image:width': imageWidth,
-      'og:image:height': imageHeight,
-      'og:image:alt': imageAlt,
-
-      // Twitter card tags - use large image format for better visibility
-      'twitter:card': 'summary_large_image',
-      'twitter:image': imageUrl,
-      'twitter:image:src': imageUrl,
-      'twitter:image:alt': imageAlt,
-    };
-  } else {
-    // Use summary card type instead of summary_large_image when no image is present
-    imageMetaTags = {
-      'twitter:card': 'summary',
-    };
+    // If it's a custom image, use it directly
+    if (baseUrl.startsWith('http') && !baseUrl.includes('dailydigest.id')) {
+      return cacheBuster 
+        ? `${baseUrl}${baseUrl.includes('?') ? '&' : '?'}v=${cacheBuster}`
+        : baseUrl;
+    }
+    
+    // Otherwise, create an image.social URL from the article's URL
+    // This ensures we get a beautiful screenshot preview
+    const encodedUrl = encodeURIComponent(metadata.url);
+    const timestamp = cacheBuster || Date.now();
+    return `https://image.social/get?url=${encodedUrl}&t=${timestamp}`;
+  };
+  
+  // Process image URL
+  const imageUrl = metadata.image && metadata.image.trim() !== ''
+    ? getImageUrl(metadata.image)
+    : getImageUrl(metadata.url);
+  
+  // Determine image format for proper MIME type (default to jpeg for image.social)
+  let imageMimeType = 'image/jpeg';
+  if (imageUrl.endsWith('.png') || imageUrl.includes('.png?')) {
+    imageMimeType = 'image/png';
+  } else if (imageUrl.endsWith('.webp') || imageUrl.includes('.webp?')) {
+    imageMimeType = 'image/webp';
   }
+  
+  imageMetaTags = {
+    // Open Graph image tags
+    'og:image': imageUrl,
+    'og:image:url': imageUrl,
+    'og:image:secure_url': imageUrl,
+    'og:image:type': imageMimeType,
+    'og:image:width': imageWidth,
+    'og:image:height': imageHeight,
+    'og:image:alt': imageAlt,
+
+    // Twitter card tags - use large image format for better visibility
+    'twitter:card': 'summary_large_image',
+    'twitter:image': imageUrl,
+    'twitter:image:src': imageUrl,
+    'twitter:image:alt': imageAlt,
+  };
   
   // Define all meta tags
   const metaTags = {

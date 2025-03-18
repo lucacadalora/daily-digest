@@ -59,22 +59,16 @@ export function generateSocialPreviewHTML(
   platform: SocialPlatform,
   baseUrl: string
 ): string {
-  // Ensure image URL is absolute
-  let imageUrl;
+  // Generate the image.social URL for dynamic screenshots
+  // This provides beautiful social media preview images for all articles
+  const timestamp = Date.now(); // Add timestamp for cache busting
+  const encodedUrl = encodeURIComponent(`${baseUrl}${article.url}`);
+  const imageUrl = `https://image.social/get?url=${encodedUrl}&t=${timestamp}`;
   
-  // If it's just a relative URL, make it absolute
-  if (!article.imageUrl.startsWith('http')) {
-    imageUrl = `${baseUrl}${article.imageUrl}`;
-  }
-  // Otherwise, use the URL as is
-  else {
-    imageUrl = article.imageUrl;
-  }
-  
-  // For cases where no image is available, use a default logo image
-  if (!imageUrl || imageUrl.includes('placeholder')) {
-    imageUrl = `${baseUrl}/logo-large.png`;
-  }
+  // For fallback cases, we'll still have a static image ready
+  const fallbackImage = article.imageUrl.startsWith('http') 
+    ? article.imageUrl 
+    : `${baseUrl}${article.imageUrl || '/logo-large.png'}`;
   
   // Canonical URL for the article
   const canonicalUrl = article.url.startsWith('http') 
@@ -219,7 +213,7 @@ export function generateSocialPreviewHTML(
       ${article.category ? `<div class="category">${article.category}</div>` : ''}
     </div>
     
-    <img class="featured" src="${imageUrl}" alt="${article.title}">
+    <img class="featured" src="${imageUrl}" alt="${article.title}" onerror="this.onerror=null; this.src='${fallbackImage}'">
     
     <div class="description">
       ${article.description}
