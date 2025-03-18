@@ -233,13 +233,19 @@ export function handleArticlePreview(
   // Check if this is a newsletter path (any URL containing /newsletter/)
   const isNewsletterPath = req.path.includes('/newsletter/');
   
+  // If this is a newsletter path, ALWAYS skip preview page and show the real site
+  if (isNewsletterPath) {
+    console.log(`[ArticlePreview] Newsletter path detected - always showing real site: Path=${req.path}`);
+    return next();
+  }
+  
   // Detect if this request is from a social media crawler
   const crawlerInfo = detectSocialMediaCrawler(req);
   
-  // If this is a WhatsApp or Instagram request, or if the URL contains /newsletter/ path,
-  // always pass to the next middleware to ensure users see the actual site
-  if (crawlerInfo.isWhatsApp || crawlerInfo.isInstagram || req.skipPreview || isNewsletterPath) {
-    console.log(`[ArticlePreview] Skip preview - showing normal site: WhatsApp=${crawlerInfo.isWhatsApp}, Instagram=${crawlerInfo.isInstagram}, Newsletter=${isNewsletterPath}, Path=${req.path}`);
+  // If this is a WhatsApp or Instagram request, or if skipPreview flag is set,
+  // pass to the next middleware to ensure users see the actual site
+  if (crawlerInfo.isWhatsApp || crawlerInfo.isInstagram || req.skipPreview) {
+    console.log(`[ArticlePreview] Skip preview - showing normal site: WhatsApp=${crawlerInfo.isWhatsApp}, Instagram=${crawlerInfo.isInstagram}, Path=${req.path}`);
     return next();
   }
   

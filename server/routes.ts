@@ -417,26 +417,12 @@ export function registerRoutes(app: Express): Server {
     console.log(`[OG Debug] Processing IHSG newsletter request with image-free meta tags`);
     console.log(`[OG Debug] User-Agent: ${req.headers['user-agent']}`);
     
-    // Check for WhatsApp and Instagram in the user agent or referer
-    const userAgent = req.headers['user-agent'] || '';
-    const referer = req.headers['referer'] || '';
+    // For ALL social platforms, we skip special handling for newsletter links
+    // We always want to show the actual website for newsletter links
     
-    const isWhatsAppRequest = 
-      userAgent.includes('WhatsApp') || 
-      referer.includes('whatsapp.com') || 
-      referer.includes('wa.me');
-      
-    const isInstagramRequest = 
-      userAgent.includes('Instagram') || 
-      referer.includes('instagram.com') ||
-      referer.includes('ig.me');
-    
-    // If this is a WhatsApp or Instagram request, skip special handling
-    // We want these platforms to see the actual website
-    if (isWhatsAppRequest || isInstagramRequest) {
-      console.log(`[OG Debug] WhatsApp/Instagram request detected - showing normal site`);
-      return next();
-    }
+    // Skip all special handling for this newsletter path
+    console.log(`[OG Debug] Newsletter path detected - showing normal site`);
+    return next();
     
     // Find the IHSG newsletter article
     const article = sampleArticles.find(a => a.slug === 'ihsg-outlook-march-3-7');
@@ -636,26 +622,12 @@ export function registerRoutes(app: Express): Server {
     console.log(`[OG Debug] Processing Indonesia Economic Tightrope newsletter request with proper image meta tags`);
     console.log(`[OG Debug] User-Agent: ${req.headers['user-agent']}`);
     
-    // Check for WhatsApp and Instagram in the user agent or referer
-    const userAgent = req.headers['user-agent'] || '';
-    const referer = req.headers['referer'] || '';
+    // For ALL social platforms, we skip special handling for newsletter links
+    // We always want to show the actual website for newsletter links
     
-    const isWhatsAppRequest = 
-      userAgent.includes('WhatsApp') || 
-      referer.includes('whatsapp.com') || 
-      referer.includes('wa.me');
-      
-    const isInstagramRequest = 
-      userAgent.includes('Instagram') || 
-      referer.includes('instagram.com') ||
-      referer.includes('ig.me');
-    
-    // If this is a WhatsApp or Instagram request, skip special handling
-    // We want these platforms to see the actual website
-    if (isWhatsAppRequest || isInstagramRequest) {
-      console.log(`[OG Debug] WhatsApp/Instagram request detected - showing normal site`);
-      return next();
-    }
+    // Skip all special handling for this newsletter path
+    console.log(`[OG Debug] Newsletter path detected - showing normal site`);
+    return next();
     
     // Check if the request is from a social media crawler
     const isCrawler = /facebookexternalhit|Twitterbot|LinkedInBot|Googlebot|bingbot|DuckDuckBot|Slackbot|TelegramBot/i.test(userAgent);
