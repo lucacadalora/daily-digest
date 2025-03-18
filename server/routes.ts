@@ -2210,6 +2210,23 @@ export function registerRoutes(app: Express): Server {
     // Send the file
     res.sendFile(join(process.cwd(), 'public', 'image-social-test.html'));
   });
+  
+  app.get('/whatsapp-cache-buster.html', (req, res) => {
+    // Set strong cache-busting headers to help with WhatsApp's cache
+    res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+    res.setHeader('Pragma', 'no-cache');
+    res.setHeader('Expires', '0');
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    
+    // Log WhatsApp crawler detection
+    const userAgent = req.headers['user-agent'] || '';
+    if (userAgent.includes('WhatsApp')) {
+      console.log(`[WhatsApp Cache Buster] WhatsApp crawler detected: ${userAgent.substring(0, 50)}...`);
+    }
+    
+    // Send the file
+    res.sendFile(join(process.cwd(), 'public', 'whatsapp-cache-buster.html'));
+  });
 
   // Register the article routes
   registerArticleRoutes(app);

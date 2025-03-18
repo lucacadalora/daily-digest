@@ -3,33 +3,30 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>WhatsApp Cache Buster | Daily Digest</title>
-  <meta name="description" content="A special page designed to break WhatsApp's preview cache">
+  <title>WhatsApp Preview Cache Buster | Daily Digest</title>
+  <meta name="description" content="Special page designed to overcome WhatsApp's aggressive caching of link previews">
   
-  <!-- Using the exact image.social format with WhatsApp cache buster timestamp -->
-  <meta property="og:image" content="https://image.social/get?url=dailydigest.id/latest/china-steel-reform?whatsapp_cache_buster=18032025">
-  
-  <!-- Standard Open Graph tags -->
+  <!-- Dynamic timestamp to prevent WhatsApp caching -->
   <meta property="og:title" content="WhatsApp Cache Buster">
-  <meta property="og:description" content="Special page to break WhatsApp's aggressive preview cache">
+  <meta property="og:description" content="This page helps overcome WhatsApp's aggressive caching of link previews">
   <meta property="og:url" content="https://dailydigest.id/whatsapp-cache-buster.html">
-  <meta property="og:type" content="article">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://image.social/get?url=dailydigest.id/latest/china-steel-reform">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
   <meta property="og:site_name" content="Daily Digest">
-  
-  <!-- Force WhatsApp to see this as an updated page with Cache-Control headers -->
-  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-  <meta http-equiv="Pragma" content="no-cache">
-  <meta http-equiv="Expires" content="0">
   
   <style>
     :root {
-      --primary-color: #25D366;
-      --primary-hover: #128C7E;
+      --primary-color: #4f46e5;
+      --primary-hover: #4338ca;
       --bg-color: #f8fafc;
       --text-color: #1e293b;
       --light-gray: #f1f5f9;
       --border-color: #e2e8f0;
-      --code-bg: #f3f4f6;
+      --success-color: #10b981;
+      --warning-color: #f59e0b;
+      --error-color: #ef4444;
     }
     
     body {
@@ -78,55 +75,21 @@
       padding: 1.5rem;
     }
     
-    .implementation {
-      background-color: var(--code-bg);
-      padding: 1.5rem;
-      border-radius: 0.5rem;
-      margin-bottom: 1.5rem;
-      font-family: monospace;
-      white-space: pre-wrap;
-      overflow-x: auto;
-    }
-    
-    .note {
-      background-color: #fffbeb;
-      border-left: 4px solid #f59e0b;
+    .url-display {
+      background-color: var(--light-gray);
       padding: 1rem;
-      margin: 1.5rem 0;
-      border-radius: 0 0.25rem 0.25rem 0;
-    }
-    
-    .button-group {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.75rem;
-      margin-top: 2rem;
-    }
-    
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      padding: 0.675rem 1.25rem;
-      border: none;
       border-radius: 0.375rem;
-      background-color: var(--primary-color);
-      color: white;
-      font-weight: 500;
-      cursor: pointer;
-      text-decoration: none;
+      font-family: monospace;
+      overflow-x: auto;
+      margin-bottom: 1.5rem;
       font-size: 0.875rem;
-      transition: background-color 0.2s;
+      white-space: nowrap;
     }
     
-    .btn:hover {
-      background-color: var(--primary-hover);
-    }
-    
-    .platform-icon {
-      width: 20px;
-      height: 20px;
-      margin-right: 0.5rem;
+    .highlight {
+      background-color: #fef9c3;
+      padding: 0.125rem 0.25rem;
+      border-radius: 0.25rem;
     }
     
     footer {
@@ -136,50 +99,154 @@
       border-top: 1px solid var(--border-color);
       color: #64748b;
     }
+    
+    .whatsapp-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.75rem 1rem;
+      border: none;
+      border-radius: 0.375rem;
+      background-color: #25d366;
+      color: white;
+      font-weight: 500;
+      cursor: pointer;
+      text-decoration: none;
+      font-size: 1rem;
+      transition: background-color 0.2s;
+    }
+    
+    .whatsapp-button:hover {
+      background-color: #128c7e;
+    }
+    
+    .whatsapp-icon {
+      width: 24px;
+      height: 24px;
+      margin-right: 0.5rem;
+    }
+    
+    .timestamp {
+      font-size: 0.875rem;
+      color: #64748b;
+      text-align: center;
+      margin-top: 1rem;
+    }
+    
+    .instructions {
+      margin-top: 2rem;
+      padding: 1.5rem;
+      background-color: #f8fafc;
+      border-radius: 0.5rem;
+      border-left: 4px solid var(--primary-color);
+    }
+    
+    .instructions h3 {
+      margin-top: 0;
+    }
+    
+    .instructions ol {
+      padding-left: 1.5rem;
+    }
+    
+    .instructions li {
+      margin-bottom: 0.5rem;
+    }
   </style>
+  
+  <!-- Script to update timestamp in real-time -->
+  <script>
+    // This function will be executed when the DOM is fully loaded
+    document.addEventListener('DOMContentLoaded', function() {
+      // Get the timestamp display element
+      const timestampElement = document.getElementById('current-timestamp');
+      
+      // Function to update the timestamp
+      function updateTimestamp() {
+        const now = new Date();
+        const formattedTime = now.toLocaleTimeString('en-US', { 
+          hour: '2-digit', 
+          minute: '2-digit', 
+          second: '2-digit',
+          hour12: true 
+        });
+        const formattedDate = now.toLocaleDateString('en-US', {
+          month: 'short',
+          day: 'numeric',
+          year: 'numeric'
+        });
+        
+        // Update the timestamp display
+        timestampElement.textContent = `${formattedDate} at ${formattedTime}`;
+      }
+      
+      // Update initially
+      updateTimestamp();
+      
+      // Update every second
+      setInterval(updateTimestamp, 1000);
+      
+      // Generate unique share URL with timestamp
+      const shareButton = document.getElementById('whatsapp-share');
+      if (shareButton) {
+        shareButton.addEventListener('click', function(e) {
+          e.preventDefault();
+          const timestamp = Date.now();
+          const shareUrl = `https://dailydigest.id/whatsapp-cache-buster.html?t=${timestamp}`;
+          const shareText = `Testing WhatsApp cache buster: ${shareUrl}`;
+          window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(shareText)}`, '_blank');
+        });
+      }
+    });
+  </script>
 </head>
 <body>
   <div class="container">
     <header>
-      <h1>WhatsApp Cache Buster</h1>
-      <p class="subtitle">Breaking WhatsApp's aggressive preview cache</p>
+      <h1>WhatsApp Preview Cache Buster</h1>
+      <p class="subtitle">Overcoming WhatsApp's aggressive caching of link previews</p>
     </header>
     
     <div class="card">
       <div class="card-body">
-        <h2>Implementation Details</h2>
+        <h2>About This Tool</h2>
         <p>
-          This page is designed to force WhatsApp to refresh its preview cache by using a unique
-          URL parameter in the image.social URL:
+          This page is specially designed to help overcome WhatsApp's aggressive caching of link previews.
+          WhatsApp tends to cache previews for extended periods, making it difficult to update the preview
+          image for links that have been shared before.
         </p>
         
-        <div class="implementation">
-<!-- Special cache-busting parameter for WhatsApp -->
-&lt;meta 
-  property="og:image" 
-  content="https://image.social/get?url=dailydigest.id/latest/china-steel-reform?whatsapp_cache_buster=18032025" /&gt;</div>
-        
-        <div class="note">
-          <strong>Note:</strong> WhatsApp aggressively caches link previews, sometimes for days or weeks.
-          This implementation adds a special parameter to force WhatsApp to see this as a unique image URL,
-          bypassing its preview cache.
+        <div class="url-display">
+          https://image.social/get?url=dailydigest.id/latest/china-steel-reform
         </div>
         
         <p>
-          When you share this page on WhatsApp, it should generate a fresh preview using image.social.
-          The special parameter is ignored by image.social but helps WhatsApp recognize this as a new image.
+          When shared on WhatsApp, this page uses a combination of strong cache control headers and
+          dynamically generated timestamps to force WhatsApp to refresh its preview cache.
         </p>
         
-        <h3>Share This Test Page</h3>
-        <div class="button-group">
-          <a href="https://api.whatsapp.com/send?text=Testing%20WhatsApp%20cache%20buster:%20https://dailydigest.id/whatsapp-cache-buster.html" 
-             target="_blank" 
-             class="btn">
-            <svg class="platform-icon" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <p class="timestamp">
+          Current timestamp: <span id="current-timestamp">Loading...</span>
+        </p>
+        
+        <div class="instructions">
+          <h3>How to Use This Tool</h3>
+          <ol>
+            <li>Click the "Share on WhatsApp" button below</li>
+            <li>WhatsApp will open with a pre-filled message containing a unique timestamped URL</li>
+            <li>Send the message to test WhatsApp's preview rendering</li>
+            <li>The preview should display the dynamic image from image.social</li>
+            <li>Each share will generate a unique URL to bypass WhatsApp's cache</li>
+          </ol>
+        </div>
+        
+        <div style="text-align: center; margin-top: 2rem;">
+          <button id="whatsapp-share" class="whatsapp-button">
+            <svg class="whatsapp-icon" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
               <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
             </svg>
             Share on WhatsApp
-          </a>
+          </button>
         </div>
       </div>
     </div>

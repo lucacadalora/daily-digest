@@ -28,7 +28,8 @@ interface DynamicOGImageProps {
   
   /**
    * Optional flag to enable cache busting with timestamp parameter
-   * Default is false to match the exact image.social documentation format
+   * Default is false to exactly match the official image.social documentation format
+   * IMPORTANT: Using cache busting may cause issues with some platforms
    */
   enableCacheBusting?: boolean;
   
