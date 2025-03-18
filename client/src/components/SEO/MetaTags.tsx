@@ -90,20 +90,25 @@ export default function MetaTags({
           <meta name="twitter:creator" content={metadata.twitterCreator} />
         )}
         
-        {/* Use dynamic OG image */}
+        {/* Use dynamic OG image with cache busting */}
         <meta
           property="og:image"
-          content={`https://image.social/get?url=dailydigest.id${customPath || ''}`} />
+          content={`https://image.social/get?url=dailydigest.id${customPath || ''}&t=${cacheBuster || Date.now()}`} />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         {metadata.imageAlt && (
           <meta property="og:image:alt" content={metadata.imageAlt} />
         )}
         
-        {/* Twitter image - same as OG image */}
+        {/* Twitter image with Twitter-specific parameters */}
         <meta
           name="twitter:image"
-          content={`https://image.social/get?url=dailydigest.id${customPath || ''}`} />
+          content={`https://image.social/get?url=dailydigest.id${customPath || ''}&twitter=true&t=${cacheBuster || Date.now()}`} />
+          
+        {/* For newsletter links, we'll add a special crawler hint */}
+        {customPath && customPath.includes('newsletter') && (
+          <meta name="robots" content="noindex, nofollow" />
+        )}
       </Helmet>
     );
   }

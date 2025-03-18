@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Social Media Sharing Test | Daily Digest</title>
+  
+  <!-- Basic Meta Tags -->
+  <meta name="description" content="Testing our social media sharing implementation with image.social">
+  
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:title" content="Social Media Sharing Test">
+  <meta property="og:description" content="Testing our implementation of dynamic social previews using image.social">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://dailydigest.id/social-media-test">
+  <meta property="og:image" content="https://image.social/get?url=dailydigest.id/social-media-test&t=1742318925000">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:site_name" content="Daily Digest">
+  
+  <!-- Twitter Card Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@dailydigest">
+  <meta name="twitter:title" content="Social Media Sharing Test">
+  <meta name="twitter:description" content="Testing our implementation of dynamic social previews using image.social">
+  <meta name="twitter:image" content="https://image.social/get?url=dailydigest.id/social-media-test&twitter=true&t=1742318925000">
+  
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      line-height: 1.6;
+      color: #333;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    
+    h1 {
+      color: #1a365d;
+      margin-top: 40px;
+    }
+    
+    h2 {
+      color: #2c5282;
+      margin-top: 30px;
+    }
+    
+    .test-section {
+      margin: 30px 0;
+      padding: 20px;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      background-color: #f8fafc;
+    }
+    
+    code {
+      background: #edf2f7;
+      padding: 2px 4px;
+      border-radius: 4px;
+      font-family: Monaco, monospace;
+      font-size: 0.9em;
+    }
+    
+    .platform {
+      display: inline-block;
+      margin: 10px;
+      padding: 10px 15px;
+      background: #ebf8ff;
+      border-radius: 4px;
+      font-weight: bold;
+    }
+    
+    .success {
+      color: #2f855a;
+    }
+    
+    .warning {
+      color: #c05621;
+    }
+    
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+    }
+    
+    table, th, td {
+      border: 1px solid #e2e8f0;
+    }
+    
+    th, td {
+      padding: 12px;
+      text-align: left;
+    }
+    
+    th {
+      background-color: #f7fafc;
+    }
+    
+    tr:nth-child(even) {
+      background-color: #f8fafc;
+    }
+  </style>
+</head>
+<body>
+  <h1>Social Media Sharing Test Page</h1>
+  <p>This page is designed to test our implementation of dynamic social media previews using image.social.</p>
+  
+  <div class="test-section">
+    <h2>Test Configuration</h2>
+    <p>We're using image.social to generate dynamic screenshots of our pages for social media sharing.</p>
+    <p>The URL format we're using is:</p>
+    <code>https://image.social/get?url=dailydigest.id/[path]&[platform-specific-parameters]&t=[timestamp]</code>
+    
+    <h3>Platform-Specific Parameters:</h3>
+    <ul>
+      <li><strong>Twitter:</strong> <code>&twitter=true</code></li>
+      <li><strong>Facebook:</strong> <code>&fb=true</code></li>
+      <li><strong>Telegram:</strong> <code>&telegram=true</code> with more aggressive cache busting</li>
+    </ul>
+  </div>
+  
+  <div class="test-section">
+    <h2>Platform Support Matrix</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Platform</th>
+          <th>Dynamic Previews</th>
+          <th>Newsletter Links</th>
+          <th>Special Handling</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="platform">Twitter/X</span></td>
+          <td><span class="success">Supported</span></td>
+          <td><span class="success">No Preview</span></td>
+          <td>Using <code>&twitter=true</code> parameter</td>
+        </tr>
+        <tr>
+          <td><span class="platform">Facebook</span></td>
+          <td><span class="success">Supported</span></td>
+          <td><span class="success">No Preview</span></td>
+          <td>Using <code>&fb=true</code> parameter</td>
+        </tr>
+        <tr>
+          <td><span class="platform">WhatsApp</span></td>
+          <td><span class="success">Supported</span></td>
+          <td><span class="success">No Preview</span></td>
+          <td>Standard implementation</td>
+        </tr>
+        <tr>
+          <td><span class="platform">Telegram</span></td>
+          <td><span class="success">Supported</span></td>
+          <td><span class="success">No Preview</span></td>
+          <td>Aggressive cache busting with <code>&telegram=true&t=[timestamp]</code></td>
+        </tr>
+        <tr>
+          <td><span class="platform">LinkedIn</span></td>
+          <td><span class="success">Supported</span></td>
+          <td><span class="success">No Preview</span></td>
+          <td>Standard implementation</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  <div class="test-section">
+    <h2>Test Links</h2>
+    <p>Share these links on various platforms to verify the implementation:</p>
+    <ul>
+      <li><a href="https://dailydigest.id/latest/china-steel-reform">China Steel Reform Article</a></li>
+      <li><a href="https://dailydigest.id/newsletter/fed-qt-exit-crypto-rally">Newsletter: Fed QT Exit &amp; Crypto Rally</a> (should have no preview)</li>
+      <li><a href="https://dailydigest.id/indonesia-economic-tightrope-export-rules">Indonesia Economic Tightrope</a></li>
+    </ul>
+  </div>
+  
+  <div class="test-section">
+    <h2>Implementation Details</h2>
+    <p>Our social media sharing strategy includes:</p>
+    <ol>
+      <li>Dynamic OpenGraph images using image.social</li>
+      <li>Fallback to static images when required</li>
+      <li>Special handling for newsletter links (no previews)</li>
+      <li>Platform-specific optimizations (Twitter, Facebook, Telegram)</li>
+      <li>Cache busting to ensure fresh previews</li>
+    </ol>
+    <p>The core components include:</p>
+    <ul>
+      <li><code>DynamicOGImage.tsx</code> - React component for dynamic previews</li>
+      <li><code>GlobalOGImage.tsx</code> - Global component applying to all pages</li>
+      <li><code>MetaTags.tsx</code> - General meta tag management</li>
+      <li><code>ArticleSEO.tsx</code> - Article-specific SEO</li>
+      <li>Server-side routes for handling social media crawler requests</li>
+    </ul>
+  </div>
+
+  <footer style="margin-top: 50px; padding-top: 20px; border-top: 1px solid #e2e8f0; text-align: center;">
+    <p>Daily Digest - Market Intelligence Platform</p>
+    <p><small>© 2025 Daily Digest. All rights reserved.</small></p>
+  </footer>
+</body>
+</html>

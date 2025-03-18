@@ -919,6 +919,38 @@ export function registerRoutes(app: Express): Server {
     }
   });
   
+  // Serve our comprehensive social media test page
+  app.get('/social-media-test', (req, res) => {
+    try {
+      console.log('[Debug] Serving social-media-test.html');
+      const filePath = join(process.cwd(), 'public', 'social-media-test.html');
+      
+      if (!fs.existsSync(filePath)) {
+        console.error(`[Debug] HTML file not found at path: ${filePath}`);
+        return res.status(404).send('Test page not found');
+      }
+      
+      const content = fs.readFileSync(filePath, 'utf8');
+      console.log('[Debug] Successfully read social media test file, length:', content.length);
+      
+      // Set appropriate cache headers based on user agent
+      const userAgent = req.headers['user-agent'] || '';
+      if (userAgent.includes('Twitterbot') || userAgent.includes('facebookexternalhit')) {
+        // Social media crawlers should get fresh content
+        res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+      } else {
+        // Regular users can cache briefly
+        res.setHeader('Cache-Control', 'public, max-age=300');
+      }
+      
+      res.setHeader('Content-Type', 'text/html');
+      return res.send(content);
+    } catch (error) {
+      console.error('[Error] Failed to serve social media test page:', error);
+      res.status(500).send('Error serving test page');
+    }
+  });
+  
   // Serve social media image test page
   app.get('/social-image-test', (req, res) => {
     try {
