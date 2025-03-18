@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useLocation } from 'wouter';
 
 /**
@@ -16,42 +16,23 @@ interface DynamicOGImageProps {
   description?: string;
 
   /**
-   * Optional path to override the current URL path
-   * If not provided, the component will use the current path
+   * Optional image URL to use for Open Graph tags
+   * If not provided, will use defaultImage
    */
-  path?: string;
-  
-  /**
-   * Optional custom domain to use instead of dailydigest.id
-   */
-  domain?: string;
-  
-  /**
-   * Optional flag to enable cache busting with timestamp parameter
-   * Default is false to exactly match the official image.social documentation format
-   * IMPORTANT: Using cache busting may cause issues with some platforms
-   */
-  enableCacheBusting?: boolean;
+  imageUrl?: string;
   
   /**
    * Whether to prioritize these meta tags over existing ones
    * Default is true
    */
   prioritize?: boolean;
-  
-  /**
-   * Optional platform-specific optimizations for different social media platforms
-   * Default is 'all' which applies general optimizations
-   */
-  platform?: 'twitter' | 'facebook' | 'telegram' | 'whatsapp' | 'linkedin' | 'all';
 }
 
 /**
- * DynamicOGImage component that generates Open Graph meta tags using image.social service
+ * DynamicOGImage component that sets Open Graph meta tags for the current page
  * 
- * This component automatically generates high-quality, dynamic Open Graph images for any page
- * without requiring manual configuration. The image.social service creates screenshots
- * of the actual page content, making preview cards more engaging and relevant.
+ * This is a simplified version that uses a static image rather than
+ * a dynamic screenshot service.
  * 
  * Usage:
  * ```tsx
@@ -66,49 +47,22 @@ interface DynamicOGImageProps {
  * />
  * ```
  * 
- * With custom path:
+ * With custom image:
  * ```tsx
- * <DynamicOGImage path="/latest/steel-reform" />
- * ```
- * 
- * With platform-specific optimizations:
- * ```tsx
- * <DynamicOGImage platform="telegram" />
+ * <DynamicOGImage imageUrl="/images/my-custom-image.jpg" />
  * ```
  */
 export default function DynamicOGImage({ 
   title, 
   description, 
-  path, 
-  domain = 'dailydigest.id',
-  enableCacheBusting = false,
-  prioritize = true,
-  platform = 'all'
+  imageUrl,
+  prioritize = true
 }: DynamicOGImageProps) {
   const [location] = useLocation();
-  const [timestamp, setTimestamp] = useState<string>('');
   
-  // Generate a timestamp for cache busting when component mounts
-  useEffect(() => {
-    if (enableCacheBusting) {
-      setTimestamp(new Date().getTime().toString());
-    }
-  }, [enableCacheBusting]);
-  
-  // Use provided path or current location
-  const currentPath = path || location;
-  
-  // Remove leading slash if present for better URL construction
-  const cleanPath = currentPath.startsWith('/') ? currentPath.substring(1) : currentPath;
-  
-  // Construct the full URL for image.social with the correct format
-  // The format should be https://image.social/get?url=domain/path
-  let imageUrl = `https://image.social/get?url=${domain}/${cleanPath}`;
-  
-  // Add cache busting parameter if enabled - only use a simple 't' parameter
-  if (enableCacheBusting && timestamp) {
-    imageUrl += `&t=${timestamp}`;
-  }
+  // Default image to use if none is provided
+  const defaultImage = '/logo-large.png';
+  const finalImageUrl = imageUrl || defaultImage;
   
   // Client-side meta tag cleanup to prevent duplicates
   useEffect(() => {
@@ -126,14 +80,46 @@ export default function DynamicOGImage({
       // Create and insert OG image tag
       const ogImageMeta = document.createElement('meta');
       ogImageMeta.setAttribute('property', 'og:image');
-      ogImageMeta.setAttribute('content', imageUrl);
+      ogImageMeta.setAttribute('content', finalImageUrl);
       head.appendChild(ogImageMeta);
       
       // Create and insert Twitter image tag
       const twitterImageMeta = document.createElement('meta');
       twitterImageMeta.setAttribute('name', 'twitter:image');
-      twitterImageMeta.setAttribute('content', imageUrl);
+      twitterImageMeta.setAttribute('content', finalImageUrl);
       head.appendChild(twitterImageMeta);
+      
+      // If title is provided, update those tags too
+      if (title) {
+        document.querySelectorAll('meta[property="og:title"]').forEach(tag => tag.remove());
+        document.querySelectorAll('meta[name="twitter:title"]').forEach(tag => tag.remove());
+        
+        const ogTitleTag = document.createElement('meta');
+        ogTitleTag.setAttribute('property', 'og:title');
+        ogTitleTag.setAttribute('content', title);
+        head.appendChild(ogTitleTag);
+        
+        const twitterTitleTag = document.createElement('meta');
+        twitterTitleTag.setAttribute('name', 'twitter:title');
+        twitterTitleTag.setAttribute('content', title);
+        head.appendChild(twitterTitleTag);
+      }
+      
+      // If description is provided, update those tags too
+      if (description) {
+        document.querySelectorAll('meta[property="og:description"]').forEach(tag => tag.remove());
+        document.querySelectorAll('meta[name="twitter:description"]').forEach(tag => tag.remove());
+        
+        const ogDescTag = document.createElement('meta');
+        ogDescTag.setAttribute('property', 'og:description');
+        ogDescTag.setAttribute('content', description);
+        head.appendChild(ogDescTag);
+        
+        const twitterDescTag = document.createElement('meta');
+        twitterDescTag.setAttribute('name', 'twitter:description');
+        twitterDescTag.setAttribute('content', description);
+        head.appendChild(twitterDescTag);
+      }
     }
     
     // Cleanup function to remove tags on unmount
@@ -144,29 +130,27 @@ export default function DynamicOGImage({
         allMetaTags.forEach(tag => {
           const property = tag.getAttribute('property');
           const name = tag.getAttribute('name');
-          const content = tag.getAttribute('content');
           
-          if (content && content.includes('image.social/get') && 
-              ((property && property === 'og:image') || 
-               (name && name === 'twitter:image'))) {
+          if ((property && property === 'og:image') || 
+              (name && name === 'twitter:image')) {
             tag.remove();
           }
         });
       }
     };
-  }, [imageUrl, prioritize]);
+  }, [finalImageUrl, title, description, prioritize]);
   
   return (
     <>
       {/* Standard Open Graph tags */}
-      <meta property="og:image" content={imageUrl} />
+      <meta property="og:image" content={finalImageUrl} />
       <meta property="og:image:width" content="1200" />
       <meta property="og:image:height" content="630" />
       <meta property="og:image:alt" content={title || 'Daily Digest - Market Intelligence'} />
       
       {/* Twitter Card tags */}
       <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:image" content={imageUrl} />
+      <meta name="twitter:image" content={finalImageUrl} />
       
       {/* If title is provided, add it to OG tags */}
       {title && (
