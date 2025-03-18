@@ -248,11 +248,18 @@ export function registerRoutes(app: Express): Server {
   // This must be the FIRST middleware in the chain to ensure it catches crawler requests
   app.use((req, res, next) => {
     // Use our crawler detection utility to check for social media crawlers
-    const { isCrawler, platform, isTwitter, isFacebook, isWhatsApp } = detectSocialMediaCrawler(req);
+    const { isCrawler, platform, isTwitter, isFacebook, isWhatsApp, isInstagram } = detectSocialMediaCrawler(req);
     
     // Get the request path and user agent
     const path = req.path;
     const userAgent = req.headers['user-agent'] || '';
+    
+    // If this is from WhatsApp or Instagram, don't apply any special handling
+    // We want these platforms to see the real site
+    if (isWhatsApp || isInstagram) {
+      console.log(`📱 WhatsApp/Instagram client detected - showing normal site`);
+      return next();
+    }
     
     // Log crawler-related requests for debugging
     if (isCrawler) {
@@ -280,16 +287,8 @@ export function registerRoutes(app: Express): Server {
       return res.sendFile(join(process.cwd(), 'public', 'twitter-card', 'steel.html'));
     }
     
-    // Handle the China Steel Reform article for WhatsApp
-    if (isWhatsApp && (path === '/latest/china-steel-reform' || path === '/latest/china-steel-reform/')) {
-      console.log('📱 WhatsApp client detected! Serving specialized WhatsApp preview page...');
-      
-      // Set no-cache headers for WhatsApp to ensure fresh content
-      setSocialMediaCacheHeaders(res);
-      
-      // Serve our WhatsApp-optimized page with Open Graph tags
-      return res.sendFile(join(process.cwd(), 'public', 'shares', 'whatsapp', 'china-steel.html'));
-    }
+    // WhatsApp special handling is completely removed
+    // We want WhatsApp users to see the actual website
     
     // Handle the China Steel Reform article for Facebook
     if (isFacebook && (path === '/latest/china-steel-reform' || path === '/latest/china-steel-reform/')) {

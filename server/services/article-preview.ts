@@ -224,6 +224,13 @@ export function handleArticlePreview(
   // Detect if this request is from a social media crawler
   const crawlerInfo = detectSocialMediaCrawler(req);
   
+  // If this is a WhatsApp or Instagram request, pass to the next middleware
+  // This ensures WhatsApp and Instagram users see the actual site
+  if (crawlerInfo.isWhatsApp || crawlerInfo.isInstagram) {
+    console.log(`[ArticlePreview] WhatsApp/Instagram detected - showing normal site: ${JSON.stringify(crawlerInfo)}`);
+    return next();
+  }
+  
   // If not a crawler, pass to the next middleware
   if (!crawlerInfo.isCrawler) {
     return next();
@@ -235,7 +242,6 @@ export function handleArticlePreview(
   let platform: SocialPlatform = 'other';
   if (crawlerInfo.isTwitter) platform = 'twitter';
   else if (crawlerInfo.isFacebook) platform = 'facebook';
-  // WhatsApp detection removed - we want WhatsApp users to see the actual site
   else if (crawlerInfo.isLinkedIn) platform = 'linkedin';
   
   // Set cache control headers based on platform

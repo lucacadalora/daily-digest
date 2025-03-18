@@ -67,20 +67,41 @@ export function detectSocialMediaCrawler(req: Request): {
   isTwitter: boolean;
   isFacebook: boolean;
   isWhatsApp: boolean;
+  isInstagram: boolean;
   isLinkedIn: boolean;
 } {
   const userAgent = req.headers['user-agent'] || '';
   const referer = req.headers['referer'] || '';
   
+  // Check for WhatsApp and Instagram specific user-agents or referers
+  const isWhatsAppRequest = 
+    userAgent.includes('WhatsApp') || 
+    referer.includes('whatsapp.com') || 
+    referer.includes('wa.me');
+    
+  const isInstagramRequest = 
+    userAgent.includes('Instagram') || 
+    referer.includes('instagram.com') ||
+    referer.includes('ig.me');
+  
+  // If this is a WhatsApp or Instagram request, don't treat as a crawler
+  if (isWhatsAppRequest || isInstagramRequest) {
+    return {
+      isCrawler: false,
+      platform: null,
+      isTwitter: false,
+      isFacebook: false,
+      isWhatsApp: isWhatsAppRequest,
+      isInstagram: isInstagramRequest,
+      isLinkedIn: false
+    };
+  }
+  
   // Check if this is a Twitter/X crawler
   const isTwitter = CRAWLER_PATTERNS.twitter.some(pattern => pattern.test(userAgent));
   
-  // Check if this is a Facebook crawler
-  const isFacebook = CRAWLER_PATTERNS.facebook.some(pattern => pattern.test(userAgent));
-  
-  // WhatsApp crawler detection is disabled
-  // We manually check here in case it's needed somewhere, but we always return false
-  const isWhatsApp = false;
+  // Check if this is a Facebook crawler (but not Instagram)
+  const isFacebook = !isInstagramRequest && CRAWLER_PATTERNS.facebook.some(pattern => pattern.test(userAgent));
   
   // Check if this is a LinkedIn crawler
   const isLinkedIn = CRAWLER_PATTERNS.linkedin.some(pattern => pattern.test(userAgent));
@@ -95,17 +116,17 @@ export function detectSocialMediaCrawler(req: Request): {
   let platform = null;
   if (isTwitter) platform = 'twitter';
   else if (isFacebook) platform = 'facebook';
-  // We no longer detect WhatsApp as a platform
   else if (isLinkedIn) platform = 'linkedin';
   else if (isGenericCrawler || isSocialReferer) platform = 'unknown';
   
   return {
-    // WhatsApp is excluded from the crawler detection
-    isCrawler: isTwitter || isFacebook || isLinkedIn || isGenericCrawler || isSocialReferer,
+    // We exclude WhatsApp and Instagram from crawler detection
+    isCrawler: isTwitter || isFacebook || isLinkedIn || (isGenericCrawler && !isWhatsAppRequest && !isInstagramRequest) || (isSocialReferer && !isWhatsAppRequest && !isInstagramRequest),
     platform,
     isTwitter,
     isFacebook,
-    isWhatsApp, // Always false
+    isWhatsApp: isWhatsAppRequest,
+    isInstagram: isInstagramRequest,
     isLinkedIn
   };
 }
