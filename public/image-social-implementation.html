@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Digest - Image.social Implementation</title>
+    <style>
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+        }
+        h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+            color: #1a202c;
+        }
+        h2 {
+            font-size: 22px;
+            margin-top: 30px;
+            margin-bottom: 10px;
+            color: #2d3748;
+        }
+        .section {
+            background: #f8f8f8;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border: 1px solid #e2e8f0;
+        }
+        pre {
+            background: #edf2f7;
+            padding: 15px;
+            border-radius: 6px;
+            overflow-x: auto;
+            font-family: monospace;
+            font-size: 14px;
+        }
+        code {
+            font-family: monospace;
+            background: #edf2f7;
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-size: 14px;
+        }
+        .step {
+            display: flex;
+            margin-bottom: 15px;
+        }
+        .step-number {
+            flex: 0 0 24px;
+            height: 24px;
+            width: 24px;
+            background: #4299e1;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            font-weight: bold;
+            font-size: 12px;
+        }
+        .step-content {
+            flex: 1;
+        }
+        .image-preview {
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            overflow: hidden;
+            margin: 15px 0;
+        }
+        .image-preview img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        .copy-button {
+            background: #4299e1;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 5px 10px;
+            font-size: 12px;
+            cursor: pointer;
+            float: right;
+        }
+        .copy-button:hover {
+            background: #3182ce;
+        }
+        .test-links {
+            margin-top: 20px;
+            padding: 15px;
+            background: #ebf8ff;
+            border-radius: 8px;
+        }
+        .test-links ul {
+            margin: 0;
+            padding-left: 20px;
+        }
+        .test-links li {
+            margin-bottom: 8px;
+        }
+    </style>
+
+    <!-- Image.social OG image implementation -->
+    <meta property="og:title" content="Daily Digest - Image.social Integration Guide" />
+    <meta property="og:description" content="Automated dynamic OpenGraph images for all Daily Digest pages using image.social" />
+    <meta property="og:url" content="https://dailydigest.id/image-social-implementation" />
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="Daily Digest" />
+    
+    <!-- The magic happens here: -->
+    <meta property="og:image" content="https://image.social/get?url=dailydigest.id/image-social-implementation" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    
+    <!-- Twitter Card tags -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Daily Digest - Image.social Integration Guide" />
+    <meta name="twitter:description" content="Automated dynamic OpenGraph images for all Daily Digest pages using image.social" />
+    <meta name="twitter:image" content="https://image.social/get?url=dailydigest.id/image-social-implementation" />
+</head>
+<body>
+    <h1>Image.social Implementation Guide</h1>
+    <p>This guide explains how we've implemented automated dynamic OpenGraph images for social media sharing using image.social.</p>
+    
+    <div class="section">
+        <h2>Global Implementation</h2>
+        <p>We've added a global component that automatically generates social media preview images for any page on Daily Digest:</p>
+        
+        <div class="step">
+            <div class="step-number">1</div>
+            <div class="step-content">
+                <strong>GlobalOGImage Component</strong> - This component is included in the app's root and applies to all pages:
+                <pre><button class="copy-button" onclick="copyToClipboard('code-1')">Copy</button><code id="code-1">import React from 'react';
+import { Helmet } from 'react-helmet-async';
+import { useLocation } from 'wouter';
+
+export default function GlobalOGImage() {
+  const [location] = useLocation();
+  const baseUrl = 'dailydigest.id';
+  const fullUrl = `${baseUrl}${location}`;
+  const imageSocialUrl = `https://image.social/get?url=${fullUrl}`;
+  
+  return (
+    &lt;Helmet>
+      &lt;meta property="og:image" content={imageSocialUrl} />
+      &lt;meta property="og:image:width" content="1200" />
+      &lt;meta property="og:image:height" content="630" />
+      &lt;meta name="twitter:card" content="summary_large_image" />
+      &lt;meta name="twitter:image" content={imageSocialUrl} />
+    &lt;/Helmet>
+  );
+}</code></pre>
+            </div>
+        </div>
+        
+        <div class="step">
+            <div class="step-number">2</div>
+            <div class="step-content">
+                <strong>App Component Integration</strong> - Added to the root component:
+                <pre><button class="copy-button" onclick="copyToClipboard('code-2')">Copy</button><code id="code-2">function App() {
+  return (
+    &lt;QueryClientProvider client={queryClient}>
+      &lt;HelmetProvider>
+        {/* Global OG Image for social media sharing */}
+        &lt;GlobalOGImage />
+        &lt;Router />
+        &lt;Toaster />
+      &lt;/HelmetProvider>
+    &lt;/QueryClientProvider>
+  );
+}</code></pre>
+            </div>
+        </div>
+    </div>
+    
+    <div class="section">
+        <h2>How It Works</h2>
+        <p>The implementation follows these principles:</p>
+        <ol>
+            <li><strong>Dynamic Generation:</strong> Each page gets its own unique social media preview</li>
+            <li><strong>High Quality:</strong> Images are retina-scaled for crisp display on all devices</li>
+            <li><strong>Zero Maintenance:</strong> No need to manually create images for each article</li>
+            <li><strong>Context Relevant:</strong> The preview shows the actual page content</li>
+        </ol>
+        
+        <div class="image-preview">
+            <img src="https://image.social/get?url=dailydigest.id/image-social-implementation" alt="Preview of this page on image.social">
+        </div>
+        
+        <p>The image above is the actual preview that will be shown when this page is shared on social media.</p>
+    </div>
+    
+    <div class="section">
+        <h2>Newsletter Links</h2>
+        <p>For newsletter links, we've implemented a special strategy:</p>
+        <ul>
+            <li>When a newsletter link is shared on social platforms, no preview card is shown</li>
+            <li>This encourages users to click through to see the actual content</li>
+        </ul>
+        
+        <p>We achieved this by enhancing our server routes to detect social media crawlers and skip generating preview metadata for newsletter URLs.</p>
+    </div>
+    
+    <div class="section">
+        <h2>Testing Your Implementation</h2>
+        <div class="test-links">
+            <p>You can test how your links will appear on different platforms using these tools:</p>
+            <ul>
+                <li><a href="https://cards-dev.twitter.com/validator" target="_blank">Twitter Card Validator</a></li>
+                <li><a href="https://developers.facebook.com/tools/debug/" target="_blank">Facebook Sharing Debugger</a></li>
+                <li><a href="https://www.linkedin.com/post-inspector/" target="_blank">LinkedIn Post Inspector</a></li>
+            </ul>
+        </div>
+    </div>
+    
+    <div class="section">
+        <h2>Manual Implementation</h2>
+        <p>If you need to add image.social to a specific HTML page (without the React component), use this code:</p>
+        <pre><button class="copy-button" onclick="copyToClipboard('code-3')">Copy</button><code id="code-3">&lt;!-- Open Graph tags -->
+&lt;meta property="og:title" content="Your Page Title" />
+&lt;meta property="og:description" content="Your page description text" />
+&lt;meta property="og:url" content="https://dailydigest.id/your-page-path" />
+&lt;meta property="og:type" content="article" />
+&lt;meta property="og:site_name" content="Daily Digest" />
+
+&lt;!-- Image.social integration -->
+&lt;meta property="og:image" content="https://image.social/get?url=dailydigest.id/your-page-path" />
+&lt;meta property="og:image:width" content="1200" />
+&lt;meta property="og:image:height" content="630" />
+
+&lt;!-- Twitter Card tags -->
+&lt;meta name="twitter:card" content="summary_large_image" />
+&lt;meta name="twitter:title" content="Your Page Title" />
+&lt;meta name="twitter:description" content="Your page description text" />
+&lt;meta name="twitter:image" content="https://image.social/get?url=dailydigest.id/your-page-path" /></code></pre>
+    </div>
+    
+    <script>
+        function copyToClipboard(elementId) {
+            const element = document.getElementById(elementId);
+            const text = element.textContent;
+            
+            const textarea = document.createElement('textarea');
+            textarea.value = text;
+            document.body.appendChild(textarea);
+            textarea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textarea);
+            
+            const button = element.previousElementSibling;
+            const originalText = button.textContent;
+            button.textContent = 'Copied!';
+            setTimeout(() => {
+                button.textContent = originalText;
+            }, 2000);
+        }
+    </script>
+</body>
+</html>

@@ -3,158 +3,142 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Daily Digest - Social Image Test</title>
+    <title>Social Image Test Page - Daily Digest</title>
+    
+    <!-- Basic meta tags -->
+    <meta name="description" content="Test page for verifying social media image implementation">
+    
+    <!-- Open Graph meta tags -->
+    <meta property="og:title" content="Daily Digest Social Media Image Test">
+    <meta property="og:description" content="Testing our implementation of automated social media preview images using image.social">
+    <meta property="og:url" content="https://dailydigest.id/social-image-test">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Daily Digest">
+    
+    <!-- Image.social integration - this is the key part -->
+    <meta property="og:image" content="https://image.social/get?url=dailydigest.id/social-image-test">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    
+    <!-- Twitter Card tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Daily Digest Social Media Image Test">
+    <meta name="twitter:description" content="Testing our implementation of automated social media preview images using image.social">
+    <meta name="twitter:image" content="https://image.social/get?url=dailydigest.id/social-image-test">
+    
     <style>
         body {
-            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
             line-height: 1.6;
+            color: #333;
             max-width: 800px;
             margin: 0 auto;
             padding: 20px;
-            color: #333;
         }
         h1 {
-            font-size: 28px;
-            margin-bottom: 10px;
-            color: #1a202c;
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            color: #1a365d;
         }
-        .test-section {
-            background: #f8f8f8;
-            padding: 20px;
+        h2 {
+            font-size: 1.8rem;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            color: #2a4365;
+        }
+        .container {
+            background-color: #f7fafc;
             border-radius: 8px;
-            margin-bottom: 20px;
-            border: 1px solid #e2e8f0;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
         }
-        .image-preview {
-            width: 100%;
-            max-width: 600px;
-            margin: 20px 0;
+        .code-block {
+            background-color: #edf2f7;
+            border-radius: 6px;
+            padding: 1rem;
+            margin: 1rem 0;
+            font-family: monospace;
+            overflow-x: auto;
+        }
+        .highlight {
+            background-color: #ebf8ff;
+            padding: 1rem;
+            border-left: 4px solid #4299e1;
+            margin: 1.5rem 0;
+        }
+        .preview {
             border: 1px solid #e2e8f0;
             border-radius: 8px;
             overflow: hidden;
+            margin: 1.5rem 0;
         }
-        .image-preview img {
+        .preview img {
             width: 100%;
             height: auto;
             display: block;
         }
-        code {
-            font-family: monospace;
-            background: #edf2f7;
-            padding: 2px 5px;
-            border-radius: 3px;
-        }
-        button {
-            background: #2563eb;
+        .button {
+            display: inline-block;
+            background-color: #4299e1;
             color: white;
-            border: none;
-            padding: 8px 16px;
+            padding: 0.5rem 1rem;
             border-radius: 4px;
-            cursor: pointer;
-            font-size: 14px;
-            margin-top: 10px;
+            text-decoration: none;
+            font-weight: 500;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
         }
-        button:hover {
-            background: #1d4ed8;
-        }
-        input[type="text"] {
-            padding: 8px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            width: 100%;
-            font-size: 14px;
-            margin-bottom: 10px;
+        .button:hover {
+            background-color: #3182ce;
         }
     </style>
-
-    <!-- Default Meta Tags -->
-    <meta name="description" content="Daily Digest provides comprehensive market intelligence on Indonesian and global financial markets.">
-    
-    <!-- Standard Open Graph Tags -->
-    <meta property="og:title" content="Daily Digest - Market Intelligence">
-    <meta property="og:description" content="Stay informed with expert analysis and insights on global markets, technological developments, and strategic analysis.">
-    <meta property="og:url" content="https://dailydigest.id">
-    <meta property="og:type" content="website">
-    <meta property="og:site_name" content="Daily Digest">
-    
-    <!-- Twitter Card Tags -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:site" content="@dailydigest">
-    <meta name="twitter:title" content="Daily Digest - Market Intelligence">
-    <meta name="twitter:description" content="Stay informed with expert analysis and insights on global markets, technological developments, and strategic analysis.">
-    
-    <!-- Image.social OG Image Tag -->
-    <meta property="og:image" content="https://image.social/get?url=dailydigest.id">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">
-    <meta name="twitter:image" content="https://image.social/get?url=dailydigest.id">
 </head>
 <body>
-    <h1>Daily Digest - Social Image Test</h1>
-    <p>This page demonstrates the integration with image.social for automatic OpenGraph image generation.</p>
-    
-    <div class="test-section">
-        <h2>1. Default Social Image</h2>
-        <p>The default social image for <code>dailydigest.id</code>:</p>
-        <div class="image-preview">
-            <img src="https://image.social/get?url=dailydigest.id" alt="Default social image">
+    <div class="container">
+        <h1>Social Media Image Test</h1>
+        <p>This page demonstrates our implementation of automatic social media previews using image.social.</p>
+        
+        <div class="highlight">
+            <p><strong>How to test:</strong> Share this page on social media platforms like X (Twitter), WhatsApp, Facebook, or LinkedIn to see the dynamic preview image generated from this page.</p>
         </div>
-        <p><strong>Meta tag:</strong> <code>&lt;meta property="og:image" content="https://image.social/get?url=dailydigest.id"&gt;</code></p>
-    </div>
-    
-    <div class="test-section">
-        <h2>2. Article-specific Social Image</h2>
-        <p>The social image for a specific article path:</p>
-        <div class="image-preview">
-            <img src="https://image.social/get?url=dailydigest.id/latest/china-steel-reform" alt="Article-specific social image">
+        
+        <h2>Preview of how this page will appear on social media:</h2>
+        <div class="preview">
+            <img src="https://image.social/get?url=dailydigest.id/social-image-test" alt="Social media preview of this page">
         </div>
-        <p><strong>Meta tag:</strong> <code>&lt;meta property="og:image" content="https://image.social/get?url=dailydigest.id/latest/china-steel-reform"&gt;</code></p>
-    </div>
-    
-    <div class="test-section">
-        <h2>3. Test Your Own Path</h2>
-        <p>Enter a path to test (without the domain):</p>
-        <input type="text" id="path-input" placeholder="e.g., newsletter/indonesia-ree-potential">
-        <button id="generate-preview">Generate Preview</button>
-        <div class="image-preview" id="custom-preview">
-            <img src="https://image.social/get?url=dailydigest.id" alt="Custom path social image">
+        
+        <h2>Implementation Details</h2>
+        <p>We're using image.social's URL-based approach to generate preview images. The key code is:</p>
+        
+        <div class="code-block">
+            &lt;meta property="og:image" content="https://image.social/get?url=dailydigest.id/social-image-test"&gt;
         </div>
-        <p id="custom-meta-tag"><strong>Meta tag:</strong> <code>&lt;meta property="og:image" content="https://image.social/get?url=dailydigest.id"&gt;</code></p>
-    </div>
-    
-    <div class="test-section">
-        <h2>How This Works</h2>
-        <p>Image.social is a service that takes screenshots of your website to create beautiful, contextually relevant social media preview images.</p>
-        <ol>
-            <li>When your URL is shared on social media, the platform fetches the OpenGraph meta tags</li>
-            <li>The <code>og:image</code> tag points to image.social with your URL as a parameter</li>
-            <li>Image.social visits your page, takes a high-quality screenshot, optimizes it, and returns it</li>
-            <li>The social platform displays this screenshot as the preview image</li>
-        </ol>
-        <p>Benefits:</p>
+        
+        <p>This approach works across all social platforms that support OpenGraph and Twitter Card meta tags.</p>
+        
+        <h2>Test on different platforms</h2>
+        <p>Use these validation tools to see how this page will appear on different platforms:</p>
+        
+        <a href="https://cards-dev.twitter.com/validator" target="_blank" class="button">Twitter Card Validator</a>
+        <a href="https://developers.facebook.com/tools/debug/" target="_blank" class="button">Facebook Debugger</a>
+        <a href="https://www.linkedin.com/post-inspector/" target="_blank" class="button">LinkedIn Post Inspector</a>
+        
+        <h2>Benefits of this approach</h2>
         <ul>
-            <li>Automatic, high-quality social images for every page on your site</li>
-            <li>No manual image creation required</li>
-            <li>Preview shows actual page content for higher engagement</li>
-            <li>Retina-scaled for crisp display on all devices</li>
-            <li>Fast loading thanks to optimization</li>
+            <li>No manual image creation needed</li>
+            <li>Each page gets its own unique preview</li>
+            <li>Preview shows what's actually on the page</li>
+            <li>Automatic updates when page content changes</li>
+            <li>Works consistently across all platforms</li>
         </ul>
     </div>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const pathInput = document.getElementById('path-input');
-            const generateButton = document.getElementById('generate-preview');
-            const customPreview = document.getElementById('custom-preview').querySelector('img');
-            const customMetaTag = document.getElementById('custom-meta-tag');
-            
-            generateButton.addEventListener('click', function() {
-                const path = pathInput.value.trim();
-                const url = `https://image.social/get?url=dailydigest.id${path.startsWith('/') ? path : '/' + path}`;
-                customPreview.src = url;
-                customMetaTag.innerHTML = `<strong>Meta tag:</strong> <code>&lt;meta property="og:image" content="${url}"&gt;</code>`;
-            });
-        });
-    </script>
+    
+    <div class="container">
+        <h2>About Daily Digest</h2>
+        <p>Daily Digest is an AI-powered market insights platform delivering comprehensive financial market analysis with a focus on Indonesian and global rare earth element (REE) market dynamics.</p>
+        <p>Our platform provides intelligent, contextual market intelligence by integrating multiple data streams and offering nuanced insights into critical mineral resources.</p>
+        <a href="/" class="button">Return to Home</a>
+    </div>
 </body>
 </html>
