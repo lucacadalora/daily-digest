@@ -918,6 +918,52 @@ export function registerRoutes(app: Express): Server {
     }
   });
   
+  // Serve social media image test page
+  app.get('/social-image-test', (req, res) => {
+    try {
+      console.log('[Debug] Serving social-image-test.html');
+      const filePath = join(process.cwd(), 'public', 'social-image-test.html');
+      
+      if (!fs.existsSync(filePath)) {
+        console.error(`[Debug] HTML file not found at path: ${filePath}`);
+        return res.status(404).send('Test page not found');
+      }
+      
+      const content = fs.readFileSync(filePath, 'utf8');
+      console.log('[Debug] Successfully read social image test file, length:', content.length);
+      
+      res.setHeader('Content-Type', 'text/html');
+      res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+      return res.send(content);
+    } catch (error) {
+      console.error('[Error] Failed to serve social image test page:', error);
+      res.status(500).send('Error serving test page');
+    }
+  });
+  
+  // Serve image.social implementation guide page
+  app.get('/image-social-implementation', (req, res) => {
+    try {
+      console.log('[Debug] Serving image-social-implementation.html');
+      const filePath = join(process.cwd(), 'public', 'image-social-implementation.html');
+      
+      if (!fs.existsSync(filePath)) {
+        console.error(`[Debug] HTML file not found at path: ${filePath}`);
+        return res.status(404).send('Implementation guide not found');
+      }
+      
+      const content = fs.readFileSync(filePath, 'utf8');
+      console.log('[Debug] Successfully read implementation guide, length:', content.length);
+      
+      res.setHeader('Content-Type', 'text/html');
+      res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+      return res.send(content);
+    } catch (error) {
+      console.error('[Error] Failed to serve implementation guide:', error);
+      res.status(500).send('Error serving implementation guide');
+    }
+  });
+  
   // Serve the steel image for Open Graph meta tag use
   app.get('/latest/china-steel.png', (req, res) => {
     try {
