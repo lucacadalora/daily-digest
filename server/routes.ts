@@ -282,6 +282,38 @@ export function registerRoutes(app: Express): Server {
       console.log(`  • Path: ${path}`);
     }
     
+    // Special handler for the homepage
+    if (isCrawler && (path === '/' || path === '')) {
+      console.log('📱 Homepage crawler detected! Serving dynamic preview image...');
+      
+      try {
+        // Read the homepage preview HTML file
+        const filePath = join(process.cwd(), 'public', 'homepage-preview.html');
+        let html = fs.readFileSync(filePath, 'utf-8');
+        
+        // Add a unique timestamp to prevent caching
+        const timestamp = Date.now();
+        html = html.replace(/TIMESTAMP/g, timestamp.toString());
+        
+        // Set aggressive cache busting headers
+        res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+        res.setHeader('Pragma', 'no-cache');
+        res.setHeader('Expires', '0');
+        
+        // Set cross-origin headers to ensure access from all platforms
+        res.setHeader('Access-Control-Allow-Origin', '*');
+        res.setHeader('Access-Control-Allow-Methods', 'GET');
+        res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+        
+        res.setHeader('Content-Type', 'text/html');
+        return res.send(html);
+      } catch (error) {
+        console.error('Error serving homepage preview:', error);
+        // If any error occurs, continue with normal processing
+        return next();
+      }
+    }
+    
     // Handle the China Steel Reform article for Twitter/X
     if (isTwitter && (path === '/latest/china-steel-reform' || path === '/latest/china-steel-reform/')) {
       console.log('🐦 Twitter/X client detected! Serving specialized Twitter card page...');
