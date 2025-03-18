@@ -47,16 +47,9 @@ app.get('/dynamic-preview', (req, res) => {
     // Generate image.social URL with appropriate parameters
     let imageSocialUrl = `https://image.social/get?url=dailydigest.id/${path}`;
     
-    // Add platform-specific parameters
-    if (platform === 'telegram') {
-      imageSocialUrl += `&telegram=true&t=${timestamp}`;
-    } else if (platform === 'twitter' || platform === 'x') {
-      imageSocialUrl += `&twitter=true&t=${timestamp}`;
-    } else if (platform === 'facebook') {
-      imageSocialUrl += `&fb=true&t=${timestamp}`;
-    } else {
-      imageSocialUrl += `&t=${timestamp}`;
-    }
+    // Use simplified parameter format for all platforms
+    // The correct image.social format works consistently across platforms
+    imageSocialUrl += `&t=${timestamp}`;
     
     // Set appropriate cache control headers based on platform
     let cacheTime = 60 * 60; // Default: 1 hour

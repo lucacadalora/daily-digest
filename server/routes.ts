@@ -2140,6 +2140,39 @@ export function registerRoutes(app: Express): Server {
     }
   });
 
+  // Routes for serving our social media test pages with proper headers
+  app.get('/social-media-test.html', (req, res) => {
+    // Set cache headers for social media platforms
+    res.setHeader('Cache-Control', 'public, max-age=300');
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    
+    // Check if it's a social media crawler
+    const userAgent = req.headers['user-agent'] || '';
+    if (userAgent.includes('facebookexternalhit') || 
+        userAgent.includes('Twitterbot') ||
+        userAgent.includes('LinkedInBot')) {
+      console.log(`[Social Test] Social media crawler detected: ${userAgent.substring(0, 50)}...`);
+    }
+    
+    // Send the file
+    res.sendFile(path.join(process.cwd(), 'public', 'social-media-test.html'));
+  });
+  
+  app.get('/twitter-direct.html', (req, res) => {
+    // Set cache headers for Twitter
+    res.setHeader('Cache-Control', 'public, max-age=300');
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    
+    // Check if it's a Twitter crawler
+    const userAgent = req.headers['user-agent'] || '';
+    if (userAgent.includes('Twitterbot')) {
+      console.log(`[Twitter Test] Twitter crawler detected: ${userAgent.substring(0, 50)}...`);
+    }
+    
+    // Send the file
+    res.sendFile(path.join(process.cwd(), 'public', 'twitter-direct.html'));
+  });
+
   // Register the article routes
   registerArticleRoutes(app);
 
