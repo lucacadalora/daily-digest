@@ -323,16 +323,8 @@ export function registerRoutes(app: Express): Server {
       return res.sendFile(join(process.cwd(), 'public', 'twitter-card', 'coal.html'));
     }
     
-    // Handle the Global Coal Price article for WhatsApp
-    if (isWhatsApp && (path === '/latest/global-coal-price-slump' || path === '/latest/global-coal-price-slump/')) {
-      console.log('📱 WhatsApp client detected for Coal article! Serving specialized WhatsApp preview page...');
-      
-      // Set no-cache headers for WhatsApp to ensure fresh content
-      setSocialMediaCacheHeaders(res);
-      
-      // Serve our WhatsApp-optimized page with Open Graph tags
-      return res.sendFile(join(process.cwd(), 'public', 'shares', 'whatsapp', 'coal.html'));
-    }
+    // WhatsApp special handling is completely removed for the Global Coal Price article
+    // We want WhatsApp users to see the actual website
     
     // Handle the Global Coal Price article for Facebook
     if (isFacebook && (path === '/latest/global-coal-price-slump' || path === '/latest/global-coal-price-slump/')) {
@@ -412,6 +404,27 @@ export function registerRoutes(app: Express): Server {
   app.get('/newsletter/ihsg-outlook-march-3-7', (req, res, next) => {
     console.log(`[OG Debug] Processing IHSG newsletter request with image-free meta tags`);
     console.log(`[OG Debug] User-Agent: ${req.headers['user-agent']}`);
+    
+    // Check for WhatsApp and Instagram in the user agent or referer
+    const userAgent = req.headers['user-agent'] || '';
+    const referer = req.headers['referer'] || '';
+    
+    const isWhatsAppRequest = 
+      userAgent.includes('WhatsApp') || 
+      referer.includes('whatsapp.com') || 
+      referer.includes('wa.me');
+      
+    const isInstagramRequest = 
+      userAgent.includes('Instagram') || 
+      referer.includes('instagram.com') ||
+      referer.includes('ig.me');
+    
+    // If this is a WhatsApp or Instagram request, skip special handling
+    // We want these platforms to see the actual website
+    if (isWhatsAppRequest || isInstagramRequest) {
+      console.log(`[OG Debug] WhatsApp/Instagram request detected - showing normal site`);
+      return next();
+    }
     
     // Find the IHSG newsletter article
     const article = sampleArticles.find(a => a.slug === 'ihsg-outlook-march-3-7');
@@ -611,9 +624,29 @@ export function registerRoutes(app: Express): Server {
     console.log(`[OG Debug] Processing Indonesia Economic Tightrope newsletter request with proper image meta tags`);
     console.log(`[OG Debug] User-Agent: ${req.headers['user-agent']}`);
     
-    // Check if the request is from a social media crawler
+    // Check for WhatsApp and Instagram in the user agent or referer
     const userAgent = req.headers['user-agent'] || '';
-    const isCrawler = /facebookexternalhit|Twitterbot|LinkedInBot|WhatsApp|Googlebot|bingbot|DuckDuckBot|Slackbot|TelegramBot/i.test(userAgent);
+    const referer = req.headers['referer'] || '';
+    
+    const isWhatsAppRequest = 
+      userAgent.includes('WhatsApp') || 
+      referer.includes('whatsapp.com') || 
+      referer.includes('wa.me');
+      
+    const isInstagramRequest = 
+      userAgent.includes('Instagram') || 
+      referer.includes('instagram.com') ||
+      referer.includes('ig.me');
+    
+    // If this is a WhatsApp or Instagram request, skip special handling
+    // We want these platforms to see the actual website
+    if (isWhatsAppRequest || isInstagramRequest) {
+      console.log(`[OG Debug] WhatsApp/Instagram request detected - showing normal site`);
+      return next();
+    }
+    
+    // Check if the request is from a social media crawler
+    const isCrawler = /facebookexternalhit|Twitterbot|LinkedInBot|Googlebot|bingbot|DuckDuckBot|Slackbot|TelegramBot/i.test(userAgent);
     
     if (!isCrawler) {
       // If not a crawler, just pass through to the client app
