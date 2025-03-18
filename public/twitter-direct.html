@@ -3,90 +3,173 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Twitter Card Test</title>
+  <title>Twitter/X Card Test | Daily Digest</title>
+  <meta name="description" content="Testing Twitter Card integration with image.social dynamic previews">
   
-  <!-- Twitter Cards metadata -->
+  <!-- Twitter Card tags - using the correct image.social format -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:site" content="@MarketInsights">
-  <meta name="twitter:title" content="Testing Twitter Card Integration">
-  <meta name="twitter:description" content="Testing the image.social integration specifically for Twitter Cards using the correct URL format">
+  <meta name="twitter:title" content="Twitter Card Test - image.social Integration">
+  <meta name="twitter:description" content="Testing Twitter Card with image.social using the correct URL format: https://image.social/get?url=domain/path">
   <meta name="twitter:image" content="https://image.social/get?url=dailydigest.id/latest/china-steel-reform&t=20250318">
+  <meta name="twitter:site" content="@dailydigestID">
   
-  <!-- Open Graph metadata (also used by Twitter) -->
-  <meta property="og:title" content="Testing Twitter Card Integration">
-  <meta property="og:description" content="Testing the image.social integration specifically for Twitter Cards using the correct URL format">
-  <meta property="og:url" content="https://dailydigest.id/twitter-direct.html">
-  <meta property="og:image" content="https://image.social/get?url=dailydigest.id/latest/china-steel-reform&t=20250318">
-  <meta property="og:type" content="article">
+  <!-- No Open Graph tags to ensure we're testing Twitter-specific implementation -->
   
   <style>
+    :root {
+      --primary-color: #1DA1F2;
+      --primary-hover: #0c85d0;
+      --bg-color: #f8fafc;
+      --text-color: #1e293b;
+      --light-gray: #f1f5f9;
+      --border-color: #e2e8f0;
+      --success-color: #10b981;
+      --warning-color: #f59e0b;
+      --error-color: #ef4444;
+    }
+    
     body {
       font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      line-height: 1.6;
+      color: var(--text-color);
+      background-color: var(--bg-color);
+      margin: 0;
+      padding: 0;
+    }
+    
+    .container {
       max-width: 800px;
       margin: 0 auto;
       padding: 2rem;
-      line-height: 1.6;
     }
+    
+    header {
+      text-align: center;
+      margin-bottom: 3rem;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 1.5rem;
+    }
+    
     h1 {
-      margin-bottom: 2rem;
-      color: #1a1a1a;
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+      color: var(--primary-color);
     }
+    
+    .subtitle {
+      color: #64748b;
+      font-size: 1.25rem;
+      margin-bottom: 2rem;
+    }
+    
     .card {
-      background-color: #f5f5f5;
-      padding: 1.5rem;
+      background-color: white;
       border-radius: 0.5rem;
+      overflow: hidden;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
       margin-bottom: 2rem;
-      border-left: 4px solid #1DA1F2;
     }
-    pre {
-      background-color: #eee;
+    
+    .card-body {
+      padding: 1.5rem;
+    }
+    
+    .url-display {
+      background-color: var(--light-gray);
       padding: 1rem;
-      border-radius: 0.25rem;
-      overflow-x: auto;
+      border-radius: 0.375rem;
       font-family: monospace;
+      overflow-x: auto;
+      margin-bottom: 1.5rem;
+      font-size: 0.875rem;
+      white-space: nowrap;
     }
+    
     .button {
       display: inline-block;
-      background-color: #1DA1F2;
+      padding: 0.675rem 1.25rem;
+      border: none;
+      border-radius: 0.375rem;
+      background-color: var(--primary-color);
       color: white;
-      padding: 0.75rem 1.5rem;
-      border-radius: 9999px;
-      text-decoration: none;
       font-weight: 500;
-      margin-top: 1rem;
+      cursor: pointer;
+      text-decoration: none;
+      font-size: 0.875rem;
+      transition: background-color 0.2s;
     }
+    
     .button:hover {
-      background-color: #0c85d0;
+      background-color: var(--primary-hover);
+    }
+    
+    .twitter-logo {
+      width: 24px;
+      height: 24px;
+      vertical-align: middle;
+      margin-right: 0.5rem;
+    }
+    
+    .highlight {
+      background-color: #fef9c3;
+      padding: 0.125rem 0.25rem;
+      border-radius: 0.25rem;
+    }
+    
+    footer {
+      text-align: center;
+      margin-top: 4rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border-color);
+      color: #64748b;
     }
   </style>
 </head>
 <body>
-  <h1>Twitter Card Test</h1>
-  
-  <div class="card">
-    <h2>Twitter Card Meta Tags</h2>
-    <p>This page is designed to test Twitter Card integration with image.social using the correct URL format:</p>
-    <pre>https://image.social/get?url=dailydigest.id/latest/china-steel-reform&t=20250318</pre>
+  <div class="container">
+    <header>
+      <h1>Twitter Card Test</h1>
+      <p class="subtitle">Testing Twitter Card integration with image.social dynamic preview images</p>
+    </header>
     
-    <p>When shared on Twitter, this URL should generate a dynamic screenshot of our article page.</p>
+    <div class="card">
+      <div class="card-body">
+        <h2>Implementation Details</h2>
+        <p>
+          This page is designed to test Twitter Card integration with image.social using 
+          the correct URL format:
+        </p>
+        <div class="url-display">
+          https://image.social/get?url=dailydigest.id/latest/china-steel-reform&t=20250318
+        </div>
+        <p>
+          When this page is shared on Twitter/X, it should display a large preview image 
+          generated dynamically by image.social from the actual content of our website.
+        </p>
+        <p>
+          <strong>Key implementation notes:</strong>
+        </p>
+        <ul>
+          <li>Using <span class="highlight">twitter:card</span> with value <span class="highlight">summary_large_image</span></li>
+          <li>The <span class="highlight">twitter:image</span> meta tag uses the proper image.social URL format</li>
+          <li>A timestamp parameter is added to ensure fresh content from image.social</li>
+          <li>No Open Graph tags to ensure we're testing Twitter-specific implementation</li>
+        </ul>
+        
+        <div class="button-group" style="margin-top: 2rem; text-align: center;">
+          <a href="https://twitter.com/intent/tweet?url=https://dailydigest.id/twitter-direct.html" target="_blank" class="button">
+            <svg class="twitter-logo" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+            </svg>
+            Share on Twitter/X
+          </a>
+        </div>
+      </div>
+    </div>
+    
+    <footer>
+      <p>© 2025 Daily Digest - Market Intelligence. All rights reserved.</p>
+    </footer>
   </div>
-  
-  <p>
-    Twitter Cards allow you to attach rich media to Tweets, helping your content stand out in 
-    the Twitter timeline. By implementing the correct Twitter Card markup, we can ensure our 
-    articles display with proper images when shared on Twitter.
-  </p>
-  
-  <p>
-    The image.social service works by taking a screenshot of the actual web page, ensuring 
-    that Twitter users see an accurate preview of our content.
-  </p>
-  
-  <a href="https://twitter.com/intent/tweet?url=https://dailydigest.id/twitter-direct.html&text=Testing%20Twitter%20Card%20integration%20with%20image.social" class="button" target="_blank">
-    Share this page on Twitter
-  </a>
-  
-  <h2>Debug Tools</h2>
-  <p>Use the <a href="https://cards-dev.twitter.com/validator" target="_blank">Twitter Card Validator</a> to validate this page's metadata.</p>
 </body>
 </html>

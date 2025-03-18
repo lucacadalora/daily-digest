@@ -3,7 +3,7 @@ import express from "express";
 import { createServer, type Server } from "http";
 import axios from "axios";
 import { execFile } from "child_process";
-import { join } from "path";
+import path, { join } from "path";
 import { readFileSync, statSync, createReadStream } from "fs";
 import * as fs from "fs";
 import { sampleArticles } from "../client/src/types/newsletter";
@@ -2155,7 +2155,7 @@ export function registerRoutes(app: Express): Server {
     }
     
     // Send the file
-    res.sendFile(path.join(process.cwd(), 'public', 'social-media-test.html'));
+    res.sendFile(join(process.cwd(), 'public', 'social-media-test.html'));
   });
   
   app.get('/twitter-direct.html', (req, res) => {
@@ -2170,7 +2170,26 @@ export function registerRoutes(app: Express): Server {
     }
     
     // Send the file
-    res.sendFile(path.join(process.cwd(), 'public', 'twitter-direct.html'));
+    res.sendFile(join(process.cwd(), 'public', 'twitter-direct.html'));
+  });
+  
+  app.get('/social-media-testing-suite.html', (req, res) => {
+    // Set cache headers for social media platforms
+    res.setHeader('Cache-Control', 'public, max-age=300');
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    
+    // Check if it's a social media crawler
+    const userAgent = req.headers['user-agent'] || '';
+    if (userAgent.includes('facebookexternalhit') || 
+        userAgent.includes('Twitterbot') ||
+        userAgent.includes('LinkedInBot') ||
+        userAgent.includes('Telegram') ||
+        userAgent.includes('WhatsApp')) {
+      console.log(`[TestSuite] Social crawler detected: ${userAgent.substring(0, 50)}...`);
+    }
+    
+    // Send the file
+    res.sendFile(join(process.cwd(), 'public', 'social-media-testing-suite.html'));
   });
 
   // Register the article routes
