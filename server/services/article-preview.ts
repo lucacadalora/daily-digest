@@ -59,11 +59,11 @@ export function generateSocialPreviewHTML(
   platform: SocialPlatform,
   baseUrl: string
 ): string {
-  // Generate the image.social URL for dynamic screenshots
+  // Generate the image.social URL for dynamic screenshots with a zoomed out view
   // This provides beautiful social media preview images for all articles
   const timestamp = Date.now(); // Add timestamp for cache busting
   const encodedUrl = encodeURIComponent(`${baseUrl}${article.url}`);
-  const imageUrl = `https://image.social/get?url=${encodedUrl}&t=${timestamp}`;
+  const imageUrl = `https://image.social/get?url=${encodedUrl}&scale=0.8&t=${timestamp}`;
   
   // For fallback cases, we'll still have a static image ready
   const fallbackImage = article.imageUrl.startsWith('http') 
