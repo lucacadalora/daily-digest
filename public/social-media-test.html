@@ -3,101 +3,321 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Social Media Sharing Test</title>
-  <meta name="description" content="Testing social media sharing with image.social integration">
+  <title>Social Media Integration Test | Daily Digest</title>
+  <meta name="description" content="Testing social media integration with image.social dynamic previews">
   
-  <!-- Standard Open Graph meta tags -->
-  <meta property="og:title" content="Testing Social Media Sharing">
-  <meta property="og:description" content="This page tests the image.social integration with the correct URL format">
+  <!-- Standard Open Graph meta tags - using the correct image.social format -->
+  <meta property="og:title" content="Social Media Test - image.social Integration">
+  <meta property="og:description" content="Testing dynamic link previews with image.social using the correct URL format: https://image.social/get?url=domain/path">
+  <meta property="og:url" content="https://dailydigest.id/social-media-test.html">
   <meta property="og:type" content="article">
-  <meta property="og:url" content="https://dailydigest.id/test">
-  
-  <!-- Using the correct image.social format -->
-  <meta property="og:image" content="https://image.social/get?url=dailydigest.id/latest/global-coal-price-slump&t=20250318">
+  <meta property="og:image" content="https://image.social/get?url=dailydigest.id/latest/china-steel-reform&t=20250318">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="Social media sharing test">
+  <meta property="og:image:alt" content="Social media integration test">
+  <meta property="og:site_name" content="Daily Digest">
   
-  <!-- Twitter Card tags -->
+  <!-- Twitter Card tags (with the same image.social format) -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Testing Social Media Sharing">
-  <meta name="twitter:description" content="This page tests the image.social integration with the correct URL format">
-  <meta name="twitter:image" content="https://image.social/get?url=dailydigest.id/latest/global-coal-price-slump&t=20250318">
+  <meta name="twitter:title" content="Social Media Test - image.social Integration">
+  <meta name="twitter:description" content="Testing dynamic link previews with image.social using the correct URL format">
+  <meta name="twitter:image" content="https://image.social/get?url=dailydigest.id/latest/china-steel-reform&t=20250318">
+  <meta name="twitter:site" content="@dailydigestID">
   
   <style>
+    :root {
+      --primary-color: #4f46e5;
+      --primary-hover: #4338ca;
+      --bg-color: #f8fafc;
+      --text-color: #1e293b;
+      --light-gray: #f1f5f9;
+      --border-color: #e2e8f0;
+      --success-color: #10b981;
+      --warning-color: #f59e0b;
+      --error-color: #ef4444;
+    }
+    
     body {
       font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      line-height: 1.6;
+      color: var(--text-color);
+      background-color: var(--bg-color);
+      margin: 0;
+      padding: 0;
+    }
+    
+    .container {
       max-width: 800px;
       margin: 0 auto;
       padding: 2rem;
-      line-height: 1.6;
     }
+    
+    header {
+      text-align: center;
+      margin-bottom: 3rem;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 1.5rem;
+    }
+    
     h1 {
-      margin-bottom: 2rem;
-      color: #1a1a1a;
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+      color: var(--primary-color);
     }
-    .metadata {
-      background-color: #f5f5f5;
-      padding: 1.5rem;
+    
+    .subtitle {
+      color: #64748b;
+      font-size: 1.25rem;
+      margin-bottom: 2rem;
+    }
+    
+    .card {
+      background-color: white;
       border-radius: 0.5rem;
+      overflow: hidden;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
       margin-bottom: 2rem;
     }
-    .metadata h2 {
-      margin-top: 0;
+    
+    .card-body {
+      padding: 1.5rem;
     }
-    code {
+    
+    .url-display {
+      background-color: var(--light-gray);
+      padding: 1rem;
+      border-radius: 0.375rem;
       font-family: monospace;
-      background-color: #eee;
-      padding: 0.2rem 0.4rem;
-      border-radius: 0.25rem;
+      overflow-x: auto;
+      margin-bottom: 1.5rem;
+      font-size: 0.875rem;
+      white-space: nowrap;
     }
-    .buttons {
-      display: flex;
+    
+    .platform-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
       gap: 1rem;
       margin-top: 2rem;
     }
-    .btn {
-      padding: 0.75rem 1.5rem;
+    
+    .platform-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.75rem 1rem;
       border: none;
-      border-radius: 0.25rem;
-      background-color: #3b82f6;
+      border-radius: 0.375rem;
+      background-color: var(--primary-color);
       color: white;
       font-weight: 500;
       cursor: pointer;
       text-decoration: none;
+      font-size: 0.875rem;
+      transition: background-color 0.2s;
     }
-    .btn:hover {
-      background-color: #2563eb;
+    
+    .platform-button:hover {
+      background-color: var(--primary-hover);
+    }
+    
+    .platform-icon {
+      width: 20px;
+      height: 20px;
+      margin-right: 0.5rem;
+    }
+    
+    .facebook-button {
+      background-color: #1877f2;
+    }
+    
+    .facebook-button:hover {
+      background-color: #166fe5;
+    }
+    
+    .twitter-button {
+      background-color: #1da1f2;
+    }
+    
+    .twitter-button:hover {
+      background-color: #0c85d0;
+    }
+    
+    .whatsapp-button {
+      background-color: #25d366;
+    }
+    
+    .whatsapp-button:hover {
+      background-color: #128c7e;
+    }
+    
+    .linkedin-button {
+      background-color: #0a66c2;
+    }
+    
+    .linkedin-button:hover {
+      background-color: #004182;
+    }
+    
+    .telegram-button {
+      background-color: #0088cc;
+    }
+    
+    .telegram-button:hover {
+      background-color: #0069a9;
+    }
+    
+    .highlight {
+      background-color: #fef9c3;
+      padding: 0.125rem 0.25rem;
+      border-radius: 0.25rem;
+    }
+    
+    footer {
+      text-align: center;
+      margin-top: 4rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border-color);
+      color: #64748b;
+    }
+    
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 1.5rem;
+    }
+    
+    th, td {
+      padding: 0.75rem;
+      border: 1px solid var(--border-color);
+      text-align: left;
+    }
+    
+    th {
+      background-color: var(--light-gray);
+      font-weight: 600;
+    }
+    
+    tr:nth-child(even) {
+      background-color: #fafafa;
     }
   </style>
 </head>
 <body>
-  <h1>Social Media Sharing Test</h1>
-  
-  <div class="metadata">
-    <h2>Meta Tags</h2>
-    <p>This page is configured with the correct image.social URL format:</p>
-    <code>https://image.social/get?url=dailydigest.id/latest/global-coal-price-slump&t=20250318</code>
+  <div class="container">
+    <header>
+      <h1>Social Media Integration Test</h1>
+      <p class="subtitle">Testing cross-platform integration with image.social dynamic preview images</p>
+    </header>
     
-    <p>The URL format follows the pattern:</p>
-    <code>https://image.social/get?url=domain/path&t=timestamp</code>
-  </div>
-  
-  <p>
-    This test page is used to verify that our social media sharing implementation works correctly
-    with image.social dynamic screenshots. When shared on social media platforms (X/Twitter, Facebook, 
-    WhatsApp, LinkedIn, etc.), this page should display a proper preview with an image generated
-    by image.social.
-  </p>
-  
-  <p>
-    The preview should show a screenshot of our actual page at the path specified in the URL.
-  </p>
-  
-  <div class="buttons">
-    <a href="https://twitter.com/intent/tweet?url=https://dailydigest.id/social-media-test.html" target="_blank" class="btn">Share on X/Twitter</a>
-    <a href="https://www.facebook.com/sharer/sharer.php?u=https://dailydigest.id/social-media-test.html" target="_blank" class="btn">Share on Facebook</a>
-    <a href="https://api.whatsapp.com/send?text=Testing%20social%20media%20integration:%20https://dailydigest.id/social-media-test.html" target="_blank" class="btn">Share on WhatsApp</a>
+    <div class="card">
+      <div class="card-body">
+        <h2>Implementation Details</h2>
+        <p>
+          This page is designed to test social media integration with image.social using 
+          the correct URL format:
+        </p>
+        <div class="url-display">
+          https://image.social/get?url=dailydigest.id/latest/china-steel-reform&t=20250318
+        </div>
+        <p>
+          When this page is shared on social media platforms, it should display a large preview image 
+          generated dynamically by image.social from the actual content of our website.
+        </p>
+        
+        <h3>Platforms Supported</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Platform</th>
+              <th>Support Level</th>
+              <th>URL Format</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Facebook</td>
+              <td>Full support</td>
+              <td><code>image.social/get?url=domain/path</code></td>
+            </tr>
+            <tr>
+              <td>Twitter/X</td>
+              <td>Full support</td>
+              <td><code>image.social/get?url=domain/path</code></td>
+            </tr>
+            <tr>
+              <td>LinkedIn</td>
+              <td>Full support</td>
+              <td><code>image.social/get?url=domain/path</code></td>
+            </tr>
+            <tr>
+              <td>WhatsApp</td>
+              <td>Direct site access</td>
+              <td>Uses website's actual UI</td>
+            </tr>
+            <tr>
+              <td>Telegram</td>
+              <td>Full support</td>
+              <td><code>image.social/get?url=domain/path</code></td>
+            </tr>
+          </tbody>
+        </table>
+        
+        <h3>Share This Test Page</h3>
+        <p>Click on any of the buttons below to share this test page on your preferred social platform:</p>
+        
+        <div class="platform-grid">
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://dailydigest.id/social-media-test.html" 
+             target="_blank" 
+             class="platform-button facebook-button">
+            <svg class="platform-icon" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 2.04c-5.5 0-10 4.49-10 10.02 0 5 3.66 9.15 8.44 9.9v-7H7.9v-2.9h2.54V9.85c0-2.51 1.49-3.89 3.78-3.89 1.09 0 2.23.19 2.23.19v2.47h-1.26c-1.24 0-1.63.77-1.63 1.56v1.88h2.78l-.45 2.9h-2.33v7a10 10 0 0 0 8.44-9.9c0-5.53-4.5-10.02-10-10.02z"/>
+            </svg>
+            Facebook
+          </a>
+          
+          <a href="https://twitter.com/intent/tweet?url=https://dailydigest.id/social-media-test.html" 
+             target="_blank" 
+             class="platform-button twitter-button">
+            <svg class="platform-icon" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+            </svg>
+            Twitter/X
+          </a>
+          
+          <a href="https://api.whatsapp.com/send?text=Testing%20social%20media%20integration:%20https://dailydigest.id/social-media-test.html" 
+             target="_blank" 
+             class="platform-button whatsapp-button">
+            <svg class="platform-icon" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+            </svg>
+            WhatsApp
+          </a>
+          
+          <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://dailydigest.id/social-media-test.html" 
+             target="_blank" 
+             class="platform-button linkedin-button">
+            <svg class="platform-icon" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+            </svg>
+            LinkedIn
+          </a>
+          
+          <a href="https://t.me/share/url?url=https://dailydigest.id/social-media-test.html&text=Testing%20social%20media%20integration%20with%20image.social" 
+             target="_blank" 
+             class="platform-button telegram-button">
+            <svg class="platform-icon" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/>
+            </svg>
+            Telegram
+          </a>
+        </div>
+      </div>
+    </div>
+    
+    <footer>
+      <p>© 2025 Daily Digest - Market Intelligence. All rights reserved.</p>
+    </footer>
   </div>
 </body>
 </html>

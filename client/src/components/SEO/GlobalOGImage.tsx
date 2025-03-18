@@ -32,8 +32,10 @@ export default function GlobalOGImage() {
     const addMetaTags = () => {
       const head = document.head;
       const baseUrl = 'dailydigest.id';
-      const fullUrl = `${baseUrl}${location}`;
-      const imageSocialUrl = `https://image.social/get?url=${fullUrl}`;
+      // Clean path (remove leading slash if present)
+      const cleanPath = location.startsWith('/') ? location.substring(1) : location;
+      // Construct URL in the format: https://image.social/get?url=domain/path
+      const imageSocialUrl = `https://image.social/get?url=${baseUrl}/${cleanPath}`;
       
       // Create OG image meta tag
       const ogImageMeta = document.createElement('meta');
@@ -74,14 +76,15 @@ export default function GlobalOGImage() {
     };
   }, [location]);
 
-  // Get the full URL for the current page
+  // Get the domain and clean path
   const baseUrl = 'dailydigest.id'; // Use your actual domain here
-  const fullUrl = `${baseUrl}${location}`;
+  // Clean path (remove leading slash if present)
+  const cleanPath = location.startsWith('/') ? location.substring(1) : location;
   
   // Generate the image.social URL with the correct format and optional cache busting
   // Format: https://image.social/get?url=domain/path
   const timestamp = new Date().getTime();
-  const imageSocialUrl = `https://image.social/get?url=${fullUrl}&t=${timestamp}`;
+  const imageSocialUrl = `https://image.social/get?url=${baseUrl}/${cleanPath}&t=${timestamp}`;
   
   return (
     <Helmet prioritizeSeoTags>
