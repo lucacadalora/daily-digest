@@ -1,4 +1,4 @@
-import type { Express, Request, Response, NextFunction } from "express";
+import type { Express, Request as ExpressRequest, Response, NextFunction } from "express";
 import express from "express";
 import { createServer, type Server } from "http";
 import axios from "axios";
@@ -12,6 +12,18 @@ import { subscribers } from "../db/schema";
 import { z } from "zod";
 import { eq } from "drizzle-orm";
 import { detectSocialMediaCrawler, setSocialMediaCacheHeaders } from "./utils/crawler-detection";
+
+// Extend Express Request to include the skipPreview property
+declare global {
+  namespace Express {
+    interface Request {
+      skipPreview?: boolean;
+    }
+  }
+}
+
+// Use the extended Request type
+type Request = ExpressRequest;
 import { registerArticleRoutes } from "./routes-article";
 
 interface MarketPrice {
@@ -791,8 +803,45 @@ export function registerRoutes(app: Express): Server {
     }
   });
 
-  // Generic handler for other newsletter routes
+  // Global middleware for ALL newsletter routes
+  // This runs before any specific route handlers
+  app.use((req, res, next) => {
+    // Check if this is a newsletter route
+    if (req.path.startsWith('/newsletter/') || req.path === '/newsletter') {
+      // Check for WhatsApp and Instagram in the user agent or referer
+      const userAgent = req.headers['user-agent'] || '';
+      const referer = req.headers['referer'] || '';
+      
+      const isWhatsAppRequest = 
+        userAgent.includes('WhatsApp') || 
+        referer.includes('whatsapp.com') || 
+        referer.includes('wa.me');
+        
+      const isInstagramRequest = 
+        userAgent.includes('Instagram') || 
+        referer.includes('instagram.com') ||
+        referer.includes('ig.me');
+      
+      // Log that we detected a social media app requesting a newsletter
+      if (isWhatsAppRequest || isInstagramRequest) {
+        console.log(`[Newsletter] ${isWhatsAppRequest ? 'WhatsApp' : 'Instagram'} client detected for ${req.path}! Showing normal site...`);
+        
+        // Set a flag in the request to skip any special preview handling
+        req.skipPreview = true;
+      }
+    }
+    
+    // Always continue to the next middleware
+    next();
+  });
+  
+  // Generic handler for other newsletter routes - simply serves the app 
   app.get('/newsletter/:slug', (req, res, next) => {
+    // Check if we should skip preview (set by the middleware above)
+    if (req.skipPreview) {
+      console.log(`[Newsletter] Skipping preview for ${req.path} - showing normal site`);
+    }
+    
     // Always just pass through to the actual application
     next();
   });

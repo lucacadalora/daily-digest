@@ -2,6 +2,15 @@ import { Request, Response } from 'express';
 import path from 'path';
 import { detectSocialMediaCrawler } from '../utils/crawler-detection';
 
+// Ensure we can access skipPreview property
+declare global {
+  namespace Express {
+    interface Request {
+      skipPreview?: boolean;
+    }
+  }
+}
+
 /**
  * Social media platforms we support optimized previews for
  * Note: WhatsApp is intentionally not included as we want WhatsApp users to see the actual site
@@ -221,13 +230,16 @@ export function handleArticlePreview(
   article: ArticlePreviewData,
   next: () => void
 ) {
+  // Check if this is a newsletter path (any URL containing /newsletter/)
+  const isNewsletterPath = req.path.includes('/newsletter/');
+  
   // Detect if this request is from a social media crawler
   const crawlerInfo = detectSocialMediaCrawler(req);
   
-  // If this is a WhatsApp or Instagram request, pass to the next middleware
-  // This ensures WhatsApp and Instagram users see the actual site
-  if (crawlerInfo.isWhatsApp || crawlerInfo.isInstagram) {
-    console.log(`[ArticlePreview] WhatsApp/Instagram detected - showing normal site: ${JSON.stringify(crawlerInfo)}`);
+  // If this is a WhatsApp or Instagram request, or if the URL contains /newsletter/ path,
+  // always pass to the next middleware to ensure users see the actual site
+  if (crawlerInfo.isWhatsApp || crawlerInfo.isInstagram || req.skipPreview || isNewsletterPath) {
+    console.log(`[ArticlePreview] Skip preview - showing normal site: WhatsApp=${crawlerInfo.isWhatsApp}, Instagram=${crawlerInfo.isInstagram}, Newsletter=${isNewsletterPath}, Path=${req.path}`);
     return next();
   }
   
