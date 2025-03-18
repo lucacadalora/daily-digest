@@ -74,6 +74,8 @@ export default function ArticleSEO({ articleId, articleSlug, article }: ArticleS
     <MetaTags 
       metadata={metadata}
       cacheBuster={cacheBuster}
+      useDynamicOG={true}
+      customPath={`/${resolvedArticle.slug}`}
     />
   );
 }

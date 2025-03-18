@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Digest - Social Image Test</title>
+    <style>
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+        }
+        h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+            color: #1a202c;
+        }
+        .test-section {
+            background: #f8f8f8;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border: 1px solid #e2e8f0;
+        }
+        .image-preview {
+            width: 100%;
+            max-width: 600px;
+            margin: 20px 0;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .image-preview img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        code {
+            font-family: monospace;
+            background: #edf2f7;
+            padding: 2px 5px;
+            border-radius: 3px;
+        }
+        button {
+            background: #2563eb;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+        button:hover {
+            background: #1d4ed8;
+        }
+        input[type="text"] {
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            width: 100%;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+    </style>
+
+    <!-- Default Meta Tags -->
+    <meta name="description" content="Daily Digest provides comprehensive market intelligence on Indonesian and global financial markets.">
+    
+    <!-- Standard Open Graph Tags -->
+    <meta property="og:title" content="Daily Digest - Market Intelligence">
+    <meta property="og:description" content="Stay informed with expert analysis and insights on global markets, technological developments, and strategic analysis.">
+    <meta property="og:url" content="https://dailydigest.id">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Daily Digest">
+    
+    <!-- Twitter Card Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@dailydigest">
+    <meta name="twitter:title" content="Daily Digest - Market Intelligence">
+    <meta name="twitter:description" content="Stay informed with expert analysis and insights on global markets, technological developments, and strategic analysis.">
+    
+    <!-- Image.social OG Image Tag -->
+    <meta property="og:image" content="https://image.social/get?url=dailydigest.id">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:image" content="https://image.social/get?url=dailydigest.id">
+</head>
+<body>
+    <h1>Daily Digest - Social Image Test</h1>
+    <p>This page demonstrates the integration with image.social for automatic OpenGraph image generation.</p>
+    
+    <div class="test-section">
+        <h2>1. Default Social Image</h2>
+        <p>The default social image for <code>dailydigest.id</code>:</p>
+        <div class="image-preview">
+            <img src="https://image.social/get?url=dailydigest.id" alt="Default social image">
+        </div>
+        <p><strong>Meta tag:</strong> <code>&lt;meta property="og:image" content="https://image.social/get?url=dailydigest.id"&gt;</code></p>
+    </div>
+    
+    <div class="test-section">
+        <h2>2. Article-specific Social Image</h2>
+        <p>The social image for a specific article path:</p>
+        <div class="image-preview">
+            <img src="https://image.social/get?url=dailydigest.id/latest/china-steel-reform" alt="Article-specific social image">
+        </div>
+        <p><strong>Meta tag:</strong> <code>&lt;meta property="og:image" content="https://image.social/get?url=dailydigest.id/latest/china-steel-reform"&gt;</code></p>
+    </div>
+    
+    <div class="test-section">
+        <h2>3. Test Your Own Path</h2>
+        <p>Enter a path to test (without the domain):</p>
+        <input type="text" id="path-input" placeholder="e.g., newsletter/indonesia-ree-potential">
+        <button id="generate-preview">Generate Preview</button>
+        <div class="image-preview" id="custom-preview">
+            <img src="https://image.social/get?url=dailydigest.id" alt="Custom path social image">
+        </div>
+        <p id="custom-meta-tag"><strong>Meta tag:</strong> <code>&lt;meta property="og:image" content="https://image.social/get?url=dailydigest.id"&gt;</code></p>
+    </div>
+    
+    <div class="test-section">
+        <h2>How This Works</h2>
+        <p>Image.social is a service that takes screenshots of your website to create beautiful, contextually relevant social media preview images.</p>
+        <ol>
+            <li>When your URL is shared on social media, the platform fetches the OpenGraph meta tags</li>
+            <li>The <code>og:image</code> tag points to image.social with your URL as a parameter</li>
+            <li>Image.social visits your page, takes a high-quality screenshot, optimizes it, and returns it</li>
+            <li>The social platform displays this screenshot as the preview image</li>
+        </ol>
+        <p>Benefits:</p>
+        <ul>
+            <li>Automatic, high-quality social images for every page on your site</li>
+            <li>No manual image creation required</li>
+            <li>Preview shows actual page content for higher engagement</li>
+            <li>Retina-scaled for crisp display on all devices</li>
+            <li>Fast loading thanks to optimization</li>
+        </ul>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const pathInput = document.getElementById('path-input');
+            const generateButton = document.getElementById('generate-preview');
+            const customPreview = document.getElementById('custom-preview').querySelector('img');
+            const customMetaTag = document.getElementById('custom-meta-tag');
+            
+            generateButton.addEventListener('click', function() {
+                const path = pathInput.value.trim();
+                const url = `https://image.social/get?url=dailydigest.id${path.startsWith('/') ? path : '/' + path}`;
+                customPreview.src = url;
+                customMetaTag.innerHTML = `<strong>Meta tag:</strong> <code>&lt;meta property="og:image" content="${url}"&gt;</code>`;
+            });
+        });
+    </script>
+</body>
+</html>

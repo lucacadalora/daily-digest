@@ -1163,6 +1163,33 @@ export function registerRoutes(app: Express): Server {
     }
   });
   
+  // Test route for social image (image.social) integration
+  app.get('/social-image-test', (req, res) => {
+    try {
+      console.log('[Debug] Serving social-image-test.html');
+      const filePath = join(process.cwd(), 'public', 'social-image-test.html');
+      
+      if (!fs.existsSync(filePath)) {
+        console.error(`[Debug] Social image test file not found at path: ${filePath}`);
+        return res.status(404).send('Social image test file not found');
+      }
+      
+      const html = readFileSync(filePath, 'utf-8');
+      console.log('[Debug] Successfully read social image test file, length:', html.length);
+      
+      // Set cache headers for social media preview
+      res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+      res.setHeader('Pragma', 'no-cache');
+      res.setHeader('Expires', '0');
+      res.setHeader('Content-Type', 'text/html');
+      
+      return res.send(html);
+    } catch (error) {
+      console.error('Error serving social image test page:', error);
+      return res.status(500).send(`Error loading test page: ${error instanceof Error ? error.message : 'Unknown error'}`);
+    }
+  });
+  
   // Specialized route for coal article sharing test
   app.get('/coal-share', (req, res) => {
     try {
