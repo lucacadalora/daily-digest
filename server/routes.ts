@@ -1114,41 +1114,7 @@ export function registerRoutes(app: Express): Server {
     }
   });
   
-  // Universal image endpoint that works for all social platforms (WhatsApp, Telegram, Twitter, etc)
-  app.get('/steel-image', (req, res) => {
-    try {
-      console.log('[Universal Image] Serving optimized steel image for social media');
-      
-      // Get the actual image file path
-      const filePath = join(process.cwd(), 'public', 'latest', 'china-steel.png');
-      
-      if (!fs.existsSync(filePath)) {
-        console.error(`[Image Error] Image not found at path: ${filePath}`);
-        return res.status(404).send('Image not found');
-      }
-      
-      // Set special headers that work well across multiple platforms
-      // Cache for 1 hour for better performance
-      const oneHour = 60 * 60;
-      res.setHeader('Cache-Control', `public, max-age=${oneHour}`);
-      res.setHeader('Expires', new Date(Date.now() + oneHour * 1000).toUTCString());
-      
-      // Add cross-origin support for all platforms
-      res.setHeader('Access-Control-Allow-Origin', '*');
-      res.setHeader('Access-Control-Allow-Methods', 'GET');
-      res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-      
-      // Set content type
-      res.setHeader('Content-Type', 'image/png');
-      
-      // Create a readable stream and pipe it to the response
-      const fileStream = fs.createReadStream(filePath);
-      fileStream.pipe(res);
-    } catch (error) {
-      console.error('Error serving social media image:', error);
-      return res.status(500).send(`Error: ${error instanceof Error ? error.message : 'Unknown error'}`);
-    }
-  });
+  // Steel image endpoint removed to prevent unwanted image previews
   
   // Universal image endpoint for Coal article - works for all social platforms
   app.get('/coal-image', (req, res) => {
@@ -2063,82 +2029,9 @@ export function registerRoutes(app: Express): Server {
     }
   });
 
-  // Universal image endpoint for social media previews using image.social
-  app.get('/steel-image', (req, res) => {
-    try {
-      console.log('[Universal Image] Redirecting to image.social for dynamic preview');
-      
-      // Get path from query parameter or use default path
-      const path = req.query.path || 'latest/china-steel-reform';
-      
-      // Add cache busting for aggressive cachers like Telegram
-      const timestamp = Date.now();
-      
-      // Redirect to image.social with the appropriate path (correct format)
-      const imageSocialUrl = `https://image.social/get?url=dailydigest.id/${path}&t=${timestamp}`;
-      
-      // Set cache control headers
-      const oneHour = 60 * 60;
-      res.setHeader('Cache-Control', `public, max-age=${oneHour}`);
-      res.setHeader('Expires', new Date(Date.now() + oneHour * 1000).toUTCString());
-      
-      // Add cross-origin support
-      res.setHeader('Access-Control-Allow-Origin', '*');
-      res.setHeader('Access-Control-Allow-Methods', 'GET');
-      res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-      
-      // Redirect to image.social
-      res.redirect(imageSocialUrl);
-    } catch (error) {
-      console.error('Error redirecting to image.social:', error);
-      return res.status(500).send(`Error: ${error instanceof Error ? error.message : 'Unknown error'}`);
-    }
-  });
+  // Second steel image endpoint removed to prevent unwanted image previews
 
-  // Dynamic social preview endpoint that generates previews for any path
-  app.get('/dynamic-preview', (req, res) => {
-    try {
-      console.log('[Dynamic Preview] Generating dynamic social preview');
-      
-      // Get path from query parameter
-      const path = req.query.path || '';
-      
-      // Get platform from query parameter (defaults to 'all')
-      const platform = req.query.platform || 'all';
-      
-      // Add cache busting for aggressive cachers like Telegram
-      const timestamp = Date.now();
-      
-      // Generate image.social URL with appropriate parameters
-      let imageSocialUrl = `https://image.social/get?url=dailydigest.id/${path}`;
-      
-      // No platform-specific parameters needed, just add cache busting
-      // The simplified image.social format works well across all platforms
-      imageSocialUrl += `&t=${timestamp}`;
-      
-      // Set appropriate cache control headers based on platform
-      let cacheTime = 60 * 60; // Default: 1 hour
-      if (platform === 'telegram') {
-        cacheTime = 5 * 60; // 5 minutes for Telegram (aggressive caching)
-      } else if (platform === 'twitter' || platform === 'x') {
-        cacheTime = 12 * 60 * 60; // 12 hours for Twitter (less frequent refreshes)
-      }
-      
-      res.setHeader('Cache-Control', `public, max-age=${cacheTime}`);
-      res.setHeader('Expires', new Date(Date.now() + cacheTime * 1000).toUTCString());
-      
-      // Add cross-origin support
-      res.setHeader('Access-Control-Allow-Origin', '*');
-      res.setHeader('Access-Control-Allow-Methods', 'GET');
-      res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-      
-      // Redirect to image.social
-      res.redirect(imageSocialUrl);
-    } catch (error) {
-      console.error('Error generating dynamic preview:', error);
-      return res.status(500).send(`Error: ${error instanceof Error ? error.message : 'Unknown error'}`);
-    }
-  });
+  // Dynamic social preview endpoint removed to prevent unwanted image.social integration
 
   // Routes for serving our social media test pages with proper headers
   app.get('/social-media-test.html', (req, res) => {
