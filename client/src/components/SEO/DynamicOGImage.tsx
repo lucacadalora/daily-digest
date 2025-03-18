@@ -100,24 +100,13 @@ export default function DynamicOGImage({
   // Remove leading slash if present for better URL construction
   const cleanPath = currentPath.startsWith('/') ? currentPath.substring(1) : currentPath;
   
-  // Construct the full URL for image.social with optional cache busting
+  // Construct the full URL for image.social with the correct format
+  // The format should be https://image.social/get?url=domain/path
   let imageUrl = `https://image.social/get?url=${domain}/${cleanPath}`;
   
-  // Add cache busting parameter if enabled
+  // Add cache busting parameter if enabled - only use a simple 't' parameter
   if (enableCacheBusting && timestamp) {
     imageUrl += `&t=${timestamp}`;
-  }
-  
-  // Platform-specific optimizations
-  if (platform === 'telegram') {
-    // Telegram needs stronger cache busting
-    imageUrl += `&telegram=true&t=${Date.now()}`;
-  } else if (platform === 'twitter') {
-    // Twitter prefers consistent URLs with less frequent changes
-    imageUrl += enableCacheBusting ? `&twitter=true` : '';
-  } else if (platform === 'facebook') {
-    // Facebook has good debugger tools, but still benefits from cache hints
-    imageUrl += enableCacheBusting ? `&fb=true` : '';
   }
   
   // Client-side meta tag cleanup to prevent duplicates

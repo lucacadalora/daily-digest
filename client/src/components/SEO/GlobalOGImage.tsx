@@ -78,8 +78,8 @@ export default function GlobalOGImage() {
   const baseUrl = 'dailydigest.id'; // Use your actual domain here
   const fullUrl = `${baseUrl}${location}`;
   
-  // Generate the image.social URL with a cache-busting timestamp parameter
-  // This helps platforms like Telegram refresh the image
+  // Generate the image.social URL with the correct format and optional cache busting
+  // Format: https://image.social/get?url=domain/path
   const timestamp = new Date().getTime();
   const imageSocialUrl = `https://image.social/get?url=${fullUrl}&t=${timestamp}`;
   

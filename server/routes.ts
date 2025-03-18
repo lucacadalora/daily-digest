@@ -2074,7 +2074,7 @@ export function registerRoutes(app: Express): Server {
       // Add cache busting for aggressive cachers like Telegram
       const timestamp = Date.now();
       
-      // Redirect to image.social with the appropriate path
+      // Redirect to image.social with the appropriate path (correct format)
       const imageSocialUrl = `https://image.social/get?url=dailydigest.id/${path}&t=${timestamp}`;
       
       // Set cache control headers
@@ -2112,16 +2112,9 @@ export function registerRoutes(app: Express): Server {
       // Generate image.social URL with appropriate parameters
       let imageSocialUrl = `https://image.social/get?url=dailydigest.id/${path}`;
       
-      // Add platform-specific parameters
-      if (platform === 'telegram') {
-        imageSocialUrl += `&telegram=true&t=${timestamp}`;
-      } else if (platform === 'twitter' || platform === 'x') {
-        imageSocialUrl += `&twitter=true&t=${timestamp}`;
-      } else if (platform === 'facebook') {
-        imageSocialUrl += `&fb=true&t=${timestamp}`;
-      } else {
-        imageSocialUrl += `&t=${timestamp}`;
-      }
+      // No platform-specific parameters needed, just add cache busting
+      // The simplified image.social format works well across all platforms
+      imageSocialUrl += `&t=${timestamp}`;
       
       // Set appropriate cache control headers based on platform
       let cacheTime = 60 * 60; // Default: 1 hour
