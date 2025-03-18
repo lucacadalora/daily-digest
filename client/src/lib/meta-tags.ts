@@ -81,10 +81,10 @@ export function updateMetaTags(metadata: ArticleMetadata, cacheBuster?: string):
     }
     
     // Otherwise, create an image.social URL from the article's URL
-    // This ensures we get a beautiful screenshot preview with a zoomed out view
+    // This ensures we get a beautiful screenshot preview with a widescreen viewport
     const encodedUrl = encodeURIComponent(metadata.url);
     const timestamp = cacheBuster || Date.now();
-    return `https://image.social/get?url=${encodedUrl}&scale=0.8&t=${timestamp}`;
+    return `https://image.social/get?url=${encodedUrl}&viewport=1920x1080&t=${timestamp}`;
   };
   
   // Process image URL

@@ -15,8 +15,8 @@ export function registerAdditionalRoutes(app: Express) {
       // Add cache busting for aggressive cachers like Telegram
       const timestamp = Date.now();
       
-      // Redirect to image.social with the appropriate path and scale parameter for a zoomed out view
-      const imageSocialUrl = `https://image.social/get?url=dailydigest.id/${path}&scale=0.8&t=${timestamp}`;
+      // Redirect to image.social with the appropriate path and viewport parameters for a zoomed out view
+      const imageSocialUrl = `https://image.social/get?url=dailydigest.id/${path}&viewport=1920x1080&t=${timestamp}`;
       
       // Set cache control headers
       const oneDay = 24 * 60 * 60;
