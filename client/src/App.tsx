@@ -30,6 +30,7 @@ import IndonesiaREEPotential from "@/pages/newsletter/indonesia-ree-potential";
 // Insights pages
 import Insights from "@/pages/insights";
 import BUMNLawComparison from "@/pages/insights/bumn-law-comparison";
+import JFKDeclassifiedFiles from "@/pages/insights/jfk-declassified-files";
 
 // Data section pages
 import DataIndex from "@/pages/data/index";
@@ -56,6 +57,7 @@ function Router() {
       {/* Insights routes */}
       <Route path="/insights" component={Insights} />
       <Route path="/insights/bumn-law-comparison" component={BUMNLawComparison} />
+      <Route path="/insights/jfk-declassified-files" component={JFKDeclassifiedFiles} />
       
       {/* Data section routes */}
       <Route path="/data" component={DataIndex} />

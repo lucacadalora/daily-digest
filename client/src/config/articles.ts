@@ -33,6 +33,22 @@ export type ArticleConfig = z.infer<typeof articleSchema>;
  */
 export const articles: ArticleConfig[] = [
   {
+    id: "jfk-declassified-files",
+    title: "The Newly Declassified JFK Files: 80,000 Pages Reshaping History",
+    description: "In March 2025, President Trump ordered the release of long-classified documents related to JFK's assassination. Over 80,000 pages of previously confidential materials are now available, offering new insights into one of America's most scrutinized events.",
+    image: "/images/articles/jfk-declassified.svg",
+    imageAlt: "Investigation document with JFK assassination declassified files",
+    author: "Insights Team",
+    publishedDate: "March 19, 2025",
+    category: "Insights",
+    tags: ["Government", "History", "Declassified", "National Security"],
+    slug: "insights/jfk-declassified-files",
+    featured: true,
+    imageWidth: 1200,
+    imageHeight: 630,
+    summary: "How newly declassified JFK assassination files are reshaping our understanding of this pivotal historical event and raising new questions about intelligence agencies."
+  },
+  {
     id: "indonesia-economic-tightrope-export-rules",
     title: "Saving USD 50 Billion: How PP No 8 2025 Could Transform Indonesia's Liquidity",
     description: "Indonesia's economy faces a pivotal moment with a liquidity deficit in the banking system and Rupiah depreciation. PP No 8 2025 mandating export proceed repatriation could unlock USD 50 billion and reshape liquidity dynamics if successfully implemented.",
@@ -106,7 +122,7 @@ export function getArticleBySlug(slug: string): ArticleConfig | undefined {
 export function getArticleUrl(article: ArticleConfig): string {
   // Use the appropriate domain based on environment
   const domain = typeof window !== 'undefined' ? 
-    (import.meta.env.PROD ? "https://market-insights.repl.app" : window.location.origin)
+    (process.env.NODE_ENV === 'production' ? "https://market-insights.repl.app" : window.location.origin)
     : "https://market-insights.repl.app";
     
   return `${domain}/${article.slug}`;
@@ -117,7 +133,7 @@ export function getArticleUrl(article: ArticleConfig): string {
  */
 export function getArticleImageUrl(article: ArticleConfig): string {
   const domain = typeof window !== 'undefined' ? 
-    (import.meta.env.PROD ? "https://market-insights.repl.app" : window.location.origin)
+    (process.env.NODE_ENV === 'production' ? "https://market-insights.repl.app" : window.location.origin)
     : "https://market-insights.repl.app";
     
   return `${domain}${article.image}`;

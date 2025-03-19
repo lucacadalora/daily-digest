@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0d253f" />
+      <stop offset="100%" stop-color="#1c2f45" />
+    </linearGradient>
+    <filter id="paper-texture" x="0" y="0" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="5" seed="1" />
+      <feDisplacementMap in="SourceGraphic" scale="8" />
+    </filter>
+    <filter id="redacted-effect">
+      <feTurbulence type="fractalNoise" baseFrequency="0.09" numOctaves="3" seed="2" />
+      <feDisplacementMap in="SourceGraphic" scale="2" />
+    </filter>
+    <style>
+      @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+      }
+      @keyframes typewriter {
+        from { width: 0; }
+        to { width: 100%; }
+      }
+      .timeline-item {
+        animation: fadeIn 0.5s ease-in-out forwards;
+        opacity: 0;
+      }
+      .timeline-item:nth-child(1) { animation-delay: 0.2s; }
+      .timeline-item:nth-child(2) { animation-delay: 0.4s; }
+      .timeline-item:nth-child(3) { animation-delay: 0.6s; }
+      .timeline-item:nth-child(4) { animation-delay: 0.8s; }
+      .timeline-item:nth-child(5) { animation-delay: 1s; }
+    </style>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bg-gradient)" />
+  
+  <!-- Paper texture overlay -->
+  <rect width="1200" height="630" fill="#f6f4ea" opacity="0.08" filter="url(#paper-texture)" />
+  
+  <!-- Secret document effect -->
+  <g transform="translate(100, 80)">
+    <rect width="1000" height="480" fill="#f3f0e6" rx="2" opacity="0.9" filter="url(#paper-texture)" />
+    <rect x="20" y="20" width="960" height="40" fill="#a7332e" rx="1" />
+    <text x="500" y="45" font-family="'Courier New', monospace" font-size="20" fill="white" text-anchor="middle" font-weight="bold">TOP SECRET - DECLASSIFIED MARCH 2025</text>
+  </g>
+  
+  <!-- Main headline -->
+  <g transform="translate(130, 170)">
+    <text font-family="Georgia, serif" font-size="44" font-weight="bold" fill="#1a1a1a">
+      <tspan x="0" y="0">THE NEWLY DECLASSIFIED</tspan>
+      <tspan x="0" y="60">JFK FILES</tspan>
+    </text>
+    <text x="0" y="100" font-family="Georgia, serif" font-size="22" fill="#444444" font-style="italic">
+      How 80,000+ Pages of Documents Are Reshaping History
+    </text>
+    
+    <line x1="0" y1="130" x2="940" y2="130" stroke="#a7332e" stroke-width="2" />
+  </g>
+  
+  <!-- Key findings visualization -->
+  <g transform="translate(130, 320)">
+    <text font-family="Georgia, serif" font-size="18" font-weight="bold" fill="#1a1a1a">TEN KEY REVELATIONS:</text>
+    
+    <!-- Redacted style elements -->
+    <g transform="translate(0, 30)">
+      <rect width="280" height="20" fill="#111" filter="url(#redacted-effect)" opacity="0.9" />
+      <text x="300" y="15" font-family="'Courier New', monospace" font-size="14" fill="#333">Oswald's surveillance was more extensive than admitted</text>
+    </g>
+    
+    <g transform="translate(0, 60)">
+      <rect width="200" height="20" fill="#111" filter="url(#redacted-effect)" opacity="0.9" />
+      <text x="300" y="15" font-family="'Courier New', monospace" font-size="14" fill="#333">CIA may have been negligent or complicit</text>
+    </g>
+    
+    <g transform="translate(0, 90)">
+      <rect width="240" height="20" fill="#111" filter="url(#redacted-effect)" opacity="0.9" />
+      <text x="300" y="15" font-family="'Courier New', monospace" font-size="14" fill="#333">KGB deemed Oswald "unstable and self-motivated"</text>
+    </g>
+    
+    <g transform="translate(0, 120)">
+      <rect width="180" height="20" fill="#111" filter="url(#redacted-effect)" opacity="0.9" />
+      <text x="300" y="15" font-family="'Courier New', monospace" font-size="14" fill="#333">New evidence reopens second shooter theories</text>
+    </g>
+    
+    <g transform="translate(0, 150)">
+      <rect width="220" height="20" fill="#111" filter="url(#redacted-effect)" opacity="0.9" />
+      <text x="300" y="15" font-family="'Courier New', monospace" font-size="14" fill="#333">Mafia connections more substantial than reported</text>
+    </g>
+  </g>
+
+  <!-- Timeline -->
+  <g transform="translate(600, 320)">
+    <text font-family="Georgia, serif" font-size="18" font-weight="bold" fill="#1a1a1a">DECLASSIFICATION TIMELINE:</text>
+    
+    <g class="timeline-item" transform="translate(0, 40)">
+      <circle cx="10" cy="10" r="6" fill="#a7332e" />
+      <line x1="10" y1="16" x2="10" y2="50" stroke="#a7332e" stroke-width="2" />
+      <text x="30" y="15" font-family="'Courier New', monospace" font-size="14" fill="#333">1963: JFK Assassination</text>
+    </g>
+    
+    <g class="timeline-item" transform="translate(0, 80)">
+      <circle cx="10" cy="10" r="6" fill="#a7332e" />
+      <line x1="10" y1="16" x2="10" y2="50" stroke="#a7332e" stroke-width="2" />
+      <text x="30" y="15" font-family="'Courier New', monospace" font-size="14" fill="#333">1964: Warren Commission Report</text>
+    </g>
+    
+    <g class="timeline-item" transform="translate(0, 120)">
+      <circle cx="10" cy="10" r="6" fill="#a7332e" />
+      <line x1="10" y1="16" x2="10" y2="50" stroke="#a7332e" stroke-width="2" />
+      <text x="30" y="15" font-family="'Courier New', monospace" font-size="14" fill="#333">1992: JFK Records Collection Act</text>
+    </g>
+    
+    <g class="timeline-item" transform="translate(0, 160)">
+      <circle cx="10" cy="10" r="6" fill="#a7332e" />
+      <line x1="10" y1="16" x2="10" y2="50" stroke="#a7332e" stroke-width="2" />
+      <text x="30" y="15" font-family="'Courier New', monospace" font-size="14" fill="#333">2017-2024: Partial releases</text>
+    </g>
+    
+    <g class="timeline-item" transform="translate(0, 200)">
+      <circle cx="10" cy="10" r="6" fill="#a7332e" />
+      <text x="30" y="15" font-family="'Courier New', monospace" font-size="14" fill="#333" font-weight="bold">March 2025: 80,000+ pages released</text>
+    </g>
+  </g>
+  
+  <!-- Footer -->
+  <g transform="translate(100, 550)">
+    <rect width="1000" height="1" fill="#888" />
+    <text x="0" y="25" font-family="Georgia, serif" font-size="14" fill="#555">By Insights Team • March 19, 2025</text>
+    <text x="1000" y="25" font-family="Georgia, serif" font-size="14" fill="#555" text-anchor="end">Market Insights Special Report</text>
+  </g>
+</svg>
