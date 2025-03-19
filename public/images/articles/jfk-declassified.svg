@@ -60,8 +60,8 @@
     <line x1="0" y1="130" x2="940" y2="130" stroke="#a7332e" stroke-width="2" />
   </g>
   
-  <!-- Key findings visualization -->
-  <g transform="translate(130, 320)">
+  <!-- Key findings visualization - left column -->
+  <g transform="translate(70, 320)">
     <text font-family="Georgia, serif" font-size="18" font-weight="bold" fill="#1a1a1a">TEN KEY REVELATIONS:</text>
     
     <!-- Redacted style elements -->
@@ -91,56 +91,63 @@
     </g>
   </g>
 
-  <!-- Timeline - completely redesigned to prevent overlap -->
-  <g transform="translate(600, 320)">
+  <!-- Timeline - expanded with more width and reduced text overlap -->
+  <g transform="translate(650, 320)">
     <text font-family="Georgia, serif" font-size="18" font-weight="bold" fill="#1a1a1a">DECLASSIFICATION TIMELINE:</text>
     
+    <!-- Background rectangles for better readability -->
+    <rect x="-95" y="31" width="75" height="22" fill="#f3f0e6" rx="2" />
+    <rect x="-95" y="71" width="75" height="22" fill="#f3f0e6" rx="2" />
+    <rect x="-95" y="111" width="75" height="22" fill="#f3f0e6" rx="2" />
+    <rect x="-95" y="151" width="95" height="22" fill="#f3f0e6" rx="2" />
+    <rect x="-95" y="191" width="95" height="22" fill="#f3f0e6" rx="2" />
+    
     <!-- Timeline bar -->
-    <line x1="130" y1="40" x2="130" y2="210" stroke="#a7332e" stroke-width="2" />
+    <line x1="0" y1="40" x2="0" y2="210" stroke="#a7332e" stroke-width="2" />
     
     <!-- Year 1963 -->
     <g class="timeline-item" transform="translate(0, 40)">
-      <circle cx="130" cy="10" r="6" fill="#a7332e" />
-      <!-- Year on the left -->
-      <text x="120" y="14" font-family="'Courier New', monospace" font-size="14" fill="#333" font-weight="bold" text-anchor="end">1963</text>
-      <!-- Description on the right -->
-      <text x="145" y="14" font-family="'Courier New', monospace" font-size="14" fill="#333">JFK Assassination</text>
+      <circle cx="0" cy="10" r="6" fill="#a7332e" />
+      <!-- Year on the left with more space -->
+      <text x="-12" y="14" font-family="'Courier New', monospace" font-size="14" fill="#333" font-weight="bold" text-anchor="end">1963</text>
+      <!-- Description on the right with more space -->
+      <text x="15" y="14" font-family="'Courier New', monospace" font-size="14" fill="#333">JFK Assassination</text>
     </g>
     
     <!-- Year 1964 -->
     <g class="timeline-item" transform="translate(0, 80)">
-      <circle cx="130" cy="10" r="6" fill="#a7332e" />
-      <!-- Year on the left -->
-      <text x="120" y="14" font-family="'Courier New', monospace" font-size="14" fill="#333" font-weight="bold" text-anchor="end">1964</text>
-      <!-- Description on the right -->
-      <text x="145" y="14" font-family="'Courier New', monospace" font-size="14" fill="#333">Warren Commission Report</text>
+      <circle cx="0" cy="10" r="6" fill="#a7332e" />
+      <!-- Year on the left with more space -->
+      <text x="-12" y="14" font-family="'Courier New', monospace" font-size="14" fill="#333" font-weight="bold" text-anchor="end">1964</text>
+      <!-- Description on the right with more space -->
+      <text x="15" y="14" font-family="'Courier New', monospace" font-size="14" fill="#333">Warren Commission</text>
     </g>
     
     <!-- Year 1992 -->
     <g class="timeline-item" transform="translate(0, 120)">
-      <circle cx="130" cy="10" r="6" fill="#a7332e" />
-      <!-- Year on the left -->
-      <text x="120" y="14" font-family="'Courier New', monospace" font-size="14" fill="#333" font-weight="bold" text-anchor="end">1992</text>
-      <!-- Description on the right -->
-      <text x="145" y="14" font-family="'Courier New', monospace" font-size="14" fill="#333">JFK Records Collection Act</text>
+      <circle cx="0" cy="10" r="6" fill="#a7332e" />
+      <!-- Year on the left with more space -->
+      <text x="-12" y="14" font-family="'Courier New', monospace" font-size="14" fill="#333" font-weight="bold" text-anchor="end">1992</text>
+      <!-- Description on the right with more space -->
+      <text x="15" y="14" font-family="'Courier New', monospace" font-size="14" fill="#333">JFK Records Act</text>
     </g>
     
     <!-- Years 2017-2024 -->
     <g class="timeline-item" transform="translate(0, 160)">
-      <circle cx="130" cy="10" r="6" fill="#a7332e" />
-      <!-- Year on the left -->
-      <text x="120" y="14" font-family="'Courier New', monospace" font-size="14" fill="#333" font-weight="bold" text-anchor="end">2017-2024</text>
-      <!-- Description on the right -->
-      <text x="145" y="14" font-family="'Courier New', monospace" font-size="14" fill="#333">Partial releases</text>
+      <circle cx="0" cy="10" r="6" fill="#a7332e" />
+      <!-- Year on the left with more space -->
+      <text x="-12" y="14" font-family="'Courier New', monospace" font-size="14" fill="#333" font-weight="bold" text-anchor="end">2017-2024</text>
+      <!-- Description on the right with more space -->
+      <text x="15" y="14" font-family="'Courier New', monospace" font-size="14" fill="#333">Partial releases</text>
     </g>
     
     <!-- March 2025 -->
     <g class="timeline-item" transform="translate(0, 200)">
-      <circle cx="130" cy="10" r="6" fill="#a7332e" />
-      <!-- Year on the left -->
-      <text x="120" y="14" font-family="'Courier New', monospace" font-size="14" fill="#333" font-weight="bold" text-anchor="end">March 2025</text>
-      <!-- Description on the right -->
-      <text x="145" y="14" font-family="'Courier New', monospace" font-size="14" fill="#333">80,000+ pages released</text>
+      <circle cx="0" cy="10" r="6" fill="#a7332e" />
+      <!-- Year on the left with more space -->
+      <text x="-12" y="14" font-family="'Courier New', monospace" font-size="14" fill="#333" font-weight="bold" text-anchor="end">March 2025</text>
+      <!-- Description on the right with more space -->
+      <text x="15" y="14" font-family="'Courier New', monospace" font-size="14" fill="#333">80,000+ pages</text>
     </g>
   </g>
   
