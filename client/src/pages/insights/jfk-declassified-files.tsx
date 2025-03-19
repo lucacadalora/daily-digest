@@ -63,29 +63,17 @@ export default function JFKDeclassifiedFiles() {
             While these files offer new insights into the assassination and the complex global tensions of the Cold War era, they also spark fresh questions about government secrecy, possible foreign involvement, and the role of U.S. intelligence agencies.
           </p>
           
-          <div className="bg-neutral-100 dark:bg-slate-800/60 rounded-lg p-5 border border-neutral-200 dark:border-slate-700 my-8">
-            <h2 className="text-2xl font-semibold mb-3 flex items-center">
+          <div className="bg-neutral-100 dark:bg-slate-800/60 rounded-lg p-4 border border-neutral-200 dark:border-slate-700 my-6">
+            <h2 className="text-xl font-semibold mb-2 flex items-center">
               <FileText className="mr-2 h-5 w-5 text-red-700" />
               Document Release Details
             </h2>
-            <ul className="grid grid-cols-1 md:grid-cols-2 gap-4 list-none pl-0">
-              <li className="flex items-center space-x-2">
-                <Badge variant="outline" className="px-2 py-1 bg-red-50 dark:bg-red-900/20 text-red-800 dark:text-red-300 border-red-200 dark:border-red-800">80,000+</Badge>
-                <span className="text-gray-700 dark:text-gray-300">Pages of declassified documents</span>
-              </li>
-              <li className="flex items-center space-x-2">
-                <Badge variant="outline" className="px-2 py-1 bg-blue-50 dark:bg-blue-900/20 text-blue-800 dark:text-blue-300 border-blue-200 dark:border-blue-800">March 2025</Badge>
-                <span className="text-gray-700 dark:text-gray-300">Released by Trump administration</span>
-              </li>
-              <li className="flex items-center space-x-2">
-                <Badge variant="outline" className="px-2 py-1 bg-amber-50 dark:bg-amber-900/20 text-amber-800 dark:text-amber-300 border-amber-200 dark:border-amber-800">62 years</Badge>
-                <span className="text-gray-700 dark:text-gray-300">Since the assassination</span>
-              </li>
-              <li className="flex items-center space-x-2">
-                <Badge variant="outline" className="px-2 py-1 bg-green-50 dark:bg-green-900/20 text-green-800 dark:text-green-300 border-green-200 dark:border-green-800">National Archives</Badge>
-                <span className="text-gray-700 dark:text-gray-300">Public access available</span>
-              </li>
-            </ul>
+            <div className="flex flex-wrap gap-3">
+              <Badge variant="outline" className="px-2 py-1 bg-red-50 dark:bg-red-900/20 text-red-800 dark:text-red-300 border-red-200 dark:border-red-800 text-sm">80,000+ pages</Badge>
+              <Badge variant="outline" className="px-2 py-1 bg-blue-50 dark:bg-blue-900/20 text-blue-800 dark:text-blue-300 border-blue-200 dark:border-blue-800 text-sm">March 2025 release</Badge>
+              <Badge variant="outline" className="px-2 py-1 bg-amber-50 dark:bg-amber-900/20 text-amber-800 dark:text-amber-300 border-amber-200 dark:border-amber-800 text-sm">62 years after assassination</Badge>
+              <Badge variant="outline" className="px-2 py-1 bg-green-50 dark:bg-green-900/20 text-green-800 dark:text-green-300 border-green-200 dark:border-green-800 text-sm">National Archives</Badge>
+            </div>
           </div>
         </div>
         
@@ -137,12 +125,12 @@ export default function JFKDeclassifiedFiles() {
         {/* Key Findings Section */}
         <section className="mb-12">
           <h2 className="text-2xl font-bold mb-6 flex items-center">
-            <Search className="mr-2 h-5 w-5 text-red-700" /> Key Revelations
+            <Search className="mr-2 h-5 w-5 text-red-700" /> 10 Key Revelations
           </h2>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <KeyFinding 
-              icon={<Users className="h-5 w-5 text-indigo-600 dark:text-indigo-400" />}
+              icon={<div className="bg-indigo-600 dark:bg-indigo-700 text-white w-6 h-6 rounded-full flex items-center justify-center font-bold text-sm">1</div>}
               title="Lee Harvey Oswald's Surveillance"
               color="bg-indigo-50 dark:bg-indigo-900/20"
             >
@@ -152,7 +140,7 @@ export default function JFKDeclassifiedFiles() {
             </KeyFinding>
             
             <KeyFinding 
-              icon={<AlertCircle className="h-5 w-5 text-red-600 dark:text-red-400" />}
+              icon={<div className="bg-red-600 dark:bg-red-700 text-white w-6 h-6 rounded-full flex items-center justify-center font-bold text-sm">2</div>}
               title="CIA Negligence or Complicity"
               color="bg-red-50 dark:bg-red-900/20"
             >
@@ -162,7 +150,7 @@ export default function JFKDeclassifiedFiles() {
             </KeyFinding>
             
             <KeyFinding 
-              icon={<Globe className="h-5 w-5 text-blue-600 dark:text-blue-400" />}
+              icon={<div className="bg-blue-600 dark:bg-blue-700 text-white w-6 h-6 rounded-full flex items-center justify-center font-bold text-sm">3</div>}
               title="KGB Assessment of Oswald"
               color="bg-blue-50 dark:bg-blue-900/20"
             >
@@ -172,7 +160,7 @@ export default function JFKDeclassifiedFiles() {
             </KeyFinding>
             
             <KeyFinding 
-              icon={<Users className="h-5 w-5 text-amber-600 dark:text-amber-400" />}
+              icon={<div className="bg-amber-600 dark:bg-amber-700 text-white w-6 h-6 rounded-full flex items-center justify-center font-bold text-sm">4</div>}
               title="Second Shooter Evidence"
               color="bg-amber-50 dark:bg-amber-900/20"
             >
@@ -182,7 +170,7 @@ export default function JFKDeclassifiedFiles() {
             </KeyFinding>
             
             <KeyFinding 
-              icon={<Shield className="h-5 w-5 text-emerald-600 dark:text-emerald-400" />}
+              icon={<div className="bg-emerald-600 dark:bg-emerald-700 text-white w-6 h-6 rounded-full flex items-center justify-center font-bold text-sm">5</div>}
               title="Mafia Connections"
               color="bg-emerald-50 dark:bg-emerald-900/20"
             >
@@ -192,7 +180,7 @@ export default function JFKDeclassifiedFiles() {
             </KeyFinding>
             
             <KeyFinding 
-              icon={<Lock className="h-5 w-5 text-purple-600 dark:text-purple-400" />}
+              icon={<div className="bg-purple-600 dark:bg-purple-700 text-white w-6 h-6 rounded-full flex items-center justify-center font-bold text-sm">6</div>}
               title="Unredacted FBI Records"
               color="bg-purple-50 dark:bg-purple-900/20"
             >
@@ -200,29 +188,69 @@ export default function JFKDeclassifiedFiles() {
                 Over 2,400 new FBI documents illuminate the bureau's surveillance of Oswald and prior knowledge of his volatile behavior, suggesting the FBI may have under-communicated concerns.
               </p>
             </KeyFinding>
+
+            <KeyFinding 
+              icon={<div className="bg-rose-600 dark:bg-rose-700 text-white w-6 h-6 rounded-full flex items-center justify-center font-bold text-sm">7</div>}
+              title="Cold War Tensions"
+              color="bg-rose-50 dark:bg-rose-900/20"
+            >
+              <p>
+                U.S. officials were deeply worried that Oswald's Soviet and Cuban ties might escalate into a larger conflict. Internal memos show frantic efforts to avert global panic and prevent the assassination from being perceived as a Soviet-backed act of war.
+              </p>
+            </KeyFinding>
+
+            <KeyFinding 
+              icon={<div className="bg-cyan-600 dark:bg-cyan-700 text-white w-6 h-6 rounded-full flex items-center justify-center font-bold text-sm">8</div>}
+              title="Propaganda Operations"
+              color="bg-cyan-50 dark:bg-cyan-900/20"
+            >
+              <p>
+                Documents reveal CIA propaganda campaigns to shape international opinion about Oswald's motivations both before and after the assassination. Controlling the narrative abroad was a major priority for U.S. intelligence in the tense Cold War environment.
+              </p>
+            </KeyFinding>
+
+            <KeyFinding 
+              icon={<div className="bg-orange-600 dark:bg-orange-700 text-white w-6 h-6 rounded-full flex items-center justify-center font-bold text-sm">9</div>}
+              title="Technical Espionage Details"
+              color="bg-orange-50 dark:bg-orange-900/20"
+            >
+              <p>
+                Several files detail CIA phone taps in Mexico City monitoring traffic between Soviet and Cuban officials, capturing Oswald's communications. The scale of these wiretaps underlines the agency's focus on the region during Cold War rivalries.
+              </p>
+            </KeyFinding>
+
+            <KeyFinding 
+              icon={<div className="bg-teal-600 dark:bg-teal-700 text-white w-6 h-6 rounded-full flex items-center justify-center font-bold text-sm">10</div>}
+              title="Transparency Milestone"
+              color="bg-teal-50 dark:bg-teal-900/20"
+            >
+              <p>
+                This 2025 release is the most significant since the 1990s. Despite thousands of pages now unredacted, skepticism persists as some crucial documents remain sealed, with many experts believing critical pieces of the JFK puzzle are still missing.
+              </p>
+            </KeyFinding>
           </div>
         </section>
         
-        {/* Cold War Context */}
+        {/* Investigative Analysis */}
         <section className="mb-12">
           <h2 className="text-2xl font-bold mb-6 flex items-center">
-            <Globe className="mr-2 h-5 w-5 text-red-700" /> Cold War Context
+            <Globe className="mr-2 h-5 w-5 text-red-700" /> Investigative Analysis
           </h2>
           
           <div className="prose dark:prose-invert lg:prose-lg max-w-none">
             <p>
-              The files offer a vivid look at how JFK's assassination magnified Cold War tensions. U.S. officials were deeply worried that Oswald's Soviet and Cuban ties—however flimsy—might escalate into a larger conflict. Internal CIA and FBI memos show frantic efforts to avert global panic and ensure the assassination was not perceived as a Soviet-backed act of war.
+              The newly declassified files not only provide factual revelations but also paint a complex picture of Cold War America and its intelligence operations. The documents reveal the depth of surveillance capabilities that existed in the 1960s and how these technologies were deployed against potential threats - both foreign and domestic.
             </p>
             
             <div className="bg-neutral-100 dark:bg-slate-800/60 p-5 rounded-lg border border-neutral-200 dark:border-slate-700 my-6">
-              <h3 className="text-xl font-semibold mb-3">Technical Espionage Details</h3>
+              <h3 className="text-xl font-semibold mb-3">Historical Significance</h3>
               <p className="mb-0">
-                Several files detail how the CIA tapped phones in Mexico City to monitor traffic between Soviet and Cuban officials. This espionage net encompassed Oswald's communications, capturing phone calls that had remained partly redacted until now. The scale and sophistication of these wiretaps underline the agency's intense focus on the region at the height of Cold War rivalries.
+                These documents are significant not only for what they reveal about the Kennedy assassination, but also for how they illuminate the operational methods of U.S. intelligence agencies during the Cold War. They provide an unprecedented window into the sophisticated counterintelligence operations of the era and the complex web of international espionage that characterized U.S.-Soviet relations.
               </p>
             </div>
             
             <p>
-              Among the declassified records are documents related to propaganda campaigns conducted by the CIA. These show attempts to shape international opinion about Oswald's motivations both before and after November 22, 1963. The files confirm that controlling the narrative—especially abroad—was a major concern for U.S. intelligence in the tense Cold War environment.
+              Historians and researchers now face the daunting task of organizing and interpreting this massive trove of information. While the documents answer some long-standing questions, they inevitably generate new ones - particularly about the decision-making processes that led certain information to remain classified for so many decades after the events they describe.
             </p>
           </div>
         </section>
