@@ -36,7 +36,7 @@ export const articles: ArticleConfig[] = [
     id: "jfk-declassified-files",
     title: "The Newly Declassified JFK Files: 80,000 Pages Reshaping History",
     description: "In March 2025, President Trump ordered the release of long-classified documents related to JFK's assassination. Over 80,000 pages of previously confidential materials are now available, offering new insights into one of America's most scrutinized events.",
-    image: "/social-image?path=insights/jfk-declassified-files",
+    image: "/images/articles/jfk-declassified.svg",
     imageAlt: "Investigation document with JFK assassination declassified files",
     author: "Insights Team",
     publishedDate: "March 19, 2025",
