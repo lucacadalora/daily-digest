@@ -42,7 +42,7 @@ export const articles: ArticleConfig[] = [
     publishedDate: "March 19, 2025",
     category: "Insights",
     tags: ["Government", "History", "Declassified", "National Security"],
-    slug: "insights/jfk-declassified-files",
+    slug: "newsletter/jfk-declassified-files",
     featured: true,
     imageWidth: 1200,
     imageHeight: 630,

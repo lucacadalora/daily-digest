@@ -91,6 +91,7 @@ function Router() {
       <Route path="/fed-balance-sheet" component={FedBalanceSheet} />
       <Route path="/newsletter/fed-qt-exit-crypto-rally" component={FedQTExitCryptoRally} />
       <Route path="/newsletter/indonesia-ree-potential" component={IndonesiaREEPotential} />
+      <Route path="/newsletter/jfk-declassified-files" component={JFKDeclassifiedFiles} />
       <Route path="/newsletter/category/:category" component={Newsletters} />
       <Route path="/newsletters" component={() => <Redirect to="/newsletter" />} />
       
