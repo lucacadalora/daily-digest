@@ -98,30 +98,35 @@
     <g class="timeline-item" transform="translate(0, 40)">
       <circle cx="10" cy="10" r="6" fill="#a7332e" />
       <line x1="10" y1="16" x2="10" y2="50" stroke="#a7332e" stroke-width="2" />
-      <text x="30" y="15" font-family="'Courier New', monospace" font-size="14" fill="#333">1963: JFK Assassination</text>
+      <text x="30" y="15" font-family="'Courier New', monospace" font-size="14" fill="#333" font-weight="bold">1963:</text>
+      <text x="80" y="15" font-family="'Courier New', monospace" font-size="14" fill="#333">JFK Assassination</text>
     </g>
     
     <g class="timeline-item" transform="translate(0, 80)">
       <circle cx="10" cy="10" r="6" fill="#a7332e" />
       <line x1="10" y1="16" x2="10" y2="50" stroke="#a7332e" stroke-width="2" />
-      <text x="30" y="15" font-family="'Courier New', monospace" font-size="14" fill="#333">1964: Warren Commission Report</text>
+      <text x="30" y="15" font-family="'Courier New', monospace" font-size="14" fill="#333" font-weight="bold">1964:</text>
+      <text x="80" y="15" font-family="'Courier New', monospace" font-size="14" fill="#333">Warren Commission Report</text>
     </g>
     
     <g class="timeline-item" transform="translate(0, 120)">
       <circle cx="10" cy="10" r="6" fill="#a7332e" />
       <line x1="10" y1="16" x2="10" y2="50" stroke="#a7332e" stroke-width="2" />
-      <text x="30" y="15" font-family="'Courier New', monospace" font-size="14" fill="#333">1992: JFK Records Collection Act</text>
+      <text x="30" y="15" font-family="'Courier New', monospace" font-size="14" fill="#333" font-weight="bold">1992:</text>
+      <text x="80" y="15" font-family="'Courier New', monospace" font-size="14" fill="#333">JFK Records Collection Act</text>
     </g>
     
     <g class="timeline-item" transform="translate(0, 160)">
       <circle cx="10" cy="10" r="6" fill="#a7332e" />
       <line x1="10" y1="16" x2="10" y2="50" stroke="#a7332e" stroke-width="2" />
-      <text x="30" y="15" font-family="'Courier New', monospace" font-size="14" fill="#333">2017-2024: Partial releases</text>
+      <text x="30" y="15" font-family="'Courier New', monospace" font-size="14" fill="#333" font-weight="bold">2017-2024:</text>
+      <text x="125" y="15" font-family="'Courier New', monospace" font-size="14" fill="#333">Partial releases</text>
     </g>
     
     <g class="timeline-item" transform="translate(0, 200)">
       <circle cx="10" cy="10" r="6" fill="#a7332e" />
-      <text x="30" y="15" font-family="'Courier New', monospace" font-size="14" fill="#333" font-weight="bold">March 2025: 80,000+ pages released</text>
+      <text x="30" y="15" font-family="'Courier New', monospace" font-size="14" fill="#333" font-weight="bold">March 2025:</text>
+      <text x="125" y="15" font-family="'Courier New', monospace" font-size="14" fill="#333">80,000+ pages released</text>
     </g>
   </g>
   
