@@ -40,7 +40,7 @@ export const articles: ArticleConfig[] = [
     imageAlt: "Investigation document with JFK assassination declassified files",
     author: "Insights Team",
     publishedDate: "March 19, 2025",
-    category: "Insights",
+    category: "Insight",
     tags: ["Government", "History", "Declassified", "National Security"],
     slug: "newsletter/jfk-declassified-files",
     featured: true,

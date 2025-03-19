@@ -34,6 +34,37 @@ export type Article = z.infer<typeof articleSchema>;
 
 export const sampleArticles: Article[] = [
   {
+    slug: "jfk-declassified-files",
+    title: "The Newly Declassified JFK Files: 80,000 Pages Reshaping History",
+    description: "In March 2025, President Trump ordered the release of long-classified documents related to JFK's assassination. Over 80,000 pages of previously confidential materials are now available, offering new insights into one of America's most scrutinized events.",
+    category: "Insight",
+    source: "Daily Digest",
+    author: "Insights Team",
+    date: "March 19, 2025",
+    previewEmoji: "🔍",
+    previewImage: "/images/articles/jfk-declassified.svg",
+    featured: true,
+    previewMetrics: [
+      {
+        label: "Pages Released",
+        value: "80,000+",
+        subtitle: "Declassified documents"
+      },
+      {
+        label: "New Evidence",
+        value: "10",
+        subtitle: "Key revelations"
+      },
+      {
+        label: "Time Elapsed",
+        value: "62 yrs",
+        subtitle: "Since assassination"
+      }
+    ],
+    tags: ["Government", "History", "Declassified", "National Security"],
+    content: "The Newly Declassified JFK Files: How 80,000+ Pages of Documents Are Reshaping Our Understanding of a National Tragedy. In March 2025, President Trump ordered the release of long-classified documents related to the 1963 assassination of President John F. Kennedy (JFK). This move fulfilled a campaign promise to bring greater transparency to one of America's most scrutinized events. The documents reveal unprecedented details about Lee Harvey Oswald's surveillance, CIA operations, KGB assessments, potential second shooter evidence, and mafia connections to the assassination."
+  },
+  {
     slug: "indonesia-ree-potential",
     title: "$2 Billion USD Rare Earth Elements Potential",
     description: "Unlocking value from Indonesian tin smelter byproduct recovery in the Bangka Belitung Islands, with 116,142 tons of REE oxides estimated at $1.99 billion USD market value.",
