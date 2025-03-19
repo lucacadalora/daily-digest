@@ -91,42 +91,56 @@
     </g>
   </g>
 
-  <!-- Timeline -->
+  <!-- Timeline - completely redesigned to prevent overlap -->
   <g transform="translate(600, 320)">
     <text font-family="Georgia, serif" font-size="18" font-weight="bold" fill="#1a1a1a">DECLASSIFICATION TIMELINE:</text>
     
+    <!-- Timeline bar -->
+    <line x1="130" y1="40" x2="130" y2="210" stroke="#a7332e" stroke-width="2" />
+    
+    <!-- Year 1963 -->
     <g class="timeline-item" transform="translate(0, 40)">
-      <circle cx="10" cy="10" r="6" fill="#a7332e" />
-      <line x1="10" y1="16" x2="10" y2="50" stroke="#a7332e" stroke-width="2" />
-      <text x="30" y="15" font-family="'Courier New', monospace" font-size="14" fill="#333" font-weight="bold">1963:</text>
-      <text x="80" y="15" font-family="'Courier New', monospace" font-size="14" fill="#333">JFK Assassination</text>
+      <circle cx="130" cy="10" r="6" fill="#a7332e" />
+      <!-- Year on the left -->
+      <text x="120" y="14" font-family="'Courier New', monospace" font-size="14" fill="#333" font-weight="bold" text-anchor="end">1963</text>
+      <!-- Description on the right -->
+      <text x="145" y="14" font-family="'Courier New', monospace" font-size="14" fill="#333">JFK Assassination</text>
     </g>
     
+    <!-- Year 1964 -->
     <g class="timeline-item" transform="translate(0, 80)">
-      <circle cx="10" cy="10" r="6" fill="#a7332e" />
-      <line x1="10" y1="16" x2="10" y2="50" stroke="#a7332e" stroke-width="2" />
-      <text x="30" y="15" font-family="'Courier New', monospace" font-size="14" fill="#333" font-weight="bold">1964:</text>
-      <text x="80" y="15" font-family="'Courier New', monospace" font-size="14" fill="#333">Warren Commission Report</text>
+      <circle cx="130" cy="10" r="6" fill="#a7332e" />
+      <!-- Year on the left -->
+      <text x="120" y="14" font-family="'Courier New', monospace" font-size="14" fill="#333" font-weight="bold" text-anchor="end">1964</text>
+      <!-- Description on the right -->
+      <text x="145" y="14" font-family="'Courier New', monospace" font-size="14" fill="#333">Warren Commission Report</text>
     </g>
     
+    <!-- Year 1992 -->
     <g class="timeline-item" transform="translate(0, 120)">
-      <circle cx="10" cy="10" r="6" fill="#a7332e" />
-      <line x1="10" y1="16" x2="10" y2="50" stroke="#a7332e" stroke-width="2" />
-      <text x="30" y="15" font-family="'Courier New', monospace" font-size="14" fill="#333" font-weight="bold">1992:</text>
-      <text x="80" y="15" font-family="'Courier New', monospace" font-size="14" fill="#333">JFK Records Collection Act</text>
+      <circle cx="130" cy="10" r="6" fill="#a7332e" />
+      <!-- Year on the left -->
+      <text x="120" y="14" font-family="'Courier New', monospace" font-size="14" fill="#333" font-weight="bold" text-anchor="end">1992</text>
+      <!-- Description on the right -->
+      <text x="145" y="14" font-family="'Courier New', monospace" font-size="14" fill="#333">JFK Records Collection Act</text>
     </g>
     
+    <!-- Years 2017-2024 -->
     <g class="timeline-item" transform="translate(0, 160)">
-      <circle cx="10" cy="10" r="6" fill="#a7332e" />
-      <line x1="10" y1="16" x2="10" y2="50" stroke="#a7332e" stroke-width="2" />
-      <text x="30" y="15" font-family="'Courier New', monospace" font-size="14" fill="#333" font-weight="bold">2017-2024:</text>
-      <text x="125" y="15" font-family="'Courier New', monospace" font-size="14" fill="#333">Partial releases</text>
+      <circle cx="130" cy="10" r="6" fill="#a7332e" />
+      <!-- Year on the left -->
+      <text x="120" y="14" font-family="'Courier New', monospace" font-size="14" fill="#333" font-weight="bold" text-anchor="end">2017-2024</text>
+      <!-- Description on the right -->
+      <text x="145" y="14" font-family="'Courier New', monospace" font-size="14" fill="#333">Partial releases</text>
     </g>
     
+    <!-- March 2025 -->
     <g class="timeline-item" transform="translate(0, 200)">
-      <circle cx="10" cy="10" r="6" fill="#a7332e" />
-      <text x="30" y="15" font-family="'Courier New', monospace" font-size="14" fill="#333" font-weight="bold">March 2025:</text>
-      <text x="125" y="15" font-family="'Courier New', monospace" font-size="14" fill="#333">80,000+ pages released</text>
+      <circle cx="130" cy="10" r="6" fill="#a7332e" />
+      <!-- Year on the left -->
+      <text x="120" y="14" font-family="'Courier New', monospace" font-size="14" fill="#333" font-weight="bold" text-anchor="end">March 2025</text>
+      <!-- Description on the right -->
+      <text x="145" y="14" font-family="'Courier New', monospace" font-size="14" fill="#333">80,000+ pages released</text>
     </g>
   </g>
   
