@@ -38,6 +38,14 @@ const lawDocuments: LawDocument[] = [
     date: "5 Maret 2025",
     effectiveDate: "15 Maret 2025",
     slug: "permen-esdm-no-5-tahun-2025"
+  },
+  {
+    id: "4",
+    title: "Proposed Amendments in the RUU with UU 34 Tahun 2004",
+    subtitle: "Proposed Amendments in the RUU with UU 34 Tahun 2004 on the Indonesian National Armed Forces (TNI)",
+    date: "20 Maret 2025",
+    effectiveDate: "Pending Approval",
+    slug: "proposed-amendments-ruu-tni"
   }
 ];
 

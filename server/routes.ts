@@ -1789,6 +1789,11 @@ export function registerRoutes(app: Express): Server {
           contentType: "application/pdf",
           title: "PP No. 10 Tahun 2025"
         },
+        "proposed-amendments-ruu-tni": {
+          filename: "ruu TNI.pdf",
+          contentType: "application/pdf",
+          title: "Proposed Amendments in the RUU with UU 34 Tahun 2004 on the Indonesian National Armed Forces (TNI)"
+        },
         // Research papers
         "steel-tariff-exemptions-global-trade-impact": {
           filename: "Paper.pdf",
