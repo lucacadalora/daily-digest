@@ -22,6 +22,8 @@ export const PDFViewer: React.FC<PDFViewerProps> = ({ pdfUrl, documentTitle }) =
           return `/api/documents/law/peraturan-pemerintah-nomor-10-tahun-2025?download=true`;
         } else if (pdfUrl.includes('UU_NO_1_2025.pdf')) {
           return `/api/documents/law/undang-undang-nomor-1-tahun-2025?download=true`;
+        } else if (pdfUrl.includes('ruu TNI.pdf')) {
+          return `/api/documents/law/proposed-amendments-ruu-tni?download=true`;
         } else if (category === 'research') {
           return `/api/documents/research/steel-tariff-exemptions-global-trade-impact?download=true`;
         }
@@ -44,6 +46,8 @@ export const PDFViewer: React.FC<PDFViewerProps> = ({ pdfUrl, documentTitle }) =
           return `/api/documents/law/peraturan-pemerintah-nomor-10-tahun-2025`;
         } else if (pdfUrl.includes('UU_NO_1_2025.pdf')) {
           return `/api/documents/law/undang-undang-nomor-1-tahun-2025`;
+        } else if (pdfUrl.includes('ruu TNI.pdf')) {
+          return `/api/documents/law/proposed-amendments-ruu-tni`;
         } else if (category === 'research') {
           return `/api/documents/research/steel-tariff-exemptions-global-trade-impact`;
         }
