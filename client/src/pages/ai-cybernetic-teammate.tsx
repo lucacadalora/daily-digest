@@ -176,115 +176,109 @@ export default function AICyberneticTeammate() {
               This design revealed a clear hierarchy in solution quality across different work setups. While individuals working alone without AI formed the baseline, traditional two-person teams (R&D + Commercial) showed modestly better performance, validating standard assumptions about collaborative benefits. However, the introduction of GenAI dramatically shifted this landscape.
             </p>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-8">
-              <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-sm overflow-hidden">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-10">
+              <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-sm">
                 <div className="bg-blue-50 dark:bg-blue-900/20 p-4 border-b border-gray-200 dark:border-gray-700">
                   <h3 className="font-bold text-lg text-gray-900 dark:text-white flex items-center">
                     <Brain className="h-5 w-5 text-blue-600 dark:text-blue-400 mr-2" />
                     AI Empowers Individuals
                   </h3>
                 </div>
-                <div className="p-5 flex flex-col h-full">
+                <div className="p-5">
                   <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4 text-sm">
                     Individuals using AI produced solutions <span className="font-bold text-blue-600 dark:text-blue-400">0.37 standard deviations higher</span> in quality than the baseline. Strikingly, their performance was statistically comparable to that of two-person teams working without AI.
                   </p>
-                  <figure className="mt-auto mb-2">
-                    <div className="bg-gray-50 dark:bg-gray-800/30 rounded-lg overflow-hidden p-4">
-                      <div className="text-center mb-2 text-sm font-medium text-gray-700 dark:text-gray-300">Figure 2: Average Solution Quality</div>
-                      
-                      <div className="relative mx-auto max-w-md">
-                        <div className="bg-gray-50 dark:bg-gray-800/60 rounded-lg p-2">
-                          <img 
-                            src="/images/solution-quality-chart-new.png" 
-                            alt="Average Solution Quality chart showing standardized quality scores across four conditions: Individual No AI (0.0), Team No AI (0.25), Individual + AI (0.37), and Team + AI (0.40)"
-                            className="w-full h-auto mx-auto"
-                            style={{ 
-                              mixBlendMode: 'multiply',
-                              backgroundColor: 'transparent'
-                            }}
-                          />
-                        </div>
-                      </div>
-                      
-                      <div className="text-center text-xs text-gray-600 dark:text-gray-400 mt-4">
-                        This figure displays the average quality scores for solutions across different groups, showing individuals with AI (0.37) performing comparably to teams without AI (0.25), while AI-assisted teams achieved the highest scores (0.40).
+                  <div className="bg-gray-50 dark:bg-gray-800/30 rounded-lg overflow-hidden p-4 mb-2">
+                    <div className="text-center mb-2 text-sm font-medium text-gray-700 dark:text-gray-300">Figure 2: Average Solution Quality</div>
+                    
+                    <div className="relative mx-auto max-w-md">
+                      <div className="bg-gray-50 dark:bg-gray-800/60 rounded-lg p-2">
+                        <img 
+                          src="/images/solution-quality-chart-new.png" 
+                          alt="Average Solution Quality chart showing standardized quality scores across four conditions: Individual No AI (0.0), Team No AI (0.25), Individual + AI (0.37), and Team + AI (0.40)"
+                          className="w-full h-auto mx-auto"
+                          style={{ 
+                            mixBlendMode: 'multiply',
+                            backgroundColor: 'transparent'
+                          }}
+                        />
                       </div>
                     </div>
-                  </figure>
+                    
+                    <div className="text-center text-xs text-gray-600 dark:text-gray-400 mt-4">
+                      This figure displays the average quality scores for solutions across different groups, showing individuals with AI performing comparably to teams without AI.
+                    </div>
+                  </div>
                 </div>
               </div>
 
-              <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-sm overflow-hidden">
+              <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-sm">
                 <div className="bg-green-50 dark:bg-green-900/20 p-4 border-b border-gray-200 dark:border-gray-700">
                   <h3 className="font-bold text-lg text-gray-900 dark:text-white flex items-center">
                     <Zap className="h-5 w-5 text-green-600 dark:text-green-400 mr-2" />
                     Efficiency and Speed
                   </h3>
                 </div>
-                <div className="p-5 flex flex-col h-full">
+                <div className="p-5">
                   <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4 text-sm">
                     Individuals with AI spent <span className="font-bold text-green-600 dark:text-green-400">16.4% less time</span> on tasks than the control group, while AI-assisted teams were <span className="font-bold text-green-600 dark:text-green-400">12.7% faster</span> while producing solutions of higher quality.
                   </p>
-                  <figure className="mt-auto mb-2">
-                    <div className="bg-gray-50 dark:bg-gray-800/30 rounded-lg overflow-hidden p-4">
-                      <div className="text-center mb-2 text-sm font-medium text-gray-700 dark:text-gray-300">Figure 3: Time Saved</div>
-                      
-                      <div className="relative mx-auto max-w-md">
-                        <div className="bg-gray-50 dark:bg-gray-800/60 rounded-lg p-2">
-                          <img 
-                            src="/images/time-saved-chart.png" 
-                            alt="Time Saved chart showing average minutes saved across four conditions: Alone No AI (0 min), Team No AI (-0.7 min), Alone + AI (9.1 min), and Team + AI (6.8 min)"
-                            className="w-full h-auto mx-auto"
-                            style={{ 
-                              mixBlendMode: 'multiply',
-                              backgroundColor: 'transparent'
-                            }}
-                          />
-                        </div>
-                      </div>
-                      
-                      <div className="text-center text-xs text-gray-600 dark:text-gray-400 mt-4">
-                        This figure shows the average time saved (in minutes) when preparing solutions by groups treated with AI versus those without AI, with individuals using AI saving the most time (approximately 9 minutes).
+                  <div className="bg-gray-50 dark:bg-gray-800/30 rounded-lg overflow-hidden p-4 mb-2">
+                    <div className="text-center mb-2 text-sm font-medium text-gray-700 dark:text-gray-300">Figure 3: Time Saved</div>
+                    
+                    <div className="relative mx-auto max-w-md">
+                      <div className="bg-gray-50 dark:bg-gray-800/60 rounded-lg p-2">
+                        <img 
+                          src="/images/time-saved-chart.png" 
+                          alt="Time Saved chart showing average minutes saved across four conditions: Alone No AI (0 min), Team No AI (-0.7 min), Alone + AI (9.1 min), and Team + AI (6.8 min)"
+                          className="w-full h-auto mx-auto"
+                          style={{ 
+                            mixBlendMode: 'multiply',
+                            backgroundColor: 'transparent'
+                          }}
+                        />
                       </div>
                     </div>
-                  </figure>
+                    
+                    <div className="text-center text-xs text-gray-600 dark:text-gray-400 mt-4">
+                      This figure shows the average time saved when preparing solutions, with individuals using AI saving approximately 9 minutes.
+                    </div>
+                  </div>
                 </div>
               </div>
 
-              <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-sm overflow-hidden">
+              <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-sm">
                 <div className="bg-purple-50 dark:bg-purple-900/20 p-4 border-b border-gray-200 dark:border-gray-700">
                   <h3 className="font-bold text-lg text-gray-900 dark:text-white flex items-center">
                     <TrendingUp className="h-5 w-5 text-purple-600 dark:text-purple-400 mr-2" />
                     Top-Tier Innovation
                   </h3>
                 </div>
-                <div className="p-5 flex flex-col h-full">
+                <div className="p-5">
                   <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4 text-sm">
                     AI-augmented teams were <span className="font-bold text-purple-600 dark:text-purple-400">three times more likely</span> than individuals without AI to generate solutions ranked in the top 10% by quality, highlighting a potential synergy for breakthrough innovation.
                   </p>
-                  <figure className="mt-auto mb-2">
-                    <div className="bg-gray-50 dark:bg-gray-800/30 rounded-lg overflow-hidden p-4">
-                      <div className="text-center mb-2 text-sm font-medium text-gray-700 dark:text-gray-300">Figure 4: Top 10% Solutions</div>
-                      
-                      <div className="relative mx-auto max-w-md">
-                        <div className="bg-gray-50 dark:bg-gray-800/60 rounded-lg p-2">
-                          <img 
-                            src="/images/top-10-solutions-chart.png" 
-                            alt="Top 10% Solutions chart showing proportion of top quality solutions: Individual No AI (0.05), Team No AI (0.09), Individual + AI (0.08), and Team + AI (0.15)"
-                            className="w-full h-auto mx-auto"
-                            style={{ 
-                              mixBlendMode: 'multiply',
-                              backgroundColor: 'transparent'
-                            }}
-                          />
-                        </div>
-                      </div>
-                      
-                      <div className="text-center text-xs text-gray-600 dark:text-gray-400 mt-4">
-                        This figure displays the proportion of top 10% solutions across different treatments with standard errors, showing that AI-assisted teams were three times more likely to produce exceptional solutions than individuals without AI.
+                  <div className="bg-gray-50 dark:bg-gray-800/30 rounded-lg overflow-hidden p-4 mb-2">
+                    <div className="text-center mb-2 text-sm font-medium text-gray-700 dark:text-gray-300">Figure 4: Top 10% Solutions</div>
+                    
+                    <div className="relative mx-auto max-w-md">
+                      <div className="bg-gray-50 dark:bg-gray-800/60 rounded-lg p-2">
+                        <img 
+                          src="/images/top-10-solutions-chart.png" 
+                          alt="Top 10% Solutions chart showing proportion of top quality solutions: Individual No AI (0.05), Team No AI (0.09), Individual + AI (0.08), and Team + AI (0.15)"
+                          className="w-full h-auto mx-auto"
+                          style={{ 
+                            mixBlendMode: 'multiply',
+                            backgroundColor: 'transparent'
+                          }}
+                        />
                       </div>
                     </div>
-                  </figure>
+                    
+                    <div className="text-center text-xs text-gray-600 dark:text-gray-400 mt-4">
+                      This figure displays the proportion of top 10% solutions across different treatments, showing that AI-assisted teams produced exceptional solutions.
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
