@@ -26,6 +26,7 @@ import ChinaSteel from "@/pages/external/china-steel-supply-reform";
 import ChinaSteelReform from "@/pages/latest/china-steel-reform";
 import GlobalCoalPriceSlump from "@/pages/latest/global-coal-price-slump";
 import IndonesiaREEPotential from "@/pages/newsletter/indonesia-ree-potential";
+import AICyberneticTeammate from "@/pages/ai-cybernetic-teammate";
 
 // Insights pages
 import Insights from "@/pages/insights";
@@ -92,6 +93,7 @@ function Router() {
       <Route path="/newsletter/fed-qt-exit-crypto-rally" component={FedQTExitCryptoRally} />
       <Route path="/newsletter/indonesia-ree-potential" component={IndonesiaREEPotential} />
       <Route path="/newsletter/jfk-declassified-files" component={JFKDeclassifiedFiles} />
+      <Route path="/newsletter/ai-cybernetic-teammate" component={AICyberneticTeammate} />
       <Route path="/newsletter/category/:category" component={Newsletters} />
       <Route path="/newsletters" component={() => <Redirect to="/newsletter" />} />
       
