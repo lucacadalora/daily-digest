@@ -46,9 +46,12 @@ export default function AICyberneticTeammate() {
               <span>Analysis</span>
             </div>
 
-            <h1 className="font-serif text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-3 leading-tight">
+            <h1 className="font-serif text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-1 leading-tight">
               How GenAI Acts as Your Cybernetic Teammate & Boosts Productivity
             </h1>
+            <h2 className="font-serif text-xl font-medium text-gray-700 dark:text-gray-300 mb-3">
+              Beyond the Tool: Generative AI Steps In as a "Cybernetic Teammate," Reshaping How We Work Together
+            </h2>
 
             <div className="flex items-center space-x-4 text-sm text-gray-600 dark:text-gray-400 mb-3">
               <div className="flex items-center space-x-1">
@@ -64,10 +67,6 @@ export default function AICyberneticTeammate() {
             <div className="text-sm">
               <p className="font-semibold dark:text-gray-300">By Luca Cada Lora</p>
             </div>
-            
-            <h2 className="mt-3 text-lg font-medium text-gray-700 dark:text-gray-300">
-              Beyond the Tool: Generative AI Steps In as a "Cybernetic Teammate," Reshaping How We Work Together
-            </h2>
           </div>
         </header>
 
