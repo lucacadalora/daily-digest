@@ -65,9 +65,9 @@ export default function AICyberneticTeammate() {
               <p className="font-semibold dark:text-gray-300">By Luca Cada Lora</p>
             </div>
             
-            <p className="mt-3 text-lg text-gray-700 dark:text-gray-300">
+            <h2 className="mt-3 text-lg font-medium text-gray-700 dark:text-gray-300">
               Beyond the Tool: Generative AI Steps In as a "Cybernetic Teammate," Reshaping How We Work Together
-            </p>
+            </h2>
           </div>
         </header>
 
