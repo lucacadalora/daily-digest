@@ -74,71 +74,43 @@ export default function AICyberneticTeammate() {
           <section>
             <h2 className="text-xl font-serif font-bold text-gray-900 dark:text-white mb-4">Key Insights</h2>
             
-            <div className="space-y-5">
-              {/* Insight 1 */}
-              <div className="bg-white dark:bg-gray-800 border-l-4 border-blue-500 shadow-md rounded-lg overflow-hidden">
-                <div className="px-5 py-4">
-                  <div className="flex items-center mb-2">
-                    <Brain className="h-5 w-5 text-blue-500 mr-2" />
-                    <h3 className="font-bold text-gray-900 dark:text-white">1. AI as Teammate</h3>
+            <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-5 mb-6">
+              <ul className="space-y-3 text-gray-700 dark:text-gray-300">
+                <li className="flex gap-2">
+                  <div className="text-blue-600 dark:text-blue-400 font-bold min-w-[18px]">1.</div>
+                  <div>
+                    <span className="font-bold text-gray-900 dark:text-white">AI as Teammate:</span> GenAI functions beyond a simple tool, acting as a "cybernetic teammate" that replicates key aspects of human collaboration.
                   </div>
-                  <p className="text-gray-700 dark:text-gray-300">
-                    GenAI functions beyond a simple tool, acting as a "cybernetic teammate" that replicates key aspects of human collaboration.
-                  </p>
-                </div>
-              </div>
+                </li>
 
-              {/* Insight 2 */}
-              <div className="bg-white dark:bg-gray-800 border-l-4 border-green-500 shadow-md rounded-lg overflow-hidden">
-                <div className="px-5 py-4">
-                  <div className="flex items-center mb-2">
-                    <Zap className="h-5 w-5 text-green-500 mr-2" />
-                    <h3 className="font-bold text-gray-900 dark:text-white">2. Productivity Surge</h3>
+                <li className="flex gap-2">
+                  <div className="text-blue-600 dark:text-blue-400 font-bold min-w-[18px]">2.</div>
+                  <div>
+                    <span className="font-bold text-gray-900 dark:text-white">Productivity Surge:</span> AI significantly boosts efficiency, with individuals completing tasks <span className="text-green-600 dark:text-green-400 font-medium">16.4% faster</span> and teams <span className="text-green-600 dark:text-green-400 font-medium">12.7% faster</span>, while maintaining high quality benchmarks.
                   </div>
-                  <p className="text-gray-700 dark:text-gray-300">
-                    AI significantly boosts efficiency, with individuals completing tasks 16.4% faster and teams 12.7% faster, while matching quality benchmarks.
-                  </p>
-                </div>
-              </div>
+                </li>
 
-              {/* Insight 3 */}
-              <div className="bg-white dark:bg-gray-800 border-l-4 border-purple-500 shadow-md rounded-lg overflow-hidden">
-                <div className="px-5 py-4">
-                  <div className="flex items-center mb-2">
-                    <Users className="h-5 w-5 text-purple-500 mr-2" />
-                    <h3 className="font-bold text-gray-900 dark:text-white">3. Expertise Unleashed</h3>
+                <li className="flex gap-2">
+                  <div className="text-blue-600 dark:text-blue-400 font-bold min-w-[18px]">3.</div>
+                  <div>
+                    <span className="font-bold text-gray-900 dark:text-white">Expertise Unleashed:</span> AI breaks down traditional knowledge silos, empowering individuals to perform tasks outside their core expertise and balancing functional perspectives.
                   </div>
-                  <p className="text-gray-700 dark:text-gray-300">
-                    AI breaks down traditional knowledge silos, empowering individuals to perform tasks outside their core expertise and balancing functional perspectives.
-                  </p>
-                </div>
-              </div>
+                </li>
 
-              {/* Insight 4 */}
-              <div className="bg-white dark:bg-gray-800 border-l-4 border-amber-500 shadow-md rounded-lg overflow-hidden">
-                <div className="px-5 py-4">
-                  <div className="flex items-center mb-2">
-                    <Sparkles className="h-5 w-5 text-amber-500 mr-2" />
-                    <h3 className="font-bold text-gray-900 dark:text-white">4. Work Experience Enhanced</h3>
+                <li className="flex gap-2">
+                  <div className="text-blue-600 dark:text-blue-400 font-bold min-w-[18px]">4.</div>
+                  <div>
+                    <span className="font-bold text-gray-900 dark:text-white">Work Experience Enhanced:</span> Contrary to expectations, AI use leads to increased positive emotions (like excitement) and decreased negative ones (like frustration) among workers.
                   </div>
-                  <p className="text-gray-700 dark:text-gray-300">
-                    Contrary to expectations, AI use leads to increased positive emotions (like excitement) and decreased negative ones (like frustration) among workers.
-                  </p>
-                </div>
-              </div>
+                </li>
 
-              {/* Insight 5 */}
-              <div className="bg-white dark:bg-gray-800 border-l-4 border-red-500 shadow-md rounded-lg overflow-hidden">
-                <div className="px-5 py-4">
-                  <div className="flex items-center mb-2">
-                    <BarChart3 className="h-5 w-5 text-red-500 mr-2" />
-                    <h3 className="font-bold text-gray-900 dark:text-white">5. Rethink Collaboration</h3>
+                <li className="flex gap-2">
+                  <div className="text-blue-600 dark:text-blue-400 font-bold min-w-[18px]">5.</div>
+                  <div>
+                    <span className="font-bold text-gray-900 dark:text-white">Rethink Collaboration:</span> Findings necessitate a strategic review of team structures, workflow designs, and skill development for the AI-augmented workplace.
                   </div>
-                  <p className="text-gray-700 dark:text-gray-300">
-                    Findings necessitate a strategic review of team structures, workflow designs, and skill development for the AI-augmented workplace.
-                  </p>
-                </div>
-              </div>
+                </li>
+              </ul>
             </div>
           </section>
 
