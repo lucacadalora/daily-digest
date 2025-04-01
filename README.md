@@ -1,91 +1,93 @@
 
-# Daily Digest - Financial Markets Analysis Platform
+# Market Insights AI - Advanced Financial Analysis Platform
 
-A comprehensive financial news and analysis platform delivering in-depth insights on global markets with a focus on Indonesian and international financial dynamics.
+An advanced AI-powered market insights platform that explores collaborative human-AI interaction through comprehensive financial market analysis and innovative research visualization.
 
-![Daily Digest Dashboard](https://placeholder-for-dashboard-screenshot.png)
+![Market Insights AI Dashboard](https://placeholder-for-dashboard-screenshot.png)
 
 *Note: The above screenshot is a placeholder. Add actual application screenshot when available.*
 
 ## Overview
 
-Daily Digest provides intelligent market analysis and financial news by integrating multiple data sources, leveraging advanced natural language processing, and offering nuanced financial insights with enhanced visualization and user interaction. The platform focuses on delivering complex economic narratives through intuitive, data-driven storytelling.
+Market Insights AI delivers nuanced market insights by leveraging state-of-the-art AI reasoning, interactive data visualization, and cutting-edge content management technologies that reimagine workplace collaboration. The platform focuses on delivering complex economic narratives through intuitive, data-driven storytelling and AI-powered analysis.
 
 ## Features
 
-- **Real-time Market Monitoring**: Track crypto, stocks, indices, and forex markets with up-to-date price data
-- **AI-Powered Analysis**: Leverage advanced AI models for market intelligence and insights
-- **Interactive Data Visualization**: Explore financial data through intuitive charts and visual representations
-- **Comprehensive Article Library**: Access in-depth analysis on key market trends and economic events
-- **Law & Regulatory Database**: Browse through Indonesian legal documents with PDF viewing capabilities
-- **Dark/Light Mode Support**: Customize your viewing experience with theme preferences
+- **AI-Powered Market Analysis**: Leverage state-of-the-art AI reasoning models for deep financial insights
+- **Interactive Data Visualization**: Explore complex financial data through intuitive charts and dynamic visual representations
+- **Collaborative Research Environment**: Seamlessly integrate human expertise with AI analysis
+- **Comprehensive Market Dashboard**: Track global markets with real-time data across various asset classes
+- **Advanced Content Management**: Dynamic organization of financial analysis, research papers, and market reports
+- **Customizable User Experience**: Personalized dashboard with dark/light mode support
+- **SEO-Optimized Content**: High-visibility market research that's easily discoverable
 
 ## Technology Stack
 
 ### Frontend
 - React.js with TypeScript
-- Tailwind CSS for styling
+- Tailwind CSS for advanced styling
 - Shadcn UI component library
-- Framer Motion for animations
-- Recharts for data visualization
-- Wouter for routing
+- Framer Motion for sophisticated animations
+- Recharts for dynamic data visualization
+- Next.js for optimized performance
 
 ### Backend
 - Node.js with Express
 - PostgreSQL database with Drizzle ORM
-- WebSockets for real-time updates
+- RESTful API architecture
 
 ### AI & Data Integration
-- Integration with AI analysis tools
-- Enhanced inline citation system
+- Perplexity AI integration for market research
+- Llama-3.1-sonar-reasoning-pro for advanced financial analysis
+- Real-time data processing pipeline
+- Enhanced citation and source attribution system
 
 ## Key Sections
 
-1. **Market Dashboard**: Real-time updates on crypto, stocks, indices, and forex
-2. **Insights Hub**: AI-generated analysis and expert commentary on market trends
-3. **Data Explorer**: Interactive tools for exploring financial and economic datasets
-4. **Document Library**: Comprehensive collection of laws, regulations, and economic papers
-5. **Newsletter**: Regular financial market updates and analysis
+1. **Market Intelligence Dashboard**: Real-time market analysis with AI-powered insights
+2. **Research Hub**: Advanced AI-generated analysis and expert commentary on market trends
+3. **Data Visualization Studio**: Interactive tools for exploring complex financial datasets
+4. **Content Management System**: Dynamic organization of market research, analysis, and reports
+5. **AI Collaboration Space**: Environment for human-AI joint market analysis and research
 
 ## Project Structure
 
 ```
-daily-digest/
-├── client/                # Frontend React application
-│   ├── src/
-│   │   ├── components/    # Reusable UI components
-│   │   ├── hooks/         # Custom React hooks
-│   │   ├── lib/           # Utility functions and services
-│   │   ├── pages/         # Application pages and routes
-│   │   └── config/        # Configuration files
+market-insights-ai/
+├── app/                   # Next.js application
+│   ├── components/        # Reusable UI components
+│   │   ├── ui/            # Shadcn UI components
+│   │   └── custom/        # Custom project components
+│   ├── lib/               # Utility functions and services
+│   ├── hooks/             # Custom React hooks 
+│   ├── pages/             # Application routes
+│   └── api/               # API routes
 ├── public/                # Static assets and files
-│   ├── documents/         # PDF documents and reports
 │   ├── images/            # Image assets
-│   ├── shares/            # Social media share templates
-│   └── twitter-card/      # Twitter card templates
+│   └── documents/         # PDF documents and reports
 ├── db/                    # Database related files
 │   ├── index.ts           # Database connection setup
 │   └── schema.ts          # Drizzle ORM schema definitions
-├── server/                # Backend Express server
-│   ├── routes/            # API route definitions
-│   ├── services/          # Business logic and services
-│   └── utils/             # Helper functions
-├── scripts/               # Utility scripts
-└── types/                 # Shared TypeScript types
+├── services/              # Service integrations
+│   ├── ai/                # AI model integrations
+│   └── data/              # Data processing services
+├── styles/                # Global styles and themes
+└── types/                 # TypeScript type definitions
 ```
 
 ## Getting Started
 
 ### Prerequisites
-- Node.js (v18+)
+- Node.js (v20+)
 - PostgreSQL database
+- AI API keys (Perplexity AI, Llama-3.1)
 
 ### Installation
 
 1. Clone the repository
 ```bash
-git clone https://github.com/your-username/daily-digest.git
-cd daily-digest
+git clone https://github.com/your-username/market-insights-ai.git
+cd market-insights-ai
 ```
 
 2. Install dependencies
@@ -94,10 +96,17 @@ npm install
 ```
 
 3. Set up environment variables
-Create a `.env` file with the following variables:
+Create a `.env.local` file with the following variables:
 ```
-DATABASE_URL=postgresql://username:password@localhost:5432/dailydigest
-API_KEY=your-api-key-here
+# Database
+DATABASE_URL=postgresql://username:password@localhost:5432/marketinsights
+
+# AI API Keys
+PERPLEXITY_API_KEY=your-perplexity-api-key
+LLAMA_API_KEY=your-llama-api-key
+
+# Other configuration
+NEXT_PUBLIC_SITE_URL=http://localhost:3000
 ```
 
 4. Set up the database
@@ -112,33 +121,43 @@ npm run dev
 
 ## Development
 
-The application uses Vite for development and builds. The main scripts are:
+The application uses Next.js for development and builds. The main scripts are:
 
 - `npm run dev`: Start the development server
 - `npm run build`: Build for production
 - `npm run start`: Run the production build
+- `npm run lint`: Run ESLint
+- `npm run db:push`: Push database schema changes
 
 ## API Documentation
 
-### Market Data Endpoints
+### Market Intelligence Endpoints
 
-- `GET /api/market-data`: Retrieve current market data for cryptocurrencies, stocks, indices, and forex.
-  - Response includes price and 24-hour change data for each asset.
+- `GET /api/market-analytics`: Retrieve AI-generated market analysis and insights
+  - Response includes detailed analysis of market trends, key indicators, and predictive metrics
+  - Query parameters allow filtering by market sector, region, and time period
 
-### Article Endpoints
+### AI Analysis Endpoints
 
-- `GET /api/articles`: Get a list of all articles
-- `GET /api/articles/:id`: Get a specific article by ID
-- `POST /api/articles`: Create a new article (requires authentication)
+- `POST /api/ai/analyze`: Submit data for AI analysis
+  - Request body: `{ "data": { ... }, "analysisType": "market-forecast" }`
+  - Returns structured market intelligence with reasoning chains and citations
 
-### Newsletter Subscription
+### Research Management
 
-- `POST /api/subscribe`: Subscribe to the newsletter
-  - Request body: `{ "email": "user@example.com", "category": "MARKETS" }`
+- `GET /api/research`: Get a list of all research papers and reports
+- `GET /api/research/:id`: Get a specific research paper by ID
+- `POST /api/research`: Create a new research paper (requires authentication)
+
+### Visualization API
+
+- `GET /api/visualize/:datasetId`: Generate visualization data for interactive charts
+  - Supports various visualization types via the `type` parameter
+  - Returns structured data ready for client-side rendering
 
 ## Contributing
 
-Contributions to Daily Digest are welcome! Please feel free to submit issues or pull requests to help improve the platform.
+Contributions to Market Insights AI are welcome! Please feel free to submit issues or pull requests to help improve the platform.
 
 ## License
 
