@@ -118,8 +118,21 @@ export default function AICyberneticTeammate() {
             <h2 className="text-xl font-serif font-bold text-gray-900 dark:text-white mb-3">1. AI Boosts Performance, Matches Human Teams</h2>
             
             <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
-              The experiment, based on a field study with 776 professionals at Procter & Gamble, compared four distinct groups: individuals and two-person teams working either with or without GenAI assistance (See [Figure 1, Treatment Matrix] for the experimental setup).
+              The experiment, based on a field study with 776 professionals at Procter & Gamble, compared four distinct groups: individuals and two-person teams working either with or without GenAI assistance.
             </p>
+            
+            <figure className="mb-6">
+              <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
+                <img 
+                  src="/images/treatment-matrix.png" 
+                  alt="Treatment Matrix: 2x2 experimental design showing four conditions: individuals and teams working either with or without AI assistance" 
+                  className="w-full max-w-2xl mx-auto"
+                />
+                <figcaption className="bg-gray-50 dark:bg-gray-800 p-3 text-center text-sm text-gray-600 dark:text-gray-400 border-t border-gray-200 dark:border-gray-700">
+                  <span className="font-medium">Figure 1: Treatment Matrix</span> - This figure displays the 2x2 experimental design showing four conditions: individuals and teams working either with or without AI assistance.
+                </figcaption>
+              </div>
+            </figure>
             
             <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
               This design revealed a clear hierarchy in solution quality across different work setups. While individuals working alone without AI formed the baseline, traditional two-person teams (R&D + Commercial) showed modestly better performance, validating standard assumptions about collaborative benefits. However, the introduction of GenAI dramatically shifted this landscape.
