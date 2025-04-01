@@ -122,13 +122,16 @@ export default function AICyberneticTeammate() {
             </p>
             
             <figure className="mb-6">
-              <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
-                <img 
-                  src="/images/treatment-matrix.png" 
-                  alt="Treatment Matrix: 2x2 experimental design showing four conditions: individuals and teams working either with or without AI assistance" 
-                  className="w-full max-w-2xl mx-auto"
-                />
-                <figcaption className="bg-gray-50 dark:bg-gray-800 p-3 text-center text-sm text-gray-600 dark:text-gray-400 border-t border-gray-200 dark:border-gray-700">
+              <div className="bg-gray-50 dark:bg-gray-800/30 rounded-lg overflow-hidden">
+                <div className="p-4">
+                  <img 
+                    src="/images/treatment-matrix.png" 
+                    alt="Treatment Matrix: 2x2 experimental design showing four conditions: individuals and teams working either with or without AI assistance" 
+                    className="w-full max-w-2xl mx-auto blend-multiply dark:blend-screen"
+                    style={{ mixBlendMode: 'multiply', background: 'transparent' }}
+                  />
+                </div>
+                <figcaption className="bg-gray-100/50 dark:bg-gray-800/50 p-3 text-center text-sm text-gray-600 dark:text-gray-400 border-t border-gray-200/50 dark:border-gray-700/50">
                   <span className="font-medium">Figure 1: Treatment Matrix</span> - This figure displays the 2x2 experimental design showing four conditions: individuals and teams working either with or without AI assistance.
                 </figcaption>
               </div>
