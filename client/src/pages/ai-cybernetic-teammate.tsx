@@ -303,8 +303,26 @@ export default function AICyberneticTeammate() {
                 <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
                   The impact was particularly strong for employees less familiar with new product development tasks ("non-core-job"). Without AI, these individuals performed relatively poorly, even in teams. With AI access, however, these same non-core-job individuals achieved performance levels comparable to teams containing experienced members, effectively substituting for task-specific expertise and leveling the playing field.
                 </p>
-                <div className="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg mb-4 text-center">
-                  [Figure 5, Average Solution Quality by Task Experience]
+                <div className="bg-gray-50 dark:bg-gray-800/30 rounded-lg overflow-hidden p-4 mb-4">
+                  <div className="text-center mb-2 text-sm font-medium text-gray-700 dark:text-gray-300">Figure 5: Average Solution Quality: Core-jobs versus Not</div>
+                  
+                  <div className="relative mx-auto max-w-md">
+                    <div className="bg-gray-50 dark:bg-gray-800/60 rounded-lg p-2">
+                      <img 
+                        src="/images/solution-quality-by-experience.png" 
+                        alt="Average Solution Quality chart comparing participants who are more familiar with this type of task (left) versus less familiar (right)"
+                        className="w-full h-auto mx-auto"
+                        style={{ 
+                          mixBlendMode: 'multiply',
+                          backgroundColor: 'transparent'
+                        }}
+                      />
+                    </div>
+                  </div>
+                  
+                  <div className="text-center text-xs text-gray-600 dark:text-gray-400 mt-4">
+                    This figure displays the average quality scores for solutions across different groups, separating between participants who are more familiar with this type of task (on the left), and participants less familiar with it (on the right) with standard errors.
+                  </div>
                 </div>
               </div>
 
@@ -313,8 +331,26 @@ export default function AICyberneticTeammate() {
                 <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
                   Without AI, individuals tended to propose solutions reflecting their own background – R&D specialists offered more technical ideas, while Commercial professionals leaned towards market-oriented ones. AI usage erased this distinction. Both R&D and Commercial professionals using AI generated a more balanced mix of ideas, spanning the technical-commercial spectrum without sacrificing quality. This indicates AI helps integrate diverse viewpoints.
                 </p>
-                <div className="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg mb-4 text-center">
-                  [Figure 6, Degree of Solution Technicality by Functional Background]
+                <div className="bg-gray-50 dark:bg-gray-800/30 rounded-lg overflow-hidden p-4 mb-4">
+                  <div className="text-center mb-2 text-sm font-medium text-gray-700 dark:text-gray-300">Figure 6: Degree of Solution Technicality for Individuals</div>
+                  
+                  <div className="relative mx-auto max-w-md">
+                    <div className="bg-gray-50 dark:bg-gray-800/60 rounded-lg p-2">
+                      <img 
+                        src="/images/solution-technicality.png" 
+                        alt="Two density plots showing the distributions of solution technicality for commercial and R&D participants, with and without AI"
+                        className="w-full h-auto mx-auto"
+                        style={{ 
+                          mixBlendMode: 'multiply',
+                          backgroundColor: 'transparent'
+                        }}
+                      />
+                    </div>
+                  </div>
+                  
+                  <div className="text-center text-xs text-gray-600 dark:text-gray-400 mt-4">
+                    These figures illustrate the difference in idea generation between commercial and technical participants, with and without AI assistance. In both graphs, blue represents commercial participants and yellow represents technical participants. The x-axis indicates the commercial nature of ideas, with higher values representing more technically-oriented suggestions.
+                  </div>
                 </div>
               </div>
 
