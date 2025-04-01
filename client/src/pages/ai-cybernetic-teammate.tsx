@@ -305,7 +305,7 @@ export default function AICyberneticTeammate() {
 
           <section className="border-t border-gray-200 dark:border-gray-800 pt-6">
             <p className="text-sm text-gray-600 dark:text-gray-400 italic">
-              Note: This newsletter synthesizes findings from the working paper <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=5188231" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">"The Cybernetic Teammate"</a>. The referenced figures can be inserted into the layout where indicated. Remember to include proper attribution to the original source paper.
+              Note: This newsletter synthesizes findings from the working paper <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=5188231" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">"The Cybernetic Teammate"</a>. All figures, charts, and data referenced are from the original research paper.
             </p>
           </section>
         </div>
