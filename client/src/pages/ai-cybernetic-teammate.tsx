@@ -12,7 +12,7 @@ export default function AICyberneticTeammate() {
     description: "Generative AI is emerging as a 'cybernetic teammate' that replicates key aspects of human collaboration, boosting productivity and reshaping how we work together.",
     url: "https://lucaxyzz-digest.replit.app/newsletter/ai-cybernetic-teammate",
     // Don't include image to avoid using the wrong one in social sharing
-    author: "Daily Digest Technology Desk",
+    author: "Luca Cada Lora",
     publishedTime: "2025-04-01T10:00:00Z",
     section: "Technology",
     tags: ["AI", "Generative AI", "Productivity", "Teamwork", "Workplace"],
@@ -62,26 +62,14 @@ export default function AICyberneticTeammate() {
             </div>
 
             <div className="text-sm">
-              <p className="font-semibold dark:text-gray-300">By Daily Digest Technology Team</p>
+              <p className="font-semibold dark:text-gray-300">By Luca Cada Lora</p>
             </div>
+            
+            <p className="mt-3 text-lg text-gray-700 dark:text-gray-300">
+              Beyond the Tool: Generative AI Steps In as a "Cybernetic Teammate," Reshaping How We Work Together
+            </p>
           </div>
         </header>
-
-        <div className="my-6">
-          <Card className="bg-blue-50 dark:bg-blue-900/20 border-blue-200 dark:border-blue-800">
-            <CardContent className="p-6">
-              <div className="flex items-start space-x-4">
-                <Info className="h-6 w-6 text-blue-600 dark:text-blue-400 flex-shrink-0 mt-1" />
-                <div className="space-y-3">
-                  <h2 className="font-bold text-gray-900 dark:text-white">Headline: Beyond the Tool</h2>
-                  <div className="text-sm text-gray-700 dark:text-gray-300">
-                    Generative AI Steps In as a "Cybernetic Teammate," Reshaping How We Work Together
-                  </div>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
 
         <div className="py-4 space-y-6">
           <section>
@@ -317,7 +305,7 @@ export default function AICyberneticTeammate() {
 
           <section className="border-t border-gray-200 dark:border-gray-800 pt-6">
             <p className="text-sm text-gray-600 dark:text-gray-400 italic">
-              Note: This newsletter synthesizes findings from the working paper "The Cybernetic Teammate". The referenced figures can be inserted into the layout where indicated. Remember to include proper attribution to the original source paper.
+              Note: This newsletter synthesizes findings from the working paper <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=5188231" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">"The Cybernetic Teammate"</a>. The referenced figures can be inserted into the layout where indicated. Remember to include proper attribution to the original source paper.
             </p>
           </section>
         </div>

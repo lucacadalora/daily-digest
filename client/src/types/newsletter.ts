@@ -432,7 +432,7 @@ export const sampleArticles: Article[] = [
     description: "Generative AI is emerging as a 'cybernetic teammate' that replicates key aspects of human collaboration, boosting productivity and reshaping how we work together.",
     category: "Tech",
     source: "Daily Digest",
-    author: "Daily Digest Technology Team",
+    author: "Luca Cada Lora",
     date: "April 1, 2025",
     previewEmoji: "🧠",
     previewMetrics: [
