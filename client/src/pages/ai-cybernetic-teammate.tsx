@@ -184,11 +184,11 @@ export default function AICyberneticTeammate() {
                     AI Empowers Individuals
                   </h3>
                 </div>
-                <div className="p-5">
+                <div className="p-5 flex flex-col h-full">
                   <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4 text-sm">
                     Individuals using AI produced solutions <span className="font-bold text-blue-600 dark:text-blue-400">0.37 standard deviations higher</span> in quality than the baseline. Strikingly, their performance was statistically comparable to that of two-person teams working without AI.
                   </p>
-                  <figure className="mt-4 mb-2">
+                  <figure className="mt-auto mb-2">
                     <div className="bg-gray-50 dark:bg-gray-800/30 rounded-lg overflow-hidden p-4">
                       <div className="text-center mb-2 text-sm font-medium text-gray-700 dark:text-gray-300">Figure 2: Average Solution Quality</div>
                       
@@ -221,11 +221,11 @@ export default function AICyberneticTeammate() {
                     Efficiency and Speed
                   </h3>
                 </div>
-                <div className="p-5">
+                <div className="p-5 flex flex-col h-full">
                   <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4 text-sm">
                     Individuals with AI spent <span className="font-bold text-green-600 dark:text-green-400">16.4% less time</span> on tasks than the control group, while AI-assisted teams were <span className="font-bold text-green-600 dark:text-green-400">12.7% faster</span> while producing solutions of higher quality.
                   </p>
-                  <figure className="mt-4 mb-2">
+                  <figure className="mt-auto mb-2">
                     <div className="bg-gray-50 dark:bg-gray-800/30 rounded-lg overflow-hidden p-4">
                       <div className="text-center mb-2 text-sm font-medium text-gray-700 dark:text-gray-300">Figure 3: Time Saved</div>
                       
@@ -258,13 +258,33 @@ export default function AICyberneticTeammate() {
                     Top-Tier Innovation
                   </h3>
                 </div>
-                <div className="p-5">
+                <div className="p-5 flex flex-col h-full">
                   <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4 text-sm">
                     AI-augmented teams were <span className="font-bold text-purple-600 dark:text-purple-400">three times more likely</span> than individuals without AI to generate solutions ranked in the top 10% by quality, highlighting a potential synergy for breakthrough innovation.
                   </p>
-                  <div className="bg-gray-50 dark:bg-gray-800 p-3 rounded border border-gray-200 dark:border-gray-700 text-center text-xs text-gray-500">
-                    [Figure 9, Top 10% Solutions]
-                  </div>
+                  <figure className="mt-auto mb-2">
+                    <div className="bg-gray-50 dark:bg-gray-800/30 rounded-lg overflow-hidden p-4">
+                      <div className="text-center mb-2 text-sm font-medium text-gray-700 dark:text-gray-300">Figure 4: Top 10% Solutions</div>
+                      
+                      <div className="relative mx-auto max-w-md">
+                        <div className="bg-gray-50 dark:bg-gray-800/60 rounded-lg p-2">
+                          <img 
+                            src="/images/top-10-solutions-chart.png" 
+                            alt="Top 10% Solutions chart showing proportion of top quality solutions: Individual No AI (0.05), Team No AI (0.09), Individual + AI (0.08), and Team + AI (0.15)"
+                            className="w-full h-auto mx-auto"
+                            style={{ 
+                              mixBlendMode: 'multiply',
+                              backgroundColor: 'transparent'
+                            }}
+                          />
+                        </div>
+                      </div>
+                      
+                      <div className="text-center text-xs text-gray-600 dark:text-gray-400 mt-4">
+                        This figure displays the proportion of top 10% solutions across different treatments with standard errors, showing that AI-assisted teams were three times more likely to produce exceptional solutions than individuals without AI.
+                      </div>
+                    </div>
+                  </figure>
                 </div>
               </div>
             </div>
