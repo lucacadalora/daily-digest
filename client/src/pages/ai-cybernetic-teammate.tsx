@@ -190,119 +190,24 @@ export default function AICyberneticTeammate() {
                   </p>
                   <figure className="mt-4 mb-2">
                     <div className="bg-gray-50 dark:bg-gray-800/30 rounded-lg overflow-hidden p-4">
-                      <div className="text-center mb-2 text-xs font-medium text-gray-700 dark:text-gray-300">Figure 2: Average Solution Quality</div>
+                      <div className="text-center mb-2 text-sm font-medium text-gray-700 dark:text-gray-300">Figure 2: Average Solution Quality</div>
                       
-                      <div className="h-64 relative">
-                        {/* Y-axis label */}
-                        <div className="absolute -left-6 top-1/2 transform -translate-y-1/2 -rotate-90 text-xs font-medium text-gray-500 dark:text-gray-400 whitespace-nowrap">
-                          Standardized Quality
-                        </div>
-                        
-                        {/* Grid lines: we'll draw 7 lines for better proportionality */}
-                        <div className="absolute left-8 right-4 h-full flex flex-col">
-                          <div className="h-1/7 border-b border-gray-200 dark:border-gray-700/30"></div>
-                          <div className="h-1/7 border-b border-gray-200 dark:border-gray-700/30"></div>
-                          <div className="h-1/7 border-b border-gray-200 dark:border-gray-700/30"></div>
-                          <div className="h-1/7 border-b border-dashed border-gray-300 dark:border-gray-700/50"></div> {/* 0.0 line */}
-                          <div className="h-1/7 border-b border-gray-200 dark:border-gray-700/30"></div>
-                          <div className="h-1/7 border-b border-gray-200 dark:border-gray-700/30"></div>
-                          <div className="h-1/7 border-b border-gray-300 dark:border-gray-700/70"></div> {/* -0.1 line */}
-                        </div>
-                        
-                        {/* Y-axis line */}
-                        <div className="absolute left-8 top-0 h-full border-l border-gray-300 dark:border-gray-600"></div>
-                        
-                        {/* Chart area - positioned more precisely */}
-                        <div className="ml-8 h-full flex items-end justify-around pb-[14.3%]"> {/* 1/7 = 14.3% for -0.1 offset */}
-                          {/* Individual No AI (baseline at 0) */}
-                          <div className="flex flex-col items-center w-1/5">
-                            <div className="relative flex justify-center">
-                              {/* Error bars */}
-                              <div className="absolute h-10 w-px bg-gray-400 dark:bg-gray-500 top-[-10px]"></div>
-                              <div className="absolute h-10 w-px bg-gray-400 dark:bg-gray-500 bottom-[-10px]"></div>
-                              <div className="absolute w-4 h-px bg-gray-400 dark:bg-gray-500 top-[-10px]"></div>
-                              <div className="absolute w-4 h-px bg-gray-400 dark:bg-gray-500 bottom-[-10px]"></div>
-                              
-                              {/* Bar - positioned at the 0.0 line (zero height) */}
-                              <div className="bg-gray-300 dark:bg-gray-600 w-6 h-0 rounded-t"></div>
-                            </div>
-                            <div className="text-xs mt-4 text-center text-gray-600 dark:text-gray-400">Individual<br/>No AI</div>
-                          </div>
-                          
-                          {/* Team No AI (0.25) - 25% of the way from 0.0 to 0.5 */}
-                          <div className="flex flex-col items-center w-1/5">
-                            <div className="relative flex justify-center">
-                              {/* Error bars */}
-                              <div className="absolute h-8 w-px bg-gray-400 dark:bg-gray-500 top-[-8px]"></div>
-                              <div className="absolute w-4 h-px bg-gray-400 dark:bg-gray-500 top-[-8px]"></div>
-                              
-                              {/* Bar */}
-                              <div className="bg-blue-400 dark:bg-blue-600 w-6 h-[42.8%] rounded-t"></div> {/* 25% of 0.5 = 0.125, 0.125/(0.6) ≈ 42.8% of visible height */}
-                            </div>
-                            <div className="text-xs mt-4 text-center text-gray-600 dark:text-gray-400">Team<br/>No AI</div>
-                          </div>
-                          
-                          {/* Individual + AI (0.37) - 37% of the way from 0.0 to 0.5 */}
-                          <div className="flex flex-col items-center w-1/5">
-                            <div className="relative flex justify-center">
-                              {/* Error bars */}
-                              <div className="absolute h-10 w-px bg-gray-400 dark:bg-gray-500 top-[-10px]"></div>
-                              <div className="absolute w-4 h-px bg-gray-400 dark:bg-gray-500 top-[-10px]"></div>
-                              
-                              {/* Bar */}
-                              <div className="bg-amber-400 dark:bg-amber-600 w-6 h-[61.7%] rounded-t"></div> {/* 37% of 0.5 = 0.185, 0.185/(0.6) ≈ 61.7% of visible height */}
-                            </div>
-                            <div className="text-xs mt-4 text-center text-gray-600 dark:text-gray-400">Individual<br/>+ AI</div>
-                          </div>
-                          
-                          {/* Team + AI (0.40) - 40% of the way from 0.0 to 0.5 */}
-                          <div className="flex flex-col items-center w-1/5">
-                            <div className="relative flex justify-center">
-                              {/* Error bars */}
-                              <div className="absolute h-10 w-px bg-gray-400 dark:bg-gray-500 top-[-10px]"></div>
-                              <div className="absolute w-4 h-px bg-gray-400 dark:bg-gray-500 top-[-10px]"></div>
-                              
-                              {/* Bar */}
-                              <div className="bg-red-300 dark:bg-red-500 w-6 h-[66.7%] rounded-t"></div> {/* 40% of 0.5 = 0.2, 0.2/(0.6) ≈ 66.7% of visible height */}
-                            </div>
-                            <div className="text-xs mt-4 text-center text-gray-600 dark:text-gray-400">Team<br/>+ AI</div>
-                          </div>
-                        </div>
-                        
-                        {/* Y-axis values - positioned proportionally */}
-                        <div className="absolute left-1 top-0 text-xs text-gray-500 dark:text-gray-400">0.5</div>
-                        <div className="absolute left-1 top-[42.9%] transform -translate-y-1/2 text-xs text-gray-500 dark:text-gray-400">0.0</div>
-                        <div className="absolute left-1 bottom-0 text-xs text-gray-500 dark:text-gray-400">-0.1</div>
-                        
-                        {/* Annotation for values */}
-                        <div className="absolute right-2 top-[11%] text-xs font-medium text-gray-500 dark:text-gray-400">
-                          <span className="flex items-center">
-                            <span className="h-2 w-2 rounded-full bg-red-300 dark:bg-red-500 mr-1 inline-block"></span>
-                            0.40
-                          </span>
-                        </div>
-                        <div className="absolute right-2 top-[18%] text-xs font-medium text-gray-500 dark:text-gray-400">
-                          <span className="flex items-center">
-                            <span className="h-2 w-2 rounded-full bg-amber-400 dark:bg-amber-600 mr-1 inline-block"></span>
-                            0.37
-                          </span>
-                        </div>
-                        <div className="absolute right-2 top-[30%] text-xs font-medium text-gray-500 dark:text-gray-400">
-                          <span className="flex items-center">
-                            <span className="h-2 w-2 rounded-full bg-blue-400 dark:bg-blue-600 mr-1 inline-block"></span>
-                            0.25
-                          </span>
-                        </div>
-                        <div className="absolute right-2 top-[42.9%] transform -translate-y-1/2 text-xs font-medium text-gray-500 dark:text-gray-400">
-                          <span className="flex items-center">
-                            <span className="h-2 w-2 rounded-full bg-gray-300 dark:bg-gray-600 mr-1 inline-block"></span>
-                            0.00
-                          </span>
+                      <div className="relative mx-auto max-w-md">
+                        <div className="bg-gray-50 dark:bg-gray-800/60 rounded-lg p-2">
+                          <img 
+                            src="/images/solution-quality-chart-new.png" 
+                            alt="Average Solution Quality chart showing standardized quality scores across four conditions: Individual No AI (0.0), Team No AI (0.25), Individual + AI (0.37), and Team + AI (0.40)"
+                            className="w-full h-auto mx-auto"
+                            style={{ 
+                              mixBlendMode: 'multiply',
+                              backgroundColor: 'transparent'
+                            }}
+                          />
                         </div>
                       </div>
                       
                       <div className="text-center text-xs text-gray-600 dark:text-gray-400 mt-4">
-                        This figure displays the average quality scores for solutions across different groups, showing how AI-treated groups performed better than non-AI groups.
+                        This figure displays the average quality scores for solutions across different groups, showing individuals with AI (0.37) performing comparably to teams without AI (0.25), while AI-assisted teams achieved the highest scores (0.40).
                       </div>
                     </div>
                   </figure>
