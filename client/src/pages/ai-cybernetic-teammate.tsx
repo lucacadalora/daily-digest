@@ -359,8 +359,26 @@ export default function AICyberneticTeammate() {
                 <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
                   In teams without AI, idea generation often showed a bimodal distribution, clustering around either technical or commercial poles, potentially reflecting the dominance of one member's perspective. AI-enabled teams, however, produced a more uniform, unimodal distribution of ideas, suggesting AI helps facilitate more balanced contributions and reduces dominance effects.
                 </p>
-                <div className="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg mb-4 text-center">
-                  [Figure 11, Degree of Solution Technicality for Teams]
+                <div className="bg-gray-50 dark:bg-gray-800/30 rounded-lg overflow-hidden p-4 mb-4">
+                  <div className="text-center mb-2 text-sm font-medium text-gray-700 dark:text-gray-300">Figure 7: Degree of Solution Technicality for Teams</div>
+                  
+                  <div className="relative mx-auto max-w-md">
+                    <div className="bg-gray-50 dark:bg-gray-800/60 rounded-lg p-2">
+                      <img 
+                        src="/images/solution-technicality-teams.png" 
+                        alt="Density plot showing the distributions of solution technicality for teams with and without AI assistance"
+                        className="w-full h-auto mx-auto"
+                        style={{ 
+                          mixBlendMode: 'multiply',
+                          backgroundColor: 'transparent'
+                        }}
+                      />
+                    </div>
+                  </div>
+                  
+                  <div className="text-center text-xs text-gray-600 dark:text-gray-400 mt-4">
+                    These figures illustrate the difference in idea generation for teams. Dark blue represents Team No AI and red represents Team + AI. The x-axis indicates the commercial nature of ideas, with higher values representing more technically-oriented suggestions.
+                  </div>
                 </div>
               </div>
             </div>
@@ -379,8 +397,26 @@ export default function AICyberneticTeammate() {
                 <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
                   Participants using AI reported significantly higher levels of enthusiasm, energy, and excitement compared to the control group. Individuals with AI saw a 0.46 standard deviation increase, while teams with AI saw a 0.64 standard deviation increase. Notably, the positive emotional response of individuals using AI matched or exceeded that of people working in traditional teams without AI, suggesting AI can substitute for some psychological benefits of human collaboration.
                 </p>
-                <div className="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg mb-4 text-center">
-                  [Figure 7, Evolution of Positive Emotions during the Task]
+                <div className="bg-gray-50 dark:bg-gray-800/30 rounded-lg overflow-hidden p-4 mb-4">
+                  <div className="text-center mb-2 text-sm font-medium text-gray-700 dark:text-gray-300">Figure 8: Evolution of Positive Emotions during the Task</div>
+                  
+                  <div className="relative mx-auto max-w-md">
+                    <div className="bg-gray-50 dark:bg-gray-800/60 rounded-lg p-2">
+                      <img 
+                        src="/images/positive-emotions.png" 
+                        alt="Bar chart showing the increase in positive emotions across four conditions: Individual No AI, Team No AI, Individual + AI, and Team + AI"
+                        className="w-full h-auto mx-auto"
+                        style={{ 
+                          mixBlendMode: 'multiply',
+                          backgroundColor: 'transparent'
+                        }}
+                      />
+                    </div>
+                  </div>
+                  
+                  <div className="text-center text-xs text-gray-600 dark:text-gray-400 mt-4">
+                    This figure presents the difference in self-reported positive emotions among participants before and after the task, comparing AI-treated and non-AI-treated groups to examine the emotional impact of AI on teamwork with standard errors. Positive emotions are answers to questions about enthusiasm, energy, and excitement. Higher numbers indicate stronger emotional responses.
+                  </div>
                 </div>
               </div>
 
@@ -389,8 +425,26 @@ export default function AICyberneticTeammate() {
                 <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
                   AI use was also correlated with significant decreases in reported anxiety, frustration, and distress.
                 </p>
-                <div className="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg mb-4 text-center">
-                  [Figure 8, Evolution of Negative Emotions during the Task]
+                <div className="bg-gray-50 dark:bg-gray-800/30 rounded-lg overflow-hidden p-4 mb-4">
+                  <div className="text-center mb-2 text-sm font-medium text-gray-700 dark:text-gray-300">Figure 9: Evolution of Negative Emotions during the Task</div>
+                  
+                  <div className="relative mx-auto max-w-md">
+                    <div className="bg-gray-50 dark:bg-gray-800/60 rounded-lg p-2">
+                      <img 
+                        src="/images/negative-emotions.png" 
+                        alt="Bar chart showing the decrease in negative emotions across four conditions: Individual No AI, Team No AI, Individual + AI, and Team + AI"
+                        className="w-full h-auto mx-auto"
+                        style={{ 
+                          mixBlendMode: 'multiply',
+                          backgroundColor: 'transparent'
+                        }}
+                      />
+                    </div>
+                  </div>
+                  
+                  <div className="text-center text-xs text-gray-600 dark:text-gray-400 mt-4">
+                    This figure presents the reduction in self-reported negative emotions among participants before and after the task, comparing AI-treated and non-AI-treated groups to examine the emotional impact of AI on teamwork with standard errors. Negative emotions are answers to questions about anxiety, frustration, and distress. Higher numbers indicate negative emotions decreased.
+                  </div>
                 </div>
               </div>
 
