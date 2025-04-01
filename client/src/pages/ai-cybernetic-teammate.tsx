@@ -1,5 +1,5 @@
 import { Card, CardContent } from '@/components/ui/card';
-import { TrendingUp, AlertCircle, Clock, MapPin, ChevronRight, Shield, BarChart3, LineChart, Info, Brain, Users, Zap, PieChart, Sparkles } from 'lucide-react';
+import { TrendingUp, AlertCircle, Clock, MapPin, ChevronRight, Shield, BarChart3, LineChart, Info, Brain, Users, Zap, PieChart, Sparkles, Settings } from 'lucide-react';
 import { Link } from "wouter";
 import { Header } from "@/components/Header";
 import MetaTags from '@/components/SEO/MetaTags';
@@ -47,10 +47,10 @@ export default function AICyberneticTeammate() {
             </div>
 
             <h1 className="font-serif text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-1 leading-tight">
-              How GenAI Acts as Your Cybernetic Teammate & Boosts Productivity
+              AI as Teammate: Boosting Productivity & Reshaping Work
             </h1>
             <h2 className="font-serif text-xl font-medium text-gray-700 dark:text-gray-300 mb-3">
-              Beyond the Tool: Generative AI Steps In as a "Cybernetic Teammate," Reshaping How We Work Together
+              Beyond the Tool – How GenAI Acts as Your Cybernetic Collaborator
             </h2>
 
             <div className="flex items-center space-x-4 text-sm text-gray-600 dark:text-gray-400 mb-3">
@@ -72,26 +72,73 @@ export default function AICyberneticTeammate() {
 
         <div className="py-4 space-y-6">
           <section>
-            <h2 className="text-xl font-serif font-bold text-gray-900 dark:text-white mb-3">Key Insights</h2>
+            <h2 className="text-xl font-serif font-bold text-gray-900 dark:text-white mb-4">Key Insights</h2>
             
-            <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-6 mb-6">
-              <ul className="space-y-4 list-disc pl-5 text-gray-700 dark:text-gray-300">
-                <li className="pl-2">
-                  <span className="font-bold">AI as Teammate:</span> GenAI functions beyond a simple tool, acting as a "cybernetic teammate" that replicates key aspects of human collaboration, based on a field experiment with 776 professionals comparing individuals and teams with and without AI access (See [Figure 1, Treatment Matrix] for experimental setup).
-                </li>
-                <li className="pl-2">
-                  <span className="font-bold">Productivity Surge:</span> AI enables individuals to match the performance quality of human teams, significantly boosting output and efficiency.
-                </li>
-                <li className="pl-2">
-                  <span className="font-bold">Expertise Unleashed:</span> AI breaks down traditional knowledge silos, empowering individuals to perform tasks outside their core expertise and balancing functional perspectives.
-                </li>
-                <li className="pl-2">
-                  <span className="font-bold">Work Experience Enhanced:</span> Contrary to expectations, AI use leads to increased positive emotions (like excitement) and decreased negative ones (like frustration) among workers.
-                </li>
-                <li className="pl-2">
-                  <span className="font-bold">Rethink Collaboration:</span> Findings necessitate a strategic review of team structures, workflow designs, and skill development for the AI-augmented workplace.
-                </li>
-              </ul>
+            <div className="space-y-5">
+              {/* Insight 1 */}
+              <div className="bg-white dark:bg-gray-800 border-l-4 border-blue-500 shadow-md rounded-lg overflow-hidden">
+                <div className="px-5 py-4">
+                  <div className="flex items-center mb-2">
+                    <Brain className="h-5 w-5 text-blue-500 mr-2" />
+                    <h3 className="font-bold text-gray-900 dark:text-white">1. AI as Teammate</h3>
+                  </div>
+                  <p className="text-gray-700 dark:text-gray-300">
+                    GenAI functions beyond a simple tool, acting as a "cybernetic teammate" that replicates key aspects of human collaboration.
+                  </p>
+                </div>
+              </div>
+
+              {/* Insight 2 */}
+              <div className="bg-white dark:bg-gray-800 border-l-4 border-green-500 shadow-md rounded-lg overflow-hidden">
+                <div className="px-5 py-4">
+                  <div className="flex items-center mb-2">
+                    <Zap className="h-5 w-5 text-green-500 mr-2" />
+                    <h3 className="font-bold text-gray-900 dark:text-white">2. Productivity Surge</h3>
+                  </div>
+                  <p className="text-gray-700 dark:text-gray-300">
+                    AI significantly boosts efficiency, with individuals completing tasks 16.4% faster and teams 12.7% faster, while matching quality benchmarks.
+                  </p>
+                </div>
+              </div>
+
+              {/* Insight 3 */}
+              <div className="bg-white dark:bg-gray-800 border-l-4 border-purple-500 shadow-md rounded-lg overflow-hidden">
+                <div className="px-5 py-4">
+                  <div className="flex items-center mb-2">
+                    <Users className="h-5 w-5 text-purple-500 mr-2" />
+                    <h3 className="font-bold text-gray-900 dark:text-white">3. Expertise Unleashed</h3>
+                  </div>
+                  <p className="text-gray-700 dark:text-gray-300">
+                    AI breaks down traditional knowledge silos, empowering individuals to perform tasks outside their core expertise and balancing functional perspectives.
+                  </p>
+                </div>
+              </div>
+
+              {/* Insight 4 */}
+              <div className="bg-white dark:bg-gray-800 border-l-4 border-amber-500 shadow-md rounded-lg overflow-hidden">
+                <div className="px-5 py-4">
+                  <div className="flex items-center mb-2">
+                    <Sparkles className="h-5 w-5 text-amber-500 mr-2" />
+                    <h3 className="font-bold text-gray-900 dark:text-white">4. Work Experience Enhanced</h3>
+                  </div>
+                  <p className="text-gray-700 dark:text-gray-300">
+                    Contrary to expectations, AI use leads to increased positive emotions (like excitement) and decreased negative ones (like frustration) among workers.
+                  </p>
+                </div>
+              </div>
+
+              {/* Insight 5 */}
+              <div className="bg-white dark:bg-gray-800 border-l-4 border-red-500 shadow-md rounded-lg overflow-hidden">
+                <div className="px-5 py-4">
+                  <div className="flex items-center mb-2">
+                    <BarChart3 className="h-5 w-5 text-red-500 mr-2" />
+                    <h3 className="font-bold text-gray-900 dark:text-white">5. Rethink Collaboration</h3>
+                  </div>
+                  <p className="text-gray-700 dark:text-gray-300">
+                    Findings necessitate a strategic review of team structures, workflow designs, and skill development for the AI-augmented workplace.
+                  </p>
+                </div>
+              </div>
             </div>
           </section>
 
@@ -99,49 +146,70 @@ export default function AICyberneticTeammate() {
             <h2 className="text-xl font-serif font-bold text-gray-900 dark:text-white mb-3">1. AI Boosts Performance, Matches Human Teams</h2>
             
             <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
-              The experiment revealed a clear hierarchy in solution quality across different work setups. While individuals working alone without AI formed the baseline, traditional two-person teams (R&D + Commercial) showed modestly better performance, validating standard assumptions about collaborative benefits.
+              The experiment, based on a field study with 776 professionals at Procter & Gamble, compared four distinct groups: individuals and two-person teams working either with or without GenAI assistance (See [Figure 1, Treatment Matrix] for the experimental setup).
             </p>
             
             <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
-              However, the introduction of GenAI dramatically shifted this landscape.
+              This design revealed a clear hierarchy in solution quality across different work setups. While individuals working alone without AI formed the baseline, traditional two-person teams (R&D + Commercial) showed modestly better performance, validating standard assumptions about collaborative benefits. However, the introduction of GenAI dramatically shifted this landscape.
             </p>
 
-            <div className="space-y-6">
-              <div>
-                <h3 className="font-bold text-lg mb-2 text-gray-900 dark:text-white">AI Empowers Individuals</h3>
-                <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
-                  Individuals using AI produced solutions 0.37 standard deviations higher in quality than the baseline, a significant uplift. Strikingly, their performance was statistically comparable to that of two-person teams working without AI. This suggests AI can effectively substitute for certain collaborative functions, allowing individuals to achieve team-level quality.
-                </p>
-                <div className="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg mb-4 text-center">
-                  [Figure 2, Average Solution Quality]
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-8">
+              <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-sm overflow-hidden">
+                <div className="bg-blue-50 dark:bg-blue-900/20 p-4 border-b border-gray-200 dark:border-gray-700">
+                  <h3 className="font-bold text-lg text-gray-900 dark:text-white flex items-center">
+                    <Brain className="h-5 w-5 text-blue-600 dark:text-blue-400 mr-2" />
+                    AI Empowers Individuals
+                  </h3>
                 </div>
-                <div className="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg mb-4 text-center">
-                  [Figure 3, Pairwise Density Comparisons]
-                </div>
-              </div>
-
-              <div>
-                <h3 className="font-bold text-lg mb-2 text-gray-900 dark:text-white">Efficiency and Depth</h3>
-                <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
-                  AI users were not only better but faster. Individuals with AI spent 16.4% less time on the task than the control group, while AI-assisted teams were 12.7% faster. Despite this speed, AI-generated solutions were substantially longer and more comprehensive.
-                </p>
-                <div className="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg mb-4 text-center">
-                  [Figure 4, Time Saved]
-                </div>
-                <div className="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg mb-4 text-center">
-                  [Figure A1, Length of Solutions Produced]
+                <div className="p-5">
+                  <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4 text-sm">
+                    Individuals using AI produced solutions <span className="font-bold text-blue-600 dark:text-blue-400">0.37 standard deviations higher</span> in quality than the baseline. Strikingly, their performance was statistically comparable to that of two-person teams working without AI.
+                  </p>
+                  <div className="bg-gray-50 dark:bg-gray-800 p-3 rounded border border-gray-200 dark:border-gray-700 text-center text-xs text-gray-500">
+                    [Figure 2, Average Solution Quality]
+                  </div>
                 </div>
               </div>
 
-              <div>
-                <h3 className="font-bold text-lg mb-2 text-gray-900 dark:text-white">Driving Top-Tier Innovation</h3>
-                <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
-                  AI, especially when combined with human teamwork (Team + AI), significantly increased the chances of producing exceptional results. AI-augmented teams were roughly three times more likely than individuals without AI to generate solutions ranked in the top 10% by quality, highlighting a potential synergy for breakthrough innovation.
-                </p>
-                <div className="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg mb-4 text-center">
-                  [Figure 9, Top 10% Solutions]
+              <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-sm overflow-hidden">
+                <div className="bg-green-50 dark:bg-green-900/20 p-4 border-b border-gray-200 dark:border-gray-700">
+                  <h3 className="font-bold text-lg text-gray-900 dark:text-white flex items-center">
+                    <Zap className="h-5 w-5 text-green-600 dark:text-green-400 mr-2" />
+                    Efficiency and Speed
+                  </h3>
+                </div>
+                <div className="p-5">
+                  <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4 text-sm">
+                    Individuals with AI spent <span className="font-bold text-green-600 dark:text-green-400">16.4% less time</span> on tasks than the control group, while AI-assisted teams were <span className="font-bold text-green-600 dark:text-green-400">12.7% faster</span> while producing solutions of higher quality.
+                  </p>
+                  <div className="bg-gray-50 dark:bg-gray-800 p-3 rounded border border-gray-200 dark:border-gray-700 text-center text-xs text-gray-500">
+                    [Figure 4, Time Saved]
+                  </div>
                 </div>
               </div>
+
+              <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-sm overflow-hidden">
+                <div className="bg-purple-50 dark:bg-purple-900/20 p-4 border-b border-gray-200 dark:border-gray-700">
+                  <h3 className="font-bold text-lg text-gray-900 dark:text-white flex items-center">
+                    <TrendingUp className="h-5 w-5 text-purple-600 dark:text-purple-400 mr-2" />
+                    Top-Tier Innovation
+                  </h3>
+                </div>
+                <div className="p-5">
+                  <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4 text-sm">
+                    AI-augmented teams were <span className="font-bold text-purple-600 dark:text-purple-400">three times more likely</span> than individuals without AI to generate solutions ranked in the top 10% by quality, highlighting a potential synergy for breakthrough innovation.
+                  </p>
+                  <div className="bg-gray-50 dark:bg-gray-800 p-3 rounded border border-gray-200 dark:border-gray-700 text-center text-xs text-gray-500">
+                    [Figure 9, Top 10% Solutions]
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div className="bg-gray-50 dark:bg-gray-800/50 p-4 rounded-lg mb-4 border border-gray-200 dark:border-gray-700">
+              <p className="text-sm text-gray-700 dark:text-gray-300 italic">
+                <span className="font-medium not-italic">Key finding:</span> The study demonstrates that AI effectively substitutes for certain collaborative functions, allowing individuals to achieve team-level quality of output while also significantly reducing the time required to complete complex analytical tasks.
+              </p>
             </div>
           </section>
 
