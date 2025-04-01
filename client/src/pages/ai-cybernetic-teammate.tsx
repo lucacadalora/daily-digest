@@ -75,54 +75,24 @@ export default function AICyberneticTeammate() {
           <section>
             <h2 className="text-xl font-serif font-bold text-gray-900 dark:text-white mb-3">Key Insights</h2>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-              <Card className="bg-gradient-to-br from-purple-50 to-indigo-50 dark:from-purple-900/20 dark:to-indigo-900/20 border-purple-200 dark:border-purple-800">
-                <CardContent className="p-5">
-                  <div className="flex items-center space-x-3 mb-3">
-                    <Brain className="h-6 w-6 text-purple-600 dark:text-purple-400" />
-                    <h3 className="font-bold text-gray-900 dark:text-white">AI as Teammate</h3>
-                  </div>
-                  <p className="text-sm text-gray-700 dark:text-gray-300">
-                    GenAI functions beyond a simple tool, acting as a "cybernetic teammate" that replicates key aspects of human collaboration.
-                  </p>
-                </CardContent>
-              </Card>
-
-              <Card className="bg-gradient-to-br from-blue-50 to-cyan-50 dark:from-blue-900/20 dark:to-cyan-900/20 border-blue-200 dark:border-blue-800">
-                <CardContent className="p-5">
-                  <div className="flex items-center space-x-3 mb-3">
-                    <Zap className="h-6 w-6 text-blue-600 dark:text-blue-400" />
-                    <h3 className="font-bold text-gray-900 dark:text-white">Productivity Surge</h3>
-                  </div>
-                  <p className="text-sm text-gray-700 dark:text-gray-300">
-                    AI enables individuals to match the performance quality of human teams, significantly boosting output and efficiency.
-                  </p>
-                </CardContent>
-              </Card>
-
-              <Card className="bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20 border-green-200 dark:border-green-800">
-                <CardContent className="p-5">
-                  <div className="flex items-center space-x-3 mb-3">
-                    <Users className="h-6 w-6 text-green-600 dark:text-green-400" />
-                    <h3 className="font-bold text-gray-900 dark:text-white">Expertise Unleashed</h3>
-                  </div>
-                  <p className="text-sm text-gray-700 dark:text-gray-300">
-                    AI breaks down traditional knowledge silos, empowering individuals to perform tasks outside their core expertise and balancing functional perspectives.
-                  </p>
-                </CardContent>
-              </Card>
-
-              <Card className="bg-gradient-to-br from-orange-50 to-amber-50 dark:from-orange-900/20 dark:to-amber-900/20 border-orange-200 dark:border-orange-800">
-                <CardContent className="p-5">
-                  <div className="flex items-center space-x-3 mb-3">
-                    <Sparkles className="h-6 w-6 text-orange-600 dark:text-orange-400" />
-                    <h3 className="font-bold text-gray-900 dark:text-white">Work Experience Enhanced</h3>
-                  </div>
-                  <p className="text-sm text-gray-700 dark:text-gray-300">
-                    Contrary to expectations, AI use leads to increased positive emotions (like excitement) and decreased negative ones (like frustration) among workers.
-                  </p>
-                </CardContent>
-              </Card>
+            <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-6 mb-6">
+              <ul className="space-y-4 list-disc pl-5 text-gray-700 dark:text-gray-300">
+                <li className="pl-2">
+                  <span className="font-bold">AI as Teammate:</span> GenAI functions beyond a simple tool, acting as a "cybernetic teammate" that replicates key aspects of human collaboration, based on a field experiment with 776 professionals comparing individuals and teams with and without AI access (See [Figure 1, Treatment Matrix] for experimental setup).
+                </li>
+                <li className="pl-2">
+                  <span className="font-bold">Productivity Surge:</span> AI enables individuals to match the performance quality of human teams, significantly boosting output and efficiency.
+                </li>
+                <li className="pl-2">
+                  <span className="font-bold">Expertise Unleashed:</span> AI breaks down traditional knowledge silos, empowering individuals to perform tasks outside their core expertise and balancing functional perspectives.
+                </li>
+                <li className="pl-2">
+                  <span className="font-bold">Work Experience Enhanced:</span> Contrary to expectations, AI use leads to increased positive emotions (like excitement) and decreased negative ones (like frustration) among workers.
+                </li>
+                <li className="pl-2">
+                  <span className="font-bold">Rethink Collaboration:</span> Findings necessitate a strategic review of team structures, workflow designs, and skill development for the AI-augmented workplace.
+                </li>
+              </ul>
             </div>
           </section>
 
