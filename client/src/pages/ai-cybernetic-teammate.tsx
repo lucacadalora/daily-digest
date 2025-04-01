@@ -225,9 +225,29 @@ export default function AICyberneticTeammate() {
                   <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4 text-sm">
                     Individuals with AI spent <span className="font-bold text-green-600 dark:text-green-400">16.4% less time</span> on tasks than the control group, while AI-assisted teams were <span className="font-bold text-green-600 dark:text-green-400">12.7% faster</span> while producing solutions of higher quality.
                   </p>
-                  <div className="bg-gray-50 dark:bg-gray-800 p-3 rounded border border-gray-200 dark:border-gray-700 text-center text-xs text-gray-500">
-                    [Figure 4, Time Saved]
-                  </div>
+                  <figure className="mt-4 mb-2">
+                    <div className="bg-gray-50 dark:bg-gray-800/30 rounded-lg overflow-hidden p-4">
+                      <div className="text-center mb-2 text-sm font-medium text-gray-700 dark:text-gray-300">Figure 3: Time Saved</div>
+                      
+                      <div className="relative mx-auto max-w-md">
+                        <div className="bg-gray-50 dark:bg-gray-800/60 rounded-lg p-2">
+                          <img 
+                            src="/images/time-saved-chart.png" 
+                            alt="Time Saved chart showing average minutes saved across four conditions: Alone No AI (0 min), Team No AI (-0.7 min), Alone + AI (9.1 min), and Team + AI (6.8 min)"
+                            className="w-full h-auto mx-auto"
+                            style={{ 
+                              mixBlendMode: 'multiply',
+                              backgroundColor: 'transparent'
+                            }}
+                          />
+                        </div>
+                      </div>
+                      
+                      <div className="text-center text-xs text-gray-600 dark:text-gray-400 mt-4">
+                        This figure shows the average time saved (in minutes) when preparing solutions by groups treated with AI versus those without AI, with individuals using AI saving the most time (approximately 9 minutes).
+                      </div>
+                    </div>
+                  </figure>
                 </div>
               </div>
 
