@@ -122,17 +122,52 @@ export default function AICyberneticTeammate() {
             </p>
             
             <figure className="mb-6">
-              <div className="bg-gray-50 dark:bg-gray-800/30 rounded-lg overflow-hidden">
-                <div className="p-4">
-                  <img 
-                    src="/images/treatment-matrix.png" 
-                    alt="Treatment Matrix: 2x2 experimental design showing four conditions: individuals and teams working either with or without AI assistance" 
-                    className="w-full max-w-2xl mx-auto blend-multiply dark:blend-screen"
-                    style={{ mixBlendMode: 'multiply', background: 'transparent' }}
-                  />
+              <div className="rounded-lg overflow-hidden">
+                <div className="p-2">
+                  <div className="mx-auto max-w-md">
+                    <div className="text-center mb-2 text-sm font-medium text-gray-700 dark:text-gray-300">Figure 1: Treatment Matrix</div>
+                    
+                    {/* 2x2 Grid Matrix */}
+                    <div className="grid grid-cols-2 gap-px bg-gray-300 dark:bg-gray-700 rounded-lg">
+                      {/* Header Row */}
+                      <div className="bg-gray-100 dark:bg-gray-800 p-2 text-center text-xs font-medium text-teal-600 dark:text-teal-400">
+                        Without AI
+                      </div>
+                      <div className="bg-gray-100 dark:bg-gray-800 p-2 text-center text-xs font-medium text-teal-600 dark:text-teal-400">
+                        With AI
+                      </div>
+                      
+                      {/* Team Row */}
+                      <div className="bg-teal-100 dark:bg-teal-900/30 p-3 text-center">
+                        <div className="text-xs font-medium text-gray-800 dark:text-gray-200 mb-1">Team (R&D + Commercial)</div>
+                        <div className="text-xs text-gray-600 dark:text-gray-400">Without AI (T1)</div>
+                      </div>
+                      <div className="bg-teal-100 dark:bg-teal-900/30 p-3 text-center">
+                        <div className="text-xs font-medium text-gray-800 dark:text-gray-200 mb-1">Team (R&D + Commercial)</div>
+                        <div className="text-xs text-gray-600 dark:text-gray-400">With AI (T3)</div>
+                      </div>
+                      
+                      {/* Individual Row */}
+                      <div className="bg-teal-100 dark:bg-teal-900/30 p-3 text-center">
+                        <div className="text-xs font-medium text-gray-800 dark:text-gray-200 mb-1">Individual</div>
+                        <div className="text-xs text-gray-600 dark:text-gray-400">Without AI (Control)</div>
+                      </div>
+                      <div className="bg-teal-100 dark:bg-teal-900/30 p-3 text-center">
+                        <div className="text-xs font-medium text-gray-800 dark:text-gray-200 mb-1">Individual</div>
+                        <div className="text-xs text-gray-600 dark:text-gray-400">With AI (T2)</div>
+                      </div>
+                    </div>
+                    
+                    {/* Column Headers */}
+                    <div className="flex justify-center mt-1">
+                      <div className="text-xs font-medium text-teal-600 dark:text-teal-400 whitespace-nowrap relative">
+                        <span>Team ↔ Individual</span>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-                <figcaption className="bg-gray-100/50 dark:bg-gray-800/50 p-3 text-center text-sm text-gray-600 dark:text-gray-400 border-t border-gray-200/50 dark:border-gray-700/50">
-                  <span className="font-medium">Figure 1: Treatment Matrix</span> - This figure displays the 2x2 experimental design showing four conditions: individuals and teams working either with or without AI assistance.
+                <figcaption className="p-2 text-center text-xs text-gray-600 dark:text-gray-400">
+                  The experimental design compared four distinct groups: individuals and teams working either with or without AI assistance.
                 </figcaption>
               </div>
             </figure>
