@@ -425,5 +425,34 @@ export const sampleArticles: Article[] = [
     ],
     tags: ["IHSG", "Technical Analysis", "Market Strategy", "Weekly Special"],
     content: "Weekly Market Alert March 3-7, 2025\nThe IHSG enters March 2025 at a critical inflection point after a historic 7.83% weekly decline to 6,270.597, its lowest close since October 2021. Foreign investors drove the sell-off, with Rp10.22 trillion in net outflows last week alone (Rp18.98 trillion YTD), exacerbated by MSCI's reweighting of Indonesia from 2.2% to 1.5% in its EM index. While technical indicators signal oversold conditions, structural pressures from global trade risks and domestic liquidity constraints remain key headwinds."
+  },
+  {
+    slug: "ai-cybernetic-teammate",
+    title: "How GenAI Acts as Your Cybernetic Teammate & Boosts Productivity",
+    description: "Generative AI is emerging as a 'cybernetic teammate' that replicates key aspects of human collaboration, boosting productivity and reshaping how we work together.",
+    category: "Tech",
+    source: "Daily Digest",
+    author: "Daily Digest Technology Team",
+    date: "April 1, 2025",
+    previewEmoji: "🧠",
+    previewMetrics: [
+      {
+        label: "Productivity Gain",
+        value: "37%",
+        subtitle: "Quality improvement"
+      },
+      {
+        label: "Time Saved",
+        value: "16.4%",
+        subtitle: "Task completion"
+      },
+      {
+        label: "Positive Emotion",
+        value: "+46%",
+        subtitle: "User experience"
+      }
+    ],
+    tags: ["AI", "Generative AI", "Productivity", "Teamwork", "Workplace"],
+    content: "How GenAI Acts as Your Cybernetic Teammate & Boosts Productivity: Generative AI is emerging as a 'cybernetic teammate' that replicates key aspects of human collaboration, boosting productivity and reshaping how we work together. AI enables individuals to match the performance quality of human teams, significantly boosting output and efficiency. AI breaks down traditional knowledge silos, empowering individuals to perform tasks outside their core expertise and balancing functional perspectives. Contrary to expectations, AI use leads to increased positive emotions and decreased negative ones among workers."
   }
 ];
