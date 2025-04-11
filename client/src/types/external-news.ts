@@ -32,6 +32,17 @@ export type ExternalNews = z.infer<typeof externalNewsSchema>;
 export const sampleExternalNews: ExternalNews[] = [
   {
     id: "1",
+    title: "Molten Salt Energy Storage Revamps Aging Power Plant in East China's Suzhou",
+    source: "Bloomberg",
+    author: "Luca Cada Lora",
+    publishedDate: "April 11, 2025",
+    url: "/latest/molten-salt-storage",
+    imageUrl: "/latest/molten-salt.png",
+    category: "Energy",
+    timestamp: Date.now() // Most recent
+  },
+  {
+    id: "2",
     title: "Global Coal's Price Slump Masks Brewing Supply Crisis and Potential Price Surge",
     source: "Bloomberg",
     author: "Luca Cada Lora",
@@ -39,17 +50,17 @@ export const sampleExternalNews: ExternalNews[] = [
     url: "/latest/global-coal-price-slump",
     imageUrl: "/latest/tongkang.jpeg",
     category: "Commodities",
-    timestamp: Date.now() // Most recent
+    timestamp: Date.now() - 1000 * 60 * 60 * 24 * 39 // 39 days ago
   },
   {
-    id: "2",
+    id: "3",
     title: "China's Steel Sector: 'Supply Reform 2.0' Looms",
     source: "Bloomberg",
-    author: "",
+    author: "Luca Cada Lora",
     publishedDate: "February 28, 2025",
     url: "/latest/china-steel-reform",
-    imageUrl: "/latest/china-steel.png",
-    category: "Markets",
-    timestamp: Date.now() - 1000 * 60 * 60 * 72 // 3 days ago
+    imageUrl: "/latest/china-steel-true.png",
+    category: "Industries",
+    timestamp: Date.now() - 1000 * 60 * 60 * 24 * 42 // 42 days ago
   }
 ];
