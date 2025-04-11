@@ -71,8 +71,8 @@ export default function MoltenSaltStorage() {
             <div className="relative w-full h-auto mb-6">
               <div className="w-full max-h-96 overflow-hidden">
                 <img 
-                  src="/latest/molten-salt.png" 
-                  alt="Molten salt energy storage tanks at Suzhou Power Plant in Anhui Province, China" 
+                  src="/images/articles/molten-salt.png" 
+                  alt="Molten salt energy storage tanks under construction at Suzhou Power Plant in East China" 
                   className="w-full h-auto object-cover"
                 />
               </div>
