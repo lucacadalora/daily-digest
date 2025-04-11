@@ -33,6 +33,22 @@ export type ArticleConfig = z.infer<typeof articleSchema>;
  */
 export const articles: ArticleConfig[] = [
   {
+    id: "molten-salt-storage",
+    title: "Molten Salt Energy Storage Revamps Aging Power Plant in East China's Suzhou",
+    description: "China is pioneering molten salt energy storage technology to enhance the efficiency and flexibility of aging coal-fired power plants, helping integrate renewable energy sources and reduce carbon emissions.",
+    image: "/latest/molten-salt.png",
+    imageAlt: "Molten salt energy storage tanks at Suzhou Power Plant in Anhui Province, China",
+    author: "Luca Cada Lora",
+    publishedDate: "April 11, 2025",
+    category: "Energy",
+    tags: ["Energy Storage", "Renewables", "Coal Power", "China", "Climate", "Technology"],
+    slug: "latest/molten-salt-storage",
+    featured: true,
+    imageWidth: 1200,
+    imageHeight: 630,
+    summary: "How China's innovative molten salt energy storage project at Suzhou Power Plant is transforming aging coal infrastructure while reducing emissions."
+  },
+  {
     id: "jfk-declassified-files",
     title: "The Newly Declassified JFK Files: 80,000 Pages Reshaping History",
     description: "In March 2025, President Trump ordered the release of long-classified documents related to JFK's assassination. Over 80,000 pages of previously confidential materials are now available, offering new insights into one of America's most scrutinized events.",
