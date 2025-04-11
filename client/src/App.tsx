@@ -25,6 +25,7 @@ import JapanEconomicSecurity from "@/pages/japan-economic-security";
 import ChinaSteel from "@/pages/external/china-steel-supply-reform";
 import ChinaSteelReform from "@/pages/latest/china-steel-reform";
 import GlobalCoalPriceSlump from "@/pages/latest/global-coal-price-slump";
+import MoltenSaltStorage from "@/pages/latest/molten-salt-storage";
 import IndonesiaREEPotential from "@/pages/newsletter/indonesia-ree-potential";
 import AICyberneticTeammate from "@/pages/ai-cybernetic-teammate";
 
