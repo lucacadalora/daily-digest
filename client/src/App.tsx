@@ -52,6 +52,7 @@ function Router() {
       
       {/* Latest news routes */}
       <Route path="/latest" component={Latest} />
+      <Route path="/latest/molten-salt-storage" component={MoltenSaltStorage} />
       <Route path="/latest/global-coal-price-slump" component={GlobalCoalPriceSlump} />
       <Route path="/latest/china-steel-reform" component={ChinaSteelReform} />
       <Route path="/external/china-steel-supply-reform" component={ChinaSteel} />
