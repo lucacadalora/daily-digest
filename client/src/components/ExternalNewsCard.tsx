@@ -53,7 +53,7 @@ export const ExternalNewsCard: React.FC<ExternalNewsCardProps> = ({
             {/* Thumbnail for compact view */}
             <div className="w-24 h-24 flex-shrink-0 overflow-hidden relative">
               <img 
-                src={article.imageUrl} 
+                src={`${article.imageUrl}?v=${Date.now()}`} 
                 alt={article.title}
                 className="w-full h-full object-cover"
               />
@@ -95,7 +95,7 @@ export const ExternalNewsCard: React.FC<ExternalNewsCardProps> = ({
           {article.imageUrl && (
             <div className="relative w-full overflow-hidden mb-3">
               <img 
-                src={article.imageUrl} 
+                src={`${article.imageUrl}?v=${Date.now()}`} 
                 alt={article.title}
                 className="w-full h-40 object-cover"
               />
