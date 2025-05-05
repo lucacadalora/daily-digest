@@ -24,7 +24,7 @@ export const LatestNewsCard = ({ article, compact = false }: LatestNewsCardProps
           {!compact && article.previewImage && (
             <div className="w-16 h-16 flex-shrink-0 rounded-md overflow-hidden">
               <img 
-                src={article.previewImage || "/placeholder-thumbnail.jpg"} 
+                src={`${article.previewImage || "/placeholder-thumbnail.jpg"}?v=${Date.now()}`} 
                 alt={article.title}
                 className="w-full h-full object-cover"
               />

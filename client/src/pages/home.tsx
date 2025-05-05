@@ -108,11 +108,11 @@ export default function Home() {
                       <CardContent className="p-0">
                         <div className="relative">
                           <img
-                            src={article.previewImage || (
+                            src={`${article.previewImage || (
                               article.slug === "indonesia-mineral-criticality-matrix" 
                                 ? "/Figure_1.png" 
                                 : "/test-image.png"
-                            )}
+                            )}?v=${Date.now()}`}
                             alt={article.title}
                             className="w-full aspect-video object-cover rounded-lg"
                             onError={(e) => {
