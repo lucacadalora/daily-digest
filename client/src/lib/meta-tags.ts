@@ -80,6 +80,13 @@ export function updateMetaTags(metadata: ArticleMetadata, cacheBuster?: string):
         : baseUrl;
     }
     
+    // If it's a local path (starts with '/'), use it directly
+    if (baseUrl.startsWith('/')) {
+      return cacheBuster 
+        ? `${baseUrl}${baseUrl.includes('?') ? '&' : '?'}v=${cacheBuster}`
+        : baseUrl;
+    }
+    
     // Otherwise, create an image.social URL from the article's URL
     // This ensures we get a beautiful screenshot preview with a widescreen viewport
     const encodedUrl = encodeURIComponent(metadata.url);
